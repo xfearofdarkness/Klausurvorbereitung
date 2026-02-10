@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RABS Klausurvorbereitung v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;--card:#16161f;--card-hover:#1e1e2a;--border:#2a2a3a;--text:#e8e8f0;--text2:#a0a0b8;--text3:#6a6a82;--accent:#6ee7b7;--accent2:#34d399;--accent-dim:rgba(110,231,183,0.1);--blue:#60a5fa;--blue-dim:rgba(96,165,250,0.1);--pink:#f472b6;--pink-dim:rgba(244,114,182,0.1);--orange:#fb923c;--orange-dim:rgba(251,146,60,0.1);--purple:#a78bfa;--red:#f87171;--red-dim:rgba(248,113,113,0.1);--yellow:#fbbf24;--yellow-dim:rgba(251,191,36,0.1);--radius:10px;--transition:0.2s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden}
+code,.mono{font-family:'Space Mono',monospace;font-size:0.85em}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.header{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0.8rem 1.5rem;display:flex;align-items:center;gap:1rem}
+.logo{font-weight:800;font-size:1.1rem;letter-spacing:-0.5px;background:linear-gradient(135deg,var(--accent),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
+.mode-switcher{display:flex;gap:4px;background:var(--bg2);border-radius:8px;padding:3px;margin-left:auto}
+.mode-btn{padding:6px 14px;border-radius:6px;border:none;background:transparent;color:var(--text3);cursor:pointer;font-family:inherit;font-size:0.82rem;font-weight:500;transition:var(--transition)}
+.mode-btn.active{background:var(--accent-dim);color:var(--accent)}.mode-btn:hover:not(.active){color:var(--text2)}
+.tabs-wrap{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;white-space:nowrap;padding:0 1rem;scrollbar-width:none}
+.tabs-wrap::-webkit-scrollbar{display:none}
+.tab{display:inline-block;padding:10px 16px;border:none;background:none;color:var(--text3);cursor:pointer;font-family:inherit;font-size:0.8rem;font-weight:500;border-bottom:2px solid transparent;transition:var(--transition)}
+.tab:hover{color:var(--text2)}.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.main{max-width:900px;margin:0 auto;padding:1.5rem}
+.study-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:0.8rem;transition:var(--transition)}
+.study-card:hover{border-color:var(--accent);background:var(--card-hover)}
+.study-card h3{font-size:0.95rem;font-weight:600;color:var(--accent);margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+.study-card p,.study-card ul{font-size:0.88rem;color:var(--text2);line-height:1.7}
+.study-card ul{padding-left:1.2rem;margin-top:0.3rem}.study-card li{margin-bottom:0.2rem}
+.formula{display:inline-block;background:var(--bg);padding:4px 10px;border-radius:6px;margin:4px 0;font-family:'Space Mono',monospace;font-size:0.82rem;color:var(--yellow);border:1px solid var(--yellow-dim)}
+.tag{display:inline-block;font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:600;margin-left:0.5rem}
+.tag-wichtig{background:var(--red-dim);color:var(--red)}.tag-formel{background:var(--yellow-dim);color:var(--yellow)}.tag-def{background:var(--blue-dim);color:var(--blue)}
+.quiz-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;margin-bottom:0.8rem}
+.quiz-q{font-size:0.92rem;font-weight:500;color:var(--text);margin-bottom:0.8rem;line-height:1.6}
+.quiz-a{font-size:0.88rem;color:var(--text2);line-height:1.7;padding:0.8rem 1rem;background:var(--bg);border-radius:8px;border:1px solid var(--border);display:none}.quiz-a.visible{display:block}
+.quiz-btns{display:flex;gap:0.5rem;flex-wrap:wrap}
+.q-btn{padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:0.8rem;font-weight:500;transition:var(--transition)}
+.q-btn:hover{border-color:var(--accent);color:var(--accent)}.q-btn.show-btn{border-color:var(--blue);color:var(--blue)}
+.q-btn.correct{border-color:var(--accent);color:var(--accent);background:var(--accent-dim)}.q-btn.wrong{border-color:var(--pink);color:var(--pink);background:var(--pink-dim)}
+.fc-container{display:flex;flex-direction:column;align-items:center;gap:1.2rem;padding-top:1rem}
+.fc-progress{font-size:0.82rem;color:var(--text3);font-weight:500;display:flex;align-items:center;gap:1rem;width:100%}
+.fc-bar{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}.fc-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s ease}
+.fc-card-wrap{perspective:1000px;width:100%;max-width:600px;height:320px;cursor:pointer}
+.fc-card{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.5s ease}.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--radius);padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--border)}
+.fc-front{background:linear-gradient(135deg,var(--bg2),var(--bg3))}.fc-back{background:linear-gradient(135deg,var(--card),var(--bg2));transform:rotateY(180deg)}
+.fc-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:1rem;color:var(--text3)}.fc-front .fc-label{color:var(--blue)}.fc-back .fc-label{color:var(--accent)}
+.fc-text{font-size:1rem;line-height:1.7;color:var(--text);max-width:90%}.fc-hint{font-size:0.75rem;color:var(--text3);margin-top:auto}
+.fc-controls{display:flex;gap:0.8rem;align-items:center}
+.fc-btn{padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:0.85rem;font-weight:500;transition:var(--transition)}
+.fc-btn:hover{border-color:var(--accent);color:var(--accent)}.fc-btn.fc-know{border-color:var(--accent);color:var(--accent)}.fc-btn.fc-repeat{border-color:var(--orange);color:var(--orange)}
+.fc-score{display:flex;gap:1.5rem;font-size:0.82rem}.fc-score span{display:flex;align-items:center;gap:0.4rem}.fc-score .s-know{color:var(--accent)}.fc-score .s-repeat{color:var(--orange)}
+.stats-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding:0.6rem 0;border-bottom:1px solid var(--border)}
+.stats-bar .stats-info{font-size:0.8rem;color:var(--text3)}
+.filter-btn{padding:4px 12px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text3);cursor:pointer;font-family:inherit;font-size:0.75rem;font-weight:500;transition:var(--transition)}
+.filter-btn:hover,.filter-btn.active{border-color:var(--orange);color:var(--orange);background:var(--orange-dim)}
+.section-title{font-size:1.3rem;font-weight:700;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:0.6rem}
+.section-title .emoji{font-size:1.4rem}
+@media(max-width:640px){.header{padding:0.6rem 1rem;flex-wrap:wrap;gap:0.5rem}.main{padding:0.8rem}.mode-btn{padding:5px 10px;font-size:0.75rem}.tab{padding:8px 12px;font-size:0.75rem}.fc-card-wrap{height:auto;min-height:250px}.fc-card{position:relative;transform-style:flat}.fc-card.flipped .fc-front{display:none}.fc-card.flipped .fc-back{display:flex}.fc-face{position:relative;backface-visibility:visible;transform:none}.fc-back{display:none}.fc-text{font-size:0.9rem}.fc-controls{flex-wrap:wrap;gap:0.5rem}.study-card{padding:1rem}.study-card h3{font-size:0.88rem}.study-card p,.study-card ul{font-size:0.82rem}table{font-size:0.75rem;display:block;overflow-x:auto}}
+.hidden{display:none !important}.fade-in{animation:fadeIn 0.3s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">RABS Klausurtrainer</div>
+  <div class="mode-switcher">
+    <button class="mode-btn active" data-mode="study">📖 Lernen</button>
+    <button class="mode-btn" data-mode="quiz">✍️ Fragen</button>
+    <button class="mode-btn" data-mode="flash">🃏 Karteikarten</button>
+  </div>
+</div>
+<div class="tabs-wrap" id="tabs"></div>
+<div class="main" id="content"></div>
+<script>
+const DATA = [
+// ── 0: Rechnerarchitektur ──
+{
+  title: "Rechnerarchitektur",
+  icon: "🖥️",
+  cards: [
+    { t:"Von-Neumann-Architektur", b:"Alle Komponenten (CPU, Speicher, I/O) über einen <b>gemeinsamen Bus</b> verbunden. Programme und Daten liegen im <b>selben Speicher</b>. Vorteil: Flexibilität (Programme änderbar). Nachteil: <b>Von-Neumann-Flaschenhals</b> – Bus wird zum Engpass, da Befehle und Daten um dieselbe Leitung konkurrieren." },
+    { t:"Harvard-Architektur", b:"<b>Getrennte Speicher</b> und Busse für Befehle und Daten. Befehle und Daten können <b>gleichzeitig</b> geladen werden. Moderne Prozessoren verwenden eine <b>Mischform</b> aus Harvard- und Von-Neumann-Architektur." },
+    { t:"CPU – Steuerwerk & Rechenwerk", b:"Das <b>Steuerwerk</b> (Control Unit) holt Befehle, dekodiert sie und steuert die Ausführung. Das <b>Rechenwerk</b> (ALU) führt arithmetische und logische Operationen aus. Wichtige Register: <b>Befehlszähler</b> (PC), <b>Befehlsregister</b> (IR), <b>Statusregister</b> (Flags)." },
+    { t:"Fetch-Decode-Execute-Zyklus", b:"Jeder Befehl durchläuft: <b>1. Fetch</b> – Befehl aus Speicher laden (Adresse im PC). <b>2. Decode</b> – Steuerwerk zerlegt den Befehl. <b>3. Execute</b> – ALU führt aus. Danach PC inkrementieren und wiederholen." },
+    { t:"Pipeline-Prozessoren", b:"Mehrere getrennte Hol-, Dekodier- und Ausführungseinheiten. Mehrere Befehle können <b>parallel</b> bearbeitet werden (Pipeline-Verarbeitung). Dadurch höherer Durchsatz als bei rein sequenzieller Befehlsabarbeitung." },
+    { t:"Superskalare Prozessoren", b:"<b>Mehrere Ausführungseinheiten</b>. Können oft auch mehrere Befehle gleichzeitig holen und in einem Puffer für die Ausführungseinheiten bereitstellen. Ermöglichen die parallele Ausführung mehrerer Befehle pro Takt." },
+    { t:"Cache", b:"Schneller, teurer Zwischenspeicher. Bei Speicheranforderung prüft die CPU, ob die Daten im Cache sind. Moderne Prozessoren haben mindestens <b>zwei Cache-Ebenen</b>: <b>L1-Cache</b> (typischerweise 16KB, innerhalb der CPU) und <b>L2-Cache</b> (typischerweise mehrere MB, Zugriff 1–2 Taktzyklen langsamer)." },
+    { t:"Speicherhierarchie", b:"Von schnell/klein/teuer nach langsam/groß/günstig: <b>Register → Cache (L1, L2) → RAM → Festplatte/SSD</b>. Die Hierarchie existiert, weil schneller Speicher teuer ist. Ziel: dem Programm die Illusion eines großen, schnellen Speichers geben." },
+    { t:"Interrupts", b:"Prozessor kann auf <b>externe, asynchrone</b> Ereignisse reagieren. Spezielles Eingangssignal: <b>Unterbrechungssignal</b>. Falls Signal gesetzt: Prozessor sichert PC im Keller (Rückkehradresse), Umschalten in Systemmodus. Verzweigung an vordefinierte Adresse im BS (<b>Unterbrechungsbehandlungsroutine, ISR</b> = Interrupt Service Routine). Signal wird jeweils <b>nach der Abarbeitung eines Befehls</b> abgefragt. Hauptanwendung: <b>Ein-/Ausgabe</b>.<br>In der Regel mehrere Interrupts mit verschiedenen <b>Prioritäten</b>. Jedem Interrupt kann eine eigene Behandlungsroutine zugewiesen werden: Tabelle von Adressen = <b>Unterbrechungsvektor</b>. Ggf. Unterbrechung aktiver Behandlungsroutinen. Interrupts können <b>maskiert</b> (ausgeschaltet) werden – privilegierter Befehl!" },
+    { t:"Kernmodus vs. Benutzermodus", b:"CPUs besitzen zwei Ausführungsmodi: <b>Kernmodus</b> – unbeschränkter Zugriff auf alle Rechnerkomponenten (für das BS). <b>Benutzermodus</b> – eingeschränkter Zugriff, Speicher nur über Adressabbildung, keine privilegierten Befehle. Modus wird in Hardware (<b>Programmstatuswort, PSW</b>) durch 1 Bit festgehalten.<br><b>Ausnahme (Exception, Software Interrupt):</b> Ausführung eines privilegierten Befehls im Benutzermodus → Prozessor bricht Befehl ab, sichert PC im Keller, Verzweigung an feste Stelle im BS (Systemmodus). BS behandelt Ausnahme (z.B. Abbruch des Prozesses). Rückkehrbefehl schaltet wieder in Benutzermodus.<br><b>Kontrollierter Moduswechsel (Systemaufruf, Trap, System Call):</b> Spezieller Befehl → Prozessor sichert PC, Umschalten in Systemmodus, Verzweigung an vordefinierte Adresse im BS." },
+    { t:"DMA (Direct Memory Access)", b:"Alle I/O-Geräte können per DMA auf den RAM zugreifen und Interrupts senden. Für DMA-fähige Geräte: Vorgang des Kopierens von Blöcken in oder aus dem RAM wird in <b>kleine Teile</b> zerlegt. Für jeden Teil erhält das Gerät den Bus <b>atomar</b>. Grund: Wenn der vollständige DMA-Vorgang den Bus belegen würde, würden die Wartezeiten der anderen Geräte/CPUs zu lange dauern. RAM bietet mit dem Bus <b>atomare</b> (unteilbare) Lese-/Schreiboperationen an, die nur sequenziell ablaufen – zu einem Zeitpunkt kann nur eine CPU/ein Gerät auf den RAM zugreifen." }
+  ],
+  questions: [
+    { q:"Was ist der Von-Neumann-Flaschenhals?", a:"Der Flaschenhals entsteht, weil Befehle und Daten über denselben Bus transportiert werden und so um Bandbreite konkurrieren. Moderne Prozessoren verwenden eine Mischform aus Harvard- und Von-Neumann-Architektur, um dieses Problem zu entschärfen." },
+    { q:"Erkläre den Fetch-Decode-Execute-Zyklus.", a:"Die CPU holt den Befehl an der Adresse des Befehlszählers aus dem Speicher (Fetch), das Steuerwerk zerlegt ihn in Operation und Operanden (Decode), und die ALU führt die Operation aus (Execute). Danach wird der PC inkrementiert und der Zyklus beginnt von vorn." },
+    { q:"Was ist der Unterschied zwischen Von-Neumann- und Harvard-Architektur?", a:"Bei Von-Neumann liegen Befehle und Daten im selben Speicher und teilen sich einen Bus (Flaschenhals). Die Harvard-Architektur hat getrennte Speicher und Busse für Befehle und Daten, sodass beide gleichzeitig geladen werden können." },
+    { q:"Was ist der Unterschied zwischen Pipeline- und Superskalaren Prozessoren?", a:"Pipeline-Prozessoren haben getrennte Hol-, Dekodier- und Ausführungseinheiten, sodass verschiedene Bearbeitungsphasen parallel ablaufen. Superskalare Prozessoren haben zusätzlich mehrere Ausführungseinheiten und können mehrere Befehle gleichzeitig holen und ausführen." },
+    { q:"Beschreibe L1- und L2-Cache.", a:"Der L1-Cache ist typischerweise 16KB groß, liegt innerhalb der CPU und ist am schnellsten. Der L2-Cache ist typischerweise mehrere MB groß und 1–2 Taktzyklen langsamer. Die CPU prüft bei Speicheranforderungen zuerst, ob die Daten im Cache sind." },
+    { q:"Wie unterscheiden sich Kernmodus und Benutzermodus?", a:"Im Kernmodus hat die CPU unbeschränkten Zugriff auf alle Rechnerkomponenten. Im Benutzermodus: eingeschränkter Zugriff, keine privilegierten Befehle. Modus wird im PSW durch 1 Bit festgehalten. Privilegierter Befehl im Benutzermodus → Ausnahme (Exception): Prozessor bricht ab, sichert PC, Verzweigung ins BS. Kontrollierter Moduswechsel: Trap/System Call (spezieller Befehl)." },
+    { q:"Warum werden DMA-Transfers in kleine Teile zerlegt?", a:"Weil sonst der Bus für die gesamte Dauer des Transfers belegt wäre und alle anderen CPUs und Geräte zu lange warten müssten. Durch die Zerlegung erhält das Gerät den Bus nur für kurze atomare Teiloperationen." }
+  ],
+  flashcards: [
+    { front:"Von-Neumann-Flaschenhals?", back:"Befehle und Daten teilen sich denselben Bus → Engpass. Lösung: Mischform mit Harvard-Architektur." },
+    { front:"Harvard vs. Von-Neumann?", back:"Harvard: getrennte Speicher+Busse für Code/Daten. Von-Neumann: gemeinsamer Speicher, flexibel aber Flaschenhals." },
+    { front:"Fetch → Decode → Execute", back:"1) Befehl aus Speicher holen (PC→IR), 2) Steuerwerk dekodiert, 3) ALU führt aus, 4) PC++." },
+    { front:"Pipeline vs. Superskalar?", back:"Pipeline: Phasen überlappend. Superskalar: mehrere Ausführungseinheiten, mehrere Befehle gleichzeitig." },
+    { front:"L1 / L2 Cache?", back:"L1: ~16KB, in der CPU, am schnellsten. L2: mehrere MB, 1-2 Takte langsamer." },
+    { front:"Kernmodus vs. Benutzermodus?", back:"Kern: alle Befehle erlaubt. Benutzer: privilegierter Befehl → Ausnahme (Exception). Kontrollierter Wechsel: Trap/System Call. Modus in PSW (1 Bit)." },
+    { front:"DMA?", back:"I/O-Geräte greifen per DMA auf RAM zu. Kopiervorgang in kleine Teile zerlegt, für jeden Teil Bus atomar belegt. Sonst wären Wartezeiten zu lang." },
+    { front:"Was ist ein atomarer Zugriff?", back:"Unteilbare Operation (ein Maschinenbefehl), kann nicht unterbrochen werden. Nur eine CPU/ein Gerät gleichzeitig auf RAM." }
+  ]
+},
+// ── 1: BS-Grundlagen ──
+{
+  title: "BS-Grundlagen",
+  icon: "⚙️",
+  cards: [
+    { t:"Was ist ein Betriebssystem?", b:"Software-Schicht zwischen Hardware und Anwendungen. <b>Drei Aufgaben:</b><br><b>1. Erweiterung/Veredelung der Hardware:</b> BS stellt komplexe Funktionen bereit, die Anwendungen nutzen können → erhebliche Vereinfachung der Programmierung. Z.B. Schreiben auf Festplatte: BS findet automatisch freie Blöcke, interne Plattenstruktur für Anwendung nicht mehr wichtig.<br><b>2. Abstraktion der Hardware:</b> BS realisiert einheitliche Sicht für Anwendungen (abstrakte Maschine). Fallunterscheidung zwischen verschiedenen Geräten wird vom BS vorgenommen. Z.B. Dateien abstrahieren externen Speicher – kein Unterschied zwischen Festplatte, USB-Stick, Netzlaufwerk. HAL (Hardware Abstraction Layer) isoliert Kern von Hardware.<br><b>3. Verwaltung von Betriebsmitteln:</b> Betriebsmittel = alles was eine Anwendung zur Ausführung benötigt (Prozessor, Speicher, Geräte). Im Mehrprozess-/Mehrbenutzerbetrieb: <b>Fairness</b> (gerechte Verteilung) und <b>Sicherheit</b> (Schutz der Anwendungen und Benutzer voreinander)." },
+    { t:"Betriebssystem-Konzepte (Überblick)", b:"<b>Prozessverwaltung</b>: Erzeugen, Scheduling, Beenden. <b>Speicherverwaltung</b>: Virtueller Speicher, Paging. <b>Dateisysteme</b>: Persistente Datenhaltung, Verzeichnisse. <b>Systemaufrufe</b>: Schnittstelle zum Kernel. <b>Schutz & Sicherheit</b>: Zugriffsrechte, Isolation. <b>Shell</b>: Benutzungsschnittstelle." },
+    { t:"Monolithischer Kernel", b:"Alle BS-Dienste (Dateisystem, Treiber, Scheduling) laufen im Kernmodus. Vorteile: Schnell (keine Moduswechsel zwischen Diensten). Nachteile: Ein Fehler kann das ganze System betreffen." },
+    { t:"Mikrokernel (Client/Server-Architektur)", b:"Ziel: <b>Minimierung der im privilegierten Modus ablaufenden Funktionalität</b>. BS-Komponenten als <b>Server-Prozesse im nichtprivilegierten Modus</b>. Interaktion über Nachrichten (IPC). Nur der Mikrokern läuft im Systemmodus. Systemkomponenten besitzen nur so viele Privilegien, wie zur Ausführung ihrer Aufgabe erforderlich (z.B. Treiber nur Zugriff auf spezielle IO-Register). Trennung von Strategie und Mechanismus.<br><b>Vorteil:</b> Deutlich weniger SLOC als monolithische Kernel.<br><b>Nachteil:</b> Schlechtere <b>Performance</b> durch Nachrichtenaustausch anstatt Systemcalls." },
+    { t:"Virtuelle Maschine", b:"Auf der Hardware läuft zunächst ein Basis-BS, der <b>Virtual Machine Monitor</b>. Darauf laufen keine Anwendungen, sondern virtuelle Maschinen in Form verschiedener Betriebssysteme. <b>Unabhängigkeit und Isolation</b> von Prozessen/BS konsequent fortgeführt. Illusion: jedem Prozess/BS steht der gesamte Rechner allein zur Verfügung. Unterschiedliche BS gleichzeitig auf einer Hardware-Konfiguration." }
+  ],
+  questions: [
+    { q:"Nenne die drei Aufgaben eines Betriebssystems.", a:"1) Erweiterung/Veredelung der Hardware: BS stellt komplexe Funktionen bereit, die die Programmierung erheblich vereinfachen. 2) Abstraktion der Hardware: BS realisiert einheitliche Sicht für Anwendungen (abstrakte Maschine), z.B. Dateien abstrahieren externen Speicher. 3) Verwaltung von Betriebsmitteln: Im Mehrprozess-/Mehrbenutzerbetrieb sorgt das BS für Fairness (gerechte Verteilung) und Sicherheit (Schutz der Benutzer voreinander)." },
+    { q:"Was ist der Unterschied zwischen monolithischem Kernel und Mikrokernel?", a:"Beim monolithischen Kernel laufen alle BS-Dienste im Kernmodus – schnell, aber ein Fehler kann das ganze System betreffen. Beim Mikrokernel laufen BS-Komponenten als Server-Prozesse im nichtprivilegierten Modus, nur der Mikrokern im Systemmodus. Vorteil: Deutlich weniger SLOC. Nachteil: Schlechtere Performance durch Nachrichtenaustausch anstatt Systemcalls." },
+    { q:"Was zeichnet eine Virtuelle Maschine aus?", a:"Auf der Hardware läuft ein Virtual Machine Monitor (VMM). Darauf laufen virtuelle Maschinen mit verschiedenen Betriebssystemen. Die Idee der Unabhängigkeit und Isolation wird konsequent fortgeführt: Jedem BS wird die Illusion gegeben, dass ihm der gesamte Rechner allein zur Verfügung steht." },
+    { q:"Nenne mindestens 5 Konzeptbereiche eines Betriebssystems.", a:"Prozessverwaltung, Speicherverwaltung, Dateisysteme, Systemaufrufe, Schutz und Sicherheit, Benutzungsschnittstelle (Shell). Dazu kommt die Überwachung und Zuteilung von Ressourcen." }
+  ],
+  flashcards: [
+    { front:"3 Aufgaben eines BS?", back:"1) Erweiterung/Veredelung der Hardware (komplexe Funktionen, Vereinfachung), 2) Abstraktion (einheitliche Sicht, abstrakte Maschine, HAL), 3) Verwaltung von Betriebsmitteln (Fairness + Sicherheit)." },
+    { front:"Monolithisch vs. Mikrokernel?", back:"Monolithisch: alles im Kernmodus → schnell. Mikro: BS-Dienste als Server im Benutzermodus, nur Kern im Systemmodus → schlechtere Performance (Nachrichtenaustausch statt Syscalls), aber weniger SLOC." },
+    { front:"Virtuelle Maschine?", back:"Virtual Machine Monitor auf Hardware. Darauf verschiedene BS als VMs. Illusion: jedes BS hat ganzen Rechner allein. Isolation konsequent fortgeführt." }
+  ]
+},
+// ── 2: Prozesse ──
+{
+  title: "Prozesse",
+  icon: "🔄",
+  cards: [
+    { t:"Prozess – Definition", b:"Ein Prozess ist ein <b>Programm in Ausführung mit zusätzlicher Kontextinformation</b>. Zentrales Konzept in jedem BS. Jeder Prozess besitzt einen eigenen Adressraum. Klassischer Prozess enthält genau einen Thread, heute mehrfädige Prozesse möglich. <b>Unterschied Programm – Prozess:</b> Programm = Folge von Anweisungen und Daten. Prozess = Programm in Ausführung und dessen aktuelle Daten (Programmzähler, Registerinhalte, Variablenbelegung). Ein Programm kann mehrfach ausgeführt werden → mehrere Prozesse." },
+    { t:"Prozesszustände", b:"<b>Erzeugt</b> (new): Prozess wurde erzeugt, besitzt aber noch nicht alle nötigen Betriebsmittel. <b>Bereit</b> (ready): Prozess besitzt alle nötigen Betriebsmittel und ist bereit zum Laufen. <b>Laufend</b> (running): Wird von der CPU ausgeführt. <b>Blockiert</b> (blocked/waiting): Wartet auf ein Ereignis (z.B. E/A, Betriebsmittelzuteilung, Nachricht). <b>Beendet</b> (terminated): Prozess ist beendet, einige Betriebsmittel aber noch nicht freigegeben.<br><b>Übergänge:</b> laufend→blockiert (Prozess kann nicht fortfahren / ruft pause auf), bereit→laufend (Scheduler teilt CPU zu), laufend→bereit (Rechenzeit verbraucht), blockiert→bereit (erwartetes Ereignis tritt ein). Übergänge bereit↔laufend werden vom Prozess selber <b>nicht bemerkt</b>." },
+    { t:"PCB (Prozesskontrollblock)", b:"Beschreibt den <b>Kontext</b> eines Prozesses. Enthält: <b>Eindeutiger Name</b> (z.B. PID in UNIX), Name des Benutzers und zugeordnete Gruppen, <b>Prozesszustand</b> (wartend, rechnend, rechenwillig, …), Spezifikation des Ereignisses auf das gewartet wird, <b>Scheduling-Informationen</b> (Ablaufpriorität, verbrauchte CPU-Zeit), Registerinhalte (PC, Stackpointer etc.), Accounting-Information, <b>Prozesshierarchie</b> (Elternprozess, Kindprozesse), Speichermanagement-Infos, Dateiverwaltung (u.a. Home-Verzeichnis), Liste der zugeordneten E/A-Geräte." },
+    { t:"Prozessumschaltung (Context Switch)", b:"Wechsel von der Ausführung eines Prozesses zur Ausführung eines anderen. <b>Scheduler</b> teilt Prozessen Rechenzeit zu, <b>Dispatcher</b> führt den Prozesswechsel durch. Bei <b>nicht-präemptiven</b> BS (z.B. MS-DOS): Prozesse müssen den Prozessor selbst freigeben durch Terminierung oder Warten. Bei <b>präemptiven</b> BS (z.B. UNIX, Windows): Aktiver Prozess kann vom BS unterbrochen werden." },
+    { t:"fork() unter UNIX", b:"<code>fork()</code> erzeugt einen <b>exakten Klon</b> des aufrufenden Prozesses. Beide Prozesse sind ab da voneinander unabhängig und laufen nach fork() weiter. Kindprozess erbt vom Elternprozess das <b>Speicherabbild</b> (memory image – <b>copy on write</b>), die offenen Dateien usw. Vater und Sohn arbeiten identischen Code ab, haben aber <b>private Variablen</b>. Erzeugt Vater-Sohn-Relation (Prozesshierarchie)." },
+    { t:"execve() – Programmersetzung", b:"<code>execve()</code> ändert das <b>Speicherabbild</b> eines Prozesses und startet ein neues Programm. Es wird <b>kein neuer Prozess</b> erzeugt, nur das Programm des bestehenden Prozesses ersetzt. Legt einen neuen Adressraum an (keine Kopie des aufrufenden Prozesses)." },
+    { t:"Shell-Beispiel: fork + exec", b:"Benutzer tippt Kommando (z.B. <code>sort</code>). Shell erzeugt Kindprozess (<b>fork</b>). Kindprozess führt <code>sort</code> aus. Shell wartet auf Beendigung des Kindes." },
+    { t:"Prozesshierarchie & init", b:"Jeder Prozess hat einen Elternprozess. Es entsteht ein <b>Prozessbaum</b>. <code>init</code> ist als spezieller Prozess im Bootimage vorhanden und steht als <b>Wurzel</b> des Baums. init liest beim Start eine Datei mit der Anzahl der Terminals und erzeugt (<code>forks</code>) einen neuen Kindprozess pro Terminal. Diese warten auf Login. Shells bearbeiten Kommandos, Hintergrunddienste (Daemons) laufen ohne Shell." },
+    { t:"Prozesserzeugung – Anlässe", b:"Prozesse werden erzeugt durch: <b>Systeminitialisierung</b>, Systemaufruf zur Prozesserzeugung (<code>fork</code>) durch einen anderen Prozess, <b>Benutzeranfrage</b> (Kommandoeingabe in Shell), oder Start eines Batch-Jobs." }
+  ],
+  questions: [
+    { q:"Beschreibe die 5 Prozesszustände und nenne die wichtigsten Übergänge.", a:"Erzeugt (besitzt noch nicht alle Betriebsmittel), Bereit (alle Betriebsmittel vorhanden, wartet auf CPU), Laufend (wird ausgeführt), Blockiert (wartet auf Ereignis wie E/A oder Betriebsmittel), Beendet (Ausführung abgeschlossen, Betriebsmittel evtl. noch nicht freigegeben). Übergänge: laufend→blockiert (kann nicht fortfahren), bereit→laufend (Scheduler teilt zu), laufend→bereit (Rechenzeit verbraucht), blockiert→bereit (Ereignis eingetreten)." },
+    { q:"Was enthält der PCB (Prozesskontrollblock)?", a:"Eindeutiger Name (z.B. PID), Benutzername und Gruppen, Prozesszustand, Spezifikation des Warteereignisses, Scheduling-Informationen (Priorität, verbrauchte CPU-Zeit), Registerinhalte (PC, Stackpointer), Accounting-Information, Prozesshierarchie (Eltern-/Kindprozesse), Speichermanagement-Infos, Dateiverwaltung (u.a. Home-Verzeichnis), Liste der zugeordneten E/A-Geräte." },
+    { q:"Erkläre das Zusammenspiel von fork() und execve() an einem Shell-Beispiel.", a:"Der Benutzer tippt z.B. 'sort' in die Shell. Die Shell ruft fork() auf und erzeugt einen Kindprozess als exakten Klon. Der Kindprozess ruft execve() auf, um sein Speicherabbild durch das Programm 'sort' zu ersetzen, und führt es aus." },
+    { q:"Was ist Copy-on-Write bei fork()?", a:"Nach fork() teilen sich Eltern- und Kindprozess zunächst dasselbe Speicherabbild. Erst wenn einer von beiden eine Speicherseite verändert, wird diese Seite tatsächlich kopiert. Das spart Speicher und Zeit, besonders wenn der Kindprozess sofort exec() aufruft." },
+    { q:"Was ist eine Prozessumschaltung (Context Switch) und wer ist beteiligt?", a:"Ein Wechsel von der Ausführung eines Prozesses zur Ausführung eines anderen. Der Scheduler teilt den Prozessen Rechenzeit zu, der Dispatcher führt den eigentlichen Prozesswechsel durch. Bei präemptiven BS (UNIX, Windows) kann der aktive Prozess vom BS unterbrochen werden, bei nicht-präemptiven (MS-DOS) muss er den Prozessor selbst freigeben." },
+    { q:"Was ist die Rolle des init-Prozesses?", a:"init ist ein spezieller Prozess im Bootimage und steht an der Wurzel des Prozessbaums. Er wird beim Systemstart als erster Prozess erzeugt und ist Vorfahre aller anderen Prozesse." }
+  ],
+  flashcards: [
+    { front:"5 Prozesszustände?", back:"Erzeugt (new), Bereit (ready), Laufend (running), Blockiert (blocked), Beendet (terminated)." },
+    { front:"PCB – wichtigste Inhalte?", back:"PID, Zustand, PC, Register, Scheduling-Infos (Priorität, CPU-Zeit), Speicher-Infos, Dateiverwaltung, Prozesshierarchie, E/A-Geräte." },
+    { front:"fork()?", back:"Erzeugt exakten Klon (Copy on Write). Beide laufen danach unabhängig weiter. Erzeugt Vater-Sohn-Relation." },
+    { front:"execve()?", back:"Ersetzt Speicherabbild des Prozesses durch neues Programm. Kein neuer Prozess, nur neuer Code." },
+    { front:"Shell: Kommando ausführen?", back:"Shell: fork() → Kind: exec(programm) → Shell wartet auf Kind." },
+    { front:"Prozessumschaltung?", back:"Scheduler teilt Rechenzeit zu, Dispatcher führt den Wechsel durch. Präemptiv: BS kann unterbrechen. Nicht-präemptiv: Prozess gibt freiwillig ab." }
+  ]
+},
+// ── 3: Threads ──
+{
+  title: "Threads",
+  icon: "🧵",
+  cards: [
+    { t:"Thread – Definition", b:"Threads sind <b>parallele Kontrollflüsse innerhalb eines Prozesses</b> (Prozessende beendet auch alle Threads), die nicht voneinander abgeschottet sind, da sie sich gemeinsame Ressourcen (insb. Speicher) teilen. Auch genannt: <b>Faden</b> oder <b>Leichtgewichtprozess</b>. Ein oder mehrere Threads pro Prozess möglich." },
+    { t:"Was Threads teilen / was sie eigenes haben", b:"<b>Geteilt</b> (pro Prozess): Adressraum, globale Variablen, offene Dateien. Jeder Thread kann auf die Speicheradressen des Prozesses und der anderen Threads zugreifen.<br><b>Eigen</b> (pro Thread): Thread-ID, eigener Programmzähler, eigenes Registerset (enthält lokale Variablen), eigener Stack, eigener Zustand (blockiert, rechenbereit, rechnend). Zugriff auf gemeinsame globale Variablen ⇒ <b>Synchronisationskonzepte</b> erforderlich." },
+    { t:"Thread-Operationen & Ablauf", b:"Prozesse starten normalerweise mit einem einzigen Thread. Start-Thread kann neue Threads erzeugen. Neuer Thread läuft automatisch im Adressraum des erzeugenden Prozesses.<br><b>Bibliotheksfunktionen:</b> <code>thread_create</code>: Neuen Thread erzeugen. <code>thread_exit</code>: Thread beenden. <code>thread_join</code>: Auf Beendigung eines bestimmten Threads warten. <code>thread_yield</code>: Freiwillig Rechenzeit abgeben, um einen anderen Thread rechnen zu lassen. Im Gegensatz zu Prozessen <b>keine Interrupts</b> zur Steuerung des Entzugs von Rechenzeit – Threads müssen freiwillig die CPU abgeben." },
+    { t:"User-Level-Threads (ULT)", b:"Thread-Verwaltung im <b>User-Mode</b> ohne Intervention und Wissen des BS. Kernel verwaltet nur Prozesse (Scheduling, Signale etc.). Realisierung über <b>Threading-Bibliothek</b> (z.B. pthread). Bibliothek setzt auf beliebigem BS auf, keine BS-Änderung nötig. Für jeden Prozess wird vom <b>Laufzeitsystem</b> (nicht vom Kern!) eine Threadtabelle verwaltet. <b>m:1-Abbildung</b>: Allen Threads ist genau eine Kernel-Aktivität zugeordnet (der zugehörige Prozess). Two-level Scheduling.<br><b>Vorteile:</b> Keine BS-Unterstützung nötig, schnelle Erzeugung/Wechsel (kein Kerneintritt, kein Adressraumwechsel), individuelle Scheduling-Algorithmen möglich.<br><b>Nachteile:</b> Blockierender Systemaufruf blockiert <b>alle Threads</b> des Prozesses. Kooperatives Programmiermodell mit freiwilliger Abgabe des Prozessors erforderlich (da keine unterbrechende Instanz)." },
+    { t:"Kernel-Level-Threads (KLT)", b:"Kernel verwaltet Threads: eine <b>Thread-Tabelle für jeden Prozess im Kernel</b>. Thread-Operationen (Erzeugung, Terminierung etc.) sind <b>Kernel-Aufrufe</b> (Trap in den Kernel). Blockierender Aufruf → Kernel prüft Scheduling-Optionen. Effizientes Recycling von Thread-Datenstrukturen. <b>1:1-Abbildung</b>: Jedem Thread ist genau eine Kernel-Aktivität zugeordnet, d.h. jeder Benutzer-Thread verursacht das Erzeugen eines Kernel-Threads.<br><b>Vorteile:</b> Bei Blockierung eines Threads kann BS einen anderen Thread desselben Prozesses auswählen. Bei Mehrprozessorsystemen: <b>echte Parallelität</b> innerhalb eines Prozesses.<br><b>Nachteile:</b> Hoher Overhead. Threadwechsel benötigt Moduswechsel zum BS-Kern. <b>Linux</b>: Kernel-Level-Threads. Windows 2000: Kernel-Level und User-Level-Threads." },
+    { t:"Hybride Lösung: Kernel- + User-Threads", b:"Kombination von User- und Kernel-Level-Threads. Z.B. in alten Versionen von Solaris. Heute genutzt für Programme mit <b>sehr vielen nebenläufigen Aktivitäten</b> (z.B. Webserver mit mehreren Netzwerkschnittstellen)." },
+    { t:"Gründe für Threads & Vorteile", b:"<b>1. Parallele Ausführung:</b> Mehrere Aktivitäten nutzen einen Adressraum mit allen Daten. <b>2. Leichtgewichtiger als Prozesse:</b> Threaderzeugung ca. <b>10- bis 100-mal schneller</b> als Prozesserzeugung. <b>3. Performanz:</b> Performanzgewinn z.B. bei nebenläufigen Ein-/Ausgaben (kein Gewinn wenn alle Threads rechenintensiv). <b>4. Echte Parallelität:</b> Verteilung der Threads auf mehrere Prozessoren.<br>Durch Zerlegung in quasi-parallel ausführbare Ausführungsstränge → vereinfachtes Programmiermodell, sehr schneller Datenaustausch durch gemeinsame Nutzung von Daten." },
+    { t:"Hyperthreading", b:"Implementierung von hardwareseitigem Multithreading in Intel-Prozessoren. Intern parallel arbeitende <b>Pipeline-Stufen</b> werden <b>zwei parallelen Befehls- und Datenströmen</b> zugeteilt. Ein Prozessorkern kann zwei verschiedene Threads parallel bearbeiten. Unterstützt von Linux, Windows (ab XP), Mac OS X, FreeBSD." }
+  ],
+  questions: [
+    { q:"Was teilen sich Threads und was hat jeder Thread für sich?", a:"Threads teilen sich den Adressraum, globale Variablen und offene Dateien des Prozesses. Jeder Thread hat eine eigene Thread-ID, einen eigenen Programmzähler, eigenen Stack und eigene Register." },
+    { q:"Warum blockiert bei User-Level-Threads ein Systemaufruf den ganzen Prozess?", a:"Weil bei ULTs alle Threads auf genau eine Kernel-Aktivität abgebildet sind (m:1). Der Kernel weiß nichts von den einzelnen Threads und blockiert den gesamten Prozess bei einem blockierenden Syscall." },
+    { q:"Nenne Vor- und Nachteile von Kernel-Level-Threads.", a:"Vorteile: Bei Blockierung eines Threads kann der Kernel einen anderen Thread desselben Prozesses weiterlaufen lassen; echte Parallelität auf Mehrprozessorsystemen. Nachteile: Hoher Overhead, da Threadwechsel einen Moduswechsel zum Kernel erfordert." },
+    { q:"Was ist der Unterschied zwischen m:1- und 1:1-Abbildung bei Threads?", a:"Bei m:1 (ULT) sind alle User-Threads auf eine einzige Kernel-Aktivität abgebildet – der Kernel sieht nur den Prozess. Bei 1:1 (KLT) ist jeder User-Thread direkt einem Kernel-Thread zugeordnet, sodass der Kernel jeden Thread einzeln schedulen kann." },
+    { q:"Was ist Hyperthreading?", a:"Hyperthreading ist Intels Implementierung von Hardware-Multithreading. Die intern parallel arbeitenden Pipeline-Stufen werden zwei parallelen Befehls- und Datenströmen zugeteilt, sodass ein physischer Kern zwei Threads gleichzeitig bearbeiten kann." },
+    { q:"Wozu dient thread_yield()?", a:"thread_yield() erlaubt es einem Thread, freiwillig Rechenzeit abzugeben, damit ein anderer Thread rechnen kann. Bei User-Level-Threads ist dies besonders wichtig, da es keine unterbrechende Instanz (kein BS-Scheduler für einzelne Threads) gibt." }
+  ],
+  flashcards: [
+    { front:"Thread: geteilt vs. eigen?", back:"Geteilt: Adressraum, globale Variablen, Dateien. Eigen: Thread-ID, PC, Registerset, Stack, Zustand." },
+    { front:"ULT: m:1-Abbildung – Problem?", back:"Alle Threads auf 1 Kernel-Aktivität (den Prozess). Blockierender Syscall → ganzer Prozess blockiert. Kooperativ: Threads müssen CPU freiwillig abgeben." },
+    { front:"KLT: 1:1-Abbildung – Vorteil?", back:"Jeder Thread = 1 Kernel-Thread. Blockierung eines Threads → andere laufen weiter. Echte Parallelität." },
+    { front:"4 Thread-Operationen?", back:"thread_create, thread_exit, thread_join, thread_yield." },
+    { front:"Hyperthreading?", back:"Intel: Pipeline-Stufen für 2 Befehls-/Datenströme. 1 Kern → 2 Threads parallel." },
+    { front:"ULT Vorteile?", back:"Keine BS-Unterstützung nötig, schnelle Erzeugung/Wechsel (kein Kerneintritt, kein Adressraumwechsel), individuelle Scheduling-Algorithmen." }
+  ]
+},
+// ── 4: Scheduling ──
+{
+  title: "Scheduling",
+  icon: "📊",
+  cards: [
+    { t:"Scheduling-Kriterien", b:"<b>Hohe Effizienz</b>: Prozessor soll gut ausgelastet sein. <b>Geringe Antwortzeit (Latenz)</b>: Schnelle Reaktion bei interaktiven Prozessen. <b>Hoher Durchsatz</b>: Viele Prozesse fertigstellen. <b>Fairness</b>: Gerechte Aufteilung der Prozessorleistung. <b>Pünktlichkeit</b>: Einhalten von Fristen. <b>Berücksichtigen von Prioritäten.</b> Keine Scheduling-Strategie ist für jedes System optimal → <b>Kompromiss</b> zwischen den Kriterien notwendig." },
+    { t:"Non-Preemptive vs. Preemptive", b:"<b>Non-preemptive</b>: Laufender Prozess behält CPU bis Ende oder freiwillige Abgabe (z.B. FCFS, SJF). <b>Preemptive</b>: Rechnender Prozess wird <b>verdrängt</b>, wenn z.B. Zeitscheibe abläuft oder ein höher priorisierter Prozess bereit wird (z.B. RR, Priority)." },
+    { t:"FCFS (First Come First Serve)", b:"Bearbeitung in <b>Ankunftsreihenfolge</b>. Prozessorbesitz bis zum Ende oder zur freiwilligen Aufgabe. Non-preemptive. Simpelste Lösung. Keine gerechte CPU-Zuweisung zwischen E/A-lastigen und berechnungslastigen Aufträgen. FCFS ist fair: alle Prozesse werden berücksichtigt." },
+    { t:"SJF (Shortest Job First)", b:"Prozess mit der <b>kürzesten Bedienzeit</b> wird als nächster bearbeitet. Non-preemptive. <b>Optimal</b> bei gleichzeitig verfügbaren Aufträgen (minimale mittlere Wartezeit). Nicht optimal wenn Aufträge zu unterschiedlichen Zeiten eintreffen. Nachteile: Bedienzeit muss <b>geschätzt</b> werden. Längere Prozesse können <b>verhungern</b>." },
+    { t:"Round Robin (RR)", b:"Bearbeitung in Ankunftsreihenfolge. Nach Ablauf einer Zeitscheibe <b>τ</b> (Time Slice) wird verdrängt. Preemptive. Neue und verdrängte Prozesse ans <b>Ende der Warteschlange</b> (neue haben Vorrang). Alle Prozesse gleichberechtigt. Wahl von τ kritisch: je kürzer → mehr Kontextwechsel (Overhead); je länger → Gleichzeitigkeit geht verloren." },
+    { t:"Priority Scheduling (PRIO)", b:"Neuankömmlinge werden nach <b>Priorität</b> in Bereitliste eingeordnet. <b>Non-preemptive (PRIO-NP)</b>: Prozessorbesitz bis Ende. <b>Preemptive (PRIO-P)</b>: Rechnender Prozess wird verdrängt, wenn er geringere Priorität hat als ein neuer bereiter Prozess." },
+    { t:"Rechenbeispiel – Prozesstabelle", b:"<table style='width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:0.5rem'><tr style='border-bottom:1px solid var(--border)'><th style='padding:4px 8px;text-align:left'>Nr</th><th>Ankunft a</th><th>Bedienzeit t</th><th>Priorität P</th></tr><tr><td style='padding:4px 8px'>1</td><td>0</td><td>3</td><td>2</td></tr><tr><td style='padding:4px 8px'>2</td><td>2</td><td>6</td><td>4</td></tr><tr><td style='padding:4px 8px'>3</td><td>4</td><td>4</td><td>1</td></tr><tr><td style='padding:4px 8px'>4</td><td>6</td><td>5</td><td>5</td></tr><tr><td style='padding:4px 8px'>5</td><td>8</td><td>2</td><td>3</td></tr></table><br><b>Ergebnisse aus der Vorlesung:</b><br>FCFS: ⌀ Wartezeit = 4,6ms, ⌀ Laufzeit = 8,6ms<br>SJF: ⌀ Wartezeit = 3,6ms, ⌀ Laufzeit = 7,6ms<br>RR (τ=1): ⌀ Wartezeit = 6,8ms, ⌀ Laufzeit = 10,8ms<br>RR (τ=4): ⌀ Wartezeit = 6,0ms, ⌀ Laufzeit = 10,0ms<br>PRIO-NP: ⌀ Wartezeit = 4,4ms, ⌀ Laufzeit = 8,4ms", tag:"formel" },
+    { t:"Echtzeit-Scheduling: Grundlagen", b:"Echtzeitsysteme müssen <b>Fristen</b> (Deadlines) einhalten. Periodische Prozesse mit Laufzeit CPU(P<sub>i</sub>) und Periode t<sub>P<sub>i</sub></sub>. Jeder periodische Prozess muss in seiner Periode fertig werden. Kein Prozess hängt von einem anderen ab." },
+    { t:"CPU-Auslastung (Schedulbarkeitstest)", b:"<span class='formula'>u = ∑ CPU(Pᵢ) / t_Pᵢ</span><br>Jeder Prozess belegt den Anteil CPU(P)/Periode der CPU. Die Summe = Gesamtauslastung u.<br><b>Beispiel Videostreaming:</b> A: 10/30 + B: 15/40 + C: 5/50 = 0,333 + 0,375 + 0,100 = <b>0,808</b>", tag:"formel" },
+    { t:"RMS (Raten Monotones Scheduling)", b:"Prioritätsbasiertes Scheduling für unterbrechbare, periodische Jobs. Priorität entspricht der <b>Aufrufperiode</b> (kürzere Periode = höhere Priorität). Ist Auslastung u kleiner/gleich der <b>Auslastungsschranke</b>, ist die Job-Menge einplanbar:<br><span class='formula'>u ≤ m · (2^(1/m) − 1)</span><br>Für m=3 Prozesse: Schranke ≈ 0,78. Im Beispiel: 0,808 > 0,78 → <b>kein Scheduling für RMS möglich!</b> ❌", tag:"formel" },
+    { t:"EDF (Earliest Deadline First)", b:"Prozess kündigt seine <b>Deadline</b> an, wenn er CPU-Zeit benötigt. Scheduler sortiert nach <b>kürzester Deadline</b>. Unterbrechung eines laufenden Prozesses, wenn ein neuer mit kürzerer Deadline auftaucht. Keine CPU-Verbrauchszeit-Begrenzung, kann CPU zu <b>100% auslasten</b>. EDF ist unter Linux verfügbar. Im Beispiel: 0,808 ≤ 1 → <b>schedulbar</b> ✅" }
+  ],
+  questions: [
+    { q:"Was sind die Scheduling-Kriterien?", a:"Hohe Effizienz (Prozessor gut ausgelastet), geringe Antwortzeit (schnelle Reaktion bei interaktiven Prozessen), hoher Durchsatz (viele Prozesse fertigstellen), Fairness (gerechte Aufteilung der Prozessorleistung), Pünktlichkeit (Fristen einhalten), Berücksichtigung von Prioritäten. Keine Strategie ist für jedes System optimal – Kompromiss nötig." },
+    { q:"Berechne die mittlere Wartezeit für FCFS mit den 5 Beispielprozessen.", a:"Reihenfolge: P1(0–3), P2(3–9), P3(9–13), P4(13–18), P5(18–20). Wartezeiten: P1=0, P2=3−2=1, P3=9−4=5, P4=13−6=7, P5=18−8=10. Mittlere Wartezeit = (0+1+5+7+10)/5 = 4,6ms." },
+    { q:"Warum hat SJF die optimale mittlere Wartezeit und warum ist es trotzdem unpraktisch?", a:"SJF ist optimal bei gleichzeitig verfügbaren Aufträgen, weil kurze Jobs schnell abgearbeitet werden. Unpraktisch, weil die Bedienzeit vorher nicht bekannt ist und nur geschätzt werden kann – und längere Prozesse können verhungern." },
+    { q:"Was passiert bei Round Robin, wenn τ sehr groß oder sehr klein ist?", a:"Bei sehr großem τ wird kein Prozess innerhalb seiner Zeitscheibe verdrängt – das System verliert die Gleichzeitigkeit. Bei sehr kleinem τ entsteht hoher Overhead durch viele Kontextwechsel, und das System ruckelt." },
+    { q:"Beispiel: A(CPU=10, Periode=30), B(CPU=15, Periode=40), C(CPU=5, Periode=50). Schedulbar mit EDF? Mit RMS?", a:"Auslastung u = 10/30 + 15/40 + 5/50 = 0,808. EDF: 0,808 ≤ 1 → schedulbar ✅. RMS: Schranke für m=3 ist m·(2^(1/m)−1) ≈ 0,78. Da 0,808 > 0,78 → kein Scheduling für RMS möglich ❌." },
+    { q:"Was ist der Unterschied zwischen EDF und RMS?", a:"EDF vergibt Prioritäten dynamisch nach nächster Deadline und kann die CPU zu 100% auslasten. RMS vergibt statische Prioritäten nach Periodenfrequenz (kürzere Periode = höhere Priorität), hat aber eine strengere Auslastungsschranke von m·(2^(1/m)−1)." },
+    { q:"Was ist der Unterschied zwischen non-preemptive und preemptive Scheduling?", a:"Non-preemptive: Der laufende Prozess behält die CPU bis zum Ende oder bis er sie freiwillig abgibt. Preemptive: Der Scheduler kann einem Prozess die CPU entziehen, z.B. nach Ablauf einer Zeitscheibe oder wenn ein höher priorisierter Prozess bereit wird." },
+    { q:"Vergleiche die mittlere Wartezeit von RR (τ=1) und RR (τ=4) für die Beispielprozesse.", a:"RR (τ=1): Wartezeiten P1=1, P2=10, P3=9, P4=9, P5=5 → ⌀=6,8ms. RR (τ=4): Wartezeiten P1=0, P2=9, P3=3, P4=9, P5=9 → ⌀=6,0ms. τ=4 ist hier besser, weil weniger Kontextwechsel-Overhead entsteht." }
+  ],
+  flashcards: [
+    { front:"FCFS – Eigenschaft?", back:"Ankunftsreihenfolge, non-preemptive, simpelste Lösung. Fair, aber ungerecht zwischen I/O- und CPU-lastigen." },
+    { front:"SJF – optimal aber…?", back:"Minimale mittlere Wartezeit (bei gleichzeitig verfügbaren). Bedienzeit muss geschätzt werden + Starvation." },
+    { front:"Round Robin – τ zu klein/groß?", back:"Zu klein → viele Kontextwechsel. Zu groß → Gleichzeitigkeit geht verloren." },
+    { front:"EDF-Schedulbarkeit?", back:"∑ CPU(Pᵢ)/Periode ≤ 1 → schedulbar. Dynamische Priorität nach nächster Deadline, bis 100% Auslastung." },
+    { front:"RMS-Schedulbarkeit?", back:"∑ CPU(Pᵢ)/Periode ≤ m·(2^(1/m)−1). Statische Priorität: kürzere Periode = höhere Prio." },
+    { front:"RMS-Schranke m=3?", back:"3·(2^(1/3)−1) ≈ 0,78 → strenger als EDF (≤1)." },
+    { front:"Preemptive vs. Non-preemptive?", back:"Preemptive: CPU kann entzogen werden (RR, PRIO-P). Non-preemptive: freiwillige Abgabe (FCFS, SJF)." },
+    { front:"FCFS Beispiel: ⌀ Wartezeit?", back:"P1=0, P2=1, P3=5, P4=7, P5=10 → (0+1+5+7+10)/5 = 4,6ms." }
+  ]
+},
+// ── 5: Synchronisation ──
+{
+  title: "Synchronisation",
+  icon: "🔒",
+  cards: [
+    { t:"Nebenläufigkeit & Synchronisation", b:"Prozesse als Teile komplexer Programmsysteme müssen interagieren: Daten austauschen, sich aufrufen, aufeinander warten, sich abstimmen. Ergebnisse können von der Ausführungsreihenfolge abhängen (nicht vorhersagbar).<br><b>Ziel der Synchronisation:</b> Durch wechselseitigen Ausschluss wird der Zugriff auf gemeinsam benutzte Betriebsmittel so aufeinander abgestimmt, dass die <b>Konsistenz der Daten</b> und damit die Korrektheit der Implementierung erreicht wird." },
+    { t:"Race Condition (Wettlauf-Bedingung)", b:"Situation, in der mehrere Prozesse <b>konkurrierend</b> auf gemeinsame Daten zugreifen und mindestens einer diese <b>manipuliert</b>. Letztendlicher Wert der gemeinsamen Daten hängt davon ab, in welcher Reihenfolge die Prozesse darauf zugreifen. Ergebnis ist nicht vorhersagbar und kann im Fall von überlappenden Zugriffen sogar <b>inkorrekt</b> sein. Ziel: Vermeidung durch <b>Synchronisation</b>. Der Zugriffscode wird als <b>kritischer Abschnitt</b> bezeichnet." },
+    { t:"Kritischer Abschnitt", b:"Abschnitt eines Programms, der Zugriffe auf ein <b>gemeinsam genutztes Objekt</b> (kritische Ressource) enthält. Prozess/Thread, der kritischen Abschnitt betritt, darf <b>nicht unterbrochen</b> werden. Zur Vermeidung von Inkonsistenzen muss ein kritischer Abschnitt geschützt werden: <b>Wechselseitiger Ausschluss</b> (Mutex) – zu jeder Zeit darf nur ein Prozess die Aktivität ausführen." },
+    { t:"6 Anforderungen an den wechselseitigen Ausschluss", b:"<b>1.</b> Keine Annahmen über Geschwindigkeit/Anzahl der CPUs. <b>2.</b> Mutual Exclusion: Zu jedem Zeitpunkt darf sich höchstens ein Prozess im kritischen Bereich befinden. <b>3.</b> Progress – no deadlock: Wechselseitiges Aufeinanderwarten muss verhindert werden. <b>4.</b> Bounded waiting – no starvation: Kein Prozess sollte ewig warten müssen (Voraussetzung: kein Prozess bleibt ewig im krit. Abschnitt). <b>5.</b> Prozess außerhalb des krit. Abschnitts darf andere nicht behindern. <b>6.</b> Sofortiger Zugang zum krit. Abschnitt, wenn kein anderer Prozess darin ist." },
+    { t:"Versuch 1: Sperren der Interrupts", b:"Abgesehen von freiwilliger Abgabe der CPU: Prozesswechsel nur durch Interrupt. Sperren der Interrupts in <code>begin_region()</code>, Freigabe in <code>end_region()</code>. Probleme: <b>E/A ist blockiert</b>, BS verliert Kontrolle über den Prozess, funktioniert nur bei <b>Einprozessor-Rechnern</b>. Realisierung nur im Betriebssystem-Kern." },
+    { t:"Versuch 2: Sperrvariable", b:"Variable <code>belegt</code> zeigt an, ob kritischer Abschnitt belegt ist: <code>while(belegt); belegt=true; /* krit. Abschnitt */ belegt=false;</code> Problem: <b>Race Condition</b> – Prüfen und Setzen sind zwei getrennte Operationen, die unterbrochen werden können (nicht atomar)." },
+    { t:"Versuch 3: Strikter Wechsel", b:"Variable <code>turn</code> gibt an, wer an der Reihe ist: <code>while(turn != 0); /* krit. Abschnitt */ turn = 1;</code> Problem: Prozesse müssen <b>abwechselnd</b> in den kritischen Abschnitt. Verletzt Anforderungen 3, 4 und 5." },
+    { t:"Versuch 4: Erst belegen, dann prüfen", b:"Variable <code>interested[i]</code> zeigt an, ob Prozess i in den kritischen Abschnitt will: <code>interested[0]=true; while(interested[1]); /* krit. Abschnitt */ interested[0]=false;</code> Problem: <b>Verklemmung</b>, falls beide Prozesse interested gleichzeitig auf true setzen." },
+    { t:"Semaphore – Einführung & Aufbau", b:"Eingeführt durch Dijkstra (1965). Allgemeines Synchronisationskonstrukt, nicht nur wechselseitiger Ausschluss, auch <b>Reihenfolgensynchronisation</b>. Konzept zur Lösung des Mutual-Exclusion-Problems auf Basis von <b>Sperren ohne aktives Warten</b>. Werden vom BS zur Verfügung gestellt.<br><b>Datenstruktur:</b> <b>Semaphorzähler</b> und <b>Warteschlange</b> für Prozesse/Threads. Zähler und Warteschlange sind geschützt und können nur über die Semaphoroperationen manipuliert werden. Initialisierung: Zähler = Anzahl zulässiger Prozesse im krit. Abschnitt." },
+    { t:"Wait() und Signal()", b:"<b>Wait()</b> (auch P() oder down()): Zähler wird <b>dekrementiert</b>. Ist Zähler danach ≥ 0: Prozess setzt Arbeit fort. Ist Zähler danach < 0: Aufrufender Prozess wird <b>blockiert</b> und in die Warteschlange des Semaphors eingereiht.<br><b>Signal()</b> (auch V() oder up()): Zähler wird <b>inkrementiert</b>. Prozess aus Warteschlange nehmen und entblocken, falls Warteschlange nicht leer. Entblockter Prozess setzt seine Arbeit mit den Anweisungen fort, die dem P-Aufruf folgen, der ihn blockierte.<br>Operationen sind <b>atomar</b> (ununterbrechbar). <b>Kein aktives Warten</b> – Prozess wird in den Zustand blockiert versetzt.<br><b>Interpretation:</b> Zähler ≥ 0 = Anzahl freier Ressourcen. Zähler < 0 = Anzahl wartender Prozesse." },
+    { t:"Mutex mit Semaphor (Beispiel)", b:"Semaphor <code>sema</code> init(1). A: Wait → (0,∅), A hat Ressource. B: Wait → (−1,{B}), B blockiert. A: Signal → (0,∅), B entblockt und hat Ressource. Für jedes Betriebsmittel gibt es genau einen Semaphor." },
+    { t:"Reihenfolge-Synchronisation", b:"Semaphor mit <b>0 vorbelegt</b>. Wait()-Operation an der Stelle, wo gewartet werden muss. Signal() signalisiert, dass Wartebedingung erfüllt ist. Beispiel: Prozess 1 darf Datei erst lesen, nachdem Prozess 0 sie erzeugt hat." },
+    { t:"Realisierung von Semaphoren", b:"Bei Kernel-Threads: Implementierung im <b>BS-Kern</b>. Operationen sind <b>Systemaufrufe</b>. Atomare Ausführung durch Interrupt-Sperre und ggf. <b>Spinlocks</b> gesichert. Kernel-Implementierung ermöglicht, dass mehrere Prozesse mit disjunkten Adressräumen einen Semaphor gemeinsam nutzen können. Unterbrechung der Operationen würde zu Inkonsistenzen in Warteschlangenbearbeitung oder im Semaphorzähler führen." }
+  ],
+  questions: [
+    { q:"Was ist eine Race Condition?", a:"Eine Race Condition entsteht, wenn mehrere Prozesse konkurrierend auf gemeinsame Daten zugreifen und mindestens einer schreibt. Das Ergebnis hängt von der zufälligen Ausführungsreihenfolge ab und kann bei Überlappung inkorrekt sein." },
+    { q:"Nenne die 6 Anforderungen an eine Lösung zum wechselseitigen Ausschluss.", a:"1) Keine Annahmen über CPU-Geschwindigkeit/-Anzahl. 2) Max. ein Prozess im krit. Abschnitt (Mutex). 3) Kein Deadlock. 4) Kein Verhungern (Bounded Waiting). 5) Prozess außerhalb behindert andere nicht. 6) Sofortiger Zugang wenn frei." },
+    { q:"Warum funktioniert eine einfache Sperrvariable nicht für Mutual Exclusion?", a:"Weil das Prüfen (while(belegt)) und Setzen (belegt=true) zwei getrennte Operationen sind, die unterbrochen werden können. Zwei Prozesse können gleichzeitig sehen, dass die Variable frei ist, und beide in den kritischen Abschnitt eintreten." },
+    { q:"Warum scheitert 'strikter Wechsel' als Synchronisationslösung?", a:"Weil die Prozesse streng abwechselnd in den kritischen Abschnitt müssen. Wenn ein Prozess den Abschnitt nicht braucht, blockiert er den anderen trotzdem. Das verletzt die Anforderungen 3 (Deadlock), 4 (Starvation) und 5 (Behinderung)." },
+    { q:"Erkläre Wait() und Signal() am Semaphor.", a:"Wait(): Zähler wird dekrementiert. Ist er danach ≥ 0, darf der Prozess weiter. Ist er < 0, wird der Prozess blockiert und in die Warteschlange eingereiht. Signal(): Zähler wird inkrementiert. Ist die Warteschlange nicht leer, wird ein Prozess entblockt." },
+    { q:"Erkläre den Ablauf eines Mutex-Semaphors mit zwei Prozessen A und B.", a:"Semaphor init(1). A: Wait() → Zähler=0, A hat Zugriff. B: Wait() → Zähler=−1, B wird blockiert (in Warteschlange). A fertig: Signal() → Zähler=0, B wird aus Warteschlange entblockt und darf weitermachen." },
+    { q:"Was ist der Unterschied zwischen Reihenfolge-Synchronisation und Mutual Exclusion mit Semaphoren?", a:"Bei Mutual Exclusion wird der Semaphor mit 1 initialisiert (max. 1 Prozess im krit. Abschnitt). Bei Reihenfolge-Synchronisation wird mit 0 initialisiert – ein Prozess muss warten (Wait), bis ein anderer die Bedingung erfüllt hat (Signal)." },
+    { q:"Wie werden Semaphore im Kernel implementiert?", a:"Bei Kernel-Threads als Systemaufrufe im BS-Kern. Die atomare Ausführung der Operationen wird durch Interrupt-Sperre und gegebenenfalls Spinlocks gesichert. Die Kernel-Implementierung ermöglicht die gemeinsame Nutzung durch Prozesse mit getrennten Adressräumen." }
+  ],
+  flashcards: [
+    { front:"Ziel der Synchronisation?", back:"Zugriff auf gemeinsame Betriebsmittel durch wechselseitigen Ausschluss abstimmen → Konsistenz der Daten, Korrektheit." },
+    { front:"Race Condition?", back:"Mehrere Prozesse konkurrieren um gemeinsame Daten, mind. einer schreibt → Ergebnis abhängig von Reihenfolge." },
+    { front:"6 Anforderungen an Mutex?", back:"1) Keine Annahmen über CPU, 2) max. 1 im krit. Abschnitt, 3) no deadlock, 4) no starvation, 5) keine Behinderung von außen, 6) sofortiger Zugang wenn frei." },
+    { front:"Sperrvariable – warum fehlerhaft?", back:"Prüfen + Setzen nicht atomar → Race Condition → zwei können gleichzeitig rein." },
+    { front:"Wait()/P()/down()?", back:"Semaphorzähler--. Wenn ≥0: Prozess setzt fort. Wenn <0: blockiert → Warteschlange. Atomar!" },
+    { front:"Signal()/V()/up()?", back:"Semaphorzähler++. Wenn Warteschlange nicht leer: einen Prozess entblocken. Atomar!" },
+    { front:"Mutex-Semaphor: init?", back:"Init mit 1 → max. 1 Prozess im krit. Abschnitt. Sperre ohne aktives Warten." },
+    { front:"Reihenfolge-Semaphor: init?", back:"Init mit 0 → Wait wartet, bis anderer Prozess Signal gibt. Reihenfolgensynchronisation." }
+  ]
+},
+// ── 6: Deadlocks ──
+{
+  title: "Deadlocks",
+  icon: "💀",
+  cards: [
+    { t:"Deadlock (Verklemmung) – Definition", b:"Situationen, in denen sich Prozesse <b>gegenseitig sperren</b>, weil sie auf Ereignisse warten, die von einem anderen wartenden Prozess nicht freigegeben werden können. Da alle am Deadlock beteiligten Prozesse warten, kann keiner ein Ereignis auslösen, so dass ein anderer geweckt wird. Konsequenz: <b>Alle beteiligten Prozesse warten ewig.</b> Im BS-Kontext: Ereignis = Freigabe einer Ressource. Prozess-Zustände: BLOCKED.<br><b>Beispiel:</b> A hat Scanner belegt, will CD-Brenner. B hat CD-Brenner belegt, will Scanner. A wartet auf B, B wartet auf A, …" },
+    { t:"Livelock (Verklemmung)", b:"Spezielle Art von Verklemmung, in der eine Menge von Prozessen <b>nicht in einem Wartezustand verharrt</b>, sondern ständig zwischen einer Reihe sich wiederholender Zustände wechselt, aus denen <b>kein Entkommen</b> möglich ist. Prozess-Zustände abwechselnd zwischen READY und RUNNING." },
+    { t:"Entziehbare vs. nichtentziehbare Betriebsmittel", b:"<b>Entziehbar</b>: Kann einem Prozess ohne Schaden entzogen werden. Z.B. Prozessor (Sichern und Wiederherstellen des Prozessorzustands beim Threadwechsel), Hauptspeicher (Auslagern auf Platte). <b>Nichtentziehbar</b>: Kann nicht entzogen werden, ohne dass die Ausführung fehlschlägt. Z.B. CD-Brenner. Im Folgenden betreffen Deadlocks <b>nichtentziehbare</b> Betriebsmittel." },
+    { t:"4 Bedingungen für Deadlocks (Coffman et al. 1971)", b:"<b>1. Wechselseitiger Ausschluss (Mutual Exclusion)</b>: Jede Ressource kann zu einem Zeitpunkt von höchstens einem Prozess genutzt werden. <b>2. Halten und Warten (Hold and Wait)</b>: Ein Prozess, der bereits Ressourcen besitzt, kann noch weitere anfordern. <b>3. Ununterbrechbarkeit (Non-Preemption)</b>: Einem Prozess, der im Besitz einer Ressource ist, kann diese nicht gewaltsam entzogen werden. <b>4. Zyklisches Warten (Cyclic Waiting)</b>: Zyklische Kette von Prozessen, jeder wartet auf eine Ressource, die vom nächsten belegt ist.<br>Bedingungen 1–3 sind <b>notwendig</b>, aber nicht hinreichend. Bedingung 4 ist potentielle Konsequenz aus 1–3. Alle vier zusammen sind <b>notwendig und hinreichend</b> für eine Verklemmung." },
+    { t:"Belegungsanforderungsgraph", b:"Ein Deadlock liegt genau dann vor, wenn der <b>Graph einen Zyklus</b> enthält. Knoten = Prozesse und Ressourcen, Kanten = Belegungen und Anforderungen." },
+    { t:"4 Strategien zur Behandlung", b:"<b>1. Ignorieren des Problems</b> (Strategie von UNIX-Systemen): Nichts tun und hoffen, dass alles gut geht. <b>2. Erkennen und Beheben</b>: Lässt zunächst alle Anforderungen zu, löst ggf. Deadlock auf. <b>3. Vermeidung (Avoidance)</b>: BS lässt Ressourcenanforderung nicht zu, wenn dadurch ein Deadlock entstehen könnte. <b>4. Verhinderung (Prevention)</b>: Macht eine der vier Deadlock-Bedingungen unerfüllbar." }
+  ],
+  questions: [
+    { q:"Nenne die 4 Bedingungen für Deadlocks (Coffman et al.).", a:"1) Wechselseitiger Ausschluss (Mutual Exclusion): Ressource nur von einem Prozess nutzbar. 2) Halten und Warten (Hold and Wait): Prozess besitzt Ressource und fordert weitere an. 3) Ununterbrechbarkeit (Non-Preemption): Ressource kann nicht gewaltsam entzogen werden. 4) Zyklisches Warten (Cyclic Waiting): Zyklische Kette, jeder wartet auf den nächsten." },
+    { q:"Was ist der Unterschied zwischen Deadlock und Livelock?", a:"Beim Deadlock warten alle beteiligten Prozesse im Zustand BLOCKED ewig aufeinander. Beim Livelock wechseln sie ständig zwischen READY und RUNNING, führen aber keine sinnvolle Arbeit aus – auch hier kein Entkommen." },
+    { q:"Nenne die 4 Strategien zur Behandlung von Deadlocks.", a:"1) Ignorieren des Problems (Strategie von UNIX-Systemen – nichts tun). 2) Erkennen und Beheben (alle Anforderungen zunächst zulassen, Deadlock ggf. auflösen). 3) Vermeidung (Avoidance – BS lässt Anforderung nicht zu, wenn Deadlock entstehen könnte). 4) Verhinderung (Prevention – macht eine der vier Bedingungen unerfüllbar)." },
+    { q:"Was unterscheidet entziehbare von nichtentziehbaren Betriebsmitteln? Nenne je ein Beispiel.", a:"Entziehbare Betriebsmittel können einem Prozess ohne Schaden entzogen werden (z.B. Prozessor, Hauptspeicher). Nichtentziehbare führen bei Entzug zum Fehlschlag (z.B. CD-Brenner). Deadlocks betreffen nichtentziehbare Betriebsmittel." },
+    { q:"Wie erkennt man einen Deadlock im Belegungsanforderungsgraph?", a:"Ein Deadlock liegt genau dann vor, wenn der Belegungsanforderungsgraph einen Zyklus enthält. Die Knoten sind Prozesse und Ressourcen, die Kanten stellen Belegungen und Anforderungen dar." },
+    { q:"Warum sind die Bedingungen 1–3 allein nicht hinreichend für einen Deadlock?", a:"Bedingungen 1–3 sind nur notwendig. Bedingung 4 (zyklisches Warten) ist eine potentielle Konsequenz aus 1–3, und die Unauflösbarkeit des zyklischen Wartens ist eine Folge aus den Bedingungen 1–3. Alle vier zusammen sind notwendig und hinreichend. Wenn eine der Bedingungen unerfüllbar ist, können keine Deadlocks auftreten." }
+  ],
+  flashcards: [
+    { front:"Deadlock?", back:"Prozesse sperren sich gegenseitig, warten auf Ressourcen des anderen. Alle BLOCKED, ewig." },
+    { front:"Livelock?", back:"Spezielle Verklemmung: Prozesse nicht im Wartezustand, wechseln ständig READY↔RUNNING, kommen aber nicht voran." },
+    { front:"4 Bedingungen für Deadlocks?", back:"1) Wechselseitiger Ausschluss, 2) Halten und Warten, 3) Ununterbrechbarkeit, 4) Zyklisches Warten. Alle 4 = Deadlock." },
+    { front:"Zyklus im Belegungsgraph =?", back:"Deadlock liegt vor." },
+    { front:"4 Deadlock-Strategien?", back:"1) Ignorieren (UNIX), 2) Erkennen+Beheben, 3) Vermeidung (Avoidance), 4) Verhinderung (Prevention)." },
+    { front:"Entziehbar vs. nichtentziehbar?", back:"Entziehbar: Prozessor, RAM (kein Schaden). Nichtentziehbar: CD-Brenner (Fehlschlag bei Entzug)." }
+  ]
+},
+// ── 7: Speicherverwaltung ──
+{
+  title: "Speicherverwaltung",
+  icon: "💾",
+  cards: [
+    { t:"Aufgabe der Speicherverwaltung", b:"Verwaltung des Hauptspeichers: Zuteilung von Speicher an Prozesse, Schutz der Speicherbereiche, effiziente Nutzung. Programme arbeiten mit <b>logischen Adressen</b>, die <b>MMU</b> (Memory Management Unit) übersetzt in physische Adressen." },
+    { t:"Swapping (Auslagerung)", b:"Jeder Prozess wird <b>komplett</b> in den Speicher geladen, kann eine gewisse Zeit laufen und wird dann wieder <b>komplett ausgelagert</b>. Prozesse im Leerlauf meist ausgelagert, werden aber in gewissen Zeitabständen aufgeweckt." },
+    { t:"Virtueller Speicher", b:"Nicht alle Seiten eines Prozesses müssen gleichzeitig im RAM sein. <b>Vorteile:</b> Programmgröße kann Arbeitsspeichergröße überschreiten. Prozesse müssen nicht komplett im Speicher sein → effiziente Speichernutzung. Lineare Speicheradressierung, keine Fragmentierung aus Programmierersicht. <b>Gemeinsam genutzter Code und Daten möglich.</b> Theoretisch unbegrenzte Menge gleichzeitig laufender Programme. Speicherschutzmechanismen einfach zu realisieren." },
+    { t:"Paging", b:"<b>Problem der Fragmentierung:</b> Genügend Speicher vorhanden, aber nicht zusammenhängend → zu kleine Bereiche für einen Prozess. Idee: <b>Paging</b> erlaubt es, Prozesse in Teilen zu laden.<br>Physischer Speicher wird in <b>Seitenrahmen</b> (Frames) fester Größe unterteilt. Logischer Adressraum in <b>Seiten</b> (Pages) gleicher Größe. Virtuelle Adresse wird durch <b>MMU</b> in reale Adresse umgewandelt. <b>Seitentabelle</b> gibt Mapping Seiten→Seitenrahmen an, bzw. über <b>Present-/Absent-Bit</b>, ob Seite im Speicher liegt oder ausgelagert ist." },
+    { t:"Seitenfehler (Page Fault)", b:"Wenn virtuelle Adresse auf eine ausgelagerte Seite führt → Systemaufruf <b>Seitenfehler</b> (page fault). BS lagert einen <b>wenig benutzten Seitenrahmen aus</b>, lädt die angeforderte Seite, aktualisiert die Seitentabelle und führt den Befehl, der zum Page Fault führte, <b>erneut aus</b>." },
+    { t:"TLB (Translation Lookaside Buffer)", b:"Spezieller Teil der MMU, der <b>(Teile der) Seitentabelle cached</b>. Beschleunigt die Adressübersetzung, weil nicht bei jedem Zugriff die Seitentabelle im RAM nachgeschlagen werden muss." },
+    { t:"Seitenersetzungsstrategien", b:"Wenn der Speicher voll ist, müssen Seiten verdrängt werden. Strategien aus der Vorlesung:<br>• <b>Not-Recently-Used (NRU)</b><br>• <b>First-In-First-Out (FIFO)</b><br>• <b>Least-Recently-Used (LRU)</b><br>• <b>Working-Set-Algorithmus</b><br>• <b>WSClock-Algorithmus</b>" },
+    { t:"Seitengröße – Trade-off", b:"<b>Große Seiten</b>: Kürzere Seitentabellen, weniger Einlagerungen, aber mehr <b>interne Fragmentierung</b>. <b>Kleine Seiten</b>: Weniger Fragmentierung, aber lange Seitentabellen." },
+    { t:"Virtueller Speicher – Nachteile", b:"Adressierung sehr aufwendig. Zusätzliche Verwaltungsstrukturen (Page-Tables). Teil der Festplatte wird als <b>Auslagerungsdatei</b> verwendet. Komplexe Seitenersetzungsstrategien nötig." }
+  ],
+  questions: [
+    { q:"Wie wird eine logische Adresse beim Paging in eine physische übersetzt?", a:"Physischer Speicher in Seitenrahmen (Frames), logischer Adressraum in Seiten (Pages) gleicher Größe unterteilt. Virtuelle Adresse wird durch MMU in reale Adresse umgewandelt. Die Seitentabelle gibt das Mapping Seiten→Seitenrahmen an. Über das Present-/Absent-Bit wird festgestellt, ob die Seite im Speicher liegt oder ausgelagert ist." },
+    { q:"Was ist ein TLB und warum ist er wichtig?", a:"Der TLB ist ein spezieller Cache in der MMU, der Teile der Seitentabelle zwischenspeichert. Er beschleunigt die Adressübersetzung erheblich, weil ohne ihn bei jedem Speicherzugriff zusätzlich die Seitentabelle im RAM nachgeschlagen werden müsste." },
+    { q:"Was passiert bei einem Seitenfehler (Page Fault)?", a:"Wenn ein Prozess auf eine Seite zugreift, die nicht im RAM ist, wird ein Seitenfehler als Systemaufruf ausgelöst. Das BS lädt die Seite von der Festplatte nach, aktualisiert die Seitentabelle und führt den Befehl erneut aus." },
+    { q:"Nenne mindestens 3 Seitenersetzungsstrategien.", a:"Not-Recently-Used (NRU), First-In-First-Out (FIFO), Least-Recently-Used (LRU), Working-Set-Algorithmus und WSClock-Algorithmus." },
+    { q:"Was ist der Trade-off bei der Wahl der Seitengröße?", a:"Große Seiten führen zu kürzeren Seitentabellen und weniger Einlagerungen, verursachen aber mehr interne Fragmentierung. Kleine Seiten reduzieren die Fragmentierung, erzeugen aber lange Seitentabellen." },
+    { q:"Nenne Vor- und Nachteile von virtuellem Speicher.", a:"Vorteile: Programmgröße kann RAM überschreiten, effiziente Nutzung, keine Fragmentierung aus Programmierersicht, einfacher Speicherschutz. Nachteile: Aufwendige Adressierung, zusätzliche Page-Tables, Teil der Festplatte als Auslagerung nötig, komplexe Seitenersetzung." }
+  ],
+  flashcards: [
+    { front:"Logische → physische Adresse?", back:"Seitennummer → Seitentabelle → Rahmennummer. Physische Adresse = Rahmennummer + Offset." },
+    { front:"TLB?", back:"Cache für Seitentabelle in der MMU. Beschleunigt Adressübersetzung." },
+    { front:"Page Fault?", back:"Virtuelle Adresse zeigt auf ausgelagerte Seite → Systemaufruf. BS lagert wenig benutzten Rahmen aus, lädt angeforderte Seite, aktualisiert Seitentabelle, Befehl erneut ausführen." },
+    { front:"5 Seitenersetzungsstrategien?", back:"NRU, FIFO, LRU, Working-Set, WSClock." },
+    { front:"Große vs. kleine Seiten?", back:"Groß: kürzere Tabellen, mehr interne Fragmentierung. Klein: weniger Fragmentierung, lange Tabellen." },
+    { front:"Virtueller Speicher – Hauptvorteile?", back:"Programmgröße > Arbeitsspeicher. Prozesse nicht komplett im RAM nötig. Gemeinsamer Code möglich. Lineare Adressierung. Speicherschutz einfach." }
+  ]
+},
+// ── 8: IPC & Kommunikation ──
+{
+  title: "IPC & Kommunikation",
+  icon: "📡",
+  cards: [
+    { t:"Prozessinteraktion – 3 Grundformen", b:"<b>Koordination</b> (Synchronisation): Ablaufabstimmung. <b>Kommunikation</b>: Informationsaustausch (funktionaler Aspekt). <b>Kooperation</b>: Zusammenarbeit über gemeinsame Daten (Shared Memory). Von den drei Grundformen ist <b>Koordination elementar</b> – Kommunikation und Kooperation benötigen zeitliche Abstimmung zwischen den Interaktionspartnern." },
+    { t:"Synchrone vs. asynchrone Kommunikation", b:"<b>Synchrones Send</b>: Sender wartet (blockiert), bis Empfänger die Nachricht angenommen hat. <b>Asynchrones Send</b>: Sender setzt nach Senden sofort fort. <b>Synchrones Receive</b>: Empfangsoperation blockiert den Empfänger, bis Nachricht da. <b>Asynchrones Receive</b>: Empfänger liest Information, falls empfangen." },
+    { t:"Pipes", b:"<b>Unbenannte (unnamed) Pipe</b>: Unidirektionaler Datenstrom zwischen verwandten Prozessen (Eltern-Kind). <b>Benannte (named) Pipe</b>: Hat einen Namen im Dateisystem (Systemaufruf <code>mkfifo()</code>), auch zwischen nicht-verwandten Prozessen. In Linux auch als Shell-Kommando: <code>mkfifo</code>." },
+    { t:"Sockets", b:"Endpunkte für Kommunikation, auch über Netzwerk. Verwendung für <b>TCP/IP-Verbindungen</b>. Ermöglichen bidirektionale Kommunikation zwischen Prozessen auf verschiedenen Rechnern. Socket-Verbindung folgt einem Sequenzdiagramm: Verbindungsaufbau → Datenaustausch → Verbindungsabbau." },
+    { t:"Shared Memory (Gemeinsamer Speicher)", b:"Zwei oder mehr Prozesse binden denselben <b>physischen Speicherbereich</b> in ihre Adressräume ein. Schnellste IPC, da kein Kopieren nötig. Systemaufrufe (UNIX System V): <code>shmget()</code> (Erzeugen), <code>shmat()</code> (Einbinden/Attach), <code>shmdt()</code> (Entfernen/Detach), <code>shmctl()</code> (Steuerfunktionen). Zugriffe müssen <b>synchronisiert</b> werden." },
+    { t:"Kommunikation und Synchronisation", b:"Sind durch das <b>Kausalitätsprinzip</b> immer verbunden: Wenn A eine Information von B benötigt, muss A warten, bis B sie bereitstellt. Nachrichtenbasierte Kommunikation impliziert <b>Synchronisation</b> (z.B. bei send und receive). Synchronisationsprimitiven (z.B. Semaphore) eignen sich als Basis für die Implementierung von <b>Kommunikationsprimitiven</b>.<br><b>Implizite Synchronisation:</b> z.B. blockierendes Send/Receive. <b>Explizite Synchronisation:</b> z.B. mit Semaphoren." }
+  ],
+  questions: [
+    { q:"Was sind die 3 Grundformen der Prozessinteraktion?", a:"Koordination (Synchronisation – zeitliche Abstimmung), Kommunikation (Informationsaustausch) und Kooperation (Zusammenarbeit über gemeinsame Daten). Koordination ist die elementarste Form, die anderen beiden setzen sie voraus." },
+    { q:"Erkläre den Unterschied zwischen synchronem und asynchronem Send.", a:"Beim synchronen Send wartet (blockiert) der Sender, bis der Empfänger die Nachricht angenommen hat. Beim asynchronen Send setzt der Sender nach dem Senden sofort seine Arbeit fort, ohne auf den Empfänger zu warten." },
+    { q:"Was ist der Unterschied zwischen einer unbenannten und einer benannten Pipe?", a:"Eine unbenannte Pipe funktioniert nur zwischen verwandten Prozessen (Eltern/Kind nach fork). Eine benannte Pipe (Named Pipe) hat einen Eintrag im Dateisystem (erstellt mit mkfifo) und kann auch von nicht-verwandten Prozessen genutzt werden." },
+    { q:"Nenne die 4 Shared-Memory-Systemaufrufe unter UNIX System V.", a:"shmget() zum Anfordern bzw. Erzeugen eines Shared-Memory-Segments, shmat() zum Einbinden in den eigenen Adressraum, shmdt() zum Entfernen aus dem eigenen Adressraum, und shmctl() für Steuerfunktionen." },
+    { q:"Warum muss bei Shared Memory synchronisiert werden?", a:"Weil mehrere Prozesse gleichzeitig auf denselben Speicherbereich zugreifen können, was zu Race Conditions führt, wenn mindestens einer schreibt. Die Prozesse müssen den Zugriff selbst mit Synchronisationsmechanismen (z.B. Semaphore) koordinieren." }
+  ],
+  flashcards: [
+    { front:"3 Interaktionsformen?", back:"1) Koordination (Synchronisation), 2) Kommunikation (Nachrichtenaustausch), 3) Kooperation (gemeinsame Daten)." },
+    { front:"Synchron vs. asynchron Send?", back:"Synchron: Sender blockiert bis Empfang. Asynchron: Sender macht sofort weiter." },
+    { front:"Unnamed vs. Named Pipe?", back:"Unnamed: nur verwandte Prozesse. Named (mkfifo): Dateiname im Dateisystem, beliebige Prozesse." },
+    { front:"Shared Memory Syscalls?", back:"shmget() (erzeugen), shmat() (attach), shmdt() (detach), shmctl() (steuern)." },
+    { front:"Warum Synchronisation bei Shared Memory?", back:"Gleichzeitiger Zugriff → Race Condition. Müssen selbst synchronisieren (z.B. Semaphore)." }
+  ]
+},
+// ── 9: Dateisysteme ──
+{
+  title: "Dateisysteme",
+  icon: "📁",
+  cards: [
+    { t:"Datei-Konzept", b:"Eine Datei ist eine einfache, unstrukturierte <b>Folge von Bytes</b>. Beliebiger Inhalt, für das BS ist der Inhalt transparent. Dynamisch erweiterbar. Dateisysteme speichern Daten und Programme <b>persistent</b> in Dateien." },
+    { t:"Verzeichnisse", b:"<b>Baumförmig</b> strukturiert. Innere Knoten = Verzeichnisse, Blätter = Dateien (Links). Jedem Prozess ist ein <b>aktuelles Verzeichnis</b> (Current Working Directory) zugeordnet." },
+    { t:"Speicherung auf Platte – 3 Methoden", b:"<b>1. Zusammenhängende Speicherung</b>: Aufeinanderfolgende Blöcke. Schnell, aber Fragmentierung. <b>2. Verkettete Speicherung</b>: Jeder Block zeigt auf den nächsten (Linked List). Kein Random Access. <b>3. Indizierte Speicherung</b>: Spezieller Plattenblock (Indexblock) enthält alle Blocknummern der Datenblöcke. Beispiel: Unix I-Nodes. Problem: Indexblock ist nur ein Plattenblock → Kapazität begrenzt → <b>mehrere Indexstufen</b> für größere Dateien." },
+    { t:"Unix I-Nodes", b:"Indizierte Speicherung mit <b>Indexblock</b>, der alle Blocknummern enthält. Problem: Ein Indexblock hat begrenzte Kapazität. Lösung: <b>Mehrere Indexstufen</b> für größere Dateien. Nachteil: Pro Datei muss der Indexblock mitgeladen werden (eventuell mehrere)." },
+    { t:"FAT (MS-DOS)", b:"File Allocation Table: Eingeführt mit MS-DOS. Dateien sind einfache Bytefolgen. Heute gebräuchlich bei eingebetteten Systemen, Digitalkameras, MP3-Playern, USB-Sticks. VFAT = Virtual File Allocation Table. Zugriffsrechte: nur lesbar oder schreib- und lesbar." },
+    { t:"UNIX-Dateisystem (UFS)", b:"UFS = UNIX File System. Dateien: einfache, unstrukturierte Bytefolge, dynamisch erweiterbar. Verzeichnisse: baumförmig, Blätter sind <b>Verweise auf Dateien (Links)</b>. Zugriffsrechte: <b>lesbar, schreibbar, ausführbar</b>. Verzeichnisrechte: lesbar, schreibbar, durchsuchbar, nur erweiterbar." },
+    { t:"UNIX-Zugriffsrechte", b:"Jede Datei hat Rechte für <b>Owner, Group, Others</b>: <b>r</b>(ead), <b>w</b>(rite), <b>x</b>(ecute). Verzeichnisse: r = Auflisten, w = Erstellen/Löschen von Einträgen, x = Durchsuchen. Zugriffsrechte ändern mit Systemaufruf <code>chmod()</code>." },
+    { t:"Backup-Strategien", b:"Datensicherung auf Tertiärspeichern zum Schutz vor Totalausfall. <b>Komplett-Backup</b>: Sichern aller Daten (komplette Platte), dauert typischerweise lange. <b>Inkrementelles Backup</b>: Sichern der Änderungen ab einem bestimmten Zeitpunkt. Alter Stand aus Komplett-Backup und inkrementellen Backups <b>immer wiederherstellbar</b>. <b>Differenzielles Backup</b>: Sichern der Änderungen immer bezogen auf das letzte Komplett-Backup.<br><b>3-2-1-Regel</b>: 3 Kopien der Daten (inkl. Original), auf mindestens 2 unterschiedlichen Datenträgern, mindestens 1 Backup außer Haus (z.B. Cloud)." },
+    { t:"Speichermedien: Festplatte", b:"Häufigstes Medium. Magnetisches Speichermedium. Zugriff <b>blockorientiert und wahlfrei</b>. Blockgrößen: 256, 512, 2048 oder 4096 Byte. Medium unterteilt in <b>Zylinder und Sektoren</b>. Zugriff: Schwenkarm positionieren → auf Sektor warten → interner Cache verbirgt Details." }
+  ],
+  questions: [
+    { q:"Vergleiche zusammenhängende, verkettete und indizierte Dateispeicherung.", a:"Zusammenhängend: aufeinanderfolgende Blöcke, schnell, aber Fragmentierung. Verkettet: Blöcke als Linked List, kein Random Access. Indiziert: Indexblock enthält alle Blocknummern → direkter Zugriff, aber Kapazität des Indexblocks begrenzt." },
+    { q:"Was ist das Problem bei Unix I-Nodes und wie wird es gelöst?", a:"Ein Indexblock ist nur ein einzelner Plattenblock und hat somit begrenzte Kapazität für Blocknummern. Die Lösung sind mehrere Indexstufen für größere Dateien, wobei pro Datei mehrere Indexblöcke mitgeladen werden müssen." },
+    { q:"Erkläre die 3-2-1-Backup-Regel.", a:"Man hält 3 Kopien der Daten (inklusive Original), speichert sie auf mindestens 2 verschiedenen Datenträgern und bewahrt mindestens 1 Kopie außer Haus auf (z.B. Cloud oder gesicherter Raum)." },
+    { q:"Was ist der Unterschied zwischen Komplett-, inkrementellem und differenziellem Backup?", a:"Komplett: Alles wird gesichert (vollständig, aber langsam). Inkrementell: Nur Änderungen seit dem letzten Backup (schnell, Wiederherstellung braucht alle Stufen). Differenziell: Änderungen seit dem letzten Komplett-Backup (schnellere Wiederherstellung als inkrementell)." },
+    { q:"Was bedeuten die Verzeichnisrechte r, w, x unter UNIX?", a:"r = Inhalt des Verzeichnisses auflisten, w = Dateien im Verzeichnis erstellen oder löschen, x = Verzeichnis durchsuchen (cd hinein). Diese Rechte gelten getrennt für Owner, Group und Others." },
+    { q:"Worin unterscheidet sich FAT vom UNIX-Dateisystem?", a:"FAT ist einfach aufgebaut, hat eingeschränkte Zugriffsrechte (nur lesbar/schreibbar) und wird heute bei eingebetteten Systemen und USB-Sticks genutzt. UNIX (UFS) hat differenzierte Zugriffsrechte (r/w/x für Owner/Group/Others), Links, und nutzt I-Nodes mit Indexstufen." }
+  ],
+  flashcards: [
+    { front:"3 Dateispeicherungsmethoden?", back:"1) Zusammenhängend (schnell, Fragmentierung), 2) Verkettet (Linked List, kein Random Access), 3) Indiziert (Indexblock, direkter Zugriff)." },
+    { front:"Unix I-Nodes – Problem?", back:"Indexblock = 1 Plattenblock → begrenzte Kapazität. Lösung: mehrere Indexstufen." },
+    { front:"UNIX-Dateirechte?", back:"r(ead), w(rite), x(ecute) für Owner, Group, Others. chmod() zum Ändern." },
+    { front:"Verzeichnisrechte r/w/x?", back:"r = auflisten, w = Dateien erstellen/löschen, x = durchsuchen (cd)." },
+    { front:"3-2-1 Backup-Regel?", back:"3 Kopien, 2 verschiedene Datenträger, 1 außer Haus." },
+    { front:"FAT – wo heute genutzt?", back:"Eingebettete Systeme, Digitalkameras, USB-Sticks, MP3-Player." },
+    { front:"Festplatte – Zugriffsweise?", back:"Blockorientiert und wahlfrei. Unterteilt in Zylinder und Sektoren." }
+  ]
+},
+// ── 10: Syscalls & Shell ──
+{
+  title: "Syscalls & Shell",
+  icon: "🐚",
+  cards: [
+    { t:"Systemaufrufe – Überblick", b:"Aufgabe des BS: <b>Bereitstellen von Abstraktionen</b> durch System Calls. Der POSIX-Standard beschreibt die Systemaufrufe der UNIX-Welt. Andere Betriebssysteme haben ähnliche Aufrufe." },
+    { t:"Ablauf eines Systemaufrufs (am Beispiel read())", b:"<b>1.</b> Programm ruft Bibliotheks-Routine <code>read(fd, buffer, nbytes)</code> auf (Benutzermodus). <b>2.</b> Parameter werden auf den Stack gelegt, Opcode für BS-Routine in Register geladen. <b>3.</b> <b>TRAP</b>: Kontextwechsel, BS-Routine für read() wird im <b>Kernel-Mode</b> ausgeführt. <b>4.</b> BS sichert Prozessorstatus, führt Operation aus. Aufrufender Thread kann blockiert werden (z.B. Warten auf Eingabe). <b>5.</b> Rückkehr über Scheduler (nicht unbedingt sofort zum aufrufenden Thread)." },
+    { t:"POSIX-Systemaufrufe", b:"<b>Prozesse:</b> fork(), waitpid(), execve(), exit(). <b>Dateien:</b> open(), close(), read(), write(), lseek(). <b>Verzeichnisse:</b> mkdir(). <b>Verschiedenes:</b> chmod(), kill() (Signal senden)." },
+    { t:"Shell – Benutzungsschnittstelle", b:"Die Shell ist der <b>Kommandointerpreter</b>: nimmt Befehle entgegen, startet Programme. Kein Teil des Kernels, sondern ein normaler Prozess. Arbeitsweise: <code>fork()</code> → Kindprozess führt Programm aus → Shell wartet." },
+    { t:"Shell – Pipes & Umleitung", b:"<b>Eingabe- und Ausgabeumleitung</b>: z.B. <code>sort < file1 > file2</code>. <b>Pipes</b>: Verknüpfung von Programmen, z.B. <code>cat file1 file2 file3 | sort | lpr</code>. <b>Ausführung im Hintergrund</b>: <code>sort < file1 | lpr &</code>. Die Shell ist das Werkzeug, das Pipes kombinieren kann." },
+    { t:"Schutz und Sicherheit", b:"<b>Zugriffskontrolle</b>: Dateirechte (r/w/x für Owner/Group/Others). <b>Schutzmechanismen</b>: Speicherisolation (Paging), Privilegstufen (Kern-/Benutzermodus). System Calls als kontrollierte Schnittstelle zum Kernel." }
+  ],
+  questions: [
+    { q:"Beschreibe den Ablauf eines read()-Systemaufrufs.", a:"Das Programm ruft die Bibliotheks-Routine read() auf, Parameter werden auf den Stack gelegt und der Opcode ins Register. Durch den TRAP findet ein Kontextwechsel statt, und die BS-Routine wird im Kernel-Mode ausgeführt. Rückkehr erfolgt über den Scheduler." },
+    { q:"Nenne mindestens 8 POSIX-Systemaufrufe aus der Vorlesung.", a:"fork() (Kindprozess erzeugen), waitpid() (auf Kind warten), execve() (anderes Programm ausführen), exit() (beenden), open() (Datei öffnen), close() (schließen), read() (lesen), write() (schreiben), lseek() (Dateizeiger verschieben), mkdir() (Verzeichnis erzeugen), chmod() (Rechte ändern), kill() (Signal senden)." },
+    { q:"Was passiert bei 'cat file1 file2 | sort | lpr' in der Shell?", a:"Die Shell verbindet drei Programme über Pipes: Die Ausgabe von cat (Dateien zusammenfügen) wird als Eingabe an sort (sortieren) weitergeleitet, dessen Ausgabe wiederum an lpr (Drucken) geht. Die Shell erzeugt dafür mehrere Kindprozesse." },
+    { q:"Warum ist die Shell kein Teil des Kernels?", a:"Die Shell ist ein normaler User-Mode-Prozess, der über Systemaufrufe mit dem Kernel kommuniziert. Sie nutzt fork() zum Erzeugen von Kindprozessen, die dann die eingegebenen Befehle ausführen. Sie ist austauschbar und hat keine besonderen Privilegien." },
+    { q:"Was passiert beim TRAP-Befehl im Ablauf eines Systemaufrufs?", a:"Der TRAP löst einen Kontextwechsel aus: Die CPU wechselt vom Benutzermodus in den Kernmodus. Das BS sichert den vollständigen Prozessorstatus in der Thread-/Prozesstabelle und führt dann die angeforderte Betriebssystem-Routine im privilegierten Modus aus." }
+  ],
+  flashcards: [
+    { front:"read() Syscall – Ablauf?", back:"Bibliothek → Parameter auf Stack → TRAP → Kernel-Mode → BS-Routine → Rückkehr über Scheduler." },
+    { front:"POSIX Prozess-Syscalls?", back:"fork(), waitpid(), execve(), exit()." },
+    { front:"POSIX Datei-Syscalls?", back:"open(), close(), read(), write(), lseek()." },
+    { front:"Shell: wie wird ein Befehl ausgeführt?", back:"fork() → Kind führt Programm aus → Shell wartet." },
+    { front:"Pipe in der Shell?", back:"Verknüpfung: cat f1 f2 | sort | lpr. Ausgabe → Eingabe des nächsten." },
+    { front:"Was macht der TRAP?", back:"Kontextwechsel: Benutzermodus → Kernmodus. BS sichert Prozessorstatus, führt Kernel-Routine aus." }
+  ]
+}
+];
+
+// ═══════════════════════════════════════
+// APP STATE & LOGIC (unchanged)
+// ═══════════════════════════════════════
+let currentTopic=0,currentMode='study',quizState={},fcIndex=0,fcFlipped=false,fcResults={},showOnlyWrong=false;
+
+function init(){renderTabs();bindModes();render()}
+function renderTabs(){const w=document.getElementById('tabs');w.innerHTML=DATA.map((d,i)=>`<button class="tab${i===currentTopic?' active':''}" data-idx="${i}">${d.icon} ${d.title}</button>`).join('');w.querySelectorAll('.tab').forEach(t=>{t.onclick=()=>{currentTopic=+t.dataset.idx;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');fcIndex=0;fcFlipped=false;showOnlyWrong=false;render()}})}
+function bindModes(){document.querySelectorAll('.mode-btn').forEach(b=>{b.onclick=()=>{currentMode=b.dataset.mode;document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');fcIndex=0;fcFlipped=false;showOnlyWrong=false;render()}})}
+function render(){const el=document.getElementById('content');if(currentMode==='study')renderStudy(el);else if(currentMode==='quiz')renderQuiz(el);else renderFlash(el)}
+function renderStudy(el){const d=DATA[currentTopic];el.innerHTML=`<div class="section-title fade-in"><span class="emoji">${d.icon}</span> ${d.title} – Lernseiten</div>`+d.cards.map(c=>{let tg='';if(c.tag==='wichtig')tg='<span class="tag tag-wichtig">WICHTIG</span>';if(c.tag==='formel')tg='<span class="tag tag-formel">FORMEL</span>';if(c.tag==='def')tg='<span class="tag tag-def">DEFINITION</span>';return`<div class="study-card fade-in"><h3>${c.t}${tg}</h3><p>${c.b}</p></div>`}).join('')}
+function renderQuiz(el){const d=DATA[currentTopic];if(!quizState[currentTopic])quizState[currentTopic]={};const qs=quizState[currentTopic];let questions=d.questions.map((q,i)=>({...q,idx:i}));if(showOnlyWrong)questions=questions.filter(q=>qs[q.idx]==='wrong');const wc=d.questions.filter((_,i)=>qs[i]==='wrong').length,cc=d.questions.filter((_,i)=>qs[i]==='correct').length;el.innerHTML=`<div class="section-title fade-in"><span class="emoji">${d.icon}</span> ${d.title} – Klausurfragen</div><div class="stats-bar fade-in"><span class="stats-info">✅ ${cc} gewusst · ❌ ${wc} wiederholen · ${d.questions.length} Fragen</span>${wc>0?`<button class="filter-btn ${showOnlyWrong?'active':''}" id="filterWrong">🔁 Nur Schwächen (${wc})</button>`:''}</div>${questions.length===0?'<p style="color:var(--text3);text-align:center;padding:2rem">Keine Fragen mit ❌ – gut gemacht! 🎉</p>':''}${questions.map(q=>{const s=qs[q.idx];return`<div class="quiz-card fade-in"><div class="quiz-q">${q.idx+1}. ${q.q}</div><div class="quiz-a" id="qa-${q.idx}">${q.a}</div><div class="quiz-btns"><button class="q-btn show-btn" onclick="toggleAnswer(${q.idx})">Antwort zeigen</button><button class="q-btn${s==='correct'?' correct':''}" onclick="markQ(${q.idx},'correct')">✅ Gewusst</button><button class="q-btn${s==='wrong'?' wrong':''}" onclick="markQ(${q.idx},'wrong')">❌ Wiederholen</button></div></div>`}).join('')}`;const fb=document.getElementById('filterWrong');if(fb)fb.onclick=()=>{showOnlyWrong=!showOnlyWrong;render()}}
+function toggleAnswer(i){document.getElementById('qa-'+i).classList.toggle('visible')}
+function markQ(i,v){if(!quizState[currentTopic])quizState[currentTopic]={};quizState[currentTopic][i]=v;render()}
+function renderFlash(el){const d=DATA[currentTopic],fcs=d.flashcards;if(!fcResults[currentTopic])fcResults[currentTopic]={};const res=fcResults[currentTopic],kc=Object.values(res).filter(v=>v==='know').length,rc=Object.values(res).filter(v=>v==='repeat').length,prog=fcs.length>0?((kc+rc)/fcs.length*100):0;if(fcIndex>=fcs.length){el.innerHTML=`<div class="fc-container fade-in"><div class="section-title"><span class="emoji">${d.icon}</span> ${d.title} – Karteikarten</div><div style="text-align:center;padding:3rem 1rem"><div style="font-size:2.5rem;margin-bottom:1rem">🎯</div><div style="font-size:1.1rem;font-weight:600;margin-bottom:0.5rem">Alle ${fcs.length} Karten durchgearbeitet!</div><div class="fc-score" style="justify-content:center;margin-bottom:1.5rem"><span class="s-know">✅ ${kc} gewusst</span><span class="s-repeat">🔁 ${rc} wiederholen</span></div>${rc>0?`<button class="fc-btn" onclick="restartFlashWrong()">🔁 Nur Schwächen</button>`:''}<button class="fc-btn" onclick="restartFlash()" style="margin-left:0.5rem">↩ Alle nochmal</button></div></div>`;return}const card=fcs[fcIndex];el.innerHTML=`<div class="fc-container fade-in"><div class="section-title"><span class="emoji">${d.icon}</span> ${d.title} – Karteikarten</div><div class="fc-progress"><span>${fcIndex+1} / ${fcs.length}</span><div class="fc-bar"><div class="fc-bar-fill" style="width:${prog}%"></div></div><div class="fc-score"><span class="s-know">✅ ${kc}</span><span class="s-repeat">🔁 ${rc}</span></div></div><div class="fc-card-wrap" onclick="flipCard()"><div class="fc-card${fcFlipped?' flipped':''}"><div class="fc-face fc-front"><div class="fc-label">Frage</div><div class="fc-text">${card.front}</div><div class="fc-hint">Klicken zum Umdrehen</div></div><div class="fc-face fc-back"><div class="fc-label">Antwort</div><div class="fc-text">${card.back}</div><div class="fc-hint">Klicken zum Zurückdrehen</div></div></div></div><div class="fc-controls"><button class="fc-btn fc-repeat" onclick="fcMark('repeat')">🔁 Wiederholen</button><button class="fc-btn fc-know" onclick="fcMark('know')">✅ Gewusst</button></div></div>`}
+function flipCard(){fcFlipped=!fcFlipped;const c=document.querySelector('.fc-card');if(c)c.classList.toggle('flipped',fcFlipped)}
+function fcMark(v){if(!fcResults[currentTopic])fcResults[currentTopic]={};fcResults[currentTopic][fcIndex]=v;fcIndex++;fcFlipped=false;render()}
+function restartFlash(){fcResults[currentTopic]={};fcIndex=0;fcFlipped=false;render()}
+function restartFlashWrong(){const d=DATA[currentTopic],res=fcResults[currentTopic]||{};const ri=Object.entries(res).filter(([k,v])=>v==='repeat').map(([k])=>+k);if(ri.length===0){restartFlash();return}d._orig=d._orig||[...d.flashcards];d.flashcards=ri.map(i=>(d._orig||d.flashcards)[i]);fcResults[currentTopic]={};fcIndex=0;fcFlipped=false;render()}
+document.addEventListener('keydown',e=>{if(currentMode!=='flash')return;if(e.key===' '||e.key==='Enter'){e.preventDefault();flipCard()}if(e.key==='ArrowRight'||e.key==='2')fcMark('know');if(e.key==='ArrowLeft'||e.key==='1')fcMark('repeat')});
+init();
+</script>
+</body>
+</html>
