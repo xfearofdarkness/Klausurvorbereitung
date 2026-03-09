@@ -387,13 +387,8 @@ window.APP_SUBJECTS.rabs = {
       cards: [
         {
           t: "FCFS",
-          b: "First Come First Serve oder First In First Out: Bearbeitung der Prozesse in der Reihenfolge ihrer Ankunft in der Bereitliste. Prozessorbesitz bis zum Ende oder zur freiwilligen Aufgabe. Simpelste Lösung. FCFS ist fair: Alle Prozesse werden berücksichtigt.",
+          b: "First Come First Serve oder First In First Out: Bearbeitung der Prozesse in der Reihenfolge ihrer Ankunft in der Bereitliste. Prozessorbesitz bis zum Ende oder zur freiwilligen Aufgabe. Simpelste Lösung. FCFS ist fair: Alle Prozesse werden berücksichtigt. Im Beispiel ergeben sich Wartezeiten 0, 1, 5, 7 und 10; die mittlere Wartezeit beträgt 4,6 ms.",
           source: "07_rabs-scheduling.pdf, Folien 15-17"
-        },
-        {
-          t: "FCFS-Beispiel",
-          b: "Im FCFS-Beispiel ergeben sich Wartezeiten 0, 1, 5, 7 und 10. Die mittlere Wartezeit beträgt 4,6 ms.",
-          source: "07_rabs-scheduling.pdf, Folie 17"
         },
         {
           t: "SJF",
@@ -402,18 +397,13 @@ window.APP_SUBJECTS.rabs = {
         },
         {
           t: "Round Robin",
-          b: "Nach Ablauf einer vorher festgesetzten Frist τ findet eine Verdrängung statt. Neu ankommende und verdrängte Prozesse gehen an das Ende der Warteschlange. Die Zugriffszeit auf die CPU wird fair auf die Prozesse aufgeteilt. Round Robin eignet sich für interaktive Systeme.",
+          b: "Nach Ablauf einer vorher festgesetzten Frist τ findet eine Verdrängung statt. Neu ankommende und verdrängte Prozesse gehen an das Ende der Warteschlange. Die Zugriffszeit auf die CPU wird fair auf die Prozesse aufgeteilt. Round Robin eignet sich für interaktive Systeme. Im Beispiel ergeben sich bei τ = 1 Wartezeiten 1, 10, 9, 9 und 5 mit mittlerer Wartezeit 6,8 ms; bei τ = 4 ergeben sich 0, 9, 3, 9 und 9 mit mittlerer Wartezeit 6 ms.",
           source: "07_rabs-scheduling.pdf, Folien 22-23"
         },
         {
           t: "Zeitquantum bei Round Robin",
           b: "Je kürzer das Zeitquantum ist, desto mehr Prozesswechsel müssen stattfinden und desto höher ist der Overhead. Je länger es ist, desto mehr geht die Gleichzeitigkeit verloren; das System hängt oder ruckelt.",
           source: "07_rabs-scheduling.pdf, Folie 23"
-        },
-        {
-          t: "RR-Beispiele",
-          b: "Bei τ = 1 ergeben sich im Beispiel Wartezeiten 1, 10, 9, 9 und 5 mit mittlerer Wartezeit 6,8 ms. Bei τ = 4 ergeben sich Wartezeiten 0, 9, 3, 9 und 9 mit mittlerer Wartezeit 6 ms.",
-          source: "07_rabs-scheduling.pdf, Folien 25-28"
         },
         {
           t: "RMS",
@@ -488,7 +478,7 @@ window.APP_SUBJECTS.rabs = {
         },
         {
           t: "Anforderungen an wechselseitigen Ausschluss",
-          b: "Keine Annahmen über Geschwindigkeit und Anzahl der CPUs. Mutual exclusion. Progress – no deadlock. Bounded waiting – no starvation. Prozess außerhalb des kritischen Abschnitts darf andere nicht behindern. Sofortiger Zugang zum kritischen Abschnitt, wenn kein anderer Prozess darin ist.",
+          b: "Keine Annahmen über Geschwindigkeit und Anzahl der CPUs. Zu jedem Zeitpunkt darf sich höchstens ein Prozess im kritischen Bereich befinden. Wechselseitiges Aufeinanderwarten muss verhindert werden. Kein Prozess sollte ewig warten müssen. Ein Prozess außerhalb des kritischen Abschnitts darf andere nicht behindern. Wenn kein anderer Prozess im kritischen Abschnitt ist, muss sofortiger Zugang möglich sein.",
           source: "08_rabs-synchro-1.pdf, Folien 36-37"
         },
         {
@@ -912,14 +902,9 @@ window.APP_SUBJECTS.rabs = {
           source: "04_rabs-os-konzepte.pdf, Folie 8"
         },
         {
-          t: "Beispiel read",
-          b: "read ist mit Dateihandler, Buffer und Anzahl der Zeichen parametrisiert und liefert die Anzahl der tatsächlich gelesenen Zeichen zurück. Im Fehlerfall wird der Rückgabewert auf -1 gesetzt.",
-          source: "04_rabs-os-konzepte.pdf, Folie 9"
-        },
-        {
           t: "Typische Systemaufrufe",
-          b: "Genannt werden fork, waitpid, execve, exit, open, close, read, write, lseek, mkdir, mount, chdir, chmod, chown, kill und time.",
-          source: "04_rabs-os-konzepte.pdf, Folien 10-11"
+          b: "Genannt werden fork, waitpid, execve, exit, open, close, read, write, lseek, mkdir, mount, chdir, chmod, chown, kill und time. read ist mit Dateihandler, Buffer und Anzahl der Zeichen parametrisiert und liefert die Anzahl der tatsächlich gelesenen Zeichen zurück; im Fehlerfall ist der Rückgabewert -1.",
+          source: "04_rabs-os-konzepte.pdf, Folien 9-11"
         },
         {
           t: "Zugriffskontrolle",

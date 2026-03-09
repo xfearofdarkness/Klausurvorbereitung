@@ -31,6 +31,7 @@ Jeder Trainer und jeder einzelne Eintrag muss diese Anforderungen erfüllen:
 - Fachbegriffe, Definitionen, Bedingungen, Vor- und Nachteile und Formulierungen werden so nah wie möglich an den Folien übernommen.
 - Die Stoffdichte muss zur Foliendichte passen; ein Thema darf nicht auf ein Sicherheitsminimum ausgedünnt werden, wenn die Folien deutlich mehr explizite Aussagen enthalten.
 - Zu einem Thema gehören nicht nur Definitionen, sondern auch die auf den Folien genannten Abläufe, Voraussetzungen, Varianten, Beispiele, Formeln, Systemaufrufe und Randbedingungen.
+- Beispiele werden nicht als losgelöste Sonderblöcke geführt, sondern in die fachlich passende Karte, Frage oder Flashcard integriert.
 - Unklare, abgeschnittene oder OCR-fehlerhafte Stellen werden nicht geraten.
 - Widersprüche zwischen Folien müssen manuell geprüft werden.
 - Jeder Eintrag erhält ein `source`-Feld mit Datei und Folie oder Seite.
