@@ -98,13 +98,6 @@ a {
   margin-bottom: 1rem;
 }
 
-.home-note {
-  color: var(--text3);
-  font-size: 0.8rem;
-  margin-bottom: 1.2rem;
-  max-width: 60ch;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
