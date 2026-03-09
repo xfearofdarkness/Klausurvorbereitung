@@ -6,355 +6,701 @@ window.APP_SUBJECTS.rabs = {
   subtitle: "Rechnerarchitektur & Betriebssysteme",
   icon: "🖥️",
   topics: [
-// ── 0: Rechnerarchitektur ──
-{
-  title: "Rechnerarchitektur",
-  icon: "🖥️",
-  cards: [
-    { t:"Von-Neumann-Architektur", b:"Alle Komponenten (CPU, Speicher, I/O) über einen <b>gemeinsamen Bus</b> verbunden. Programme und Daten liegen im <b>selben Speicher</b>. Vorteil: Flexibilität (Programme änderbar). Nachteil: <b>Von-Neumann-Flaschenhals</b> – Bus wird zum Engpass, da Befehle und Daten um dieselbe Leitung konkurrieren." },
-    { t:"Harvard-Architektur", b:"<b>Getrennte Speicher</b> und Busse für Befehle und Daten. Befehle und Daten können <b>gleichzeitig</b> geladen werden. Moderne Prozessoren verwenden eine <b>Mischform</b> aus Harvard- und Von-Neumann-Architektur." },
-    { t:"CPU – Steuerwerk & Rechenwerk", b:"Das <b>Steuerwerk</b> (Control Unit) holt Befehle, dekodiert sie und steuert die Ausführung. Das <b>Rechenwerk</b> (ALU) führt arithmetische und logische Operationen aus. Wichtige Register: <b>Befehlszähler</b> (PC), <b>Befehlsregister</b> (IR), <b>Statusregister</b> (Flags)." },
-    { t:"Fetch-Decode-Execute-Zyklus", b:"Jeder Befehl durchläuft: <b>1. Fetch</b> – Befehl aus Speicher laden (Adresse im PC). <b>2. Decode</b> – Steuerwerk zerlegt den Befehl. <b>3. Execute</b> – ALU führt aus. Danach PC inkrementieren und wiederholen." },
-    { t:"Pipeline-Prozessoren", b:"Mehrere getrennte Hol-, Dekodier- und Ausführungseinheiten. Mehrere Befehle können <b>parallel</b> bearbeitet werden (Pipeline-Verarbeitung). Dadurch höherer Durchsatz als bei rein sequenzieller Befehlsabarbeitung." },
-    { t:"Superskalare Prozessoren", b:"<b>Mehrere Ausführungseinheiten</b>. Können oft auch mehrere Befehle gleichzeitig holen und in einem Puffer für die Ausführungseinheiten bereitstellen. Ermöglichen die parallele Ausführung mehrerer Befehle pro Takt." },
-    { t:"Cache", b:"Schneller, teurer Zwischenspeicher. Bei Speicheranforderung prüft die CPU, ob die Daten im Cache sind. Moderne Prozessoren haben mindestens <b>zwei Cache-Ebenen</b>: <b>L1-Cache</b> (typischerweise 16KB, innerhalb der CPU) und <b>L2-Cache</b> (typischerweise mehrere MB, Zugriff 1–2 Taktzyklen langsamer)." },
-    { t:"Speicherhierarchie", b:"Von schnell/klein/teuer nach langsam/groß/günstig: <b>Register → Cache (L1, L2) → RAM → Festplatte/SSD</b>. Die Hierarchie existiert, weil schneller Speicher teuer ist. Ziel: dem Programm die Illusion eines großen, schnellen Speichers geben." },
-    { t:"Interrupts", b:"Prozessor kann auf <b>externe, asynchrone</b> Ereignisse reagieren. Spezielles Eingangssignal: <b>Unterbrechungssignal</b>. Falls Signal gesetzt: Prozessor sichert PC im Keller (Rückkehradresse), Umschalten in Systemmodus. Verzweigung an vordefinierte Adresse im BS (<b>Unterbrechungsbehandlungsroutine, ISR</b> = Interrupt Service Routine). Signal wird jeweils <b>nach der Abarbeitung eines Befehls</b> abgefragt. Hauptanwendung: <b>Ein-/Ausgabe</b>.<br>In der Regel mehrere Interrupts mit verschiedenen <b>Prioritäten</b>. Jedem Interrupt kann eine eigene Behandlungsroutine zugewiesen werden: Tabelle von Adressen = <b>Unterbrechungsvektor</b>. Ggf. Unterbrechung aktiver Behandlungsroutinen. Interrupts können <b>maskiert</b> (ausgeschaltet) werden – privilegierter Befehl!" },
-    { t:"Kernmodus vs. Benutzermodus", b:"CPUs besitzen zwei Ausführungsmodi: <b>Kernmodus</b> – unbeschränkter Zugriff auf alle Rechnerkomponenten (für das BS). <b>Benutzermodus</b> – eingeschränkter Zugriff, Speicher nur über Adressabbildung, keine privilegierten Befehle. Modus wird in Hardware (<b>Programmstatuswort, PSW</b>) durch 1 Bit festgehalten.<br><b>Ausnahme (Exception, Software Interrupt):</b> Ausführung eines privilegierten Befehls im Benutzermodus → Prozessor bricht Befehl ab, sichert PC im Keller, Verzweigung an feste Stelle im BS (Systemmodus). BS behandelt Ausnahme (z.B. Abbruch des Prozesses). Rückkehrbefehl schaltet wieder in Benutzermodus.<br><b>Kontrollierter Moduswechsel (Systemaufruf, Trap, System Call):</b> Spezieller Befehl → Prozessor sichert PC, Umschalten in Systemmodus, Verzweigung an vordefinierte Adresse im BS." },
-    { t:"DMA (Direct Memory Access)", b:"Alle I/O-Geräte können per DMA auf den RAM zugreifen und Interrupts senden. Für DMA-fähige Geräte: Vorgang des Kopierens von Blöcken in oder aus dem RAM wird in <b>kleine Teile</b> zerlegt. Für jeden Teil erhält das Gerät den Bus <b>atomar</b>. Grund: Wenn der vollständige DMA-Vorgang den Bus belegen würde, würden die Wartezeiten der anderen Geräte/CPUs zu lange dauern. RAM bietet mit dem Bus <b>atomare</b> (unteilbare) Lese-/Schreiboperationen an, die nur sequenziell ablaufen – zu einem Zeitpunkt kann nur eine CPU/ein Gerät auf den RAM zugreifen." }
-  ],
-  questions: [
-    { q:"Was ist der Von-Neumann-Flaschenhals?", a:"Der Flaschenhals entsteht, weil Befehle und Daten über denselben Bus transportiert werden und so um Bandbreite konkurrieren. Moderne Prozessoren verwenden eine Mischform aus Harvard- und Von-Neumann-Architektur, um dieses Problem zu entschärfen." },
-    { q:"Erkläre den Fetch-Decode-Execute-Zyklus.", a:"Die CPU holt den Befehl an der Adresse des Befehlszählers aus dem Speicher (Fetch), das Steuerwerk zerlegt ihn in Operation und Operanden (Decode), und die ALU führt die Operation aus (Execute). Danach wird der PC inkrementiert und der Zyklus beginnt von vorn." },
-    { q:"Was ist der Unterschied zwischen Von-Neumann- und Harvard-Architektur?", a:"Bei Von-Neumann liegen Befehle und Daten im selben Speicher und teilen sich einen Bus (Flaschenhals). Die Harvard-Architektur hat getrennte Speicher und Busse für Befehle und Daten, sodass beide gleichzeitig geladen werden können." },
-    { q:"Was ist der Unterschied zwischen Pipeline- und Superskalaren Prozessoren?", a:"Pipeline-Prozessoren haben getrennte Hol-, Dekodier- und Ausführungseinheiten, sodass verschiedene Bearbeitungsphasen parallel ablaufen. Superskalare Prozessoren haben zusätzlich mehrere Ausführungseinheiten und können mehrere Befehle gleichzeitig holen und ausführen." },
-    { q:"Beschreibe L1- und L2-Cache.", a:"Der L1-Cache ist typischerweise 16KB groß, liegt innerhalb der CPU und ist am schnellsten. Der L2-Cache ist typischerweise mehrere MB groß und 1–2 Taktzyklen langsamer. Die CPU prüft bei Speicheranforderungen zuerst, ob die Daten im Cache sind." },
-    { q:"Wie unterscheiden sich Kernmodus und Benutzermodus?", a:"Im Kernmodus hat die CPU unbeschränkten Zugriff auf alle Rechnerkomponenten. Im Benutzermodus: eingeschränkter Zugriff, keine privilegierten Befehle. Modus wird im PSW durch 1 Bit festgehalten. Privilegierter Befehl im Benutzermodus → Ausnahme (Exception): Prozessor bricht ab, sichert PC, Verzweigung ins BS. Kontrollierter Moduswechsel: Trap/System Call (spezieller Befehl)." },
-    { q:"Warum werden DMA-Transfers in kleine Teile zerlegt?", a:"Weil sonst der Bus für die gesamte Dauer des Transfers belegt wäre und alle anderen CPUs und Geräte zu lange warten müssten. Durch die Zerlegung erhält das Gerät den Bus nur für kurze atomare Teiloperationen." }
-  ],
-  flashcards: [
-    { front:"Von-Neumann-Flaschenhals?", back:"Befehle und Daten teilen sich denselben Bus → Engpass. Lösung: Mischform mit Harvard-Architektur." },
-    { front:"Harvard vs. Von-Neumann?", back:"Harvard: getrennte Speicher+Busse für Code/Daten. Von-Neumann: gemeinsamer Speicher, flexibel aber Flaschenhals." },
-    { front:"Fetch → Decode → Execute", back:"1) Befehl aus Speicher holen (PC→IR), 2) Steuerwerk dekodiert, 3) ALU führt aus, 4) PC++." },
-    { front:"Pipeline vs. Superskalar?", back:"Pipeline: Phasen überlappend. Superskalar: mehrere Ausführungseinheiten, mehrere Befehle gleichzeitig." },
-    { front:"L1 / L2 Cache?", back:"L1: ~16KB, in der CPU, am schnellsten. L2: mehrere MB, 1-2 Takte langsamer." },
-    { front:"Kernmodus vs. Benutzermodus?", back:"Kern: alle Befehle erlaubt. Benutzer: privilegierter Befehl → Ausnahme (Exception). Kontrollierter Wechsel: Trap/System Call. Modus in PSW (1 Bit)." },
-    { front:"DMA?", back:"I/O-Geräte greifen per DMA auf RAM zu. Kopiervorgang in kleine Teile zerlegt, für jeden Teil Bus atomar belegt. Sonst wären Wartezeiten zu lang." },
-    { front:"Was ist ein atomarer Zugriff?", back:"Unteilbare Operation (ein Maschinenbefehl), kann nicht unterbrochen werden. Nur eine CPU/ein Gerät gleichzeitig auf RAM." }
-  ]
-},
-// ── 1: BS-Grundlagen ──
-{
-  title: "BS-Grundlagen",
-  icon: "⚙️",
-  cards: [
-    { t:"Was ist ein Betriebssystem?", b:"Software-Schicht zwischen Hardware und Anwendungen. <b>Drei Aufgaben:</b><br><b>1. Erweiterung/Veredelung der Hardware:</b> BS stellt komplexe Funktionen bereit, die Anwendungen nutzen können → erhebliche Vereinfachung der Programmierung. Z.B. Schreiben auf Festplatte: BS findet automatisch freie Blöcke, interne Plattenstruktur für Anwendung nicht mehr wichtig.<br><b>2. Abstraktion der Hardware:</b> BS realisiert einheitliche Sicht für Anwendungen (abstrakte Maschine). Fallunterscheidung zwischen verschiedenen Geräten wird vom BS vorgenommen. Z.B. Dateien abstrahieren externen Speicher – kein Unterschied zwischen Festplatte, USB-Stick, Netzlaufwerk. HAL (Hardware Abstraction Layer) isoliert Kern von Hardware.<br><b>3. Verwaltung von Betriebsmitteln:</b> Betriebsmittel = alles was eine Anwendung zur Ausführung benötigt (Prozessor, Speicher, Geräte). Im Mehrprozess-/Mehrbenutzerbetrieb: <b>Fairness</b> (gerechte Verteilung) und <b>Sicherheit</b> (Schutz der Anwendungen und Benutzer voreinander)." },
-    { t:"Betriebssystem-Konzepte (Überblick)", b:"<b>Prozessverwaltung</b>: Erzeugen, Scheduling, Beenden. <b>Speicherverwaltung</b>: Virtueller Speicher, Paging. <b>Dateisysteme</b>: Persistente Datenhaltung, Verzeichnisse. <b>Systemaufrufe</b>: Schnittstelle zum Kernel. <b>Schutz & Sicherheit</b>: Zugriffsrechte, Isolation. <b>Shell</b>: Benutzungsschnittstelle." },
-    { t:"Monolithischer Kernel", b:"Alle BS-Dienste (Dateisystem, Treiber, Scheduling) laufen im Kernmodus. Vorteile: Schnell (keine Moduswechsel zwischen Diensten). Nachteile: Ein Fehler kann das ganze System betreffen." },
-    { t:"Mikrokernel (Client/Server-Architektur)", b:"Ziel: <b>Minimierung der im privilegierten Modus ablaufenden Funktionalität</b>. BS-Komponenten als <b>Server-Prozesse im nichtprivilegierten Modus</b>. Interaktion über Nachrichten (IPC). Nur der Mikrokern läuft im Systemmodus. Systemkomponenten besitzen nur so viele Privilegien, wie zur Ausführung ihrer Aufgabe erforderlich (z.B. Treiber nur Zugriff auf spezielle IO-Register). Trennung von Strategie und Mechanismus.<br><b>Vorteil:</b> Deutlich weniger SLOC als monolithische Kernel.<br><b>Nachteil:</b> Schlechtere <b>Performance</b> durch Nachrichtenaustausch anstatt Systemcalls." },
-    { t:"Virtuelle Maschine", b:"Auf der Hardware läuft zunächst ein Basis-BS, der <b>Virtual Machine Monitor</b>. Darauf laufen keine Anwendungen, sondern virtuelle Maschinen in Form verschiedener Betriebssysteme. <b>Unabhängigkeit und Isolation</b> von Prozessen/BS konsequent fortgeführt. Illusion: jedem Prozess/BS steht der gesamte Rechner allein zur Verfügung. Unterschiedliche BS gleichzeitig auf einer Hardware-Konfiguration." }
-  ],
-  questions: [
-    { q:"Nenne die drei Aufgaben eines Betriebssystems.", a:"1) Erweiterung/Veredelung der Hardware: BS stellt komplexe Funktionen bereit, die die Programmierung erheblich vereinfachen. 2) Abstraktion der Hardware: BS realisiert einheitliche Sicht für Anwendungen (abstrakte Maschine), z.B. Dateien abstrahieren externen Speicher. 3) Verwaltung von Betriebsmitteln: Im Mehrprozess-/Mehrbenutzerbetrieb sorgt das BS für Fairness (gerechte Verteilung) und Sicherheit (Schutz der Benutzer voreinander)." },
-    { q:"Was ist der Unterschied zwischen monolithischem Kernel und Mikrokernel?", a:"Beim monolithischen Kernel laufen alle BS-Dienste im Kernmodus – schnell, aber ein Fehler kann das ganze System betreffen. Beim Mikrokernel laufen BS-Komponenten als Server-Prozesse im nichtprivilegierten Modus, nur der Mikrokern im Systemmodus. Vorteil: Deutlich weniger SLOC. Nachteil: Schlechtere Performance durch Nachrichtenaustausch anstatt Systemcalls." },
-    { q:"Was zeichnet eine Virtuelle Maschine aus?", a:"Auf der Hardware läuft ein Virtual Machine Monitor (VMM). Darauf laufen virtuelle Maschinen mit verschiedenen Betriebssystemen. Die Idee der Unabhängigkeit und Isolation wird konsequent fortgeführt: Jedem BS wird die Illusion gegeben, dass ihm der gesamte Rechner allein zur Verfügung steht." },
-    { q:"Nenne mindestens 5 Konzeptbereiche eines Betriebssystems.", a:"Prozessverwaltung, Speicherverwaltung, Dateisysteme, Systemaufrufe, Schutz und Sicherheit, Benutzungsschnittstelle (Shell). Dazu kommt die Überwachung und Zuteilung von Ressourcen." }
-  ],
-  flashcards: [
-    { front:"3 Aufgaben eines BS?", back:"1) Erweiterung/Veredelung der Hardware (komplexe Funktionen, Vereinfachung), 2) Abstraktion (einheitliche Sicht, abstrakte Maschine, HAL), 3) Verwaltung von Betriebsmitteln (Fairness + Sicherheit)." },
-    { front:"Monolithisch vs. Mikrokernel?", back:"Monolithisch: alles im Kernmodus → schnell. Mikro: BS-Dienste als Server im Benutzermodus, nur Kern im Systemmodus → schlechtere Performance (Nachrichtenaustausch statt Syscalls), aber weniger SLOC." },
-    { front:"Virtuelle Maschine?", back:"Virtual Machine Monitor auf Hardware. Darauf verschiedene BS als VMs. Illusion: jedes BS hat ganzen Rechner allein. Isolation konsequent fortgeführt." }
-  ]
-},
-// ── 2: Prozesse ──
-{
-  title: "Prozesse",
-  icon: "🔄",
-  cards: [
-    { t:"Prozess – Definition", b:"Ein Prozess ist ein <b>Programm in Ausführung mit zusätzlicher Kontextinformation</b>. Zentrales Konzept in jedem BS. Jeder Prozess besitzt einen eigenen Adressraum. Klassischer Prozess enthält genau einen Thread, heute mehrfädige Prozesse möglich. <b>Unterschied Programm – Prozess:</b> Programm = Folge von Anweisungen und Daten. Prozess = Programm in Ausführung und dessen aktuelle Daten (Programmzähler, Registerinhalte, Variablenbelegung). Ein Programm kann mehrfach ausgeführt werden → mehrere Prozesse." },
-    { t:"Prozesszustände", b:"<b>Erzeugt</b> (new): Prozess wurde erzeugt, besitzt aber noch nicht alle nötigen Betriebsmittel. <b>Bereit</b> (ready): Prozess besitzt alle nötigen Betriebsmittel und ist bereit zum Laufen. <b>Laufend</b> (running): Wird von der CPU ausgeführt. <b>Blockiert</b> (blocked/waiting): Wartet auf ein Ereignis (z.B. E/A, Betriebsmittelzuteilung, Nachricht). <b>Beendet</b> (terminated): Prozess ist beendet, einige Betriebsmittel aber noch nicht freigegeben.<br><b>Übergänge:</b> laufend→blockiert (Prozess kann nicht fortfahren / ruft pause auf), bereit→laufend (Scheduler teilt CPU zu), laufend→bereit (Rechenzeit verbraucht), blockiert→bereit (erwartetes Ereignis tritt ein). Übergänge bereit↔laufend werden vom Prozess selber <b>nicht bemerkt</b>." },
-    { t:"PCB (Prozesskontrollblock)", b:"Beschreibt den <b>Kontext</b> eines Prozesses. Enthält: <b>Eindeutiger Name</b> (z.B. PID in UNIX), Name des Benutzers und zugeordnete Gruppen, <b>Prozesszustand</b> (wartend, rechnend, rechenwillig, …), Spezifikation des Ereignisses auf das gewartet wird, <b>Scheduling-Informationen</b> (Ablaufpriorität, verbrauchte CPU-Zeit), Registerinhalte (PC, Stackpointer etc.), Accounting-Information, <b>Prozesshierarchie</b> (Elternprozess, Kindprozesse), Speichermanagement-Infos, Dateiverwaltung (u.a. Home-Verzeichnis), Liste der zugeordneten E/A-Geräte." },
-    { t:"Prozessumschaltung (Context Switch)", b:"Wechsel von der Ausführung eines Prozesses zur Ausführung eines anderen. <b>Scheduler</b> teilt Prozessen Rechenzeit zu, <b>Dispatcher</b> führt den Prozesswechsel durch. Bei <b>nicht-präemptiven</b> BS (z.B. MS-DOS): Prozesse müssen den Prozessor selbst freigeben durch Terminierung oder Warten. Bei <b>präemptiven</b> BS (z.B. UNIX, Windows): Aktiver Prozess kann vom BS unterbrochen werden." },
-    { t:"fork() unter UNIX", b:"<code>fork()</code> erzeugt einen <b>exakten Klon</b> des aufrufenden Prozesses. Beide Prozesse sind ab da voneinander unabhängig und laufen nach fork() weiter. Kindprozess erbt vom Elternprozess das <b>Speicherabbild</b> (memory image – <b>copy on write</b>), die offenen Dateien usw. Vater und Sohn arbeiten identischen Code ab, haben aber <b>private Variablen</b>. Erzeugt Vater-Sohn-Relation (Prozesshierarchie)." },
-    { t:"execve() – Programmersetzung", b:"<code>execve()</code> ändert das <b>Speicherabbild</b> eines Prozesses und startet ein neues Programm. Es wird <b>kein neuer Prozess</b> erzeugt, nur das Programm des bestehenden Prozesses ersetzt. Legt einen neuen Adressraum an (keine Kopie des aufrufenden Prozesses)." },
-    { t:"Shell-Beispiel: fork + exec", b:"Benutzer tippt Kommando (z.B. <code>sort</code>). Shell erzeugt Kindprozess (<b>fork</b>). Kindprozess führt <code>sort</code> aus. Shell wartet auf Beendigung des Kindes." },
-    { t:"Prozesshierarchie & init", b:"Jeder Prozess hat einen Elternprozess. Es entsteht ein <b>Prozessbaum</b>. <code>init</code> ist als spezieller Prozess im Bootimage vorhanden und steht als <b>Wurzel</b> des Baums. init liest beim Start eine Datei mit der Anzahl der Terminals und erzeugt (<code>forks</code>) einen neuen Kindprozess pro Terminal. Diese warten auf Login. Shells bearbeiten Kommandos, Hintergrunddienste (Daemons) laufen ohne Shell." },
-    { t:"Prozesserzeugung – Anlässe", b:"Prozesse werden erzeugt durch: <b>Systeminitialisierung</b>, Systemaufruf zur Prozesserzeugung (<code>fork</code>) durch einen anderen Prozess, <b>Benutzeranfrage</b> (Kommandoeingabe in Shell), oder Start eines Batch-Jobs." }
-  ],
-  questions: [
-    { q:"Beschreibe die 5 Prozesszustände und nenne die wichtigsten Übergänge.", a:"Erzeugt (besitzt noch nicht alle Betriebsmittel), Bereit (alle Betriebsmittel vorhanden, wartet auf CPU), Laufend (wird ausgeführt), Blockiert (wartet auf Ereignis wie E/A oder Betriebsmittel), Beendet (Ausführung abgeschlossen, Betriebsmittel evtl. noch nicht freigegeben). Übergänge: laufend→blockiert (kann nicht fortfahren), bereit→laufend (Scheduler teilt zu), laufend→bereit (Rechenzeit verbraucht), blockiert→bereit (Ereignis eingetreten)." },
-    { q:"Was enthält der PCB (Prozesskontrollblock)?", a:"Eindeutiger Name (z.B. PID), Benutzername und Gruppen, Prozesszustand, Spezifikation des Warteereignisses, Scheduling-Informationen (Priorität, verbrauchte CPU-Zeit), Registerinhalte (PC, Stackpointer), Accounting-Information, Prozesshierarchie (Eltern-/Kindprozesse), Speichermanagement-Infos, Dateiverwaltung (u.a. Home-Verzeichnis), Liste der zugeordneten E/A-Geräte." },
-    { q:"Erkläre das Zusammenspiel von fork() und execve() an einem Shell-Beispiel.", a:"Der Benutzer tippt z.B. 'sort' in die Shell. Die Shell ruft fork() auf und erzeugt einen Kindprozess als exakten Klon. Der Kindprozess ruft execve() auf, um sein Speicherabbild durch das Programm 'sort' zu ersetzen, und führt es aus." },
-    { q:"Was ist Copy-on-Write bei fork()?", a:"Nach fork() teilen sich Eltern- und Kindprozess zunächst dasselbe Speicherabbild. Erst wenn einer von beiden eine Speicherseite verändert, wird diese Seite tatsächlich kopiert. Das spart Speicher und Zeit, besonders wenn der Kindprozess sofort exec() aufruft." },
-    { q:"Was ist eine Prozessumschaltung (Context Switch) und wer ist beteiligt?", a:"Ein Wechsel von der Ausführung eines Prozesses zur Ausführung eines anderen. Der Scheduler teilt den Prozessen Rechenzeit zu, der Dispatcher führt den eigentlichen Prozesswechsel durch. Bei präemptiven BS (UNIX, Windows) kann der aktive Prozess vom BS unterbrochen werden, bei nicht-präemptiven (MS-DOS) muss er den Prozessor selbst freigeben." },
-    { q:"Was ist die Rolle des init-Prozesses?", a:"init ist ein spezieller Prozess im Bootimage und steht an der Wurzel des Prozessbaums. Er wird beim Systemstart als erster Prozess erzeugt und ist Vorfahre aller anderen Prozesse." }
-  ],
-  flashcards: [
-    { front:"5 Prozesszustände?", back:"Erzeugt (new), Bereit (ready), Laufend (running), Blockiert (blocked), Beendet (terminated)." },
-    { front:"PCB – wichtigste Inhalte?", back:"PID, Zustand, PC, Register, Scheduling-Infos (Priorität, CPU-Zeit), Speicher-Infos, Dateiverwaltung, Prozesshierarchie, E/A-Geräte." },
-    { front:"fork()?", back:"Erzeugt exakten Klon (Copy on Write). Beide laufen danach unabhängig weiter. Erzeugt Vater-Sohn-Relation." },
-    { front:"execve()?", back:"Ersetzt Speicherabbild des Prozesses durch neues Programm. Kein neuer Prozess, nur neuer Code." },
-    { front:"Shell: Kommando ausführen?", back:"Shell: fork() → Kind: exec(programm) → Shell wartet auf Kind." },
-    { front:"Prozessumschaltung?", back:"Scheduler teilt Rechenzeit zu, Dispatcher führt den Wechsel durch. Präemptiv: BS kann unterbrechen. Nicht-präemptiv: Prozess gibt freiwillig ab." }
-  ]
-},
-// ── 3: Threads ──
-{
-  title: "Threads",
-  icon: "🧵",
-  cards: [
-    { t:"Thread – Definition", b:"Threads sind <b>parallele Kontrollflüsse innerhalb eines Prozesses</b> (Prozessende beendet auch alle Threads), die nicht voneinander abgeschottet sind, da sie sich gemeinsame Ressourcen (insb. Speicher) teilen. Auch genannt: <b>Faden</b> oder <b>Leichtgewichtprozess</b>. Ein oder mehrere Threads pro Prozess möglich." },
-    { t:"Was Threads teilen / was sie eigenes haben", b:"<b>Geteilt</b> (pro Prozess): Adressraum, globale Variablen, offene Dateien. Jeder Thread kann auf die Speicheradressen des Prozesses und der anderen Threads zugreifen.<br><b>Eigen</b> (pro Thread): Thread-ID, eigener Programmzähler, eigenes Registerset (enthält lokale Variablen), eigener Stack, eigener Zustand (blockiert, rechenbereit, rechnend). Zugriff auf gemeinsame globale Variablen ⇒ <b>Synchronisationskonzepte</b> erforderlich." },
-    { t:"Thread-Operationen & Ablauf", b:"Prozesse starten normalerweise mit einem einzigen Thread. Start-Thread kann neue Threads erzeugen. Neuer Thread läuft automatisch im Adressraum des erzeugenden Prozesses.<br><b>Bibliotheksfunktionen:</b> <code>thread_create</code>: Neuen Thread erzeugen. <code>thread_exit</code>: Thread beenden. <code>thread_join</code>: Auf Beendigung eines bestimmten Threads warten. <code>thread_yield</code>: Freiwillig Rechenzeit abgeben, um einen anderen Thread rechnen zu lassen. Im Gegensatz zu Prozessen <b>keine Interrupts</b> zur Steuerung des Entzugs von Rechenzeit – Threads müssen freiwillig die CPU abgeben." },
-    { t:"User-Level-Threads (ULT)", b:"Thread-Verwaltung im <b>User-Mode</b> ohne Intervention und Wissen des BS. Kernel verwaltet nur Prozesse (Scheduling, Signale etc.). Realisierung über <b>Threading-Bibliothek</b> (z.B. pthread). Bibliothek setzt auf beliebigem BS auf, keine BS-Änderung nötig. Für jeden Prozess wird vom <b>Laufzeitsystem</b> (nicht vom Kern!) eine Threadtabelle verwaltet. <b>m:1-Abbildung</b>: Allen Threads ist genau eine Kernel-Aktivität zugeordnet (der zugehörige Prozess). Two-level Scheduling.<br><b>Vorteile:</b> Keine BS-Unterstützung nötig, schnelle Erzeugung/Wechsel (kein Kerneintritt, kein Adressraumwechsel), individuelle Scheduling-Algorithmen möglich.<br><b>Nachteile:</b> Blockierender Systemaufruf blockiert <b>alle Threads</b> des Prozesses. Kooperatives Programmiermodell mit freiwilliger Abgabe des Prozessors erforderlich (da keine unterbrechende Instanz)." },
-    { t:"Kernel-Level-Threads (KLT)", b:"Kernel verwaltet Threads: eine <b>Thread-Tabelle für jeden Prozess im Kernel</b>. Thread-Operationen (Erzeugung, Terminierung etc.) sind <b>Kernel-Aufrufe</b> (Trap in den Kernel). Blockierender Aufruf → Kernel prüft Scheduling-Optionen. Effizientes Recycling von Thread-Datenstrukturen. <b>1:1-Abbildung</b>: Jedem Thread ist genau eine Kernel-Aktivität zugeordnet, d.h. jeder Benutzer-Thread verursacht das Erzeugen eines Kernel-Threads.<br><b>Vorteile:</b> Bei Blockierung eines Threads kann BS einen anderen Thread desselben Prozesses auswählen. Bei Mehrprozessorsystemen: <b>echte Parallelität</b> innerhalb eines Prozesses.<br><b>Nachteile:</b> Hoher Overhead. Threadwechsel benötigt Moduswechsel zum BS-Kern. <b>Linux</b>: Kernel-Level-Threads. Windows 2000: Kernel-Level und User-Level-Threads." },
-    { t:"Hybride Lösung: Kernel- + User-Threads", b:"Kombination von User- und Kernel-Level-Threads. Z.B. in alten Versionen von Solaris. Heute genutzt für Programme mit <b>sehr vielen nebenläufigen Aktivitäten</b> (z.B. Webserver mit mehreren Netzwerkschnittstellen)." },
-    { t:"Gründe für Threads & Vorteile", b:"<b>1. Parallele Ausführung:</b> Mehrere Aktivitäten nutzen einen Adressraum mit allen Daten. <b>2. Leichtgewichtiger als Prozesse:</b> Threaderzeugung ca. <b>10- bis 100-mal schneller</b> als Prozesserzeugung. <b>3. Performanz:</b> Performanzgewinn z.B. bei nebenläufigen Ein-/Ausgaben (kein Gewinn wenn alle Threads rechenintensiv). <b>4. Echte Parallelität:</b> Verteilung der Threads auf mehrere Prozessoren.<br>Durch Zerlegung in quasi-parallel ausführbare Ausführungsstränge → vereinfachtes Programmiermodell, sehr schneller Datenaustausch durch gemeinsame Nutzung von Daten." },
-    { t:"Hyperthreading", b:"Implementierung von hardwareseitigem Multithreading in Intel-Prozessoren. Intern parallel arbeitende <b>Pipeline-Stufen</b> werden <b>zwei parallelen Befehls- und Datenströmen</b> zugeteilt. Ein Prozessorkern kann zwei verschiedene Threads parallel bearbeiten. Unterstützt von Linux, Windows (ab XP), Mac OS X, FreeBSD." }
-  ],
-  questions: [
-    { q:"Was teilen sich Threads und was hat jeder Thread für sich?", a:"Threads teilen sich den Adressraum, globale Variablen und offene Dateien des Prozesses. Jeder Thread hat eine eigene Thread-ID, einen eigenen Programmzähler, eigenen Stack und eigene Register." },
-    { q:"Warum blockiert bei User-Level-Threads ein Systemaufruf den ganzen Prozess?", a:"Weil bei ULTs alle Threads auf genau eine Kernel-Aktivität abgebildet sind (m:1). Der Kernel weiß nichts von den einzelnen Threads und blockiert den gesamten Prozess bei einem blockierenden Syscall." },
-    { q:"Nenne Vor- und Nachteile von Kernel-Level-Threads.", a:"Vorteile: Bei Blockierung eines Threads kann der Kernel einen anderen Thread desselben Prozesses weiterlaufen lassen; echte Parallelität auf Mehrprozessorsystemen. Nachteile: Hoher Overhead, da Threadwechsel einen Moduswechsel zum Kernel erfordert." },
-    { q:"Was ist der Unterschied zwischen m:1- und 1:1-Abbildung bei Threads?", a:"Bei m:1 (ULT) sind alle User-Threads auf eine einzige Kernel-Aktivität abgebildet – der Kernel sieht nur den Prozess. Bei 1:1 (KLT) ist jeder User-Thread direkt einem Kernel-Thread zugeordnet, sodass der Kernel jeden Thread einzeln schedulen kann." },
-    { q:"Was ist Hyperthreading?", a:"Hyperthreading ist Intels Implementierung von Hardware-Multithreading. Die intern parallel arbeitenden Pipeline-Stufen werden zwei parallelen Befehls- und Datenströmen zugeteilt, sodass ein physischer Kern zwei Threads gleichzeitig bearbeiten kann." },
-    { q:"Wozu dient thread_yield()?", a:"thread_yield() erlaubt es einem Thread, freiwillig Rechenzeit abzugeben, damit ein anderer Thread rechnen kann. Bei User-Level-Threads ist dies besonders wichtig, da es keine unterbrechende Instanz (kein BS-Scheduler für einzelne Threads) gibt." }
-  ],
-  flashcards: [
-    { front:"Thread: geteilt vs. eigen?", back:"Geteilt: Adressraum, globale Variablen, Dateien. Eigen: Thread-ID, PC, Registerset, Stack, Zustand." },
-    { front:"ULT: m:1-Abbildung – Problem?", back:"Alle Threads auf 1 Kernel-Aktivität (den Prozess). Blockierender Syscall → ganzer Prozess blockiert. Kooperativ: Threads müssen CPU freiwillig abgeben." },
-    { front:"KLT: 1:1-Abbildung – Vorteil?", back:"Jeder Thread = 1 Kernel-Thread. Blockierung eines Threads → andere laufen weiter. Echte Parallelität." },
-    { front:"4 Thread-Operationen?", back:"thread_create, thread_exit, thread_join, thread_yield." },
-    { front:"Hyperthreading?", back:"Intel: Pipeline-Stufen für 2 Befehls-/Datenströme. 1 Kern → 2 Threads parallel." },
-    { front:"ULT Vorteile?", back:"Keine BS-Unterstützung nötig, schnelle Erzeugung/Wechsel (kein Kerneintritt, kein Adressraumwechsel), individuelle Scheduling-Algorithmen." }
-  ]
-},
-// ── 4: Scheduling ──
-{
-  title: "Scheduling",
-  icon: "📊",
-  cards: [
-    { t:"Scheduling-Kriterien", b:"<b>Hohe Effizienz</b>: Prozessor soll gut ausgelastet sein. <b>Geringe Antwortzeit (Latenz)</b>: Schnelle Reaktion bei interaktiven Prozessen. <b>Hoher Durchsatz</b>: Viele Prozesse fertigstellen. <b>Fairness</b>: Gerechte Aufteilung der Prozessorleistung. <b>Pünktlichkeit</b>: Einhalten von Fristen. <b>Berücksichtigen von Prioritäten.</b> Keine Scheduling-Strategie ist für jedes System optimal → <b>Kompromiss</b> zwischen den Kriterien notwendig." },
-    { t:"Non-Preemptive vs. Preemptive", b:"<b>Non-preemptive</b>: Laufender Prozess behält CPU bis Ende oder freiwillige Abgabe (z.B. FCFS, SJF). <b>Preemptive</b>: Rechnender Prozess wird <b>verdrängt</b>, wenn z.B. Zeitscheibe abläuft oder ein höher priorisierter Prozess bereit wird (z.B. RR, Priority)." },
-    { t:"FCFS (First Come First Serve)", b:"Bearbeitung in <b>Ankunftsreihenfolge</b>. Prozessorbesitz bis zum Ende oder zur freiwilligen Aufgabe. Non-preemptive. Simpelste Lösung. Keine gerechte CPU-Zuweisung zwischen E/A-lastigen und berechnungslastigen Aufträgen. FCFS ist fair: alle Prozesse werden berücksichtigt." },
-    { t:"SJF (Shortest Job First)", b:"Prozess mit der <b>kürzesten Bedienzeit</b> wird als nächster bis zum Ende oder zur freiwilligen Aufgabe bearbeitet. Nicht-unterbrechendes (non-preemptive) Scheduling.<br><b>Nachteile:</b> Kenntnis der Bedienzeit wird benötigt, die nur vom Benutzer in Form einer Schätzung stammen kann. Längere Prozesse können <b>verhungern</b>, wenn stets kürzere vorhanden sind." },
-    { t:"Round Robin (RR)", b:"Bearbeitung in Ankunftsreihenfolge. Nach Ablauf einer Zeitscheibe <b>τ</b> (Time Slice) wird verdrängt. Preemptive. Neue und verdrängte Prozesse ans <b>Ende der Warteschlange</b> (neue haben Vorrang). Alle Prozesse gleichberechtigt. Wahl von τ kritisch: je kürzer → mehr Kontextwechsel (Overhead); je länger → Gleichzeitigkeit geht verloren." },
-    { t:"Priority Scheduling (PRIO)", b:"Neuankömmlinge werden nach <b>Priorität</b> in Bereitliste eingeordnet. <b>Non-preemptive (PRIO-NP)</b>: Prozessorbesitz bis Ende. <b>Preemptive (PRIO-P)</b>: Rechnender Prozess wird verdrängt, wenn er geringere Priorität hat als ein neuer bereiter Prozess." },
-    { t:"Rechenbeispiel – Prozesstabelle", b:"<table style='width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:0.5rem'><tr style='border-bottom:1px solid var(--border)'><th style='padding:4px 8px;text-align:left'>Nr</th><th>Ankunft a</th><th>Bedienzeit t</th><th>Priorität P</th></tr><tr><td style='padding:4px 8px'>1</td><td>0</td><td>3</td><td>2</td></tr><tr><td style='padding:4px 8px'>2</td><td>2</td><td>6</td><td>4</td></tr><tr><td style='padding:4px 8px'>3</td><td>4</td><td>4</td><td>1</td></tr><tr><td style='padding:4px 8px'>4</td><td>6</td><td>5</td><td>5</td></tr><tr><td style='padding:4px 8px'>5</td><td>8</td><td>2</td><td>3</td></tr></table><br><b>Ergebnisse aus der Vorlesung:</b><br>FCFS: ⌀ Wartezeit = 4,6ms, ⌀ Laufzeit = 8,6ms<br>SJF: ⌀ Wartezeit = 3,6ms, ⌀ Laufzeit = 7,6ms<br>RR (τ=1): ⌀ Wartezeit = 6,8ms, ⌀ Laufzeit = 10,8ms<br>RR (τ=4): ⌀ Wartezeit = 6,0ms, ⌀ Laufzeit = 10,0ms<br>PRIO-NP: ⌀ Wartezeit = 4,4ms, ⌀ Laufzeit = 8,4ms", tag:"formel" },
-    { t:"Echtzeit-Scheduling: Grundlagen", b:"Echtzeitsysteme müssen <b>Fristen</b> (Deadlines) einhalten. Periodische Prozesse mit Laufzeit CPU(P<sub>i</sub>) und Periode t<sub>P<sub>i</sub></sub>. Jeder periodische Prozess muss in seiner Periode fertig werden. Kein Prozess hängt von einem anderen ab." },
-    { t:"CPU-Auslastung (Schedulbarkeitstest)", b:"<span class='formula'>u = ∑ CPU(Pᵢ) / t_Pᵢ</span><br>Jeder Prozess belegt den Anteil CPU(P)/Periode der CPU. Die Summe = Gesamtauslastung u.<br><b>Beispiel Videostreaming:</b> A: 10/30 + B: 15/40 + C: 5/50 = 0,333 + 0,375 + 0,100 = <b>0,808</b>", tag:"formel" },
-    { t:"RMS (Raten Monotones Scheduling)", b:"Prioritätsbasiertes Scheduling für unterbrechbare, periodische Jobs. Priorität entspricht der <b>Aufrufperiode</b> (kürzere Periode = höhere Priorität). Ist Auslastung u kleiner/gleich der <b>Auslastungsschranke</b>, ist die Job-Menge einplanbar:<br><span class='formula'>u ≤ m · (2^(1/m) − 1)</span><br>Für m=3 Prozesse: Schranke ≈ 0,78. Im Beispiel: 0,808 > 0,78 → <b>kein Scheduling für RMS möglich!</b> ❌", tag:"formel" },
-    { t:"EDF (Earliest Deadline First)", b:"Prozess kündigt seine <b>Deadline</b> an, wenn er CPU-Zeit benötigt. Scheduler sortiert nach <b>kürzester Deadline</b>. Unterbrechung eines laufenden Prozesses, wenn ein neuer mit kürzerer Deadline auftaucht. Keine CPU-Verbrauchszeit-Begrenzung, kann CPU zu <b>100% auslasten</b>. EDF ist unter Linux verfügbar. Im Beispiel: 0,808 ≤ 1 → <b>schedulbar</b> ✅" }
-  ],
-  questions: [
-    { q:"Was sind die Scheduling-Kriterien?", a:"Hohe Effizienz (Prozessor gut ausgelastet), geringe Antwortzeit (schnelle Reaktion bei interaktiven Prozessen), hoher Durchsatz (viele Prozesse fertigstellen), Fairness (gerechte Aufteilung der Prozessorleistung), Pünktlichkeit (Fristen einhalten), Berücksichtigung von Prioritäten. Keine Strategie ist für jedes System optimal – Kompromiss nötig." },
-    { q:"Berechne die mittlere Wartezeit für FCFS mit den 5 Beispielprozessen.", a:"Reihenfolge: P1(0–3), P2(3–9), P3(9–13), P4(13–18), P5(18–20). Wartezeiten: P1=0, P2=3−2=1, P3=9−4=5, P4=13−6=7, P5=18−8=10. Mittlere Wartezeit = (0+1+5+7+10)/5 = 4,6ms." },
-    { q:"Welche Nachteile hat SJF und welche Information wird dafür benötigt?", a:"SJF benötigt die Kenntnis der Bedienzeit, die nur vom Benutzer in Form einer Schätzung stammen kann. Längere Prozesse können verhungern, wenn stets kürzere vorhanden sind." },
-    { q:"Was passiert bei Round Robin, wenn τ sehr groß oder sehr klein ist?", a:"Bei sehr großem τ wird kein Prozess innerhalb seiner Zeitscheibe verdrängt – das System verliert die Gleichzeitigkeit. Bei sehr kleinem τ entsteht hoher Overhead durch viele Kontextwechsel, und das System ruckelt." },
-    { q:"Beispiel: A(CPU=10, Periode=30), B(CPU=15, Periode=40), C(CPU=5, Periode=50). Schedulbar mit EDF? Mit RMS?", a:"Auslastung u = 10/30 + 15/40 + 5/50 = 0,808. EDF: 0,808 ≤ 1 → schedulbar ✅. RMS: Schranke für m=3 ist m·(2^(1/m)−1) ≈ 0,78. Da 0,808 > 0,78 → kein Scheduling für RMS möglich ❌." },
-    { q:"Was ist der Unterschied zwischen EDF und RMS?", a:"EDF vergibt Prioritäten dynamisch nach nächster Deadline und kann die CPU zu 100% auslasten. RMS vergibt statische Prioritäten nach Periodenfrequenz (kürzere Periode = höhere Priorität), hat aber eine strengere Auslastungsschranke von m·(2^(1/m)−1)." },
-    { q:"Was ist der Unterschied zwischen non-preemptive und preemptive Scheduling?", a:"Non-preemptive: Der laufende Prozess behält die CPU bis zum Ende oder bis er sie freiwillig abgibt. Preemptive: Der Scheduler kann einem Prozess die CPU entziehen, z.B. nach Ablauf einer Zeitscheibe oder wenn ein höher priorisierter Prozess bereit wird." },
-    { q:"Vergleiche die mittlere Wartezeit von RR (τ=1) und RR (τ=4) für die Beispielprozesse.", a:"RR (τ=1): Wartezeiten P1=1, P2=10, P3=9, P4=9, P5=5 → ⌀=6,8ms. RR (τ=4): Wartezeiten P1=0, P2=9, P3=3, P4=9, P5=9 → ⌀=6,0ms. τ=4 ist hier besser, weil weniger Kontextwechsel-Overhead entsteht." }
-  ],
-  flashcards: [
-    { front:"FCFS – Eigenschaft?", back:"Ankunftsreihenfolge, non-preemptive, simpelste Lösung. Fair, aber ungerecht zwischen I/O- und CPU-lastigen." },
-    { front:"SJF – Nachteile?", back:"Bedienzeit muss geschätzt werden. Längere Prozesse können verhungern, wenn stets kürzere vorhanden sind." },
-    { front:"Round Robin – τ zu klein/groß?", back:"Zu klein → viele Kontextwechsel. Zu groß → Gleichzeitigkeit geht verloren." },
-    { front:"EDF-Schedulbarkeit?", back:"∑ CPU(Pᵢ)/Periode ≤ 1 → schedulbar. Dynamische Priorität nach nächster Deadline, bis 100% Auslastung." },
-    { front:"RMS-Schedulbarkeit?", back:"∑ CPU(Pᵢ)/Periode ≤ m·(2^(1/m)−1). Statische Priorität: kürzere Periode = höhere Prio." },
-    { front:"RMS-Schranke m=3?", back:"3·(2^(1/3)−1) ≈ 0,78 → strenger als EDF (≤1)." },
-    { front:"Preemptive vs. Non-preemptive?", back:"Preemptive: CPU kann entzogen werden (RR, PRIO-P). Non-preemptive: freiwillige Abgabe (FCFS, SJF)." },
-    { front:"FCFS Beispiel: ⌀ Wartezeit?", back:"P1=0, P2=1, P3=5, P4=7, P5=10 → (0+1+5+7+10)/5 = 4,6ms." }
-  ]
-},
-// ── 5: Synchronisation ──
-{
-  title: "Synchronisation",
-  icon: "🔒",
-  cards: [
-    { t:"Nebenläufigkeit & Synchronisation", b:"Prozesse als Teile komplexer Programmsysteme müssen interagieren: Daten austauschen, sich aufrufen, aufeinander warten, sich abstimmen. Ergebnisse können von der Ausführungsreihenfolge abhängen (nicht vorhersagbar).<br><b>Ziel der Synchronisation:</b> Durch wechselseitigen Ausschluss wird der Zugriff auf gemeinsam benutzte Betriebsmittel so aufeinander abgestimmt, dass die <b>Konsistenz der Daten</b> und damit die Korrektheit der Implementierung erreicht wird." },
-    { t:"Race Condition (Wettlauf-Bedingung)", b:"Situation, in der mehrere Prozesse <b>konkurrierend</b> auf gemeinsame Daten zugreifen und mindestens einer diese <b>manipuliert</b>. Letztendlicher Wert der gemeinsamen Daten hängt davon ab, in welcher Reihenfolge die Prozesse darauf zugreifen. Ergebnis ist nicht vorhersagbar und kann im Fall von überlappenden Zugriffen sogar <b>inkorrekt</b> sein. Ziel: Vermeidung durch <b>Synchronisation</b>. Der Zugriffscode wird als <b>kritischer Abschnitt</b> bezeichnet." },
-    { t:"Kritischer Abschnitt", b:"Abschnitt eines Programms, der Zugriffe auf ein <b>gemeinsam genutztes Objekt</b> (kritische Ressource) enthält. Prozess/Thread, der kritischen Abschnitt betritt, darf <b>nicht unterbrochen</b> werden. Zur Vermeidung von Inkonsistenzen muss ein kritischer Abschnitt geschützt werden: <b>Wechselseitiger Ausschluss</b> (Mutex) – zu jeder Zeit darf nur ein Prozess die Aktivität ausführen." },
-    { t:"6 Anforderungen an den wechselseitigen Ausschluss", b:"<b>1.</b> Keine Annahmen über Geschwindigkeit/Anzahl der CPUs. <b>2.</b> Mutual Exclusion: Zu jedem Zeitpunkt darf sich höchstens ein Prozess im kritischen Bereich befinden. <b>3.</b> Progress – no deadlock: Wechselseitiges Aufeinanderwarten muss verhindert werden. <b>4.</b> Bounded waiting – no starvation: Kein Prozess sollte ewig warten müssen (Voraussetzung: kein Prozess bleibt ewig im krit. Abschnitt). <b>5.</b> Prozess außerhalb des krit. Abschnitts darf andere nicht behindern. <b>6.</b> Sofortiger Zugang zum krit. Abschnitt, wenn kein anderer Prozess darin ist." },
-    { t:"Versuch 1: Sperren der Interrupts", b:"Abgesehen von freiwilliger Abgabe der CPU: Prozesswechsel nur durch Interrupt. Sperren der Interrupts in <code>begin_region()</code>, Freigabe in <code>end_region()</code>. Probleme: <b>E/A ist blockiert</b>, BS verliert Kontrolle über den Prozess, funktioniert nur bei <b>Einprozessor-Rechnern</b>. Realisierung nur im Betriebssystem-Kern." },
-    { t:"Versuch 2: Sperrvariable", b:"Variable <code>belegt</code> zeigt an, ob kritischer Abschnitt belegt ist: <code>while(belegt); belegt=true; /* krit. Abschnitt */ belegt=false;</code> Problem: <b>Race Condition</b> – Prüfen und Setzen sind zwei getrennte Operationen, die unterbrochen werden können (nicht atomar)." },
-    { t:"Versuch 3: Strikter Wechsel", b:"Variable <code>turn</code> gibt an, wer an der Reihe ist: <code>while(turn != 0); /* krit. Abschnitt */ turn = 1;</code> Problem: Prozesse müssen <b>abwechselnd</b> in den kritischen Abschnitt. Verletzt Anforderungen 3, 4 und 5." },
-    { t:"Versuch 4: Erst belegen, dann prüfen", b:"Variable <code>interested[i]</code> zeigt an, ob Prozess i in den kritischen Abschnitt will: <code>interested[0]=true; while(interested[1]); /* krit. Abschnitt */ interested[0]=false;</code> Problem: <b>Verklemmung</b>, falls beide Prozesse interested gleichzeitig auf true setzen." },
-    { t:"Semaphore – Einführung & Aufbau", b:"Eingeführt durch Dijkstra (1965). Allgemeines Synchronisationskonstrukt, nicht nur wechselseitiger Ausschluss, auch <b>Reihenfolgensynchronisation</b>. Konzept zur Lösung des Mutual-Exclusion-Problems auf Basis von <b>Sperren ohne aktives Warten</b>. Werden vom BS zur Verfügung gestellt.<br><b>Datenstruktur:</b> <b>Semaphorzähler</b> und <b>Warteschlange</b> für Prozesse/Threads. Zähler und Warteschlange sind geschützt und können nur über die Semaphoroperationen manipuliert werden. Initialisierung: Zähler = Anzahl zulässiger Prozesse im krit. Abschnitt." },
-    { t:"Wait() und Signal()", b:"<b>Wait()</b> (auch P() oder down()): Zähler wird <b>dekrementiert</b>. Ist Zähler danach ≥ 0: Prozess setzt Arbeit fort. Ist Zähler danach < 0: Aufrufender Prozess wird <b>blockiert</b> und in die Warteschlange des Semaphors eingereiht.<br><b>Signal()</b> (auch V() oder up()): Zähler wird <b>inkrementiert</b>. Prozess aus Warteschlange nehmen und entblocken, falls Warteschlange nicht leer. Entblockter Prozess setzt seine Arbeit mit den Anweisungen fort, die dem P-Aufruf folgen, der ihn blockierte.<br>Operationen sind <b>atomar</b> (ununterbrechbar). <b>Kein aktives Warten</b> – Prozess wird in den Zustand blockiert versetzt.<br><b>Interpretation:</b> Zähler ≥ 0 = Anzahl freier Ressourcen. Zähler < 0 = Anzahl wartender Prozesse." },
-    { t:"Mutex mit Semaphor (Beispiel)", b:"Semaphor <code>sema</code> init(1). A: Wait → (0,∅), A hat Ressource. B: Wait → (−1,{B}), B blockiert. A: Signal → (0,∅), B entblockt und hat Ressource. Für jedes Betriebsmittel gibt es genau einen Semaphor." },
-    { t:"Reihenfolge-Synchronisation", b:"Semaphor mit <b>0 vorbelegt</b>. Wait()-Operation an der Stelle, wo gewartet werden muss. Signal() signalisiert, dass Wartebedingung erfüllt ist. Beispiel: Prozess 1 darf Datei erst lesen, nachdem Prozess 0 sie erzeugt hat." },
-    { t:"Realisierung von Semaphoren", b:"Bei Kernel-Threads: Implementierung im <b>BS-Kern</b>. Operationen sind <b>Systemaufrufe</b>. Atomare Ausführung durch Interrupt-Sperre und ggf. <b>Spinlocks</b> gesichert. Kernel-Implementierung ermöglicht, dass mehrere Prozesse mit disjunkten Adressräumen einen Semaphor gemeinsam nutzen können. Unterbrechung der Operationen würde zu Inkonsistenzen in Warteschlangenbearbeitung oder im Semaphorzähler führen." }
-  ],
-  questions: [
-    { q:"Was ist eine Race Condition?", a:"Eine Race Condition entsteht, wenn mehrere Prozesse konkurrierend auf gemeinsame Daten zugreifen und mindestens einer schreibt. Das Ergebnis hängt von der zufälligen Ausführungsreihenfolge ab und kann bei Überlappung inkorrekt sein." },
-    { q:"Nenne die 6 Anforderungen an eine Lösung zum wechselseitigen Ausschluss.", a:"1) Keine Annahmen über CPU-Geschwindigkeit/-Anzahl. 2) Max. ein Prozess im krit. Abschnitt (Mutex). 3) Kein Deadlock. 4) Kein Verhungern (Bounded Waiting). 5) Prozess außerhalb behindert andere nicht. 6) Sofortiger Zugang wenn frei." },
-    { q:"Warum funktioniert eine einfache Sperrvariable nicht für Mutual Exclusion?", a:"Weil das Prüfen (while(belegt)) und Setzen (belegt=true) zwei getrennte Operationen sind, die unterbrochen werden können. Zwei Prozesse können gleichzeitig sehen, dass die Variable frei ist, und beide in den kritischen Abschnitt eintreten." },
-    { q:"Warum scheitert 'strikter Wechsel' als Synchronisationslösung?", a:"Weil die Prozesse streng abwechselnd in den kritischen Abschnitt müssen. Wenn ein Prozess den Abschnitt nicht braucht, blockiert er den anderen trotzdem. Das verletzt die Anforderungen 3 (Deadlock), 4 (Starvation) und 5 (Behinderung)." },
-    { q:"Erkläre Wait() und Signal() am Semaphor.", a:"Wait(): Zähler wird dekrementiert. Ist er danach ≥ 0, darf der Prozess weiter. Ist er < 0, wird der Prozess blockiert und in die Warteschlange eingereiht. Signal(): Zähler wird inkrementiert. Ist die Warteschlange nicht leer, wird ein Prozess entblockt." },
-    { q:"Erkläre den Ablauf eines Mutex-Semaphors mit zwei Prozessen A und B.", a:"Semaphor init(1). A: Wait() → Zähler=0, A hat Zugriff. B: Wait() → Zähler=−1, B wird blockiert (in Warteschlange). A fertig: Signal() → Zähler=0, B wird aus Warteschlange entblockt und darf weitermachen." },
-    { q:"Was ist der Unterschied zwischen Reihenfolge-Synchronisation und Mutual Exclusion mit Semaphoren?", a:"Bei Mutual Exclusion wird der Semaphor mit 1 initialisiert (max. 1 Prozess im krit. Abschnitt). Bei Reihenfolge-Synchronisation wird mit 0 initialisiert – ein Prozess muss warten (Wait), bis ein anderer die Bedingung erfüllt hat (Signal)." },
-    { q:"Wie werden Semaphore im Kernel implementiert?", a:"Bei Kernel-Threads als Systemaufrufe im BS-Kern. Die atomare Ausführung der Operationen wird durch Interrupt-Sperre und gegebenenfalls Spinlocks gesichert. Die Kernel-Implementierung ermöglicht die gemeinsame Nutzung durch Prozesse mit getrennten Adressräumen." }
-  ],
-  flashcards: [
-    { front:"Ziel der Synchronisation?", back:"Zugriff auf gemeinsame Betriebsmittel durch wechselseitigen Ausschluss abstimmen → Konsistenz der Daten, Korrektheit." },
-    { front:"Race Condition?", back:"Mehrere Prozesse konkurrieren um gemeinsame Daten, mind. einer schreibt → Ergebnis abhängig von Reihenfolge." },
-    { front:"6 Anforderungen an Mutex?", back:"1) Keine Annahmen über CPU, 2) max. 1 im krit. Abschnitt, 3) no deadlock, 4) no starvation, 5) keine Behinderung von außen, 6) sofortiger Zugang wenn frei." },
-    { front:"Sperrvariable – warum fehlerhaft?", back:"Prüfen + Setzen nicht atomar → Race Condition → zwei können gleichzeitig rein." },
-    { front:"Wait()/P()/down()?", back:"Semaphorzähler--. Wenn ≥0: Prozess setzt fort. Wenn <0: blockiert → Warteschlange. Atomar!" },
-    { front:"Signal()/V()/up()?", back:"Semaphorzähler++. Wenn Warteschlange nicht leer: einen Prozess entblocken. Atomar!" },
-    { front:"Mutex-Semaphor: init?", back:"Init mit 1 → max. 1 Prozess im krit. Abschnitt. Sperre ohne aktives Warten." },
-    { front:"Reihenfolge-Semaphor: init?", back:"Init mit 0 → Wait wartet, bis anderer Prozess Signal gibt. Reihenfolgensynchronisation." }
-  ]
-},
-// ── 6: Deadlocks ──
-{
-  title: "Deadlocks",
-  icon: "💀",
-  cards: [
-    { t:"Deadlock (Verklemmung) – Definition", b:"Situationen, in denen sich Prozesse <b>gegenseitig sperren</b>, weil sie auf Ereignisse warten, die von einem anderen wartenden Prozess nicht freigegeben werden können. Da alle am Deadlock beteiligten Prozesse warten, kann keiner ein Ereignis auslösen, so dass ein anderer geweckt wird. Konsequenz: <b>Alle beteiligten Prozesse warten ewig.</b> Im BS-Kontext: Ereignis = Freigabe einer Ressource. Prozess-Zustände: BLOCKED.<br><b>Beispiel:</b> A hat Scanner belegt, will CD-Brenner. B hat CD-Brenner belegt, will Scanner. A wartet auf B, B wartet auf A, …" },
-    { t:"Livelock (Verklemmung)", b:"Spezielle Art von Verklemmung, in der eine Menge von Prozessen <b>nicht in einem Wartezustand verharrt</b>, sondern ständig zwischen einer Reihe sich wiederholender Zustände wechselt, aus denen <b>kein Entkommen</b> möglich ist. Prozess-Zustände abwechselnd zwischen READY und RUNNING." },
-    { t:"Entziehbare vs. nichtentziehbare Betriebsmittel", b:"<b>Entziehbar</b>: Kann einem Prozess ohne Schaden entzogen werden. Z.B. Prozessor (Sichern und Wiederherstellen des Prozessorzustands beim Threadwechsel), Hauptspeicher (Auslagern auf Platte). <b>Nichtentziehbar</b>: Kann nicht entzogen werden, ohne dass die Ausführung fehlschlägt. Z.B. CD-Brenner. Im Folgenden betreffen Deadlocks <b>nichtentziehbare</b> Betriebsmittel." },
-    { t:"4 Bedingungen für Deadlocks (Coffman et al. 1971)", b:"<b>1. Wechselseitiger Ausschluss (Mutual Exclusion)</b>: Jede Ressource kann zu einem Zeitpunkt von höchstens einem Prozess genutzt werden. <b>2. Halten und Warten (Hold and Wait)</b>: Ein Prozess, der bereits Ressourcen besitzt, kann noch weitere anfordern. <b>3. Ununterbrechbarkeit (Non-Preemption)</b>: Einem Prozess, der im Besitz einer Ressource ist, kann diese nicht gewaltsam entzogen werden. <b>4. Zyklisches Warten (Cyclic Waiting)</b>: Zyklische Kette von Prozessen, jeder wartet auf eine Ressource, die vom nächsten belegt ist.<br>Bedingungen 1–3 sind <b>notwendig</b>, aber nicht hinreichend. Bedingung 4 ist potentielle Konsequenz aus 1–3. Alle vier zusammen sind <b>notwendig und hinreichend</b> für eine Verklemmung." },
-    { t:"Belegungsanforderungsgraph", b:"Ein Deadlock liegt genau dann vor, wenn der <b>Graph einen Zyklus</b> enthält. Knoten = Prozesse und Ressourcen, Kanten = Belegungen und Anforderungen." },
-    { t:"4 Strategien zur Behandlung", b:"<b>1. Ignorieren des Problems</b> (Strategie von UNIX-Systemen): Nichts tun und hoffen, dass alles gut geht. <b>2. Erkennen und Beheben</b>: Lässt zunächst alle Anforderungen zu, löst ggf. Deadlock auf. <b>3. Vermeidung (Avoidance)</b>: BS lässt Ressourcenanforderung nicht zu, wenn dadurch ein Deadlock entstehen könnte. <b>4. Verhinderung (Prevention)</b>: Macht eine der vier Deadlock-Bedingungen unerfüllbar." }
-  ],
-  questions: [
-    { q:"Nenne die 4 Bedingungen für Deadlocks (Coffman et al.).", a:"1) Wechselseitiger Ausschluss (Mutual Exclusion): Ressource nur von einem Prozess nutzbar. 2) Halten und Warten (Hold and Wait): Prozess besitzt Ressource und fordert weitere an. 3) Ununterbrechbarkeit (Non-Preemption): Ressource kann nicht gewaltsam entzogen werden. 4) Zyklisches Warten (Cyclic Waiting): Zyklische Kette, jeder wartet auf den nächsten." },
-    { q:"Was ist der Unterschied zwischen Deadlock und Livelock?", a:"Beim Deadlock warten alle beteiligten Prozesse im Zustand BLOCKED ewig aufeinander. Beim Livelock wechseln sie ständig zwischen READY und RUNNING, führen aber keine sinnvolle Arbeit aus – auch hier kein Entkommen." },
-    { q:"Nenne die 4 Strategien zur Behandlung von Deadlocks.", a:"1) Ignorieren des Problems (Strategie von UNIX-Systemen – nichts tun). 2) Erkennen und Beheben (alle Anforderungen zunächst zulassen, Deadlock ggf. auflösen). 3) Vermeidung (Avoidance – BS lässt Anforderung nicht zu, wenn Deadlock entstehen könnte). 4) Verhinderung (Prevention – macht eine der vier Bedingungen unerfüllbar)." },
-    { q:"Was unterscheidet entziehbare von nichtentziehbaren Betriebsmitteln? Nenne je ein Beispiel.", a:"Entziehbare Betriebsmittel können einem Prozess ohne Schaden entzogen werden (z.B. Prozessor, Hauptspeicher). Nichtentziehbare führen bei Entzug zum Fehlschlag (z.B. CD-Brenner). Deadlocks betreffen nichtentziehbare Betriebsmittel." },
-    { q:"Wie erkennt man einen Deadlock im Belegungsanforderungsgraph?", a:"Ein Deadlock liegt genau dann vor, wenn der Belegungsanforderungsgraph einen Zyklus enthält. Die Knoten sind Prozesse und Ressourcen, die Kanten stellen Belegungen und Anforderungen dar." },
-    { q:"Warum sind die Bedingungen 1–3 allein nicht hinreichend für einen Deadlock?", a:"Bedingungen 1–3 sind nur notwendig. Bedingung 4 (zyklisches Warten) ist eine potentielle Konsequenz aus 1–3, und die Unauflösbarkeit des zyklischen Wartens ist eine Folge aus den Bedingungen 1–3. Alle vier zusammen sind notwendig und hinreichend. Wenn eine der Bedingungen unerfüllbar ist, können keine Deadlocks auftreten." }
-  ],
-  flashcards: [
-    { front:"Deadlock?", back:"Prozesse sperren sich gegenseitig, warten auf Ressourcen des anderen. Alle BLOCKED, ewig." },
-    { front:"Livelock?", back:"Spezielle Verklemmung: Prozesse nicht im Wartezustand, wechseln ständig READY↔RUNNING, kommen aber nicht voran." },
-    { front:"4 Bedingungen für Deadlocks?", back:"1) Wechselseitiger Ausschluss, 2) Halten und Warten, 3) Ununterbrechbarkeit, 4) Zyklisches Warten. Alle 4 = Deadlock." },
-    { front:"Zyklus im Belegungsgraph =?", back:"Deadlock liegt vor." },
-    { front:"4 Deadlock-Strategien?", back:"1) Ignorieren (UNIX), 2) Erkennen+Beheben, 3) Vermeidung (Avoidance), 4) Verhinderung (Prevention)." },
-    { front:"Entziehbar vs. nichtentziehbar?", back:"Entziehbar: Prozessor, RAM (kein Schaden). Nichtentziehbar: CD-Brenner (Fehlschlag bei Entzug)." }
-  ]
-},
-// ── 7: Speicherverwaltung ──
-{
-  title: "Speicherverwaltung",
-  icon: "💾",
-  cards: [
-    { t:"Aufgabe der Speicherverwaltung", b:"Verwaltung des Hauptspeichers: Zuteilung von Speicher an Prozesse, Schutz der Speicherbereiche, effiziente Nutzung. Programme arbeiten mit <b>logischen Adressen</b>, die <b>MMU</b> (Memory Management Unit) übersetzt in physische Adressen." },
-    { t:"Swapping (Auslagerung)", b:"Jeder Prozess wird <b>komplett</b> in den Speicher geladen, kann eine gewisse Zeit laufen und wird dann wieder <b>komplett ausgelagert</b>. Prozesse im Leerlauf meist ausgelagert, werden aber in gewissen Zeitabständen aufgeweckt." },
-    { t:"Virtueller Speicher", b:"Nicht alle Seiten eines Prozesses müssen gleichzeitig im RAM sein. <b>Vorteile:</b> Programmgröße kann Arbeitsspeichergröße überschreiten. Prozesse müssen nicht komplett im Speicher sein → effiziente Speichernutzung. Lineare Speicheradressierung, keine Fragmentierung aus Programmierersicht. <b>Gemeinsam genutzter Code und Daten möglich.</b> Theoretisch unbegrenzte Menge gleichzeitig laufender Programme. Speicherschutzmechanismen einfach zu realisieren." },
-    { t:"Paging", b:"<b>Problem der Fragmentierung:</b> Genügend Speicher vorhanden, aber nicht zusammenhängend → zu kleine Bereiche für einen Prozess. Idee: <b>Paging</b> erlaubt es, Prozesse in Teilen zu laden.<br>Physischer Speicher wird in <b>Seitenrahmen</b> (Frames) fester Größe unterteilt. Logischer Adressraum in <b>Seiten</b> (Pages) gleicher Größe. Virtuelle Adresse wird durch <b>MMU</b> in reale Adresse umgewandelt. <b>Seitentabelle</b> gibt Mapping Seiten→Seitenrahmen an, bzw. über <b>Present-/Absent-Bit</b>, ob Seite im Speicher liegt oder ausgelagert ist." },
-    { t:"Seitenfehler (Page Fault)", b:"Wenn virtuelle Adresse auf eine ausgelagerte Seite führt → Systemaufruf <b>Seitenfehler</b> (page fault). BS lagert einen <b>wenig benutzten Seitenrahmen aus</b>, lädt die angeforderte Seite, aktualisiert die Seitentabelle und führt den Befehl, der zum Page Fault führte, <b>erneut aus</b>." },
-    { t:"TLB (Translation Lookaside Buffer)", b:"Spezieller Teil der MMU, der <b>(Teile der) Seitentabelle cached</b>. Beschleunigt die Adressübersetzung, weil nicht bei jedem Zugriff die Seitentabelle im RAM nachgeschlagen werden muss." },
-    { t:"Seitenersetzungsstrategien", b:"Wenn der Speicher voll ist, müssen Seiten verdrängt werden. Strategien aus der Vorlesung:<br>• <b>Not-Recently-Used (NRU)</b><br>• <b>First-In-First-Out (FIFO)</b><br>• <b>Least-Recently-Used (LRU)</b><br>• <b>Working-Set-Algorithmus</b><br>• <b>WSClock-Algorithmus</b>" },
-    { t:"Seitengröße – Trade-off", b:"<b>Große Seiten</b>: Kürzere Seitentabellen, weniger Einlagerungen, aber mehr <b>interne Fragmentierung</b>. <b>Kleine Seiten</b>: Weniger Fragmentierung, aber lange Seitentabellen." },
-    { t:"Virtueller Speicher – Nachteile", b:"Adressierung sehr aufwendig. Zusätzliche Verwaltungsstrukturen (Page-Tables). Teil der Festplatte wird als <b>Auslagerungsdatei</b> verwendet. Komplexe Seitenersetzungsstrategien nötig." }
-  ],
-  questions: [
-    { q:"Wie wird eine logische Adresse beim Paging in eine physische übersetzt?", a:"Physischer Speicher in Seitenrahmen (Frames), logischer Adressraum in Seiten (Pages) gleicher Größe unterteilt. Virtuelle Adresse wird durch MMU in reale Adresse umgewandelt. Die Seitentabelle gibt das Mapping Seiten→Seitenrahmen an. Über das Present-/Absent-Bit wird festgestellt, ob die Seite im Speicher liegt oder ausgelagert ist." },
-    { q:"Was ist ein TLB und warum ist er wichtig?", a:"Der TLB ist ein spezieller Cache in der MMU, der Teile der Seitentabelle zwischenspeichert. Er beschleunigt die Adressübersetzung erheblich, weil ohne ihn bei jedem Speicherzugriff zusätzlich die Seitentabelle im RAM nachgeschlagen werden müsste." },
-    { q:"Was passiert bei einem Seitenfehler (Page Fault)?", a:"Wenn ein Prozess auf eine Seite zugreift, die nicht im RAM ist, wird ein Seitenfehler als Systemaufruf ausgelöst. Das BS lädt die Seite von der Festplatte nach, aktualisiert die Seitentabelle und führt den Befehl erneut aus." },
-    { q:"Nenne mindestens 3 Seitenersetzungsstrategien.", a:"Not-Recently-Used (NRU), First-In-First-Out (FIFO), Least-Recently-Used (LRU), Working-Set-Algorithmus und WSClock-Algorithmus." },
-    { q:"Was ist der Trade-off bei der Wahl der Seitengröße?", a:"Große Seiten führen zu kürzeren Seitentabellen und weniger Einlagerungen, verursachen aber mehr interne Fragmentierung. Kleine Seiten reduzieren die Fragmentierung, erzeugen aber lange Seitentabellen." },
-    { q:"Nenne Vor- und Nachteile von virtuellem Speicher.", a:"Vorteile: Programmgröße kann RAM überschreiten, effiziente Nutzung, keine Fragmentierung aus Programmierersicht, einfacher Speicherschutz. Nachteile: Aufwendige Adressierung, zusätzliche Page-Tables, Teil der Festplatte als Auslagerung nötig, komplexe Seitenersetzung." }
-  ],
-  flashcards: [
-    { front:"Logische → physische Adresse?", back:"Seitennummer → Seitentabelle → Rahmennummer. Physische Adresse = Rahmennummer + Offset." },
-    { front:"TLB?", back:"Cache für Seitentabelle in der MMU. Beschleunigt Adressübersetzung." },
-    { front:"Page Fault?", back:"Virtuelle Adresse zeigt auf ausgelagerte Seite → Systemaufruf. BS lagert wenig benutzten Rahmen aus, lädt angeforderte Seite, aktualisiert Seitentabelle, Befehl erneut ausführen." },
-    { front:"5 Seitenersetzungsstrategien?", back:"NRU, FIFO, LRU, Working-Set, WSClock." },
-    { front:"Große vs. kleine Seiten?", back:"Groß: kürzere Tabellen, mehr interne Fragmentierung. Klein: weniger Fragmentierung, lange Tabellen." },
-    { front:"Virtueller Speicher – Hauptvorteile?", back:"Programmgröße > Arbeitsspeicher. Prozesse nicht komplett im RAM nötig. Gemeinsamer Code möglich. Lineare Adressierung. Speicherschutz einfach." }
-  ]
-},
-// ── 8: IPC & Kommunikation ──
-{
-  title: "IPC & Kommunikation",
-  icon: "📡",
-  cards: [
-    { t:"Prozessinteraktion – 3 Grundformen", b:"<b>Koordination</b> (Synchronisation): Ablaufabstimmung. <b>Kommunikation</b>: Informationsaustausch (funktionaler Aspekt). <b>Kooperation</b>: Zusammenarbeit über gemeinsame Daten (Shared Memory). Von den drei Grundformen ist <b>Koordination elementar</b> – Kommunikation und Kooperation benötigen zeitliche Abstimmung zwischen den Interaktionspartnern." },
-    { t:"Synchrone vs. asynchrone Kommunikation", b:"<b>Synchrones Send</b>: Sender wartet (blockiert), bis Empfänger die Nachricht angenommen hat. <b>Asynchrones Send</b>: Sender setzt nach Senden sofort fort. <b>Synchrones Receive</b>: Empfangsoperation blockiert den Empfänger, bis Nachricht da. <b>Asynchrones Receive</b>: Empfänger liest Information, falls empfangen." },
-    { t:"Pipes", b:"<b>Unbenannte (unnamed) Pipe</b>: Unidirektionaler Datenstrom zwischen verwandten Prozessen (Eltern-Kind). <b>Benannte (named) Pipe</b>: Hat einen Namen im Dateisystem (Systemaufruf <code>mkfifo()</code>), auch zwischen nicht-verwandten Prozessen. In Linux auch als Shell-Kommando: <code>mkfifo</code>." },
-    { t:"Sockets", b:"Endpunkte für Kommunikation, auch über Netzwerk. Verwendung für <b>TCP/IP-Verbindungen</b>. Ermöglichen bidirektionale Kommunikation zwischen Prozessen auf verschiedenen Rechnern. Socket-Verbindung folgt einem Sequenzdiagramm: Verbindungsaufbau → Datenaustausch → Verbindungsabbau." },
-    { t:"Shared Memory (Gemeinsamer Speicher)", b:"<b>Gemeinsamer Speicher</b> muss beim Betriebssystem explizit angefordert werden, von Sender und Empfänger gleichermaßen. Die Adresse des gemeinsamen Speichersegments wird in den Prozessadressraum integriert (mit einem Zeiger). Sender und Empfänger müssen denselben Datentyp verwenden.<br><b>Systemaufrufe (UNIX System V):</b> <code>shmget()</code> (Erzeugen), <code>shmat()</code> (Einbinden/Attach), <code>shmdt()</code> (Entfernen/Detach), <code>shmctl()</code> (Steuerfunktionen)." },
-    { t:"Kommunikation und Synchronisation", b:"Sind durch das <b>Kausalitätsprinzip</b> immer verbunden: Wenn A eine Information von B benötigt, muss A warten, bis B sie bereitstellt. Nachrichtenbasierte Kommunikation impliziert <b>Synchronisation</b> (z.B. bei send und receive). Synchronisationsprimitiven (z.B. Semaphore) eignen sich als Basis für die Implementierung von <b>Kommunikationsprimitiven</b>.<br><b>Implizite Synchronisation:</b> z.B. blockierendes Send/Receive. <b>Explizite Synchronisation:</b> z.B. mit Semaphoren." }
-  ],
-  questions: [
-    { q:"Was sind die 3 Grundformen der Prozessinteraktion?", a:"Koordination (Synchronisation – zeitliche Abstimmung), Kommunikation (Informationsaustausch) und Kooperation (Zusammenarbeit über gemeinsame Daten). Koordination ist die elementarste Form, die anderen beiden setzen sie voraus." },
-    { q:"Erkläre den Unterschied zwischen synchronem und asynchronem Send.", a:"Beim synchronen Send wartet (blockiert) der Sender, bis der Empfänger die Nachricht angenommen hat. Beim asynchronen Send setzt der Sender nach dem Senden sofort seine Arbeit fort, ohne auf den Empfänger zu warten." },
-    { q:"Was ist der Unterschied zwischen einer unbenannten und einer benannten Pipe?", a:"Eine unbenannte Pipe funktioniert nur zwischen verwandten Prozessen (Eltern/Kind nach fork). Eine benannte Pipe (Named Pipe) hat einen Eintrag im Dateisystem (erstellt mit mkfifo) und kann auch von nicht-verwandten Prozessen genutzt werden." },
-    { q:"Nenne die 4 Shared-Memory-Systemaufrufe unter UNIX System V.", a:"shmget() zum Anfordern bzw. Erzeugen eines Shared-Memory-Segments, shmat() zum Einbinden in den eigenen Adressraum, shmdt() zum Entfernen aus dem eigenen Adressraum, und shmctl() für Steuerfunktionen." },
-    { q:"Wie funktioniert Shared Memory grundsätzlich?", a:"Gemeinsamer Speicher muss beim Betriebssystem explizit angefordert werden, von Sender und Empfänger gleichermaßen. Die Adresse des gemeinsamen Speichersegments wird in den Prozessadressraum integriert. Sender und Empfänger müssen denselben Datentyp verwenden." }
-  ],
-  flashcards: [
-    { front:"3 Interaktionsformen?", back:"1) Koordination (Synchronisation), 2) Kommunikation (Nachrichtenaustausch), 3) Kooperation (gemeinsame Daten)." },
-    { front:"Synchron vs. asynchron Send?", back:"Synchron: Sender blockiert bis Empfang. Asynchron: Sender macht sofort weiter." },
-    { front:"Unnamed vs. Named Pipe?", back:"Unnamed: nur verwandte Prozesse. Named (mkfifo): Dateiname im Dateisystem, beliebige Prozesse." },
-    { front:"Shared Memory Syscalls?", back:"shmget() (erzeugen), shmat() (attach), shmdt() (detach), shmctl() (steuern)." },
-    { front:"Warum Synchronisation bei Shared Memory?", back:"Gleichzeitiger Zugriff → Race Condition. Müssen selbst synchronisieren (z.B. Semaphore)." }
-  ]
-},
-// ── 9: Dateisysteme ──
-{
-  title: "Dateisysteme",
-  icon: "📁",
-  cards: [
-    { t:"Datei-Konzept", b:"Eine Datei ist eine einfache, unstrukturierte <b>Folge von Bytes</b>. Beliebiger Inhalt, für das BS ist der Inhalt transparent. Dynamisch erweiterbar. Dateisysteme speichern Daten und Programme <b>persistent</b> in Dateien." },
-    { t:"Verzeichnisse", b:"<b>Baumförmig</b> strukturiert. Innere Knoten = Verzeichnisse, Blätter = Dateien (Links). Jedem Prozess ist ein <b>aktuelles Verzeichnis</b> (Current Working Directory) zugeordnet." },
-    { t:"Speicherung auf Platte – 3 Methoden", b:"<b>1. Zusammenhängende Speicherung</b>: Aufeinanderfolgende Blöcke. Schnell, aber Fragmentierung. <b>2. Verkettete Speicherung</b>: Jeder Block zeigt auf den nächsten (Linked List). Kein Random Access. <b>3. Indizierte Speicherung</b>: Spezieller Plattenblock (Indexblock) enthält alle Blocknummern der Datenblöcke. Beispiel: Unix I-Nodes. Problem: Indexblock ist nur ein Plattenblock → Kapazität begrenzt → <b>mehrere Indexstufen</b> für größere Dateien." },
-    { t:"Unix I-Nodes", b:"Indizierte Speicherung mit <b>Indexblock</b>, der alle Blocknummern enthält. Problem: Ein Indexblock hat begrenzte Kapazität. Lösung: <b>Mehrere Indexstufen</b> für größere Dateien. Nachteil: Pro Datei muss der Indexblock mitgeladen werden (eventuell mehrere)." },
-    { t:"FAT (MS-DOS)", b:"File Allocation Table: Eingeführt mit MS-DOS. Dateien sind einfache Bytefolgen. Heute gebräuchlich bei eingebetteten Systemen, Digitalkameras, MP3-Playern, USB-Sticks. VFAT = Virtual File Allocation Table. Zugriffsrechte: nur lesbar oder schreib- und lesbar." },
-    { t:"UNIX-Dateisystem (UFS)", b:"UFS = UNIX File System. Dateien: einfache, unstrukturierte Bytefolge, dynamisch erweiterbar. Verzeichnisse: baumförmig, Blätter sind <b>Verweise auf Dateien (Links)</b>. Zugriffsrechte: <b>lesbar, schreibbar, ausführbar</b>. Verzeichnisrechte: lesbar, schreibbar, durchsuchbar, nur erweiterbar." },
-    { t:"UNIX-Zugriffsrechte", b:"Jede Datei hat Rechte für <b>Owner, Group, Others</b>: <b>r</b>(ead), <b>w</b>(rite), <b>x</b>(ecute). Verzeichnisse: r = Auflisten, w = Erstellen/Löschen von Einträgen, x = Durchsuchen. Zugriffsrechte ändern mit Systemaufruf <code>chmod()</code>." },
-    { t:"Backup-Strategien", b:"Datensicherung auf Tertiärspeichern zum Schutz vor Totalausfall. <b>Komplett-Backup</b>: Sichern aller Daten (komplette Platte), dauert typischerweise lange. <b>Inkrementelles Backup</b>: Sichern der Änderungen ab einem bestimmten Zeitpunkt. Alter Stand aus Komplett-Backup und inkrementellen Backups <b>immer wiederherstellbar</b>. <b>Differenzielles Backup</b>: Sichern der Änderungen immer bezogen auf das letzte Komplett-Backup.<br><b>3-2-1-Regel</b>: 3 Kopien der Daten (inkl. Original), auf mindestens 2 unterschiedlichen Datenträgern, mindestens 1 Backup außer Haus (z.B. Cloud)." },
-    { t:"Speichermedien: Festplatte", b:"Häufigstes Medium. Magnetisches Speichermedium. Zugriff <b>blockorientiert und wahlfrei</b>. Blockgrößen: 256, 512, 2048 oder 4096 Byte. Medium unterteilt in <b>Zylinder und Sektoren</b>. Zugriff: Schwenkarm positionieren → auf Sektor warten → interner Cache verbirgt Details." }
-  ],
-  questions: [
-    { q:"Vergleiche zusammenhängende, verkettete und indizierte Dateispeicherung.", a:"Zusammenhängend: aufeinanderfolgende Blöcke, schnell, aber Fragmentierung. Verkettet: Blöcke als Linked List, kein Random Access. Indiziert: Indexblock enthält alle Blocknummern → direkter Zugriff, aber Kapazität des Indexblocks begrenzt." },
-    { q:"Was ist das Problem bei Unix I-Nodes und wie wird es gelöst?", a:"Ein Indexblock ist nur ein einzelner Plattenblock und hat somit begrenzte Kapazität für Blocknummern. Die Lösung sind mehrere Indexstufen für größere Dateien, wobei pro Datei mehrere Indexblöcke mitgeladen werden müssen." },
-    { q:"Erkläre die 3-2-1-Backup-Regel.", a:"Man hält 3 Kopien der Daten (inklusive Original), speichert sie auf mindestens 2 verschiedenen Datenträgern und bewahrt mindestens 1 Kopie außer Haus auf (z.B. Cloud oder gesicherter Raum)." },
-    { q:"Was ist der Unterschied zwischen Komplett-, inkrementellem und differenziellem Backup?", a:"Komplett-Backup: Sichern aller Daten, d. h. der kompletten Platte. Inkrementelles Backup: Sichern der Änderungen ab einem bestimmten Zeitpunkt; alter Stand aus Komplett-Backup und inkrementellen Backups immer wiederherstellbar. Differenzielles Backup: Sichern der Änderungen immer bezogen auf das letzte Komplett-Backup." },
-    { q:"Was bedeuten die Verzeichnisrechte r, w, x unter UNIX?", a:"r = Inhalt des Verzeichnisses auflisten, w = Dateien im Verzeichnis erstellen oder löschen, x = Verzeichnis durchsuchen (cd hinein). Diese Rechte gelten getrennt für Owner, Group und Others." },
-    { q:"Worin unterscheidet sich FAT vom UNIX-Dateisystem?", a:"FAT ist einfach aufgebaut, hat eingeschränkte Zugriffsrechte (nur lesbar/schreibbar) und wird heute bei eingebetteten Systemen und USB-Sticks genutzt. UNIX (UFS) hat differenzierte Zugriffsrechte (r/w/x für Owner/Group/Others), Links, und nutzt I-Nodes mit Indexstufen." }
-  ],
-  flashcards: [
-    { front:"3 Dateispeicherungsmethoden?", back:"1) Zusammenhängend (schnell, Fragmentierung), 2) Verkettet (Linked List, kein Random Access), 3) Indiziert (Indexblock, direkter Zugriff)." },
-    { front:"Unix I-Nodes – Problem?", back:"Indexblock = 1 Plattenblock → begrenzte Kapazität. Lösung: mehrere Indexstufen." },
-    { front:"UNIX-Dateirechte?", back:"r(ead), w(rite), x(ecute) für Owner, Group, Others. chmod() zum Ändern." },
-    { front:"Verzeichnisrechte r/w/x?", back:"r = auflisten, w = Dateien erstellen/löschen, x = durchsuchen (cd)." },
-    { front:"3-2-1 Backup-Regel?", back:"3 Kopien, 2 verschiedene Datenträger, 1 außer Haus." },
-    { front:"FAT – wo heute genutzt?", back:"Eingebettete Systeme, Digitalkameras, USB-Sticks, MP3-Player." },
-    { front:"Festplatte – Zugriffsweise?", back:"Blockorientiert und wahlfrei. Unterteilt in Zylinder und Sektoren." }
-  ]
-},
-// ── 10: Syscalls & Shell ──
-{
-  title: "Syscalls & Shell",
-  icon: "🐚",
-  cards: [
-    { t:"Systemaufrufe – Überblick", b:"Aufgabe des BS: <b>Bereitstellen von Abstraktionen</b> durch System Calls. Der POSIX-Standard beschreibt die Systemaufrufe der UNIX-Welt. Andere Betriebssysteme haben ähnliche Aufrufe." },
-    { t:"Ablauf eines Systemaufrufs (am Beispiel read())", b:"<b>1.</b> Programm ruft Bibliotheks-Routine <code>read(fd, buffer, nbytes)</code> auf (Benutzermodus). <b>2.</b> Parameter werden auf den Stack gelegt, Opcode für BS-Routine in Register geladen. <b>3.</b> <b>TRAP</b>: Kontextwechsel, BS-Routine für read() wird im <b>Kernel-Mode</b> ausgeführt. <b>4.</b> BS sichert Prozessorstatus, führt Operation aus. Aufrufender Thread kann blockiert werden (z.B. Warten auf Eingabe). <b>5.</b> Rückkehr über Scheduler (nicht unbedingt sofort zum aufrufenden Thread)." },
-    { t:"POSIX-Systemaufrufe", b:"<b>Prozesse:</b> fork(), waitpid(), execve(), exit(). <b>Dateien:</b> open(), close(), read(), write(), lseek(). <b>Verzeichnisse:</b> mkdir(). <b>Verschiedenes:</b> chmod(), kill() (Signal senden)." },
-    { t:"Shell – Benutzungsschnittstelle", b:"Die Shell ist der <b>Kommandointerpreter</b>: nimmt Befehle entgegen, startet Programme. Kein Teil des Kernels, sondern ein normaler Prozess. Arbeitsweise: <code>fork()</code> → Kindprozess führt Programm aus → Shell wartet." },
-    { t:"Shell – Pipes & Umleitung", b:"<b>Eingabe- und Ausgabeumleitung</b>: z.B. <code>sort < file1 > file2</code>. <b>Pipes</b>: Verknüpfung von Programmen, z.B. <code>cat file1 file2 file3 | sort | lpr</code>. <b>Ausführung im Hintergrund</b>: <code>sort < file1 | lpr &</code>. Die Shell ist das Werkzeug, das Pipes kombinieren kann." },
-    { t:"Schutz und Sicherheit", b:"<b>Zugriffskontrolle</b>: Dateirechte (r/w/x für Owner/Group/Others). <b>Schutzmechanismen</b>: Speicherisolation (Paging), Privilegstufen (Kern-/Benutzermodus). System Calls als kontrollierte Schnittstelle zum Kernel." }
-  ],
-  questions: [
-    { q:"Beschreibe den Ablauf eines read()-Systemaufrufs.", a:"Das Programm ruft die Bibliotheks-Routine read() auf, Parameter werden auf den Stack gelegt und der Opcode ins Register. Durch den TRAP findet ein Kontextwechsel statt, und die BS-Routine wird im Kernel-Mode ausgeführt. Rückkehr erfolgt über den Scheduler." },
-    { q:"Nenne mindestens 8 POSIX-Systemaufrufe aus der Vorlesung.", a:"fork() (Kindprozess erzeugen), waitpid() (auf Kind warten), execve() (anderes Programm ausführen), exit() (beenden), open() (Datei öffnen), close() (schließen), read() (lesen), write() (schreiben), lseek() (Dateizeiger verschieben), mkdir() (Verzeichnis erzeugen), chmod() (Rechte ändern), kill() (Signal senden)." },
-    { q:"Was passiert bei 'cat file1 file2 | sort | lpr' in der Shell?", a:"Die Shell verbindet drei Programme über Pipes: Die Ausgabe von cat (Dateien zusammenfügen) wird als Eingabe an sort (sortieren) weitergeleitet, dessen Ausgabe wiederum an lpr (Drucken) geht. Die Shell erzeugt dafür mehrere Kindprozesse." },
-    { q:"Warum ist die Shell kein Teil des Kernels?", a:"Die Shell ist ein normaler User-Mode-Prozess, der über Systemaufrufe mit dem Kernel kommuniziert. Sie nutzt fork() zum Erzeugen von Kindprozessen, die dann die eingegebenen Befehle ausführen. Sie ist austauschbar und hat keine besonderen Privilegien." },
-    { q:"Was passiert beim TRAP-Befehl im Ablauf eines Systemaufrufs?", a:"Der TRAP löst einen Kontextwechsel aus: Die CPU wechselt vom Benutzermodus in den Kernmodus. Das BS sichert den vollständigen Prozessorstatus in der Thread-/Prozesstabelle und führt dann die angeforderte Betriebssystem-Routine im privilegierten Modus aus." }
-  ],
-  flashcards: [
-    { front:"read() Syscall – Ablauf?", back:"Bibliothek → Parameter auf Stack → TRAP → Kernel-Mode → BS-Routine → Rückkehr über Scheduler." },
-    { front:"POSIX Prozess-Syscalls?", back:"fork(), waitpid(), execve(), exit()." },
-    { front:"POSIX Datei-Syscalls?", back:"open(), close(), read(), write(), lseek()." },
-    { front:"Shell: wie wird ein Befehl ausgeführt?", back:"fork() → Kind führt Programm aus → Shell wartet." },
-    { front:"Pipe in der Shell?", back:"Verknüpfung: cat f1 f2 | sort | lpr. Ausgabe → Eingabe des nächsten." },
-    { front:"Was macht der TRAP?", back:"Kontextwechsel: Benutzermodus → Kernmodus. BS sichert Prozessorstatus, führt Kernel-Routine aus." }
-  ]
-}
+    {
+      id: "rechnerarchitektur",
+      title: "Rechnerarchitektur",
+      icon: "🖥️",
+      cards: [
+        {
+          t: "Von-Neumann- und Harvard-Architektur",
+          b: "Nachteile der VON-NEUMANN-Architektur: Befehle und Daten werden im Speicher gehalten. Die Verbindung und Datenübertragung zwischen CPU und Speicher über den Systembus wird zum VON-NEUMANN-FLASCHENHALS. Harvard-Architektur: logische und physische Trennung von Befehls- und Datenspeicher. Befehle und Daten können gleichzeitig geladen bzw. geschrieben werden.",
+          source: "02_rabs_vna1.pdf, Folien 4-6"
+        },
+        {
+          t: "fetch-decode-execute und Mikroarchitekturen",
+          b: "fetch-decode-execute-Zyklus: Nächsten Befehl aus dem Speicher in das Befehlsregister laden, Programmzähler hochzählen, Typ des Befehls bestimmen, Operanden aus dem Speicher in ein Register laden, Befehl ausführen, wieder von vorne beginnen. Pipeline-Prozessoren besitzen mehrere getrennte Hol-, Dekodier- und Ausführungseinheiten. Superskalare Prozessoren besitzen mehrere Ausführungseinheiten.",
+          source: "02_rabs_vna1.pdf, Folien 19-21"
+        },
+        {
+          t: "Caching",
+          b: "CPU speichert die am häufigsten benötigten Daten in einem kleinen, aber sehr schnellen Speicher: Cache. Bei Speicheranforderung überprüft die CPU, ob die Daten im Cache liegen. Moderne Prozessoren besitzen mindestens zwei Cache-Ebenen: L1-Cache und L2-Cache. L1-Cache typischerweise 16KB und innerhalb der CPU, L2-Cache typischerweise mehrere MB.",
+          source: "02_rabs_vna1.pdf, Folie 25"
+        },
+        {
+          t: "Ausführungsmodi, Systemaufruf und Interrupt",
+          b: "CPUs besitzen zwei Ausführungsmodi: Kernmodus und Benutzermodus. Kernmodus: unbeschränkter Zugriff auf alle Rechnerkomponenten. Benutzermodus: keine privilegierten Befehle. Kontrollierter Moduswechsel mit speziellem Befehl: Systemaufruf, Trap, System Call. Interrupts reagieren auf externe, asynchrone Ereignisse; das Signal wird jeweils nach der Abarbeitung eines Befehls abgefragt.",
+          source: "02_rabs_vna1.pdf, Folien 26, 31-33"
+        },
+        {
+          t: "DMA",
+          b: "Alle I/O-Geräte können per Direct Memory Access auf den RAM zugreifen und Interrupts senden. Für DMA-fähige Geräte wird der Vorgang des Kopierens von Blöcken in oder aus dem RAM in kleine Teile zerlegt. Für jeden Teil erhält das Gerät den Bus atomar.",
+          source: "08_rabs-synchro-1.pdf, Folien 16-18"
+        }
+      ],
+      questions: [
+        {
+          q: "Worin besteht der VON-NEUMANN-FLASCHENHALS und welche Idee verfolgt die Harvard-Architektur?",
+          a: "Beim VON-NEUMANN-FLASCHENHALS wird jeglicher Datenverkehr von und zur CPU über den internen Bus abgewickelt. Die Harvard-Architektur trennt Befehls- und Datenspeicher logisch und physisch, so dass Befehle und Daten gleichzeitig geladen bzw. geschrieben werden können.",
+          source: "02_rabs_vna1.pdf, Folien 4-6"
+        },
+        {
+          q: "Wie läuft der fetch-decode-execute-Zyklus ab?",
+          a: "Nächsten Befehl aus dem Speicher in das Befehlsregister laden, Programmzähler hochzählen, Typ des Befehls bestimmen, Operanden aus dem Speicher in ein Register laden, Befehl ausführen und wieder von vorne beginnen.",
+          source: "02_rabs_vna1.pdf, Folie 19"
+        },
+        {
+          q: "Was kennzeichnet Kernmodus, Benutzermodus und den kontrollierten Moduswechsel?",
+          a: "Kernmodus bedeutet unbeschränkten Zugriff auf alle Rechnerkomponenten. Im Benutzermodus sind keine privilegierten Befehle erlaubt. Beim kontrollierten Moduswechsel mit Systemaufruf, Trap oder System Call sichert der Prozessor den PC, schaltet in den Systemmodus und verzweigt an eine vordefinierte Adresse im Betriebssystem.",
+          source: "02_rabs_vna1.pdf, Folien 26, 31-32"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Harvard-Architektur",
+          back: "Logische und physische Trennung von Befehls- und Datenspeicher; Befehle und Daten können gleichzeitig geladen bzw. geschrieben werden.",
+          source: "02_rabs_vna1.pdf, Folien 5-6"
+        },
+        {
+          front: "L1- und L2-Cache",
+          back: "L1-Cache typischerweise 16KB und innerhalb der CPU. L2-Cache typischerweise mehrere MB.",
+          source: "02_rabs_vna1.pdf, Folie 25"
+        },
+        {
+          front: "DMA",
+          back: "Kopieren in oder aus dem RAM wird in kleine Teile zerlegt; fuer jeden Teil erhaelt das Geraet den Bus atomar.",
+          source: "08_rabs-synchro-1.pdf, Folien 17-18"
+        }
+      ]
+    },
+    {
+      id: "bs-grundlagen",
+      title: "BS-Grundlagen",
+      icon: "⚙️",
+      cards: [
+        {
+          t: "Aufgaben eines Betriebssystems",
+          b: "Ein Betriebssystem leistet Erweiterung/Veredelung der Hardware, Abstraktion der Hardware und Verwaltung von Betriebsmitteln.",
+          source: "01_rabs_grundlagen.pdf, Folie 9"
+        },
+        {
+          t: "Erweiterung und Abstraktion",
+          b: "Das Betriebssystem stellt komplexe Funktionen bereit, die die Anwendungsprogramme verwenden koennen. Folge: erhebliche Vereinfachung der Programmierung. Das Betriebssystem realisiert fuer Anwendungen eine einheitliche Sicht, eine abstrakte Maschine. Dateien abstrahieren externen Speicher.",
+          source: "01_rabs_grundlagen.pdf, Folien 10-11"
+        },
+        {
+          t: "HAL",
+          b: "HAL = Hardware Abstraction Layer. Das ist die Schicht des Betriebssystems, die Betriebssystemkern und uebrige Software von der Hardware isoliert. Nur der HAL kann auf die Hardware zugreifen.",
+          source: "01_rabs_grundlagen.pdf, Folie 13"
+        },
+        {
+          t: "Mikrokern und Virtuelle Maschine",
+          b: "Client/Server-Architektur mit Mikrokern: Nur der Mikrokern laeuft im Systemmodus, BS-Komponenten laufen als Server-Prozesse im nichtprivilegierten Modus. Virtuelle Maschine: Auf der Hardware laeuft ein Basis-Betriebssystem, der Virtual Machine Monitor; darauf laufen virtuelle Maschinen in Form verschiedener Betriebssysteme.",
+          source: "01_rabs_grundlagen.pdf, Folien 4-8"
+        }
+      ],
+      questions: [
+        {
+          q: "Welche drei Aufgaben nennt die Vorlesung fuer ein Betriebssystem?",
+          a: "Erweiterung/Veredelung der Hardware, Abstraktion der Hardware und Verwaltung von Betriebsmitteln.",
+          source: "01_rabs_grundlagen.pdf, Folie 9"
+        },
+        {
+          q: "Was ist die HAL?",
+          a: "Die HAL ist die Hardware Abstraction Layer. Sie isoliert Betriebssystemkern und uebrige Software von der Hardware. Nur der HAL kann auf die Hardware zugreifen.",
+          source: "01_rabs_grundlagen.pdf, Folie 13"
+        },
+        {
+          q: "Was kennzeichnet eine Mikrokern-Architektur?",
+          a: "Ziel ist die Minimierung der im privilegierten Modus ablaufenden Funktionalitaet. BS-Komponenten laufen als Server-Prozesse im nichtprivilegierten Modus, nur der Mikrokern laeuft im Systemmodus. Die Kommunikation erfolgt ueber Nachrichten.",
+          source: "01_rabs_grundlagen.pdf, Folien 4-6"
+        }
+      ],
+      flashcards: [
+        {
+          front: "3 Aufgaben des Betriebssystems",
+          back: "Erweiterung/Veredelung der Hardware, Abstraktion der Hardware, Verwaltung von Betriebsmitteln.",
+          source: "01_rabs_grundlagen.pdf, Folie 9"
+        },
+        {
+          front: "HAL",
+          back: "Hardware Abstraction Layer; isoliert Kern und Software von der Hardware.",
+          source: "01_rabs_grundlagen.pdf, Folie 13"
+        },
+        {
+          front: "Virtuelle Maschine",
+          back: "Auf der Hardware laeuft der Virtual Machine Monitor; darauf laufen virtuelle Maschinen in Form verschiedener Betriebssysteme.",
+          source: "01_rabs_grundlagen.pdf, Folien 7-8"
+        }
+      ]
+    },
+    {
+      id: "prozesse",
+      title: "Prozesse",
+      icon: "🔄",
+      cards: [
+        {
+          t: "Prozessbegriff",
+          b: "Ein Prozess ist ein Programm in Ausfuehrung mit zusaetzlicher Kontextinformation. Prozess ist das zentrale Konzept in jedem Betriebssystem. Jeder Prozess besitzt einen eigenen Adressraum. Prozess: Programm in Ausfuehrung und dessen aktuelle Daten.",
+          source: "05_rabs-process.pdf, Folien 8-10"
+        },
+        {
+          t: "Prozesskontrollblock",
+          b: "Der Prozesskontrollblock beschreibt den Kontext eines Prozesses. Er enthaelt unter anderem eindeutigen Namen, Prozesszustand, Ereignis auf das gewartet wird, Scheduling-Informationen, Registerinhalte, Accounting-Information, Prozesshierarchie, Informationen fuer Speichermanagement und Dateiverwaltung.",
+          source: "05_rabs-process.pdf, Folie 11"
+        },
+        {
+          t: "fork unter UNIX",
+          b: "fork erzeugt einen exakten Klon des aufrufenden Prozesses. Beide Prozesse sind ab da voneinander unabhaengig und laufen nach fork weiter. Der Kindprozess erbt vom Elternprozess das Speicherabbild (memory image - copy on write), die offenen Dateien und weitere Ressourcen.",
+          source: "05_rabs-process.pdf, Folie 17"
+        },
+        {
+          t: "Programmwechsel und Prozesshierarchie",
+          b: "Um das Speicherabbild zu aendern und ein neues Programm auszufuehren, muss der Kindprozess z. B. execl ausfuehren. Das ersetzt den aktuellen Programmcode durch die Binaerdatei und erzeugt keinen neuen Prozess. UNIX bildet Prozesshierarchien; init ist als spezieller Prozess im Bootimage vorhanden und bildet die Wurzel.",
+          source: "05_rabs-process.pdf, Folien 19, 21-22"
+        },
+        {
+          t: "Prozesszustaende",
+          b: "Ein Prozess befindet sich waehrend der Abarbeitung in einem der folgenden Zustaende: erzeugt, bereit, laufend, blockiert, beendet.",
+          source: "05_rabs-process.pdf, Folie 24"
+        }
+      ],
+      questions: [
+        {
+          q: "Wie definiert die Vorlesung einen Prozess?",
+          a: "Ein Prozess ist ein Programm in Ausfuehrung mit zusaetzlicher Kontextinformation. Jeder Prozess besitzt einen eigenen Adressraum.",
+          source: "05_rabs-process.pdf, Folie 8"
+        },
+        {
+          q: "Was leistet fork unter UNIX?",
+          a: "fork erzeugt einen exakten Klon des aufrufenden Prozesses. Beide Prozesse laufen danach unabhaengig weiter. Der Kindprozess erbt das Speicherabbild, offene Dateien und weitere Ressourcen.",
+          source: "05_rabs-process.pdf, Folie 17"
+        },
+        {
+          q: "Welche Prozesszustaende nennt die Vorlesung?",
+          a: "erzeugt, bereit, laufend, blockiert und beendet.",
+          source: "05_rabs-process.pdf, Folie 24"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Prozess",
+          back: "Programm in Ausfuehrung mit zusaetzlicher Kontextinformation.",
+          source: "05_rabs-process.pdf, Folie 8"
+        },
+        {
+          front: "PCB",
+          back: "Beschreibt den Kontext eines Prozesses und enthaelt u. a. Zustand, Register, Scheduling-Informationen und Prozesshierarchie.",
+          source: "05_rabs-process.pdf, Folie 11"
+        },
+        {
+          front: "fork",
+          back: "Erzeugt exakten Klon des aufrufenden Prozesses; copy on write; Vater-Sohn-Relation.",
+          source: "05_rabs-process.pdf, Folie 17"
+        }
+      ]
+    },
+    {
+      id: "threads",
+      title: "Threads",
+      icon: "🧵",
+      cards: [
+        {
+          t: "Definition Thread",
+          b: "Threads sind parallele Kontrollfluesse innerhalb eines Prozesses, die nicht voneinander abgeschottet sind, da sie sich gemeinsame Ressourcen, insbesondere Speicher, teilen. Ein oder mehrere Threads pro Prozess sind moeglich.",
+          source: "06_rabs-threads.pdf, Folie 6"
+        },
+        {
+          t: "Grunde und Eigenschaften",
+          b: "Gruende fuer Threads: parallele Ausfuehrung mehrerer Aktivitaeten, Threads sind leichtgewichtiger als Prozesse, Performanz und Verteilung der Threads auf mehrere Prozessoren. Ein Thread besitzt Thread-ID, Programmzaehler, Registersatz, Stack und Zustand.",
+          source: "06_rabs-threads.pdf, Folien 7, 12"
+        },
+        {
+          t: "Adressraum, Multithreading und Hyperthreading",
+          b: "Threads des gleichen Prozesses teilen sich den gemeinsamen Prozessadressraum und gemeinsame Ressourcen. Multithreading bedeutet gleichzeitiges Abarbeiten mehrerer Threads innerhalb eines einzelnen Prozesses oder Tasks. Hyperthreading ist hardwareseitiges Multithreading in Intel-Prozessoren.",
+          source: "06_rabs-threads.pdf, Folien 15, 17-18"
+        },
+        {
+          t: "User-Level-Threads",
+          b: "User-Level-Threads werden im User Mode ohne Intervention und Wissen des Betriebssystems erzeugt, synchronisiert und vernichtet. Vorteile: keine Betriebssystem-Unterstuetzung notwendig, schnelle Threaderzeugung und Threadwechsel. Nachteile: blockierender Systemaufruf blockiert alle Threads eines Prozesses, Threads muessen CPU freiwillig abgeben.",
+          source: "06_rabs-threads.pdf, Folien 22-25"
+        },
+        {
+          t: "Kernel-Level-Threads",
+          b: "Kernel-Level-Threads werden vom Kernel verwaltet. Thread-Operationen wie Erzeugung und Terminierung sind Kernel-Aufrufe. Vorteile: Bei Blockierung eines Threads kann das Betriebssystem einen anderen Thread desselben Prozesses auswaehlen; echte Parallelitaet innerhalb eines Prozesses ist moeglich. Nachteil: hoher Overhead.",
+          source: "06_rabs-threads.pdf, Folien 26-28"
+        }
+      ],
+      questions: [
+        {
+          q: "Wie definiert die Vorlesung einen Thread?",
+          a: "Ein Thread ist ein paralleler Kontrollfluss innerhalb eines Prozesses. Threads teilen sich die Ressourcen des Prozesses und damit auch den Prozessadressraum.",
+          source: "06_rabs-threads.pdf, Folien 6, 15"
+        },
+        {
+          q: "Was macht thread_yield?",
+          a: "thread_yield erlaubt es dem Thread, freiwillig Rechenzeit abzugeben, um einen anderen Thread rechnen zu lassen.",
+          source: "06_rabs-threads.pdf, Folie 19"
+        },
+        {
+          q: "Wodurch unterscheiden sich User-Level-Threads und Kernel-Level-Threads?",
+          a: "User-Level-Threads werden im User Mode durch eine Threading-Bibliothek verwaltet. Kernel-Level-Threads werden vom Kernel verwaltet; Erzeugung und Terminierung sind Kernel-Aufrufe. Bei User-Level-Threads blockiert ein blockierender Systemaufruf alle Threads des Prozesses, bei Kernel-Level-Threads kann das Betriebssystem einen anderen Thread desselben Prozesses auswaehlen.",
+          source: "06_rabs-threads.pdf, Folien 22-28"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Thread",
+          back: "Paralleler Kontrollfluss innerhalb eines Prozesses.",
+          source: "06_rabs-threads.pdf, Folie 6"
+        },
+        {
+          front: "thread_yield",
+          back: "Freiwillige Abgabe von Rechenzeit, um einen anderen Thread rechnen zu lassen.",
+          source: "06_rabs-threads.pdf, Folie 19"
+        },
+        {
+          front: "Kernel-Level-Threads",
+          back: "Vom Kernel verwaltet; echte Parallelitaet innerhalb eines Prozesses moeglich, aber hoher Overhead.",
+          source: "06_rabs-threads.pdf, Folien 26-28"
+        }
+      ]
+    },
+    {
+      id: "scheduling",
+      title: "Scheduling",
+      icon: "⏱️",
+      cards: [
+        {
+          t: "First Come First Serve",
+          b: "First Come First Serve oder First In First Out: Bearbeitung der Prozesse in der Reihenfolge ihrer Ankunft in der Bereitliste. Prozessorbesitz bis zum Ende oder zur freiwilligen Aufgabe. Simpelste Loesung. FCFS ist fair: Alle Prozesse werden beruecksichtigt.",
+          source: "07_rabs-scheduling.pdf, Folien 15-17"
+        },
+        {
+          t: "Shortest Job First",
+          b: "Prozess mit der kuerzesten Bedienzeit wird als naechster bis zum Ende oder zur freiwilligen Aufgabe bearbeitet. Nicht-unterbrechender Scheduling-Algorithmus. Kenntnis der Bedienzeit wird benoetigt, die nur vom Benutzer in Form einer Schaetzung stammen kann. Laengere Prozesse koennen verhungern.",
+          source: "07_rabs-scheduling.pdf, Folien 18-21"
+        },
+        {
+          t: "Round Robin",
+          b: "Nach Ablauf einer vorher festgesetzten Frist tau, der Zeitscheibe, findet eine Verdraengung statt. Neu ankommende und verdraengte Prozesse gehen an das Ende der Warteschlange. Die Zugriffszeit auf die CPU wird fair auf die Prozesse aufgeteilt. Round Robin eignet sich fuer interaktive Systeme.",
+          source: "07_rabs-scheduling.pdf, Folien 22-23"
+        },
+        {
+          t: "RMS und EDF",
+          b: "Raten Monotones Scheduling ist ein prioritaetsbasiertes Scheduling-Verfahren fuer unterbrechbare, periodische Jobs. Prioritaet eines Prozesses entspricht seiner Aufrufperiode. Earliest Deadline First sortiert Prozesse nach der kuerzesten Deadline. EDF kann die CPU zu 100 Prozent auslasten.",
+          source: "07_rabs-scheduling.pdf, Folien 36-45"
+        }
+      ],
+      questions: [
+        {
+          q: "Wie arbeitet FCFS?",
+          a: "FCFS bearbeitet Prozesse in der Reihenfolge ihrer Ankunft in der Bereitliste. Ein Prozess behaelt den Prozessor bis zum Ende oder bis zur freiwilligen Aufgabe.",
+          source: "07_rabs-scheduling.pdf, Folie 15"
+        },
+        {
+          q: "Welche Nachteile nennt die Vorlesung fuer SJF?",
+          a: "SJF benoetigt die Kenntnis der Bedienzeit, die nur vom Benutzer in Form einer Schaetzung stammen kann. Laengere Prozesse koennen verhungern, wenn stets kuerzere vorhanden sind.",
+          source: "07_rabs-scheduling.pdf, Folie 18"
+        },
+        {
+          q: "Was sagt das Beispiel zu RMS und EDF?",
+          a: "Im Beispiel ist die Auslastung 0,808. Damit ist kein Scheduling fuer RMS moeglich, weil 0,808 groesser als 0,78 ist. Bei EDF ist die CPU-Auslastung bis 100 Prozent moeglich.",
+          source: "07_rabs-scheduling.pdf, Folien 44-45"
+        }
+      ],
+      flashcards: [
+        {
+          front: "FCFS",
+          back: "Bearbeitung in Ankunftsreihenfolge; nicht-unterbrechend; alle Prozesse werden beruecksichtigt.",
+          source: "07_rabs-scheduling.pdf, Folien 15-17"
+        },
+        {
+          front: "SJF",
+          back: "Kuerzeste Bedienzeit zuerst; nicht-unterbrechend; Bedienzeit muss geschaetzt werden.",
+          source: "07_rabs-scheduling.pdf, Folie 18"
+        },
+        {
+          front: "Round Robin",
+          back: "Zeitscheibe tau; faire Aufteilung der CPU-Zugriffszeit; geeignet fuer interaktive Systeme.",
+          source: "07_rabs-scheduling.pdf, Folien 22-23"
+        }
+      ]
+    },
+    {
+      id: "synchronisation",
+      title: "Synchronisation",
+      icon: "🔒",
+      cards: [
+        {
+          t: "Race Condition und kritischer Abschnitt",
+          b: "Race Condition: Mehrere Prozesse greifen konkurrierend auf gemeinsame Daten zu und mindestens einer manipuliert diese. Das Ergebnis ist nicht vorhersagbar und kann inkorrekt sein. Zugriffscode wird als kritischer Abschnitt bezeichnet.",
+          source: "08_rabs-synchro-1.pdf, Folien 28-30"
+        },
+        {
+          t: "Anforderungen an eine Loesung",
+          b: "Keine Annahmen ueber Geschwindigkeit oder Anzahl der CPUs. Mutual exclusion. Progress - no deadlock. Bounded waiting - no starvation. Prozess ausserhalb des kritischen Abschnitts darf andere nicht behindern. Sofortiger Zugang zum kritischen Abschnitt, wenn kein anderer Prozess darin ist.",
+          source: "08_rabs-synchro-1.pdf, Folien 36-37"
+        },
+        {
+          t: "Fehlgeschlagene Loesungsversuche",
+          b: "Sperren der Interrupts blockiert Ein-/Ausgabe und funktioniert nur auf Einprozessor-Rechnern. Die Sperrvariable scheitert an einer Race Condition. Beim strikten Wechsel muessen Prozesse abwechselnd in den kritischen Abschnitt. Beim Ansatz interested erst belegen, dann pruefen, kann Verklemmung auftreten.",
+          source: "08_rabs-synchro-1.pdf, Folien 35, 39-41"
+        },
+        {
+          t: "Semaphore",
+          b: "Semaphore sind ein allgemeines Synchronisationskonstrukt. Wait dekrementiert den Zaehler; bei negativem Ergebnis wird der Prozess blockiert. Signal inkrementiert den Zaehler und entblockt gegebenenfalls einen Prozess. Semaphor-Operationen sind atomar und verursachen kein aktives Warten.",
+          source: "09_rabs-synchro-2.pdf, Folien 8-10"
+        },
+        {
+          t: "Mutex und Reihenfolgesynchronisation",
+          b: "Beim wechselseitigen Ausschluss wird ein Semaphor mit 1 initialisiert. Fuer Reihenfolgesynchronisation wird ein Semaphor mit 0 vorbelegt. Wait steht an der Stelle, wo gewartet werden muss; Signal zeigt an, dass die Wartebedingung erfuellt ist.",
+          source: "09_rabs-synchro-2.pdf, Folien 12-15"
+        }
+      ],
+      questions: [
+        {
+          q: "Was ist eine Race Condition?",
+          a: "Mehrere Prozesse greifen konkurrierend auf gemeinsame Daten zu und mindestens einer manipuliert diese. Das Ergebnis ist nicht vorhersagbar und kann inkorrekt sein.",
+          source: "08_rabs-synchro-1.pdf, Folie 28"
+        },
+        {
+          q: "Welche sechs Anforderungen nennt die Vorlesung fuer wechselseitigen Ausschluss?",
+          a: "Keine Annahmen ueber Geschwindigkeit oder Anzahl der CPUs, mutual exclusion, progress - no deadlock, bounded waiting - no starvation, ein Prozess ausserhalb des kritischen Abschnitts darf andere nicht behindern, sofortiger Zugang wenn kein anderer Prozess im kritischen Abschnitt ist.",
+          source: "08_rabs-synchro-1.pdf, Folien 36-37"
+        },
+        {
+          q: "Wie arbeiten Wait und Signal?",
+          a: "Wait dekrementiert den Zaehler. Ist der Zaehler danach kleiner als 0, wird der aufrufende Prozess blockiert und in die Warteschlange eingereiht. Signal inkrementiert den Zaehler und entblockt einen Prozess, falls die Warteschlange nicht leer ist.",
+          source: "09_rabs-synchro-2.pdf, Folien 8-10"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Race Condition",
+          back: "Konkurrierender Zugriff auf gemeinsame Daten; Ergebnis kann nicht vorhersagbar und inkorrekt sein.",
+          source: "08_rabs-synchro-1.pdf, Folie 28"
+        },
+        {
+          front: "Wait",
+          back: "Zaehler wird dekrementiert; bei negativem Ergebnis wird der Prozess blockiert.",
+          source: "09_rabs-synchro-2.pdf, Folie 8"
+        },
+        {
+          front: "Signal",
+          back: "Zaehler wird inkrementiert; falls noetig wird ein Prozess aus der Warteschlange entblockt.",
+          source: "09_rabs-synchro-2.pdf, Folie 9"
+        }
+      ]
+    },
+    {
+      id: "deadlocks",
+      title: "Deadlocks",
+      icon: "💀",
+      cards: [
+        {
+          t: "Deadlock",
+          b: "Deadlocks sind Situationen, in denen sich Prozesse gegenseitig sperren, weil sie auf Ereignisse warten, die von einem anderen wartenden Prozess nicht freigegeben werden koennen. Konsequenz: alle beteiligten Prozesse warten ewig. Im Betriebssystem-Kontext ist das Ereignis die Freigabe einer Ressource.",
+          source: "09_rabs-synchro-2.pdf, Folien 19-20"
+        },
+        {
+          t: "Livelock und Betriebsmittel",
+          b: "Livelock ist eine spezielle Art von Verklemmung, in der Prozesse nicht in einem Wartezustand verharren, sondern zwischen sich wiederholenden Zustaenden wechseln. Entziehbare Betriebsmittel koennen ohne Schaden entzogen werden; nichtentziehbare nicht.",
+          source: "09_rabs-synchro-2.pdf, Folien 21-22"
+        },
+        {
+          t: "Vier Bedingungen",
+          b: "Wechselseitiger Ausschluss, Halten und Warten, Ununterbrechbarkeit und zyklisches Warten. Alle vier Bedingungen zusammen sind notwendig und hinreichend fuer eine Verklemmung.",
+          source: "09_rabs-synchro-2.pdf, Folien 30-31"
+        },
+        {
+          t: "Graph und Strategien",
+          b: "Ein Deadlock liegt genau dann vor, wenn der Belegungsanforderungsgraph einen Zyklus enthaelt. Vier Strategien zur Behandlung: Ignorieren, Erkennen und Beheben, Vermeidung, Verhinderung.",
+          source: "09_rabs-synchro-2.pdf, Folien 32, 50"
+        }
+      ],
+      questions: [
+        {
+          q: "Wie definiert die Vorlesung einen Deadlock?",
+          a: "Prozesse sperren sich gegenseitig, weil sie auf Ereignisse warten, die von einem anderen wartenden Prozess nicht freigegeben werden koennen. Alle beteiligten Prozesse warten ewig.",
+          source: "09_rabs-synchro-2.pdf, Folien 19-20"
+        },
+        {
+          q: "Welche vier Bedingungen nach Coffman nennt die Vorlesung?",
+          a: "Wechselseitiger Ausschluss, Halten und Warten, Ununterbrechbarkeit und zyklisches Warten.",
+          source: "09_rabs-synchro-2.pdf, Folie 30"
+        },
+        {
+          q: "Welche vier Strategien zur Behandlung von Deadlocks werden genannt?",
+          a: "Ignorieren des Problems, Erkennen und Beheben, Vermeidung und Verhinderung.",
+          source: "09_rabs-synchro-2.pdf, Folie 50"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Deadlock",
+          back: "Alle beteiligten Prozesse warten ewig auf Ressourcen oder Ereignisse, die von anderen wartenden Prozessen gehalten werden.",
+          source: "09_rabs-synchro-2.pdf, Folien 19-20"
+        },
+        {
+          front: "Livelock",
+          back: "Prozesse verharren nicht im Wartezustand, wechseln aber fortlaufend zwischen wiederkehrenden Zustaenden ohne Fortschritt.",
+          source: "09_rabs-synchro-2.pdf, Folie 21"
+        },
+        {
+          front: "Zyklus im Belegungsanforderungsgraphen",
+          back: "Ein Deadlock liegt genau dann vor, wenn der Graph einen Zyklus enthaelt.",
+          source: "09_rabs-synchro-2.pdf, Folie 32"
+        }
+      ]
+    },
+    {
+      id: "speicherverwaltung",
+      title: "Speicherverwaltung",
+      icon: "💾",
+      cards: [
+        {
+          t: "Adressraum und virtueller Speicher",
+          b: "Adressraum: Menge von Adressen, die ein Prozess zur Adressierung des Speichers benutzen kann. Jeder Prozess besitzt einen eigenen Adressraum. Virtueller Speicher erlaubt das Aufbrechen des Adressraums eines Prozesses in Seiten.",
+          source: "02_rabs_speicher.pdf, Folien 20, 28"
+        },
+        {
+          t: "Paging",
+          b: "Physikalischer Speicher wird in Seitenrahmen fester Groesse unterteilt. Logischer Adressraum wird in Seiten unterteilt. Die virtuelle Adresse wird durch die MMU in eine reale Adresse umgewandelt. Die Seitentabelle gibt das Mapping der Seiten auf Seitenrahmen an.",
+          source: "02_rabs_speicher.pdf, Folien 31-33"
+        },
+        {
+          t: "Page Fault",
+          b: "Wenn eine virtuelle Adresse auf eine ausgelagerte Seite fuehrt, entsteht ein Systemaufruf Seitenfehler. Das Betriebssystem lagert einen wenig benutzten Seitenrahmen aus, laedt die angeforderte Seite, aktualisiert die Seitentabelle und fuehrt den Befehl noch einmal aus.",
+          source: "02_rabs_speicher.pdf, Folie 33"
+        },
+        {
+          t: "Seitengroesse, Ersetzung und TLB",
+          b: "Grosse Seiten bedeuten weniger Einlagerungen, aber mehr interne Fragmentierung. Kleine Seiten bedeuten lange Seitentabellen. Genannte Seitenersetzungsstrategien: NRU, FIFO, LRU, Working-Set und WSClock. Der TLB ist ein spezieller Teil der MMU, der Teile der Seitentabelle cached.",
+          source: "02_rabs_speicher.pdf, Folie 35"
+        }
+      ],
+      questions: [
+        {
+          q: "Was ist ein Adressraum?",
+          a: "Ein Adressraum ist die Menge von Adressen, die ein Prozess zur Adressierung des Speichers benutzen kann.",
+          source: "02_rabs_speicher.pdf, Folie 20"
+        },
+        {
+          q: "Wie beschreibt die Vorlesung Paging?",
+          a: "Physikalischer Speicher wird in Seitenrahmen fester Groesse unterteilt, der logische Adressraum in Seiten. Die MMU wandelt virtuelle Adressen in reale Adressen um, und die Seitentabelle liefert das Mapping auf Seitenrahmen.",
+          source: "02_rabs_speicher.pdf, Folien 31-33"
+        },
+        {
+          q: "Was ist der TLB?",
+          a: "Der TLB ist ein spezieller Teil der MMU, der Teile der Seitentabelle cached.",
+          source: "02_rabs_speicher.pdf, Folie 35"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Adressraum",
+          back: "Menge von Adressen, die ein Prozess zur Adressierung des Speichers benutzen kann.",
+          source: "02_rabs_speicher.pdf, Folie 20"
+        },
+        {
+          front: "Page Fault",
+          back: "Virtuelle Adresse verweist auf ausgelagerte Seite; das Betriebssystem laedt die Seite nach und fuehrt den Befehl erneut aus.",
+          source: "02_rabs_speicher.pdf, Folie 33"
+        },
+        {
+          front: "TLB",
+          back: "Spezieller Teil der MMU, der Teile der Seitentabelle cached.",
+          source: "02_rabs_speicher.pdf, Folie 35"
+        }
+      ]
+    },
+    {
+      id: "ipc-kommunikation",
+      title: "IPC & Kommunikation",
+      icon: "📡",
+      cards: [
+        {
+          t: "Zeitliche Kopplung",
+          b: "Synchrone Kommunikation: Der Sender wartet, bis der Empfaenger die Information entgegengenommen hat; die Empfangsoperation blockiert den Empfaenger bis Information eintrifft. Asynchrone Kommunikation: Der Sender setzt sofort seine Arbeit fort; der Empfaenger arbeitet auch dann weiter, wenn nichts empfangen wurde.",
+          source: "10_rabs-ipc.pdf, Folie 18"
+        },
+        {
+          t: "Pipes",
+          b: "Pipes uebertragen einen Strom von Bytes in FIFO-Reihenfolge zwischen Prozessen. Eine unbenannte Pipe ist zunaechst nur dem erzeugenden Prozess bekannt; Dateideskriptoren werden an Kindprozesse vererbt. Eine benannte Pipe ist als spezielle Datei im Dateisystem sichtbar und wird mit mkfifo erzeugt.",
+          source: "10_rabs-ipc.pdf, Folien 25-30"
+        },
+        {
+          t: "Pipes in der Shell",
+          b: "Pipe-Operator unter Linux: |. Beispiele: cat foo.txt | lpr -Php1320 oder set | grep PATH. Die Ausgabe eines Kommandos wird ueber eine Pipe an das naechste Kommando uebergeben.",
+          source: "10_rabs-ipc.pdf, Folie 31"
+        },
+        {
+          t: "Shared Memory",
+          b: "Gemeinsamer Speicher muss beim Betriebssystem explizit angefordert werden, von Sender und Empfaenger gleichermassen. Die Adresse des gemeinsamen Speichersegments wird in den Prozessadressraum integriert. Sender und Empfaenger muessen denselben Datentyp benutzen und synchronisiert zugreifen.",
+          source: "10_rabs-ipc.pdf, Folien 38-40"
+        },
+        {
+          t: "Shared Memory in UNIX",
+          b: "Systemaufrufe: shmget zum Anfordern oder Erzeugen, shmat zum Einbinden, shmdt zum Entfernen und shmctl fuer Steuerfunktionen.",
+          source: "10_rabs-ipc.pdf, Folie 44"
+        }
+      ],
+      questions: [
+        {
+          q: "Was ist der Unterschied zwischen synchroner und asynchroner Kommunikation?",
+          a: "Bei synchroner Kommunikation wartet der Sender, bis der Empfaenger die Information entgegengenommen hat. Bei asynchroner Kommunikation setzt der Sender nach dem Senden sofort seine Arbeit fort.",
+          source: "10_rabs-ipc.pdf, Folie 18"
+        },
+        {
+          q: "Wodurch unterscheiden sich unbenannte und benannte Pipes?",
+          a: "Unbenannte Pipes sind zunaechst nur dem erzeugenden Prozess bekannt und ihre Dateideskriptoren werden an Kindprozesse vererbt. Benannte Pipes sind als spezielle Datei im Dateisystem sichtbar und werden mit mkfifo erzeugt.",
+          source: "10_rabs-ipc.pdf, Folien 29-30"
+        },
+        {
+          q: "Wie beschreibt die Vorlesung Shared Memory?",
+          a: "Gemeinsamer Speicher muss beim Betriebssystem explizit angefordert werden. Die Adresse des gemeinsamen Speichersegments wird in den Prozessadressraum integriert. Sender und Empfaenger muessen denselben Datentyp benutzen und synchronisiert zugreifen.",
+          source: "10_rabs-ipc.pdf, Folien 38-40"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Asynchrone Kommunikation",
+          back: "Sender setzt nach dem Senden sofort seine Arbeit fort.",
+          source: "10_rabs-ipc.pdf, Folie 18"
+        },
+        {
+          front: "Named Pipe",
+          back: "Spezielle Datei im Dateisystem; Erzeugung mit mkfifo.",
+          source: "10_rabs-ipc.pdf, Folie 30"
+        },
+        {
+          front: "shmget, shmat, shmdt, shmctl",
+          back: "Systemaufrufe fuer Shared Memory in UNIX.",
+          source: "10_rabs-ipc.pdf, Folie 44"
+        }
+      ]
+    },
+    {
+      id: "dateisysteme",
+      title: "Dateisysteme",
+      icon: "📁",
+      cards: [
+        {
+          t: "Dateisysteme",
+          b: "Dateisysteme speichern Daten und Programme persistent in Dateien. Sie bilden eine Betriebssystemabstraktion zur Nutzung von Hintergrundspeichern und bestehen aus Dateien, Verzeichnissen und Partitionen.",
+          source: "03_rabs_dateisystem.pdf, Folie 18"
+        },
+        {
+          t: "Unix I-Nodes",
+          b: "Ein spezieller Plattenblock, der Indexblock, enthaelt alle Blocknummern der Datenbloecke einer Datei. Beispiel: Unix I-Nodes. Problem: Der Indexblock ist nur ein Plattenblock, die Kapazitaet ist begrenzt. Deshalb gibt es mehrere Indexstufen fuer groessere Dateien.",
+          source: "03_rabs_dateisystem.pdf, Folie 47"
+        },
+        {
+          t: "VFAT und UFS",
+          b: "VFAT ist heute gebraeuchlich bei eingebetteten Systemen, Digitalkameras, MP3-Playern und USB-Sticks. UFS = UNIX File System. Dateien sind einfache, unstrukturierte Folgen von Bytes. Bei UFS sind Verzeichnisse baumfoermig strukturiert, Blaetter sind Verweise auf Dateien.",
+          source: "03_rabs_dateisystem.pdf, Folien 50-52"
+        },
+        {
+          t: "Backup",
+          b: "Komplett-Backup sichert alle Daten, also die komplette Platte. Inkrementelles Backup sichert die Aenderungen ab einem bestimmten Zeitpunkt. Differenzielles Backup sichert die Aenderungen immer bezogen auf das letzte Komplett-Backup. Die 3-2-1-Regel fordert drei Kopien, zwei Datentraeger und ein Backup ausser Haus.",
+          source: "03_rabs_dateisystem.pdf, Folien 53-54"
+        }
+      ],
+      questions: [
+        {
+          q: "Woraus bestehen Dateisysteme laut Vorlesung?",
+          a: "Aus Dateien, Verzeichnissen beziehungsweise Katalogen und Partitionen.",
+          source: "03_rabs_dateisystem.pdf, Folie 18"
+        },
+        {
+          q: "Was ist das Problem eines Unix I-Node-Indexblocks?",
+          a: "Der Indexblock ist nur ein Plattenblock und seine Kapazitaet ist daher begrenzt. Fuer groessere Dateien werden mehrere Indexstufen benoetigt.",
+          source: "03_rabs_dateisystem.pdf, Folie 47"
+        },
+        {
+          q: "Wie unterscheiden sich Komplett-, inkrementelles und differenzielles Backup?",
+          a: "Komplett-Backup sichert alle Daten. Inkrementelles Backup sichert die Aenderungen ab einem bestimmten Zeitpunkt. Differenzielles Backup sichert die Aenderungen immer bezogen auf das letzte Komplett-Backup.",
+          source: "03_rabs_dateisystem.pdf, Folie 53"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Dateisysteme",
+          back: "Speichern Daten und Programme persistent in Dateien.",
+          source: "03_rabs_dateisystem.pdf, Folie 18"
+        },
+        {
+          front: "Unix I-Nodes",
+          back: "Indexblock mit Blocknummern; Kapazitaet eines einzelnen Indexblocks ist begrenzt.",
+          source: "03_rabs_dateisystem.pdf, Folie 47"
+        },
+        {
+          front: "3-2-1-Regel",
+          back: "Drei Kopien der Daten, auf mindestens zwei unterschiedlichen Datentraegern, mindestens ein Backup ausser Haus.",
+          source: "03_rabs_dateisystem.pdf, Folie 54"
+        }
+      ]
+    },
+    {
+      id: "syscalls-shell",
+      title: "Syscalls & Shell",
+      icon: "🐚",
+      cards: [
+        {
+          t: "Systemaufrufe",
+          b: "Systemaufrufe sind die Schnittstelle zwischen Benutzerprogrammen und Betriebssystem. Sie sind meist in Bibliotheksfunktionen gekapselt. Die Nummer des Systemaufrufs wird vor Ausfuehrung des TRAP-Befehls in ein festes Register geschrieben.",
+          source: "04_rabs-os-konzepte.pdf, Folie 6"
+        },
+        {
+          t: "Ablauf eines Systemaufrufs",
+          b: "Das Betriebssystem sichert zunaechst den vollstaendigen Prozessorstatus in der Threadtabelle oder Prozesstabelle. Der aufrufende Thread kann blockiert werden. Die Rueckkehr aus dem Betriebssystem erfolgt ueber den Scheduler und nicht unbedingt sofort zum aufrufenden Thread.",
+          source: "04_rabs-os-konzepte.pdf, Folie 8"
+        },
+        {
+          t: "Beispiel read und typische Aufrufe",
+          b: "read ist mit Dateihandler, Buffer und Anzahl der Zeichen parametrisiert und liefert die Anzahl der tatsaechlich gelesenen Zeichen zurueck. Typische Systemaufrufe sind fork, waitpid, execve, exit, open, close, read, write, lseek, mkdir, mount, chdir, chmod, chown, kill und time.",
+          source: "04_rabs-os-konzepte.pdf, Folien 9-11"
+        },
+        {
+          t: "Shell",
+          b: "Die Shell ist kein Teil des Betriebssystems, nutzt aber dessen Eigenschaften. Textuelle Shells ermoeglichen Kommandos, Ein- und Ausgabeumleitung, Pipes und Ausfuehrung im Hintergrund. UNIX-Philosophie: viele kleine Kommandos, die man ueber Pipes kombinieren kann.",
+          source: "04_rabs-os-konzepte.pdf, Folien 28-31"
+        }
+      ],
+      questions: [
+        {
+          q: "Was sind Systemaufrufe?",
+          a: "Systemaufrufe sind die Schnittstelle zwischen Benutzerprogrammen und Betriebssystem. Sie sind meist in Bibliotheksfunktionen gekapselt.",
+          source: "04_rabs-os-konzepte.pdf, Folie 6"
+        },
+        {
+          q: "Was sagt die Vorlesung zum Ablauf eines Systemaufrufs?",
+          a: "Das Betriebssystem sichert den vollstaendigen Prozessorstatus, der aufrufende Thread kann blockiert werden und die Rueckkehr erfolgt ueber den Scheduler.",
+          source: "04_rabs-os-konzepte.pdf, Folie 8"
+        },
+        {
+          q: "Welche Moeglichkeiten nennt die Vorlesung fuer die textuelle Shell?",
+          a: "Kommandos zum Start neuer Prozesse, Ein- und Ausgabeumleitung, Pipes und Ausfuehrung im Hintergrund.",
+          source: "04_rabs-os-konzepte.pdf, Folien 30-31"
+        }
+      ],
+      flashcards: [
+        {
+          front: "Systemaufruf",
+          back: "Schnittstelle zwischen Benutzerprogrammen und Betriebssystem.",
+          source: "04_rabs-os-konzepte.pdf, Folie 6"
+        },
+        {
+          front: "read",
+          back: "Liest Daten aus Datei in einen Puffer; Rueckgabewert ist die Anzahl der tatsaechlich gelesenen Zeichen.",
+          source: "04_rabs-os-konzepte.pdf, Folie 9"
+        },
+        {
+          front: "Shell",
+          back: "Kein Teil des Betriebssystems; bietet Kommandos, Umleitung, Pipes und Hintergrundausfuehrung.",
+          source: "04_rabs-os-konzepte.pdf, Folien 28-31"
+        }
+      ]
+    }
   ]
 };
