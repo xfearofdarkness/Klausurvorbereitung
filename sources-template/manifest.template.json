@@ -1,0 +1,20 @@
+{
+  "subject_id": "fach-id",
+  "subject_title": "Fachname",
+  "source_type": "single_pdf_or_multi_pdf",
+  "slides_are_complete": false,
+  "only_slides_have_authority": true,
+  "notes": [
+    "Die Folien haben das letzte Wort.",
+    "Unklare Stellen werden nicht geraten."
+  ],
+  "files": [
+    {
+      "path": "01_kapitel.pdf",
+      "label": "Kapitel 1",
+      "order": 1,
+      "kind": "slides",
+      "relevant": true
+    }
+  ]
+}
