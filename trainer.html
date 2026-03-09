@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klausurtrainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="page-trainer">
+  <div class="header">
+    <a class="home-link" href="index.html">← Übersicht</a>
+    <div class="header-meta">
+      <div class="logo" id="subjectTitle">Klausurtrainer</div>
+      <div class="subtitle" id="subjectSubtitle">Lädt Fachdaten …</div>
+    </div>
+    <div class="mode-switcher">
+      <button class="mode-btn active" data-mode="study">Lernen</button>
+      <button class="mode-btn" data-mode="quiz">Fragen</button>
+      <button class="mode-btn" data-mode="flash">Karteikarten</button>
+    </div>
+  </div>
+
+  <div class="tabs-wrap" id="tabs"></div>
+  <main class="main" id="content"></main>
+
+  <script src="data/catalog.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

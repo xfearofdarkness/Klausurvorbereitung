@@ -1,47 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Klausurvorbereitung</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f1117;color:#e2e4e9;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem}
-h1{font-size:1.6rem;font-weight:700;margin-bottom:0.3rem}
-.sub{color:#8b8fa3;font-size:0.9rem;margin-bottom:2.5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;width:100%;max-width:700px}
-a.card{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.4rem;background:#1a1c25;border:1px solid #2a2d3a;border-radius:12px;text-decoration:none;color:#e2e4e9;transition:border-color 0.2s,transform 0.2s}
-a.card:hover{border-color:#4a9eff;transform:translateY(-2px)}
-.icon{font-size:1.8rem;flex-shrink:0}
-.label{font-weight:600;font-size:0.95rem}
-.semester{font-size:0.78rem;color:#8b8fa3;margin-top:2px}
-.footer{margin-top:auto;padding-top:3rem;color:#e8a735;font-size:1rem;font-weight:600;text-align:center}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klausurvorbereitung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
-<body>
-<h1>📚 Klausurvorbereitung</h1>
-<p class="sub">Interaktive Trainer · Lernen · Quiz · Karteikarten</p>
-<div class="grid">
+<body class="page-home">
+  <main class="home-shell">
+    <h1 class="home-title">📚 Klausurvorbereitung</h1>
+    <p class="home-sub">Interaktive Trainer für Lernen, Fragen und Karteikarten</p>
+    <p class="home-note">Neue Fächer sollen künftig nur noch als Datendatei ergänzt werden und über GitHub Pages direkt ausgerollt werden.</p>
+    <div class="grid" id="subjectGrid"></div>
+  </main>
+  <div class="footer">Hinweis: Lernseiten sind Hilfsmittel. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</div>
 
-  <a class="card" href="rabs.html">
-    <span class="icon">🖥️</span>
-    <div>
-      <div class="label">RABS</div>
-      <div class="semester">Rechnerarchitektur & Betriebssysteme</div>
-    </div>
-  </a>
-
-  <!-- Nächstes Fach: einfach kopieren und anpassen
-  <a class="card" href="mathe2.html">
-    <span class="icon">📐</span>
-    <div>
-      <div class="label">Mathe 2</div>
-      <div class="semester">Analysis & Lineare Algebra</div>
-    </div>
-  </a>
-  -->
-
-</div>
-<div class="footer">Hinweis: Lernseiten KI generiert, im Zweifel immer auf Folien zurückgreifen</div>
+  <script src="data/catalog.js"></script>
+  <script src="assets/index.js"></script>
 </body>
 </html>
