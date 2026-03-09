@@ -137,19 +137,6 @@ Regeln:
 - Fachdaten werden in `data/<fach>.js` gehalten.
 - Fortschritt gehoert in State oder `localStorage`, nie in die Fachdaten.
 
-## Naechste UI-Schritte
-
-Diese Verbesserungen sind die naechsten sinnvollen Schritte:
-
-1. Header vertikal verdichten und Untertitel noch unaufdringlicher machen.
-2. Themen-Tabs kompakter gestalten und das horizontale Scrollen mobil verbessern.
-3. Lern- und Quizkarten im Padding leicht reduzieren.
-4. Antwortbereiche und Statusleisten platzsparender gestalten.
-5. Letztes Thema und letzter Modus lokal merken.
-6. Lange Lernkarten optional klappbar machen.
-7. Flashcards an kleinere Viewports anpassen, damit mehr Inhalt ohne Scrollen sichtbar ist.
-8. Mobile Buttons sprachlich kuerzen und visuell vereinheitlichen.
-
 ## Was nicht gemacht werden soll
 
 - Kein visuelles Redesign ohne funktionalen Mehrwert.
