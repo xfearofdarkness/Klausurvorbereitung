@@ -7,6 +7,7 @@
     currentTopicIndex: 0,
     currentMode: "study",
     showOnlyWrong: false,
+    studyOpen: {},
     flash: {
       deck: [],
       position: 0,
@@ -61,12 +62,14 @@
     }
 
     state.subject = normalizeSubject(rawSubject, subjectMeta);
+    restoreUiState();
     document.title = `${state.subject.title} Klausurtrainer`;
 
     renderHeader();
     bindModes();
     renderTabs();
     resetFlashDeck();
+    saveUiState();
     render();
   }
 
@@ -175,6 +178,12 @@
     return subjects[state.subject.id];
   }
 
+  function getSubjectUiState() {
+    const subjectProgress = getSubjectProgress();
+    subjectProgress.ui = subjectProgress.ui || {};
+    return subjectProgress.ui;
+  }
+
   function getCurrentTopic() {
     return state.subject.topics[state.currentTopicIndex];
   }
@@ -206,6 +215,7 @@
         state.currentMode = button.dataset.mode || "study";
         state.showOnlyWrong = false;
         resetFlashDeck();
+        saveUiState();
         updateModeButtons();
         render();
       });
@@ -255,20 +265,28 @@
 
   function renderStudy() {
     const topic = getCurrentTopic();
+    const topicOpenState = state.studyOpen[topic.id] || {};
 
     refs.content.innerHTML =
       `<div class="section-title fade-in"><span class="emoji">${topic.icon}</span> ${topic.title} – Lernseiten</div>` +
       topic.cards
-        .map((card) => {
+        .map((card, index) => {
           let tag = "";
           if (card.tag === "wichtig") tag = '<span class="tag tag-wichtig">WICHTIG</span>';
           if (card.tag === "formel") tag = '<span class="tag tag-formel">FORMEL</span>';
           if (card.tag === "def") tag = '<span class="tag tag-def">DEFINITION</span>';
+          const isLong = getPlainText(card.body).length > 260;
+          const isOpen = topicOpenState[index] || !isLong;
 
           return `
             <div class="study-card fade-in">
-              <h3>${card.title}${tag}</h3>
-              <p>${card.body}</p>
+              <div class="study-card-head">
+                <h3>${card.title}${tag}</h3>
+                ${isLong ? `<button class="study-toggle" data-action="toggle-study" data-index="${index}" aria-expanded="${isOpen}">${isOpen ? "Weniger" : "Mehr"}</button>` : ""}
+              </div>
+              <div class="study-body${isOpen ? " is-open" : ""}">
+                <p>${card.body}</p>
+              </div>
             </div>
           `;
         })
@@ -290,8 +308,14 @@
     refs.content.innerHTML = `
       <div class="section-title fade-in"><span class="emoji">${topic.icon}</span> ${topic.title} – Klausurfragen</div>
       <div class="stats-bar fade-in">
-        <span class="stats-info">✅ ${correctCount} gewusst · 🔁 ${wrongCount} wiederholen · ${topic.questions.length} Fragen</span>
-        ${wrongCount > 0 ? `<button class="filter-btn ${state.showOnlyWrong ? "active" : ""}" data-action="toggle-wrong-filter">Nur Schwächen (${wrongCount})</button>` : ""}
+        <div class="stats-group">
+          <span class="stat-pill stat-pill-neutral">${topic.questions.length} Fragen</span>
+          <span class="stat-pill stat-pill-success">✅ ${correctCount}</span>
+          <span class="stat-pill stat-pill-warning">🔁 ${wrongCount}</span>
+        </div>
+        <div class="stats-actions">
+          ${wrongCount > 0 ? `<button class="filter-btn ${state.showOnlyWrong ? "active" : ""}" data-action="toggle-wrong-filter">${state.showOnlyWrong ? "Alle" : "Nur Schwächen"} (${wrongCount})</button>` : ""}
+        </div>
       </div>
       ${
         questions.length === 0
@@ -353,7 +377,7 @@
       <div class="fc-container fade-in">
         <div class="section-title"><span class="emoji">${topic.icon}</span> ${topic.title} – Karteikarten</div>
         <div class="fc-progress">
-          <span>${state.flash.position + 1} / ${state.flash.deck.length}</span>
+          <span class="fc-progress-count">${state.flash.position + 1} / ${state.flash.deck.length}</span>
           <div class="fc-bar"><div class="fc-bar-fill" style="width:${progress}%"></div></div>
           <div class="fc-score">
             <span class="s-know">✅ ${knownCount}</span>
@@ -394,8 +418,14 @@
       state.currentTopicIndex = Number(index);
       state.showOnlyWrong = false;
       resetFlashDeck();
+      saveUiState();
       renderTabs();
       render();
+      return;
+    }
+
+    if (action === "toggle-study") {
+      toggleStudyCard(Number(index));
       return;
     }
 
@@ -470,7 +500,15 @@
     const quizState = getTopicQuizState(topic.id);
     quizState[index] = value;
     saveProgress();
+    saveUiState();
     render();
+  }
+
+  function toggleStudyCard(index) {
+    const topic = getCurrentTopic();
+    state.studyOpen[topic.id] = state.studyOpen[topic.id] || {};
+    state.studyOpen[topic.id][index] = !state.studyOpen[topic.id][index];
+    renderStudy();
   }
 
   function flipCard() {
@@ -493,6 +531,7 @@
     state.flash.position += 1;
     state.flash.flipped = false;
     saveProgress();
+    saveUiState();
     render();
   }
 
@@ -509,6 +548,29 @@
     state.flash.deck = onlyWrong && wrongIndices.length ? wrongIndices : allIndices;
     state.flash.position = 0;
     state.flash.flipped = false;
+  }
+
+  function restoreUiState() {
+    const ui = getSubjectUiState();
+    const maxTopicIndex = Math.max(0, state.subject.topics.length - 1);
+    state.currentTopicIndex = Math.min(ui.lastTopicIndex || 0, maxTopicIndex);
+    state.currentMode = ui.lastMode || "study";
+  }
+
+  function saveUiState() {
+    if (!state.subject) {
+      return;
+    }
+
+    const ui = getSubjectUiState();
+    ui.lastMode = state.currentMode;
+    ui.lastTopicIndex = state.currentTopicIndex;
+    state.progress.lastSubjectId = state.subject.id;
+    saveProgress();
+  }
+
+  function getPlainText(value) {
+    return String(value || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
   }
 
   function renderMissingSubject() {
