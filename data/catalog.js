@@ -10,5 +10,11 @@ window.APP_CATALOG = [
     title: "LAA",
     subtitle: "Lineare Algebra und Analysis",
     icon: "📐"
+  },
+  {
+    id: "vs",
+    title: "VS",
+    subtitle: "Verteilte Systeme",
+    icon: "🌐"
   }
 ];
