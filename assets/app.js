@@ -1,9 +1,19 @@
 (function () {
   const STORAGE_KEY = "klausurtrainer-progress-v1";
   const SUBJECT_ID_PATTERN = /^[a-z0-9-]+$/;
+  const KATEX_BASE = "https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/";
+
+  const MODES = [
+    { id: "study", label: "Lernen", key: "cards" },
+    { id: "quiz", label: "Fragen", key: "questions" },
+    { id: "flash", label: "Karteikarten", key: "flashcards" },
+    { id: "practice", label: "Üben", key: "exercises" }
+  ];
 
   const state = {
     subject: null,
+    availableModes: [],
+    mathEnabled: false,
     currentTopicIndex: 0,
     currentMode: "study",
     showOnlyWrong: false,
@@ -21,7 +31,7 @@
     subtitle: document.getElementById("subjectSubtitle"),
     tabs: document.getElementById("tabs"),
     content: document.getElementById("content"),
-    modeButtons: Array.from(document.querySelectorAll(".mode-btn"))
+    modeSwitcher: document.getElementById("modeSwitcher")
   };
 
   document.addEventListener("DOMContentLoaded", init);
@@ -31,6 +41,9 @@
   }
   if (refs.tabs) {
     refs.tabs.addEventListener("click", handleContentClick);
+  }
+  if (refs.modeSwitcher) {
+    refs.modeSwitcher.addEventListener("click", handleContentClick);
   }
 
   async function init() {
@@ -62,11 +75,15 @@
     }
 
     state.subject = normalizeSubject(rawSubject, subjectMeta);
+    state.availableModes = MODES.filter((mode) =>
+      state.subject.topics.some((topic) => topic[mode.key].length > 0)
+    );
+    setupMath();
     restoreUiState();
     document.title = `${state.subject.title} Klausurtrainer`;
 
     renderHeader();
-    bindModes();
+    renderModes();
     renderTabs();
     resetFlashDeck();
     saveUiState();
@@ -93,12 +110,56 @@
     });
   }
 
+  function setupMath() {
+    if (!state.subject.features.math) {
+      return;
+    }
+
+    state.mathEnabled = true;
+
+    if (typeof window.renderMathInElement === "function") {
+      return;
+    }
+
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = `${KATEX_BASE}katex.min.css`;
+    document.head.appendChild(css);
+
+    const core = document.createElement("script");
+    core.src = `${KATEX_BASE}katex.min.js`;
+    core.defer = true;
+    core.onload = () => {
+      const autoRender = document.createElement("script");
+      autoRender.src = `${KATEX_BASE}contrib/auto-render.min.js`;
+      autoRender.defer = true;
+      autoRender.onload = () => applyMath();
+      document.head.appendChild(autoRender);
+    };
+    document.head.appendChild(core);
+  }
+
+  function applyMath() {
+    if (!state.mathEnabled || typeof window.renderMathInElement !== "function" || !refs.content) {
+      return;
+    }
+
+    window.renderMathInElement(refs.content, {
+      delimiters: [
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+      throwOnError: false
+    });
+  }
+
   function normalizeSubject(rawSubject, subjectMeta) {
     const subject = {
       id: rawSubject.id || subjectMeta.id,
       title: rawSubject.title || subjectMeta.title,
       subtitle: rawSubject.subtitle || subjectMeta.subtitle || "",
       icon: rawSubject.icon || subjectMeta.icon || "📘",
+      features: rawSubject.features && typeof rawSubject.features === "object" ? rawSubject.features : {},
       topics: Array.isArray(rawSubject.topics) ? rawSubject.topics : []
     };
 
@@ -115,7 +176,8 @@
       icon: topic.icon || "📘",
       cards: Array.isArray(topic.cards) ? topic.cards.map(normalizeCard) : [],
       questions: Array.isArray(topic.questions) ? topic.questions.map(normalizeQuestion) : [],
-      flashcards: Array.isArray(topic.flashcards) ? topic.flashcards.map(normalizeFlashcard) : []
+      flashcards: Array.isArray(topic.flashcards) ? topic.flashcards.map(normalizeFlashcard) : [],
+      exercises: Array.isArray(topic.exercises) ? topic.exercises.map(normalizeExercise) : []
     };
   }
 
@@ -123,22 +185,38 @@
     return {
       title: card.title || card.t || "",
       body: card.body || card.b || "",
-      tag: card.tag || ""
+      tag: card.tag || "",
+      source: card.source || ""
     };
   }
 
   function normalizeQuestion(question) {
     return {
       question: question.question || question.q || "",
-      answer: question.answer || question.a || ""
+      answer: question.answer || question.a || "",
+      source: question.source || ""
     };
   }
 
   function normalizeFlashcard(flashcard) {
     return {
       front: flashcard.front || "",
-      back: flashcard.back || ""
+      back: flashcard.back || "",
+      source: flashcard.source || ""
     };
+  }
+
+  function normalizeExercise(exercise) {
+    return {
+      task: exercise.task || "",
+      ref: exercise.ref || "",
+      note: exercise.note || "",
+      source: exercise.source || ""
+    };
+  }
+
+  function renderSource(source, className) {
+    return source ? `<div class="${className || "card-source"}">${source}</div>` : "";
   }
 
   function slugify(value) {
@@ -200,6 +278,13 @@
     return subjectProgress.flash[topicId];
   }
 
+  function getTopicPracticeState(topicId) {
+    const subjectProgress = getSubjectProgress();
+    subjectProgress.practice = subjectProgress.practice || {};
+    subjectProgress.practice[topicId] = subjectProgress.practice[topicId] || {};
+    return subjectProgress.practice[topicId];
+  }
+
   function renderHeader() {
     if (refs.title) {
       refs.title.textContent = `${state.subject.icon} ${state.subject.title} Klausurtrainer`;
@@ -209,24 +294,20 @@
     }
   }
 
-  function bindModes() {
-    refs.modeButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        state.currentMode = button.dataset.mode || "study";
-        state.showOnlyWrong = false;
-        resetFlashDeck();
-        saveUiState();
-        updateModeButtons();
-        render();
-      });
-    });
-    updateModeButtons();
-  }
+  function renderModes() {
+    if (!refs.modeSwitcher) {
+      return;
+    }
 
-  function updateModeButtons() {
-    refs.modeButtons.forEach((button) => {
-      button.classList.toggle("active", button.dataset.mode === state.currentMode);
-    });
+    refs.modeSwitcher.innerHTML = state.availableModes
+      .map(
+        (mode) => `
+          <button class="mode-btn${mode.id === state.currentMode ? " active" : ""}" data-action="switch-mode" data-mode="${mode.id}">
+            ${mode.label}
+          </button>
+        `
+      )
+      .join("");
   }
 
   function renderTabs() {
@@ -243,6 +324,11 @@
         `
       )
       .join("");
+
+    const activeTab = refs.tabs.querySelector(".tab.active");
+    if (activeTab && typeof activeTab.scrollIntoView === "function") {
+      activeTab.scrollIntoView({ block: "nearest", inline: "nearest" });
+    }
   }
 
   function render() {
@@ -252,15 +338,24 @@
 
     if (state.currentMode === "study") {
       renderStudy();
-      return;
-    }
-
-    if (state.currentMode === "quiz") {
+    } else if (state.currentMode === "quiz") {
       renderQuiz();
-      return;
+    } else if (state.currentMode === "practice") {
+      renderPractice();
+    } else {
+      renderFlash();
     }
 
-    renderFlash();
+    applyMath();
+  }
+
+  function renderTag(tag) {
+    if (tag === "wichtig") return '<span class="tag tag-wichtig">WICHTIG</span>';
+    if (tag === "formel") return '<span class="tag tag-formel">FORMEL</span>';
+    if (tag === "def") return '<span class="tag tag-def">DEFINITION</span>';
+    if (tag === "satz") return '<span class="tag tag-satz">SATZ</span>';
+    if (tag === "beispiel") return '<span class="tag tag-beispiel">BEISPIEL</span>';
+    return "";
   }
 
   function renderStudy() {
@@ -271,21 +366,18 @@
       `<div class="section-title fade-in"><span class="emoji">${topic.icon}</span> ${topic.title} – Lernseiten</div>` +
       topic.cards
         .map((card, index) => {
-          let tag = "";
-          if (card.tag === "wichtig") tag = '<span class="tag tag-wichtig">WICHTIG</span>';
-          if (card.tag === "formel") tag = '<span class="tag tag-formel">FORMEL</span>';
-          if (card.tag === "def") tag = '<span class="tag tag-def">DEFINITION</span>';
           const isLong = getPlainText(card.body).length > 260;
           const isOpen = topicOpenState[index] || !isLong;
 
           return `
             <div class="study-card fade-in">
               <div class="study-card-head">
-                <h3>${card.title}${tag}</h3>
+                <h3>${card.title}${renderTag(card.tag)}</h3>
                 ${isLong ? `<button class="study-toggle" data-action="toggle-study" data-index="${index}" aria-expanded="${isOpen}">${isOpen ? "Weniger" : "Mehr"}</button>` : ""}
               </div>
               <div class="study-body${isOpen ? " is-open" : ""}">
                 <p>${card.body}</p>
+                ${renderSource(card.source)}
               </div>
             </div>
           `;
@@ -326,7 +418,7 @@
                 return `
                   <div class="quiz-card fade-in">
                     <div class="quiz-q">${question.index + 1}. ${question.question}</div>
-                    <div class="quiz-a" id="qa-${question.index}">${question.answer}</div>
+                    <div class="quiz-a" id="qa-${question.index}">${question.answer}${renderSource(question.source)}</div>
                     <div class="quiz-btns">
                       <button class="q-btn show-btn" data-action="toggle-answer" data-index="${question.index}">Antwort zeigen</button>
                       <button class="q-btn${answerState === "correct" ? " correct" : ""}" data-action="mark-question" data-index="${question.index}" data-value="correct">Gewusst</button>
@@ -340,6 +432,43 @@
     `;
   }
 
+  function renderPractice() {
+    const topic = getCurrentTopic();
+    const practiceState = getTopicPracticeState(topic.id);
+    const doneCount = topic.exercises.filter((_, index) => practiceState[index] === "done").length;
+
+    refs.content.innerHTML = `
+      <div class="section-title fade-in"><span class="emoji">${topic.icon}</span> ${topic.title} – Übungsaufgaben</div>
+      ${
+        topic.exercises.length === 0
+          ? '<p class="empty-state">Für dieses Thema gibt es keine Übungsaufgaben.</p>'
+          : `
+            <div class="stats-bar fade-in">
+              <div class="stats-group">
+                <span class="stat-pill stat-pill-neutral">${topic.exercises.length} Aufgaben</span>
+                <span class="stat-pill stat-pill-success">✅ ${doneCount} bearbeitet</span>
+              </div>
+            </div>
+            ${topic.exercises
+              .map((exercise, index) => {
+                const isDone = practiceState[index] === "done";
+                return `
+                  <div class="quiz-card ex-card${isDone ? " ex-done" : ""} fade-in">
+                    ${exercise.ref ? `<div class="ex-ref">${exercise.ref}</div>` : ""}
+                    <div class="quiz-q ex-task">${exercise.task}</div>
+                    ${exercise.note ? `<div class="ex-note">${exercise.note}</div>` : ""}
+                    <div class="quiz-btns">
+                      <button class="q-btn${isDone ? " correct" : ""}" data-action="mark-exercise" data-index="${index}">${isDone ? "Bearbeitet ✓" : "Als bearbeitet markieren"}</button>
+                    </div>
+                  </div>
+                `;
+              })
+              .join("")}
+          `
+      }
+    `;
+  }
+
   function renderFlash() {
     const topic = getCurrentTopic();
     const results = getTopicFlashState(topic.id);
@@ -348,6 +477,16 @@
     const progress = state.flash.deck.length
       ? (state.flash.position / state.flash.deck.length) * 100
       : 0;
+
+    if (state.flash.deck.length === 0) {
+      refs.content.innerHTML = `
+        <div class="fc-container fade-in">
+          <div class="section-title"><span class="emoji">${topic.icon}</span> ${topic.title} – Karteikarten</div>
+          <p class="empty-state">Für dieses Thema gibt es keine Karteikarten.</p>
+        </div>
+      `;
+      return;
+    }
 
     if (state.flash.position >= state.flash.deck.length) {
       refs.content.innerHTML = `
@@ -394,6 +533,7 @@
             <div class="fc-face fc-back">
               <div class="fc-label">Antwort</div>
               <div class="fc-text">${card.back}</div>
+              ${renderSource(card.source, "card-source fc-source")}
               <div class="fc-hint">Klicken zum Zurückdrehen</div>
             </div>
           </div>
@@ -412,7 +552,18 @@
       return;
     }
 
-    const { action, index, value } = trigger.dataset;
+    const { action, index, value, mode } = trigger.dataset;
+
+    if (action === "switch-mode") {
+      state.currentMode = mode || "study";
+      state.showOnlyWrong = false;
+      resetFlashDeck();
+      saveUiState();
+      renderModes();
+      render();
+      window.scrollTo(0, 0);
+      return;
+    }
 
     if (action === "switch-topic") {
       state.currentTopicIndex = Number(index);
@@ -421,6 +572,7 @@
       saveUiState();
       renderTabs();
       render();
+      window.scrollTo(0, 0);
       return;
     }
 
@@ -436,6 +588,11 @@
 
     if (action === "mark-question") {
       markQuestion(Number(index), value);
+      return;
+    }
+
+    if (action === "mark-exercise") {
+      markExercise(Number(index));
       return;
     }
 
@@ -504,11 +661,24 @@
     render();
   }
 
+  function markExercise(index) {
+    const topic = getCurrentTopic();
+    const practiceState = getTopicPracticeState(topic.id);
+    if (practiceState[index] === "done") {
+      delete practiceState[index];
+    } else {
+      practiceState[index] = "done";
+    }
+    saveProgress();
+    saveUiState();
+    render();
+  }
+
   function toggleStudyCard(index) {
     const topic = getCurrentTopic();
     state.studyOpen[topic.id] = state.studyOpen[topic.id] || {};
     state.studyOpen[topic.id][index] = !state.studyOpen[topic.id][index];
-    renderStudy();
+    render();
   }
 
   function flipCard() {
@@ -554,7 +724,12 @@
     const ui = getSubjectUiState();
     const maxTopicIndex = Math.max(0, state.subject.topics.length - 1);
     state.currentTopicIndex = Math.min(ui.lastTopicIndex || 0, maxTopicIndex);
-    state.currentMode = ui.lastMode || "study";
+
+    const fallbackMode = state.availableModes.length ? state.availableModes[0].id : "study";
+    const restoredMode = ui.lastMode || fallbackMode;
+    state.currentMode = state.availableModes.some((mode) => mode.id === restoredMode)
+      ? restoredMode
+      : fallbackMode;
   }
 
   function saveUiState() {

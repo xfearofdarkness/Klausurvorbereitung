@@ -30,6 +30,27 @@ Regeln:
 - Keine fachspezifische UI-Logik.
 - Keine Mutation von Quelldaten fuer UI-Zustaende.
 
+## Didaktische Varianz pro Fach
+
+Faecher unterscheiden sich didaktisch. Die App bildet das ueber
+generische, deklarative Optionen in den Fachdaten ab, nie ueber
+Sonderlogik:
+
+- Modi sind inhaltsgetrieben: Die Modus-Buttons (Lernen, Fragen,
+  Karteikarten, Ueben) werden nur angezeigt, wenn mindestens ein
+  Thema des Fachs Inhalte fuer diesen Modus hat.
+- Der Modus "Ueben" rendert den optionalen Themenabschnitt
+  `exercises` (Aufgaben ohne hinterlegte Loesung, mit
+  Bearbeitet-Fortschritt).
+- `features.math: true` im Fachobjekt aktiviert Formel-Rendering
+  mit KaTeX. KaTeX wird nur dann und nur per CDN geladen; es gibt
+  keinen Build-Schritt und die App bleibt GitHub-Pages-tauglich.
+- Formeln stehen in den Inhalten als LaTeX in `\(...\)` (inline)
+  bzw. `\[...\]` (abgesetzt).
+
+Neue didaktische Beduerfnisse werden als weitere generische Option
+dieser Art ergaenzt, nicht als fachspezifischer Sonderfall.
+
 ## Designprinzipien
 
 Die Oberflaeche ist funktional, kompakt und sachlich.
@@ -53,9 +74,29 @@ Standardkomponenten:
 - Lernkarte
 - Quizkarte
 - Flashcard
+- Uebungskarte
 - Fortschrittsleiste
 - Statistikleiste
 - Fehler- und Leerstates
+
+Lernkarten koennen mit den Tags `wichtig`, `formel`, `def`, `satz`
+und `beispiel` ausgezeichnet werden. Die Tag-Farben sind zentral
+definiert und in allen Faechern gleich.
+
+Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
+in Lernkarten unter dem Text, in Quizkarten unter der Antwort, bei
+Flashcards auf der Rueckseite. Das stuetzt die Kernregel, dass die
+Folien Vorrang haben, und macht das Nachschlagen einfach.
+
+## Barrierefreiheit
+
+- Tastatur-Fokus ist auf allen interaktiven Elementen sichtbar
+  (`:focus-visible` mit Akzentfarbe).
+- `prefers-reduced-motion` wird respektiert: Einblend- und
+  Flip-Animationen sind dann deaktiviert.
+- Der aktive Themen-Tab wird beim Laden und Wechseln automatisch in
+  den sichtbaren Bereich gescrollt; Themen- und Moduswechsel setzen
+  die Scrollposition nach oben.
 
 Regeln:
 

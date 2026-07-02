@@ -13,7 +13,8 @@ Er gilt für:
 ## Grundregeln
 
 - Vorlesungsfolien haben immer das letzte Wort.
-- Die Folien sind die einzige fachliche Referenz.
+- Die Folien sind die einzige fachliche Referenz für Lernkarten, Fragen und Flashcards.
+- Offizielle Übungsblätter des Kurses dürfen zusätzlich als Quelle für Übungsaufgaben (`exercises`) dienen — nur für den Aufgabentext, nie für Lösungen.
 - Wenn etwas nicht explizit auf den Folien steht, darf es nicht in den Trainer.
 - Bei Abweichungen zwischen Trainer und Folien gelten immer die Folien.
 - Unklare, abgeschnittene oder OCR-fehlerhafte Stellen werden nicht geraten.
@@ -105,6 +106,26 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 12. Im Browser kurz prüfen.
 13. Vor Freigabe eine fachliche Endprüfung gegen die Folien machen.
 
+## Übungsaufgaben (`exercises`)
+
+Der optionale Themenabschnitt `exercises` bildet offizielle Übungsblätter ab.
+
+Regeln:
+
+- Der Aufgabentext bleibt so nah wie möglich am Übungsblatt.
+- Enthält die Quelle keine Lösung, wird keine Lösung erfunden oder ergänzt.
+- Theoriefragen eines Übungsblatts, deren Antwort explizit auf den Folien steht, dürfen zusätzlich als `questions` mit Folien-`source` geführt werden.
+- `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5"), `source` die Pflicht-Quellenangabe.
+- `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
+
+## Mathematische Inhalte
+
+Für Fächer mit `features.math: true` gilt:
+
+- Formeln werden als LaTeX geschrieben: `\(...\)` inline, `\[...\]` abgesetzt.
+- In den JS-Datendateien müssen Backslashes verdoppelt werden (`\\(`, `\\frac`, ...).
+- Formeln werden zeichengetreu aus den Folien übernommen, nicht umgeformt.
+
 ## Datenformat
 
 ```js
@@ -115,14 +136,16 @@ window.APP_SUBJECTS["fach-id"] = {
   title: "Fachname",
   subtitle: "Untertitel",
   icon: "📘",
+  features: { math: false },
   topics: [
     {
       id: "thema-1",
       title: "Thema 1",
       icon: "🧠",
-      cards: [{ title: "Begriff", body: "Inhalt", source: "01.pdf, Folie 12" }],
+      cards: [{ title: "Begriff", body: "Inhalt", tag: "def", source: "01.pdf, Folie 12" }],
       questions: [{ question: "Frage", answer: "Antwort", source: "01.pdf, Folie 12" }],
-      flashcards: [{ front: "Frage", back: "Antwort", source: "01.pdf, Folie 12" }]
+      flashcards: [{ front: "Frage", back: "Antwort", source: "01.pdf, Folie 12" }],
+      exercises: [{ ref: "Aufgabe 1", task: "Aufgabentext", source: "uebungen.pdf, Aufgabe 1" }]
     }
   ]
 };
@@ -134,6 +157,12 @@ Pflicht:
 - stabile Topic-IDs
 - konsistente Feldnamen
 - `source` bei jedem Eintrag
+
+Optional:
+
+- `features` (z. B. `math`)
+- `exercises` pro Thema
+- `tag` bei Lernkarten: `wichtig`, `formel`, `def`, `satz`, `beispiel`
 
 ## Qualitätssicherung
 

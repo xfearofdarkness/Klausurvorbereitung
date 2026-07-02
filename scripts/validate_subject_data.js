@@ -79,6 +79,22 @@ function validateSubject(subjectId, subject) {
       }
     });
 
+    if (topic.exercises !== undefined) {
+      if (!Array.isArray(topic.exercises)) {
+        fail(`${topicLabel} field "exercises" must be an array if present.`);
+      } else {
+        topic.exercises.forEach((exercise, exerciseIndex) => {
+          if (!exercise.task) {
+            fail(`${topicLabel} exercise[${exerciseIndex}] is missing task.`);
+          }
+
+          if (!exercise.source || typeof exercise.source !== "string") {
+            fail(`${topicLabel} exercise[${exerciseIndex}] is missing source.`);
+          }
+        });
+      }
+    }
+
     topic.flashcards.forEach((flashcard, flashIndex) => {
       if (!flashcard.front || !flashcard.back) {
         fail(`${topicLabel} flashcard[${flashIndex}] is missing front/back.`);
