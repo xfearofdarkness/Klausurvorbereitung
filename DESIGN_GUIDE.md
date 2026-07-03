@@ -94,9 +94,13 @@ Folien Vorrang haben, und macht das Nachschlagen einfach.
   (`:focus-visible` mit Akzentfarbe).
 - `prefers-reduced-motion` wird respektiert: Einblend- und
   Flip-Animationen sind dann deaktiviert.
-- Der aktive Themen-Tab wird beim Laden und Wechseln automatisch in
-  den sichtbaren Bereich gescrollt; Themen- und Moduswechsel setzen
-  die Scrollposition nach oben.
+- Der aktive Themen-Tab wird beim Laden und Wechseln automatisch
+  mittig in den sichtbaren Bereich gescrollt; Themen- und
+  Moduswechsel setzen die Scrollposition nach oben.
+- Ueberlaufende Themen-Tabs sind erkennbar und erreichbar:
+  Fade-Kanten zeigen weitere Tabs an, auf Desktop gibt es
+  Blaetter-Buttons und Mausrad-Scrolling; auf Touch-Displays
+  bleibt das Wischen der primaere Weg (keine Buttons).
 
 Regeln:
 

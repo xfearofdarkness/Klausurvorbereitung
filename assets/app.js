@@ -30,6 +30,9 @@
     title: document.getElementById("subjectTitle"),
     subtitle: document.getElementById("subjectSubtitle"),
     tabs: document.getElementById("tabs"),
+    tabsBar: document.getElementById("tabsBar"),
+    tabsNavLeft: document.getElementById("tabsNavLeft"),
+    tabsNavRight: document.getElementById("tabsNavRight"),
     content: document.getElementById("content"),
     modeSwitcher: document.getElementById("modeSwitcher")
   };
@@ -41,10 +44,16 @@
   }
   if (refs.tabs) {
     refs.tabs.addEventListener("click", handleContentClick);
+    refs.tabs.addEventListener("scroll", updateTabsNav, { passive: true });
+    refs.tabs.addEventListener("wheel", handleTabsWheel, { passive: false });
   }
-  if (refs.modeSwitcher) {
-    refs.modeSwitcher.addEventListener("click", handleContentClick);
+  if (refs.tabsNavLeft) {
+    refs.tabsNavLeft.addEventListener("click", () => scrollTabs(-1));
   }
+  if (refs.tabsNavRight) {
+    refs.tabsNavRight.addEventListener("click", () => scrollTabs(1));
+  }
+  window.addEventListener("resize", updateTabsNav);
 
   async function init() {
     const subjectId = getSubjectId();
@@ -327,8 +336,47 @@
 
     const activeTab = refs.tabs.querySelector(".tab.active");
     if (activeTab && typeof activeTab.scrollIntoView === "function") {
-      activeTab.scrollIntoView({ block: "nearest", inline: "nearest" });
+      activeTab.scrollIntoView({ block: "nearest", inline: "center" });
     }
+
+    updateTabsNav();
+  }
+
+  function updateTabsNav() {
+    if (!refs.tabs || !refs.tabsBar) {
+      return;
+    }
+
+    const maxScroll = refs.tabs.scrollWidth - refs.tabs.clientWidth;
+    const scrollable = maxScroll > 1;
+    refs.tabsBar.classList.toggle("is-scrollable", scrollable);
+    refs.tabsBar.classList.toggle("tabs-overflow-left", scrollable && refs.tabs.scrollLeft > 1);
+    refs.tabsBar.classList.toggle("tabs-overflow-right", scrollable && refs.tabs.scrollLeft < maxScroll - 1);
+  }
+
+  function scrollTabs(direction) {
+    if (!refs.tabs) {
+      return;
+    }
+
+    const distance = Math.max(refs.tabs.clientWidth * 0.7, 120) * direction;
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    refs.tabs.scrollBy({ left: distance, behavior: reduceMotion ? "auto" : "smooth" });
+  }
+
+  function handleTabsWheel(event) {
+    if (!refs.tabs || refs.tabs.scrollWidth <= refs.tabs.clientWidth) {
+      return;
+    }
+
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+      return;
+    }
+
+    event.preventDefault();
+    refs.tabs.scrollLeft += event.deltaY;
   }
 
   function render() {

@@ -255,9 +255,77 @@ a.card.is-last {
   color: var(--text2);
 }
 
-.tabs-wrap {
+.tabs-bar {
+  position: relative;
+  display: flex;
+  align-items: stretch;
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
+}
+
+.tabs-bar::before,
+.tabs-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition);
+  z-index: 1;
+}
+
+.tabs-bar::before {
+  left: 1.9rem;
+  background: linear-gradient(90deg, var(--bg2), transparent);
+}
+
+.tabs-bar::after {
+  right: 1.9rem;
+  background: linear-gradient(270deg, var(--bg2), transparent);
+}
+
+.tabs-bar.tabs-overflow-left::before,
+.tabs-bar.tabs-overflow-right::after {
+  opacity: 1;
+}
+
+.tabs-nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.9rem;
+  border: none;
+  background: var(--bg2);
+  color: var(--text2);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.tabs-bar.is-scrollable .tabs-nav {
+  display: flex;
+}
+
+.tabs-nav:hover {
+  color: var(--accent);
+}
+
+.tabs-bar:not(.tabs-overflow-left) .tabs-nav-left,
+.tabs-bar:not(.tabs-overflow-right) .tabs-nav-right {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.tabs-wrap {
+  flex: 1;
+  min-width: 0;
   overflow-x: auto;
   white-space: nowrap;
   padding: 0 0.55rem;
@@ -835,6 +903,7 @@ a.card.is-last {
 
 .mode-btn:focus-visible,
 .tab:focus-visible,
+.tabs-nav:focus-visible,
 .q-btn:focus-visible,
 .fc-btn:focus-visible,
 .study-toggle:focus-visible,
@@ -914,6 +983,18 @@ a.card:focus-visible,
   .tab {
     padding: 8px 9px;
     font-size: 0.72rem;
+  }
+
+  .tabs-bar.is-scrollable .tabs-nav {
+    display: none;
+  }
+
+  .tabs-bar::before {
+    left: 0;
+  }
+
+  .tabs-bar::after {
+    right: 0;
   }
 
   .fc-card-wrap {
