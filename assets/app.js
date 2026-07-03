@@ -2,6 +2,13 @@
   const STORAGE_KEY = "klausurtrainer-progress-v1";
   const SUBJECT_ID_PATTERN = /^[a-z0-9-]+$/;
   const KATEX_BASE = "https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/";
+  const ASSET_VERSION = (() => {
+    const script = document.currentScript;
+    if (!script || !script.src || script.src.indexOf("?") === -1) {
+      return "";
+    }
+    return new URLSearchParams(script.src.split("?")[1]).get("v") || "";
+  })();
 
   const MODES = [
     { id: "study", label: "Lernen", key: "cards" },
@@ -46,6 +53,9 @@
     refs.tabs.addEventListener("click", handleContentClick);
     refs.tabs.addEventListener("scroll", updateTabsNav, { passive: true });
     refs.tabs.addEventListener("wheel", handleTabsWheel, { passive: false });
+  }
+  if (refs.modeSwitcher) {
+    refs.modeSwitcher.addEventListener("click", handleContentClick);
   }
   if (refs.tabsNavLeft) {
     refs.tabsNavLeft.addEventListener("click", () => scrollTabs(-1));
@@ -111,7 +121,7 @@
 
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
-      script.src = `data/${subjectId}.js`;
+      script.src = `data/${subjectId}.js${ASSET_VERSION ? `?v=${ASSET_VERSION}` : ""}`;
       script.defer = true;
       script.onload = () => resolve();
       script.onerror = () => reject(new Error(`Failed to load data/${subjectId}.js`));

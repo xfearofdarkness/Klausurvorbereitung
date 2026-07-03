@@ -29,6 +29,12 @@ Regeln:
 - Keine neue HTML-Datei pro Fach.
 - Keine fachspezifische UI-Logik.
 - Keine Mutation von Quelldaten fuer UI-Zustaende.
+- Cache-Busting: Die Asset-Referenzen in `index.html` und
+  `trainer.html` tragen einen Versionsparameter (`?v=N`). Bei
+  Aenderungen an `assets/` oder `data/` wird `N` in beiden
+  HTML-Dateien erhoeht; die Trainerseite reicht die Version an die
+  dynamisch geladenen Fachdaten weiter. So mischen Browser nach
+  einem Deployment keine alten und neuen Dateien.
 
 ## Didaktische Varianz pro Fach
 
