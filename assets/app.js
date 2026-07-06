@@ -24,7 +24,6 @@
     currentTopicIndex: 0,
     currentMode: "study",
     showOnlyWrong: false,
-    studyOpen: {},
     flash: {
       deck: [],
       position: 0,
@@ -418,28 +417,21 @@
 
   function renderStudy() {
     const topic = getCurrentTopic();
-    const topicOpenState = state.studyOpen[topic.id] || {};
 
     refs.content.innerHTML =
       `<div class="section-title fade-in"><span class="emoji">${topic.icon}</span> ${topic.title} – Lernseiten</div>` +
       topic.cards
-        .map((card, index) => {
-          const isLong = getPlainText(card.body).length > 260;
-          const isOpen = topicOpenState[index] || !isLong;
-
-          return `
+        .map(
+          (card) => `
             <div class="study-card fade-in">
-              <div class="study-card-head">
-                <h3>${card.title}${renderTag(card.tag)}</h3>
-                ${isLong ? `<button class="study-toggle" data-action="toggle-study" data-index="${index}" aria-expanded="${isOpen}">${isOpen ? "Weniger" : "Mehr"}</button>` : ""}
-              </div>
-              <div class="study-body${isOpen ? " is-open" : ""}">
+              <h3>${card.title}${renderTag(card.tag)}</h3>
+              <div class="study-body">
                 <p>${card.body}</p>
                 ${renderSource(card.source)}
               </div>
             </div>
-          `;
-        })
+          `
+        )
         .join("");
   }
 
@@ -634,11 +626,6 @@
       return;
     }
 
-    if (action === "toggle-study") {
-      toggleStudyCard(Number(index));
-      return;
-    }
-
     if (action === "toggle-answer") {
       toggleAnswer(Number(index));
       return;
@@ -732,13 +719,6 @@
     render();
   }
 
-  function toggleStudyCard(index) {
-    const topic = getCurrentTopic();
-    state.studyOpen[topic.id] = state.studyOpen[topic.id] || {};
-    state.studyOpen[topic.id][index] = !state.studyOpen[topic.id][index];
-    render();
-  }
-
   function flipCard() {
     state.flash.flipped = !state.flash.flipped;
     const card = refs.content.querySelector(".fc-card");
@@ -800,10 +780,6 @@
     ui.lastTopicIndex = state.currentTopicIndex;
     state.progress.lastSubjectId = state.subject.id;
     saveProgress();
-  }
-
-  function getPlainText(value) {
-    return String(value || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
   }
 
   function renderMissingSubject() {
