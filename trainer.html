@@ -7,26 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body class="page-trainer">
-  <div class="header">
-    <a class="home-link" href="index.html">← Übersicht</a>
-    <div class="header-meta">
-      <div class="logo" id="subjectTitle">Klausurtrainer</div>
-      <div class="subtitle" id="subjectSubtitle">Lädt Fachdaten …</div>
-    </div>
-    <div class="mode-switcher" id="modeSwitcher"></div>
-  </div>
-
-  <div class="tabs-bar" id="tabsBar">
-    <button class="tabs-nav tabs-nav-left" id="tabsNavLeft" aria-label="Themen nach links blättern">‹</button>
-    <div class="tabs-wrap" id="tabs"></div>
-    <button class="tabs-nav tabs-nav-right" id="tabsNavRight" aria-label="Themen nach rechts blättern">›</button>
-  </div>
-  <main class="main" id="content"></main>
-
-  <script src="data/catalog.js?v=4"></script>
-  <script src="assets/app.js?v=4"></script>
+  <div id="app"></div>
+  <script type="module" src="/src/main-trainer.ts"></script>
 </body>
 </html>

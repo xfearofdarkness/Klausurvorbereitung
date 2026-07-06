@@ -13,7 +13,23 @@ Prueft ein lokales Quellen-Manifest auf:
 Beispiel:
 
 ```bash
-node scripts/validate_manifest.js sources/<fach-id>/manifest.json
+npm run validate:manifest -- sources/<fach-id>/manifest.json
+```
+
+## Fachdaten validieren
+
+Prueft die typisierten Fachdaten aus `src/data/subjects/` auf:
+
+- Pflichtfelder
+- eindeutige Topic-IDs
+- Quellenangaben
+- gueltige Cards, Questions, Flashcards, Exercises und Walkthroughs
+
+Beispiele:
+
+```bash
+npm run validate
+npm run validate -- <fach-id>
 ```
 
 ## Quellenabdeckung validieren
@@ -27,5 +43,5 @@ einmal referenziert wird.
 Beispiel:
 
 ```bash
-node scripts/validate_source_coverage.js data/<fach-id>.js <fach-id> sources/<fach-id>/manifest.json --require-all-manifest-files
+npm run validate:sources -- <fach-id> sources/<fach-id>/manifest.json --require-all-manifest-files
 ```

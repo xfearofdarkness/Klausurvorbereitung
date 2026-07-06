@@ -13,7 +13,7 @@ Er gilt für:
 ## Grundregeln
 
 - Vorlesungsfolien haben immer das letzte Wort.
-- Die Folien sind die einzige fachliche Referenz für Lernkarten, Fragen und Flashcards.
+- Die Folien sind die einzige fachliche Referenz für Lernkarten, Fragen, Flashcards und Abläufe (`walkthroughs`).
 - Offizielle Übungsblätter des Kurses dürfen zusätzlich als Quelle für Übungsaufgaben (`exercises`) dienen — nur für den Aufgabentext, nie für Lösungen.
 - Wenn etwas nicht explizit auf den Folien steht, darf es nicht in den Trainer.
 - Bei Abweichungen zwischen Trainer und Folien gelten immer die Folien.
@@ -49,7 +49,7 @@ Warnsignale für Unterabdeckung:
 Erlaubt:
 
 - Folien in Themenblöcke und Foliencluster gliedern
-- Aussagen aus Folien in Lernkarten, Fragen und Flashcards überführen
+- Aussagen aus Folien in Lernkarten, Fragen, Flashcards und Abläufe überführen
 - Formulierungen leicht glätten, ohne neue Aussage hinzuzufügen
 - mehrere explizite Aussagen einer Folie in mehrere Einträge aufteilen
 
@@ -100,8 +100,8 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 6. Verdichtungs-Pass: fehlende explizite Aussagen aus denselben Folienclustern ergänzen.
 7. Cards, Questions und Flashcards erzeugen.
 8. Jede Aussage gegen die Folien prüfen.
-9. Fachdaten in `data/<fach-id>.js` eintragen.
-10. Fach in `data/catalog.js` registrieren.
+9. Fachdaten in `src/data/subjects/<fach-id>.ts` eintragen.
+10. Fach in `src/data/catalog.ts` registrieren.
 11. Validatoren ausführen.
 12. Im Browser kurz prüfen.
 13. Vor Freigabe eine fachliche Endprüfung gegen die Folien machen.
@@ -118,20 +118,34 @@ Regeln:
 - `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5"), `source` die Pflicht-Quellenangabe.
 - `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
 
+## Abläufe (`walkthroughs`)
+
+Der optionale Themenabschnitt `walkthroughs` bildet visuelle oder
+algorithmische Schrittfolgen ab, ohne fachliche Sonderlogik in die UI
+einzubauen.
+
+Regeln:
+
+- Jeder Ablauf hat `id`, `title`, `source`, `visual` und `steps`.
+- `visual` verwendet nur generische Visualtypen wie `matrix` oder `array`.
+- Schritte enthalten explizit belegbare Aussagen aus den Quellen.
+- Agenten erzeugen deklarative Schritt- und Highlight-Daten, keinen neuen UI-Code.
+- Schrittquellen sind optional, wenn der Ablauf bereits einen genauen Folienbereich als `source` hat.
+
 ## Mathematische Inhalte
 
 Für Fächer mit `features.math: true` gilt:
 
 - Formeln werden als LaTeX geschrieben: `\(...\)` inline, `\[...\]` abgesetzt.
-- In den JS-Datendateien müssen Backslashes verdoppelt werden (`\\(`, `\\frac`, ...).
+- In den TypeScript-Datendateien müssen Backslashes in Strings verdoppelt werden (`\\(`, `\\frac`, ...).
 - Formeln werden zeichengetreu aus den Folien übernommen, nicht umgeformt.
 
 ## Datenformat
 
-```js
-window.APP_SUBJECTS = window.APP_SUBJECTS || {};
+```ts
+import type { RawSubject } from "../../types/content";
 
-window.APP_SUBJECTS["fach-id"] = {
+const subject = {
   id: "fach-id",
   title: "Fachname",
   subtitle: "Untertitel",
@@ -145,10 +159,13 @@ window.APP_SUBJECTS["fach-id"] = {
       cards: [{ title: "Begriff", body: "Inhalt", tag: "def", source: "01.pdf, Folie 12" }],
       questions: [{ question: "Frage", answer: "Antwort", source: "01.pdf, Folie 12" }],
       flashcards: [{ front: "Frage", back: "Antwort", source: "01.pdf, Folie 12" }],
-      exercises: [{ ref: "Aufgabe 1", task: "Aufgabentext", source: "uebungen.pdf, Aufgabe 1" }]
+      exercises: [{ ref: "Aufgabe 1", task: "Aufgabentext", source: "uebungen.pdf, Aufgabe 1" }],
+      walkthroughs: []
     }
   ]
-};
+} satisfies RawSubject;
+
+export default subject;
 ```
 
 Pflicht:
@@ -162,6 +179,7 @@ Optional:
 
 - `features` (z. B. `math`)
 - `exercises` pro Thema
+- `walkthroughs` pro Thema
 - `tag` bei Lernkarten: `wichtig`, `formel`, `def`, `satz`, `beispiel`
 
 ## Qualitätssicherung

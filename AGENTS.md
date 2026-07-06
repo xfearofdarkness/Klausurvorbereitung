@@ -7,7 +7,7 @@ Dieses Repo enthält einen statischen Klausurtrainer für GitHub Pages.
 Agenten arbeiten hier an:
 
 - UI und App-Logik
-- Trainerdaten in `data/`
+- Trainerdaten in `src/data/subjects/`
 - Inhaltsprozessen für neue Fächer
 - Validierung und Qualitätssicherung
 
@@ -24,21 +24,24 @@ Diese Datei enthält nur Arbeitsregeln für Agenten, keine Produktregeln im Deta
 
 - `index.html` ist die Fachübersicht
 - `trainer.html` ist die generische Trainerseite
-- `assets/` enthält gemeinsames CSS und JavaScript
-- `data/` enthält Fachdaten und den Katalog
+- `src/` enthält Svelte-Komponenten, TypeScript-Logik, Styles und Fachdaten
+- `src/data/catalog.ts` enthält Fachliste und Loader
+- `src/data/subjects/` enthält Fachdaten
+- `src/types/content.ts` enthält das Content-Datenmodell
 - `scripts/` enthält Validatoren und Hilfsskripte
 - `sources/` ist nur für lokale Quelldateien gedacht und darf nicht öffentlich gepusht werden
 
 ## Arbeitsregeln
 
 - Keine neue HTML-Datei pro Fach anlegen.
-- Neue Fächer werden über `data/<fach-id>.js` und `data/catalog.js` ergänzt.
+- Neue Fächer werden über `src/data/subjects/<fach-id>.ts` und `src/data/catalog.ts` ergänzt.
 - Inhalte nie aus Eigenwissen ergänzen.
 - Folien haben immer Vorrang.
 - `source` ist bei jedem Inhaltseintrag Pflicht.
 - Beispiele werden in fachlich passende Inhalte integriert, nicht als lose Sonderblöcke abgetrennt.
 - Umlaute normal mit `ä`, `ö`, `ü` und `ß` schreiben.
 - `sources/` nur lokal verwenden, nicht ins öffentliche Repo bringen.
+- Agenten erzeugen für Abläufe deklarative `walkthroughs`-Daten, keinen fach- oder algorithmusspezifischen UI-Code.
 
 ## Standardablauf für neue oder überarbeitete Trainer
 
@@ -46,17 +49,19 @@ Diese Datei enthält nur Arbeitsregeln für Agenten, keine Produktregeln im Deta
 2. Inhalte in Foliencluster und Themenblöcke gliedern.
 3. Sicherheits-Pass: nur explizit belegbare Aussagen übernehmen.
 4. Verdichtungs-Pass: fehlende explizite Aussagen aus denselben Folien ergänzen.
-5. Inhalte in `data/<fach-id>.js` eintragen.
-6. Fach in `data/catalog.js` registrieren, falls neu.
+5. Inhalte in `src/data/subjects/<fach-id>.ts` eintragen.
+6. Fach in `src/data/catalog.ts` registrieren, falls neu.
 7. Validatoren und kurze Laufzeitprüfungen ausführen.
 
 ## Prüfschritte vor Abschluss
 
 Mindestens diese Prüfungen laufen lassen, wenn betroffen:
 
-- `node --check data/<fach-id>.js`
-- `node scripts/validate_subject_data.js data/<fach-id>.js <fach-id>`
-- `node scripts/validate_manifest.js sources/<fach-id>/manifest.json`
+- `npm run typecheck`
+- `npm run validate`
+- `npm run validate:manifest -- sources/<fach-id>/manifest.json`
+- `npm run validate:sources -- <fach-id> sources/<fach-id>/manifest.json --require-all-manifest-files`
+- `npm run build`
 - fachspezifische Heuristiken aus `scripts/`, falls vorhanden
 
 Wenn eine Prüfung nicht möglich war, muss das klar benannt werden.

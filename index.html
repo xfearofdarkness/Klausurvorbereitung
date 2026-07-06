@@ -7,17 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/styles.css?v=4">
 </head>
 <body class="page-home">
-  <main class="home-shell">
-    <h1 class="home-title">📚 Klausurvorbereitung</h1>
-    <p class="home-sub">Interaktive Trainer: Lernen, Fragen und Karteikarten</p>
-    <div class="grid" id="subjectGrid"></div>
-  </main>
-  <div class="footer">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</div>
-
-  <script src="data/catalog.js?v=4"></script>
-  <script src="assets/index.js?v=4"></script>
+  <div id="app"></div>
+  <script type="module" src="/src/main-home.ts"></script>
 </body>
 </html>

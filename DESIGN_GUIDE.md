@@ -2,7 +2,8 @@
 
 ## Ziel
 
-Die App ist ein statischer Klausurtrainer fuer GitHub Pages.
+Die App ist ein statischer Klausurtrainer fuer GitHub Pages mit Vite,
+Svelte und TypeScript.
 
 Sie soll:
 
@@ -18,23 +19,23 @@ Die App verwendet diese Struktur:
 
 - `index.html` fuer die Fachuebersicht
 - `trainer.html` als generische Trainerseite
-- `assets/styles.css` fuer zentrales Styling
-- `assets/index.js` fuer die Startseite
-- `assets/app.js` fuer die Trainerlogik
-- `data/catalog.js` fuer die Fachliste
-- `data/<fach>.js` fuer die Fachdaten
+- `src/pages/Home.svelte` fuer die Startseite
+- `src/pages/Trainer.svelte` fuer die Trainerseite
+- `src/components/` fuer wiederverwendbare UI-Komponenten
+- `src/styles.css` fuer zentrales Styling
+- `src/data/catalog.ts` fuer Fachliste und Loader
+- `src/data/subjects/<fach>.ts` fuer die Fachdaten
+- `src/types/content.ts` fuer das Datenmodell
+- `dist/` als Build-Ausgabe fuer GitHub Pages
 
 Regeln:
 
 - Keine neue HTML-Datei pro Fach.
 - Keine fachspezifische UI-Logik.
 - Keine Mutation von Quelldaten fuer UI-Zustaende.
-- Cache-Busting: Die Asset-Referenzen in `index.html` und
-  `trainer.html` tragen einen Versionsparameter (`?v=N`). Bei
-  Aenderungen an `assets/` oder `data/` wird `N` in beiden
-  HTML-Dateien erhoeht; die Trainerseite reicht die Version an die
-  dynamisch geladenen Fachdaten weiter. So mischen Browser nach
-  einem Deployment keine alten und neuen Dateien.
+- Cache-Busting geschieht ueber Vite-Hashes im Build, nicht ueber
+  manuelle `?v=N`-Parameter.
+- GitHub Pages deployt die gebaute Ausgabe aus `dist/`.
 
 ## Didaktische Varianz pro Fach
 
@@ -42,15 +43,19 @@ Faecher unterscheiden sich didaktisch. Die App bildet das ueber
 generische, deklarative Optionen in den Fachdaten ab, nie ueber
 Sonderlogik:
 
-- Modi sind inhaltsgetrieben: Die Modus-Buttons (Lernen, Fragen,
-  Karteikarten, Ueben) werden nur angezeigt, wenn mindestens ein
-  Thema des Fachs Inhalte fuer diesen Modus hat.
+- Modi sind inhaltsgetrieben und beziehen sich auf das aktuelle
+  Thema: Die Modus-Buttons (Lernen, Fragen, Karteikarten, Ueben,
+  Ablaeufe) werden nur angezeigt, wenn das aktuell ausgewaehlte
+  Thema Inhalte fuer diesen Modus hat.
 - Der Modus "Ueben" rendert den optionalen Themenabschnitt
   `exercises` (Aufgaben ohne hinterlegte Loesung, mit
   Bearbeitet-Fortschritt).
+- Der Modus "Ablaeufe" rendert den optionalen Themenabschnitt
+  `walkthroughs`. Er zeigt deklarative Schrittfolgen mit
+  generischen Visualtypen wie `matrix` und `array`.
 - `features.math: true` im Fachobjekt aktiviert Formel-Rendering
-  mit KaTeX. KaTeX wird nur dann und nur per CDN geladen; es gibt
-  keinen Build-Schritt und die App bleibt GitHub-Pages-tauglich.
+  mit KaTeX. KaTeX wird ueber npm gebuendelt; die App bleibt
+  GitHub-Pages-tauglich.
 - Formeln stehen in den Inhalten als LaTeX in `\(...\)` (inline)
   bzw. `\[...\]` (abgesetzt).
 
@@ -81,6 +86,8 @@ Standardkomponenten:
 - Quizkarte
 - Flashcard
 - Uebungskarte
+- Ablaufkarte
+- Matrix- und Array-Visualisierung
 - Fortschrittsleiste
 - Statistikleiste
 - Fehler- und Leerstates
@@ -183,9 +190,9 @@ Regeln:
 
 Regeln:
 
-- `index.html` rendert Faecher nur aus `data/catalog.js`.
+- `index.html` rendert Faecher nur aus `src/data/catalog.ts`.
 - `trainer.html` laedt ein Fach nur ueber `?subject=<id>`.
-- Fachdaten werden in `data/<fach>.js` gehalten.
+- Fachdaten werden in `src/data/subjects/<fach>.ts` gehalten.
 - Fortschritt gehoert in State oder `localStorage`, nie in die Fachdaten.
 
 ## Was nicht gemacht werden soll
@@ -193,4 +200,6 @@ Regeln:
 - Kein visuelles Redesign ohne funktionalen Mehrwert.
 - Keine Animationen, die Lesefluss oder Bedienung verlangsamen.
 - Keine zusaetzlichen UI-Muster pro Fach.
-- Keine komplexen Frameworks oder Build-Prozesse fuer einfache Layoutanpassungen.
+- Kein Backend, kein SvelteKit und kein SPA-Router ohne ausdrueckliche Entscheidung.
+- Keine algorithmusspezifischen Mini-Apps; neue visuelle Logik wird ueber
+  generische Renderer und deklarative Daten geloest.
