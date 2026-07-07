@@ -158,13 +158,24 @@
   }
 
   function viewBox(): string {
+    const { width, height } = viewBoxSize();
+    return `0 0 ${width} ${height}`;
+  }
+
+  function viewBoxSize(): { width: number; height: number } {
     let maxX = 0;
     let maxY = 0;
     for (const entry of layout.values()) {
       maxX = Math.max(maxX, entry.x);
       maxY = Math.max(maxY, entry.y);
     }
-    return `0 0 ${maxX + PADDING} ${maxY + PADDING + 2}`;
+    return { width: maxX + PADDING, height: maxY + PADDING + 2 };
+  }
+
+  function svgStyle(): string {
+    const width = viewBoxSize().width;
+    const maxWidth = Math.max(180, Math.min(440, width * 5));
+    return `--walk-tree-max-width: ${maxWidth}px`;
   }
 </script>
 
@@ -173,7 +184,7 @@
     {#if visual.label}
       <div class="walk-matrix-title">{visual.label}</div>
     {/if}
-    <svg class="walk-svg" viewBox={viewBox()} role="img" aria-label={visual.label || walkthrough.title}>
+    <svg class="walk-svg walk-tree-svg" style={svgStyle()} viewBox={viewBox()} role="img" aria-label={visual.label || walkthrough.title}>
       {#each edges() as edge (edge.key)}
         <line class={edgeClasses(edge.key)} x1={edge.from.x} y1={edge.from.y} x2={edge.to.x} y2={edge.to.y} />
       {/each}
