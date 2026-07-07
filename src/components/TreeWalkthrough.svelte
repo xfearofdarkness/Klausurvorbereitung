@@ -174,7 +174,7 @@
 
   function svgStyle(): string {
     const width = viewBoxSize().width;
-    const maxWidth = Math.max(180, Math.min(440, width * 5));
+    const maxWidth = Math.max(120, Math.min(320, width * 3.6));
     return `--walk-tree-max-width: ${maxWidth}px`;
   }
 </script>
