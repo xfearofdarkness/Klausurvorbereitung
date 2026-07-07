@@ -347,8 +347,20 @@ function treeNodeIds(visual: TreeVisual): Set<string> {
   return new Set(visual.nodes.map((node) => node.id));
 }
 
-function treeHasEdge(visual: TreeVisual, from: string, to: string): boolean {
-  return visual.nodes.some((node) => node.id === from && (node.left === to || node.right === to));
+function treeHasPossibleEdge(walkthrough: Walkthrough, from: string, to: string): boolean {
+  if (walkthrough.visual.kind !== "tree") return false;
+  if (walkthrough.visual.nodes.some((node) => node.id === from && (node.left === to || node.right === to))) {
+    return true;
+  }
+
+  return walkthrough.steps.some((step) =>
+    step.values?.some(
+      (update) =>
+        update.kind === "tree-node" &&
+        update.node === from &&
+        (update.left === to || update.right === to)
+    )
+  );
 }
 
 function validateMatrixShape(label: string, matrix: MatrixDefinition): void {
@@ -397,8 +409,12 @@ function validateWalkthroughHighlight(
       return;
     }
     if (highlight.kind === "tree-edge") {
-      if (!treeHasEdge(walkthrough.visual, highlight.from, highlight.to)) {
-        fail(`${highlightLabel} references unknown tree edge "${highlight.from}" -> "${highlight.to}".`);
+      if (!treeNodeIds(walkthrough.visual).has(highlight.from) || !treeNodeIds(walkthrough.visual).has(highlight.to)) {
+        fail(`${highlightLabel} references unknown tree edge endpoint "${highlight.from}" -> "${highlight.to}".`);
+        return;
+      }
+      if (!treeHasPossibleEdge(walkthrough, highlight.from, highlight.to)) {
+        fail(`${highlightLabel} references tree edge "${highlight.from}" -> "${highlight.to}", but no step creates that edge.`);
       }
       return;
     }
@@ -458,12 +474,30 @@ function validateWalkthroughValue(
 ): void {
   const updateLabel = `${label} step[${stepIndex}].values[${updateIndex}]`;
   if (walkthrough.visual.kind === "tree") {
+    if (update.kind === "tree-root") {
+      if (!treeNodeIds(walkthrough.visual).has(update.root)) {
+        fail(`${updateLabel} references unknown tree root "${update.root}".`);
+      }
+      return;
+    }
     if (update.kind !== "tree-node") {
       fail(`${updateLabel} uses ${update.kind} value in tree visual.`);
       return;
     }
     if (!treeNodeIds(walkthrough.visual).has(update.node)) {
       fail(`${updateLabel} references unknown tree node "${update.node}".`);
+    }
+    for (const [field, childId] of [
+      ["left", update.left],
+      ["right", update.right]
+    ] as const) {
+      if (childId === undefined || childId === null) continue;
+      if (!treeNodeIds(walkthrough.visual).has(childId)) {
+        fail(`${updateLabel}.${field} references unknown tree node "${childId}".`);
+      }
+      if (childId === update.node) {
+        fail(`${updateLabel}.${field} cannot reference itself.`);
+      }
     }
     return;
   }

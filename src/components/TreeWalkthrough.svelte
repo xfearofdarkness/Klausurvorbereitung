@@ -10,16 +10,19 @@
     value: number | string;
     hidden: boolean;
     marked: boolean;
+    left?: string;
+    right?: string;
   }
 
   interface TreeLayoutNode {
-    node: TreeNodeDefinition;
+    id: string;
     x: number;
     y: number;
   }
 
   interface TreeRenderState {
     nodes: Map<string, TreeNodeState>;
+    root: string | null;
     nodeRoles: Map<string, string[]>;
     edgeRoles: Map<string, string[]>;
   }
@@ -33,23 +36,20 @@
 
   let visual = $derived(walkthrough.visual.kind === "tree" ? walkthrough.visual : null);
   let currentStep = $derived(walkthrough.steps[stepIndex]);
-  let layout = $derived(buildLayout(visual));
   let renderState = $derived(buildRenderState(visual, walkthrough.steps, currentStep, stepIndex));
+  let layout = $derived(buildLayout(renderState));
 
-  function buildLayout(treeVisual: TreeVisual | null): Map<string, TreeLayoutNode> {
+  function buildLayout(state: TreeRenderState): Map<string, TreeLayoutNode> {
     const positions = new Map<string, TreeLayoutNode>();
-    if (!treeVisual) return positions;
-
-    const nodeById = new Map(treeVisual.nodes.map((node) => [node.id, node]));
     let inorderIndex = 0;
 
     const place = (nodeId: string | undefined, depth: number): void => {
       if (!nodeId) return;
-      const node = nodeById.get(nodeId);
+      const node = state.nodes.get(nodeId);
       if (!node || positions.has(nodeId)) return;
       place(node.left, depth + 1);
       positions.set(nodeId, {
-        node,
+        id: nodeId,
         x: PADDING + inorderIndex * COL_WIDTH,
         y: PADDING + depth * ROW_HEIGHT
       });
@@ -57,7 +57,7 @@
       place(node.right, depth + 1);
     };
 
-    place(treeVisual.root, 0);
+    place(state.root ?? undefined, 0);
     return positions;
   }
 
@@ -70,20 +70,33 @@
     const nodes = new Map<string, TreeNodeState>();
     const nodeRoles = new Map<string, string[]>();
     const edgeRoles = new Map<string, string[]>();
-    if (!treeVisual) return { nodes, nodeRoles, edgeRoles };
+    let root = treeVisual?.root ?? null;
+    if (!treeVisual) return { nodes, root, nodeRoles, edgeRoles };
 
     for (const node of treeVisual.nodes) {
-      nodes.set(node.id, { value: node.value, hidden: node.hidden === true, marked: false });
+      nodes.set(node.id, {
+        value: node.value,
+        hidden: node.hidden === true,
+        marked: false,
+        left: node.left,
+        right: node.right
+      });
     }
 
     for (let index = 0; index <= activeStepIndex; index += 1) {
       for (const update of steps[index]?.values || []) {
+        if (update.kind === "tree-root") {
+          root = update.root;
+          continue;
+        }
         if (update.kind !== "tree-node") continue;
         const state = nodes.get(update.node);
         if (!state) continue;
         if (update.value !== undefined) state.value = update.value;
         if (update.hidden !== undefined) state.hidden = update.hidden;
         if (update.mark !== undefined) state.marked = update.mark === "done";
+        if (update.left !== undefined) state.left = update.left ?? undefined;
+        if (update.right !== undefined) state.right = update.right ?? undefined;
       }
     }
 
@@ -100,7 +113,7 @@
       }
     }
 
-    return { nodes, nodeRoles, edgeRoles };
+    return { nodes, root, nodeRoles, edgeRoles };
   }
 
   function edgeKey(from: string, to: string): string {
@@ -110,12 +123,14 @@
   function edges(): Array<{ from: TreeLayoutNode; to: TreeLayoutNode; key: string }> {
     const result: Array<{ from: TreeLayoutNode; to: TreeLayoutNode; key: string }> = [];
     for (const entry of layout.values()) {
-      for (const childId of [entry.node.left, entry.node.right]) {
+      const state = renderState.nodes.get(entry.id);
+      if (!state) continue;
+      for (const childId of [state.left, state.right]) {
         if (!childId) continue;
         const child = layout.get(childId);
         if (!child) continue;
-        if (isHidden(entry.node.id) || isHidden(childId)) continue;
-        result.push({ from: entry, to: child, key: edgeKey(entry.node.id, childId) });
+        if (isHidden(entry.id) || isHidden(childId)) continue;
+        result.push({ from: entry, to: child, key: edgeKey(entry.id, childId) });
       }
     }
     return result;
@@ -162,11 +177,11 @@
       {#each edges() as edge (edge.key)}
         <line class={edgeClasses(edge.key)} x1={edge.from.x} y1={edge.from.y} x2={edge.to.x} y2={edge.to.y} />
       {/each}
-      {#each [...layout.values()] as entry (entry.node.id)}
-        {#if !isHidden(entry.node.id)}
-          <g class={nodeClasses(entry.node.id)}>
+      {#each [...layout.values()] as entry (entry.id)}
+        {#if !isHidden(entry.id)}
+          <g class={nodeClasses(entry.id)}>
             <circle cx={entry.x} cy={entry.y} r={NODE_RADIUS} />
-            <text x={entry.x} y={entry.y}>{renderState.nodes.get(entry.node.id)?.value}</text>
+            <text x={entry.x} y={entry.y}>{renderState.nodes.get(entry.id)?.value}</text>
           </g>
         {/if}
       {/each}

@@ -225,7 +225,16 @@ export type WalkthroughHighlight =
 export type WalkthroughValueUpdate =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; value: MatrixValue }
   | { kind: "array-index"; array?: string; index: number; value: number | string }
-  | { kind: "tree-node"; node: string; value?: number | string; hidden?: boolean; mark?: "done" | null }
+  | {
+      kind: "tree-node";
+      node: string;
+      value?: number | string;
+      hidden?: boolean;
+      mark?: "done" | null;
+      left?: string | null;
+      right?: string | null;
+    }
+  | { kind: "tree-root"; root: string }
   | { kind: "graph-node"; node: string; note?: string | null; mark?: "done" | null }
   | { kind: "graph-edge"; from: string; to: string; mark?: "done" | null };
 

@@ -2587,6 +2587,260 @@ const aud = {
           back: "Unterlauf beim (2,4)-Löschen: Geschwister 3-/4-Knoten → Übertragung; Geschwister 2-Knoten → Fusion.",
           source: "05_balanced_trees.pdf, Folie 55"
         }
+      ],
+      walkthroughs: [
+        {
+          id: "avl-einfache-rotation",
+          title: "AVL: einfache Rotation",
+          source: "05_balanced_trees.pdf, Folien 15-16",
+          intro: "Ein untergeordnetes Element wird so getauscht, dass es über seinem übergeordneten Element liegt.",
+          visual: {
+            kind: "tree",
+            root: "3",
+            nodes: [
+              { id: "3", value: 3, right: "5" },
+              { id: "5", value: 5, right: "8" },
+              { id: "8", value: 8 }
+            ]
+          },
+          steps: [
+            {
+              title: "Ausgangsformation",
+              text: "Die Kette 3-5-8 ist rechtslastig; in der Folie ist bei 3 bal(T) = 2 und bei 5 bal(T) = 1 markiert.",
+              explanation: {
+                action: "Den betroffenen Teilbaum ansehen.",
+                rule: "Rotation tauscht ein untergeordnetes Element über sein übergeordnetes Element.",
+                decision: "Hier genügt eine einfache Rotation."
+              },
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-node", node: "5", role: "target" },
+                { kind: "tree-edge", from: "3", to: "5", role: "active" }
+              ]
+            },
+            {
+              title: "5 über 3 drehen",
+              text: "Der Knoten 5 wird über seinen Elternknoten 3 getauscht.",
+              explanation: {
+                action: "5 wird Wurzel des Teilbaums.",
+                rule: "Das kleinere Element 3 bleibt links von 5.",
+                decision: "8 bleibt rechts von 5."
+              },
+              values: [
+                { kind: "tree-root", root: "5" },
+                { kind: "tree-node", node: "3", right: null },
+                { kind: "tree-node", node: "5", left: "3", right: "8" }
+              ],
+              highlights: [
+                { kind: "tree-node", node: "5", role: "active" },
+                { kind: "tree-edge", from: "5", to: "3", role: "active" },
+                { kind: "tree-edge", from: "5", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Teilbaum ist ausgeglichen",
+              text: "Das Ergebnis ist 5 mit den Kindern 3 und 8; in der Folie ist bal(T) = 0 markiert.",
+              explanation: {
+                action: "Neue Formation prüfen.",
+                rule: "Beim AVL-Baum muss bal(N) für jeden Knoten in {-1, 0, +1} liegen.",
+                decision: "Der Teilbaum erfüllt die AVL-Bedingung."
+              },
+              values: [
+                { kind: "tree-root", root: "5" },
+                { kind: "tree-node", node: "3", right: null, mark: "done" },
+                { kind: "tree-node", node: "5", left: "3", right: "8", mark: "done" },
+                { kind: "tree-node", node: "8", mark: "done" }
+              ],
+              highlights: [{ kind: "tree-node", node: "5", role: "target" }]
+            }
+          ]
+        },
+        {
+          id: "avl-doppelrotation",
+          title: "AVL: Doppelrotation",
+          source: "05_balanced_trees.pdf, Folien 17-19",
+          intro: "Bei der Doppelrotation werden zwei Tausche ausgeführt: erst 5 über 8, dann 5 über 3.",
+          visual: {
+            kind: "tree",
+            root: "3",
+            nodes: [
+              { id: "3", value: 3, right: "8" },
+              { id: "8", value: 8, left: "5" },
+              { id: "5", value: 5 }
+            ]
+          },
+          steps: [
+            {
+              title: "Ausgangsformation",
+              text: "Die Kette ist 3-8-5; die Folie markiert bei 3 bal(T) = 2 und bei 8 bal(T) = -1.",
+              explanation: {
+                action: "Den inneren Knoten 5 identifizieren.",
+                rule: "Wenn eine einfache Rotation nicht direkt zur Endformation führt, braucht es zwei Tausche.",
+                decision: "Zuerst wird 5 über 8 gedreht."
+              },
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-node", node: "8", role: "compare" },
+                { kind: "tree-node", node: "5", role: "target" }
+              ]
+            },
+            {
+              title: "Erster Tausch: 5 über 8",
+              text: "5 wird über seinen Elternknoten 8 getauscht; daraus entsteht die Zwischenform 3-5-8.",
+              explanation: {
+                action: "Untergeordnetes Element 5 über 8 heben.",
+                rule: "5 liegt zwischen 3 und 8.",
+                decision: "5 wird rechtes Kind von 3, 8 wird rechtes Kind von 5."
+              },
+              values: [
+                { kind: "tree-node", node: "3", right: "5" },
+                { kind: "tree-node", node: "5", right: "8" },
+                { kind: "tree-node", node: "8", left: null }
+              ],
+              highlights: [
+                { kind: "tree-node", node: "5", role: "active" },
+                { kind: "tree-edge", from: "3", to: "5", role: "active" },
+                { kind: "tree-edge", from: "5", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Zweiter Tausch: 5 über 3",
+              text: "Jetzt wird 5 über 3 getauscht; 3 wird linkes Kind und 8 bleibt rechtes Kind.",
+              explanation: {
+                action: "Zwischenwurzel 5 zur Wurzel des Teilbaums machen.",
+                rule: "Die Inorder-Reihenfolge 3, 5, 8 bleibt erhalten.",
+                decision: "Damit ist die Doppelrotation abgeschlossen."
+              },
+              values: [
+                { kind: "tree-root", root: "5" },
+                { kind: "tree-node", node: "3", right: null },
+                { kind: "tree-node", node: "5", left: "3", right: "8" }
+              ],
+              highlights: [
+                { kind: "tree-node", node: "5", role: "active" },
+                { kind: "tree-edge", from: "5", to: "3", role: "active" },
+                { kind: "tree-edge", from: "5", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Teilbaum ist ausgeglichen",
+              text: "Das Ergebnis ist wieder 5 mit den Kindern 3 und 8; die Folie markiert bal(T) = 0.",
+              explanation: {
+                action: "Endformation prüfen.",
+                rule: "Ein AVL-Baum erlaubt nur Balancewerte -1, 0 oder +1.",
+                decision: "Der Teilbaum ist wieder AVL-konform."
+              },
+              values: [
+                { kind: "tree-root", root: "5" },
+                { kind: "tree-node", node: "3", right: null, mark: "done" },
+                { kind: "tree-node", node: "5", left: "3", right: "8", mark: "done" },
+                { kind: "tree-node", node: "8", left: null, mark: "done" }
+              ],
+              highlights: [{ kind: "tree-node", node: "5", role: "target" }]
+            }
+          ]
+        },
+        {
+          id: "avl-trinode-restructure",
+          title: "AVL: restructure(x)",
+          source: "05_balanced_trees.pdf, Folien 20-29",
+          intro: "Die Trinode-Umstrukturierung sortiert x, y und z per Inorder zu a, b, c und ersetzt den Teilbaum mit b als neuer Wurzel.",
+          visual: {
+            kind: "tree",
+            root: "78",
+            nodes: [
+              { id: "78", value: 78, left: "50", right: "88" },
+              { id: "50", value: 50, left: "48", right: "62" },
+              { id: "88", value: 88 },
+              { id: "48", value: 48 },
+              { id: "62", value: 62, left: "54" },
+              { id: "54", value: 54 }
+            ]
+          },
+          steps: [
+            {
+              title: "x, y und z bestimmen",
+              text: "Im Folienbeispiel liegt x = 62 unter y = 50 und z = 78.",
+              explanation: {
+                action: "Position x mit Elternknoten y und Großelternknoten z betrachten.",
+                rule: "restructure(x) arbeitet genau mit diesen drei Positionen.",
+                decision: "Der betroffene Teilbaum hat aktuell die Wurzel z = 78."
+              },
+              highlights: [
+                { kind: "tree-node", node: "62", role: "target" },
+                { kind: "tree-node", node: "50", role: "compare" },
+                { kind: "tree-node", node: "78", role: "active" }
+              ]
+            },
+            {
+              title: "Inorder-Auflistung",
+              text: "Die Inorder-Auflistung von x, y und z ist a = 50, b = 62, c = 78.",
+              explanation: {
+                action: "x, y und z nach Suchbaum-Reihenfolge sortieren.",
+                rule: "a, b und c sind die Inorder-Auflistung der drei Positionen.",
+                decision: "b = 62 wird die neue Wurzel des Teilbaums."
+              },
+              highlights: [
+                { kind: "tree-node", node: "50", role: "done" },
+                { kind: "tree-node", node: "62", role: "target" },
+                { kind: "tree-node", node: "78", role: "done" }
+              ]
+            },
+            {
+              title: "Teilbäume einordnen",
+              text: "48 entspricht T1, 54 entspricht T2, 88 entspricht T4; T3 ist im Beispiel leer.",
+              explanation: {
+                action: "Die vier Teilbäume T1 bis T4 in Inorder-Reihenfolge festhalten.",
+                rule: "a erhält T1 und T2, c erhält T3 und T4.",
+                decision: "50 behält 48 und bekommt 54; 78 behält 88."
+              },
+              highlights: [
+                { kind: "tree-node", node: "48", role: "compare" },
+                { kind: "tree-node", node: "54", role: "compare" },
+                { kind: "tree-node", node: "88", role: "compare" }
+              ]
+            },
+            {
+              title: "b ersetzt z",
+              text: "Der Teilbaum mit Wurzel z = 78 wird durch einen Teilbaum mit Wurzel b = 62 ersetzt.",
+              explanation: {
+                action: "62 zur neuen Wurzel machen.",
+                rule: "a wird linkes Kind von b, c wird rechtes Kind von b.",
+                decision: "50 wird links von 62, 78 rechts von 62."
+              },
+              values: [
+                { kind: "tree-root", root: "62" },
+                { kind: "tree-node", node: "50", right: "54" },
+                { kind: "tree-node", node: "62", left: "50", right: "78" },
+                { kind: "tree-node", node: "78", left: null }
+              ],
+              highlights: [
+                { kind: "tree-node", node: "62", role: "active" },
+                { kind: "tree-edge", from: "62", to: "50", role: "active" },
+                { kind: "tree-edge", from: "62", to: "78", role: "active" }
+              ]
+            },
+            {
+              title: "Umstrukturierung fertig",
+              text: "Das Ergebnis ist 62 als Wurzel, 50 mit 48 und 54 links sowie 78 mit 88 rechts.",
+              explanation: {
+                action: "Endzustand lesen.",
+                rule: "Die Suchbaum-Reihenfolge bleibt erhalten.",
+                decision: "Der Folienzustand nach der Trinode-Umstrukturierung ist erreicht."
+              },
+              values: [
+                { kind: "tree-root", root: "62" },
+                { kind: "tree-node", node: "50", right: "54", mark: "done" },
+                { kind: "tree-node", node: "62", left: "50", right: "78", mark: "done" },
+                { kind: "tree-node", node: "78", left: null, mark: "done" },
+                { kind: "tree-node", node: "48", mark: "done" },
+                { kind: "tree-node", node: "54", mark: "done" },
+                { kind: "tree-node", node: "88", mark: "done" }
+              ],
+              highlights: [{ kind: "tree-node", node: "62", role: "target" }]
+            }
+          ]
+        }
       ]
     },
     {
