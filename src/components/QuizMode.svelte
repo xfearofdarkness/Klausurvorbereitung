@@ -50,9 +50,9 @@
 {:else}
   {#each questions as question}
     <div class="quiz-card fade-in">
-      <div class="quiz-q">{question.index + 1}. {@html question.question}</div>
+      <div class="quiz-q"><span>{question.index + 1}. </span><span data-math-content>{@html question.question}</span></div>
       <div class:visible={visibleAnswers.has(question.index)} class="quiz-a">
-        {@html question.answer}
+        <div data-math-content>{@html question.answer}</div>
         <Source source={question.source} />
       </div>
       <div class="quiz-btns">

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, tick } from "svelte";
-  import renderMathInElement from "katex/contrib/auto-render";
   import FlashMode from "../components/FlashMode.svelte";
   import ModeSwitcher from "../components/ModeSwitcher.svelte";
   import PracticeMode from "../components/PracticeMode.svelte";
@@ -17,12 +16,16 @@
     getQuizState,
     getSubjectProgress,
     loadProgress,
-    saveProgress,
     saveUiState
   } from "../lib/progress";
   import type { AppProgress, FlashMark, ModeConfig, ModeId, PracticeMark, QuizMark, Subject, Topic } from "../types/content";
 
   const SUBJECT_ID_PATTERN = /^[a-z0-9-]+$/;
+  const MATH_SOURCE_PATTERN = /\\\(|\\\[/;
+  type RenderMathInElement = typeof import("katex/contrib/auto-render").default;
+
+  let mathRendererPromise: Promise<RenderMathInElement> | null = null;
+  let mathRenderToken = 0;
 
   let subject = $state<Subject | null>(null);
   let errorMessage = $state("");
@@ -49,20 +52,47 @@
   });
 
   $effect(() => {
-    if (!subject || !contentElement || !subject.features.math) return;
     currentMode;
     currentTopicIndex;
-    tick().then(() => {
-      if (!contentElement) return;
-      renderMathInElement(contentElement, {
-        delimiters: [
-          { left: "\\(", right: "\\)", display: false },
-          { left: "\\[", right: "\\]", display: true }
-        ],
-        throwOnError: false
-      });
+    const activeSubject = subject;
+    const renderTarget = contentElement;
+    const token = ++mathRenderToken;
+
+    if (!activeSubject || !renderTarget || !activeSubject.features.math) return;
+
+    tick().then(async () => {
+      if (token !== mathRenderToken || subject !== activeSubject || !contentElement) return;
+      const mathTargets = findMathTargets(contentElement);
+      if (mathTargets.length === 0) return;
+
+      const renderMathInElement = await loadMathRenderer();
+      if (token !== mathRenderToken || subject !== activeSubject || !contentElement) return;
+
+      mathTargets.forEach((target) => renderMathInElement(target, mathRenderOptions));
     });
   });
+
+  const mathRenderOptions = {
+    delimiters: [
+      { left: "\\(", right: "\\)", display: false },
+      { left: "\\[", right: "\\]", display: true }
+    ],
+    throwOnError: false
+  };
+
+  function loadMathRenderer(): Promise<RenderMathInElement> {
+    mathRendererPromise ??= Promise.all([
+      import("katex/dist/katex.min.css"),
+      import("katex/contrib/auto-render")
+    ]).then(([, module]) => module.default);
+    return mathRendererPromise;
+  }
+
+  function findMathTargets(element: HTMLElement): HTMLElement[] {
+    return Array.from(element.querySelectorAll<HTMLElement>("[data-math-content]")).filter((target) =>
+      MATH_SOURCE_PATTERN.test(target.textContent || "")
+    );
+  }
 
   async function loadSubject(): Promise<void> {
     const subjectId = getSubjectId();
@@ -116,6 +146,10 @@
     return modesForTopic(topic).some((entry) => entry.id === mode);
   }
 
+  function isModeId(value: unknown): value is ModeId {
+    return typeof value === "string" && MODES.some((mode) => mode.id === value);
+  }
+
   function fallbackModeForTopic(topic: Topic | null): ModeId {
     return modesForTopic(topic)[0]?.id || "study";
   }
@@ -139,12 +173,14 @@
     if (!subject) return;
     const subjectProgress = getSubjectProgress(progress, subject);
     const maxTopicIndex = Math.max(0, subject.topics.length - 1);
-    const restoredTopicIndex = subjectProgress.ui?.lastTopicIndex || 0;
-    currentTopicIndex = Math.min(Math.max(restoredTopicIndex, 0), maxTopicIndex);
+    const restoredTopicIndex = subjectProgress.ui?.lastTopicIndex;
+    currentTopicIndex = typeof restoredTopicIndex === "number" && Number.isInteger(restoredTopicIndex)
+      ? Math.min(Math.max(restoredTopicIndex, 0), maxTopicIndex)
+      : 0;
 
     const restoredTopic = getTopicAt(currentTopicIndex);
     const fallbackMode = fallbackModeForTopic(restoredTopic);
-    const restoredMode = subjectProgress.ui?.lastMode || fallbackMode;
+    const restoredMode = isModeId(subjectProgress.ui?.lastMode) ? subjectProgress.ui.lastMode : fallbackMode;
     currentMode = isModeAvailableForTopic(restoredMode, restoredTopic) ? restoredMode : fallbackMode;
   }
 
@@ -187,7 +223,6 @@
     if (!subject || !currentTopic) return;
     const state = getQuizState(progress, subject, currentTopic.id);
     state[index] = value;
-    saveProgress(progress);
     persistUi();
   }
 
@@ -199,7 +234,6 @@
     } else {
       state[index] = "done";
     }
-    saveProgress(progress);
     persistUi();
   }
 
@@ -214,7 +248,6 @@
     state[cardIndex] = value;
     flashPosition += 1;
     flashFlipped = false;
-    saveProgress(progress);
     persistUi();
   }
 
@@ -285,30 +318,34 @@
     </div>
   {:else if !subject || !currentTopic}
     <p class="empty-state">Fachdaten werden geladen.</p>
-  {:else if currentMode === "study"}
-    <StudyMode topic={currentTopic} />
-  {:else if currentMode === "quiz"}
-    <QuizMode
-      topic={currentTopic}
-      {quizState}
-      {showOnlyWrong}
-      onToggleWrongFilter={() => (showOnlyWrong = !showOnlyWrong)}
-      onMark={markQuestion}
-    />
-  {:else if currentMode === "practice"}
-    <PracticeMode topic={currentTopic} {practiceState} onMark={markExercise} />
-  {:else if currentMode === "walkthrough"}
-    <WalkthroughMode topic={currentTopic} />
   {:else}
-    <FlashMode
-      topic={currentTopic}
-      results={flashState}
-      deck={flashDeck}
-      position={flashPosition}
-      flipped={flashFlipped}
-      onFlip={flipCard}
-      onMark={markFlash}
-      onRestart={restartFlash}
-    />
+    {#key `${currentTopic.id}:${currentMode}`}
+      {#if currentMode === "study"}
+        <StudyMode topic={currentTopic} />
+      {:else if currentMode === "quiz"}
+        <QuizMode
+          topic={currentTopic}
+          {quizState}
+          {showOnlyWrong}
+          onToggleWrongFilter={() => (showOnlyWrong = !showOnlyWrong)}
+          onMark={markQuestion}
+        />
+      {:else if currentMode === "practice"}
+        <PracticeMode topic={currentTopic} {practiceState} onMark={markExercise} />
+      {:else if currentMode === "walkthrough"}
+        <WalkthroughMode topic={currentTopic} />
+      {:else}
+        <FlashMode
+          topic={currentTopic}
+          results={flashState}
+          deck={flashDeck}
+          position={flashPosition}
+          flipped={flashFlipped}
+          onFlip={flipCard}
+          onMark={markFlash}
+          onRestart={restartFlash}
+        />
+      {/if}
+    {/key}
   {/if}
 </main>

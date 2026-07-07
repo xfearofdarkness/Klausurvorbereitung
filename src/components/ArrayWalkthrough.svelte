@@ -1,35 +1,57 @@
 <script lang="ts">
-  import type { Walkthrough } from "../types/content";
+  import type { ArrayVisual, Walkthrough, WalkthroughStep } from "../types/content";
 
   interface Props {
     walkthrough: Walkthrough;
     stepIndex: number;
   }
 
+  interface ArrayRenderState {
+    values: Array<number | string>;
+    roles: Map<number, string[]>;
+  }
+
   let { walkthrough, stepIndex }: Props = $props();
 
   let visual = $derived(walkthrough.visual.kind === "array" ? walkthrough.visual : null);
   let currentStep = $derived(walkthrough.steps[stepIndex]);
+  let renderState = $derived(buildRenderState(visual, walkthrough.steps, currentStep, stepIndex));
 
-  function valueAt(index: number): number | string | undefined {
-    if (!visual) return undefined;
-    let value = visual.values[index];
-    for (let step = 0; step <= stepIndex; step += 1) {
-      for (const update of walkthrough.steps[step]?.values || []) {
-        if (update.kind === "array-index" && update.index === index) {
-          value = update.value;
+  function buildRenderState(
+    arrayVisual: ArrayVisual | null,
+    steps: WalkthroughStep[],
+    activeStep: WalkthroughStep | undefined,
+    activeStepIndex: number
+  ): ArrayRenderState {
+    const values = [...(arrayVisual?.values || [])];
+    const roles = new Map<number, string[]>();
+
+    for (let index = 0; index <= activeStepIndex; index += 1) {
+      for (const update of steps[index]?.values || []) {
+        if (update.kind === "array-index") {
+          values[update.index] = update.value;
         }
       }
     }
-    return value;
+
+    for (const highlight of activeStep?.highlights || []) {
+      if (highlight.kind !== "array-index") continue;
+      const nextRoles = roles.get(highlight.index) || [];
+      nextRoles.push(highlight.role);
+      roles.set(highlight.index, nextRoles);
+    }
+
+    return { values, roles };
+  }
+
+  function valueAt(index: number): number | string | undefined {
+    return renderState.values[index];
   }
 
   function cellClasses(index: number): string {
     const classes = ["walk-array-cell"];
-    for (const highlight of currentStep?.highlights || []) {
-      if (highlight.kind === "array-index" && highlight.index === index) {
-        classes.push(`walk-${highlight.role}`);
-      }
+    for (const role of renderState.roles.get(index) || []) {
+      classes.push(`walk-${role}`);
     }
     return classes.join(" ");
   }

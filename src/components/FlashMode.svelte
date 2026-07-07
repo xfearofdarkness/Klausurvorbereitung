@@ -54,12 +54,12 @@
       <div class:flipped class="fc-card">
         <div class="fc-face fc-front">
           <div class="fc-label">Frage</div>
-          <div class="fc-text">{@html card.front}</div>
+          <div class="fc-text" data-math-content>{@html card.front}</div>
           <div class="fc-hint">Klicken zum Umdrehen</div>
         </div>
         <div class="fc-face fc-back">
           <div class="fc-label">Antwort</div>
-          <div class="fc-text">{@html card.back}</div>
+          <div class="fc-text" data-math-content>{@html card.back}</div>
           <Source source={card.source} className="card-source fc-source" />
           <div class="fc-hint">Klicken zum Zurückdrehen</div>
         </div>

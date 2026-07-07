@@ -6,61 +6,97 @@
     stepIndex: number;
   }
 
+  interface MatrixRenderState {
+    values: Map<string, MatrixValue>;
+    done: Set<string>;
+    roles: Map<string, string[]>;
+  }
+
   let { walkthrough, stepIndex }: Props = $props();
 
   let matrices = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.matrices : []);
   let currentStep = $derived(walkthrough.steps[stepIndex]);
+  let renderState = $derived(buildRenderState(matrices, walkthrough.steps, currentStep, stepIndex));
 
-  function cellValue(matrix: MatrixDefinition, row: number, col: number): MatrixValue {
-    let value = matrix.values[row]?.[col] ?? null;
-    for (let index = 0; index <= stepIndex; index += 1) {
-      for (const update of walkthrough.steps[index]?.values || []) {
-        if (update.kind === "matrix-cell" && update.matrix === matrix.id && update.row === row && update.col === col) {
-          value = update.value;
+  function buildRenderState(
+    matrixList: MatrixDefinition[],
+    steps: WalkthroughStep[],
+    step: WalkthroughStep | undefined,
+    activeStepIndex: number
+  ): MatrixRenderState {
+    const values = new Map<string, MatrixValue>();
+    const done = new Set<string>();
+    const roles = new Map<string, string[]>();
+    const matrixById = new Map(matrixList.map((matrix) => [matrix.id, matrix]));
+
+    for (const matrix of matrixList) {
+      matrix.values.forEach((row, rowIndex) => {
+        row.forEach((value, colIndex) => {
+          values.set(cellKey(matrix.id, rowIndex, colIndex), value);
+        });
+      });
+    }
+
+    for (let index = 0; index <= activeStepIndex; index += 1) {
+      const isPreviousStep = index < activeStepIndex;
+      for (const update of steps[index]?.values || []) {
+        if (update.kind !== "matrix-cell") continue;
+        const key = cellKey(update.matrix, update.row, update.col);
+        values.set(key, update.value);
+        if (isPreviousStep) {
+          done.add(key);
         }
       }
     }
-    return value;
-  }
-
-  function isPreviouslySet(matrix: MatrixDefinition, row: number, col: number): boolean {
-    for (let index = 0; index < stepIndex; index += 1) {
-      if (
-        walkthrough.steps[index]?.values?.some(
-          (update) => update.kind === "matrix-cell" && update.matrix === matrix.id && update.row === row && update.col === col
-        )
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  function highlightClasses(matrix: MatrixDefinition, row: number, col: number, step?: WalkthroughStep): string {
-    const classes = ["walk-matrix-cell"];
-    if (cellValue(matrix, row, col) === null) classes.push("walk-empty");
-    if (isPreviouslySet(matrix, row, col)) classes.push("walk-done");
 
     for (const highlight of step?.highlights || []) {
-      if (matchesCellHighlight(highlight, matrix.id, row, col)) {
-        classes.push(`walk-${highlight.role}`);
+      for (const key of highlightedCellKeys(highlight, matrixById)) {
+        const nextRoles = roles.get(key) || [];
+        nextRoles.push(highlight.role);
+        roles.set(key, nextRoles);
       }
     }
 
-    return classes.join(" ");
+    return { values, done, roles };
   }
 
-  function matchesCellHighlight(highlight: WalkthroughHighlight, matrixId: string, row: number, col: number): boolean {
+  function highlightedCellKeys(highlight: WalkthroughHighlight, matrixById: Map<string, MatrixDefinition>): string[] {
     if (highlight.kind === "matrix-cell") {
-      return highlight.matrix === matrixId && highlight.row === row && highlight.col === col;
+      return [cellKey(highlight.matrix, highlight.row, highlight.col)];
     }
+
     if (highlight.kind === "matrix-row") {
-      return highlight.matrix === matrixId && highlight.row === row;
+      const matrix = matrixById.get(highlight.matrix);
+      if (!matrix) return [];
+      return matrix.values[highlight.row]?.map((_, col) => cellKey(highlight.matrix, highlight.row, col)) || [];
     }
+
     if (highlight.kind === "matrix-col") {
-      return highlight.matrix === matrixId && highlight.col === col;
+      const matrix = matrixById.get(highlight.matrix);
+      if (!matrix) return [];
+      return matrix.values.map((_, row) => cellKey(highlight.matrix, row, highlight.col));
     }
-    return false;
+
+    return [];
+  }
+
+  function cellKey(matrixId: string, row: number, col: number): string {
+    return `${matrixId}:${row}:${col}`;
+  }
+
+  function cellValue(matrix: MatrixDefinition, row: number, col: number): MatrixValue {
+    return renderState.values.get(cellKey(matrix.id, row, col)) ?? null;
+  }
+
+  function highlightClasses(matrix: MatrixDefinition, row: number, col: number): string {
+    const key = cellKey(matrix.id, row, col);
+    const classes = ["walk-matrix-cell"];
+    if (cellValue(matrix, row, col) === null) classes.push("walk-empty");
+    if (renderState.done.has(key)) classes.push("walk-done");
+    for (const role of renderState.roles.get(key) || []) {
+      classes.push(`walk-${role}`);
+    }
+    return classes.join(" ");
   }
 
   function display(value: MatrixValue): string {
@@ -78,9 +114,8 @@
             {#each matrix.values as row, rowIndex}
               <tr>
                 {#each row as _, colIndex}
-                  <td class={highlightClasses(matrix, rowIndex, colIndex, currentStep)}>
-                    <span class="cell-label">{matrix.id}{rowIndex + 1}{colIndex + 1}</span>
-                    <span>{display(cellValue(matrix, rowIndex, colIndex))}</span>
+                  <td class={highlightClasses(matrix, rowIndex, colIndex)}>
+                    {display(cellValue(matrix, rowIndex, colIndex))}
                   </td>
                 {/each}
               </tr>

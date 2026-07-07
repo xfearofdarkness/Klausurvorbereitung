@@ -29,7 +29,7 @@
       {/if}
     </h3>
     <div class="study-body">
-      <p>{@html card.body}</p>
+      <p data-math-content>{@html card.body}</p>
       <Source source={card.source} />
     </div>
   </div>

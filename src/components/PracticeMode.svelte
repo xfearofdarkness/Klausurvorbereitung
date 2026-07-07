@@ -29,9 +29,9 @@
       {#if exercise.ref}
         <div class="ex-ref">{exercise.ref}</div>
       {/if}
-      <div class="quiz-q ex-task">{@html exercise.task}</div>
+      <div class="quiz-q ex-task" data-math-content>{@html exercise.task}</div>
       {#if exercise.note}
-        <div class="ex-note">{@html exercise.note}</div>
+        <div class="ex-note" data-math-content>{@html exercise.note}</div>
       {/if}
       <Source source={exercise.source} />
       <div class="quiz-btns">

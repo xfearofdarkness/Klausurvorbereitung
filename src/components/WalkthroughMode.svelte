@@ -14,7 +14,7 @@
 {#if topic.walkthroughs.length === 0}
   <p class="empty-state">Für dieses Thema gibt es keine Abläufe.</p>
 {:else}
-  {#each topic.walkthroughs as walkthrough}
+  {#each topic.walkthroughs as walkthrough (walkthrough.id)}
     <WalkthroughCard {walkthrough} />
   {/each}
 {/if}
