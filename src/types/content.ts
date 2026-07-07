@@ -1,4 +1,4 @@
-export type SubjectId = "rabs" | "laa" | "vs";
+export type SubjectId = "rabs" | "laa" | "vs" | "aud";
 
 export type ModeId = "study" | "quiz" | "flash" | "practice" | "walkthrough";
 

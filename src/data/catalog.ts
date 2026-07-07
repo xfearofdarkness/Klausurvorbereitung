@@ -18,11 +18,18 @@ export const catalog = [
     "title": "VS",
     "subtitle": "Verteilte Systeme",
     "icon": "🌐"
+  },
+  {
+    "id": "aud",
+    "title": "AuD",
+    "subtitle": "Algorithmen und Datenstrukturen",
+    "icon": "🧮"
   }
 ] satisfies SubjectMeta[];
 
 export const subjectLoaders: Record<SubjectId, () => Promise<{ default: import("../types/content").RawSubject }>> = {
   rabs: () => import("./subjects/rabs"),
   laa: () => import("./subjects/laa"),
-  vs: () => import("./subjects/vs")
+  vs: () => import("./subjects/vs"),
+  aud: () => import("./subjects/aud")
 };

@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "klausurtrainer",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "/Users/jamiehuta/src/Klausurvorbereitung"],
-      "port": 4173
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/jamiehuta/src/Klausurvorbereitung", "run", "dev", "--", "--port", "5173", "--strictPort"],
+      "port": 5173
     }
   ]
 }
