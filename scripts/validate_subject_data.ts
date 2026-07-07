@@ -1,5 +1,6 @@
 #!/usr/bin/env tsx
 
+import katex from "katex";
 import { catalog, subjectLoaders } from "../src/data/catalog";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
@@ -22,6 +23,11 @@ const DANGEROUS_HTML_PATTERNS = [
   { label: "javascript URL", pattern: /javascript\s*:/i },
   { label: "inline event handler", pattern: /\son[a-z]+\s*=/i }
 ];
+const MATH_DELIMITER_PATTERNS = [
+  { label: "inline math", open: /(?<!\\)\\\(/g, close: /(?<!\\)\\\)/g },
+  { label: "display math", open: /(?<!\\)\\\[/g, close: /(?<!\\)\\\]/g }
+];
+const MATH_FORMULA_PATTERN = /(?<!\\)\\\(([\s\S]*?)(?<!\\)\\\)|(?<!\\)\\\[([\s\S]*?)(?<!\\)\\\]/g;
 
 function fail(message: string): void {
   console.error(`ERROR: ${message}`);
@@ -62,14 +68,14 @@ function validateSubject(subjectId: SubjectId, subject: Subject | null): void {
 
   const topicIds = new Set<string>();
 
-  subject.topics.forEach((topic, topicIndex) => validateTopic(subjectId, topic, topicIndex, topicIds));
+  subject.topics.forEach((topic, topicIndex) => validateTopic(subjectId, topic, topicIndex, topicIds, subject.features.math === true));
 
   if (!failed) {
     console.log(`OK: ${subjectId}`);
   }
 }
 
-function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, topicIds: Set<string>): void {
+function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, topicIds: Set<string>, validateMath: boolean): void {
   const topicLabel = `subject "${subjectId}" topic[${topicIndex}]`;
 
   if (!topic.title || typeof topic.title !== "string") {
@@ -94,7 +100,7 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     if (!card.title || !card.body) {
       fail(`${topicLabel} card[${cardIndex}] is missing title/body.`);
     }
-    validateHtmlField(`${topicLabel} card[${cardIndex}].body`, card.body);
+    validateHtmlField(`${topicLabel} card[${cardIndex}].body`, card.body, validateMath);
     requireSource(topicLabel, "card", cardIndex, card.source);
   });
 
@@ -102,8 +108,8 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     if (!question.question || !question.answer) {
       fail(`${topicLabel} question[${questionIndex}] is missing question/answer.`);
     }
-    validateHtmlField(`${topicLabel} question[${questionIndex}].question`, question.question);
-    validateHtmlField(`${topicLabel} question[${questionIndex}].answer`, question.answer);
+    validateHtmlField(`${topicLabel} question[${questionIndex}].question`, question.question, validateMath);
+    validateHtmlField(`${topicLabel} question[${questionIndex}].answer`, question.answer, validateMath);
     requireSource(topicLabel, "question", questionIndex, question.source);
   });
 
@@ -111,8 +117,8 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     if (!exercise.task) {
       fail(`${topicLabel} exercise[${exerciseIndex}] is missing task.`);
     }
-    validateHtmlField(`${topicLabel} exercise[${exerciseIndex}].task`, exercise.task);
-    validateHtmlField(`${topicLabel} exercise[${exerciseIndex}].note`, exercise.note);
+    validateHtmlField(`${topicLabel} exercise[${exerciseIndex}].task`, exercise.task, validateMath);
+    validateHtmlField(`${topicLabel} exercise[${exerciseIndex}].note`, exercise.note, validateMath);
     requireSource(topicLabel, "exercise", exerciseIndex, exercise.source);
   });
 
@@ -120,13 +126,15 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     if (!flashcard.front || !flashcard.back) {
       fail(`${topicLabel} flashcard[${flashIndex}] is missing front/back.`);
     }
-    validateHtmlField(`${topicLabel} flashcard[${flashIndex}].front`, flashcard.front);
-    validateHtmlField(`${topicLabel} flashcard[${flashIndex}].back`, flashcard.back);
+    validateHtmlField(`${topicLabel} flashcard[${flashIndex}].front`, flashcard.front, validateMath);
+    validateHtmlField(`${topicLabel} flashcard[${flashIndex}].back`, flashcard.back, validateMath);
     requireSource(topicLabel, "flashcard", flashIndex, flashcard.source);
   });
 
   const walkthroughIds = new Set<string>();
-  topic.walkthroughs.forEach((walkthrough, walkthroughIndex) => validateWalkthrough(topicLabel, walkthrough, walkthroughIndex, walkthroughIds));
+  topic.walkthroughs.forEach((walkthrough, walkthroughIndex) =>
+    validateWalkthrough(topicLabel, walkthrough, walkthroughIndex, walkthroughIds, validateMath)
+  );
 
   if (topic.questions.length === 0) {
     fail(`${topicLabel} has no questions.`);
@@ -137,7 +145,13 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
   }
 }
 
-function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkthroughIndex: number, walkthroughIds: Set<string>): void {
+function validateWalkthrough(
+  topicLabel: string,
+  walkthrough: Walkthrough,
+  walkthroughIndex: number,
+  walkthroughIds: Set<string>,
+  validateMath: boolean
+): void {
   const label = `${topicLabel} walkthrough[${walkthroughIndex}]`;
 
   if (!walkthrough.id || !walkthrough.title) {
@@ -150,7 +164,7 @@ function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkt
     walkthroughIds.add(walkthrough.id);
   }
   requireSource(topicLabel, "walkthrough", walkthroughIndex, walkthrough.source);
-  validateHtmlField(`${label}.intro`, walkthrough.intro || "");
+  validateHtmlField(`${label}.intro`, walkthrough.intro || "", validateMath);
 
   if (!walkthrough.visual || !["matrix", "array", "tree", "graph"].includes(walkthrough.visual.kind)) {
     fail(`${label} has unsupported visual kind.`);
@@ -168,10 +182,10 @@ function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkt
     if (!step.title || !step.text) {
       fail(`${label} step[${stepIndex}] is missing title/text.`);
     }
-    validateHtmlField(`${label} step[${stepIndex}].text`, step.text);
-    validateHtmlField(`${label} step[${stepIndex}].explanation.action`, step.explanation?.action);
-    validateHtmlField(`${label} step[${stepIndex}].explanation.rule`, step.explanation?.rule);
-    validateHtmlField(`${label} step[${stepIndex}].explanation.decision`, step.explanation?.decision);
+    validateHtmlField(`${label} step[${stepIndex}].text`, step.text, validateMath);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.action`, step.explanation?.action, validateMath);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.rule`, step.explanation?.rule, validateMath);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.decision`, step.explanation?.decision, validateMath);
     step.highlights?.forEach((highlight, highlightIndex) => validateWalkthroughHighlight(label, walkthrough, stepIndex, highlight, highlightIndex));
     step.values?.forEach((update, updateIndex) => validateWalkthroughValue(label, walkthrough, stepIndex, update, updateIndex));
   });
@@ -571,13 +585,46 @@ function validateArrayReference(label: string, visual: ArrayVisual, arrayId: str
   validateArrayIndex(label, values.length, index);
 }
 
-function validateHtmlField(label: string, value: string | undefined): void {
+function validateHtmlField(label: string, value: string | undefined, validateMath = false): void {
   if (!value) return;
   for (const { label: patternLabel, pattern } of DANGEROUS_HTML_PATTERNS) {
     if (pattern.test(value)) {
       fail(`${label} contains unsafe HTML pattern: ${patternLabel}.`);
     }
   }
+  if (validateMath) {
+    validateMathField(label, value);
+  }
+}
+
+function validateMathField(label: string, value: string): void {
+  for (const { label: delimiterLabel, open, close } of MATH_DELIMITER_PATTERNS) {
+    const openCount = countMatches(value, open);
+    const closeCount = countMatches(value, close);
+    if (openCount !== closeCount) {
+      fail(`${label} has mismatched ${delimiterLabel} delimiters: ${openCount} opening and ${closeCount} closing.`);
+    }
+  }
+
+  for (const match of value.matchAll(MATH_FORMULA_PATTERN)) {
+    const isDisplay = match[2] !== undefined;
+    const tex = match[1] ?? match[2] ?? "";
+    if (!tex.trim()) {
+      fail(`${label} contains an empty math expression.`);
+      continue;
+    }
+    try {
+      katex.renderToString(tex, { displayMode: isDisplay, throwOnError: true });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      fail(`${label} contains invalid LaTeX: ${message}`);
+    }
+  }
+}
+
+function countMatches(value: string, pattern: RegExp): number {
+  pattern.lastIndex = 0;
+  return value.match(pattern)?.length || 0;
 }
 
 function requireSource(topicLabel: string, kind: string, index: number, source: string): void {

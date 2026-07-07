@@ -52,25 +52,38 @@
   });
 
   $effect(() => {
-    currentMode;
-    currentTopicIndex;
     const activeSubject = subject;
     const renderTarget = contentElement;
-    const token = ++mathRenderToken;
+    const renderKey = `${currentTopic?.id || ""}:${currentMode}`;
 
     if (!activeSubject || !renderTarget || !activeSubject.features.math) return;
 
+    renderKey;
+    scheduleMathRender(activeSubject, renderTarget);
+
+    const observer = new MutationObserver(() => scheduleMathRender(activeSubject, renderTarget));
+    observer.observe(renderTarget, { childList: true, subtree: true, characterData: true });
+
+    return () => {
+      observer.disconnect();
+      mathRenderToken += 1;
+    };
+  });
+
+  function scheduleMathRender(activeSubject: Subject, renderTarget: HTMLElement): void {
+    const token = ++mathRenderToken;
+
     tick().then(async () => {
-      if (token !== mathRenderToken || subject !== activeSubject || !contentElement) return;
-      const mathTargets = findMathTargets(contentElement);
+      if (token !== mathRenderToken || subject !== activeSubject || contentElement !== renderTarget) return;
+      const mathTargets = findMathTargets(renderTarget);
       if (mathTargets.length === 0) return;
 
       const renderMathInElement = await loadMathRenderer();
-      if (token !== mathRenderToken || subject !== activeSubject || !contentElement) return;
+      if (token !== mathRenderToken || subject !== activeSubject || contentElement !== renderTarget) return;
 
       mathTargets.forEach((target) => renderMathInElement(target, mathRenderOptions));
     });
-  });
+  }
 
   const mathRenderOptions = {
     delimiters: [
@@ -111,7 +124,11 @@
 
     try {
       const module = await loader();
-      subject = normalizeSubject(module.default, subjectMeta);
+      const loadedSubject = normalizeSubject(module.default, subjectMeta);
+      if (loadedSubject.features.math) {
+        await loadMathRenderer();
+      }
+      subject = loadedSubject;
       document.title = `${subject.title} Klausurtrainer`;
       restoreUiState();
       if (currentMode === "flash") {
