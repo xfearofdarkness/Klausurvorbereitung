@@ -2,10 +2,22 @@ import type { AppProgress, FlashMark, ModeId, PracticeMark, QuizMark, Subject, S
 
 export const STORAGE_KEY = "klausurtrainer-progress-v1";
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function normalizeProgress(value: unknown): AppProgress {
+  const progress = isRecord(value) ? (value as unknown as AppProgress) : { subjects: {} };
+  if (!isRecord(progress.subjects)) {
+    progress.subjects = {};
+  }
+  return progress;
+}
+
 export function loadProgress(): AppProgress {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as AppProgress) : { subjects: {} };
+    return raw ? normalizeProgress(JSON.parse(raw)) : { subjects: {} };
   } catch (error) {
     console.warn("Progress could not be restored.", error);
     return { subjects: {} };
@@ -21,8 +33,28 @@ export function saveProgress(progress: AppProgress): void {
 }
 
 export function getSubjectProgress(progress: AppProgress, subject: Subject): SubjectProgress {
-  progress.subjects[subject.id] = progress.subjects[subject.id] || { quiz: {}, flash: {} };
-  return progress.subjects[subject.id] as SubjectProgress;
+  if (!isRecord(progress.subjects)) {
+    progress.subjects = {};
+  }
+
+  const current = progress.subjects[subject.id];
+  const subjectProgress = isRecord(current) ? (current as SubjectProgress) : { quiz: {}, flash: {} };
+
+  if (!isRecord(subjectProgress.quiz)) {
+    subjectProgress.quiz = {};
+  }
+  if (!isRecord(subjectProgress.flash)) {
+    subjectProgress.flash = {};
+  }
+  if (subjectProgress.practice !== undefined && !isRecord(subjectProgress.practice)) {
+    subjectProgress.practice = {};
+  }
+  if (subjectProgress.ui !== undefined && !isRecord(subjectProgress.ui)) {
+    subjectProgress.ui = {};
+  }
+
+  progress.subjects[subject.id] = subjectProgress;
+  return subjectProgress;
 }
 
 export function getQuizState(progress: AppProgress, subject: Subject, topicId: string): Record<number, QuizMark> {
