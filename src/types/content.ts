@@ -125,6 +125,8 @@ export type WalkthroughVisualKind = "matrix" | "array" | "tree" | "graph";
 export interface MatrixVisual {
   kind: "matrix";
   matrices: MatrixDefinition[];
+  /** Operator, der nach der jeweiligen Matrix angezeigt wird (z. B. ["×", "="]). */
+  operators?: string[];
 }
 
 export interface MatrixDefinition {
@@ -139,6 +141,8 @@ export interface ArrayVisual {
   kind: "array";
   label?: string;
   values: Array<number | string>;
+  /** Balkendarstellung für numerische Werte (z. B. Sortierverfahren). */
+  bars?: boolean;
 }
 
 export interface TreeVisual {
@@ -193,7 +197,7 @@ export type WalkthroughHighlight =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; role: "target" | "factor" | "done" }
   | { kind: "matrix-row"; matrix: string; row: number; role: "active" }
   | { kind: "matrix-col"; matrix: string; col: number; role: "active" }
-  | { kind: "array-index"; index: number; role: "active" | "compare" | "done" }
+  | { kind: "array-index"; index: number; role: "active" | "compare" | "done" | "target" }
   | { kind: "tree-node"; node: string; role: "active" | "compare" | "done" | "target" }
   | { kind: "tree-edge"; from: string; to: string; role: "active" | "done" }
   | { kind: "graph-node"; node: string; role: "active" | "compare" | "done" | "target" }

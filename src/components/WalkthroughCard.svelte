@@ -74,13 +74,13 @@
           {:else}
             <div class="walk-calculation" aria-label="Rechnung">
               {#if currentStep.formula}
-                <span>{currentStep.formula}</span>
+                <span class="walk-formula">{currentStep.formula}</span>
               {/if}
               {#if currentStep.product}
-                <span>{currentStep.product}</span>
+                <span class="walk-product">{currentStep.product}</span>
               {/if}
               {#if currentStep.sum}
-                <span>Summe: {currentStep.sum}</span>
+                <span class="walk-sum">Summe: {currentStep.sum}</span>
               {/if}
             </div>
           {/if}

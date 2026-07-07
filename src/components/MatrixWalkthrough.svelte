@@ -15,6 +15,7 @@
   let { walkthrough, stepIndex }: Props = $props();
 
   let matrices = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.matrices : []);
+  let operators = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.operators || [] : []);
   let currentStep = $derived(walkthrough.steps[stepIndex]);
   let renderState = $derived(buildRenderState(matrices, walkthrough.steps, currentStep, stepIndex));
 
@@ -109,24 +110,24 @@
     {#each matrices as matrix, matrixIndex}
       <div class="walk-matrix-block">
         <div class="walk-matrix-title">{matrix.label}</div>
-        <table class="walk-matrix" aria-label={matrix.label}>
-          <tbody>
-            {#each matrix.values as row, rowIndex}
-              <tr>
-                {#each row as _, colIndex}
-                  <td class={highlightClasses(matrix, rowIndex, colIndex)}>
-                    {display(cellValue(matrix, rowIndex, colIndex))}
-                  </td>
-                {/each}
-              </tr>
-            {/each}
-          </tbody>
-        </table>
+        <div class="walk-matrix-paren">
+          <table class="walk-matrix" aria-label={matrix.label}>
+            <tbody>
+              {#each matrix.values as row, rowIndex}
+                <tr>
+                  {#each row as _, colIndex}
+                    <td class={highlightClasses(matrix, rowIndex, colIndex)}>
+                      {display(cellValue(matrix, rowIndex, colIndex))}
+                    </td>
+                  {/each}
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
       </div>
-      {#if matrixIndex === 0}
-        <div class="walk-operator">*</div>
-      {:else if matrixIndex === 1}
-        <div class="walk-operator">=</div>
+      {#if operators[matrixIndex]}
+        <div class="walk-operator">{operators[matrixIndex]}</div>
       {/if}
     {/each}
   </div>

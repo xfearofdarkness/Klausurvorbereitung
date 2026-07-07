@@ -1611,6 +1611,7 @@ const laa = {
           "intro": "Die Zeilen der linken Matrix werden auf die Spalten der rechten Matrix gelegt; aufeinanderliegende Einträge werden multipliziert und addiert.",
           "visual": {
             "kind": "matrix",
+            "operators": ["×", "="],
             "matrices": [
               {
                 "id": "A",

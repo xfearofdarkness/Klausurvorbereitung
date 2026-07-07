@@ -926,7 +926,7 @@ const aud = {
                 { kind: "array-index", index: 1, role: "done" },
                 { kind: "array-index", index: 2, role: "done" },
                 { kind: "array-index", index: 3, role: "done" },
-                { kind: "array-index", index: 4, role: "compare" }
+                { kind: "array-index", index: 4, role: "target" }
               ]
             }
           ]
@@ -967,7 +967,7 @@ const aud = {
               text: "Suchbereich 9-9, mid = 9. 70 = 70 → return 9. Nach jeder Iteration blieb nur die Hälfte der Elemente übrig.",
               highlights: [
                 { kind: "array-index", index: 10, role: "done" },
-                { kind: "array-index", index: 9, role: "compare" }
+                { kind: "array-index", index: 9, role: "target" }
               ]
             }
           ]
@@ -979,6 +979,7 @@ const aud = {
           intro: "Jedes Element wird an die richtige Stelle im bereits sortierten linken Bereich eingefügt.",
           visual: {
             kind: "array",
+            bars: true,
             values: [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]
           },
           steps: [
@@ -1089,7 +1090,7 @@ const aud = {
                 { kind: "array-index", index: 8, value: 9 },
                 { kind: "array-index", index: 9, value: 10 }
               ],
-              highlights: [{ kind: "array-index", index: 4, role: "compare" }]
+              highlights: [{ kind: "array-index", index: 4, role: "active" }]
             }
           ]
         },
@@ -1100,6 +1101,7 @@ const aud = {
           intro: "Im ersten Durchlauf wandert das größte Element (10) durch Nachbartausche ans Ende.",
           visual: {
             kind: "array",
+            bars: true,
             values: [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]
           },
           steps: [
@@ -1185,6 +1187,306 @@ const aud = {
               highlights: [
                 { kind: "array-index", index: 8, role: "active" },
                 { kind: "array-index", index: 9, role: "done" }
+              ]
+            }
+          ]
+        },
+        {
+          id: "selection-sort",
+          title: "Selection Sort",
+          source: "03_fundamental-algorithms.pdf, Folien 53-100",
+          intro: "In jedem Durchlauf wird das kleinste Element (rot) im unsortierten Bereich gesucht und an die erste unsortierte Stelle getauscht; der sortierte Bereich (grün) wächst von links.",
+          visual: {
+            kind: "array",
+            bars: true,
+            values: [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]
+          },
+          steps: [
+            {
+              title: "Durchlauf 1: Minimum 1",
+              text: "Das kleinste Element im Bereich 0-9 ist 1 (Position 2) — Tausch mit Position 0.",
+              values: [
+                { kind: "array-index", index: 0, value: 1 },
+                { kind: "array-index", index: 2, value: 4 }
+              ],
+              highlights: [{ kind: "array-index", index: 0, role: "target" }]
+            },
+            {
+              title: "Durchlauf 2: Minimum 2",
+              text: "Das kleinste Element im Bereich 1-9 ist 2 (Position 4) — Tausch mit Position 1.",
+              values: [
+                { kind: "array-index", index: 1, value: 2 },
+                { kind: "array-index", index: 4, value: 3 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 3: Minimum 3",
+              text: "Das kleinste Element im Bereich 2-9 ist 3 (Position 4) — Tausch mit Position 2.",
+              values: [
+                { kind: "array-index", index: 2, value: 3 },
+                { kind: "array-index", index: 4, value: 4 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 4: Minimum 4",
+              text: "Das kleinste Element im Bereich 3-9 ist 4 (Position 4) — Tausch mit Position 3.",
+              values: [
+                { kind: "array-index", index: 3, value: 4 },
+                { kind: "array-index", index: 4, value: 9 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 5: Minimum 5",
+              text: "Das kleinste Element im Bereich 4-9 ist 5 (Position 9) — Tausch mit Position 4.",
+              values: [
+                { kind: "array-index", index: 4, value: 5 },
+                { kind: "array-index", index: 9, value: 9 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 6: Minimum 6",
+              text: "Das kleinste Element im Bereich 5-9 ist 6 (Position 6) — Tausch mit Position 5.",
+              values: [
+                { kind: "array-index", index: 5, value: 6 },
+                { kind: "array-index", index: 6, value: 10 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 7: Minimum 7",
+              text: "Das kleinste Element im Bereich 6-9 ist 7 (Position 8) — Tausch mit Position 6.",
+              values: [
+                { kind: "array-index", index: 6, value: 7 },
+                { kind: "array-index", index: 8, value: 10 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 8: Minimum 8",
+              text: "Das kleinste Element im Bereich 7-9 ist 8 — es steht bereits an Position 7.",
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" },
+                { kind: "array-index", index: 7, role: "target" }
+              ]
+            },
+            {
+              title: "Durchlauf 9: Minimum 9 — fertig",
+              text: "Das kleinste Element im Bereich 8-9 ist 9 (Position 9) — Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
+              values: [
+                { kind: "array-index", index: 8, value: 9 },
+                { kind: "array-index", index: 9, value: 10 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" },
+                { kind: "array-index", index: 7, role: "done" },
+                { kind: "array-index", index: 8, role: "done" },
+                { kind: "array-index", index: 9, role: "done" }
+              ]
+            }
+          ]
+        },
+        {
+          id: "quicksort-partitionierung",
+          title: "Quicksort: Partitionierung",
+          source: "03_fundamental-algorithms.pdf, Folien 216-257",
+          intro: "Pivot ist das letzte Element (rot). Index i (blau) läuft von links, Index j (pink) von rechts; „fehl am Platz“ stehende Elemente werden getauscht.",
+          visual: {
+            kind: "array",
+            bars: true,
+            values: [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]
+          },
+          steps: [
+            {
+              title: "Pivot wählen",
+              text: "Als Pivot dient das letzte Element: p = 5.",
+              highlights: [{ kind: "array-index", index: 9, role: "target" }]
+            },
+            {
+              title: "i läuft von links",
+              text: "4, 3 und 1 sind kleiner als der Pivot; i stoppt bei Position 3, denn 9 >= 5.",
+              highlights: [
+                { kind: "array-index", index: 3, role: "active" },
+                { kind: "array-index", index: 9, role: "target" }
+              ]
+            },
+            {
+              title: "j läuft von rechts",
+              text: "j stoppt sofort bei Position 9, denn 5 <= 5. Die Elemente an i und j stehen „fehl am Platz“.",
+              highlights: [
+                { kind: "array-index", index: 3, role: "active" },
+                { kind: "array-index", index: 9, role: "compare" }
+              ]
+            },
+            {
+              title: "Tausch 9 ↔ 5",
+              text: "arr[i] und arr[j] werden getauscht: 4 3 1 5 2 10 6 8 7 9.",
+              values: [
+                { kind: "array-index", index: 3, value: 5 },
+                { kind: "array-index", index: 9, value: 9 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 3, role: "active" },
+                { kind: "array-index", index: 9, role: "compare" }
+              ]
+            },
+            {
+              title: "Weiter ab Schritt 2",
+              text: "i läuft weiter und stoppt bei Position 5 (10 >= 5); j läuft nach links und stoppt bei Position 4 (2 <= 5).",
+              highlights: [
+                { kind: "array-index", index: 5, role: "active" },
+                { kind: "array-index", index: 4, role: "compare" }
+              ]
+            },
+            {
+              title: "i > j: Partitionierung fertig",
+              text: "Mit i = 5 und j = 4 ist i > j — der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" }
+              ]
+            }
+          ]
+        },
+        {
+          id: "merge-sortierter-arrays",
+          title: "Mergesort: Zusammenführen",
+          source: "03_fundamental-algorithms.pdf, Folien 333-343",
+          intro: "Die sortierten Arrays A = [2, 8, 14, 24] und B = [5, 7, 9, 11] werden zu C zusammengeführt: A[i] und B[j] vergleichen, den kleineren Wert kopieren.",
+          visual: {
+            kind: "array",
+            label: "Array C",
+            values: ["", "", "", "", "", "", "", ""]
+          },
+          steps: [
+            {
+              title: "2 < 5",
+              text: "A[0] = 2 ist kleiner als B[0] = 5 → C[0] = 2; i wird erhöht.",
+              values: [{ kind: "array-index", index: 0, value: 2 }],
+              highlights: [{ kind: "array-index", index: 0, role: "active" }]
+            },
+            {
+              title: "8 > 5",
+              text: "A[1] = 8 ist größer als B[0] = 5 → C[1] = 5; j wird erhöht.",
+              values: [{ kind: "array-index", index: 1, value: 5 }],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "active" }
+              ]
+            },
+            {
+              title: "8 > 7",
+              text: "B[1] = 7 ist kleiner → C[2] = 7.",
+              values: [{ kind: "array-index", index: 2, value: 7 }],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "active" }
+              ]
+            },
+            {
+              title: "8 < 9",
+              text: "Jetzt ist A[1] = 8 kleiner als B[2] = 9 → C[3] = 8.",
+              values: [{ kind: "array-index", index: 3, value: 8 }],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "active" }
+              ]
+            },
+            {
+              title: "14 > 9",
+              text: "B[2] = 9 ist kleiner → C[4] = 9.",
+              values: [{ kind: "array-index", index: 4, value: 9 }],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "active" }
+              ]
+            },
+            {
+              title: "14 > 11",
+              text: "B[3] = 11 ist kleiner → C[5] = 11. Damit ist B erschöpft.",
+              values: [{ kind: "array-index", index: 5, value: 11 }],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "active" }
+              ]
+            },
+            {
+              title: "Rest von A kopieren: fertig",
+              text: "Da B erschöpft ist (j >= Länge von B), werden die restlichen Werte von A übernommen: C = [2, 5, 7, 8, 9, 11, 14, 24].",
+              values: [
+                { kind: "array-index", index: 6, value: 14 },
+                { kind: "array-index", index: 7, value: 24 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "done" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "active" },
+                { kind: "array-index", index: 7, role: "active" }
               ]
             }
           ]
@@ -2051,6 +2353,7 @@ const aud = {
           intro: "Min-at-top Heap: remove() liefert wiederholt das kleinste Element, das ans Ende des unsortierten Bereichs gesetzt wird.",
           visual: {
             kind: "array",
+            bars: true,
             values: [13, 6, 45, 10, 3, 22, 5]
           },
           steps: [

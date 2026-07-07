@@ -190,6 +190,16 @@ function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): voi
       return;
     }
 
+    if (walkthrough.visual.operators !== undefined) {
+      if (
+        !Array.isArray(walkthrough.visual.operators) ||
+        walkthrough.visual.operators.length >= walkthrough.visual.matrices.length ||
+        walkthrough.visual.operators.some((operator) => typeof operator !== "string" || !operator)
+      ) {
+        fail(`${label} matrix visual has invalid operators (expected non-empty strings, fewer than matrices).`);
+      }
+    }
+
     const matrixIds = new Set<string>();
     walkthrough.visual.matrices.forEach((matrix, matrixIndex) => {
       const matrixLabel = `${label} visual.matrices[${matrixIndex}]`;
