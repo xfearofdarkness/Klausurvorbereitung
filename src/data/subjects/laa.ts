@@ -119,43 +119,43 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Bedingung: \\(f\\) beschränkt",
-          "back": "\\(\\exists\\, M, N \\in \\mathbb{R}\\): \\(M \\le f(x) \\le N\\) für alle \\(x \\in D\\)",
+          "front": "Wann heißt eine Funktion \\(f: D \\to \\mathbb{R}\\) beschränkt?",
+          "back": "Wenn es Zahlen \\(M, N \\in \\mathbb{R}\\) gibt, sodass für alle \\(x \\in D\\) gilt: \\(M \\le f(x) \\le N\\). Dabei heißt \\(M\\) untere Schranke und \\(N\\) obere Schranke von \\(f\\). Gibt es solche Zahlen nicht, heißt \\(f\\) unbeschränkt.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 8"
         },
         {
-          "front": "Monoton wachsend vs. streng monoton wachsend",
-          "back": "\\(x_1 < x_2 \\Rightarrow f(x_1) \\le f(x_2)\\) (monoton) bzw. \\(f(x_1) < f(x_2)\\) (streng)",
+          "front": "Was ist der Unterschied zwischen monoton wachsend und streng monoton wachsend?",
+          "back": "Monoton wachsend: Für alle \\(x_1, x_2 \\in D\\) mit \\(x_1 < x_2\\) gilt \\(f(x_1) \\le f(x_2)\\). Streng monoton wachsend: Es gilt sogar \\(f(x_1) < f(x_2)\\). Analog heißt \\(f\\) monoton fallend bei \\(f(x_1) \\ge f(x_2)\\) und streng monoton fallend bei \\(f(x_1) > f(x_2)\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 10"
         },
         {
-          "front": "Gerade Funktion",
-          "back": "\\(f(-x) = f(x)\\) — Beispiel: \\(x^2\\)",
+          "front": "Wann heißt eine Funktion gerade?",
+          "back": "Wenn für alle \\(x \\in D\\) auch \\(-x \\in D\\) ist und \\(f(-x) = f(x)\\) gilt. Beispiel: \\(f(x) := x^2\\) ist gerade.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 12-13"
         },
         {
-          "front": "Ungerade Funktion",
-          "back": "\\(f(-x) = -f(x)\\) — Beispiel: \\(x\\)",
+          "front": "Wann heißt eine Funktion ungerade?",
+          "back": "Wenn für alle \\(x \\in D\\) auch \\(-x \\in D\\) ist und \\(f(-x) = -f(x)\\) gilt. Beispiel: \\(g(x) := x\\) ist ungerade.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 12-13"
         },
         {
-          "front": "Periodische Funktion",
-          "back": "\\(f(x + p) = f(x)\\) für alle \\(x\\); kleinste solche Zahl \\(p > 0\\) = Periode. \\(\\sin\\) und \\(\\cos\\) sind \\(2\\pi\\)-periodisch.",
+          "front": "Wann heißt eine Funktion periodisch, und was ist ihre Periode?",
+          "back": "Wenn es eine Zahl \\(p \\in \\mathbb{R}^+ \\setminus \\{0\\}\\) gibt, sodass für alle \\(x \\in \\mathbb{R}\\) gilt: \\(f(x + p) = f(x)\\). Die kleinste dieser Zahlen \\(p\\) heißt Periode von \\(f\\). Beispiel: \\(\\sin\\) und \\(\\cos\\) sind periodisch mit der Periode \\(2\\pi\\), kurz \\(2\\pi\\)-periodisch.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 14-15"
         },
         {
-          "front": "Allgemeine Form eines Polynoms",
-          "back": "\\(p(x) = \\sum_{k=0}^{n} a_k x^k = a_0 + a_1 x + \\dots + a_n x^n\\), \\(a_k \\in \\mathbb{R}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 17"
+          "front": "Wie sieht die allgemeine Form eines Polynoms aus, und was ist sein Grad?",
+          "back": "Polynome sind Funktionen der Form \\(p(x) = \\sum_{k=0}^{n} a_k x^k = a_0 + a_1 x + \\dots + a_n x^n\\) mit reellen Koeffizienten \\(a_k\\). Der höchste auftretende Exponent (also \\(n\\), falls \\(a_n \\ne 0\\)) heißt Grad von \\(p\\).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 17-18"
         },
         {
-          "front": "Rationale Funktion",
-          "back": "\\(f(z) = \\frac{p(z)}{q(z)}\\), Bruch zweier Polynome mit \\(q(z) \\ne 0\\)",
+          "front": "Was ist eine rationale Funktion?",
+          "back": "Der Bruch zweier Polynome: \\(f(z) := \\frac{p(z)}{q(z)}\\) mit \\(q(z) \\ne 0\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 21"
         },
         {
-          "front": "Pole einer rationalen Funktion",
-          "back": "Nullstellen des Nennerpolynoms — dort ist \\(f\\) nicht definiert",
+          "front": "Was sind die Pole einer rationalen Funktion?",
+          "back": "Die Nullstellen des Nennerpolynoms \\(q\\) — an diesen Punkten ist die rationale Funktion nicht definiert. Die Nullstellen von \\(f\\) selbst sind dagegen die Nullstellen des Zählerpolynoms \\(p\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 22"
         }
       ],
@@ -312,43 +312,43 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "\\(\\mathrm{i}^2 = \\;?\\)",
-          "back": "\\(-1\\)",
+          "front": "Wodurch ist die imaginäre Einheit \\(\\mathrm{i}\\) charakterisiert?",
+          "back": "Durch die Gleichung \\(\\mathrm{i}^2 = -1\\). Komplexe Zahlen sind Zahlen der Form \\(z = a + b\\mathrm{i}\\) mit \\(a, b \\in \\mathbb{R}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 24"
         },
         {
-          "front": "\\(\\operatorname{Re} z\\) und \\(\\operatorname{Im} z\\) für \\(z = a + b\\mathrm{i}\\)",
-          "back": "\\(\\operatorname{Re} z = a\\), \\(\\operatorname{Im} z = b\\) — beide sind reelle Zahlen!",
+          "front": "Was sind Real- und Imaginärteil von \\(z = a + b\\mathrm{i}\\)?",
+          "back": "\\(\\operatorname{Re} z = a\\) und \\(\\operatorname{Im} z = b\\). Beide sind reelle Zahlen — was beim Imaginärteil gerne vergessen wird.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 24, 26"
         },
         {
-          "front": "Multiplikationsformel \\((a+b\\mathrm{i})(c+d\\mathrm{i})\\)",
-          "back": "\\((ac - bd) + (ad + bc)\\mathrm{i}\\)",
+          "front": "Wie multipliziert man zwei komplexe Zahlen \\((a+b\\mathrm{i})\\) und \\((c+d\\mathrm{i})\\)?",
+          "back": "\\((a+b\\mathrm{i})(c+d\\mathrm{i}) = (ac - bd) + (ad + bc)\\mathrm{i}\\). Das entspricht dem gewöhnlichen Ausmultiplizieren von Klammern mit reellen Zahlen, wobei lediglich \\(\\mathrm{i}^2 = -1\\) eingesetzt wird.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 28"
         },
         {
-          "front": "Trick bei der Division komplexer Zahlen",
-          "back": "Mit der konjugierten Zahl des Nenners erweitern: \\(\\frac{a+b\\mathrm{i}}{c+d\\mathrm{i}} = \\frac{(a+b\\mathrm{i})(c-d\\mathrm{i})}{(c+d\\mathrm{i})(c-d\\mathrm{i})}\\)",
+          "front": "Wie dividiert man zwei komplexe Zahlen?",
+          "back": "Man erweitert mit der konjugierten Zahl des Nenners: \\(\\frac{a+b\\mathrm{i}}{c+d\\mathrm{i}} = \\frac{(a+b\\mathrm{i})(c-d\\mathrm{i})}{(c+d\\mathrm{i})(c-d\\mathrm{i})} = \\frac{ac+bd}{c^2+d^2} + \\frac{bc-ad}{c^2+d^2}\\mathrm{i}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 29"
         },
         {
-          "front": "Komplex konjugierte Zahl \\(\\bar{z}\\)",
-          "back": "\\(z = a + b\\mathrm{i} \\Rightarrow \\bar{z} = a - b\\mathrm{i}\\) (Vorzeichen des Imaginärteils umdrehen)",
+          "front": "Was ist die komplex konjugierte Zahl \\(\\bar{z}\\)?",
+          "back": "Dreht man das Vorzeichen des Imaginärteils von \\(z\\) um, erhält man die komplex konjugierte Zahl: Aus \\(z = a + b\\mathrm{i}\\) wird \\(\\bar{z} = a - b\\mathrm{i}\\). In der Gauß'schen Zahlenebene liegt \\(\\bar{z}\\) bei \\((a, -b)\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 30"
         },
         {
-          "front": "Betrag \\(|z|\\)",
-          "back": "\\(|z| = \\sqrt{a^2 + b^2}\\) (Abstand vom Ursprung, Pythagoras)",
+          "front": "Wie ist der Betrag \\(|z|\\) einer komplexen Zahl definiert?",
+          "back": "Als Abstand des Punktes vom Koordinatenursprung in der Gauß'schen Zahlenebene. Nach dem Satz von Pythagoras gilt \\(|z| = \\sqrt{a^2 + b^2}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 32"
         },
         {
-          "front": "Eulerformel",
-          "back": "\\(e^{\\mathrm{i}\\varphi} = \\cos\\varphi + \\mathrm{i}\\sin\\varphi\\), damit \\(z = r e^{\\mathrm{i}\\varphi}\\)",
+          "front": "Wie lautet die Eulerformel?",
+          "back": "\\(e^{\\mathrm{i}\\varphi} = \\cos\\varphi + \\mathrm{i}\\sin\\varphi\\). Damit lässt sich eine komplexe Zahl in Polarkoordinaten kurz als \\(z = r e^{\\mathrm{i}\\varphi}\\) schreiben — mit dem Abstand \\(r\\) vom Ursprung und dem Winkel \\(\\varphi\\) von der positiven reellen Achse aus.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 34"
         },
         {
-          "front": "Multiplikation in Polarform: Was passiert mit Beträgen und Winkeln?",
-          "back": "Beträge multiplizieren sich, Winkel addieren sich: \\(z_1 z_2 = r_1 r_2 e^{\\mathrm{i}(\\varphi_1+\\varphi_2)}\\)",
+          "front": "Was passiert geometrisch bei der Multiplikation komplexer Zahlen in Polarform?",
+          "back": "\\(z_1 \\cdot z_2 = r_1 e^{\\mathrm{i}\\varphi_1} \\cdot r_2 e^{\\mathrm{i}\\varphi_2} = r_1 r_2\\, e^{\\mathrm{i}(\\varphi_1 + \\varphi_2)}\\): Die Beträge multiplizieren sich und die Winkel addieren sich.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 36"
         }
       ],
@@ -463,43 +463,43 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Nullstellen von \\(\\sin\\)",
-          "back": "\\(t = k\\pi\\), \\(k \\in \\mathbb{Z}\\)",
+          "front": "Wo liegen die Nullstellen des Sinus?",
+          "back": "Bei allen ganzzahligen Vielfachen von \\(\\pi\\): \\(\\sin t = 0\\) für \\(t = k\\pi\\) mit \\(k \\in \\mathbb{Z}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 39"
         },
         {
-          "front": "Nullstellen von \\(\\cos\\)",
-          "back": "\\(t = \\frac{\\pi}{2} + k\\pi\\), \\(k \\in \\mathbb{Z}\\)",
+          "front": "Wo liegen die Nullstellen des Kosinus?",
+          "back": "\\(\\cos t = 0\\) für \\(t = \\frac{\\pi}{2} + k\\pi\\) mit \\(k \\in \\mathbb{Z}\\). Sinus und Kosinus gehen durch Verschieben um \\(\\frac{\\pi}{2}\\) ineinander über.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 39"
         },
         {
-          "front": "Definition Tangens",
-          "back": "\\(\\tan t = \\frac{\\sin t}{\\cos t}\\) — gleiche Nullstellen wie der Sinus",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 41"
+          "front": "Wie ist der Tangens definiert, und wo liegen seine Nullstellen?",
+          "back": "\\(\\tan t := \\frac{\\sin t}{\\cos t}\\). Der Tangens hat die gleichen Nullstellen wie der Sinus; sein „gestückeltes“ Bild ergibt sich aus den Nullstellen des Kosinus im Nenner.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 41, 43"
         },
         {
-          "front": "Eulersche Zahl \\(e\\)",
-          "back": "\\(e = 2{,}71828\\ldots\\)",
+          "front": "Was ist die Eulersche Zahl \\(e\\)?",
+          "back": "\\(e = 2{,}71828\\ldots\\) — die Basis der Exponentialfunktion \\(e^x\\) mit reellem Exponenten \\(x\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 44"
         },
         {
-          "front": "\\(e^{\\ln x}\\) und \\(\\ln e^x\\)",
-          "back": "Beides ergibt \\(x\\) — der \\(\\ln\\) ist die Umkehrfunktion von \\(e^x\\)",
+          "front": "In welchem Zusammenhang stehen Exponentialfunktion und natürlicher Logarithmus?",
+          "back": "Der natürliche Logarithmus \\(\\ln x\\) ist die Umkehrfunktion der Exponentialfunktion \\(e^x\\). Es gilt daher \\(e^{\\ln x} = x\\) und \\(\\ln e^x = x\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 45"
         },
         {
-          "front": "Allgemeine Potenz \\(a^x\\)",
-          "back": "\\(a^x := e^{x \\ln a}\\) (für \\(a > 0\\))",
+          "front": "Wie wird die allgemeine Potenz \\(a^x\\) definiert?",
+          "back": "Über die Exponentialfunktion: \\(a^x := e^{x \\ln a}\\) für \\(a > 0\\). Die Umkehrfunktion von \\(a^x\\) ist der Logarithmus zur Basis \\(a\\), notiert als \\(\\log_a x\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 46"
         },
         {
-          "front": "\\(\\log_a xy = \\;?\\)",
-          "back": "\\(\\log_a x + \\log_a y\\)",
+          "front": "Wie lautet die Logarithmusregel für ein Produkt, also \\(\\log_a xy\\)?",
+          "back": "\\(\\log_a xy = \\log_a x + \\log_a y\\) — der Logarithmus eines Produkts ist die Summe der Logarithmen (für \\(a, x, y > 0\\)).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 48"
         },
         {
-          "front": "\\(\\log_a x^y = \\;?\\)",
-          "back": "\\(y \\log_a x\\)",
+          "front": "Wie lautet die Logarithmusregel für eine Potenz, also \\(\\log_a x^y\\)?",
+          "back": "\\(\\log_a x^y = y \\log_a x\\) — der Exponent darf vor den Logarithmus gezogen werden. Für Quotienten gilt außerdem \\(\\log_a \\frac{x}{y} = \\log_a x - \\log_a y\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 48"
         }
       ],
@@ -663,53 +663,53 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Definition: \\((x_n)\\) konvergiert gegen \\(a\\)",
-          "back": "Zu jedem \\(\\varepsilon > 0\\) gibt es ein \\(N \\in \\mathbb{N}\\), sodass \\(|x_n - a| < \\varepsilon\\) für alle \\(n \\ge N\\)",
+          "front": "Wann konvergiert eine Folge \\((x_n)\\) gegen einen Grenzwert \\(a\\)?",
+          "back": "Wenn es zu jedem \\(\\varepsilon > 0\\) ein \\(N \\in \\mathbb{N}\\) gibt, sodass für alle Indizes \\(n \\ge N\\) die Ungleichung \\(|x_n - a| < \\varepsilon\\) gilt. Schreibweise: \\(\\lim_{n \\to \\infty} x_n = a\\) oder \\(x_n \\to a\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 54"
         },
         {
-          "front": "Nullfolge",
-          "back": "Folge mit Grenzwert 0, z. B. \\(\\left(\\frac{1}{n}\\right)\\)",
+          "front": "Was ist eine Nullfolge?",
+          "back": "Eine Folge mit dem Grenzwert 0. Standardbeispiel: \\(x_n := \\frac{1}{n}\\), denn es gilt \\(\\lim_{n \\to \\infty} \\frac{1}{n} = 0\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 54, 58"
         },
         {
-          "front": "\\(\\varepsilon\\)-Umgebung von \\(a\\)",
-          "back": "\\(]a - \\varepsilon, a + \\varepsilon[\\) mit \\(\\varepsilon > 0\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 57"
+          "front": "Was ist die \\(\\varepsilon\\)-Umgebung eines Punktes \\(a\\)?",
+          "back": "Das Intervall \\(]a - \\varepsilon, a + \\varepsilon[\\) um den Punkt \\(a\\) (stets \\(\\varepsilon > 0\\)). Eine Folge konvergiert gegen \\(a\\), wenn sich in jeder noch so kleinen \\(\\varepsilon\\)-Umgebung fast alle — also alle bis auf endlich viele — Folgenglieder befinden.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 55-57"
         },
         {
-          "front": "Häufungspunkte von \\(x_n := (-1)^n\\)",
-          "back": "Zwei: \\(-1\\) und \\(+1\\) — die Folge ist divergent",
+          "front": "Welche Häufungspunkte hat die Folge \\(x_n := (-1)^n\\)?",
+          "back": "Die Folge ist divergent und hat die zwei so genannten Häufungspunkte \\(-1\\) und \\(+1\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 60-61"
         },
         {
-          "front": "\\(\\lim_{n\\to\\infty} \\left(1 + \\frac{a}{n}\\right)^n = \\;?\\)",
-          "back": "\\(e^a\\)",
+          "front": "Wogegen konvergiert \\(\\left(1 + \\frac{a}{n}\\right)^n\\) für \\(n \\to \\infty\\)?",
+          "back": "Gegen \\(e^a\\) — einer der wichtigen Grenzwerte zum Merken.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 66"
         },
         {
-          "front": "\\(b^n \\to \\;?\\) für \\(|b| < 1\\)",
-          "back": "\\(0\\)",
+          "front": "Wogegen konvergiert \\(b^n\\) für \\(|b| < 1\\)?",
+          "back": "Gegen 0. Weitere Merk-Grenzwerte: Für positives \\(a\\) gilt \\(a^{1/n} \\to 1\\) und \\(n^{1/n} \\to 1\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 66"
         },
         {
-          "front": "\\(n\\)-te Partialsumme",
-          "back": "\\(S_n = \\sum_{k=0}^{n} a_k\\)",
+          "front": "Was ist die \\(n\\)-te Partialsumme einer Folge \\((a_k)\\)?",
+          "back": "\\(S_n := \\sum_{k=0}^{n} a_k\\) — einfach die Summe der ersten \\(n\\) Folgenglieder.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 70"
         },
         {
-          "front": "Was ist eine Reihe?",
-          "back": "Die Folge der Partialsummen; ihr Wert ist \\(\\lim_{n\\to\\infty} S_n\\), falls dieser existiert",
+          "front": "Was ist eine Reihe, und wann heißt sie konvergent?",
+          "back": "Die Folge der Partialsummen, notiert als \\(\\sum_{k=0}^{\\infty} a_k\\). Konvergiert die Folge der Partialsummen \\((S_n)\\), heißt die Reihe konvergent, und ihr Wert ist \\(\\sum_{k=0}^{\\infty} a_k = \\lim_{n\\to\\infty} S_n\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 71-72"
         },
         {
-          "front": "Geometrische Reihe \\(\\sum_{k=0}^{\\infty} x^k\\) für \\(|x| < 1\\)",
-          "back": "\\(\\frac{1}{1 - x}\\)",
+          "front": "Welchen Wert hat die geometrische Reihe \\(\\sum_{k=0}^{\\infty} x^k\\)?",
+          "back": "Für \\(x \\in \\,]-1, 1[\\) gilt \\(\\sum_{k=0}^{\\infty} x^k = \\frac{1}{1 - x}\\), denn \\(x^{n+1} \\to 0\\) für \\(|x| < 1\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 74"
         },
         {
-          "front": "Geometrische Summe \\(\\sum_{k=0}^{n} x^k\\) (\\(x \\ne 1\\))",
-          "back": "\\(\\frac{1 - x^{n+1}}{1 - x}\\)",
+          "front": "Welchen Wert hat die geometrische Summe \\(\\sum_{k=0}^{n} x^k\\)?",
+          "back": "Für \\(x \\ne 1\\) gilt \\(S_n(x) = \\sum_{k=0}^{n} x^k = \\frac{1 - x^{n+1}}{1 - x}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 74"
         }
       ],
@@ -833,33 +833,33 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Stetigkeit in \\(\\tilde{x}\\)",
-          "back": "\\(\\lim_{x \\to \\tilde{x}} f(x)\\) existiert und ist gleich \\(f(\\tilde{x})\\)",
+          "front": "Wann heißt eine Funktion \\(f\\) im Punkt \\(\\tilde{x}\\) stetig?",
+          "back": "Wenn der Grenzwert \\(\\lim_{x \\to \\tilde{x}} f(x)\\) existiert und \\(\\lim_{x \\to \\tilde{x}} f(x) = f(\\tilde{x})\\) gilt. Ist \\(f\\) in allen Punkten des Definitionsbereichs stetig, heißt \\(f\\) stetig auf ganz \\(D\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 77"
         },
         {
-          "front": "Anschauliche Vorstellung von Stetigkeit",
-          "back": "Keine Brüche, Sprünge oder Risse — der Graph lässt sich in einem Zug zeichnen",
+          "front": "Was ist die anschauliche Vorstellung von Stetigkeit?",
+          "back": "Es gibt keine Brüche, Sprünge oder Risse: Der Funktionsgraph soll sich für ein bestimmtes Intervall in einem Zug zeichnen lassen.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 76"
         },
         {
-          "front": "Auf ganz \\(\\mathbb{R}\\) stetige Standardfunktionen",
-          "back": "Polynome, \\(e^x\\), \\(\\ln x\\), \\(\\sin x\\), \\(\\cos x\\)",
+          "front": "Welche wichtigen Funktionen sind auf ganz \\(\\mathbb{R}\\) stetig?",
+          "back": "Polynome, die Exponentialfunktion \\(e^x\\), der Logarithmus \\(\\ln x\\) sowie Sinus und Kosinus. Die Funktion \\(\\frac{1}{x}\\) ist in \\(x = 0\\) nicht definiert, sonst aber überall stetig.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 80"
         },
         {
-          "front": "Satz über Kombinationen stetiger Funktionen",
-          "back": "Summen, Differenzen, Produkte, Quotienten und Kompositionen stetiger Funktionen sind (wo definiert) stetig",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 81"
+          "front": "Was gilt für Summen, Produkte, Quotienten und Kompositionen stetiger Funktionen?",
+          "back": "Sie sind (dort, wo sie definiert sind) wieder stetig. Deshalb sind auch rationale Funktionen stetig — sie sind Quotienten von Polynomen.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 81-82"
         },
         {
-          "front": "Globales Maximum in \\(\\tilde{x}\\)",
-          "back": "\\(f(\\tilde{x}) \\ge f(x)\\) für alle \\(x \\in D\\); bei \\(>\\): strenges Maximum",
+          "front": "Wann nimmt \\(f\\) in \\(\\tilde{x}\\) das globale Maximum an?",
+          "back": "Wenn \\(f(\\tilde{x}) \\ge f(x)\\) für alle \\(x \\in D\\) gilt; Schreibweise \\(f(\\tilde{x}) = \\max_{x \\in D} f(x)\\). Gilt sogar \\(>\\) anstelle von \\(\\ge\\), spricht man von einem strengen Maximum. Analog wird das Minimum definiert.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 83"
         },
         {
-          "front": "Lokales Maximum in \\(\\tilde{x}\\)",
-          "back": "Es gibt \\(\\varepsilon > 0\\) mit \\(f(\\tilde{x}) \\ge f(x)\\) für alle \\(x \\in D\\) mit \\(|x - \\tilde{x}| < \\varepsilon\\)",
+          "front": "Wann nimmt \\(f\\) in \\(\\tilde{x}\\) ein lokales Maximum an?",
+          "back": "Wenn ein \\(\\varepsilon > 0\\) existiert, sodass \\(f(\\tilde{x}) \\ge f(x)\\) für alle \\(x \\in D\\) mit \\(|x - \\tilde{x}| < \\varepsilon\\) gilt. Die Bedingung muss also nur in einer Umgebung von \\(\\tilde{x}\\) gelten, nicht auf ganz \\(D\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 84"
         }
       ],
@@ -1042,58 +1042,58 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Differenzialquotient",
-          "back": "\\(f'(x_0) = \\lim_{x \\to x_0} \\frac{f(x) - f(x_0)}{x - x_0}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 89"
+          "front": "Wie ist die Ableitung \\(f'(x_0)\\) über den Differenzialquotienten definiert?",
+          "back": "\\(f'(x_0) := \\lim_{x \\to x_0} \\frac{f(x) - f(x_0)}{x - x_0}\\). Existiert dieser Grenzwert, heißt \\(f\\) in \\(x_0\\) differenzierbar und \\(f'(x_0)\\) Ableitung von \\(f\\) in \\(x_0\\). Die Ableitung gibt die Steigung von \\(f\\) im betrachteten Punkt an.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 89-90"
         },
         {
-          "front": "h-Schreibweise der Ableitung",
-          "back": "\\(f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 91"
+          "front": "Wie lautet die h-Schreibweise der Ableitung?",
+          "back": "\\(f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}\\). Inhaltlich ändert sich nichts — der betrachtete Punkt heißt \\(x\\) statt \\(x_0\\) und der Abstand \\(h\\); mit dieser Form lässt sich zumeist etwas besser rechnen.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 91-92"
         },
         {
-          "front": "Produktregel",
-          "back": "\\((f \\cdot g)' = f'g + fg'\\)",
+          "front": "Wie lautet die Produktregel?",
+          "back": "Für differenzierbare Funktionen \\(f\\) und \\(g\\) gilt: \\((f \\cdot g)'(x) = f'(x)g(x) + f(x)g'(x)\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 98"
         },
         {
-          "front": "Quotientenregel",
-          "back": "\\(\\left(\\frac{f}{g}\\right)' = \\frac{f'g - fg'}{g^2}\\)",
+          "front": "Wie lautet die Quotientenregel?",
+          "back": "\\(\\left(\\frac{f}{g}\\right)'(x) = \\frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}\\) — dort, wo der Ausdruck definiert ist.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 98"
         },
         {
-          "front": "Kettenregel",
-          "back": "\\((f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\)",
+          "front": "Wie lautet die Kettenregel?",
+          "back": "Für die Komposition differenzierbarer Funktionen gilt: \\((f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 98"
         },
         {
-          "front": "\\((x^s)'\\) und \\((\\sqrt{x})'\\)",
-          "back": "\\(s \\cdot x^{s-1}\\) bzw. \\(\\frac{1}{2\\sqrt{x}}\\)",
+          "front": "Wie lauten die Ableitungen von \\(x^s\\) und \\(\\sqrt{x}\\)?",
+          "back": "\\((x^s)' = s \\cdot x^{s-1}\\) für \\(s \\in \\mathbb{R}\\) und \\((\\sqrt{x})' = \\frac{1}{2\\sqrt{x}}\\) — dabei die jeweiligen Definitionsbereiche beachten.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 99"
         },
         {
-          "front": "\\((\\sin x)'\\), \\((\\cos x)'\\), \\((\\tan x)'\\)",
-          "back": "\\(\\cos x\\); \\(-\\sin x\\); \\(\\frac{1}{\\cos^2 x} = 1 + \\tan^2 x\\)",
+          "front": "Wie lauten die Ableitungen von \\(\\sin x\\), \\(\\cos x\\) und \\(\\tan x\\)?",
+          "back": "\\((\\sin x)' = \\cos x\\), \\((\\cos x)' = -\\sin x\\) und \\((\\tan x)' = \\frac{1}{\\cos^2 x} = 1 + \\tan^2 x\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 99"
         },
         {
-          "front": "Zusammenhang differenzierbar / stetig",
-          "back": "Jede differenzierbare Funktion ist stetig; Gegenbeispiel für die Umkehrung: \\(|x|\\) in 0",
+          "front": "Welcher Zusammenhang besteht zwischen Differenzierbarkeit und Stetigkeit?",
+          "back": "Jede differenzierbare Funktion ist stetig. Die Umkehrung gilt nicht: \\(f(x) := |x|\\) ist im Punkt 0 nicht differenzierbar, denn \\(\\frac{|h|}{h}\\) ist für \\(h \\to 0\\) nicht konvergent.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 96, 102"
         },
         {
-          "front": "Notwendige Bedingung lokales Extremum",
-          "back": "\\(f'(x_0) = 0\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 108"
+          "front": "Welche notwendige Bedingung gilt für lokale Extrema differenzierbarer Funktionen?",
+          "back": "Hat \\(f\\) in \\(x_0\\) ein lokales Minimum oder Maximum, dann gilt \\(f'(x_0) = 0\\). Für hinreichende Aussagen dient das Kriterium über die \\(n\\)-te Ableitung.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 108-109"
         },
         {
-          "front": "Taylor-Polynom \\(n\\)-ter Ordnung",
-          "back": "\\(T^{n,x_0}_f(x) = \\sum_{i=0}^{n} \\frac{f^{(i)}(x_0)}{i!}(x - x_0)^i\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 113"
+          "front": "Wie ist das Taylor-Polynom \\(n\\)-ter Ordnung definiert?",
+          "back": "\\(T^{n,x_0}_f(x) = \\sum_{i=0}^{n} \\frac{f^{(i)}(x_0)}{i!}(x - x_0)^i\\) mit Entwicklungspunkt \\(x_0\\). Es stellt eine Näherung der Funktion durch Polynome dar; das Restglied \\(R^{n,x_0}_f\\) gibt den Fehler dieser Näherung an.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 113-114"
         },
         {
-          "front": "Taylor-Polynom von \\(e^x\\) um 0",
-          "back": "\\(\\sum_{i=0}^{n} \\frac{x^i}{i!}\\)",
+          "front": "Wie lautet das Taylor-Polynom von \\(e^x\\) um den Entwicklungspunkt 0?",
+          "back": "\\(T^{n,0}_f(x) = \\sum_{i=0}^{n} \\frac{x^i}{i!}\\), denn beim Ableiten ändert sich die Exponentialfunktion nicht und damit ist \\(f^{(i)}(0) = e^0 = 1\\) für alle \\(i\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 115"
         }
       ],
@@ -1250,44 +1250,44 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Definition des bestimmten Integrals",
-          "back": "\\(\\int_a^b f(x)\\,dx = \\lim_{n\\to\\infty} F(n)\\), Grenzwert der Rechteckssummen (für stetige oder monotone \\(f\\))",
+          "front": "Wie ist das bestimmte Integral \\(\\int_a^b f(x)\\,dx\\) definiert?",
+          "back": "Als Grenzwert der Rechteckssummen: \\(\\int_a^b f(x)\\,dx := \\lim_{n\\to\\infty} F(n)\\). Für stetige (oder monotone) Funktionen \\(f: [a, b] \\to \\mathbb{R}\\) existiert dieser Grenzwert.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 120"
         },
         {
-          "front": "\\(\\int_a^a f(x)\\,dx\\) und \\(\\int_b^a f(x)\\,dx\\)",
-          "back": "\\(0\\) bzw. \\(-\\int_a^b f(x)\\,dx\\)",
+          "front": "Was ergeben \\(\\int_a^a f(x)\\,dx\\) und \\(\\int_b^a f(x)\\,dx\\)?",
+          "back": "\\(\\int_a^a f(x)\\,dx = 0\\), und beim Vertauschen der Grenzen dreht sich das Vorzeichen um: \\(\\int_b^a f(x)\\,dx := -\\int_a^b f(x)\\,dx\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 121"
         },
         {
-          "front": "Stammfunktion",
-          "back": "Differenzierbares \\(F\\) mit \\(F' = f\\); mit \\(F\\) auch \\(F + c\\)",
+          "front": "Was ist eine Stammfunktion?",
+          "back": "Eine differenzierbare Funktion \\(F: [a, b] \\to \\mathbb{R}\\) mit \\(F' = f\\). Mit \\(F\\) ist auch \\(F + c\\) für jede Konstante \\(c \\in \\mathbb{R}\\) eine Stammfunktion, denn \\((F + c)' = F' + 0 = F'\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 122"
         },
         {
-          "front": "Unbestimmtes Integral",
-          "back": "\\(\\int f(x)\\,dx = F(x) + c\\) — die Gesamtheit aller Stammfunktionen",
+          "front": "Was bezeichnet das unbestimmte Integral?",
+          "back": "Die Gesamtheit aller Stammfunktionen: \\(\\int f(x)\\,dx = F(x) + c\\), geschrieben ohne Grenzen am Integralsymbol.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 123"
         },
         {
-          "front": "Hauptsatz der Differential- und Integralrechnung",
-          "back": "\\(f\\) stetig \\(\\Rightarrow\\) es gibt eine Stammfunktion \\(F\\) und \\(\\int_a^b f(x)\\,dx = F(b) - F(a)\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 127"
+          "front": "Was besagt der Hauptsatz der Differential- und Integralrechnung?",
+          "back": "Zu jeder stetigen Funktion \\(f: [a, b] \\to \\mathbb{R}\\) gibt es eine Stammfunktion \\(F\\), und es gilt \\(\\int_a^b f(x)\\,dx = F(b) - F(a)\\). Der Hauptsatz verbindet damit bestimmtes und unbestimmtes Integral.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 127-128"
         },
         {
-          "front": "Partielle Integration",
-          "back": "\\(\\int_a^b f'g\\,dx = fg\\big|_a^b - \\int_a^b fg'\\,dx\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 131"
+          "front": "Wie lautet die Formel der partiellen Integration?",
+          "back": "\\(\\int_a^b f'(x)g(x)\\,dx = f(x)g(x)\\big|_a^b - \\int_a^b f(x)g'(x)\\,dx\\) für auf \\([a, b]\\) stetig differenzierbare \\(f, g\\). Sie folgt aus der Produktregel zusammen mit dem Hauptsatz.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 131-132"
         },
         {
-          "front": "\\(\\int_a^b x e^x\\,dx = \\;?\\)",
-          "back": "\\((x - 1)e^x\\big|_a^b\\) (partielle Integration mit \\(f = x\\), \\(g' = e^x\\))",
+          "front": "Wie berechnet man \\(\\int_a^b x e^x\\,dx\\) mit partieller Integration?",
+          "back": "Man wählt \\(f(x) := x\\) und \\(g'(x) := e^x\\): \\(\\int_a^b x e^x\\,dx = x e^x\\big|_a^b - \\int_a^b 1 \\cdot e^x\\,dx = (x - 1)e^x\\big|_a^b\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 133"
         },
         {
-          "front": "Newton-Beispiel: Bedeutung der Integrationskonstanten",
-          "back": "\\(v_0\\) = Anfangsgeschwindigkeit, \\(x_0\\) = Anfangsort — vernachlässigt man sie, verschwinden diese Informationen",
-          "source": "VorlesungFolienLAA-2026.pdf, Folien 125-126"
+          "front": "Warum darf die Integrationskonstante nicht immer vernachlässigt werden?",
+          "back": "Nur wenn lediglich eine mögliche Stammfunktion interessiert, kann \\(c = 0\\) gesetzt werden. Beim Newton-Beispiel \\(\\ddot{x}(t) = a\\) sind die Konstanten die Anfangsgeschwindigkeit \\(v_0\\) und der Anfangsort \\(x_0\\) — vernachlässigt man sie, verschwinden diese Informationen.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 124-126"
         }
       ],
       "exercises": [
@@ -1397,38 +1397,38 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Koordinaten eines Vektors im \\(\\mathbb{R}^n\\)",
-          "back": "Die Zahlen \\(x_1, \\ldots, x_n\\) in \\(\\vec{x} = (x_1, \\ldots, x_n)^T\\); \\(n\\) = Anzahl der Koordinaten",
+          "front": "Was sind die Koordinaten eines Vektors im \\(\\mathbb{R}^n\\)?",
+          "back": "Die Zahlen \\(x_1, \\ldots, x_n\\) im Vektor \\(\\vec{x} = (x_1, \\ldots, x_n)^T\\). Die natürliche Zahl \\(n\\) im Exponenten von \\(\\mathbb{R}^n\\) gibt die Anzahl der Koordinaten seiner Vektoren an.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 135"
         },
         {
-          "front": "Vektoraddition und Skalarmultiplikation",
-          "back": "Beides koordinatenweise: \\((\\vec{x} + \\vec{y})_i = x_i + y_i\\), \\((\\lambda\\vec{x})_i = \\lambda x_i\\)",
+          "front": "Wie werden Vektoren addiert und mit einem Skalar multipliziert?",
+          "back": "Beides erfolgt koordinatenweise: Bei der Addition werden die Koordinaten einzeln addiert (\\((\\vec{x} + \\vec{y})_i = x_i + y_i\\)), bei der Multiplikation mit einem Skalar wird jede Koordinate mit \\(\\lambda\\) multipliziert (\\((\\lambda\\vec{x})_i = \\lambda x_i\\)).",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 136-137"
         },
         {
-          "front": "Linearkombination",
-          "back": "\\(\\vec{v} = \\lambda_1 \\vec{v}_1 + \\ldots + \\lambda_k \\vec{v}_k\\) mit \\(\\lambda_i \\in \\mathbb{R}\\)",
+          "front": "Wann heißt ein Vektor \\(\\vec{v}\\) Linearkombination der Vektoren \\(\\vec{v}_1, \\ldots, \\vec{v}_k\\)?",
+          "back": "Wenn er sich mit Zahlen \\(\\lambda_1, \\ldots, \\lambda_k \\in \\mathbb{R}\\) darstellen lässt als \\(\\vec{v} = \\lambda_1 \\vec{v}_1 + \\ldots + \\lambda_k \\vec{v}_k\\). Sprechweise: \\(\\vec{v}\\) lässt sich aus \\(\\vec{v}_1, \\ldots, \\vec{v}_k\\) linear kombinieren.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 139"
         },
         {
-          "front": "Linear unabhängig",
-          "back": "\\(\\lambda_1 \\vec{v}_1 + \\ldots + \\lambda_k \\vec{v}_k = \\vec{0} \\;\\Rightarrow\\; \\lambda_1 = \\ldots = \\lambda_k = 0\\)",
+          "front": "Wann heißen Vektoren linear unabhängig, wann linear abhängig?",
+          "back": "Linear unabhängig, wenn aus \\(\\lambda_1 \\vec{v}_1 + \\ldots + \\lambda_k \\vec{v}_k = \\vec{0}\\) folgt, dass \\(\\lambda_1 = \\ldots = \\lambda_k = 0\\). Linear abhängig, wenn es eine solche Linearkombination gibt, bei der mindestens ein \\(\\lambda_i\\) ungleich Null ist — die Vektoren heben sich dann genau gegeneinander auf.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 143"
         },
         {
-          "front": "Basis",
-          "back": "Minimale Menge von Vektoren, aus denen sich jeder Vektor des \\(\\mathbb{R}^n\\) linear kombinieren lässt",
+          "front": "Was ist eine Basis des \\(\\mathbb{R}^n\\)?",
+          "back": "Eine minimale Menge von Vektoren, mit denen sich durch Linearkombinationen jeder andere Vektor des \\(\\mathbb{R}^n\\) bilden lässt.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 144"
         },
         {
-          "front": "Dimension",
-          "back": "Anzahl der Vektoren in einer Basis",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 144"
+          "front": "Was ist die Dimension?",
+          "back": "Die Anzahl der Vektoren in einer Basis. Der \\(\\mathbb{R}^n\\) ist wegen der Standardbasis aus \\(n\\) Vektoren ein \\(n\\)-dimensionaler Vektorraum.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 144-145"
         },
         {
-          "front": "Standardbasis des \\(\\mathbb{R}^n\\)",
-          "back": "\\(\\vec{e}_1, \\ldots, \\vec{e}_n\\) — je genau eine 1, sonst Nullen",
+          "front": "Was ist die Standardbasis des \\(\\mathbb{R}^n\\)?",
+          "back": "Die Vektoren \\(\\vec{e}_1 = (1, 0, \\ldots, 0)^T\\) bis \\(\\vec{e}_n = (0, \\ldots, 0, 1)^T\\) — bei jedem ist genau eine Koordinate 1 und alle anderen sind 0.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 145"
         }
       ],
@@ -1556,38 +1556,38 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "\\((m \\times n)\\)-Matrix",
-          "back": "\\(m\\) Zeilen, \\(n\\) Spalten; Einträge \\(a_{ij}\\) mit Zeilenindex \\(i\\), Spaltenindex \\(j\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 146"
+          "front": "Was bedeutet das Format \\((m \\times n)\\) einer Matrix?",
+          "back": "Die Matrix hat \\(m\\) Zeilen und \\(n\\) Spalten mit Einträgen \\(a_{ij}\\). Der erste Index \\(i\\) heißt Zeilenindex, der zweite Index \\(j\\) Spaltenindex. Die Menge aller \\((m \\times n)\\)-Matrizen wird als \\(M(m \\times n)\\) notiert.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 146-147"
         },
         {
-          "front": "Matrixprodukt \\(AB\\)",
-          "back": "\\(\\left(\\sum_{j=1}^{n} a_{ij} b_{jk}\\right)\\) — Zeile mal Spalte",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 150"
+          "front": "Wie ist das Matrixprodukt \\(AB\\) definiert?",
+          "back": "Für \\(A \\in M(m \\times n)\\) und \\(B \\in M(n \\times p)\\) gilt \\(AB = \\left(\\sum_{j=1}^{n} a_{ij} b_{jk}\\right)\\). Anschaulich: Die Zeilen der linken Matrix werden auf die Spalten der rechten Matrix „gelegt“, aufeinanderliegende Einträge multipliziert und die Ergebnisse addiert.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 150-151"
         },
         {
-          "front": "Ist \\(AB = BA\\)?",
-          "back": "Allgemein nein — Matrizenmultiplikation ist nicht kommutativ",
+          "front": "Gilt für Matrizen \\(AB = BA\\)?",
+          "back": "Nein — die Matrizenmultiplikation ist allgemein nicht kommutativ.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 155"
         },
         {
-          "front": "Rang einer Matrix",
-          "back": "Anzahl der linear unabhängigen Spalten (= Anzahl der linear unabhängigen Zeilen)",
+          "front": "Was ist der Rang einer Matrix?",
+          "back": "Die Anzahl ihrer linear unabhängigen Spaltenvektoren — was gleich der Anzahl ihrer linear unabhängigen Zeilenvektoren ist.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 154"
         },
         {
-          "front": "Transponierte \\(A^T\\)",
-          "back": "\\((a_{ij})^T = (a_{ji})\\) — Zeilen und Spalten vertauscht; \\((AB)^T = B^T A^T\\)",
+          "front": "Was ist die transponierte Matrix \\(A^T\\)?",
+          "back": "\\(A^T := (a_{ji})\\) — Zeilen und Spalten werden vertauscht. Für Produkte gilt die Regel \\((AB)^T = B^T A^T\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 159"
         },
         {
-          "front": "Invertierbare Matrix",
-          "back": "Quadratisches \\(A\\) mit \\(AB = E_n = BA\\); \\(B = A^{-1}\\) heißt Inverse",
+          "front": "Wann heißt eine Matrix invertierbar?",
+          "back": "Eine quadratische Matrix \\(A\\) heißt invertierbar, wenn ein \\(B \\in M(n \\times n)\\) existiert mit \\(AB = E_n = BA\\). Für \\(B\\) schreibt man dann \\(A^{-1}\\); sie heißt Inverse von \\(A\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 159"
         },
         {
-          "front": "Symmetrische Matrix",
-          "back": "\\(A = A^T\\), d. h. \\(a_{ij} = a_{ji}\\)",
+          "front": "Wann heißt eine Matrix symmetrisch?",
+          "back": "Wenn \\(A = A^T\\) gilt, d. h. \\(a_{ij} = a_{ji}\\) für alle Einträge.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 160"
         }
       ],
@@ -1878,39 +1878,39 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Homogenes vs. inhomogenes LGS",
-          "back": "Homogen: alle \\(b_j = 0\\); inhomogen: sonst",
+          "front": "Wann heißt ein lineares Gleichungssystem homogen, wann inhomogen?",
+          "back": "Homogen, wenn alle Inhomogenitäten \\(b_j = 0\\) sind; sonst inhomogen. Die \\(a_{jk}\\) heißen Koeffizienten, die \\(b_j\\) Inhomogenitäten.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 171"
         },
         {
-          "front": "Kurzschreibweise eines LGS",
-          "back": "\\(A\\vec{x} = \\vec{b}\\) mit Koeffizientenmatrix \\(A\\) und Inhomogenitätsvektor \\(\\vec{b}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 172"
+          "front": "Wie schreibt man ein LGS in Matrixform?",
+          "back": "\\(A\\vec{x} = \\vec{b}\\) mit der Koeffizientenmatrix \\(A\\) und dem Inhomogenitätsvektor \\(\\vec{b}\\). Beim Rechnen verzichtet man gern auf \\(\\vec{x}\\), da alle wichtigen Informationen in \\(A\\) und \\(\\vec{b}\\) stehen — übrig bleibt die erweiterte Koeffizientenmatrix \\((A|\\vec{b})\\).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 172-173"
         },
         {
-          "front": "Die 3 elementaren Zeilenoperationen",
-          "back": "Zeilen tauschen; Vielfaches einer Zeile zu anderer addieren; Zeile mit Zahl \\(\\ne 0\\) multiplizieren",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 165"
+          "front": "Welche drei elementaren Zeilenoperationen sind beim Gauß-Algorithmus gestattet?",
+          "back": "1. Tauschen von Zeilen, 2. Addition eines (ggf. negativen) Vielfachen einer Zeile zu einer anderen, 3. Multiplikation einer Zeile mit einer Zahl ungleich Null. Diese Operationen ändern die Lösungsmenge nicht.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 165-166"
         },
         {
-          "front": "Idealfall des Gauß-Algorithmus",
-          "back": "Einheitsmatrix im linken Teil — Lösung \\(x_1 = c_1, \\ldots, x_m = c_m\\) direkt ablesbar",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 167"
+          "front": "Was ist der Idealfall beim Gauß-Algorithmus?",
+          "back": "Die erweiterte Koeffizientenmatrix wird so umgeformt, dass im linken Teil die Einheitsmatrix steht. Daran kann die eindeutige Lösung \\(x_1 = c_1, \\ldots, x_m = c_m\\) direkt abgelesen werden.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 167, 175"
         },
         {
-          "front": "Zeile „\\(0 = 0\\)“ nach Umformung",
-          "back": "Wahre Aussage, schränkt die Lösungsmenge nicht ein — es können unendlich viele Lösungen bleiben",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 168"
+          "front": "Was bedeutet eine Nullzeile „\\(0 = 0\\)“ nach den Umformungen?",
+          "back": "Sie ist eine wahre Aussage und schränkt die Lösungsmenge nicht ein. Es verbleiben Gleichungen mit Abhängigkeiten (z. B. \\(x_1 = 3 - 2x_2\\)) — das LGS hat dann unendlich viele Lösungen, und eine konkrete Lösung ergibt sich durch konkretes Wählen der freien Variablen.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 168-169"
         },
         {
-          "front": "Zeile „\\(0 = 1\\)“ nach Umformung",
-          "back": "Das LGS hat keine Lösung",
+          "front": "Was bedeutet eine Zeile „\\(0 = 1\\)“ nach den Umformungen?",
+          "back": "Eine falsche Aussage — das ursprüngliche LGS hat keine Lösung.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 170"
         },
         {
-          "front": "Lösungsmenge des inhomogenen LGS",
-          "back": "\\(\\vec{x}_P + L_H\\) — partikuläre Lösung plus homogener Lösungsraum",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 178"
+          "front": "Wie ist die Lösungsmenge eines inhomogenen LGS aufgebaut?",
+          "back": "\\(\\vec{x}_P + L_H = \\{\\vec{x}_P + \\vec{x}_H \\,|\\, \\vec{x}_H \\in L_H\\}\\): eine partikuläre (auch: spezielle) Lösung \\(\\vec{x}_P\\) plus der Lösungsraum \\(L_H\\) des zugehörigen homogenen LGSs \\(A\\vec{x} = \\vec{0}\\).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 178-179"
         }
       ],
       "exercises": [
@@ -2029,38 +2029,38 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "\\(\\det\\) einer \\((2 \\times 2)\\)-Matrix",
-          "back": "\\(a_{11}a_{22} - a_{21}a_{12}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 191"
+          "front": "Wie berechnet man die Determinante einer \\((2 \\times 2)\\)-Matrix?",
+          "back": "\\(\\det \\begin{pmatrix} a_{11} & a_{12} \\\\ a_{21} & a_{22} \\end{pmatrix} = a_{11}a_{22} - a_{21}a_{12}\\) — Hauptdiagonale minus Nebendiagonale.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 191-192"
         },
         {
-          "front": "\\(\\det\\) einer \\((1 \\times 1)\\)-Matrix",
-          "back": "\\(\\det(a_{11}) = a_{11}\\)",
+          "front": "Was ist die Determinante einer \\((1 \\times 1)\\)-Matrix?",
+          "back": "\\(\\det(a_{11}) = a_{11}\\) — der Eintrag selbst. Das ist der Startpunkt der rekursiven Definition: Die Determinante größerer Matrizen ist über Determinanten kleinerer Matrizen definiert.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 185"
         },
         {
-          "front": "Streichungsmatrix \\(S_{ij}(A)\\)",
-          "back": "\\(A\\) ohne \\(i\\)-te Zeile und \\(j\\)-te Spalte",
+          "front": "Was ist die Streichungsmatrix \\(S_{ij}(A)\\)?",
+          "back": "Die \\((n-1 \\times n-1)\\)-Matrix, die aus \\(A\\) durch Streichen der \\(i\\)-ten Zeile und der \\(j\\)-ten Spalte entsteht.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 184"
         },
         {
-          "front": "Vorzeichenfaktor beim Entwicklungssatz",
-          "back": "\\((-1)^{i+k}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 185"
+          "front": "Wie lautet die Entwicklung nach der \\(i\\)-ten Zeile im Laplace'schen Entwicklungssatz?",
+          "back": "\\(\\det A = \\sum_{k=1}^{n} (-1)^{i+k} a_{ik} \\det S_{ik}(A)\\) — mit dem Vorzeichenfaktor \\((-1)^{i+k}\\) und den Streichungsmatrizen \\(S_{ik}(A)\\). Man wählt am besten die Zeile oder Spalte mit den meisten Nullen.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 185, 188"
         },
         {
-          "front": "Determinante einer Dreiecksmatrix",
-          "back": "Produkt der Diagonaleinträge \\(a_{11} \\cdots a_{nn}\\)",
+          "front": "Wie berechnet sich die Determinante einer Dreiecksmatrix?",
+          "back": "Als Produkt der Diagonaleinträge: \\(\\det = a_{11} \\cdot a_{22} \\cdot \\ldots \\cdot a_{nn}\\) — bei oberen wie unteren Dreiecksmatrizen.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 194"
         },
         {
-          "front": "Nullzeile oder Nullspalte in der Matrix",
-          "back": "\\(\\det = 0\\)",
+          "front": "Was ist die Determinante einer Matrix mit einer Nullzeile oder Nullspalte?",
+          "back": "Null — entwickelt man nach dieser Zeile bzw. Spalte, verschwinden alle Summanden.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 189"
         },
         {
-          "front": "\\(\\det A \\ne 0\\) ist äquivalent zu …",
-          "back": "Spalten/Zeilen linear unabhängig \\(\\Leftrightarrow\\) \\(\\operatorname{Rang} A = n\\) \\(\\Leftrightarrow\\) \\(A^{-1}\\) existiert",
+          "front": "Zu welchen Aussagen ist \\(\\det A \\ne 0\\) äquivalent?",
+          "back": "Die Spalten (Zeilen) von \\(A\\) sind linear unabhängig, es gilt \\(\\operatorname{Rang} A = n\\), und die Inverse \\(A^{-1}\\) existiert (der große Äquivalenzsatz).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 197"
         }
       ],
@@ -2180,39 +2180,39 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Kreuzprodukt \\(\\vec{x} \\times \\vec{y}\\)",
-          "back": "\\(\\begin{pmatrix} x_2y_3 - x_3y_2 \\\\ x_3y_1 - x_1y_3 \\\\ x_1y_2 - x_2y_1 \\end{pmatrix}\\) — nur im \\(\\mathbb{R}^3\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 199"
+          "front": "Wie ist das Kreuzprodukt definiert, und für welche Vektoren existiert es?",
+          "back": "Nur für Vektoren des \\(\\mathbb{R}^3\\): \\(\\vec{x} \\times \\vec{y} := \\begin{pmatrix} x_2y_3 - x_3y_2 \\\\ x_3y_1 - x_1y_3 \\\\ x_1y_2 - x_2y_1 \\end{pmatrix}\\).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 198-199"
         },
         {
-          "front": "Richtung von \\(\\vec{x} \\times \\vec{y}\\)",
-          "back": "Senkrecht auf \\(\\vec{x}\\) und \\(\\vec{y}\\), Rechte-Hand-Regel",
+          "front": "In welche Richtung zeigt der Vektor \\(\\vec{x} \\times \\vec{y}\\)?",
+          "back": "Er steht senkrecht auf \\(\\vec{x}\\) und auf \\(\\vec{y}\\); \\((\\vec{x}, \\vec{y}, \\vec{x} \\times \\vec{y})\\) genügen der Rechte-Hand-Regel. Außerdem ist das Kreuzprodukt in beiden Eingängen linear.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 200"
         },
         {
-          "front": "Standardnorm \\(\\lVert\\vec{x}\\rVert\\)",
-          "back": "\\(\\sqrt{x_1^2 + \\ldots + x_n^2}\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 204"
+          "front": "Wie ist die Standardnorm auf dem \\(\\mathbb{R}^n\\) definiert?",
+          "back": "\\(\\lVert\\vec{x}\\rVert := \\sqrt{x_1^2 + \\ldots + x_n^2}\\). Mit der Norm lassen sich Untersuchungen in normierten Vektorräumen durchführen (Längenmessung).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 204-205"
         },
         {
-          "front": "Standardskalarprodukt \\(\\langle\\vec{x}, \\vec{y}\\rangle\\)",
-          "back": "\\(x_1y_1 + \\ldots + x_ny_n\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 206"
+          "front": "Wie ist das Standardskalarprodukt auf dem \\(\\mathbb{R}^n\\) definiert?",
+          "back": "\\(\\langle\\vec{x}, \\vec{y}\\rangle = x_1y_1 + \\ldots + x_ny_n\\) — die Koordinaten werden paarweise multipliziert und die Produkte addiert.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 205-206"
         },
         {
-          "front": "Zusammenhang Norm und Skalarprodukt",
-          "back": "\\(\\lVert\\vec{x}\\rVert = \\sqrt{\\langle\\vec{x}, \\vec{x}\\rangle}\\) — jedes Skalarprodukt induziert eine Norm (nicht umgekehrt)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folien 205, 207"
+          "front": "Welcher Zusammenhang besteht zwischen Norm und Skalarprodukt?",
+          "back": "Wegen \\(\\langle\\vec{x}, \\vec{x}\\rangle = x_1^2 + \\ldots + x_n^2\\) gilt \\(\\lVert\\vec{x}\\rVert = \\sqrt{\\langle\\vec{x}, \\vec{x}\\rangle}\\) — die Standardnorm wird vom Standardskalarprodukt induziert. Jedes Skalarprodukt induziert eine Norm, aber nicht umgekehrt.",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 205-207"
         },
         {
-          "front": "Winkelformel",
-          "back": "\\(\\langle\\vec{v}, \\vec{w}\\rangle = \\lVert\\vec{v}\\rVert \\lVert\\vec{w}\\rVert \\cos\\sphericalangle(\\vec{v}, \\vec{w})\\)",
+          "front": "Wie berechnet man den Winkel zwischen zwei Vektoren?",
+          "back": "Über die Formel \\(\\langle\\vec{v}, \\vec{w}\\rangle = \\lVert\\vec{v}\\rVert \\lVert\\vec{w}\\rVert \\cos\\sphericalangle(\\vec{v}, \\vec{w})\\); darin ist \\(\\sphericalangle(\\vec{v}, \\vec{w})\\) der Winkel zwischen den Vektoren \\(\\vec{v}\\) und \\(\\vec{w}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 207"
         },
         {
-          "front": "Bedingung für Orthogonalität",
-          "back": "\\(\\vec{x} \\perp \\vec{y} \\Leftrightarrow \\langle\\vec{x}, \\vec{y}\\rangle = 0\\)",
-          "source": "VorlesungFolienLAA-2026.pdf, Folie 209"
+          "front": "Wann heißen zwei Vektoren orthogonal?",
+          "back": "Wenn ihr Skalarprodukt Null ist: \\(\\vec{x} \\perp \\vec{y} \\Leftrightarrow \\langle\\vec{x}, \\vec{y}\\rangle = 0\\). Beispiel im \\(\\mathbb{R}^2\\): \\((1, 0)^T\\) und \\((0, 1)^T\\) mit \\(\\langle\\vec{x}, \\vec{y}\\rangle = 1 \\cdot 0 + 0 \\cdot 1 = 0\\).",
+          "source": "VorlesungFolienLAA-2026.pdf, Folien 209-210"
         }
       ],
       "exercises": [
@@ -2320,38 +2320,38 @@ const laa = {
       ],
       "flashcards": [
         {
-          "front": "Eigenwertgleichung",
-          "back": "\\(A\\vec{v} = \\lambda\\vec{v}\\), \\(\\vec{v} \\ne \\vec{0}\\)",
+          "front": "Wie lautet die Eigenwertgleichung?",
+          "back": "\\(A\\vec{v} = \\lambda\\vec{v}\\) mit \\(\\vec{v} \\ne \\vec{0}\\): Der Eigenvektor \\(\\vec{v}\\) wird durch \\(A\\) auf das \\(\\lambda\\)-Fache von sich selbst abgebildet; \\(\\lambda\\) heißt Eigenwert von \\(A\\) zum Eigenvektor \\(\\vec{v}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 211"
         },
         {
-          "front": "Bedingung für Eigenwerte",
-          "back": "\\(\\det(A - \\lambda E) = 0\\)",
+          "front": "Unter welcher Bedingung ist \\(\\lambda\\) ein Eigenwert von \\(A\\)?",
+          "back": "Wenn \\(\\det(A - \\lambda E) = 0\\) gilt — genau dann hat das Gleichungssystem \\((A - \\lambda E)\\vec{v} = \\vec{0}\\) eine Lösung, die nicht nur aus dem Nullvektor besteht.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 215"
         },
         {
-          "front": "Charakteristisches Polynom",
-          "back": "\\(P_A(\\lambda) = \\det(A - \\lambda E)\\), Polynom \\(n\\)-ten Grades; Nullstellen = Eigenwerte",
+          "front": "Was ist das charakteristische Polynom?",
+          "back": "\\(P_A(\\lambda) := \\det(A - \\lambda E)\\) — nach dem Ausrechnen ein Polynom \\(n\\)-ten Grades in \\(\\lambda\\). Seine Nullstellen liefern die Eigenwerte von \\(A\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 216"
         },
         {
-          "front": "Eigenvektoren zu gefundenem \\(\\lambda\\)",
-          "back": "Lösungen des LGS \\((A - \\lambda E)\\vec{v} = \\vec{0}\\)",
+          "front": "Wie berechnet man die Eigenvektoren zu einem gefundenen Eigenwert \\(\\lambda\\)?",
+          "back": "Als Lösungen des linearen Gleichungssystems \\((A - \\lambda E)\\vec{v} = \\vec{0}\\), z. B. mit dem Gauß-Algorithmus.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 218"
         },
         {
-          "front": "Warum \\(\\vec{v} \\ne \\vec{0}\\)?",
-          "back": "Der Nullvektor erfüllt die Gleichung für jedes \\(\\lambda\\) — der Eigenwert wäre nicht eindeutig",
+          "front": "Warum wird der Nullvektor als Eigenvektor ausgeschlossen?",
+          "back": "Der Nullvektor würde die Eigenwertgleichung für jedes \\(\\lambda\\) erfüllen. Für die Theorie ist aber wichtig, dass jedem Eigenvektor ein eindeutiger Eigenwert zugeordnet werden kann.",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 212"
         },
         {
-          "front": "Eigenwerte von \\(\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}\\)",
-          "back": "\\(\\lambda_{1,2} = \\pm 1\\) (aus \\(\\lambda^2 - 1 = 0\\)); EV zu \\(+1\\): \\((1, 1)^T\\)",
+          "front": "Welche Eigenwerte hat die Matrix \\(\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}\\)?",
+          "back": "Das charakteristische Polynom ist \\(\\lambda^2 - 1\\) mit den Nullstellen \\(\\lambda_{1,2} = \\pm 1\\). Eigenvektor zu \\(\\lambda_1 = +1\\): \\(\\vec{v}_1 = (1, 1)^T\\) bzw. alle Vielfachen davon.",
           "source": "VorlesungFolienLAA-2026.pdf, Folien 217, 219"
         },
         {
-          "front": "Eigenwerte von \\(\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}\\)",
-          "back": "Reell: keine; komplex: \\(\\lambda_{1,2} = \\pm\\mathrm{i}\\) (aus \\(\\lambda^2 + 1 = 0\\))",
+          "front": "Welche Eigenwerte hat die Matrix \\(\\begin{pmatrix} 0 & 1 \\\\ -1 & 0 \\end{pmatrix}\\)?",
+          "back": "Das charakteristische Polynom \\(\\lambda^2 + 1\\) ist im Reellen nicht zu faktorisieren — es gibt keine reellen Eigenwerte. Im Komplexen gilt \\(\\lambda^2 + 1 = (\\lambda + \\mathrm{i})(\\lambda - \\mathrm{i})\\), und \\(A\\) hat die komplexen Eigenwerte \\(\\lambda_{1,2} = \\pm\\mathrm{i}\\).",
           "source": "VorlesungFolienLAA-2026.pdf, Folie 220"
         }
       ],
