@@ -923,6 +923,37 @@ a.card:focus-visible,
   overflow-wrap: anywhere;
 }
 
+.walk-explanation {
+  display: grid;
+  gap: 0.34rem;
+  margin: 0.55rem 0 0;
+  padding: 0.5rem 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.walk-explanation div {
+  display: grid;
+  grid-template-columns: minmax(70px, 0.18fr) 1fr;
+  gap: 0.6rem;
+}
+
+.walk-explanation dt {
+  color: var(--text3);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.walk-explanation dd {
+  color: var(--text2);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
 .walk-visual {
   margin: 0;
   padding: 0.35rem 0;
@@ -950,9 +981,17 @@ a.card:focus-visible,
   gap: 0.45rem;
 }
 
+.walk-matrix-visual.walk-table-visual {
+  display: block;
+}
+
 .walk-matrix-block {
   justify-self: center;
   min-width: 0;
+}
+
+.walk-matrix-table-block {
+  width: 100%;
 }
 
 .walk-matrix-title {
@@ -1033,6 +1072,88 @@ a.card:focus-visible,
 .walk-matrix-cell.walk-empty {
   color: var(--text3);
   font-weight: 600;
+}
+
+.walk-data-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+.walk-data-table {
+  width: max-content;
+  min-width: min(100%, 520px);
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.walk-data-table th,
+.walk-data-cell {
+  width: 34px;
+  min-width: 34px;
+  height: 30px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.walk-data-table th {
+  color: var(--text3);
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: transparent;
+}
+
+.walk-table-corner,
+.walk-table-row-head {
+  width: 42px;
+  min-width: 42px;
+  color: var(--text2);
+}
+
+.walk-table-col-head {
+  border-bottom: 1px solid var(--border);
+}
+
+.walk-table-row-head {
+  border-right: 1px solid var(--border);
+}
+
+.walk-data-cell {
+  position: relative;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 750;
+  line-height: 1;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.walk-data-cell.walk-empty {
+  color: transparent;
+}
+
+.walk-data-cell.walk-active {
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.walk-data-cell.walk-done {
+  box-shadow: inset 0 0 0 1px rgba(110, 231, 183, 0.55);
+}
+
+.walk-data-cell.walk-factor {
+  box-shadow: inset 0 0 0 1px var(--yellow);
+}
+
+.walk-data-cell.walk-target {
+  box-shadow: inset 0 0 0 1px var(--red);
+}
+
+.walk-data-cell.walk-compare {
+  box-shadow: inset 0 0 0 1px var(--pink);
 }
 
 .walk-done {
@@ -1145,12 +1266,46 @@ a.card:focus-visible,
   stroke-width: 1.2px;
 }
 
+.walk-array-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+.walk-array-stack {
+  display: grid;
+  gap: 0.5rem;
+  width: max-content;
+  min-width: max-content;
+  margin: 0 auto;
+}
+
+.walk-array-row {
+  display: grid;
+  grid-template-columns: 36px max-content;
+  align-items: end;
+  gap: 0.5rem;
+}
+
+.walk-array-label {
+  align-self: center;
+  color: var(--text2);
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: right;
+}
+
 .walk-array {
   display: flex;
   align-items: flex-end;
   gap: 6px;
   width: max-content;
   margin: 0 auto;
+}
+
+.walk-array-stack .walk-array {
+  margin: 0;
 }
 
 .walk-array-item {
@@ -1362,6 +1517,7 @@ button:disabled {
   .study-card,
   .walk-bar,
   .walk-matrix-cell,
+  .walk-data-cell,
   .walk-array-cell {
     transition: none;
   }
@@ -1537,6 +1693,19 @@ button:disabled {
     font-size: 0.8rem;
   }
 
+  .walk-explanation {
+    gap: 0.42rem;
+  }
+
+  .walk-explanation div {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .walk-explanation dd {
+    font-size: 0.76rem;
+  }
+
   .walk-visual {
     padding: 0.35rem 0;
   }
@@ -1545,6 +1714,23 @@ button:disabled {
     min-width: 34px;
     height: 34px;
     font-size: 0.9rem;
+  }
+
+  .walk-data-table {
+    min-width: 470px;
+  }
+
+  .walk-data-table th,
+  .walk-data-cell {
+    width: 30px;
+    min-width: 30px;
+    height: 28px;
+  }
+
+  .walk-table-corner,
+  .walk-table-row-head {
+    width: 36px;
+    min-width: 36px;
   }
 
   .walk-array-cell {

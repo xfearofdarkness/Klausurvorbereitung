@@ -3,6 +3,7 @@
 import { catalog, subjectLoaders } from "../src/data/catalog";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
+  ArrayVisual,
   GraphVisual,
   MatrixDefinition,
   RawSubject,
@@ -168,6 +169,9 @@ function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkt
       fail(`${label} step[${stepIndex}] is missing title/text.`);
     }
     validateHtmlField(`${label} step[${stepIndex}].text`, step.text);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.action`, step.explanation?.action);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.rule`, step.explanation?.rule);
+    validateHtmlField(`${label} step[${stepIndex}].explanation.decision`, step.explanation?.decision);
     step.highlights?.forEach((highlight, highlightIndex) => validateWalkthroughHighlight(label, walkthrough, stepIndex, highlight, highlightIndex));
     step.values?.forEach((update, updateIndex) => validateWalkthroughValue(label, walkthrough, stepIndex, update, updateIndex));
   });
@@ -217,9 +221,36 @@ function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): voi
     return;
   }
 
-  if (!Array.isArray(walkthrough.visual.values) || walkthrough.visual.values.length === 0) {
+  validateArrayVisual(label, walkthrough.visual);
+}
+
+function validateArrayVisual(label: string, visual: ArrayVisual): void {
+  if (!Array.isArray(visual.values) || visual.values.length === 0) {
     fail(`${label} array visual must contain at least one value.`);
   }
+
+  if (visual.arrays === undefined) return;
+  if (!Array.isArray(visual.arrays) || visual.arrays.length === 0) {
+    fail(`${label} array visual field "arrays" must contain at least one row when present.`);
+    return;
+  }
+
+  const arrayIds = new Set<string>();
+  visual.arrays.forEach((array, arrayIndex) => {
+    const arrayLabel = `${label} visual.arrays[${arrayIndex}]`;
+    if (!array.id || !array.label) {
+      fail(`${arrayLabel} is missing id/label.`);
+    }
+    if (array.id) {
+      if (arrayIds.has(array.id)) {
+        fail(`${arrayLabel} has duplicate id "${array.id}".`);
+      }
+      arrayIds.add(array.id);
+    }
+    if (!Array.isArray(array.values) || array.values.length === 0) {
+      fail(`${arrayLabel}.values must contain at least one value.`);
+    }
+  });
 }
 
 function validateTreeVisual(label: string, visual: TreeVisual): void {
@@ -326,6 +357,10 @@ function validateMatrixShape(label: string, matrix: MatrixDefinition): void {
     return;
   }
 
+  if (matrix.layout !== undefined && !["matrix", "table"].includes(matrix.layout)) {
+    fail(`${label}.layout must be "matrix" or "table".`);
+  }
+
   const width = Array.isArray(matrix.values[0]) ? matrix.values[0].length : 0;
   if (width === 0) {
     fail(`${label}.values must contain at least one column.`);
@@ -336,6 +371,14 @@ function validateMatrixShape(label: string, matrix: MatrixDefinition): void {
       fail(`${label}.values[${rowIndex}] must be rectangular with width ${width}.`);
     }
   });
+
+  if (matrix.rowLabels !== undefined && matrix.rowLabels.length !== matrix.values.length) {
+    fail(`${label}.rowLabels length must match row count ${matrix.values.length}.`);
+  }
+
+  if (matrix.colLabels !== undefined && matrix.colLabels.length !== width) {
+    fail(`${label}.colLabels length must match column count ${width}.`);
+  }
 }
 
 function validateWalkthroughHighlight(
@@ -403,7 +446,7 @@ function validateWalkthroughHighlight(
     fail(`${highlightLabel} uses matrix highlight in array visual.`);
     return;
   }
-  validateArrayIndex(highlightLabel, walkthrough.visual.values.length, highlight.index);
+  validateArrayReference(highlightLabel, walkthrough.visual, highlight.array, highlight.index);
 }
 
 function validateWalkthroughValue(
@@ -455,7 +498,7 @@ function validateWalkthroughValue(
     fail(`${updateLabel} uses matrix value in array visual.`);
     return;
   }
-  validateArrayIndex(updateLabel, walkthrough.visual.values.length, update.index);
+  validateArrayReference(updateLabel, walkthrough.visual, update.array, update.index);
 }
 
 function validateMatrixReference(
@@ -485,7 +528,16 @@ function validateArrayIndex(label: string, length: number, index: number): void 
   }
 }
 
-function validateHtmlField(label: string, value: string): void {
+function validateArrayReference(label: string, visual: ArrayVisual, arrayId: string | undefined, index: number): void {
+  const values = arrayId === undefined ? visual.values : visual.arrays?.find((array) => array.id === arrayId)?.values;
+  if (!values) {
+    fail(`${label} references unknown array "${arrayId}".`);
+    return;
+  }
+  validateArrayIndex(label, values.length, index);
+}
+
+function validateHtmlField(label: string, value: string | undefined): void {
   if (!value) return;
   for (const { label: patternLabel, pattern } of DANGEROUS_HTML_PATTERNS) {
     if (pattern.test(value)) {

@@ -1108,6 +1108,11 @@ const aud = {
             {
               title: "4 und 3 tauschen",
               text: "4 > 3 → Tausch: 3 4 1 9 2 10 6 8 7 5.",
+              explanation: {
+                action: "Vergleiche die benachbarten Werte 4 und 3.",
+                rule: "Bubble Sort tauscht Nachbarn, wenn der linke Wert größer ist.",
+                decision: "4 > 3, daher werden beide Werte vertauscht."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 3 },
                 { kind: "array-index", index: 1, value: 4 }
@@ -1120,6 +1125,11 @@ const aud = {
             {
               title: "4 und 1 tauschen",
               text: "4 > 1 → Tausch: 3 1 4 9 2 10 6 8 7 5.",
+              explanation: {
+                action: "Vergleiche das nächste Nachbarpaar 4 und 1.",
+                rule: "Bei falscher Reihenfolge wird das größere Element nach rechts geschoben.",
+                decision: "4 > 1, daher wandert 4 eine Position weiter nach rechts."
+              },
               values: [
                 { kind: "array-index", index: 1, value: 1 },
                 { kind: "array-index", index: 2, value: 4 }
@@ -1132,6 +1142,11 @@ const aud = {
             {
               title: "9 und 2 tauschen",
               text: "4 < 9: kein Tausch. Dann 9 > 2 → Tausch: 3 1 4 2 9 10 6 8 7 5.",
+              explanation: {
+                action: "Prüfe weiter von links nach rechts.",
+                rule: "Paare in richtiger Reihenfolge bleiben unverändert; falsche Paare werden getauscht.",
+                decision: "4 < 9 bleibt, aber 9 > 2 wird vertauscht."
+              },
               values: [
                 { kind: "array-index", index: 3, value: 2 },
                 { kind: "array-index", index: 4, value: 9 }
@@ -1144,6 +1159,11 @@ const aud = {
             {
               title: "10 und 6 tauschen",
               text: "9 < 10: kein Tausch. Dann 10 > 6 → Tausch: 3 1 4 2 9 6 10 8 7 5.",
+              explanation: {
+                action: "Vergleiche weiter bis zum nächsten falschen Nachbarpaar.",
+                rule: "Das größere Element wandert im Durchlauf schrittweise nach rechts.",
+                decision: "10 > 6, daher wird 10 nach rechts geschoben."
+              },
               values: [
                 { kind: "array-index", index: 5, value: 6 },
                 { kind: "array-index", index: 6, value: 10 }
@@ -1156,6 +1176,11 @@ const aud = {
             {
               title: "10 und 8 tauschen",
               text: "10 > 8 → Tausch: 3 1 4 2 9 6 8 10 7 5.",
+              explanation: {
+                action: "Vergleiche 10 und 8.",
+                rule: "Ist links größer als rechts, wird getauscht.",
+                decision: "10 > 8, also wandert 10 weiter nach rechts."
+              },
               values: [
                 { kind: "array-index", index: 6, value: 8 },
                 { kind: "array-index", index: 7, value: 10 }
@@ -1168,6 +1193,11 @@ const aud = {
             {
               title: "10 und 7 tauschen",
               text: "10 > 7 → Tausch: 3 1 4 2 9 6 8 7 10 5.",
+              explanation: {
+                action: "Vergleiche 10 und 7.",
+                rule: "Der gleiche Nachbarvergleich wird bis zum Ende des Bereichs wiederholt.",
+                decision: "10 > 7, deshalb folgt der nächste Tausch."
+              },
               values: [
                 { kind: "array-index", index: 7, value: 7 },
                 { kind: "array-index", index: 8, value: 10 }
@@ -1180,6 +1210,11 @@ const aud = {
             {
               title: "10 und 5 tauschen: Durchlauf fertig",
               text: "10 > 5 → Tausch: 3 1 4 2 9 6 8 7 5 10. Das größte Element steht am Ende; weitere Durchläufe sortieren den Rest.",
+              explanation: {
+                action: "Vergleiche das letzte Nachbarpaar des Durchlaufs.",
+                rule: "Nach einem vollständigen Durchlauf steht das größte Element am rechten Rand.",
+                decision: "10 > 5, nach dem Tausch ist 10 am Ende fixiert."
+              },
               values: [
                 { kind: "array-index", index: 8, value: 5 },
                 { kind: "array-index", index: 9, value: 10 }
@@ -1205,6 +1240,11 @@ const aud = {
             {
               title: "Durchlauf 1: Minimum 1",
               text: "Das kleinste Element im Bereich 0-9 ist 1 (Position 2) — Tausch mit Position 0.",
+              explanation: {
+                action: "Suche das Minimum im gesamten noch unsortierten Bereich 0-9.",
+                rule: "Selection Sort setzt das kleinste gefundene Element an die erste unsortierte Position.",
+                decision: "1 ist das Minimum und wird mit Position 0 getauscht."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 1 },
                 { kind: "array-index", index: 2, value: 4 }
@@ -1214,6 +1254,11 @@ const aud = {
             {
               title: "Durchlauf 2: Minimum 2",
               text: "Das kleinste Element im Bereich 1-9 ist 2 (Position 4) — Tausch mit Position 1.",
+              explanation: {
+                action: "Suche das Minimum im restlichen Bereich 1-9.",
+                rule: "Der linke sortierte Bereich bleibt fixiert und wird nicht erneut verändert.",
+                decision: "2 ist das Minimum des Restbereichs und kommt an Position 1."
+              },
               values: [
                 { kind: "array-index", index: 1, value: 2 },
                 { kind: "array-index", index: 4, value: 3 }
@@ -1226,6 +1271,11 @@ const aud = {
             {
               title: "Durchlauf 3: Minimum 3",
               text: "Das kleinste Element im Bereich 2-9 ist 3 (Position 4) — Tausch mit Position 2.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 2-9.",
+                rule: "Nach jedem Durchlauf wächst der sortierte Bereich links um eine Position.",
+                decision: "3 ist das nächste Minimum und wird an Position 2 gesetzt."
+              },
               values: [
                 { kind: "array-index", index: 2, value: 3 },
                 { kind: "array-index", index: 4, value: 4 }
@@ -1239,6 +1289,11 @@ const aud = {
             {
               title: "Durchlauf 4: Minimum 4",
               text: "Das kleinste Element im Bereich 3-9 ist 4 (Position 4) — Tausch mit Position 3.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 3-9.",
+                rule: "Das gefundene Minimum wird an den Anfang des unsortierten Bereichs getauscht.",
+                decision: "4 wird an Position 3 gesetzt; die ersten vier Werte sind sortiert."
+              },
               values: [
                 { kind: "array-index", index: 3, value: 4 },
                 { kind: "array-index", index: 4, value: 9 }
@@ -1253,6 +1308,11 @@ const aud = {
             {
               title: "Durchlauf 5: Minimum 5",
               text: "Das kleinste Element im Bereich 4-9 ist 5 (Position 9) — Tausch mit Position 4.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 4-9.",
+                rule: "Nur der unsortierte Bereich wird durchsucht.",
+                decision: "5 liegt am Ende des Restbereichs und wird nach Position 4 getauscht."
+              },
               values: [
                 { kind: "array-index", index: 4, value: 5 },
                 { kind: "array-index", index: 9, value: 9 }
@@ -1268,6 +1328,11 @@ const aud = {
             {
               title: "Durchlauf 6: Minimum 6",
               text: "Das kleinste Element im Bereich 5-9 ist 6 (Position 6) — Tausch mit Position 5.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 5-9.",
+                rule: "Der kleinste Wert des Restbereichs besetzt die nächste freie sortierte Position.",
+                decision: "6 ist das Minimum und wird an Position 5 gesetzt."
+              },
               values: [
                 { kind: "array-index", index: 5, value: 6 },
                 { kind: "array-index", index: 6, value: 10 }
@@ -1284,6 +1349,11 @@ const aud = {
             {
               title: "Durchlauf 7: Minimum 7",
               text: "Das kleinste Element im Bereich 6-9 ist 7 (Position 8) — Tausch mit Position 6.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 6-9.",
+                rule: "Die Auswahlregel bleibt in jedem Durchlauf gleich.",
+                decision: "7 wird mit Position 6 getauscht."
+              },
               values: [
                 { kind: "array-index", index: 6, value: 7 },
                 { kind: "array-index", index: 8, value: 10 }
@@ -1301,6 +1371,11 @@ const aud = {
             {
               title: "Durchlauf 8: Minimum 8",
               text: "Das kleinste Element im Bereich 7-9 ist 8 — es steht bereits an Position 7.",
+              explanation: {
+                action: "Suche das Minimum im Bereich 7-9.",
+                rule: "Wenn das Minimum bereits vorne steht, ist kein Tausch nötig.",
+                decision: "8 bleibt an Position 7."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" },
@@ -1315,6 +1390,11 @@ const aud = {
             {
               title: "Durchlauf 9: Minimum 9 — fertig",
               text: "Das kleinste Element im Bereich 8-9 ist 9 (Position 9) — Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
+              explanation: {
+                action: "Bearbeite den letzten unsortierten Bereich.",
+                rule: "Nach n−1 Durchläufen ist jedes Element an seiner sortierten Position.",
+                decision: "9 und 10 werden in die endgültige Reihenfolge gebracht."
+              },
               values: [
                 { kind: "array-index", index: 8, value: 9 },
                 { kind: "array-index", index: 9, value: 10 }
@@ -1406,87 +1486,152 @@ const aud = {
           intro: "Die sortierten Arrays A = [2, 8, 14, 24] und B = [5, 7, 9, 11] werden zu C zusammengeführt: A[i] und B[j] vergleichen, den kleineren Wert kopieren.",
           visual: {
             kind: "array",
-            label: "Array C",
-            values: ["", "", "", "", "", "", "", ""]
+            label: "Merging",
+            values: ["", "", "", "", "", "", "", ""],
+            arrays: [
+              { id: "a", label: "A", values: [2, 8, 14, 24] },
+              { id: "b", label: "B", values: [5, 7, 9, 11] },
+              { id: "c", label: "C", values: ["", "", "", "", "", "", "", ""] }
+            ]
           },
           steps: [
             {
               title: "2 < 5",
               text: "A[0] = 2 ist kleiner als B[0] = 5 → C[0] = 2; i wird erhöht.",
-              values: [{ kind: "array-index", index: 0, value: 2 }],
-              highlights: [{ kind: "array-index", index: 0, role: "active" }]
+              explanation: {
+                action: "Vergleiche die aktuellen Köpfe A[i] und B[j].",
+                rule: "Beim Merge wird der kleinere der beiden Werte in C[k] kopiert.",
+                decision: "2 < 5, also wird A[0] nach C[0] übernommen."
+              },
+              values: [{ kind: "array-index", array: "c", index: 0, value: 2 }],
+              highlights: [
+                { kind: "array-index", array: "a", index: 0, role: "active" },
+                { kind: "array-index", array: "b", index: 0, role: "compare" },
+                { kind: "array-index", array: "c", index: 0, role: "target" }
+              ]
             },
             {
               title: "8 > 5",
               text: "A[1] = 8 ist größer als B[0] = 5 → C[1] = 5; j wird erhöht.",
-              values: [{ kind: "array-index", index: 1, value: 5 }],
+              explanation: {
+                action: "Vergleiche A[1] mit B[0].",
+                rule: "Nach dem Kopieren wird nur der Zeiger des gewählten Arrays erhöht.",
+                decision: "5 ist kleiner als 8, also wird B[0] nach C[1] kopiert."
+              },
+              values: [{ kind: "array-index", array: "c", index: 1, value: 5 }],
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "active" }
+                { kind: "array-index", array: "a", index: 0, role: "done" },
+                { kind: "array-index", array: "a", index: 1, role: "compare" },
+                { kind: "array-index", array: "b", index: 0, role: "active" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "target" }
               ]
             },
             {
               title: "8 > 7",
               text: "B[1] = 7 ist kleiner → C[2] = 7.",
-              values: [{ kind: "array-index", index: 2, value: 7 }],
+              explanation: {
+                action: "Vergleiche A[1] mit B[1].",
+                rule: "Der kleinere Kopf wandert in die nächste freie C-Position.",
+                decision: "7 ist kleiner als 8, daher wird B[1] nach C[2] kopiert."
+              },
+              values: [{ kind: "array-index", array: "c", index: 2, value: 7 }],
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "done" },
-                { kind: "array-index", index: 2, role: "active" }
+                { kind: "array-index", array: "a", index: 1, role: "compare" },
+                { kind: "array-index", array: "b", index: 0, role: "done" },
+                { kind: "array-index", array: "b", index: 1, role: "active" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "done" },
+                { kind: "array-index", array: "c", index: 2, role: "target" }
               ]
             },
             {
               title: "8 < 9",
               text: "Jetzt ist A[1] = 8 kleiner als B[2] = 9 → C[3] = 8.",
-              values: [{ kind: "array-index", index: 3, value: 8 }],
+              explanation: {
+                action: "Vergleiche A[1] mit B[2].",
+                rule: "Die sortierten Teilarrays bleiben sichtbar; nur C wächst schrittweise.",
+                decision: "8 ist kleiner als 9, also wird A[1] nach C[3] kopiert."
+              },
+              values: [{ kind: "array-index", array: "c", index: 3, value: 8 }],
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "done" },
-                { kind: "array-index", index: 2, role: "done" },
-                { kind: "array-index", index: 3, role: "active" }
+                { kind: "array-index", array: "a", index: 0, role: "done" },
+                { kind: "array-index", array: "a", index: 1, role: "active" },
+                { kind: "array-index", array: "b", index: 0, role: "done" },
+                { kind: "array-index", array: "b", index: 1, role: "done" },
+                { kind: "array-index", array: "b", index: 2, role: "compare" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "done" },
+                { kind: "array-index", array: "c", index: 2, role: "done" },
+                { kind: "array-index", array: "c", index: 3, role: "target" }
               ]
             },
             {
               title: "14 > 9",
               text: "B[2] = 9 ist kleiner → C[4] = 9.",
-              values: [{ kind: "array-index", index: 4, value: 9 }],
+              explanation: {
+                action: "Vergleiche A[2] mit B[2].",
+                rule: "Der Merge-Schritt entscheidet immer nur zwischen den aktuellen Kopfwerten.",
+                decision: "9 ist kleiner als 14 und wird nach C[4] kopiert."
+              },
+              values: [{ kind: "array-index", array: "c", index: 4, value: 9 }],
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "done" },
-                { kind: "array-index", index: 2, role: "done" },
-                { kind: "array-index", index: 3, role: "done" },
-                { kind: "array-index", index: 4, role: "active" }
+                { kind: "array-index", array: "a", index: 2, role: "compare" },
+                { kind: "array-index", array: "b", index: 2, role: "active" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "done" },
+                { kind: "array-index", array: "c", index: 2, role: "done" },
+                { kind: "array-index", array: "c", index: 3, role: "done" },
+                { kind: "array-index", array: "c", index: 4, role: "target" }
               ]
             },
             {
               title: "14 > 11",
               text: "B[3] = 11 ist kleiner → C[5] = 11. Damit ist B erschöpft.",
-              values: [{ kind: "array-index", index: 5, value: 11 }],
+              explanation: {
+                action: "Vergleiche A[2] mit B[3].",
+                rule: "Wenn ein Teilarray erschöpft ist, wird der Rest des anderen Arrays kopiert.",
+                decision: "11 ist kleiner als 14; danach gibt es in B keinen weiteren Wert."
+              },
+              values: [{ kind: "array-index", array: "c", index: 5, value: 11 }],
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "done" },
-                { kind: "array-index", index: 2, role: "done" },
-                { kind: "array-index", index: 3, role: "done" },
-                { kind: "array-index", index: 4, role: "done" },
-                { kind: "array-index", index: 5, role: "active" }
+                { kind: "array-index", array: "a", index: 2, role: "compare" },
+                { kind: "array-index", array: "b", index: 3, role: "active" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "done" },
+                { kind: "array-index", array: "c", index: 2, role: "done" },
+                { kind: "array-index", array: "c", index: 3, role: "done" },
+                { kind: "array-index", array: "c", index: 4, role: "done" },
+                { kind: "array-index", array: "c", index: 5, role: "target" }
               ]
             },
             {
               title: "Rest von A kopieren: fertig",
               text: "Da B erschöpft ist (j >= Länge von B), werden die restlichen Werte von A übernommen: C = [2, 5, 7, 8, 9, 11, 14, 24].",
               values: [
-                { kind: "array-index", index: 6, value: 14 },
-                { kind: "array-index", index: 7, value: 24 }
+                { kind: "array-index", array: "c", index: 6, value: 14 },
+                { kind: "array-index", array: "c", index: 7, value: 24 }
               ],
+              explanation: {
+                action: "Kopiere die übrigen Werte aus A.",
+                rule: "Sobald ein Teilarray leer ist, muss nicht mehr verglichen werden.",
+                decision: "14 und 24 werden direkt nach C[6] und C[7] übernommen."
+              },
               highlights: [
-                { kind: "array-index", index: 0, role: "done" },
-                { kind: "array-index", index: 1, role: "done" },
-                { kind: "array-index", index: 2, role: "done" },
-                { kind: "array-index", index: 3, role: "done" },
-                { kind: "array-index", index: 4, role: "done" },
-                { kind: "array-index", index: 5, role: "done" },
-                { kind: "array-index", index: 6, role: "active" },
-                { kind: "array-index", index: 7, role: "active" }
+                { kind: "array-index", array: "a", index: 2, role: "active" },
+                { kind: "array-index", array: "a", index: 3, role: "active" },
+                { kind: "array-index", array: "b", index: 0, role: "done" },
+                { kind: "array-index", array: "b", index: 1, role: "done" },
+                { kind: "array-index", array: "b", index: 2, role: "done" },
+                { kind: "array-index", array: "b", index: 3, role: "done" },
+                { kind: "array-index", array: "c", index: 0, role: "done" },
+                { kind: "array-index", array: "c", index: 1, role: "done" },
+                { kind: "array-index", array: "c", index: 2, role: "done" },
+                { kind: "array-index", array: "c", index: 3, role: "done" },
+                { kind: "array-index", array: "c", index: 4, role: "done" },
+                { kind: "array-index", array: "c", index: 5, role: "done" },
+                { kind: "array-index", array: "c", index: 6, role: "target" },
+                { kind: "array-index", array: "c", index: 7, role: "target" }
               ]
             }
           ]
@@ -3189,6 +3334,10 @@ const aud = {
               {
                 id: "dp",
                 label: "S_benefit[k, w]",
+                layout: "table",
+                cornerLabel: "k/w",
+                rowLabels: [0, 1, 2, 3, 4, 5],
+                colLabels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 values: [
                   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                   [null, null, null, null, null, null, null, null, null, null, null, null, null],
@@ -3204,11 +3353,21 @@ const aud = {
             {
               title: "Basisfall k = 0",
               text: "Ohne Elemente ist der Nutzwert für jedes Gewicht 0: S_benefit[0, w] = 0 für alle w <= cmax.",
+              explanation: {
+                action: "Initialisiere die Zeile k = 0.",
+                rule: "Ohne verfügbare Elemente ist der erreichbare Nutzen für jedes Gewicht 0.",
+                decision: "Alle Spalten der ersten Zeile bleiben 0."
+              },
               highlights: [{ kind: "matrix-row", matrix: "dp", row: 0, role: "active" }]
             },
             {
               title: "Element 1 (w = 1, b = 3)",
               text: "Ab Gewicht 1 passt Element 1 in den Rucksack: der Nutzwert ist überall 3.",
+              explanation: {
+                action: "Berechne die Zeile für Element 1.",
+                rule: "Wenn wk <= w gilt: max(S[k-1,w], S[k-1,w-wk] + bk).",
+                decision: "Ab w = 1 ist Mitnehmen besser: 0 + 3 = 3."
+              },
               values: [
                 { kind: "matrix-cell", matrix: "dp", row: 1, col: 0, value: 0 },
                 { kind: "matrix-cell", matrix: "dp", row: 1, col: 1, value: 3 },
@@ -3229,6 +3388,11 @@ const aud = {
             {
               title: "Element 2 (w = 2, b = 6)",
               text: "Ab Gewicht 2 lohnt Element 2 (Wert 6), ab Gewicht 3 beide Elemente zusammen (Wert 9).",
+              explanation: {
+                action: "Berechne die Zeile für Element 2.",
+                rule: "Pro Spalte wird zwischen Weglassen und Mitnehmen entschieden.",
+                decision: "Bei w = 2 liefert Element 2 den Wert 6; ab w = 3 kommt Element 1 dazu."
+              },
               values: [
                 { kind: "matrix-cell", matrix: "dp", row: 2, col: 0, value: 0 },
                 { kind: "matrix-cell", matrix: "dp", row: 2, col: 1, value: 3 },
@@ -3249,6 +3413,11 @@ const aud = {
             {
               title: "Element 3 (w = 2, b = 3)",
               text: "Ab Gewicht 5 passen die Elemente 1-3 zusammen: Wert 12.",
+              explanation: {
+                action: "Berechne die Zeile für Element 3.",
+                rule: "Eine Zelle übernimmt entweder den alten Wert oder ergänzt Element 3.",
+                decision: "Ab w = 5 verbessert die Kombination der Elemente 1-3 den Wert auf 12."
+              },
               values: [
                 { kind: "matrix-cell", matrix: "dp", row: 3, col: 0, value: 0 },
                 { kind: "matrix-cell", matrix: "dp", row: 3, col: 1, value: 3 },
@@ -3269,6 +3438,11 @@ const aud = {
             {
               title: "Element 4 (w = 5, b = 4)",
               text: "Ab Gewicht 8 verbessert Element 4 die Lösung (13), ab Gewicht 10 sogar auf 16.",
+              explanation: {
+                action: "Berechne die Zeile für Element 4.",
+                rule: "Element 4 zählt nur, wenn seine Gewichtsbeschränkung in der Spalte erfüllt ist.",
+                decision: "Ab w = 8 verbessert Mitnehmen den Wert, sonst bleibt die vorherige Zeile maßgeblich."
+              },
               values: [
                 { kind: "matrix-cell", matrix: "dp", row: 4, col: 0, value: 0 },
                 { kind: "matrix-cell", matrix: "dp", row: 4, col: 1, value: 3 },
@@ -3289,6 +3463,11 @@ const aud = {
             {
               title: "Element 5 (w = 6, b = 6)",
               text: "Die letzte Zeile liefert das Ergebnis: S_benefit[5, 12] = 18 ist der höchstmögliche Wert im Rucksack.",
+              explanation: {
+                action: "Berechne die letzte Zeile und lies die Zielzelle ab.",
+                rule: "Die optimale Lösung für cmax steht in S_benefit[n, cmax].",
+                decision: "Für 5 Elemente und Kapazität 12 ergibt sich der beste Nutzen 18."
+              },
               values: [
                 { kind: "matrix-cell", matrix: "dp", row: 5, col: 0, value: 0 },
                 { kind: "matrix-cell", matrix: "dp", row: 5, col: 1, value: 3 },

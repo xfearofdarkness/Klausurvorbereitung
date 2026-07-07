@@ -133,6 +133,10 @@ export interface MatrixDefinition {
   id: string;
   label: string;
   values: MatrixValue[][];
+  layout?: "matrix" | "table";
+  rowLabels?: Array<number | string>;
+  colLabels?: Array<number | string>;
+  cornerLabel?: string;
 }
 
 export type MatrixValue = number | string | null;
@@ -141,7 +145,15 @@ export interface ArrayVisual {
   kind: "array";
   label?: string;
   values: Array<number | string>;
+  arrays?: ArrayDefinition[];
   /** Balkendarstellung für numerische Werte (z. B. Sortierverfahren). */
+  bars?: boolean;
+}
+
+export interface ArrayDefinition {
+  id: string;
+  label: string;
+  values: Array<number | string>;
   bars?: boolean;
 }
 
@@ -186,6 +198,7 @@ export interface WalkthroughStep {
   title: string;
   text: string;
   source?: string;
+  explanation?: WalkthroughStepExplanation;
   highlights?: WalkthroughHighlight[];
   values?: WalkthroughValueUpdate[];
   formula?: string;
@@ -193,11 +206,17 @@ export interface WalkthroughStep {
   sum?: string;
 }
 
+export interface WalkthroughStepExplanation {
+  action?: string;
+  rule?: string;
+  decision?: string;
+}
+
 export type WalkthroughHighlight =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; role: "target" | "factor" | "done" }
   | { kind: "matrix-row"; matrix: string; row: number; role: "active" }
   | { kind: "matrix-col"; matrix: string; col: number; role: "active" }
-  | { kind: "array-index"; index: number; role: "active" | "compare" | "done" | "target" }
+  | { kind: "array-index"; array?: string; index: number; role: "active" | "compare" | "done" | "target" }
   | { kind: "tree-node"; node: string; role: "active" | "compare" | "done" | "target" }
   | { kind: "tree-edge"; from: string; to: string; role: "active" | "done" }
   | { kind: "graph-node"; node: string; role: "active" | "compare" | "done" | "target" }
@@ -205,7 +224,7 @@ export type WalkthroughHighlight =
 
 export type WalkthroughValueUpdate =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; value: MatrixValue }
-  | { kind: "array-index"; index: number; value: number | string }
+  | { kind: "array-index"; array?: string; index: number; value: number | string }
   | { kind: "tree-node"; node: string; value?: number | string; hidden?: boolean; mark?: "done" | null }
   | { kind: "graph-node"; node: string; note?: string | null; mark?: "done" | null }
   | { kind: "graph-edge"; from: string; to: string; mark?: "done" | null };

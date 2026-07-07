@@ -4,7 +4,7 @@
   import ArrayWalkthrough from "./ArrayWalkthrough.svelte";
   import TreeWalkthrough from "./TreeWalkthrough.svelte";
   import GraphWalkthrough from "./GraphWalkthrough.svelte";
-  import type { Walkthrough } from "../types/content";
+  import type { Walkthrough, WalkthroughStep } from "../types/content";
 
   interface Props {
     walkthrough: Walkthrough;
@@ -17,6 +17,15 @@
 
   function setStep(index: number): void {
     stepIndex = Math.max(0, Math.min(index, stepCount - 1));
+  }
+
+  function explanationRows(step: WalkthroughStep | undefined): Array<{ label: string; value: string }> {
+    if (!step?.explanation) return [];
+    return [
+      { label: "Aktion", value: step.explanation.action },
+      { label: "Regel", value: step.explanation.rule },
+      { label: "Entscheidung", value: step.explanation.decision }
+    ].filter((entry): entry is { label: string; value: string } => typeof entry.value === "string" && entry.value.length > 0);
   }
 
   $effect(() => {
@@ -83,6 +92,16 @@
                 <span class="walk-sum">Summe: {currentStep.sum}</span>
               {/if}
             </div>
+          {/if}
+          {#if explanationRows(currentStep).length > 0}
+            <dl class="walk-explanation" aria-label="Algorithmische Erklärung">
+              {#each explanationRows(currentStep) as row}
+                <div>
+                  <dt>{row.label}</dt>
+                  <dd data-math-content>{row.value}</dd>
+                </div>
+              {/each}
+            </dl>
           {/if}
           <Source source={currentStep.source || walkthrough.source} />
         </div>

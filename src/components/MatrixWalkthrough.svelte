@@ -16,6 +16,7 @@
 
   let matrices = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.matrices : []);
   let operators = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.operators || [] : []);
+  let hasTableMatrix = $derived(matrices.some((matrix) => matrix.layout === "table"));
   let currentStep = $derived(walkthrough.steps[stepIndex]);
   let renderState = $derived(buildRenderState(matrices, walkthrough.steps, currentStep, stepIndex));
 
@@ -89,9 +90,9 @@
     return renderState.values.get(cellKey(matrix.id, row, col)) ?? null;
   }
 
-  function highlightClasses(matrix: MatrixDefinition, row: number, col: number): string {
+  function highlightClasses(matrix: MatrixDefinition, row: number, col: number, baseClass = "walk-matrix-cell"): string {
     const key = cellKey(matrix.id, row, col);
-    const classes = ["walk-matrix-cell"];
+    const classes = [baseClass];
     if (cellValue(matrix, row, col) === null) classes.push("walk-empty");
     if (renderState.done.has(key)) classes.push("walk-done");
     for (const role of renderState.roles.get(key) || []) {
@@ -100,31 +101,76 @@
     return classes.join(" ");
   }
 
-  function display(value: MatrixValue): string {
-    return value === null ? "?" : String(value);
+  function display(value: MatrixValue, emptyValue = "?"): string {
+    return value === null ? emptyValue : String(value);
+  }
+
+  function rowLabel(matrix: MatrixDefinition, row: number): string {
+    return String(matrix.rowLabels?.[row] ?? row);
+  }
+
+  function colLabel(matrix: MatrixDefinition, col: number): string {
+    return String(matrix.colLabels?.[col] ?? col);
+  }
+
+  function cellAria(matrix: MatrixDefinition, row: number, col: number): string {
+    const value = cellValue(matrix, row, col);
+    const renderedValue = value === null ? "noch offen" : String(value);
+    return `${matrix.label}, k ${rowLabel(matrix, row)}, w ${colLabel(matrix, col)}: ${renderedValue}`;
   }
 </script>
 
 {#if currentStep}
-  <div class="walk-visual walk-matrix-visual">
+  <div class:walk-table-visual={hasTableMatrix} class="walk-visual walk-matrix-visual">
     {#each matrices as matrix, matrixIndex}
-      <div class="walk-matrix-block">
+      <div class:walk-matrix-table-block={matrix.layout === "table"} class="walk-matrix-block">
         <div class="walk-matrix-title">{matrix.label}</div>
-        <div class="walk-matrix-paren">
-          <table class="walk-matrix" aria-label={matrix.label}>
-            <tbody>
-              {#each matrix.values as row, rowIndex}
+        {#if matrix.layout === "table"}
+          <div class="walk-data-table-wrap">
+            <table class="walk-data-table" aria-label={matrix.label}>
+              <thead>
                 <tr>
-                  {#each row as _, colIndex}
-                    <td class={highlightClasses(matrix, rowIndex, colIndex)}>
-                      {display(cellValue(matrix, rowIndex, colIndex))}
-                    </td>
+                  <th class="walk-table-corner" scope="col">{matrix.cornerLabel || ""}</th>
+                  {#each matrix.values[0] || [] as _, colIndex}
+                    <th class="walk-table-col-head" scope="col">{colLabel(matrix, colIndex)}</th>
                   {/each}
                 </tr>
-              {/each}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {#each matrix.values as row, rowIndex}
+                  <tr>
+                    <th class="walk-table-row-head" scope="row">{rowLabel(matrix, rowIndex)}</th>
+                    {#each row as _, colIndex}
+                      {@const value = cellValue(matrix, rowIndex, colIndex)}
+                      <td
+                        aria-label={cellAria(matrix, rowIndex, colIndex)}
+                        class={highlightClasses(matrix, rowIndex, colIndex, "walk-data-cell")}
+                      >
+                        {display(value, "")}
+                      </td>
+                    {/each}
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {:else}
+          <div class="walk-matrix-paren">
+            <table class="walk-matrix" aria-label={matrix.label}>
+              <tbody>
+                {#each matrix.values as row, rowIndex}
+                  <tr>
+                    {#each row as _, colIndex}
+                      <td class={highlightClasses(matrix, rowIndex, colIndex)}>
+                        {display(cellValue(matrix, rowIndex, colIndex))}
+                      </td>
+                    {/each}
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        {/if}
       </div>
       {#if operators[matrixIndex]}
         <div class="walk-operator">{operators[matrixIndex]}</div>
