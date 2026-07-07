@@ -2810,7 +2810,7 @@ const aud = {
               },
               values: [
                 { kind: "tree-root", root: "62" },
-                { kind: "tree-node", node: "50", right: "54" },
+                { kind: "tree-node", node: "50", right: null },
                 { kind: "tree-node", node: "62", left: "50", right: "78" },
                 { kind: "tree-node", node: "78", left: null }
               ],
@@ -2821,8 +2821,23 @@ const aud = {
               ]
             },
             {
+              title: "T2 an a anhängen",
+              text: "Der Teilbaum T2 mit 54 wird rechts an a = 50 angehängt.",
+              explanation: {
+                action: "Teilbaum T2 in die neue Formation einsetzen.",
+                rule: "a wird linkes Kind von b, wobei T1 und T2 Teilbäume von a sind.",
+                decision: "54 liegt zwischen 50 und 62, also rechts von 50."
+              },
+              values: [{ kind: "tree-node", node: "50", right: "54" }],
+              highlights: [
+                { kind: "tree-node", node: "50", role: "active" },
+                { kind: "tree-node", node: "54", role: "target" },
+                { kind: "tree-edge", from: "50", to: "54", role: "active" }
+              ]
+            },
+            {
               title: "Umstrukturierung fertig",
-              text: "Das Ergebnis ist 62 als Wurzel, 50 mit 48 und 54 links sowie 78 mit 88 rechts.",
+              text: "Das Ergebnis ist 62 als Wurzel, links 50 mit 48 und 54 sowie rechts 78 mit 88.",
               explanation: {
                 action: "Endzustand lesen.",
                 rule: "Die Suchbaum-Reihenfolge bleibt erhalten.",
