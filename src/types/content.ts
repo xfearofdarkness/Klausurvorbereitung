@@ -58,8 +58,6 @@ export interface Topic {
 export interface RawCard {
   title?: string;
   body?: string;
-  t?: string;
-  b?: string;
   tag?: ContentTag;
   source?: string;
 }
@@ -74,8 +72,6 @@ export interface Card {
 export interface RawQuestion {
   question?: string;
   answer?: string;
-  q?: string;
-  a?: string;
   source?: string;
 }
 

@@ -177,38 +177,38 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Algorithmus (Definition)",
-          back: "Abfolge eindeutiger Anweisungen zur Lösung eines Problems: erzeugt ein gewünschtes Ergebnis, für jede zulässige Eingabe, innerhalb einer endlichen Zeitspanne.",
+          front: "Was ist ein Algorithmus?",
+          back: "Ein Algorithmus ist eine Abfolge eindeutiger Anweisungen zur Lösung eines Problems: Er erzeugt ein gewünschtes Ergebnis für jede zulässige Eingabe innerhalb einer endlichen Zeitspanne.",
           source: "01_introduction.pdf, Folie 14"
         },
         {
-          front: "4 Kernkonzepte des Computational Thinking",
-          back: "Abstraktion, Dekomposition, Mustererkennung, Algorithmisierung.",
+          front: "Welche vier Kernkonzepte gehören zum Computational Thinking?",
+          back: "Die vier Kernkonzepte sind Abstraktion, Dekomposition, Mustererkennung und Algorithmisierung.",
           source: "01_introduction.pdf, Folie 6"
         },
         {
-          front: "5 Eigenschaften eines Algorithmus",
-          back: "Endlichkeit, Bestimmtheit, Eingabe, Ausgabe, Wirksamkeit.",
+          front: "Welche fünf Eigenschaften hat ein Algorithmus?",
+          back: "Ein Algorithmus hat die Eigenschaften Endlichkeit, Bestimmtheit, Eingabe, Ausgabe und Wirksamkeit.",
           source: "01_introduction.pdf, Folie 16"
         },
         {
-          front: "Dekomposition",
-          back: "Zerlegung eines komplexen Problems in kleinere, überschaubare Teile. Verwandt: Teile und Herrsche (Divide & Conquer).",
+          front: "Was bedeutet Dekomposition?",
+          back: "Dekomposition bedeutet, ein komplexes Problem in kleinere, überschaubare Teile zu zerlegen; verwandt damit ist Teile und Herrsche (Divide & Conquer).",
           source: "01_introduction.pdf, Folie 7"
         },
         {
-          front: "Datenstruktur (Definition)",
-          back: "Eine systematische Art und Weise, Daten zu organisieren und darauf zuzugreifen.",
+          front: "Was ist eine Datenstruktur?",
+          back: "Eine Datenstruktur ist eine systematische Art und Weise, Daten zu organisieren und darauf zuzugreifen.",
           source: "01_introduction.pdf, Folie 27"
         },
         {
-          front: "Entwurfsziele vs. Implementierungsziele",
-          back: "Entwurf: Korrektheit, Effizienz. Implementierung: Robustheit, Anpassungsfähigkeit, Wiederverwendbarkeit.",
+          front: "Wie unterscheiden sich Entwurfsziele und Implementierungsziele?",
+          back: "Entwurfsziele sind Korrektheit und Effizienz; Implementierungsziele sind Robustheit, Anpassungsfähigkeit und Wiederverwendbarkeit.",
           source: "01_introduction.pdf, Folien 28-31"
         },
         {
-          front: "Zeitkomplexität",
-          back: "Anzahl der Schritte (Grundoperationen), die ein Algorithmus benötigt, um ein Problem der Größe n zu lösen.",
+          front: "Was bedeutet Zeitkomplexität?",
+          back: "Zeitkomplexität ist die Anzahl der Schritte beziehungsweise Grundoperationen, die ein Algorithmus benötigt, um ein Problem der Größe n zu lösen.",
           source: "01_introduction.pdf, Folie 39"
         }
       ]
@@ -445,53 +445,53 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "ADT (Abstract Data Type)",
-          back: "Modell einer Datenstruktur: legt Eigenschaften der Datensammlung und mögliche Operationen fest, aber nicht die Implementierung.",
+          front: "Was ist ein ADT (Abstract Data Type)?",
+          back: "Ein ADT ist ein Modell einer Datenstruktur: Er legt Eigenschaften der Datensammlung und mögliche Operationen fest, aber nicht die Implementierung.",
           source: "02_abstract_data_types.pdf, Folie 44"
         },
         {
-          front: "LIFO vs. FIFO",
-          back: "Stack: last in, first out (LIFO). Queue: first in, first out (FIFO).",
+          front: "Wie unterscheiden sich LIFO und FIFO?",
+          back: "Ein Stack arbeitet nach last in, first out (LIFO); eine Queue arbeitet nach first in, first out (FIFO).",
           source: "02_abstract_data_types.pdf, Folie 148"
         },
         {
-          front: "Stack-Operationen",
-          back: "push(e), pop(), top(), isFull(), isEmpty().",
+          front: "Welche Operationen hat ein Stack?",
+          back: "Ein Stack bietet push(e), pop(), top(), isFull() und isEmpty().",
           source: "02_abstract_data_types.pdf, Folie 108"
         },
         {
-          front: "Queue-Operationen",
-          back: "enqueue(e), dequeue(), first(), size(), isFull(), isEmpty().",
+          front: "Welche Operationen hat eine Queue?",
+          back: "Eine Queue bietet enqueue(e), dequeue(), first(), size(), isFull() und isEmpty().",
           source: "02_abstract_data_types.pdf, Folie 148"
         },
         {
-          front: "Direktzugriff",
-          back: "Eigenschaft von Arrays: item[i] liefert das Element an Position i in konstanter Zeit.",
+          front: "Was bedeutet Direktzugriff bei Arrays?",
+          back: "Direktzugriff bedeutet, dass item[i] das Element an Position i in konstanter Zeit liefert.",
           source: "02_abstract_data_types.pdf, Folie 24"
         },
         {
-          front: "head und tail",
-          back: "head: Variable mit Verweis auf den ersten Knoten der verketteten Liste. tail: letzter Knoten, hat den Verweiswert null.",
+          front: "Was bedeuten head und tail in einer verketteten Liste?",
+          back: "head ist die Variable mit Verweis auf den ersten Knoten der verketteten Liste; tail ist der letzte Knoten und hat den Verweiswert null.",
           source: "02_abstract_data_types.pdf, Folie 26"
         },
         {
-          front: "header und trailer",
-          back: "Die zwei Dummy-Knoten der doppelt verketteten Liste: header ist der erste, trailer der letzte Knoten.",
+          front: "Was sind header und trailer in einer doppelt verketteten Liste?",
+          back: "header und trailer sind die zwei Dummy-Knoten der doppelt verketteten Liste: header ist der erste, trailer der letzte Knoten.",
           source: "02_abstract_data_types.pdf, Folie 39"
         },
         {
-          front: "Ringwarteschlange: Index-Formel",
-          back: "front = (front + 1) % items.length; rear = (rear + 1) % items.length.",
+          front: "Welche Index-Formel nutzt die Ringwarteschlange?",
+          back: "Die Ringwarteschlange nutzt front = (front + 1) % items.length und rear = (rear + 1) % items.length.",
           source: "02_abstract_data_types.pdf, Folie 153"
         },
         {
-          front: "ListIterator-Interface",
-          back: "hasNext(): weitere Elemente zu besuchen? next(): liefert das nächste Element und setzt den Iterator weiter.",
+          front: "Welche Methoden zeigt das ListIterator-Interface?",
+          back: "Das ListIterator-Interface zeigt hasNext(), um weitere Elemente zu prüfen, und next(), um das nächste Element zu liefern und den Iterator weiterzusetzen.",
           source: "02_abstract_data_types.pdf, Folie 96"
         },
         {
-          front: "Platzbedarf Stack-Implementierungen",
-          back: "ArrayStack: O(m), m = erwartete maximale Anzahl von Elementen. LinkedLStack: O(n), n = Anzahl der Elemente derzeit auf dem Stapel.",
+          front: "Welchen Platzbedarf haben ArrayStack und LinkedLStack?",
+          back: "ArrayStack benötigt O(m) Platz, wobei m die erwartete maximale Anzahl von Elementen ist; LinkedLStack benötigt O(n), wobei n die aktuelle Anzahl der Elemente auf dem Stapel ist.",
           source: "02_abstract_data_types.pdf, Folie 128"
         }
       ],
@@ -820,58 +820,58 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Lineare Suche: worst case",
-          back: "C(n) — jedes Element wird untersucht, bis das Ziel gefunden oder der Datensatz erschöpft ist.",
+          front: "Was passiert im Worst Case der linearen Suche?",
+          back: "Im Worst Case der linearen Suche gilt C(n): Jedes Element wird untersucht, bis das Ziel gefunden oder der Datensatz erschöpft ist.",
           source: "03_fundamental-algorithms.pdf, Folie 13"
         },
         {
-          front: "Binäre Suche: worst case",
-          back: "C(log₂n + 1) — nach jeder Iteration bleibt die Hälfte der Elemente übrig.",
+          front: "Was passiert im Worst Case der binären Suche?",
+          back: "Im Worst Case der binären Suche gilt C(log₂n + 1), weil nach jeder Iteration die Hälfte der Elemente übrig bleibt.",
           source: "03_fundamental-algorithms.pdf, Folie 25"
         },
         {
-          front: "Komplexitätsklassen (aufsteigend)",
-          back: "O(1) konstant, O(log n) logarithmisch, O(n) linear, O(n log n) linearithmisch, O(n²) quadratisch, O(nᶜ) polynomial, O(cⁿ) exponentiell, O(n!) faktoriell.",
+          front: "Wie ordnen sich die Komplexitätsklassen aufsteigend?",
+          back: "Aufsteigend sind die Klassen O(1) konstant, O(log n) logarithmisch, O(n) linear, O(n log n) linearithmisch, O(n²) quadratisch, O(nᶜ) polynomial, O(cⁿ) exponentiell und O(n!) faktoriell.",
           source: "03_fundamental-algorithms.pdf, Folie 30"
         },
         {
-          front: "Groß O / Omega / Theta",
-          back: "O: obere Schranke, Omega: untere Schranke, Theta: beides (asymptotisch).",
+          front: "Wofür stehen Groß O, Omega und Theta?",
+          back: "O steht für eine obere Schranke, Omega für eine untere Schranke und Theta asymptotisch für beides.",
           source: "03_fundamental-algorithms.pdf, Folie 36"
         },
         {
-          front: "Stabiles Sortieren",
-          back: "Datensätze mit gleichem Schlüssel behalten ihre ursprüngliche Reihenfolge.",
+          front: "Was bedeutet stabiles Sortieren?",
+          back: "Beim stabilen Sortieren behalten Datensätze mit gleichem Schlüssel ihre ursprüngliche Reihenfolge.",
           source: "03_fundamental-algorithms.pdf, Folie 49"
         },
         {
-          front: "Selection Sort: Komplexität",
-          back: "Vergleiche O(n²) in jedem Fall, Verschiebungen M(n) = 3(n-1) = O(n). Instabil.",
+          front: "Welche Komplexität hat Selection Sort?",
+          back: "Selection Sort hat in jedem Fall O(n²) Vergleiche und Verschiebungen M(n) = 3(n-1) = O(n); das Verfahren ist instabil.",
           source: "03_fundamental-algorithms.pdf, Folien 105-107"
         },
         {
-          front: "Insertion Sort: Komplexität",
-          back: "Best case O(n) (sortiertes Array, M(n) = 0), worst/average case O(n²). Stabil.",
+          front: "Welche Komplexität hat Insertion Sort?",
+          back: "Insertion Sort hat im Best Case O(n) bei sortiertem Array und M(n) = 0; im Worst und Average Case gilt O(n²), und das Verfahren ist stabil.",
           source: "03_fundamental-algorithms.pdf, Folien 135-137"
         },
         {
-          front: "Bubble Sort: Prinzip",
-          back: "Mehrere Durchläufe; je Durchlauf benachbarte Elemente tauschen, wenn sie in falscher Reihenfolge stehen. Best O(n), worst/average O(n²). Stabil.",
+          front: "Wie funktioniert Bubble Sort grundsätzlich?",
+          back: "Bubble Sort nutzt mehrere Durchläufe und tauscht je Durchlauf benachbarte Elemente, wenn sie in falscher Reihenfolge stehen; Best Case ist O(n), Worst und Average Case O(n²), und das Verfahren ist stabil.",
           source: "03_fundamental-algorithms.pdf, Folien 140, 209-211"
         },
         {
-          front: "Quicksort: Komplexität",
-          back: "Best case n·log₂n, average O(n·log₂n), worst case O(n²) (Pivot immer größter/kleinster Wert). Instabil.",
+          front: "Welche Komplexität hat Quicksort?",
+          back: "Quicksort hat im Best Case n·log₂n, im Average Case O(n·log₂n) und im Worst Case O(n²), wenn das Pivot immer größter oder kleinster Wert ist; das Verfahren ist instabil.",
           source: "03_fundamental-algorithms.pdf, Folien 328-331"
         },
         {
-          front: "Mergesort: Komplexität",
-          back: "C(n) = n·log₂n (log₂n Ebenen, je 2n Verschiebungen); O(n) zusätzlicher Speicher. Stabil.",
+          front: "Welche Komplexität hat Mergesort?",
+          back: "Für Mergesort gilt C(n) = n·log₂n mit log₂n Ebenen und je 2n Verschiebungen; zusätzlich braucht Mergesort O(n) Speicher und ist stabil.",
           source: "03_fundamental-algorithms.pdf, Folien 333, 420-421"
         },
         {
-          front: "Quicksort: Pivot-Strategien",
-          back: "Erstes/letztes Element (riskant), mittleres Element, Zufallselement, Median aus drei.",
+          front: "Welche Pivot-Strategien gibt es bei Quicksort?",
+          back: "Pivot-Strategien sind erstes oder letztes Element, was riskant ist, mittleres Element, Zufallselement und Median aus drei.",
           source: "03_fundamental-algorithms.pdf, Folie 327"
         }
       ],
@@ -1818,48 +1818,48 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Tiefe / Ebene / Höhe",
-          back: "Tiefe: Kanten bis zur Wurzel. Ebene: Knoten gleicher Tiefe. Höhe: maximale Tiefe der Knoten.",
+          front: "Wie unterscheiden sich Tiefe, Ebene und Höhe?",
+          back: "Tiefe zählt die Kanten bis zur Wurzel, eine Ebene enthält Knoten gleicher Tiefe, und die Höhe ist die maximale Tiefe der Knoten.",
           source: "04_tree_structures.pdf, Folien 14-18"
         },
         {
-          front: "Blattknoten",
-          back: "Knoten ohne Kinder (innerer Knoten: mit einem oder mehreren Kindern).",
+          front: "Was ist ein Blattknoten?",
+          back: "Ein Blattknoten ist ein Knoten ohne Kinder; ein innerer Knoten hat dagegen ein oder mehrere Kinder.",
           source: "04_tree_structures.pdf, Folie 11"
         },
         {
-          front: "Strikter (proper) Binärbaum",
-          back: "Jeder Knoten hat entweder null oder zwei Kinder.",
+          front: "Was ist ein strikter beziehungsweise proper Binärbaum?",
+          back: "Ein strikter beziehungsweise proper Binärbaum ist ein Binärbaum, in dem jeder Knoten entweder null oder zwei Kinder hat.",
           source: "04_tree_structures.pdf, Folie 22"
         },
         {
-          front: "Preorder",
-          back: "Wurzel → linker Teilbaum → rechter Teilbaum.",
+          front: "In welcher Reihenfolge läuft Preorder?",
+          back: "Preorder besucht zuerst die Wurzel, dann den linken Teilbaum und danach den rechten Teilbaum.",
           source: "04_tree_structures.pdf, Folie 127"
         },
         {
-          front: "Inorder",
-          back: "Linker Teilbaum → Wurzel → rechter Teilbaum.",
+          front: "In welcher Reihenfolge läuft Inorder?",
+          back: "Inorder besucht zuerst den linken Teilbaum, dann die Wurzel und danach den rechten Teilbaum.",
           source: "04_tree_structures.pdf, Folie 127"
         },
         {
-          front: "Postorder",
-          back: "Linker Teilbaum → rechter Teilbaum → Wurzel.",
+          front: "In welcher Reihenfolge läuft Postorder?",
+          back: "Postorder besucht zuerst den linken Teilbaum, dann den rechten Teilbaum und danach die Wurzel.",
           source: "04_tree_structures.pdf, Folie 127"
         },
         {
-          front: "Level-Order",
-          back: "Von oben nach unten, links nach rechts — implementiert mit einer Queue.",
+          front: "In welcher Reihenfolge läuft Level-Order?",
+          back: "Level-Order besucht von oben nach unten und links nach rechts; implementiert wird sie mit einer Queue.",
           source: "04_tree_structures.pdf, Folien 126-127"
         },
         {
-          front: "Binärer Suchbaum (Eigenschaft)",
-          back: "Linker Teilbaum von k: alle Knoten < k. Rechter Teilbaum: alle Knoten > k.",
+          front: "Welche Eigenschaft hat ein binärer Suchbaum?",
+          back: "Im binären Suchbaum enthält der linke Teilbaum von k nur Knoten kleiner k und der rechte Teilbaum nur Knoten größer k.",
           source: "04_tree_structures.pdf, Folie 132"
         },
         {
-          front: "BST: Suche worst case",
-          back: "O(h) — h ist die Höhe des Baumes.",
+          front: "Welche Worst-Case-Komplexität hat die Suche im BST?",
+          back: "Die Suche im BST hat im Worst Case O(h), wobei h die Höhe des Baumes ist.",
           source: "04_tree_structures.pdf, Folie 163"
         }
       ],
@@ -2543,48 +2543,48 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "bal(T)",
-          back: "h(T_RIGHT) − h(T_LEFT) — Differenz der Teilbaumhöhen.",
+          front: "Wie ist bal(T) definiert?",
+          back: "bal(T) ist h(T_RIGHT) − h(T_LEFT), also die Differenz der Teilbaumhöhen.",
           source: "05_balanced_trees.pdf, Folie 6"
         },
         {
-          front: "AVL-Bedingung",
-          back: "Für jeden Knoten N: bal(N) ∈ {−1, 0, +1}.",
+          front: "Welche AVL-Bedingung muss jeder Knoten erfüllen?",
+          back: "Für jeden Knoten N muss gelten: bal(N) ∈ {−1, 0, +1}.",
           source: "05_balanced_trees.pdf, Folie 7"
         },
         {
-          front: "Höhe eines ausgeglichenen BST",
-          back: "O(log₂n) — beste Worst-Case-Zeit für binäre Suchbäume.",
+          front: "Welche Höhe hat ein ausgeglichener BST?",
+          back: "Ein ausgeglichener BST hat Höhe O(log₂n), also die beste Worst-Case-Zeit für binäre Suchbäume.",
           source: "05_balanced_trees.pdf, Folie 8"
         },
         {
-          front: "Degenerierter BST",
-          back: "Entspricht einer verketteten Liste: Höhe n−1, worst case O(n).",
+          front: "Was ist ein degenerierter BST?",
+          back: "Ein degenerierter BST entspricht einer verketteten Liste: Er hat Höhe n−1 und Worst Case O(n).",
           source: "05_balanced_trees.pdf, Folie 12"
         },
         {
-          front: "Rotation",
-          back: "Untergeordnetes Element über sein übergeordnetes tauschen; einfach (1 Tausch) oder doppelt (2 Tausche).",
+          front: "Was passiert bei einer Rotation?",
+          back: "Bei einer Rotation wird ein untergeordnetes Element über sein übergeordnetes getauscht; sie ist einfach mit einem Tausch oder doppelt mit zwei Tauschen.",
           source: "05_balanced_trees.pdf, Folien 14-19"
         },
         {
-          front: "(2,4)-Baum: Knotentypen",
-          back: "2-Knoten: 1 Element, 0/2 Kinder. 3-Knoten: 2 Elemente, 0/3 Kinder. 4-Knoten: 3 Elemente, 0/4 Kinder.",
+          front: "Welche Knotentypen hat ein (2,4)-Baum?",
+          back: "Ein (2,4)-Baum hat 2-Knoten mit 1 Element und 0 oder 2 Kindern, 3-Knoten mit 2 Elementen und 0 oder 3 Kindern sowie 4-Knoten mit 3 Elementen und 0 oder 4 Kindern.",
           source: "05_balanced_trees.pdf, Folie 36"
         },
         {
-          front: "(2,4)-Baum: Operationen-Komplexität",
-          back: "Einfügen und Löschen jeweils O(log₂n).",
+          front: "Welche Komplexität haben Einfügen und Löschen im (2,4)-Baum?",
+          back: "Einfügen und Löschen im (2,4)-Baum dauern jeweils O(log₂n).",
           source: "05_balanced_trees.pdf, Folien 53, 73"
         },
         {
-          front: "B-Baum der Ordnung m",
-          back: "Höchstens 2m, mindestens m Einträge pro Knoten (Ausnahme Wurzel); Höhe O(log_m n).",
+          front: "Was gilt für einen B-Baum der Ordnung m?",
+          back: "Ein B-Baum der Ordnung m hat höchstens 2m und mindestens m Einträge pro Knoten, mit Ausnahme der Wurzel; seine Höhe ist O(log_m n).",
           source: "05_balanced_trees.pdf, Folien 76, 106"
         },
         {
-          front: "Transfer vs. Fusion",
-          back: "Unterlauf beim (2,4)-Löschen: Geschwister 3-/4-Knoten → Übertragung; Geschwister 2-Knoten → Fusion.",
+          front: "Wann nutzt man beim (2,4)-Löschen Transfer oder Fusion?",
+          back: "Bei Unterlauf nutzt man Transfer, wenn ein Geschwister ein 3- oder 4-Knoten ist; bei einem Geschwister als 2-Knoten nutzt man Fusion.",
           source: "05_balanced_trees.pdf, Folie 55"
         }
       ],
@@ -3046,53 +3046,53 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Vollständiger Binärbaum",
-          back: "Ebenen 0 bis h−1 voll belegt, keine Lücken links auf Ebene h.",
+          front: "Was ist ein vollständiger Binärbaum?",
+          back: "In einem vollständigen Binärbaum sind die Ebenen 0 bis h−1 voll belegt, und auf Ebene h gibt es links keine Lücken.",
           source: "06_heaps_hash-tables.pdf, Folien 3-5"
         },
         {
-          front: "Heap-Navigation im Array",
-          back: "Linkes Kind: a[2i+1], rechtes Kind: a[2i+2], Eltern: a[(i−1)/2].",
+          front: "Wie navigiert man in einem Heap-Array?",
+          back: "Im Heap-Array ist das linke Kind a[2i+1], das rechte Kind a[2i+2] und das Elternteil a[(i−1)/2].",
           source: "06_heaps_hash-tables.pdf, Folie 10"
         },
         {
-          front: "Min-at-top Heap",
-          back: "Vollständiger Binärbaum; jeder innere Knoten <= seinen Kindern; Minimum an der Wurzel.",
+          front: "Was kennzeichnet einen Min-at-top Heap?",
+          back: "Ein Min-at-top Heap ist ein vollständiger Binärbaum, in dem jeder innere Knoten kleiner oder gleich seinen Kindern ist; das Minimum steht an der Wurzel.",
           source: "06_heaps_hash-tables.pdf, Folie 12"
         },
         {
-          front: "Heap: Komplexitäten",
-          back: "insert und remove O(log₂n), makeHeap O(n), Höhe <= log₂n.",
+          front: "Welche Komplexitäten hat ein Heap?",
+          back: "Beim Heap dauern insert und remove O(log₂n), makeHeap dauert O(n), und die Höhe ist höchstens log₂n.",
           source: "06_heaps_hash-tables.pdf, Folie 49"
         },
         {
-          front: "Heapsort: Komplexität",
-          back: "O(n·log₂n) in allen Fällen; instabil; bessere Raumkomplexität als Mergesort.",
+          front: "Welche Komplexität hat Heapsort?",
+          back: "Heapsort hat in allen Fällen O(n·log₂n), ist instabil und hat eine bessere Raumkomplexität als Mergesort.",
           source: "06_heaps_hash-tables.pdf, Folie 68"
         },
         {
-          front: "Hash-Funktion",
-          back: "Bildet Schlüsselwerte auf ganze Zahlen 0 bis n−1 ab; h(key) = Hash-Code.",
+          front: "Was macht eine Hash-Funktion?",
+          back: "Eine Hash-Funktion bildet Schlüsselwerte auf ganze Zahlen von 0 bis n−1 ab; h(key) ist der Hash-Code.",
           source: "06_heaps_hash-tables.pdf, Folie 72"
         },
         {
-          front: "Kollision",
-          back: "Unterschiedliche Schlüssel erhalten denselben Hash-Code.",
+          front: "Was ist eine Kollision beim Hashing?",
+          back: "Eine Kollision liegt vor, wenn unterschiedliche Schlüssel denselben Hash-Code erhalten.",
           source: "06_heaps_hash-tables.pdf, Folie 72"
         },
         {
-          front: "Sondierungsverfahren",
-          back: "Linear: +1, +2, … Quadratisch: +1², +2², … Doppeltes Hashing: Schrittwert aus h2.",
+          front: "Welche Sondierungsverfahren nennen die Folien?",
+          back: "Die Folien nennen lineares Sondieren mit +1, +2, ..., quadratisches Sondieren mit +1², +2², ... und doppeltes Hashing mit Schrittwert aus h2.",
           source: "06_heaps_hash-tables.pdf, Folien 76-86"
         },
         {
-          front: "Auslastungsgrad-Richtwerte",
-          back: "Offene Adressierung: < ½. Separate Verkettung: < 1.",
+          front: "Welche Richtwerte gelten für den Auslastungsgrad?",
+          back: "Bei offener Adressierung soll der Auslastungsgrad unter ½ bleiben, bei separater Verkettung unter 1.",
           source: "06_heaps_hash-tables.pdf, Folie 96"
         },
         {
-          front: "Hash-Tabelle: worst case",
-          back: "Offene Adressierung O(m) (Tabellengröße), separate Verkettung O(n) (Anzahl Schlüssel); best case O(1).",
+          front: "Welche Worst-Case-Komplexität hat eine Hash-Tabelle?",
+          back: "Bei offener Adressierung ist der Worst Case O(m) mit m als Tabellengröße, bei separater Verkettung O(n) mit n als Anzahl der Schlüssel; der Best Case ist O(1).",
           source: "06_heaps_hash-tables.pdf, Folie 99"
         }
       ],
@@ -3326,43 +3326,43 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Graph G",
-          back: "G = (V, E): Menge von Knoten (Vertices) und Menge von Kanten (Edges).",
+          front: "Wie ist ein Graph G definiert?",
+          back: "Ein Graph G ist G = (V, E): V ist die Menge von Knoten (Vertices), E die Menge von Kanten (Edges).",
           source: "07_graphs.pdf, Folie 4"
         },
         {
-          front: "Adjazent",
-          back: "Zwei Knoten sind benachbart, wenn sie durch eine einzelne Kante verbunden sind.",
+          front: "Wann sind zwei Knoten adjazent?",
+          back: "Zwei Knoten sind adjazent beziehungsweise benachbart, wenn sie durch eine einzelne Kante verbunden sind.",
           source: "07_graphs.pdf, Folie 6"
         },
         {
-          front: "Zusammenhängend / vollständig",
-          back: "Zusammenhängend: Pfad zwischen beliebigen Knoten. Vollständig: Kante zwischen jedem Knotenpaar.",
+          front: "Was bedeuten zusammenhängend und vollständig bei Graphen?",
+          back: "Ein Graph ist zusammenhängend, wenn zwischen beliebigen Knoten ein Pfad existiert; er ist vollständig, wenn zwischen jedem Knotenpaar eine Kante existiert.",
           source: "07_graphs.pdf, Folie 8"
         },
         {
-          front: "Spannbaum",
-          back: "Teilmenge eines zusammenhängenden Graphen: alle Knoten + Kanten-Teilmenge, die einen Baum bildet.",
+          front: "Was ist ein Spannbaum?",
+          back: "Ein Spannbaum ist eine Teilmenge eines zusammenhängenden Graphen mit allen Knoten und einer Kanten-Teilmenge, die einen Baum bildet.",
           source: "07_graphs.pdf, Folie 15"
         },
         {
-          front: "Adjazenz-Matrix vs. -Liste",
-          back: "Matrix: gut für dichte Graphen. Liste: gut für spärliche Graphen.",
+          front: "Wann nutzt man Adjazenz-Matrix oder Adjazenz-Liste?",
+          back: "Eine Adjazenz-Matrix ist gut für dichte Graphen, eine Adjazenz-Liste für spärliche Graphen.",
           source: "07_graphs.pdf, Folien 23-25"
         },
         {
-          front: "Tiefensuche",
-          back: "Rekursiv: Knoten besuchen, markieren, dann für jeden unbesuchten Nachbarn rekursiv weitersuchen.",
+          front: "Wie funktioniert Tiefensuche?",
+          back: "Tiefensuche besucht rekursiv einen Knoten, markiert ihn und sucht dann für jeden unbesuchten Nachbarn rekursiv weiter.",
           source: "07_graphs.pdf, Folien 30-47"
         },
         {
-          front: "Breitensuche",
-          back: "Mit Queue: Startknoten einfügen; wiederholt entnehmen, besuchen und unbesuchte Nachbarn einfügen.",
+          front: "Wie funktioniert Breitensuche?",
+          back: "Breitensuche arbeitet mit einer Queue: Startknoten einfügen, wiederholt entnehmen, besuchen und unbesuchte Nachbarn einfügen.",
           source: "07_graphs.pdf, Folien 60-73"
         },
         {
-          front: "Baum (graphentheoretisch)",
-          back: "Zusammenhängender, ungerichteter, azyklischer Graph.",
+          front: "Was ist ein Baum graphentheoretisch?",
+          back: "Graphentheoretisch ist ein Baum ein zusammenhängender, ungerichteter und azyklischer Graph.",
           source: "07_graphs.pdf, Folie 13"
         }
       ],
@@ -3570,38 +3570,38 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Topologische Ordnung",
-          back: "Knotenordnung eines DAG: existiert Kante a → b, kommt a vor b.",
+          front: "Was ist eine topologische Ordnung?",
+          back: "Eine topologische Ordnung ist eine Knotenordnung eines DAG: Existiert eine Kante a → b, kommt a vor b.",
           source: "08_graph-algorithms.pdf, Folie 5"
         },
         {
-          front: "Topologisch sortieren: 2 Verfahren",
-          back: "Rückwärts: Knoten ohne unbesuchte Nachfolger auf Stack. Vorwärts: Knoten ohne eingehende Kanten in Queue, Kanten entfernen.",
+          front: "Welche zwei Verfahren zum topologischen Sortieren nennen die Folien?",
+          back: "Rückwärts legt man Knoten ohne unbesuchte Nachfolger auf einen Stack; vorwärts legt man Knoten ohne eingehende Kanten in eine Queue und entfernt Kanten.",
           source: "08_graph-algorithms.pdf, Folien 6-46"
         },
         {
-          front: "MST",
-          back: "Spannbaum mit den geringsten Gesamtkosten; eindeutig, wenn alle Kantenkosten verschieden sind.",
+          front: "Was ist ein MST?",
+          back: "Ein MST ist ein Spannbaum mit den geringsten Gesamtkosten; er ist eindeutig, wenn alle Kantenkosten verschieden sind.",
           source: "08_graph-algorithms.pdf, Folie 48"
         },
         {
-          front: "MST-Schnitteigenschaft",
-          back: "Die günstigste Kante zwischen zwei disjunkten Knotenmengen A und B gehört zum MST.",
+          front: "Was besagt die MST-Schnitteigenschaft?",
+          back: "Die MST-Schnitteigenschaft besagt, dass die günstigste Kante zwischen zwei disjunkten Knotenmengen A und B zum MST gehört.",
           source: "08_graph-algorithms.pdf, Folie 49"
         },
         {
-          front: "Prim-Jarnik: Eingabe/Ausgabe",
-          back: "Eingabe: ungerichteter, gewichteter, zusammenhängender Graph + Startknoten. Ausgabe: minimaler Spannbaum.",
+          front: "Welche Eingabe und Ausgabe hat Prim-Jarnik?",
+          back: "Prim-Jarnik erhält einen ungerichteten, gewichteten, zusammenhängenden Graphen plus Startknoten als Eingabe und liefert einen minimalen Spannbaum.",
           source: "08_graph-algorithms.pdf, Folie 50"
         },
         {
-          front: "MST vs. kürzester Pfad",
-          back: "Der MST enthält nicht unbedingt den kostengünstigsten Weg zwischen zwei Knoten.",
+          front: "Enthält ein MST immer den kürzesten Pfad?",
+          back: "Nein, der MST enthält nicht unbedingt den kostengünstigsten Weg zwischen zwei Knoten.",
           source: "08_graph-algorithms.pdf, Folie 99"
         },
         {
-          front: "Dijkstra",
-          back: "Kürzeste Wege vom Startknoten zu allen erreichbaren Knoten in einem Graphen mit nicht-negativen Kantengewichten.",
+          front: "Was berechnet Dijkstra?",
+          back: "Dijkstra berechnet kürzeste Wege vom Startknoten zu allen erreichbaren Knoten in einem Graphen mit nicht-negativen Kantengewichten.",
           source: "08_graph-algorithms.pdf, Folien 102-103"
         }
       ],
@@ -4104,48 +4104,48 @@ const aud = {
       ],
       flashcards: [
         {
-          front: "Brute-Force",
-          back: "Alle möglichen Lösungen durchprobieren, bis die richtige gefunden ist; aufwendig, manchmal einziges Mittel.",
+          front: "Was bedeutet Brute-Force?",
+          back: "Brute-Force bedeutet, alle möglichen Lösungen durchzuprobieren, bis die richtige gefunden ist; das ist aufwendig, aber manchmal das einzige Mittel.",
           source: "09_algorithm-patterns.pdf, Folie 4"
         },
         {
-          front: "Backtracking",
-          back: "Teillösung ausbauen; in der Sackgasse letzte Schritte rückgängig machen und anders weiterprobieren.",
+          front: "Wie funktioniert Backtracking?",
+          back: "Backtracking baut eine Teillösung aus; in der Sackgasse werden letzte Schritte rückgängig gemacht und anders weiterprobiert.",
           source: "09_algorithm-patterns.pdf, Folie 8"
         },
         {
-          front: "Greedy",
-          back: "In jeder Phase die lokal beste Wahl; keine Garantie fürs globale Optimum.",
+          front: "Was bedeutet Greedy?",
+          back: "Greedy wählt in jeder Phase die lokal beste Wahl, gibt aber keine Garantie für das globale Optimum.",
           source: "09_algorithm-patterns.pdf, Folien 14-18"
         },
         {
-          front: "Dynamische Programmierung",
-          back: "Teillösungen speichern und wiederverwenden; von kleinen zu großen Teilproblemen (Bellman, 1940er).",
+          front: "Was ist dynamische Programmierung?",
+          back: "Dynamische Programmierung speichert Teillösungen und verwendet sie wieder; sie arbeitet von kleinen zu großen Teilproblemen.",
           source: "09_algorithm-patterns.pdf, Folie 19"
         },
         {
-          front: "Türme von Hanoi: Komplexität",
-          back: "Zeit O(2ⁿ), zusätzlicher Platz O(n) (Aufruf-Stack).",
+          front: "Welche Komplexität haben die Türme von Hanoi?",
+          back: "Die Türme von Hanoi haben Zeit O(2ⁿ) und zusätzlichen Platz O(n) für den Aufruf-Stack.",
           source: "09_algorithm-patterns.pdf, Folie 7"
         },
         {
-          front: "Fibonacci-Folge",
-          back: "fib(0) = 0, fib(1) = 1, fib(n) = fib(n−1) + fib(n−2): 0, 1, 1, 2, 3, 5, 8, 13, 21, …",
+          front: "Wie ist die Fibonacci-Folge definiert?",
+          back: "Die Fibonacci-Folge ist definiert durch fib(0) = 0, fib(1) = 1 und fib(n) = fib(n−1) + fib(n−2); sie beginnt mit 0, 1, 1, 2, 3, 5, 8, 13, 21, …",
           source: "09_algorithm-patterns.pdf, Folie 20"
         },
         {
-          front: "Rucksack-DP: Formel",
-          back: "S[k,w] = S[k−1,w] falls wk > w, sonst max{S[k−1,w], S[k−1,w−wk] + bk}; Laufzeit O(n·cmax).",
+          front: "Wie lautet die Formel für Rucksack-DP?",
+          back: "Für Rucksack-DP gilt S[k,w] = S[k−1,w], falls wk > w, sonst max{S[k−1,w], S[k−1,w−wk] + bk}; die Laufzeit ist O(n·cmax).",
           source: "09_algorithm-patterns.pdf, Folien 24-25, 56"
         },
         {
-          front: "Edit-Distanz: Rekursion",
-          back: "d(i,j) = min{d(i,j−1)+1, d(i−1,j)+1, d(i−1,j−1)+t(i,j)}, t = 0 bei gleichen Zeichen, sonst 1.",
+          front: "Wie lautet die Rekursion der Edit-Distanz?",
+          back: "Für die Edit-Distanz gilt d(i,j) = min{d(i,j−1)+1, d(i−1,j)+1, d(i−1,j−1)+t(i,j)}, wobei t = 0 bei gleichen Zeichen und sonst 1 ist.",
           source: "09_algorithm-patterns.pdf, Folie 64"
         },
         {
-          front: "Traceback-Richtungen",
-          back: "Diagonal: Match/Mismatch. Vertikal: Einfügung. Horizontal: Löschung.",
+          front: "Wofür stehen die Traceback-Richtungen?",
+          back: "Beim Traceback steht diagonal für Match oder Mismatch, vertikal für Einfügung und horizontal für Löschung.",
           source: "09_algorithm-patterns.pdf, Folie 67"
         }
       ],
@@ -4321,5 +4321,4 @@ const aud = {
     }
   ]
 } satisfies RawSubject;
-
 export default aud;

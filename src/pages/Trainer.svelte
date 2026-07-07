@@ -309,13 +309,8 @@
   <a class="home-link" href="index.html">← Übersicht</a>
   <div class="header-meta">
     <div class="logo" id="subjectTitle">
-      {#if subject}
-        {subject.icon} {subject.title} Klausurtrainer
-      {:else}
-        Klausurtrainer
-      {/if}
+      {subject?.title || "Klausurtrainer"}
     </div>
-    <div class="subtitle" id="subjectSubtitle">{subject?.subtitle || "Statische Lernseite für GitHub Pages"}</div>
   </div>
   {#if subject}
     <ModeSwitcher modes={availableModes} {currentMode} onSelect={selectMode} />

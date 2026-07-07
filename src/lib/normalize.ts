@@ -44,8 +44,8 @@ function normalizeTopic(topic: RawTopic, index: number): Topic {
 
 function normalizeCard(card: RawCard): Card {
   return {
-    title: card.title || card.t || "",
-    body: card.body || card.b || "",
+    title: card.title || "",
+    body: card.body || "",
     tag: card.tag || "",
     source: card.source || ""
   };
@@ -53,8 +53,8 @@ function normalizeCard(card: RawCard): Card {
 
 function normalizeQuestion(question: RawQuestion): Question {
   return {
-    question: question.question || question.q || "",
-    answer: question.answer || question.a || "",
+    question: question.question || "",
+    answer: question.answer || "",
     source: question.source || ""
   };
 }

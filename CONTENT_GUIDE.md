@@ -172,7 +172,7 @@ Pflicht:
 
 - `id`, `title`, `topics`
 - stabile Topic-IDs
-- konsistente Feldnamen
+- konsistente Langfelder: `title`/`body` für Lernkarten und `question`/`answer` für Fragen; Kurzfelder `t`/`b`/`q`/`a` sind nicht erlaubt
 - `source` bei jedem Eintrag
 
 Optional:
