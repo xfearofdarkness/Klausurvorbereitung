@@ -116,11 +116,11 @@ export interface Walkthrough {
   title: string;
   source: string;
   intro?: string;
-  visual: MatrixVisual | ArrayVisual;
+  visual: MatrixVisual | ArrayVisual | TreeVisual | GraphVisual;
   steps: WalkthroughStep[];
 }
 
-export type WalkthroughVisualKind = "matrix" | "array";
+export type WalkthroughVisualKind = "matrix" | "array" | "tree" | "graph";
 
 export interface MatrixVisual {
   kind: "matrix";
@@ -141,6 +141,43 @@ export interface ArrayVisual {
   values: Array<number | string>;
 }
 
+export interface TreeVisual {
+  kind: "tree";
+  label?: string;
+  root: string;
+  nodes: TreeNodeDefinition[];
+}
+
+export interface TreeNodeDefinition {
+  id: string;
+  value: number | string;
+  left?: string;
+  right?: string;
+  hidden?: boolean;
+}
+
+export interface GraphVisual {
+  kind: "graph";
+  label?: string;
+  directed?: boolean;
+  nodes: GraphNodeDefinition[];
+  edges: GraphEdgeDefinition[];
+}
+
+export interface GraphNodeDefinition {
+  id: string;
+  label?: string;
+  note?: string;
+  x: number;
+  y: number;
+}
+
+export interface GraphEdgeDefinition {
+  from: string;
+  to: string;
+  label?: string;
+}
+
 export interface WalkthroughStep {
   title: string;
   text: string;
@@ -156,11 +193,18 @@ export type WalkthroughHighlight =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; role: "target" | "factor" | "done" }
   | { kind: "matrix-row"; matrix: string; row: number; role: "active" }
   | { kind: "matrix-col"; matrix: string; col: number; role: "active" }
-  | { kind: "array-index"; index: number; role: "active" | "compare" | "done" };
+  | { kind: "array-index"; index: number; role: "active" | "compare" | "done" }
+  | { kind: "tree-node"; node: string; role: "active" | "compare" | "done" | "target" }
+  | { kind: "tree-edge"; from: string; to: string; role: "active" | "done" }
+  | { kind: "graph-node"; node: string; role: "active" | "compare" | "done" | "target" }
+  | { kind: "graph-edge"; from: string; to: string; role: "active" | "done" };
 
 export type WalkthroughValueUpdate =
   | { kind: "matrix-cell"; matrix: string; row: number; col: number; value: MatrixValue }
-  | { kind: "array-index"; index: number; value: number | string };
+  | { kind: "array-index"; index: number; value: number | string }
+  | { kind: "tree-node"; node: string; value?: number | string; hidden?: boolean; mark?: "done" | null }
+  | { kind: "graph-node"; node: string; note?: string | null; mark?: "done" | null }
+  | { kind: "graph-edge"; from: string; to: string; mark?: "done" | null };
 
 export interface ModeConfig {
   id: ModeId;

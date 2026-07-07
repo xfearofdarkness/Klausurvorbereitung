@@ -3,11 +3,13 @@
 import { catalog, subjectLoaders } from "../src/data/catalog";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
+  GraphVisual,
   MatrixDefinition,
   RawSubject,
   Subject,
   SubjectId,
   Topic,
+  TreeVisual,
   Walkthrough,
   WalkthroughHighlight,
   WalkthroughValueUpdate
@@ -149,7 +151,7 @@ function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkt
   requireSource(topicLabel, "walkthrough", walkthroughIndex, walkthrough.source);
   validateHtmlField(`${label}.intro`, walkthrough.intro || "");
 
-  if (!walkthrough.visual || !["matrix", "array"].includes(walkthrough.visual.kind)) {
+  if (!walkthrough.visual || !["matrix", "array", "tree", "graph"].includes(walkthrough.visual.kind)) {
     fail(`${label} has unsupported visual kind.`);
     return;
   }
@@ -172,6 +174,16 @@ function validateWalkthrough(topicLabel: string, walkthrough: Walkthrough, walkt
 }
 
 function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): void {
+  if (walkthrough.visual.kind === "tree") {
+    validateTreeVisual(label, walkthrough.visual);
+    return;
+  }
+
+  if (walkthrough.visual.kind === "graph") {
+    validateGraphVisual(label, walkthrough.visual);
+    return;
+  }
+
   if (walkthrough.visual.kind === "matrix") {
     if (!Array.isArray(walkthrough.visual.matrices) || walkthrough.visual.matrices.length === 0) {
       fail(`${label} matrix visual must contain at least one matrix.`);
@@ -200,6 +212,104 @@ function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): voi
   }
 }
 
+function validateTreeVisual(label: string, visual: TreeVisual): void {
+  if (!Array.isArray(visual.nodes) || visual.nodes.length === 0) {
+    fail(`${label} tree visual must contain at least one node.`);
+    return;
+  }
+
+  const nodeIds = new Set<string>();
+  visual.nodes.forEach((node, nodeIndex) => {
+    const nodeLabel = `${label} visual.nodes[${nodeIndex}]`;
+    if (!node.id || node.value === undefined) {
+      fail(`${nodeLabel} is missing id/value.`);
+      return;
+    }
+    if (nodeIds.has(node.id)) {
+      fail(`${nodeLabel} has duplicate id "${node.id}".`);
+    }
+    nodeIds.add(node.id);
+  });
+
+  if (!visual.root || !nodeIds.has(visual.root)) {
+    fail(`${label} tree visual references unknown root "${visual.root}".`);
+  }
+
+  const childIds = new Set<string>();
+  visual.nodes.forEach((node, nodeIndex) => {
+    const nodeLabel = `${label} visual.nodes[${nodeIndex}]`;
+    for (const childId of [node.left, node.right]) {
+      if (childId === undefined) continue;
+      if (!nodeIds.has(childId)) {
+        fail(`${nodeLabel} references unknown child "${childId}".`);
+        continue;
+      }
+      if (childId === node.id || childIds.has(childId) || childId === visual.root) {
+        fail(`${nodeLabel} child "${childId}" breaks the tree structure.`);
+        continue;
+      }
+      childIds.add(childId);
+    }
+  });
+
+  for (const nodeId of nodeIds) {
+    if (nodeId !== visual.root && !childIds.has(nodeId)) {
+      fail(`${label} tree node "${nodeId}" is not reachable from the root.`);
+    }
+  }
+}
+
+function validateGraphVisual(label: string, visual: GraphVisual): void {
+  if (!Array.isArray(visual.nodes) || visual.nodes.length === 0) {
+    fail(`${label} graph visual must contain at least one node.`);
+    return;
+  }
+
+  const nodeIds = new Set<string>();
+  visual.nodes.forEach((node, nodeIndex) => {
+    const nodeLabel = `${label} visual.nodes[${nodeIndex}]`;
+    if (!node.id) {
+      fail(`${nodeLabel} is missing id.`);
+      return;
+    }
+    if (nodeIds.has(node.id)) {
+      fail(`${nodeLabel} has duplicate id "${node.id}".`);
+    }
+    nodeIds.add(node.id);
+    if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) {
+      fail(`${nodeLabel} is missing numeric x/y coordinates.`);
+    }
+  });
+
+  if (!Array.isArray(visual.edges)) {
+    fail(`${label} graph visual field "edges" must be an array.`);
+    return;
+  }
+
+  visual.edges.forEach((edge, edgeIndex) => {
+    const edgeLabel = `${label} visual.edges[${edgeIndex}]`;
+    if (!nodeIds.has(edge.from) || !nodeIds.has(edge.to)) {
+      fail(`${edgeLabel} references unknown node "${edge.from}"/"${edge.to}".`);
+    }
+  });
+}
+
+function graphHasEdge(visual: GraphVisual, from: string, to: string): boolean {
+  return visual.edges.some(
+    (edge) =>
+      (edge.from === from && edge.to === to) ||
+      (!visual.directed && edge.from === to && edge.to === from)
+  );
+}
+
+function treeNodeIds(visual: TreeVisual): Set<string> {
+  return new Set(visual.nodes.map((node) => node.id));
+}
+
+function treeHasEdge(visual: TreeVisual, from: string, to: string): boolean {
+  return visual.nodes.some((node) => node.id === from && (node.left === to || node.right === to));
+}
+
 function validateMatrixShape(label: string, matrix: MatrixDefinition): void {
   if (!Array.isArray(matrix.values) || matrix.values.length === 0) {
     fail(`${label}.values must contain at least one row.`);
@@ -226,6 +336,40 @@ function validateWalkthroughHighlight(
   highlightIndex: number
 ): void {
   const highlightLabel = `${label} step[${stepIndex}].highlights[${highlightIndex}]`;
+  if (walkthrough.visual.kind === "tree") {
+    if (highlight.kind === "tree-node") {
+      if (!treeNodeIds(walkthrough.visual).has(highlight.node)) {
+        fail(`${highlightLabel} references unknown tree node "${highlight.node}".`);
+      }
+      return;
+    }
+    if (highlight.kind === "tree-edge") {
+      if (!treeHasEdge(walkthrough.visual, highlight.from, highlight.to)) {
+        fail(`${highlightLabel} references unknown tree edge "${highlight.from}" -> "${highlight.to}".`);
+      }
+      return;
+    }
+    fail(`${highlightLabel} uses ${highlight.kind} highlight in tree visual.`);
+    return;
+  }
+
+  if (walkthrough.visual.kind === "graph") {
+    if (highlight.kind === "graph-node") {
+      if (!walkthrough.visual.nodes.some((node) => node.id === highlight.node)) {
+        fail(`${highlightLabel} references unknown graph node "${highlight.node}".`);
+      }
+      return;
+    }
+    if (highlight.kind === "graph-edge") {
+      if (!graphHasEdge(walkthrough.visual, highlight.from, highlight.to)) {
+        fail(`${highlightLabel} references unknown graph edge "${highlight.from}" -- "${highlight.to}".`);
+      }
+      return;
+    }
+    fail(`${highlightLabel} uses ${highlight.kind} highlight in graph visual.`);
+    return;
+  }
+
   if (walkthrough.visual.kind === "matrix") {
     if (highlight.kind === "array-index") {
       fail(`${highlightLabel} uses array highlight in matrix visual.`);
@@ -260,6 +404,34 @@ function validateWalkthroughValue(
   updateIndex: number
 ): void {
   const updateLabel = `${label} step[${stepIndex}].values[${updateIndex}]`;
+  if (walkthrough.visual.kind === "tree") {
+    if (update.kind !== "tree-node") {
+      fail(`${updateLabel} uses ${update.kind} value in tree visual.`);
+      return;
+    }
+    if (!treeNodeIds(walkthrough.visual).has(update.node)) {
+      fail(`${updateLabel} references unknown tree node "${update.node}".`);
+    }
+    return;
+  }
+
+  if (walkthrough.visual.kind === "graph") {
+    if (update.kind === "graph-node") {
+      if (!walkthrough.visual.nodes.some((node) => node.id === update.node)) {
+        fail(`${updateLabel} references unknown graph node "${update.node}".`);
+      }
+      return;
+    }
+    if (update.kind === "graph-edge") {
+      if (!graphHasEdge(walkthrough.visual, update.from, update.to)) {
+        fail(`${updateLabel} references unknown graph edge "${update.from}" -- "${update.to}".`);
+      }
+      return;
+    }
+    fail(`${updateLabel} uses ${update.kind} value in graph visual.`);
+    return;
+  }
+
   if (walkthrough.visual.kind === "matrix") {
     if (update.kind !== "matrix-cell") {
       fail(`${updateLabel} uses array value in matrix visual.`);

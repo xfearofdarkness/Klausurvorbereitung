@@ -1415,6 +1415,196 @@ const aud = {
           back: "O(h) — h ist die Höhe des Baumes.",
           source: "04_tree_structures.pdf, Folie 163"
         }
+      ],
+      walkthroughs: [
+        {
+          id: "bst-suche",
+          title: "Binärer Suchbaum: Suche nach 7",
+          source: "04_tree_structures.pdf, Folien 136-139",
+          intro: "In jedem Schritt wird der Schlüssel 7 mit dem aktuellen Knoten verglichen.",
+          visual: {
+            kind: "tree",
+            root: "26",
+            nodes: [
+              { id: "26", value: 26, left: "12", right: "32" },
+              { id: "12", value: 12, left: "4", right: "18" },
+              { id: "32", value: 32, right: "38" },
+              { id: "4", value: 4, right: "7" },
+              { id: "18", value: 18 },
+              { id: "38", value: 38 },
+              { id: "7", value: 7 }
+            ]
+          },
+          steps: [
+            {
+              title: "Vergleich mit der Wurzel 26",
+              text: "7 stimmt nicht mit 26 überein und ist kleiner — der linke Teilbaum wird durchsucht.",
+              highlights: [
+                { kind: "tree-node", node: "26", role: "active" },
+                { kind: "tree-edge", from: "26", to: "12", role: "active" }
+              ]
+            },
+            {
+              title: "Vergleich mit 12",
+              text: "7 < 12 — weiter im linken Teilbaum.",
+              values: [{ kind: "tree-node", node: "26", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "12", role: "active" },
+                { kind: "tree-edge", from: "12", to: "4", role: "active" }
+              ]
+            },
+            {
+              title: "Vergleich mit 4",
+              text: "7 > 4 — der rechte Teilbaum wird durchsucht.",
+              values: [{ kind: "tree-node", node: "12", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "4", role: "active" },
+                { kind: "tree-edge", from: "4", to: "7", role: "active" }
+              ]
+            },
+            {
+              title: "7 gefunden",
+              text: "Der Schlüssel 7 stimmt mit dem Knoten überein — die Suche ist beendet.",
+              values: [{ kind: "tree-node", node: "4", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "7", role: "target" }]
+            }
+          ]
+        },
+        {
+          id: "bst-einfuegen",
+          title: "Binärer Suchbaum: Füge 35 ein",
+          source: "04_tree_structures.pdf, Folien 142-146",
+          intro: "Zuerst wird nach 35 gesucht; der zuletzt besuchte Knoten wird Elternknoten des neuen Knotens.",
+          visual: {
+            kind: "tree",
+            root: "26",
+            nodes: [
+              { id: "26", value: 26, left: "12", right: "32" },
+              { id: "12", value: 12, left: "4", right: "18" },
+              { id: "32", value: 32, right: "38" },
+              { id: "4", value: 4, right: "7" },
+              { id: "18", value: 18 },
+              { id: "38", value: 38, left: "35" },
+              { id: "7", value: 7 },
+              { id: "35", value: 35, hidden: true }
+            ]
+          },
+          steps: [
+            {
+              title: "Suche ab der Wurzel 26",
+              text: "35 > 26 — weiter im rechten Teilbaum.",
+              highlights: [
+                { kind: "tree-node", node: "26", role: "active" },
+                { kind: "tree-edge", from: "26", to: "32", role: "active" }
+              ]
+            },
+            {
+              title: "Vergleich mit 32",
+              text: "35 > 32 — weiter im rechten Teilbaum.",
+              values: [{ kind: "tree-node", node: "26", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "32", role: "active" },
+                { kind: "tree-edge", from: "32", to: "38", role: "active" }
+              ]
+            },
+            {
+              title: "Vergleich mit 38",
+              text: "35 < 38, und 38 hat kein linkes Kind — 38 wird Elternknoten P des neuen Knotens.",
+              values: [{ kind: "tree-node", node: "32", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "38", role: "active" }]
+            },
+            {
+              title: "35 als linkes Kind einfügen",
+              text: "Da 35 < Schlüssel des Elternknotens ist, wird der neue Knoten linkes Kind von 38.",
+              values: [
+                { kind: "tree-node", node: "38", mark: "done" },
+                { kind: "tree-node", node: "35", hidden: false }
+              ],
+              highlights: [{ kind: "tree-node", node: "35", role: "target" }]
+            }
+          ]
+        },
+        {
+          id: "preorder-traversierung",
+          title: "Preorder-Traversierung",
+          source: "04_tree_structures.pdf, Folien 37-48",
+          intro: "Wurzel besuchen, dann rekursiv den linken, dann den rechten Teilbaum — Ergebnis: 7 5 2 3 6 9 8.",
+          visual: {
+            kind: "tree",
+            root: "7",
+            nodes: [
+              { id: "7", value: 7, left: "5", right: "9" },
+              { id: "5", value: 5, left: "2", right: "6" },
+              { id: "9", value: 9, left: "8" },
+              { id: "2", value: 2, right: "3" },
+              { id: "6", value: 6 },
+              { id: "3", value: 3 },
+              { id: "8", value: 8 }
+            ]
+          },
+          steps: [
+            {
+              title: "Besuche die Wurzel 7",
+              text: "Preorder beginnt mit dem Wurzelknoten: Ausgabe 7.",
+              values: [{ kind: "tree-node", node: "7", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "7", role: "active" }]
+            },
+            {
+              title: "Linker Teilbaum: besuche 5",
+              text: "Rekursiver Aufruf für das linke Kind von 7: Ausgabe 7 5.",
+              values: [{ kind: "tree-node", node: "5", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "5", role: "active" },
+                { kind: "tree-edge", from: "7", to: "5", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 2",
+              text: "Wieder zuerst der linke Teilbaum: Ausgabe 7 5 2.",
+              values: [{ kind: "tree-node", node: "2", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "2", role: "active" },
+                { kind: "tree-edge", from: "5", to: "2", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 3",
+              text: "2 hat kein linkes Kind; das rechte Kind 3 folgt: Ausgabe 7 5 2 3.",
+              values: [{ kind: "tree-node", node: "3", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-edge", from: "2", to: "3", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 6",
+              text: "Der linke Teilbaum von 5 ist fertig; das rechte Kind 6 folgt: Ausgabe 7 5 2 3 6.",
+              values: [{ kind: "tree-node", node: "6", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "6", role: "active" },
+                { kind: "tree-edge", from: "5", to: "6", role: "active" }
+              ]
+            },
+            {
+              title: "Rechter Teilbaum: besuche 9",
+              text: "Der linke Teilbaum der Wurzel ist fertig; rekursiver Aufruf für 9: Ausgabe 7 5 2 3 6 9.",
+              values: [{ kind: "tree-node", node: "9", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "9", role: "active" },
+                { kind: "tree-edge", from: "7", to: "9", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 8: fertig",
+              text: "Das linke Kind von 9 wird besucht — die Preorder-Reihenfolge ist 7 5 2 3 6 9 8.",
+              values: [{ kind: "tree-node", node: "8", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "8", role: "active" },
+                { kind: "tree-edge", from: "9", to: "8", role: "active" }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -2121,6 +2311,111 @@ const aud = {
           back: "Zusammenhängender, ungerichteter, azyklischer Graph.",
           source: "07_graphs.pdf, Folie 13"
         }
+      ],
+      walkthroughs: [
+        {
+          id: "breitensuche",
+          title: "Breitensuche von Knoten 1",
+          source: "07_graphs.pdf, Folien 60-73",
+          intro: "Knoten werden mit einer Queue verwaltet: besuchen, dann alle unbesuchten Nachbarn einreihen. Ergebnis: 1 3 6 8 7 4 5 2.",
+          visual: {
+            kind: "graph",
+            nodes: [
+              { id: "1", x: 20, y: 12 },
+              { id: "3", x: 45, y: 12 },
+              { id: "2", x: 28, y: 40 },
+              { id: "8", x: 53, y: 40 },
+              { id: "7", x: 78, y: 40 },
+              { id: "4", x: 38, y: 58 },
+              { id: "6", x: 20, y: 78 },
+              { id: "5", x: 53, y: 78 }
+            ],
+            edges: [
+              { from: "1", to: "3" },
+              { from: "1", to: "6" },
+              { from: "1", to: "8" },
+              { from: "2", to: "8" },
+              { from: "3", to: "7" },
+              { from: "4", to: "5" },
+              { from: "4", to: "6" },
+              { from: "5", to: "6" },
+              { from: "5", to: "7" },
+              { from: "5", to: "8" }
+            ]
+          },
+          steps: [
+            {
+              title: "Besuche 1",
+              text: "Knoten 1 wird aus der Queue entfernt und besucht; die unbesuchten Nachbarn 3, 6 und 8 kommen in die Queue. Queue: 3, 6, 8.",
+              values: [{ kind: "graph-node", node: "1", mark: "done" }],
+              highlights: [
+                { kind: "graph-node", node: "1", role: "active" },
+                { kind: "graph-edge", from: "1", to: "3", role: "active" },
+                { kind: "graph-edge", from: "1", to: "6", role: "active" },
+                { kind: "graph-edge", from: "1", to: "8", role: "active" },
+                { kind: "graph-node", node: "3", role: "compare" },
+                { kind: "graph-node", node: "6", role: "compare" },
+                { kind: "graph-node", node: "8", role: "compare" }
+              ]
+            },
+            {
+              title: "Besuche 3",
+              text: "Der unbesuchte Nachbar 7 kommt in die Queue. Queue: 6, 8, 7.",
+              values: [{ kind: "graph-node", node: "3", mark: "done" }],
+              highlights: [
+                { kind: "graph-node", node: "3", role: "active" },
+                { kind: "graph-edge", from: "3", to: "7", role: "active" },
+                { kind: "graph-node", node: "7", role: "compare" }
+              ]
+            },
+            {
+              title: "Besuche 6",
+              text: "Die unbesuchten Nachbarn 4 und 5 kommen in die Queue. Queue: 8, 7, 4, 5.",
+              values: [{ kind: "graph-node", node: "6", mark: "done" }],
+              highlights: [
+                { kind: "graph-node", node: "6", role: "active" },
+                { kind: "graph-edge", from: "4", to: "6", role: "active" },
+                { kind: "graph-edge", from: "5", to: "6", role: "active" },
+                { kind: "graph-node", node: "4", role: "compare" },
+                { kind: "graph-node", node: "5", role: "compare" }
+              ]
+            },
+            {
+              title: "Besuche 8",
+              text: "Der unbesuchte Nachbar 2 kommt in die Queue. Queue: 7, 4, 5, 2.",
+              values: [{ kind: "graph-node", node: "8", mark: "done" }],
+              highlights: [
+                { kind: "graph-node", node: "8", role: "active" },
+                { kind: "graph-edge", from: "2", to: "8", role: "active" },
+                { kind: "graph-node", node: "2", role: "compare" }
+              ]
+            },
+            {
+              title: "Besuche 7",
+              text: "Alle Nachbarn von 7 sind bereits besucht oder in der Queue. Queue: 4, 5, 2.",
+              values: [{ kind: "graph-node", node: "7", mark: "done" }],
+              highlights: [{ kind: "graph-node", node: "7", role: "active" }]
+            },
+            {
+              title: "Besuche 4",
+              text: "Keine neuen Nachbarn. Queue: 5, 2.",
+              values: [{ kind: "graph-node", node: "4", mark: "done" }],
+              highlights: [{ kind: "graph-node", node: "4", role: "active" }]
+            },
+            {
+              title: "Besuche 5",
+              text: "Keine neuen Nachbarn. Queue: 2.",
+              values: [{ kind: "graph-node", node: "5", mark: "done" }],
+              highlights: [{ kind: "graph-node", node: "5", role: "active" }]
+            },
+            {
+              title: "Besuche 2: fertig",
+              text: "Die Queue ist leer — Besuchsreihenfolge: 1 3 6 8 7 4 5 2.",
+              values: [{ kind: "graph-node", node: "2", mark: "done" }],
+              highlights: [{ kind: "graph-node", node: "2", role: "active" }]
+            }
+          ]
+        }
       ]
     },
     {
@@ -2238,6 +2533,149 @@ const aud = {
           front: "MST vs. kürzester Pfad",
           back: "Der MST enthält nicht unbedingt den kostengünstigsten Weg zwischen zwei Knoten.",
           source: "08_graph-algorithms.pdf, Folie 99"
+        }
+      ],
+      walkthroughs: [
+        {
+          id: "prim-jarnik",
+          title: "Prim-Jarnik von Knoten 1",
+          source: "08_graph-algorithms.pdf, Folien 50-85",
+          intro: "Über jedem Knoten stehen seine aktuellen Kosten. In jedem Schritt wird der günstigste nicht finalisierte Knoten finalisiert; grüne Kanten gehören zum minimalen Spannbaum.",
+          visual: {
+            kind: "graph",
+            nodes: [
+              { id: "1", x: 20, y: 12, note: "0" },
+              { id: "3", x: 45, y: 12, note: "∞" },
+              { id: "2", x: 28, y: 40, note: "∞" },
+              { id: "8", x: 53, y: 40, note: "∞" },
+              { id: "7", x: 78, y: 40, note: "∞" },
+              { id: "4", x: 38, y: 58, note: "∞" },
+              { id: "6", x: 20, y: 78, note: "∞" },
+              { id: "5", x: 53, y: 78, note: "∞" }
+            ],
+            edges: [
+              { from: "1", to: "3", label: "20" },
+              { from: "1", to: "6", label: "50" },
+              { from: "1", to: "8", label: "39" },
+              { from: "2", to: "8", label: "20" },
+              { from: "3", to: "7", label: "33" },
+              { from: "4", to: "5", label: "10" },
+              { from: "4", to: "6", label: "27" },
+              { from: "5", to: "6", label: "30" },
+              { from: "5", to: "7", label: "33" },
+              { from: "5", to: "8", label: "25" }
+            ]
+          },
+          steps: [
+            {
+              title: "Initialisierung",
+              text: "Alle Knotenkosten werden auf unendlich gesetzt, der Startknoten 1 auf 0.",
+              highlights: [{ kind: "graph-node", node: "1", role: "active" }]
+            },
+            {
+              title: "Finalisiere 1 (Kosten 0)",
+              text: "Die Nachbarn von 1 werden aktualisiert: 3 auf 20, 8 auf 39, 6 auf 50 (Eltern jeweils 1).",
+              values: [
+                { kind: "graph-node", node: "1", mark: "done" },
+                { kind: "graph-node", node: "3", note: "20" },
+                { kind: "graph-node", node: "8", note: "39" },
+                { kind: "graph-node", node: "6", note: "50" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "1", role: "active" },
+                { kind: "graph-node", node: "3", role: "compare" },
+                { kind: "graph-node", node: "8", role: "compare" },
+                { kind: "graph-node", node: "6", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 3 (Kosten 20)",
+              text: "3 hat die minimalen Kosten — die Kante (1, 3) kommt in den Spannbaum. Nachbar 7 wird auf 33 gesetzt.",
+              values: [
+                { kind: "graph-node", node: "3", mark: "done" },
+                { kind: "graph-edge", from: "1", to: "3", mark: "done" },
+                { kind: "graph-node", node: "7", note: "33" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "3", role: "active" },
+                { kind: "graph-node", node: "7", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 7 (Kosten 33)",
+              text: "Kante (3, 7) kommt in den Spannbaum. Nachbar 5 wird auf 33 gesetzt.",
+              values: [
+                { kind: "graph-node", node: "7", mark: "done" },
+                { kind: "graph-edge", from: "3", to: "7", mark: "done" },
+                { kind: "graph-node", node: "5", note: "33" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "7", role: "active" },
+                { kind: "graph-node", node: "5", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 5 (Kosten 33)",
+              text: "Kante (7, 5) kommt in den Spannbaum. Die Nachbarn von 5 werden verbessert: 8 auf 25, 4 auf 10, 6 auf 30.",
+              values: [
+                { kind: "graph-node", node: "5", mark: "done" },
+                { kind: "graph-edge", from: "5", to: "7", mark: "done" },
+                { kind: "graph-node", node: "8", note: "25" },
+                { kind: "graph-node", node: "4", note: "10" },
+                { kind: "graph-node", node: "6", note: "30" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "5", role: "active" },
+                { kind: "graph-node", node: "8", role: "compare" },
+                { kind: "graph-node", node: "4", role: "compare" },
+                { kind: "graph-node", node: "6", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 4 (Kosten 10)",
+              text: "Kante (5, 4) kommt in den Spannbaum. Nachbar 6 wird auf 27 verbessert.",
+              values: [
+                { kind: "graph-node", node: "4", mark: "done" },
+                { kind: "graph-edge", from: "4", to: "5", mark: "done" },
+                { kind: "graph-node", node: "6", note: "27" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "4", role: "active" },
+                { kind: "graph-node", node: "6", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 8 (Kosten 25)",
+              text: "Kante (5, 8) kommt in den Spannbaum. Nachbar 2 wird auf 20 gesetzt.",
+              values: [
+                { kind: "graph-node", node: "8", mark: "done" },
+                { kind: "graph-edge", from: "5", to: "8", mark: "done" },
+                { kind: "graph-node", node: "2", note: "20" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "8", role: "active" },
+                { kind: "graph-node", node: "2", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 2 (Kosten 20)",
+              text: "Kante (8, 2) kommt in den Spannbaum.",
+              values: [
+                { kind: "graph-node", node: "2", mark: "done" },
+                { kind: "graph-edge", from: "2", to: "8", mark: "done" }
+              ],
+              highlights: [{ kind: "graph-node", node: "2", role: "active" }]
+            },
+            {
+              title: "Finalisiere 6 (Kosten 27): fertig",
+              text: "Kante (4, 6) kommt in den Spannbaum. Alle Knoten sind finalisiert — die grünen Kanten bilden den minimalen Spannbaum.",
+              values: [
+                { kind: "graph-node", node: "6", mark: "done" },
+                { kind: "graph-edge", from: "4", to: "6", mark: "done" }
+              ],
+              highlights: [{ kind: "graph-node", node: "6", role: "active" }]
+            }
+          ]
         }
       ]
     },

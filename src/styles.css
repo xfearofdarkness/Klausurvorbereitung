@@ -1022,12 +1022,101 @@ a.card:focus-visible,
   border-color: var(--blue);
 }
 
+.walk-compare {
+  border-color: var(--pink);
+}
+
 .walk-factor {
   border-color: var(--yellow);
 }
 
 .walk-target {
   border-color: var(--red);
+}
+
+.walk-svg {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.walk-svg .walk-node circle {
+  fill: var(--bg3);
+  stroke: var(--border);
+  stroke-width: 1;
+  transition: stroke var(--transition), fill var(--transition);
+}
+
+.walk-svg .walk-node text {
+  fill: var(--text);
+  font-family: "Space Mono", monospace;
+  font-size: 4.2px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.walk-svg .walk-node.walk-done circle {
+  stroke: rgba(110, 231, 183, 0.55);
+  fill: var(--accent-dim);
+}
+
+.walk-svg .walk-node.walk-active circle {
+  stroke: var(--blue);
+  fill: var(--blue-dim);
+}
+
+.walk-svg .walk-node.walk-compare circle {
+  stroke: var(--pink);
+  fill: var(--pink-dim);
+}
+
+.walk-svg .walk-node.walk-target circle {
+  stroke: var(--red);
+  fill: var(--red-dim);
+}
+
+.walk-svg .walk-edge {
+  stroke: var(--border);
+  stroke-width: 0.8;
+  fill: none;
+  transition: stroke var(--transition);
+}
+
+.walk-svg .walk-edge.walk-active {
+  stroke: var(--blue);
+  stroke-width: 1.2;
+}
+
+.walk-svg .walk-edge.walk-done {
+  stroke: rgba(110, 231, 183, 0.75);
+  stroke-width: 1.2;
+}
+
+.walk-svg marker path {
+  fill: var(--text3);
+}
+
+.walk-svg .walk-edge-label {
+  fill: var(--text2);
+  font-family: "Space Mono", monospace;
+  font-size: 3.4px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 1.4px;
+}
+
+.walk-svg .walk-node text.walk-node-note {
+  fill: var(--accent);
+  font-size: 3.4px;
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 1.2px;
 }
 
 .walk-array {

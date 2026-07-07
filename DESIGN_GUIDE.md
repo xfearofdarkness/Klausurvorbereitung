@@ -52,7 +52,9 @@ Sonderlogik:
   Bearbeitet-Fortschritt).
 - Der Modus "Ablaeufe" rendert den optionalen Themenabschnitt
   `walkthroughs`. Er zeigt deklarative Schrittfolgen mit
-  generischen Visualtypen wie `matrix` und `array`.
+  generischen Visualtypen: `matrix`, `array`, `tree` (Knoten
+  mit links/rechts-Kindern) und `graph` (Knoten mit Koordinaten,
+  Kanten optional gerichtet und beschriftet).
 - `features.math: true` im Fachobjekt aktiviert Formel-Rendering
   mit KaTeX. KaTeX wird ueber npm gebuendelt; die App bleibt
   GitHub-Pages-tauglich.

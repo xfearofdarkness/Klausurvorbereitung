@@ -2,6 +2,8 @@
   import Source from "./Source.svelte";
   import MatrixWalkthrough from "./MatrixWalkthrough.svelte";
   import ArrayWalkthrough from "./ArrayWalkthrough.svelte";
+  import TreeWalkthrough from "./TreeWalkthrough.svelte";
+  import GraphWalkthrough from "./GraphWalkthrough.svelte";
   import type { Walkthrough } from "../types/content";
 
   interface Props {
@@ -58,6 +60,10 @@
         <MatrixWalkthrough {walkthrough} {stepIndex} />
       {:else if walkthrough.visual.kind === "array"}
         <ArrayWalkthrough {walkthrough} {stepIndex} />
+      {:else if walkthrough.visual.kind === "tree"}
+        <TreeWalkthrough {walkthrough} {stepIndex} />
+      {:else if walkthrough.visual.kind === "graph"}
+        <GraphWalkthrough {walkthrough} {stepIndex} />
       {/if}
 
       {#if currentStep}

@@ -127,7 +127,7 @@ einzubauen.
 Regeln:
 
 - Jeder Ablauf hat `id`, `title`, `source`, `visual` und `steps`.
-- `visual` verwendet nur generische Visualtypen wie `matrix` oder `array`.
+- `visual` verwendet nur generische Visualtypen: `matrix`, `array`, `tree` oder `graph`.
 - Schritte enthalten explizit belegbare Aussagen aus den Quellen.
 - Agenten erzeugen deklarative Schritt- und Highlight-Daten, keinen neuen UI-Code.
 - Schrittquellen sind optional, wenn der Ablauf bereits einen genauen Folienbereich als `source` hat.
