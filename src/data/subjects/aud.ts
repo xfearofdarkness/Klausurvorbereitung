@@ -2801,16 +2801,35 @@ const aud = {
               ]
             },
             {
-              title: "b ersetzt z",
-              text: "Der Teilbaum mit Wurzel z = 78 wird durch einen Teilbaum mit Wurzel b = 62 ersetzt.",
+              title: "62 über 50 drehen",
+              text: "62 wird über 50 gedreht; 54 bleibt als rechter Teilbaum von 50 sichtbar.",
               explanation: {
-                action: "62 zur neuen Wurzel machen.",
-                rule: "a wird linkes Kind von b, c wird rechtes Kind von b.",
-                decision: "50 wird links von 62, 78 rechts von 62."
+                action: "Den ersten Tausch innerhalb des linken Teilbaums ausführen.",
+                rule: "62 liegt zwischen 50 und 78; 50 bleibt links von 62.",
+                decision: "54 bleibt rechts von 50, weil 50 < 54 < 62 gilt."
+              },
+              values: [
+                { kind: "tree-node", node: "78", left: "62" },
+                { kind: "tree-node", node: "50", right: "54" },
+                { kind: "tree-node", node: "62", left: "50", right: null }
+              ],
+              highlights: [
+                { kind: "tree-node", node: "62", role: "active" },
+                { kind: "tree-edge", from: "78", to: "62", role: "active" },
+                { kind: "tree-edge", from: "62", to: "50", role: "active" },
+                { kind: "tree-edge", from: "50", to: "54", role: "active" }
+              ]
+            },
+            {
+              title: "62 über 78 drehen",
+              text: "62 ersetzt jetzt z = 78 als Wurzel des Teilbaums; 78 wird rechtes Kind von 62.",
+              explanation: {
+                action: "Den zweiten Tausch ausführen.",
+                rule: "b wird neue Wurzel; a wird linkes Kind, c rechtes Kind.",
+                decision: "50 bleibt links von 62, 78 wandert rechts von 62."
               },
               values: [
                 { kind: "tree-root", root: "62" },
-                { kind: "tree-node", node: "50", right: null },
                 { kind: "tree-node", node: "62", left: "50", right: "78" },
                 { kind: "tree-node", node: "78", left: null }
               ],
@@ -2818,21 +2837,6 @@ const aud = {
                 { kind: "tree-node", node: "62", role: "active" },
                 { kind: "tree-edge", from: "62", to: "50", role: "active" },
                 { kind: "tree-edge", from: "62", to: "78", role: "active" }
-              ]
-            },
-            {
-              title: "T2 an a anhängen",
-              text: "Der Teilbaum T2 mit 54 wird rechts an a = 50 angehängt.",
-              explanation: {
-                action: "Teilbaum T2 in die neue Formation einsetzen.",
-                rule: "a wird linkes Kind von b, wobei T1 und T2 Teilbäume von a sind.",
-                decision: "54 liegt zwischen 50 und 62, also rechts von 50."
-              },
-              values: [{ kind: "tree-node", node: "50", right: "54" }],
-              highlights: [
-                { kind: "tree-node", node: "50", role: "active" },
-                { kind: "tree-node", node: "54", role: "target" },
-                { kind: "tree-edge", from: "50", to: "54", role: "active" }
               ]
             },
             {
