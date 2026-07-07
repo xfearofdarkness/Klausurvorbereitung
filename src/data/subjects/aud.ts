@@ -2051,6 +2051,339 @@ const aud = {
               ]
             }
           ]
+        },
+        {
+          id: "postorder-traversierung",
+          title: "Postorder-Traversierung",
+          source: "04_tree_structures.pdf, Folien 64-76",
+          intro: "Erst linker Teilbaum, dann rechter Teilbaum, dann Wurzel — Ergebnis: 3 2 6 5 8 9 7.",
+          visual: {
+            kind: "tree",
+            root: "7",
+            nodes: [
+              { id: "7", value: 7, left: "5", right: "9" },
+              { id: "5", value: 5, left: "2", right: "6" },
+              { id: "9", value: 9, left: "8" },
+              { id: "2", value: 2, right: "3" },
+              { id: "6", value: 6 },
+              { id: "3", value: 3 },
+              { id: "8", value: 8 }
+            ]
+          },
+          steps: [
+            {
+              title: "Besuche 3",
+              text: "Postorder verarbeitet zuerst den linken Teilbaum so tief wie möglich: Ausgabe 3.",
+              explanation: {
+                action: "Linker Teilbaum von 7, dann von 5, dann rechter Teilbaum von 2.",
+                rule: "Links, rechts, Wurzel.",
+                decision: "3 hat keine Kinder und kann besucht werden."
+              },
+              values: [{ kind: "tree-node", node: "3", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-edge", from: "2", to: "3", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 2",
+              text: "Der rechte Teilbaum von 2 ist fertig; jetzt wird 2 besucht: Ausgabe 3 2.",
+              explanation: {
+                action: "Teilbaum mit Wurzel 2 abschließen.",
+                rule: "Die Wurzel kommt erst nach ihren Teilbäumen.",
+                decision: "2 hat kein linkes Kind und der rechte Teilbaum 3 ist fertig."
+              },
+              values: [{ kind: "tree-node", node: "2", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "2", role: "active" }]
+            },
+            {
+              title: "Besuche 6",
+              text: "Im rechten Teilbaum von 5 ist 6 ein Blatt: Ausgabe 3 2 6.",
+              explanation: {
+                action: "Rechten Teilbaum von 5 verarbeiten.",
+                rule: "Links, rechts, Wurzel.",
+                decision: "6 hat keine Kinder und kann direkt besucht werden."
+              },
+              values: [{ kind: "tree-node", node: "6", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "6", role: "active" },
+                { kind: "tree-edge", from: "5", to: "6", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 5",
+              text: "Beide Teilbäume von 5 sind fertig; jetzt folgt 5: Ausgabe 3 2 6 5.",
+              explanation: {
+                action: "Teilbaum mit Wurzel 5 abschließen.",
+                rule: "Die Wurzel wird nach linkem und rechtem Teilbaum besucht.",
+                decision: "2 und 6 sind bereits besucht."
+              },
+              values: [{ kind: "tree-node", node: "5", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "5", role: "active" }]
+            },
+            {
+              title: "Besuche 8",
+              text: "Im rechten Teilbaum der Wurzel wird zuerst der linke Teilbaum von 9 besucht: Ausgabe 3 2 6 5 8.",
+              explanation: {
+                action: "Linken Teilbaum von 9 verarbeiten.",
+                rule: "Auch im rechten Hauptteilbaum gilt links, rechts, Wurzel.",
+                decision: "8 ist ein Blatt."
+              },
+              values: [{ kind: "tree-node", node: "8", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "8", role: "active" },
+                { kind: "tree-edge", from: "9", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 9",
+              text: "Der linke Teilbaum von 9 ist fertig, ein rechter fehlt; Ausgabe 3 2 6 5 8 9.",
+              explanation: {
+                action: "Teilbaum mit Wurzel 9 abschließen.",
+                rule: "Wurzel nach den Teilbäumen.",
+                decision: "8 ist besucht und 9 hat kein rechtes Kind."
+              },
+              values: [{ kind: "tree-node", node: "9", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "9", role: "active" }]
+            },
+            {
+              title: "Besuche 7: fertig",
+              text: "Linker und rechter Teilbaum der Wurzel sind fertig; Postorder ist 3 2 6 5 8 9 7.",
+              explanation: {
+                action: "Gesamten Baum abschließen.",
+                rule: "Die Wurzel des Gesamtbaums kommt zuletzt.",
+                decision: "Teilbaum 5 und Teilbaum 9 sind vollständig besucht."
+              },
+              values: [{ kind: "tree-node", node: "7", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "7", role: "active" }]
+            }
+          ]
+        },
+        {
+          id: "inorder-traversierung",
+          title: "Inorder-Traversierung",
+          source: "04_tree_structures.pdf, Folien 92-103",
+          intro: "Erst linker Teilbaum, dann Wurzel, dann rechter Teilbaum — Ergebnis: 2 3 5 6 7 8 9.",
+          visual: {
+            kind: "tree",
+            root: "7",
+            nodes: [
+              { id: "7", value: 7, left: "5", right: "9" },
+              { id: "5", value: 5, left: "2", right: "6" },
+              { id: "9", value: 9, left: "8" },
+              { id: "2", value: 2, right: "3" },
+              { id: "6", value: 6 },
+              { id: "3", value: 3 },
+              { id: "8", value: 8 }
+            ]
+          },
+          steps: [
+            {
+              title: "Besuche 2",
+              text: "Der linke Teilbaum von 5 beginnt bei 2: Ausgabe 2.",
+              explanation: {
+                action: "Ganz nach links gehen.",
+                rule: "Links, Wurzel, rechts.",
+                decision: "2 hat kein linkes Kind und wird besucht."
+              },
+              values: [{ kind: "tree-node", node: "2", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "2", role: "active" },
+                { kind: "tree-edge", from: "5", to: "2", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 3",
+              text: "Nach der Wurzel 2 folgt ihr rechter Teilbaum: Ausgabe 2 3.",
+              explanation: {
+                action: "Rechten Teilbaum von 2 verarbeiten.",
+                rule: "Nach der Wurzel kommt der rechte Teilbaum.",
+                decision: "3 ist ein Blatt."
+              },
+              values: [{ kind: "tree-node", node: "3", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-edge", from: "2", to: "3", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 5",
+              text: "Der linke Teilbaum von 5 ist fertig; jetzt wird 5 besucht: Ausgabe 2 3 5.",
+              explanation: {
+                action: "Zur Wurzel des Teilbaums zurückkehren.",
+                rule: "Wurzel zwischen linkem und rechtem Teilbaum.",
+                decision: "Teilbaum 2 ist vollständig besucht."
+              },
+              values: [{ kind: "tree-node", node: "5", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "5", role: "active" }]
+            },
+            {
+              title: "Besuche 6",
+              text: "Nach 5 folgt ihr rechter Teilbaum: Ausgabe 2 3 5 6.",
+              explanation: {
+                action: "Rechten Teilbaum von 5 verarbeiten.",
+                rule: "Links, Wurzel, rechts.",
+                decision: "6 ist ein Blatt."
+              },
+              values: [{ kind: "tree-node", node: "6", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "6", role: "active" },
+                { kind: "tree-edge", from: "5", to: "6", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 7",
+              text: "Der linke Hauptteilbaum ist fertig; jetzt folgt die Wurzel 7: Ausgabe 2 3 5 6 7.",
+              explanation: {
+                action: "Zur Wurzel des Gesamtbaums zurückkehren.",
+                rule: "Die Wurzel steht zwischen linkem und rechtem Hauptteilbaum.",
+                decision: "Teilbaum 5 ist vollständig besucht."
+              },
+              values: [{ kind: "tree-node", node: "7", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "7", role: "active" }]
+            },
+            {
+              title: "Besuche 8",
+              text: "Im rechten Teilbaum von 7 wird zuerst der linke Teilbaum von 9 besucht: Ausgabe 2 3 5 6 7 8.",
+              explanation: {
+                action: "Linken Teilbaum von 9 verarbeiten.",
+                rule: "Links vor Wurzel.",
+                decision: "8 ist ein Blatt."
+              },
+              values: [{ kind: "tree-node", node: "8", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "8", role: "active" },
+                { kind: "tree-edge", from: "9", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 9: fertig",
+              text: "Nach dem linken Teilbaum von 9 folgt 9; Inorder ist 2 3 5 6 7 8 9.",
+              explanation: {
+                action: "Rechten Hauptteilbaum abschließen.",
+                rule: "Wurzel nach linkem Teilbaum.",
+                decision: "8 ist besucht und 9 hat kein rechtes Kind."
+              },
+              values: [{ kind: "tree-node", node: "9", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "9", role: "active" }]
+            }
+          ]
+        },
+        {
+          id: "level-order-traversierung",
+          title: "Level-Order-Traversierung",
+          source: "04_tree_structures.pdf, Folien 119-126",
+          intro: "Von oben nach unten und links nach rechts; umgesetzt mit einer Queue — Ergebnis: 7 5 9 2 6 8 3.",
+          visual: {
+            kind: "tree",
+            root: "7",
+            nodes: [
+              { id: "7", value: 7, left: "5", right: "9" },
+              { id: "5", value: 5, left: "2", right: "6" },
+              { id: "9", value: 9, left: "8" },
+              { id: "2", value: 2, right: "3" },
+              { id: "6", value: 6 },
+              { id: "3", value: 3 },
+              { id: "8", value: 8 }
+            ]
+          },
+          steps: [
+            {
+              title: "Besuche 7",
+              text: "Die Wurzel wird aus der Queue genommen; ihre Kinder 5 und 9 werden eingereiht: Ausgabe 7.",
+              explanation: {
+                action: "Start mit der Wurzel.",
+                rule: "Queue: entnehmen, besuchen, Kinder links nach rechts einfügen.",
+                decision: "Queue danach: 5, 9."
+              },
+              values: [{ kind: "tree-node", node: "7", mark: "done" }],
+              highlights: [{ kind: "tree-node", node: "7", role: "active" }]
+            },
+            {
+              title: "Besuche 5",
+              text: "5 wird entnommen; 2 und 6 kommen ans Queue-Ende: Ausgabe 7 5.",
+              explanation: {
+                action: "Vorderstes Queue-Element verarbeiten.",
+                rule: "Kinder werden links vor rechts eingereiht.",
+                decision: "Queue danach: 9, 2, 6."
+              },
+              values: [{ kind: "tree-node", node: "5", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "5", role: "active" },
+                { kind: "tree-edge", from: "7", to: "5", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 9",
+              text: "9 wird entnommen; 8 kommt ans Queue-Ende: Ausgabe 7 5 9.",
+              explanation: {
+                action: "Nächsten Knoten derselben Ebene verarbeiten.",
+                rule: "Level-Order läuft Ebene für Ebene.",
+                decision: "Queue danach: 2, 6, 8."
+              },
+              values: [{ kind: "tree-node", node: "9", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "9", role: "active" },
+                { kind: "tree-edge", from: "7", to: "9", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 2",
+              text: "Die nächste Ebene beginnt links mit 2; sein rechtes Kind 3 wird eingereiht: Ausgabe 7 5 9 2.",
+              explanation: {
+                action: "Ersten Knoten der nächsten Ebene verarbeiten.",
+                rule: "Queue-Reihenfolge bestimmt die Besuchsfolge.",
+                decision: "Queue danach: 6, 8, 3."
+              },
+              values: [{ kind: "tree-node", node: "2", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "2", role: "active" },
+                { kind: "tree-edge", from: "5", to: "2", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 6",
+              text: "6 wird entnommen und hat keine Kinder: Ausgabe 7 5 9 2 6.",
+              explanation: {
+                action: "Nächstes Queue-Element besuchen.",
+                rule: "Knoten ohne Kinder fügen nichts hinzu.",
+                decision: "Queue danach: 8, 3."
+              },
+              values: [{ kind: "tree-node", node: "6", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "6", role: "active" },
+                { kind: "tree-edge", from: "5", to: "6", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 8",
+              text: "8 wird entnommen und hat keine Kinder: Ausgabe 7 5 9 2 6 8.",
+              explanation: {
+                action: "Letzten Knoten aus dieser Queue-Phase besuchen.",
+                rule: "Weiter strikt in Queue-Reihenfolge.",
+                decision: "Queue danach: 3."
+              },
+              values: [{ kind: "tree-node", node: "8", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "8", role: "active" },
+                { kind: "tree-edge", from: "9", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Besuche 3: fertig",
+              text: "3 ist das letzte Queue-Element; Level-Order ist 7 5 9 2 6 8 3.",
+              explanation: {
+                action: "Queue leeren.",
+                rule: "Wenn die Queue leer ist, ist die Traversierung beendet.",
+                decision: "Alle Knoten wurden besucht."
+              },
+              values: [{ kind: "tree-node", node: "3", mark: "done" }],
+              highlights: [
+                { kind: "tree-node", node: "3", role: "active" },
+                { kind: "tree-edge", from: "2", to: "3", role: "active" }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -2912,6 +3245,12 @@ const aud = {
           body: "Der minimale Spannbaum ist der Spannbaum mit den geringsten Gesamtkosten der Kanten — er enthält aber nicht unbedingt den Weg mit den geringsten Kosten zwischen zwei Knoten. Beispiel: Der kürzeste Weg von Hamburg nach Berlin verläuft entlang der einzigen direkten Kante zwischen beiden Städten; diese Kante ist nicht im minimalen Spannbaum.",
           tag: "wichtig",
           source: "08_graph-algorithms.pdf, Folie 99"
+        },
+        {
+          title: "Dijkstra-Algorithmus",
+          body: "Dijkstra löst das Kürzeste-Weg-Problem für gewichtete Graphen mit nicht-negativen Kantengewichten. Er findet vom Startknoten aus die kürzesten Wege zu allen erreichbaren Knoten. Grundidee: Schätzwerte für die kürzesten Wege und ihre Kosten merken und diese Schätzwerte während der Durchquerung schrittweise verfeinern.",
+          tag: "wichtig",
+          source: "08_graph-algorithms.pdf, Folien 102-103"
         }
       ],
       questions: [
@@ -2949,6 +3288,11 @@ const aud = {
           question: "Enthält der minimale Spannbaum immer den kürzesten Weg zwischen zwei Knoten?",
           answer: "Nein. Der MST minimiert die Gesamtkosten aller Kanten, nicht die Kosten einzelner Verbindungen — z. B. liegt die direkte (kürzeste) Kante Hamburg-Berlin nicht im MST des Folienbeispiels.",
           source: "08_graph-algorithms.pdf, Folie 99"
+        },
+        {
+          question: "Worin unterscheidet sich Dijkstra von Prim-Jarnik bei der Kostenaktualisierung?",
+          answer: "Dijkstra aktualisiert mit den kumulierten Kosten über den aktuellen Knoten: kosten_via_w = w.kosten + kanten_kosten(w, x). Prim-Jarnik vergleicht nur die einzelne Kantenkosten für den MST.",
+          source: "08_graph-algorithms.pdf, Folien 50, 103"
         }
       ],
       flashcards: [
@@ -2981,6 +3325,11 @@ const aud = {
           front: "MST vs. kürzester Pfad",
           back: "Der MST enthält nicht unbedingt den kostengünstigsten Weg zwischen zwei Knoten.",
           source: "08_graph-algorithms.pdf, Folie 99"
+        },
+        {
+          front: "Dijkstra",
+          back: "Kürzeste Wege vom Startknoten zu allen erreichbaren Knoten in einem Graphen mit nicht-negativen Kantengewichten.",
+          source: "08_graph-algorithms.pdf, Folien 102-103"
         }
       ],
       walkthroughs: [
@@ -3122,6 +3471,211 @@ const aud = {
                 { kind: "graph-edge", from: "4", to: "6", mark: "done" }
               ],
               highlights: [{ kind: "graph-node", node: "6", role: "active" }]
+            }
+          ]
+        },
+        {
+          id: "dijkstra-kuerzeste-wege",
+          title: "Dijkstra: kürzeste Wege ab 1",
+          source: "08_graph-algorithms.pdf, Folien 103-139",
+          intro: "Über jedem Knoten steht die aktuell beste bekannte Distanz vom Startknoten 1. Grün markierte Kanten bilden den endgültigen Vorgängerpfad.",
+          visual: {
+            kind: "graph",
+            nodes: [
+              { id: "1", x: 20, y: 12, note: "0" },
+              { id: "3", x: 45, y: 12, note: "∞" },
+              { id: "2", x: 28, y: 40, note: "∞" },
+              { id: "8", x: 53, y: 40, note: "∞" },
+              { id: "7", x: 78, y: 40, note: "∞" },
+              { id: "4", x: 38, y: 58, note: "∞" },
+              { id: "6", x: 20, y: 78, note: "∞" },
+              { id: "5", x: 53, y: 78, note: "∞" }
+            ],
+            edges: [
+              { from: "1", to: "3", label: "20" },
+              { from: "1", to: "6", label: "50" },
+              { from: "1", to: "8", label: "39" },
+              { from: "2", to: "8", label: "20" },
+              { from: "3", to: "7", label: "33" },
+              { from: "4", to: "5", label: "10" },
+              { from: "4", to: "6", label: "27" },
+              { from: "5", to: "6", label: "30" },
+              { from: "5", to: "7", label: "33" },
+              { from: "5", to: "8", label: "25" }
+            ]
+          },
+          steps: [
+            {
+              title: "Initialisierung",
+              text: "Alle Distanzen stehen auf unendlich; der Startknoten 1 hat Distanz 0.",
+              explanation: {
+                action: "Distanzschätzungen vorbereiten.",
+                rule: "Startknoten.kosten = 0, alle anderen Knoten.kosten = unendlich.",
+                decision: "Der erste finale Knoten wird 1 sein."
+              },
+              highlights: [{ kind: "graph-node", node: "1", role: "active" }]
+            },
+            {
+              title: "Finalisiere 1",
+              text: "Von 1 aus entstehen die Schätzwerte 3 = 20, 8 = 39 und 6 = 50.",
+              explanation: {
+                action: "Nachbarn von 1 aktualisieren.",
+                rule: "kosten_via_w = w.kosten + kanten_kosten(w, x).",
+                decision: "20, 39 und 50 sind besser als unendlich."
+              },
+              values: [
+                { kind: "graph-node", node: "1", mark: "done" },
+                { kind: "graph-node", node: "3", note: "20" },
+                { kind: "graph-node", node: "8", note: "39" },
+                { kind: "graph-node", node: "6", note: "50" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "1", role: "active" },
+                { kind: "graph-edge", from: "1", to: "3", role: "active" },
+                { kind: "graph-edge", from: "1", to: "8", role: "active" },
+                { kind: "graph-edge", from: "1", to: "6", role: "active" },
+                { kind: "graph-node", node: "3", role: "compare" },
+                { kind: "graph-node", node: "8", role: "compare" },
+                { kind: "graph-node", node: "6", role: "compare" }
+              ]
+            },
+            {
+              title: "Finalisiere 3",
+              text: "3 hat mit 20 die kleinste offene Distanz. Über 3 erreicht man 7 mit 20 + 33 = 53.",
+              explanation: {
+                action: "Knoten 3 festlegen und Nachbar 7 prüfen.",
+                rule: "Der kleinste nicht finalisierte Schätzwert wird endgültig.",
+                decision: "53 ist besser als unendlich."
+              },
+              values: [
+                { kind: "graph-node", node: "3", mark: "done" },
+                { kind: "graph-edge", from: "1", to: "3", mark: "done" },
+                { kind: "graph-node", node: "7", note: "53" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "3", role: "active" },
+                { kind: "graph-edge", from: "1", to: "3", role: "done" },
+                { kind: "graph-node", node: "7", role: "compare" },
+                { kind: "graph-edge", from: "3", to: "7", role: "active" }
+              ]
+            },
+            {
+              title: "Finalisiere 8",
+              text: "8 hat mit 39 die kleinste offene Distanz. Über 8 entstehen 2 = 59 und 5 = 64.",
+              explanation: {
+                action: "Knoten 8 festlegen und seine offenen Nachbarn aktualisieren.",
+                rule: "39 + 20 = 59, 39 + 25 = 64.",
+                decision: "Beide Werte verbessern unendlich."
+              },
+              values: [
+                { kind: "graph-node", node: "8", mark: "done" },
+                { kind: "graph-edge", from: "1", to: "8", mark: "done" },
+                { kind: "graph-node", node: "2", note: "59" },
+                { kind: "graph-node", node: "5", note: "64" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "8", role: "active" },
+                { kind: "graph-edge", from: "1", to: "8", role: "done" },
+                { kind: "graph-node", node: "2", role: "compare" },
+                { kind: "graph-node", node: "5", role: "compare" },
+                { kind: "graph-edge", from: "2", to: "8", role: "active" },
+                { kind: "graph-edge", from: "5", to: "8", role: "active" }
+              ]
+            },
+            {
+              title: "Finalisiere 6",
+              text: "6 hat mit 50 die kleinste offene Distanz. Über 6 wird 4 auf 77 gesetzt; 5 bleibt bei 64.",
+              explanation: {
+                action: "Nachbarn von 6 prüfen.",
+                rule: "Nur kleinere kumulierte Kosten ersetzen alte Schätzwerte.",
+                decision: "50 + 27 = 77 verbessert 4; 50 + 30 = 80 verbessert 5 nicht."
+              },
+              values: [
+                { kind: "graph-node", node: "6", mark: "done" },
+                { kind: "graph-edge", from: "1", to: "6", mark: "done" },
+                { kind: "graph-node", node: "4", note: "77" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "6", role: "active" },
+                { kind: "graph-edge", from: "1", to: "6", role: "done" },
+                { kind: "graph-node", node: "4", role: "compare" },
+                { kind: "graph-node", node: "5", role: "compare" },
+                { kind: "graph-edge", from: "4", to: "6", role: "active" },
+                { kind: "graph-edge", from: "5", to: "6", role: "active" }
+              ]
+            },
+            {
+              title: "Finalisiere 7",
+              text: "7 hat mit 53 die kleinste offene Distanz. Über 7 ergäbe sich 5 = 86, also bleibt 5 bei 64.",
+              explanation: {
+                action: "Nachbar 5 über 7 prüfen.",
+                rule: "Nur echte Verbesserungen werden übernommen.",
+                decision: "53 + 33 = 86 ist schlechter als 64."
+              },
+              values: [
+                { kind: "graph-node", node: "7", mark: "done" },
+                { kind: "graph-edge", from: "3", to: "7", mark: "done" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "7", role: "active" },
+                { kind: "graph-edge", from: "3", to: "7", role: "done" },
+                { kind: "graph-node", node: "5", role: "compare" },
+                { kind: "graph-edge", from: "5", to: "7", role: "active" }
+              ]
+            },
+            {
+              title: "Finalisiere 2",
+              text: "2 hat mit 59 die kleinste offene Distanz. Es entstehen keine besseren Schätzwerte.",
+              explanation: {
+                action: "Knoten 2 festlegen.",
+                rule: "Finalisierte Knoten werden nicht erneut verbessert.",
+                decision: "Die einzige offene relevante Verbindung führt zurück zu 8."
+              },
+              values: [
+                { kind: "graph-node", node: "2", mark: "done" },
+                { kind: "graph-edge", from: "2", to: "8", mark: "done" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "2", role: "active" },
+                { kind: "graph-edge", from: "2", to: "8", role: "done" }
+              ]
+            },
+            {
+              title: "Finalisiere 5",
+              text: "5 hat mit 64 die kleinste offene Distanz. Über 5 verbessert sich 4 von 77 auf 74.",
+              explanation: {
+                action: "Nachbarn von 5 prüfen.",
+                rule: "64 + 10 = 74 ersetzt die bisherige 77.",
+                decision: "Der Vorgänger von 4 wird 5."
+              },
+              values: [
+                { kind: "graph-node", node: "5", mark: "done" },
+                { kind: "graph-edge", from: "5", to: "8", mark: "done" },
+                { kind: "graph-node", node: "4", note: "74" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "5", role: "active" },
+                { kind: "graph-edge", from: "5", to: "8", role: "done" },
+                { kind: "graph-node", node: "4", role: "target" },
+                { kind: "graph-edge", from: "4", to: "5", role: "active" }
+              ]
+            },
+            {
+              title: "Finalisiere 4: fertig",
+              text: "4 wird mit Distanz 74 finalisiert. Alle erreichbaren Knoten haben nun ihre kürzeste Distanz ab 1.",
+              explanation: {
+                action: "Letzten offenen Knoten festlegen.",
+                rule: "Wenn kein nicht finalisierter Knoten mit endlicher Distanz übrig ist, endet Dijkstra.",
+                decision: "Enddistanzen: 1=0, 3=20, 8=39, 6=50, 7=53, 2=59, 5=64, 4=74."
+              },
+              values: [
+                { kind: "graph-node", node: "4", mark: "done" },
+                { kind: "graph-edge", from: "4", to: "5", mark: "done" }
+              ],
+              highlights: [
+                { kind: "graph-node", node: "4", role: "active" },
+                { kind: "graph-edge", from: "4", to: "5", role: "done" }
+              ]
             }
           ]
         }
