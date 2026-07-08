@@ -1,5 +1,6 @@
 <script lang="ts">
   import Source from "./Source.svelte";
+  import GeneratedExercise from "./GeneratedExercise.svelte";
   import type { PracticeMark, Topic } from "../types/content";
 
   interface Props {
@@ -23,22 +24,26 @@
       <span class="stat-pill stat-pill-success">✓ {doneCount} bearbeitet</span>
     </div>
   </div>
-  {#each topic.exercises as exercise, index}
+  {#each topic.exercises as exercise, index (`${topic.id}:${index}`)}
     {@const isDone = practiceState[index] === "done"}
-    <div class:ex-done={isDone} class="quiz-card ex-card fade-in">
-      {#if exercise.ref}
-        <div class="ex-ref">{exercise.ref}</div>
-      {/if}
-      <div class="quiz-q ex-task" data-math-content>{@html exercise.task}</div>
-      {#if exercise.note}
-        <div class="ex-note" data-math-content>{@html exercise.note}</div>
-      {/if}
-      <Source source={exercise.source} />
-      <div class="quiz-btns">
-        <button class:correct={isDone} class="q-btn" type="button" onclick={() => onMark(index)}>
-          {isDone ? "Bearbeitet ✓" : "Als bearbeitet markieren"}
-        </button>
+    {#if exercise.generator}
+      <GeneratedExercise {exercise} {isDone} onMark={() => onMark(index)} />
+    {:else}
+      <div class:ex-done={isDone} class="quiz-card ex-card fade-in">
+        {#if exercise.ref}
+          <div class="ex-ref">{exercise.ref}</div>
+        {/if}
+        <div class="quiz-q ex-task" data-math-content>{@html exercise.task}</div>
+        {#if exercise.note}
+          <div class="ex-note" data-math-content>{@html exercise.note}</div>
+        {/if}
+        <Source source={exercise.source} />
+        <div class="quiz-btns">
+          <button class:correct={isDone} class="q-btn" type="button" onclick={() => onMark(index)}>
+            {isDone ? "Bearbeitet ✓" : "Als bearbeitet markieren"}
+          </button>
+        </div>
       </div>
-    </div>
+    {/if}
   {/each}
 {/if}

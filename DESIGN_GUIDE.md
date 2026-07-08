@@ -49,7 +49,9 @@ Sonderlogik:
   Thema Inhalte fuer diesen Modus hat.
 - Der Modus "Ueben" rendert den optionalen Themenabschnitt
   `exercises` (Aufgaben ohne hinterlegte Loesung, mit
-  Bearbeitet-Fortschritt).
+  Bearbeitet-Fortschritt). Aufgaben mit `generator`-Feld sind
+  generierte Rechenmodule: Zahlen per Zufall, berechnete Loesung
+  ein-/ausblendbar, Button "Neue Zahlen".
 - Der Modus "Ablaeufe" rendert den optionalen Themenabschnitt
   `walkthroughs`. Er zeigt deklarative Schrittfolgen mit
   generischen Visualtypen: `matrix`, `array`, `tree` (Knoten

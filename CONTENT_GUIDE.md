@@ -118,6 +118,19 @@ Regeln:
 - `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5"), `source` die Pflicht-Quellenangabe.
 - `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
 
+### Generierte Rechenmodule
+
+Reine Rechenaufgaben aus offiziellen Übungsblättern dürfen als generierte
+Rechenmodule geführt werden (`generator`-Feld statt `task`):
+
+- Ein Modul entspricht genau einem Aufgabentyp des Übungsblatts; `ref` und
+  `source` verweisen auf diese Aufgabe (Kennzeichnung z. B. "Aufgabe 5 (Typ)").
+- Die Zahlen werden zufällig erzeugt; die Lösung samt Rechenweg wird vom
+  Generator algorithmisch berechnet — nie aus KI-Wissen ergänzt.
+- Generatoren sind generisch und leben in `src/lib/exerciseGenerators.ts`;
+  die Fachdaten referenzieren sie nur deklarativ über die Generator-Id.
+- Der Validator prüft jede Generator-Referenz und erzeugt Stichproben.
+
 ## Abläufe (`walkthroughs`)
 
 Der optionale Themenabschnitt `walkthroughs` bildet visuelle oder

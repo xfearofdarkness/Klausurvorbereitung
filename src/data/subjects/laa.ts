@@ -181,8 +181,9 @@ const laa = {
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 4"
         },
         {
-          ref: "Aufgabe 5",
-          task: "Führen Sie eine Polynomdivision mit den gegebenen Polynomen durch:<br>a) \\((x^3 - (1+2i)x^2 - (1-2i)x + 1) : (x - 1)\\)<br>b) \\((x^4 - 3x^3 + 3x^2 - 3x + 2) : (x^2 + 1)\\)",
+          ref: "Aufgabe 5 (Typ)",
+          generator: "polynomdivision",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 5"
         }
       ]
@@ -354,14 +355,10 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 6",
-          task: "a) Sei \\(z_1 = 2 + 4\\mathrm{i}\\) und \\(z_2 = 3 + 7\\mathrm{i}\\). Bilden Sie \\(z_1 \\cdot z_2\\) sowie \\(\\frac{z_1}{z_2}\\) und zeichnen Sie die Zahlen \\(z_1\\) und \\(z_2\\) in die Gauß'sche Zahlenebene ein.<br>b) Sei \\(z_1 = 3e^{\\mathrm{i}\\pi}\\) und \\(z_2 = 12 e^{\\frac{3\\mathrm{i}\\pi}{2}}\\). Bestimmen Sie den Betrag des Produktes aus \\(z_1\\) und \\(z_2\\) und beschreiben Sie dessen Änderung, wenn man die Winkel in \\(z_1\\) und \\(z_2\\) mit 4 multipliziert.",
-          source: "ÜbungsaufgabenLAA.pdf, Aufgabe 6"
-        },
-        {
-          ref: "Aufgabe 8",
-          task: "Berechnen Sie den Real- und Imaginärteil der folgenden Zahl: \\[z = \\frac{(-2 + 5\\mathrm{i}) \\cdot (1 + 3\\mathrm{i})}{2 + 3\\mathrm{i}} - \\left(\\frac{2}{13} - \\frac{3}{13}\\mathrm{i}\\right)\\]",
-          source: "ÜbungsaufgabenLAA.pdf, Aufgabe 8"
+          ref: "Aufgaben 6, 8 (Typ)",
+          generator: "komplex-produkt-quotient",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
+          source: "ÜbungsaufgabenLAA.pdf, Aufgaben 6 und 8"
         }
       ]
     },
@@ -1593,8 +1590,9 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 29",
-          task: "Bestimmen Sie die Formate folgender Matrizen und berechnen Sie alle möglichen Produkte von je zwei dieser Matrizen: \\[A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 1 & 2 & 3 \\\\ 0 & 1 & 2 \\end{pmatrix}, \\quad C = \\begin{pmatrix} 1 & 2 \\\\ 2 & 3 \\\\ 3 & 1 \\end{pmatrix}\\] Fassen Sie kurz zusammen, was mit einem Vektor geschieht, wenn er mit der Matrix \\(A\\) multipliziert wird.",
+          ref: "Aufgabe 29 (Typ)",
+          generator: "matrixprodukt-2x2",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 29"
         },
         {
@@ -1915,8 +1913,9 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 31",
-          task: "Berechnen Sie mithilfe des Gauß-Algorithmus sämtliche Lösungen des homogenen und des inhomogenen linearen Gleichungssystems \\[\\begin{aligned} -x - 2y &= 0 \\\\ 2x + 4y &= 0 \\end{aligned} \\qquad , \\qquad \\begin{aligned} -x - 2y &= -1 \\\\ 2x + 4y &= 2 \\end{aligned}\\] und zeichnen Sie alle Lösungsmengen in ein Koordinatensystem.",
+          ref: "Aufgabe 31 (Typ)",
+          generator: "gauss-lgs-2x2",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — es kommen alle drei Fälle vor (eindeutig, unendlich viele, keine Lösung).",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 31"
         },
         {
@@ -2066,19 +2065,16 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 33",
-          task: "Berechnen Sie die Determinanten folgender Matrizen:<br>a) \\(A = \\begin{pmatrix} -4 & -3 & -2 \\\\ -1 & 0 & 1 \\\\ 2 & 3 & 4 \\end{pmatrix}\\)<br>b) \\(B = \\begin{pmatrix} 1 & 2 & 0 & 3 \\\\ 2 & 2 & 3 & 0 \\\\ 3 & 1 & 0 & 2 \\\\ 0 & 3 & 1 & 6 \\end{pmatrix}\\)",
+          ref: "Aufgabe 33 (Typ)",
+          generator: "determinante-3x3",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 33"
         },
         {
-          ref: "Aufgabe 34",
-          task: "Überprüfen Sie mithilfe von Determinanten, ob die Vektoren \\[\\vec{v}_1 = \\begin{pmatrix} 2 \\\\ 2 \\\\ 1 \\end{pmatrix}, \\quad \\vec{v}_2 = \\begin{pmatrix} 3 \\\\ -1 \\\\ 0 \\end{pmatrix}, \\quad \\vec{v}_3 = \\begin{pmatrix} 2 \\\\ 1 \\\\ 1 \\end{pmatrix}\\] linear abhängig oder linear unabhängig sind.",
-          source: "ÜbungsaufgabenLAA.pdf, Aufgabe 34"
-        },
-        {
-          ref: "Aufgabe 35",
-          task: "Gegeben ist die Matrix \\(A = \\begin{pmatrix} 1 & -2 & 3 \\\\ 2 & -1 & 0 \\\\ 1 & 2 & 3 \\end{pmatrix}\\).<br>a) Ist die Matrix \\(A\\) invertierbar? Begründen Sie Ihre Antwort.<br>b) Welchen Rang hat \\(A\\)?",
-          source: "ÜbungsaufgabenLAA.pdf, Aufgabe 35"
+          ref: "Aufgaben 34, 35 (Typ)",
+          generator: "unabhaengig-invertierbar",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — es kommen abhängige und unabhängige Fälle vor.",
+          source: "ÜbungsaufgabenLAA.pdf, Aufgaben 34 und 35"
         }
       ]
     },
@@ -2217,13 +2213,21 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 36",
-          task: "Bilden Sie mit den Vektoren \\(\\vec{u} = \\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}\\), \\(\\vec{v} = \\begin{pmatrix} -3 \\\\ 0 \\\\ 4 \\end{pmatrix}\\) und \\(\\vec{w} = \\begin{pmatrix} 4 \\\\ 10 \\\\ -2 \\end{pmatrix}\\) den Vektor \\((\\vec{w} \\times \\vec{v}) \\times \\vec{u}\\).",
+          ref: "Aufgabe 36 (Typ)",
+          generator: "kreuzprodukt",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 36"
         },
         {
-          ref: "Aufgabe 37",
-          task: "a) Normieren Sie die folgenden Vektoren: \\[\\vec{v}_1 = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}, \\quad \\vec{v}_2 = \\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \\end{pmatrix}, \\quad \\vec{v}_3 = \\begin{pmatrix} -1 \\\\ 0 \\\\ 1 \\end{pmatrix}\\]<br>b) Berechnen Sie den Winkel zwischen den Vektoren \\(\\vec{v} = \\begin{pmatrix} 2 \\\\ -1 \\\\ 1 \\end{pmatrix}\\) und \\(\\vec{w} = \\begin{pmatrix} 1 \\\\ -1 \\\\ 0 \\end{pmatrix}\\).",
+          ref: "Aufgabe 37a (Typ)",
+          generator: "vektor-normieren",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
+          source: "ÜbungsaufgabenLAA.pdf, Aufgabe 37"
+        },
+        {
+          ref: "Aufgabe 37b (Typ)",
+          generator: "skalarprodukt-winkel",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 37"
         }
       ]
@@ -2357,8 +2361,9 @@ const laa = {
       ],
       exercises: [
         {
-          ref: "Aufgabe 38",
-          task: "Bestimmen Sie von \\[A = \\begin{pmatrix} 1 & 2 \\\\ 3 & -1 \\end{pmatrix}, \\qquad B = \\begin{pmatrix} 1 & 0 & 3 \\\\ 0 & 2 & 0 \\\\ 1 & 0 & -1 \\end{pmatrix}\\] die Eigenwerte.",
+          ref: "Aufgabe 38 (Typ)",
+          generator: "eigenwerte-2x2",
+          note: "Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — die Eigenwerte sind stets ganzzahlig.",
           source: "ÜbungsaufgabenLAA.pdf, Aufgabe 38"
         },
         {

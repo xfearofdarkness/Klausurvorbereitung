@@ -2,6 +2,7 @@
 
 import katex from "katex";
 import { catalog, subjectLoaders } from "../src/data/catalog";
+import { generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
   ArrayVisual,
@@ -114,7 +115,21 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
   });
 
   topic.exercises.forEach((exercise, exerciseIndex) => {
-    if (!exercise.task) {
+    if (exercise.generator) {
+      if (!hasGenerator(exercise.generator)) {
+        fail(`${topicLabel} exercise[${exerciseIndex}] references unknown generator "${exercise.generator}".`);
+      } else {
+        for (const seed of [1, 2, 3, 42, 1337, 99991]) {
+          const generated = generateTask(exercise.generator, seed);
+          if (!generated || !generated.task || !generated.solution) {
+            fail(`${topicLabel} exercise[${exerciseIndex}] generator "${exercise.generator}" produced an empty task (seed ${seed}).`);
+            break;
+          }
+          validateHtmlField(`${topicLabel} exercise[${exerciseIndex}] generator task (seed ${seed})`, generated.task, validateMath);
+          validateHtmlField(`${topicLabel} exercise[${exerciseIndex}] generator solution (seed ${seed})`, generated.solution, validateMath);
+        }
+      }
+    } else if (!exercise.task) {
       fail(`${topicLabel} exercise[${exerciseIndex}] is missing task.`);
     }
     validateHtmlField(`${topicLabel} exercise[${exerciseIndex}].task`, exercise.task, validateMath);

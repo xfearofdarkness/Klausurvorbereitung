@@ -72,7 +72,8 @@ function normalizeExercise(exercise: RawExercise): Exercise {
     task: exercise.task || "",
     ref: exercise.ref || "",
     note: exercise.note || "",
-    source: exercise.source || ""
+    source: exercise.source || "",
+    ...(exercise.generator ? { generator: exercise.generator } : {})
   };
 }
 

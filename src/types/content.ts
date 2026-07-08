@@ -98,6 +98,8 @@ export interface RawExercise {
   ref?: string;
   note?: string;
   source?: string;
+  /** Id eines generischen Rechenmodul-Generators (src/lib/exerciseGenerators.ts). */
+  generator?: string;
 }
 
 export interface Exercise {
@@ -105,6 +107,7 @@ export interface Exercise {
   ref: string;
   note: string;
   source: string;
+  generator?: string;
 }
 
 export interface Walkthrough {
