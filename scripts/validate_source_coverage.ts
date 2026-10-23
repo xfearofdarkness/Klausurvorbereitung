@@ -40,7 +40,6 @@ function collectSources(subject: Subject): Array<{ label: string; source: string
     const topicLabel = `subject "${subject.id}" topic[${topicIndex}]`;
 
     topic.cards.forEach((item, index) => sources.push({ label: `${topicLabel} cards[${index}]`, source: item.source }));
-    topic.questions.forEach((item, index) => sources.push({ label: `${topicLabel} questions[${index}]`, source: item.source }));
     topic.flashcards.forEach((item, index) => sources.push({ label: `${topicLabel} flashcards[${index}]`, source: item.source }));
     topic.exercises.forEach((item, index) => sources.push({ label: `${topicLabel} exercises[${index}]`, source: item.source }));
     topic.walkthroughs.forEach((item, index) => {

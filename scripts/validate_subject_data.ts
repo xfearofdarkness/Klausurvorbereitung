@@ -94,7 +94,7 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     topicIds.add(topic.id);
   }
 
-  for (const key of ["cards", "questions", "flashcards", "exercises", "walkthroughs"] as const) {
+  for (const key of ["cards", "flashcards", "exercises", "walkthroughs"] as const) {
     if (!Array.isArray(topic[key])) {
       fail(`${topicLabel} field "${key}" must be an array.`);
     }
@@ -106,15 +106,6 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     }
     validateHtmlField(`${topicLabel} card[${cardIndex}].body`, card.body, validateMath);
     requireSource(topicLabel, "card", cardIndex, card.source);
-  });
-
-  topic.questions.forEach((question, questionIndex) => {
-    if (!question.question || !question.answer) {
-      fail(`${topicLabel} question[${questionIndex}] is missing question/answer.`);
-    }
-    validateHtmlField(`${topicLabel} question[${questionIndex}].question`, question.question, validateMath);
-    validateHtmlField(`${topicLabel} question[${questionIndex}].answer`, question.answer, validateMath);
-    requireSource(topicLabel, "question", questionIndex, question.source);
   });
 
   topic.exercises.forEach((exercise, exerciseIndex) => {
@@ -150,7 +141,6 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
   });
 
   for (const [kind, items] of [
-    ["question", topic.questions],
     ["flashcard", topic.flashcards],
     ["exercise", topic.exercises]
   ] as const) {
@@ -168,14 +158,26 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
   topic.walkthroughs.forEach((walkthrough, walkthroughIndex) =>
     validateWalkthrough(topicLabel, walkthrough, walkthroughIndex, walkthroughIds, validateMath)
   );
-
-  if (topic.questions.length === 0) {
-    fail(`${topicLabel} has no questions.`);
-  }
+  validateWalkthroughPlacement(topicLabel, topic);
 
   if (topic.flashcards.length === 0) {
     fail(`${topicLabel} has no flashcards.`);
   }
+}
+
+/** Abläufe stehen in „Lernen“ nach der Lernkarte, deren Titel `afterCard` nennt; der Titel muss eindeutig sein. */
+function validateWalkthroughPlacement(topicLabel: string, topic: Topic): void {
+  const titleCounts = new Map<string, number>();
+  for (const card of topic.cards) titleCounts.set(card.title, (titleCounts.get(card.title) || 0) + 1);
+  topic.walkthroughs.forEach((walkthrough, walkthroughIndex) => {
+    if (walkthrough.afterCard === undefined) return;
+    const count = titleCounts.get(walkthrough.afterCard) || 0;
+    if (count === 0) {
+      fail(`${topicLabel} walkthrough[${walkthroughIndex}].afterCard "${walkthrough.afterCard}" matches no card title.`);
+    } else if (count > 1) {
+      fail(`${topicLabel} walkthrough[${walkthroughIndex}].afterCard "${walkthrough.afterCard}" matches ${count} card titles.`);
+    }
+  });
 }
 
 function validateWalkthrough(

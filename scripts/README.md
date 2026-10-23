@@ -23,8 +23,8 @@ Prüft die typisierten Fachdaten aus `src/data/subjects/` auf:
 - Pflichtfelder
 - eindeutige Topic-IDs
 - Quellenangaben
-- eindeutige Fortschritts-Schlüssel (keine doppelten Fragen, Flashcards oder Aufgaben pro Thema)
-- gültige Cards, Questions, Flashcards, Exercises und Walkthroughs
+- eindeutige Fortschritts-Schlüssel (keine doppelten Karteikarten oder Aufgaben pro Thema)
+- gültige Cards, Flashcards, Exercises und Walkthroughs, `afterCard` verweist auf genau eine Lernkarte
 
 Beispiele:
 

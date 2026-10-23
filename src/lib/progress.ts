@@ -4,15 +4,17 @@ import type {
   MarkState,
   ModeId,
   PracticeMark,
-  QuizMark,
   Subject,
   SubjectProgress,
   Topic
 } from "../types/content";
 
 export const STORAGE_KEY = "klausurtrainer-progress-v1";
-const PROGRESS_VERSION = 2;
+const PROGRESS_VERSION = 3;
+const CONTENT_KEY_VERSION = 2;
 const LEGACY_INDEX_PATTERN = /^\d+$/;
+/** Modi, die es nicht mehr gibt, und wo ihre Inhalte jetzt stehen. */
+const REMOVED_MODES: Record<string, ModeId> = { quiz: "flash", walkthrough: "study" };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -50,11 +52,8 @@ export function getSubjectProgress(progress: AppProgress, subject: Subject): Sub
   }
 
   const current = progress.subjects[subject.id];
-  const subjectProgress = isRecord(current) ? (current as SubjectProgress) : { version: PROGRESS_VERSION, quiz: {}, flash: {} };
+  const subjectProgress = isRecord(current) ? (current as SubjectProgress) : { version: PROGRESS_VERSION, flash: {} };
 
-  if (!isRecord(subjectProgress.quiz)) {
-    subjectProgress.quiz = {};
-  }
   if (!isRecord(subjectProgress.flash)) {
     subjectProgress.flash = {};
   }
@@ -65,7 +64,9 @@ export function getSubjectProgress(progress: AppProgress, subject: Subject): Sub
     subjectProgress.ui = {};
   }
   if (subjectProgress.version !== PROGRESS_VERSION) {
-    migrateIndexKeys(subjectProgress, subject);
+    if ((subjectProgress.version ?? 1) < CONTENT_KEY_VERSION) migrateIndexKeys(subjectProgress, subject);
+    migrateQuizToFlash(subjectProgress, subject);
+    subjectProgress.version = PROGRESS_VERSION;
   }
 
   progress.subjects[subject.id] = subjectProgress;
@@ -95,7 +96,6 @@ function migrateIndexKeys(subjectProgress: SubjectProgress, subject: Subject): v
     }
   };
 
-  migrate(subjectProgress.quiz, (topic) => topic.questions);
   migrate(subjectProgress.flash, (topic) => topic.flashcards);
   migrate(subjectProgress.practice, (topic) => topic.exercises);
 
@@ -104,13 +104,30 @@ function migrateIndexKeys(subjectProgress: SubjectProgress, subject: Subject): v
     ui.lastTopicId = subject.topics[ui.lastTopicIndex]?.id;
   }
   if (ui) delete ui.lastTopicIndex;
-  subjectProgress.version = PROGRESS_VERSION;
 }
 
-export function getQuizState(progress: AppProgress, subject: Subject, topicId: string): MarkState<QuizMark> {
-  const subjectProgress = getSubjectProgress(progress, subject);
-  subjectProgress.quiz[topicId] = subjectProgress.quiz[topicId] || {};
-  return subjectProgress.quiz[topicId];
+/**
+ * Der Modus „Fragen“ ist in den Karteikarten aufgegangen. Eine Frage, deren Text jetzt Vorderseite
+ * einer Karteikarte ist, hat denselben Schlüssel; ihre Markierung wird übernommen, sofern die Karte
+ * noch keine eigene hat. Markierungen von Fragen ohne solche Karte entfallen.
+ */
+function migrateQuizToFlash(subjectProgress: SubjectProgress, subject: Subject): void {
+  const quiz = isRecord(subjectProgress.quiz) ? subjectProgress.quiz : {};
+  for (const topic of subject.topics) {
+    const marks = quiz[topic.id];
+    if (!isRecord(marks)) continue;
+    const flash = (subjectProgress.flash[topic.id] = subjectProgress.flash[topic.id] || {});
+    for (const card of topic.flashcards) {
+      const mark = marks[card.key];
+      if (flash[card.key] || (mark !== "correct" && mark !== "wrong")) continue;
+      flash[card.key] = mark === "correct" ? "know" : "repeat";
+    }
+  }
+  delete subjectProgress.quiz;
+
+  const ui = subjectProgress.ui;
+  const replacement = ui?.lastMode ? REMOVED_MODES[ui.lastMode] : undefined;
+  if (ui && replacement) ui.lastMode = replacement;
 }
 
 export function getFlashState(progress: AppProgress, subject: Subject, topicId: string): MarkState<FlashMark> {
@@ -140,15 +157,13 @@ export interface TopicProgressSummary {
   total: number;
 }
 
-/** Gewusste Fragen und Karten plus bearbeitete Aufgaben eines Themas; liest nur, legt nichts an. */
+/** Gewusste Karten plus bearbeitete Aufgaben eines Themas; liest nur, legt nichts an. */
 export function summarizeTopicProgress(progress: AppProgress, subject: Subject, topic: Topic): TopicProgressSummary {
   const subjectProgress = progress.subjects[subject.id];
-  const quiz = subjectProgress?.quiz?.[topic.id] || {};
   const flash = subjectProgress?.flash?.[topic.id] || {};
   const practice = subjectProgress?.practice?.[topic.id] || {};
   const done =
-    topic.questions.filter((question) => quiz[question.key] === "correct").length +
     topic.flashcards.filter((flashcard) => flash[flashcard.key] === "know").length +
     topic.exercises.filter((exercise) => practice[exercise.key] === "done").length;
-  return { done, total: topic.questions.length + topic.flashcards.length + topic.exercises.length };
+  return { done, total: topic.flashcards.length + topic.exercises.length };
 }

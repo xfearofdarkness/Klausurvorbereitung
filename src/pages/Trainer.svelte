@@ -3,13 +3,11 @@
   import FlashMode from "../components/FlashMode.svelte";
   import ModeSwitcher from "../components/ModeSwitcher.svelte";
   import PracticeMode from "../components/PracticeMode.svelte";
-  import QuizMode from "../components/QuizMode.svelte";
   import StudyMode from "../components/StudyMode.svelte";
   import Icon from "../components/Icon.svelte";
   import LayoutSwitch from "../components/LayoutSwitch.svelte";
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
-  import WalkthroughMode from "../components/WalkthroughMode.svelte";
   import { catalog, subjectLoaders } from "../data/catalog";
   import { MODES } from "../lib/modes";
   import { loadNavPlacement, saveNavPlacement, type NavPlacement } from "../lib/navPlacement";
@@ -18,14 +16,13 @@
   import {
     getFlashState,
     getPracticeState,
-    getQuizState,
     getSubjectProgress,
     loadProgress,
     saveUiState,
     summarizeTopicProgress,
     type TopicProgressSummary
   } from "../lib/progress";
-  import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, QuizMark, Subject, Topic } from "../types/content";
+  import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, Topic } from "../types/content";
 
   const SUBJECT_ID_PATTERN = /^[a-z0-9-]+$/;
 
@@ -34,7 +31,6 @@
   let progress = $state<AppProgress>({ subjects: {} });
   let currentTopicIndex = $state(0);
   let currentMode = $state<ModeId>("study");
-  let showOnlyWrong = $state(false);
   let flashDeck = $state<number[]>([]);
   let flashPosition = $state(0);
   let flashFlipped = $state(false);
@@ -42,7 +38,6 @@
 
   let currentTopic = $derived<Topic | null>(subject ? subject.topics[currentTopicIndex] || subject.topics[0] || null : null);
   let availableModes = $derived<ModeConfig[]>(modesForTopic(currentTopic));
-  let quizState = $derived(currentTopic ? readQuizState(currentTopic) : {});
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
@@ -95,7 +90,7 @@
 
   function modesForTopic(topic: Topic | null): ModeConfig[] {
     if (!topic) return [];
-    return MODES.filter((mode) => topic[mode.key].length > 0);
+    return MODES.filter((mode) => mode.keys.some((key) => topic[key].length > 0));
   }
 
   function getTopicAt(index: number): Topic | null {
@@ -113,11 +108,6 @@
 
   function fallbackModeForTopic(topic: Topic | null): ModeId {
     return modesForTopic(topic)[0]?.id || "study";
-  }
-
-  function readQuizState(topic: Topic): MarkState<QuizMark> {
-    if (!subject) return {};
-    return progress.subjects[subject.id]?.quiz?.[topic.id] || {};
   }
 
   function readFlashState(topic: Topic): MarkState<FlashMark> {
@@ -150,7 +140,6 @@
   function selectMode(mode: ModeId): void {
     if (mode === currentMode || !isModeAvailableForTopic(mode, currentTopic)) return;
     currentMode = mode;
-    showOnlyWrong = false;
     syncFlashDeck();
     persistUi();
     window.scrollTo(0, 0);
@@ -165,20 +154,12 @@
     const nextTopic = getTopicAt(index);
     if (!nextTopic) return;
     currentTopicIndex = index;
-    showOnlyWrong = false;
     if (!isModeAvailableForTopic(currentMode, nextTopic)) {
       currentMode = fallbackModeForTopic(nextTopic);
     }
     syncFlashDeck();
     persistUi();
     window.scrollTo(0, 0);
-  }
-
-  function markQuestion(key: string, value: QuizMark): void {
-    if (!subject || !currentTopic) return;
-    const state = getQuizState(progress, subject, currentTopic.id);
-    state[key] = value;
-    persistUi();
   }
 
   function markExercise(key: string): void {
@@ -306,18 +287,8 @@
         {#key `${currentTopic.id}:${currentMode}`}
           {#if currentMode === "study"}
             <StudyMode topic={currentTopic} />
-          {:else if currentMode === "quiz"}
-            <QuizMode
-              topic={currentTopic}
-              {quizState}
-              {showOnlyWrong}
-              onToggleWrongFilter={() => (showOnlyWrong = !showOnlyWrong)}
-              onMark={markQuestion}
-            />
           {:else if currentMode === "practice"}
             <PracticeMode topic={currentTopic} {practiceState} onMark={markExercise} />
-          {:else if currentMode === "walkthrough"}
-            <WalkthroughMode topic={currentTopic} />
           {:else}
             <FlashMode
               topic={currentTopic}

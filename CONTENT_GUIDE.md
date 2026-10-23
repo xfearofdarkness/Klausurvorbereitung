@@ -13,7 +13,7 @@ Er gilt für:
 ## Grundregeln
 
 - Vorlesungsfolien haben immer das letzte Wort.
-- Die Folien sind die einzige fachliche Referenz für Lernkarten, Fragen, Flashcards und Abläufe (`walkthroughs`).
+- Die Folien sind die einzige fachliche Referenz für Lernkarten, Karteikarten (`flashcards`) und Abläufe (`walkthroughs`).
 - Offizielle Übungsblätter des Kurses dürfen zusätzlich als Quelle für Übungsaufgaben (`exercises`) dienen — nur für den Aufgabentext, nie für Lösungen.
 - Wenn etwas nicht explizit auf den Folien steht, darf es nicht in den Trainer.
 - Bei Abweichungen zwischen Trainer und Folien gelten immer die Folien.
@@ -35,7 +35,7 @@ Zusätzlich gilt:
 
 - Ein Thema darf nicht auf ein Sicherheitsminimum ausgedünnt werden, wenn die Folien deutlich mehr explizite Aussagen enthalten.
 - Wenn eine Folie mehrere eigenständige Aussagen enthält, dürfen daraus mehrere Einträge entstehen.
-- Beispiele werden nicht als lose Sonderblöcke geführt, sondern in die fachlich passende Karte, Frage oder Flashcard integriert.
+- Beispiele werden nicht als lose Sonderblöcke geführt, sondern in die fachlich passende Lernkarte oder Karteikarte integriert.
 - Bild- oder Beispiel-Folien werden nur ausgelassen, wenn sie keine explizite fachliche Aussage tragen.
 
 Warnsignale für Unterabdeckung:
@@ -49,7 +49,7 @@ Warnsignale für Unterabdeckung:
 Erlaubt:
 
 - Folien in Themenblöcke und Foliencluster gliedern
-- Aussagen aus Folien in Lernkarten, Fragen, Flashcards und Abläufe überführen
+- Aussagen aus Folien in Lernkarten, Karteikarten und Abläufe überführen
 - Formulierungen leicht glätten, ohne neue Aussage hinzuzufügen
 - mehrere explizite Aussagen einer Folie in mehrere Einträge aufteilen
 
@@ -98,7 +98,7 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 4. Inhalte zuerst in Foliencluster, dann in Themenblöcke zerlegen.
 5. Sicherheits-Pass: nur explizit belegbare Aussagen extrahieren.
 6. Verdichtungs-Pass: fehlende explizite Aussagen aus denselben Folienclustern ergänzen.
-7. Cards, Questions und Flashcards erzeugen.
+7. Lernkarten (`cards`) und Karteikarten (`flashcards`) erzeugen.
 8. Jede Aussage gegen die Folien prüfen.
 9. Fachdaten in `src/data/subjects/<fach-id>.ts` eintragen.
 10. Fach in `src/data/catalog.ts` registrieren.
@@ -114,7 +114,7 @@ Regeln:
 
 - Der Aufgabentext bleibt so nah wie möglich am Übungsblatt.
 - Enthält die Quelle keine Lösung, wird keine Lösung erfunden oder ergänzt.
-- Theoriefragen eines Übungsblatts, deren Antwort explizit auf den Folien steht, dürfen zusätzlich als `questions` mit Folien-`source` geführt werden.
+- Theoriefragen eines Übungsblatts, deren Antwort explizit auf den Folien steht, dürfen zusätzlich als `flashcards` mit Folien-`source` geführt werden.
 - `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5"), `source` die Pflicht-Quellenangabe.
 - `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
 
@@ -144,6 +144,7 @@ Regeln:
 - Schritte enthalten explizit belegbare Aussagen aus den Quellen.
 - Agenten erzeugen deklarative Schritt- und Highlight-Daten, keinen neuen UI-Code.
 - Schrittquellen sind optional, wenn der Ablauf bereits einen genauen Folienbereich als `source` hat.
+- Abläufe erscheinen im Modus „Lernen“. `afterCard` nennt den Titel der Lernkarte, die der Ablauf veranschaulicht; er steht direkt danach. Ohne `afterCard` steht er am Ende des Themas. Der Titel muss im Thema eindeutig sein.
 
 ## Mathematische Inhalte
 
@@ -152,6 +153,14 @@ Für Fächer mit `features.math: true` gilt:
 - Formeln werden als LaTeX geschrieben: `\(...\)` inline, `\[...\]` abgesetzt.
 - In den TypeScript-Datendateien müssen Backslashes in Strings verdoppelt werden (`\\(`, `\\frac`, ...).
 - Formeln werden zeichengetreu aus den Folien übernommen, nicht umgeformt.
+
+## Karteikarten (`flashcards`)
+
+Karteikarten sind das einzige Abfrageformat. Eine Aussage wird nur einmal
+abgefragt: keine zweite Karte, die dieselbe Frage anders formuliert.
+
+- Die Vorderseite stellt genau eine Frage, die Rückseite beantwortet sie vollständig.
+- Zusammengehörige Teilaussagen (z. B. alle Bedingungen einer Definition) gehören auf eine Karte; voneinander unabhängige Aussagen auf getrennte Karten.
 
 ## Datenformat
 
@@ -170,7 +179,6 @@ const subject = {
       title: "Thema 1",
       icon: "🧠",
       cards: [{ title: "Begriff", body: "Inhalt", tag: "def", source: "01.pdf, Folie 12" }],
-      questions: [{ question: "Frage", answer: "Antwort", source: "01.pdf, Folie 12" }],
       flashcards: [{ front: "Frage", back: "Antwort", source: "01.pdf, Folie 12" }],
       exercises: [{ ref: "Aufgabe 1", task: "Aufgabentext", source: "uebungen.pdf, Aufgabe 1" }],
       walkthroughs: []
@@ -185,9 +193,9 @@ Pflicht:
 
 - `id`, `title`, `topics`
 - stabile Topic-IDs
-- konsistente Langfelder: `title`/`body` für Lernkarten und `question`/`answer` für Fragen; Kurzfelder `t`/`b`/`q`/`a` sind nicht erlaubt
+- konsistente Langfelder: `title`/`body` für Lernkarten und `front`/`back` für Karteikarten; Kurzfelder wie `t`/`b` sind nicht erlaubt
 - `source` bei jedem Eintrag
-- innerhalb eines Themas eindeutige Fragen, Flashcard-Vorderseiten und Aufgaben; der lokale Fortschritt hängt an diesem Text, eine Textänderung setzt nur die Markierung dieses Eintrags zurück
+- innerhalb eines Themas eindeutige Karteikarten-Vorderseiten und Aufgaben; der lokale Fortschritt hängt an diesem Text, eine Textänderung setzt nur die Markierung dieses Eintrags zurück
 
 Optional:
 

@@ -2,11 +2,9 @@ import type {
   Card,
   Exercise,
   Flashcard,
-  Question,
   RawCard,
   RawExercise,
   RawFlashcard,
-  RawQuestion,
   RawSubject,
   RawTopic,
   Subject,
@@ -35,7 +33,6 @@ function normalizeTopic(topic: RawTopic, index: number): Topic {
     title: topic.title || `Thema ${index + 1}`,
     icon: topic.icon || "📘",
     cards: Array.isArray(topic.cards) ? topic.cards.map(normalizeCard) : [],
-    questions: Array.isArray(topic.questions) ? topic.questions.map(normalizeQuestion) : [],
     flashcards: Array.isArray(topic.flashcards) ? topic.flashcards.map(normalizeFlashcard) : [],
     exercises: Array.isArray(topic.exercises) ? topic.exercises.map(normalizeExercise) : [],
     walkthroughs: Array.isArray(topic.walkthroughs) ? topic.walkthroughs : []
@@ -48,15 +45,6 @@ function normalizeCard(card: RawCard): Card {
     body: card.body || "",
     tag: card.tag || "",
     source: card.source || ""
-  };
-}
-
-function normalizeQuestion(question: RawQuestion): Question {
-  return {
-    key: contentKey(question.question || ""),
-    question: question.question || "",
-    answer: question.answer || "",
-    source: question.source || ""
   };
 }
 

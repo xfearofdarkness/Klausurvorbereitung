@@ -877,12 +877,6 @@ a.card.is-last {
   display: block;
 }
 
-.quiz-num {
-  flex-shrink: 0;
-  color: var(--text3);
-  font-variant-numeric: tabular-nums;
-}
-
 .quiz-a {
   display: none;
   margin-bottom: 0.625rem;
@@ -906,7 +900,6 @@ a.card.is-last {
 
 .q-btn,
 .fc-btn,
-.filter-btn,
 .walk-nav-btn {
   min-height: 2rem;
   padding: 0.3125rem 0.75rem;
@@ -922,7 +915,6 @@ a.card.is-last {
 
 .q-btn:hover,
 .fc-btn:hover,
-.filter-btn:hover,
 .walk-nav-btn:hover:not(:disabled) {
   border-color: var(--border-strong);
   background: var(--surface-2);
@@ -938,13 +930,6 @@ a.card.is-last {
   border-color: var(--success-border);
   background: var(--success-dim);
   color: var(--success);
-}
-
-.q-btn.wrong,
-.filter-btn.active {
-  border-color: var(--warning-border);
-  background: var(--warning-dim);
-  color: var(--warning);
 }
 
 .ex-ref {

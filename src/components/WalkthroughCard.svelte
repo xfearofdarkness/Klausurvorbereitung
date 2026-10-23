@@ -63,7 +63,7 @@
   <header class="walk-header">
     <h3>{walkthrough.title}</h3>
     {#if stepCount > 0}
-      <span class="walk-step-count">Schritt {stepIndex + 1} von {stepCount}</span>
+      <span class="walk-step-count">Ablauf · Schritt {stepIndex + 1} von {stepCount}</span>
     {/if}
   </header>
 

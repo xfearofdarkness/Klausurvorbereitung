@@ -57,38 +57,26 @@ const rabs = {
           source: "01_rabs_intro-01.pdf, Folie 28"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Welche Ziele verfolgt die RABS-Vorlesung laut Einführung?",
-          answer: "Sie soll Möglichkeiten und Grenzen der Hardware, das Verhalten komplexer Systeme, das Laufzeitverhalten von Programmen und den Blick unter die Haube verständlicher machen.",
+          front: "Welche Ziele verfolgt die RABS-Vorlesung laut Einführung?",
+          back: "Sie soll Möglichkeiten und Grenzen der Hardware, das Verhalten komplexer Systeme, das Laufzeitverhalten von Programmen und den Blick unter die Haube verständlicher machen.",
           source: "01_rabs_intro-01.pdf, Folie 4"
         },
         {
-          question: "Wie definieren Amdahl, Brooks und Blaauw Rechnerarchitektur?",
-          answer: "Als Eigenschaften und Verhalten eines Computers, wie dieser von einem Programmierer gesehen wird, einschließlich Befehlssatz, Befehlsformaten, OP-Codes, Adressierungsarten, Registern und direkt veränderbaren Speichern.",
-          source: "01_rabs_intro-01.pdf, Folie 10"
-        },
-        {
-          question: "Welche drei großen Bestandteile eines Rechnersystems zeigen die Folien?",
-          answer: "Anwendungssoftware, Systemsoftware und Hardware.",
-          source: "01_rabs_intro-01.pdf, Folie 23"
-        },
-        {
-          question: "Welche Ebenen liegen zwischen Anwendungsebene und Transistorebene?",
-          answer: "Assemblerebene, Betriebssystem, Instruction Set Architecture, Mikroarchitektur und digital-logische Ebene.",
-          source: "01_rabs_intro-01.pdf, Folie 25"
-        },
-        {
-          question: "Was kennzeichnet eingebettete Systeme in den Folien?",
-          answer: "Sie sind in größere technische Komponenten eingebettet, häufig zweckgebunden, interagieren meist nicht über Tastatur oder Touchscreen und sind hardwarenah.",
+          front: "Was kennzeichnet eingebettete Systeme in den Folien?",
+          back: "Sie sind in größere technische Komponenten eingebettet, häufig zweckgebunden, interagieren meist nicht über Tastatur oder Touchscreen und sind hardwarenah.",
           source: "01_rabs_intro-01.pdf, Folie 8"
-        }
-      ],
-      flashcards: [
+        },
         {
-          front: "Was versteht man unter Rechnerarchitektur?",
-          back: "Rechnerarchitektur beschreibt Eigenschaften und Verhalten eines Computers aus Sicht des Programmierers.",
+          front: "Wie definieren Amdahl, Brooks und Blaauw Rechnerarchitektur?",
+          back: "Als Eigenschaften und Verhalten eines Computers, wie dieser von einem Programmierer gesehen wird, einschließlich Befehlssatz, Befehlsformaten, OP-Codes, Adressierungsarten, Registern und direkt veränderbaren Speichern.",
           source: "01_rabs_intro-01.pdf, Folie 10"
+        },
+        {
+          front: "Welche drei großen Bestandteile eines Rechnersystems zeigen die Folien?",
+          back: "Anwendungssoftware, Systemsoftware und Hardware.",
+          source: "01_rabs_intro-01.pdf, Folie 23"
         },
         {
           front: "Welche Beispiele für Systemsoftware nennen die Folien?",
@@ -96,9 +84,9 @@ const rabs = {
           source: "01_rabs_intro-01.pdf, Folie 23"
         },
         {
-          front: "Was kennzeichnet ein eingebettetes System?",
-          back: "Ein eingebettetes System ist in größere technische Komponenten eingebettet, häufig zweckgebunden und hardwarenah.",
-          source: "01_rabs_intro-01.pdf, Folie 8"
+          front: "Welche Ebenen liegen zwischen Anwendungsebene und Transistorebene?",
+          back: "Assemblerebene, Betriebssystem, Instruction Set Architecture, Mikroarchitektur und digital-logische Ebene.",
+          source: "01_rabs_intro-01.pdf, Folie 25"
         },
         {
           front: "Welche Rechenprinzipien nennt die Klassifikation?",
@@ -167,39 +155,27 @@ const rabs = {
           source: "02_rabs_vna1.pdf, Folien 30-34"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Welche Komponenten nennt die Von-Neumann-Architektur?",
-          answer: "ALU, Control Unit, Memory, I/O-Unit und Bus-System.",
-          source: "02_rabs_vna1.pdf, Folie 5"
-        },
-        {
-          question: "Was ist der Von-Neumann-Flaschenhals?",
-          answer: "Der gesamte Datenverkehr von und zur CPU läuft über den internen Bus zwischen CPU und Speicher; dessen Transfergeschwindigkeit ist langsamer als die Verarbeitungsgeschwindigkeit der CPU.",
+          front: "Was ist der Von-Neumann-Flaschenhals?",
+          back: "Der gesamte Datenverkehr von und zur CPU läuft über den internen Bus zwischen CPU und Speicher; dessen Transfergeschwindigkeit ist langsamer als die Verarbeitungsgeschwindigkeit der CPU.",
           source: "01_rabs_grundlagen.pdf, Folie 4"
         },
         {
-          question: "Welche Idee verfolgt die Harvard-Architektur?",
-          answer: "Sie trennt Befehls- und Datenspeicher logisch und physisch, sodass Befehle und Daten gleichzeitig geladen oder geschrieben werden können.",
+          front: "Welche Idee verfolgt die Harvard-Architektur?",
+          back: "Sie trennt Befehls- und Datenspeicher logisch und physisch, sodass Befehle und Daten gleichzeitig geladen oder geschrieben werden können.",
           source: "01_rabs_grundlagen.pdf, Folien 5-6"
         },
         {
-          question: "Wie läuft der Fetch-Decode-Execute-Zyklus ab?",
-          answer: "Befehl laden, Programmzähler hochzählen, Befehlstyp bestimmen, Operanden laden, Befehl ausführen und von vorne beginnen.",
+          front: "Wie läuft der Fetch-Decode-Execute-Zyklus ab?",
+          back: "Befehl laden, Programmzähler hochzählen, Befehlstyp bestimmen, Operanden laden, Befehl ausführen und von vorne beginnen.",
           source: "01_rabs_grundlagen.pdf, Folie 19"
         },
         {
-          question: "Worin unterscheiden sich Kernmodus und Benutzermodus?",
-          answer: "Im Kernmodus hat das Betriebssystem unbeschränkten Zugriff auf Rechnerkomponenten. Im Benutzermodus ist der Zugriff eingeschränkt, Speicher ist nur über Adressabbildung zugreifbar und privilegierte Befehle sind nicht erlaubt.",
-          source: "02_rabs_vna1.pdf, Folie 30"
+          front: "Welche Komponenten nennt die Von-Neumann-Architektur?",
+          back: "ALU, Control Unit, Memory, I/O-Unit und Bus-System.",
+          source: "02_rabs_vna1.pdf, Folie 5"
         },
-        {
-          question: "Was ist die Hauptanwendung von Interrupts laut Folien?",
-          answer: "Ein-/Ausgabe; der Prozessor kann auf externe asynchrone Ereignisse reagieren und in eine Unterbrechungsbehandlungsroutine verzweigen.",
-          source: "02_rabs_vna1.pdf, Folie 33"
-        }
-      ],
-      flashcards: [
         {
           front: "Wofür steht ALU und welche Aufgabe hat sie?",
           back: "ALU steht für Arithmetic Logic Unit; sie führt Rechenoperationen und logische Verknüpfungen aus.",
@@ -211,14 +187,19 @@ const rabs = {
           source: "02_rabs_vna1.pdf, Folie 14"
         },
         {
-          front: "Was kennzeichnet die Harvard-Architektur?",
-          back: "Die Harvard-Architektur trennt Befehls- und Datenspeicher logisch und physisch.",
-          source: "01_rabs_grundlagen.pdf, Folie 5"
+          front: "Worin unterscheiden sich Kernmodus und Benutzermodus?",
+          back: "Im Kernmodus hat das Betriebssystem unbeschränkten Zugriff auf Rechnerkomponenten. Im Benutzermodus ist der Zugriff eingeschränkt, Speicher ist nur über Adressabbildung zugreifbar und privilegierte Befehle sind nicht erlaubt.",
+          source: "02_rabs_vna1.pdf, Folie 30"
         },
         {
           front: "Wann entsteht eine Exception im Benutzermodus?",
           back: "Eine Exception entsteht, wenn im Benutzermodus ein privilegierter Befehl ausgeführt wird.",
           source: "02_rabs_vna1.pdf, Folie 31"
+        },
+        {
+          front: "Was ist die Hauptanwendung von Interrupts laut Folien?",
+          back: "Ein-/Ausgabe; der Prozessor kann auf externe asynchrone Ereignisse reagieren und in eine Unterbrechungsbehandlungsroutine verzweigen.",
+          source: "02_rabs_vna1.pdf, Folie 33"
         },
         {
           front: "Was ist ein Unterbrechungsvektor?",
@@ -290,38 +271,11 @@ const rabs = {
           source: "01_rabs_grundlagen-05.pdf, Folien 20-21"
         }
       ],
-      questions: [
-        {
-          question: "Welche drei Aufgaben eines Betriebssystems nennt der Foliensatz?",
-          answer: "Erweiterung/Veredelung der Hardware, Abstraktion der Hardware und Verwaltung von Betriebsmitteln.",
-          source: "01_rabs_grundlagen-05.pdf, Folie 9"
-        },
-        {
-          question: "Was ist der Unterschied zwischen monolithischem Kern und Mikrokern?",
-          answer: "Beim monolithischen System sind Betriebssystemdienste in einem großen Kern gekapselt und laufen im Systemmodus. Beim Mikrokern läuft nur der Mikrokern im Systemmodus; andere Komponenten laufen als Server-Prozesse im nichtprivilegierten Modus.",
-          source: "01_rabs_grundlagen-04.pdf, Folien 17-19; 01_rabs_grundlagen-05.pdf, Folien 4-6"
-        },
-        {
-          question: "Welche Konzepte nennt der Überblick zu Betriebssystemen?",
-          answer: "Prozesse, Adressräume, Dateisystem, Eingabe/Ausgabe, Schutz der Daten und Kommandozeilen-Interpreter.",
-          source: "01_rabs_grundlagen-04.pdf, Folie 15"
-        },
-        {
-          question: "Welche Rolle hat das BIOS beim Starten des Computers?",
-          answer: "Es startet nach dem Einschalten, prüft Speicher und wichtige Geräte, durchsucht Bussysteme, bestimmt das Bootgerät und kopiert dessen ersten Sektor in den Speicher.",
-          source: "01_rabs_grundlagen-05.pdf, Folie 20"
-        },
-        {
-          question: "Was ist der Nachteil der Mikrokern-Architektur laut Folien?",
-          answer: "Schlechtere Performance durch Nachrichtenaustausch anstatt Systemcalls.",
-          source: "01_rabs_grundlagen-05.pdf, Folie 6"
-        }
-      ],
       flashcards: [
         {
-          front: "Welche drei Aufgaben hat ein Betriebssystem?",
-          back: "Ein Betriebssystem übernimmt Veredelung, Abstraktion und Betriebsmittelverwaltung.",
-          source: "01_rabs_grundlagen-05.pdf, Folie 9"
+          front: "Welche Konzepte nennt der Überblick zu Betriebssystemen?",
+          back: "Prozesse, Adressräume, Dateisystem, Eingabe/Ausgabe, Schutz der Daten und Kommandozeilen-Interpreter.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 15"
         },
         {
           front: "Was umfasst der Kernel?",
@@ -334,6 +288,16 @@ const rabs = {
           source: "01_rabs_grundlagen-04.pdf, Folie 16"
         },
         {
+          front: "Was ist der Unterschied zwischen monolithischem Kern und Mikrokern?",
+          back: "Beim monolithischen System sind Betriebssystemdienste in einem großen Kern gekapselt und laufen im Systemmodus. Beim Mikrokern läuft nur der Mikrokern im Systemmodus; andere Komponenten laufen als Server-Prozesse im nichtprivilegierten Modus.",
+          source: "01_rabs_grundlagen-04.pdf, Folien 17-19; 01_rabs_grundlagen-05.pdf, Folien 4-6"
+        },
+        {
+          front: "Was ist der Nachteil der Mikrokern-Architektur laut Folien?",
+          back: "Schlechtere Performance durch Nachrichtenaustausch anstatt Systemcalls.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 6"
+        },
+        {
           front: "Welchen Vorteil hat ein Mikrokern laut Folien?",
           back: "Ein Mikrokern hat deutlich weniger Source Lines of Code als ein monolithischer Kernel.",
           source: "01_rabs_grundlagen-05.pdf, Folie 6"
@@ -342,6 +306,16 @@ const rabs = {
           front: "Was ist ein Virtual Machine Monitor?",
           back: "Ein Virtual Machine Monitor ist ein Basis-System auf der Hardware, auf dem virtuelle Maschinen als Betriebssysteme laufen.",
           source: "01_rabs_grundlagen-05.pdf, Folie 7"
+        },
+        {
+          front: "Welche drei Aufgaben eines Betriebssystems nennt der Foliensatz?",
+          back: "Erweiterung/Veredelung der Hardware, Abstraktion der Hardware und Verwaltung von Betriebsmitteln.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 9"
+        },
+        {
+          front: "Welche Rolle hat das BIOS beim Starten des Computers?",
+          back: "Es startet nach dem Einschalten, prüft Speicher und wichtige Geräte, durchsucht Bussysteme, bestimmt das Bootgerät und kopiert dessen ersten Sektor in den Speicher.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 20"
         }
       ]
     },
@@ -403,53 +377,36 @@ const rabs = {
           source: "04_rabs-os-konzepte.pdf, Folie 34"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was sind Systemaufrufe?",
-          answer: "Die Schnittstelle zwischen Benutzerprogrammen und Betriebssystem; meist in Bibliotheksfunktionen gekapselt und hardwareabhängig.",
+          front: "Was sind Systemaufrufe?",
+          back: "Die Schnittstelle zwischen Benutzerprogrammen und Betriebssystem; meist in Bibliotheksfunktionen gekapselt und hardwareabhängig.",
           source: "04_rabs-os-konzepte.pdf, Folie 6"
         },
         {
-          question: "Warum kehrt ein Systemaufruf nicht unbedingt sofort zum aufrufenden Thread zurück?",
-          answer: "Weil der aufrufende Thread blockiert werden kann und die Rückkehr aus dem Betriebssystem über den Scheduler erfolgt, der den nächsten fortzuführenden Thread bestimmt.",
+          front: "Warum kehrt ein Systemaufruf nicht unbedingt sofort zum aufrufenden Thread zurück?",
+          back: "Weil der aufrufende Thread blockiert werden kann und die Rückkehr aus dem Betriebssystem über den Scheduler erfolgt, der den nächsten fortzuführenden Thread bestimmt.",
           source: "04_rabs-os-konzepte.pdf, Folie 8"
         },
         {
-          question: "Wie funktionieren UNIX-Rechtebits grundsätzlich?",
-          answer: "Es gibt je drei Bits für Eigentümer, Eigentümergruppe und alle anderen; literale Rechte sind r, w und x, oktal 4, 2 und 1.",
-          source: "04_rabs-os-konzepte.pdf, Folien 22-23"
-        },
-        {
-          question: "Was ist eine Pipe in der Shell?",
-          answer: "Ein Mechanismus, bei dem die Ausgabe eines Prozesses als Eingabe des nächsten dient.",
-          source: "04_rabs-os-konzepte.pdf, Folie 30"
-        },
-        {
-          question: "Was bedeutet POLA?",
-          answer: "Programme, Benutzer und Systeme erhalten nur so viele Privilegien, wie für ihre Aufgabe notwendig sind.",
-          source: "04_rabs-os-konzepte.pdf, Folie 21"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Was ist ein System Call?",
-          back: "Ein System Call ist die Schnittstelle zwischen Benutzerprogramm und Betriebssystem.",
-          source: "04_rabs-os-konzepte.pdf, Folie 6"
-        },
-        {
           front: "Was bedeutet POLA?",
-          back: "POLA steht für Principle of Least Authority: Es werden nur notwendige Privilegien vergeben.",
+          back: "POLA steht für Principle of Least Authority: Programme, Benutzer und Systeme erhalten nur so viele Privilegien, wie für ihre Aufgabe notwendig sind.",
           source: "04_rabs-os-konzepte.pdf, Folie 21"
         },
         {
-          front: "Wie werden UNIX-Rechte oktal codiert?",
-          back: "UNIX-Rechte werden oktal mit Lesen = 4, Schreiben = 2 und Ausführen = 1 codiert.",
-          source: "04_rabs-os-konzepte.pdf, Folie 22"
+          front: "Wie funktionieren UNIX-Rechtebits grundsätzlich?",
+          back: "Es gibt je drei Bits für Eigentümer, Eigentümergruppe und alle anderen; literale Rechte sind r, w und x, oktal 4, 2 und 1.",
+          source: "04_rabs-os-konzepte.pdf, Folien 22-23"
         },
         {
           front: "Wie ist die Shell zum Betriebssystem einzuordnen?",
           back: "Die Shell ist kein Teil des Betriebssystems, nutzt aber dessen Eigenschaften.",
           source: "04_rabs-os-konzepte.pdf, Folie 28"
+        },
+        {
+          front: "Was ist eine Pipe in der Shell?",
+          back: "Ein Mechanismus, bei dem die Ausgabe eines Prozesses als Eingabe des nächsten dient.",
+          source: "04_rabs-os-konzepte.pdf, Folie 30"
         },
         {
           front: "Wofür steht WIMP?",
@@ -512,42 +469,20 @@ const rabs = {
           source: "3_rabs-c-intro.pdf, Folie 24"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Warum ist C laut Folien für Systemprogrammierung attraktiv?",
-          answer: "Wegen maschinennaher Programmierung im Kontext von UNIX; Pointer als direkte Speicheradress-Variablen sind dabei ein zentrales Konstrukt.",
+          front: "Warum ist C laut Folien für Systemprogrammierung attraktiv?",
+          back: "Wegen maschinennaher Programmierung im Kontext von UNIX; Pointer als direkte Speicheradress-Variablen sind dabei ein zentrales Konstrukt.",
           source: "3_rabs-c-intro.pdf, Folien 5 und 16"
         },
-        {
-          question: "Woraus besteht eine Variable in C?",
-          answer: "Aus einem Typ, einem Namen und einem Wert.",
-          source: "3_rabs-c-intro.pdf, Folie 10"
-        },
-        {
-          question: "Was ist ein Pointer?",
-          answer: "Eine Variable, die direkt eine Speicheradresse enthält.",
-          source: "3_rabs-c-intro.pdf, Folie 16"
-        },
-        {
-          question: "Was zeigt das Array-Beispiel zum Stack?",
-          answer: "Dass fehlende Überwachung der Array-Grenzen dazu führen kann, dass über ein Array hinausgeschrieben und ein benachbartes Array überschrieben wird.",
-          source: "3_rabs-c-intro.pdf, Folien 19-21"
-        },
-        {
-          question: "Wie wird ein Fehler bei Systemaufrufen angezeigt?",
-          answer: "Im Fehlerfall geben Systemaufrufe den Wert -1 zurück; Details können über die globale errno-Variable gelesen werden.",
-          source: "3_rabs-c-intro.pdf, Folie 24"
-        }
-      ],
-      flashcards: [
         {
           front: "Wie wird C laut Vergleich ausgeführt?",
           back: "C wird direkt auf dem Betriebssystem ausgeführt.",
           source: "3_rabs-c-intro.pdf, Folie 6"
         },
         {
-          front: "Aus welchen Bestandteilen besteht eine Variable?",
-          back: "Eine Variable besteht aus Typ, Name und Wert.",
+          front: "Woraus besteht eine Variable in C?",
+          back: "Aus einem Typ, einem Namen und einem Wert.",
           source: "3_rabs-c-intro.pdf, Folie 10"
         },
         {
@@ -556,8 +491,13 @@ const rabs = {
           source: "3_rabs-c-intro.pdf, Folie 16"
         },
         {
+          front: "Was zeigt das Array-Beispiel zum Stack?",
+          back: "Dass fehlende Überwachung der Array-Grenzen dazu führen kann, dass über ein Array hinausgeschrieben und ein benachbartes Array überschrieben wird.",
+          source: "3_rabs-c-intro.pdf, Folien 19-21"
+        },
+        {
           front: "Wie wird ein Fehler bei Systemaufrufen angezeigt?",
-          back: "Ein Systemaufruf-Fehler wird durch den Rückgabewert -1 angezeigt; Details stehen in errno.",
+          back: "Im Fehlerfall geben Systemaufrufe den Wert -1 zurück; Details können über die globale errno-Variable gelesen werden.",
           source: "3_rabs-c-intro.pdf, Folie 24"
         }
       ]
@@ -642,34 +582,17 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folien 38-46"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Welche drei Ziele hat Speicherverwaltung laut Folien?",
-          answer: "Effizienter Zugriff auf physikalischen Arbeitsspeicher, Schutz der Adressräume gegen illegale Zugriffe und eine Schnittstelle für gemeinsame Speichernutzung.",
+          front: "Welche drei Ziele hat Speicherverwaltung laut Folien?",
+          back: "Effizienter Zugriff auf physikalischen Arbeitsspeicher, Schutz der Adressräume gegen illegale Zugriffe und eine Schnittstelle für gemeinsame Speichernutzung.",
           source: "02_rabs_speicher.pdf, Folie 5"
         },
         {
-          question: "Warum funktioniert Caching?",
-          answer: "Wegen zeitlicher Lokalität und räumlicher Lokalität gut strukturierter Programme.",
+          front: "Warum funktioniert Caching?",
+          back: "Wegen zeitlicher Lokalität und räumlicher Lokalität gut strukturierter Programme.",
           source: "02_rabs_speicher.pdf, Folie 9"
         },
-        {
-          question: "Was macht die MMU?",
-          answer: "Sie setzt virtuelle Adressen auf physische Adressen um und prüft Zugriffsrechte.",
-          source: "02_rabs_speicher.pdf, Folie 19"
-        },
-        {
-          question: "Was passiert bei einem Page Fault?",
-          answer: "Das Betriebssystem lädt die ausgelagerte Seite in den Speicher, aktualisiert die Seitentabelle und führt den auslösenden Befehl erneut aus; dafür kann ein wenig benutzter Seitenrahmen ausgelagert werden.",
-          source: "02_rabs_speicher.pdf, Folie 33"
-        },
-        {
-          question: "Welche Nachteile haben große beziehungsweise kleine Seiten?",
-          answer: "Große Seiten verursachen mehr interne Fragmentierung; kleine Seiten führen zu langen Seitentabellen.",
-          source: "02_rabs_speicher.pdf, Folie 35"
-        }
-      ],
-      flashcards: [
         {
           front: "Was ist ein Cache-Hit?",
           back: "Bei einem Cache-Hit liegen die Daten im Cache beziehungsweise auf der obersten Cache-Ebene.",
@@ -679,6 +602,11 @@ const rabs = {
           front: "Was ist ein Cache-Miss?",
           back: "Bei einem Cache-Miss müssen Daten von einer unteren Speicherebene nachgeladen werden.",
           source: "02_rabs_speicher.pdf, Folie 13"
+        },
+        {
+          front: "Was macht die MMU?",
+          back: "Sie setzt virtuelle Adressen auf physische Adressen um und prüft Zugriffsrechte.",
+          source: "02_rabs_speicher.pdf, Folie 19"
         },
         {
           front: "Was ist ein Adressraum?",
@@ -691,9 +619,19 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folie 24"
         },
         {
+          front: "Was passiert bei einem Page Fault?",
+          back: "Das Betriebssystem lädt die ausgelagerte Seite in den Speicher, aktualisiert die Seitentabelle und führt den auslösenden Befehl erneut aus; dafür kann ein wenig benutzter Seitenrahmen ausgelagert werden.",
+          source: "02_rabs_speicher.pdf, Folie 33"
+        },
+        {
           front: "Welche Information liefert das Present-/Absent-Bit?",
           back: "Das Present-/Absent-Bit im Seitentabelleneintrag zeigt, ob eine Seite im Speicher liegt oder ausgelagert ist.",
           source: "02_rabs_speicher.pdf, Folie 33"
+        },
+        {
+          front: "Welche Nachteile haben große beziehungsweise kleine Seiten?",
+          back: "Große Seiten verursachen mehr interne Fragmentierung; kleine Seiten führen zu langen Seitentabellen.",
+          source: "02_rabs_speicher.pdf, Folie 35"
         }
       ]
     },
@@ -780,43 +718,31 @@ const rabs = {
           source: "03_rabs_dateisystem.pdf, Folie 54"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was ist eine Datei laut Dateisystem-Folien?",
-          answer: "Ein Konzept zur persistenten Speicherung von Daten, Informationen und Programmen auf externen Speichermedien.",
+          front: "Was ist eine Datei laut Dateisystem-Folien?",
+          back: "Ein Konzept zur persistenten Speicherung von Daten, Informationen und Programmen auf externen Speichermedien.",
           source: "03_rabs_dateisystem.pdf, Folie 4"
         },
-        {
-          question: "Aus welchen Bestandteilen bestehen Dateisysteme?",
-          answer: "Aus Dateien, Verzeichnissen/Katalogen und Partitionen.",
-          source: "03_rabs_dateisystem.pdf, Folie 19"
-        },
-        {
-          question: "Welche typischen Dateioperationen nennt die Vorlesung?",
-          answer: "Create, Delete, Open, Close, Rename, Read, Write, Append, Seek sowie Get und Set Attributes.",
-          source: "03_rabs_dateisystem.pdf, Folien 32-33"
-        },
-        {
-          question: "Was ist Mounten im UNIX-Dateibaum?",
-          answer: "Ein anderes Dateisystem wird mit dem Befehl mount in das bestehende System hineinmontiert; das root file system bildet die Wurzel des Gesamtsystems.",
-          source: "03_rabs_dateisystem.pdf, Folie 39"
-        },
-        {
-          question: "Was sagt die 3-2-1-Regel für Backups?",
-          answer: "Drei Kopien inklusive Original, auf mindestens zwei unterschiedlichen Datenträgern, davon mindestens ein Backup außer Haus.",
-          source: "03_rabs_dateisystem.pdf, Folie 54"
-        }
-      ],
-      flashcards: [
         {
           front: "Was ist ein Dateisystem?",
           back: "Ein Dateisystem ist eine OS-Abstraktion zur Nutzung von Hintergrundspeichern und besteht aus Dateien, Verzeichnissen und Partitionen.",
           source: "03_rabs_dateisystem.pdf, Folie 19"
         },
         {
+          front: "Welche typischen Dateioperationen nennt die Vorlesung?",
+          back: "Create, Delete, Open, Close, Rename, Read, Write, Append, Seek sowie Get und Set Attributes.",
+          source: "03_rabs_dateisystem.pdf, Folien 32-33"
+        },
+        {
           front: "Woran erkennt man absolute Pfadnamen?",
           back: "Absolute Pfadnamen beginnen beim Wurzelverzeichnis.",
           source: "03_rabs_dateisystem.pdf, Folie 36"
+        },
+        {
+          front: "Was ist Mounten im UNIX-Dateibaum?",
+          back: "Ein anderes Dateisystem wird mit dem Befehl mount in das bestehende System hineinmontiert; das root file system bildet die Wurzel des Gesamtsystems.",
+          source: "03_rabs_dateisystem.pdf, Folie 39"
         },
         {
           front: "Wie funktioniert verkettete Speicherung?",
@@ -832,6 +758,11 @@ const rabs = {
           front: "Was sichert ein Komplett-Backup?",
           back: "Ein Komplett-Backup sichert alle Daten, also die komplette Platte.",
           source: "03_rabs_dateisystem.pdf, Folie 53"
+        },
+        {
+          front: "Was sagt die 3-2-1-Regel für Backups?",
+          back: "Drei Kopien inklusive Original, auf mindestens zwei unterschiedlichen Datenträgern, davon mindestens ein Backup außer Haus.",
+          source: "03_rabs_dateisystem.pdf, Folie 54"
         }
       ]
     },
@@ -919,38 +850,21 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 43"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Wie definiert die Vorlesung einen Prozess?",
-          answer: "Als Programm in Ausführung mit zusätzlicher Kontextinformation; jeder Prozess besitzt einen eigenen Adressraum.",
+          front: "Wie definiert die Vorlesung einen Prozess?",
+          back: "Als Programm in Ausführung mit zusätzlicher Kontextinformation; jeder Prozess besitzt einen eigenen Adressraum.",
           source: "05_rabs-process.pdf, Folie 8"
         },
         {
-          question: "Worin unterscheiden sich Programm und Prozess?",
-          answer: "Ein Programm ist eine Folge von Anweisungen und Daten. Ein Prozess ist dieses Programm in Ausführung mit aktuellen Daten wie Programmzähler, Registerinhalten und Variablenbelegung.",
+          front: "Worin unterscheiden sich Programm und Prozess?",
+          back: "Ein Programm ist eine Folge von Anweisungen und Daten. Ein Prozess ist dieses Programm in Ausführung mit aktuellen Daten wie Programmzähler, Registerinhalten und Variablenbelegung.",
           source: "05_rabs-process.pdf, Folie 11"
         },
         {
-          question: "Was enthält ein Prozesskontrollblock?",
-          answer: "Unter anderem Prozess-ID, Benutzer- und Gruppeninformationen, Zustand, Warteereignis, Scheduling-Informationen, Registerinhalte, Accounting, Prozesshierarchie sowie Speicher- und Dateiverwaltungsinformationen.",
+          front: "Was enthält ein Prozesskontrollblock?",
+          back: "Unter anderem Prozess-ID, Benutzer- und Gruppeninformationen, Zustand, Warteereignis, Scheduling-Informationen, Registerinhalte, Accounting, Prozesshierarchie sowie Speicher- und Dateiverwaltungsinformationen.",
           source: "05_rabs-process.pdf, Folie 12"
-        },
-        {
-          question: "Was macht fork() unter UNIX?",
-          answer: "Es erzeugt einen exakten Klon des aufrufenden Prozesses; Kind und Elternprozess laufen danach unabhängig weiter.",
-          source: "05_rabs-process.pdf, Folie 18"
-        },
-        {
-          question: "Was passiert bei einem Context Switch?",
-          answer: "Der Zustand des laufenden Prozesses wird im PCB gespeichert, ein neuer Prozess wird ausgewählt, seine Ablaufumgebung hergestellt und seine Register werden geladen.",
-          source: "05_rabs-process.pdf, Folie 32"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Was ist ein Prozess?",
-          back: "Ein Prozess ist ein Programm in Ausführung mit zusätzlicher Kontextinformation.",
-          source: "05_rabs-process.pdf, Folie 8"
         },
         {
           front: "Was ist ein PCB?",
@@ -958,8 +872,8 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 12"
         },
         {
-          front: "Was macht fork()?",
-          back: "fork() erzeugt einen exakten Klon des aufrufenden Prozesses.",
+          front: "Was macht fork() unter UNIX?",
+          back: "Es erzeugt einen exakten Klon des aufrufenden Prozesses; Kind und Elternprozess laufen danach unabhängig weiter.",
           source: "05_rabs-process.pdf, Folie 18"
         },
         {
@@ -971,6 +885,11 @@ const rabs = {
           front: "Welche Aufgabe hat der Dispatcher?",
           back: "Der Dispatcher führt den Prozesswechsel durch.",
           source: "05_rabs-process.pdf, Folie 29"
+        },
+        {
+          front: "Was passiert bei einem Context Switch?",
+          back: "Der Zustand des laufenden Prozesses wird im PCB gespeichert, ein neuer Prozess wird ausgewählt, seine Ablaufumgebung hergestellt und seine Register werden geladen.",
+          source: "05_rabs-process.pdf, Folie 32"
         }
       ]
     },
@@ -1042,38 +961,16 @@ const rabs = {
           source: "06_rabs-threads.pdf, Folie 35"
         }
       ],
-      questions: [
-        {
-          question: "Was ist ein Thread?",
-          answer: "Ein paralleler Kontrollfluss innerhalb eines Prozesses, der gemeinsame Ressourcen, insbesondere Speicher, mit anderen Threads des Prozesses teilt.",
-          source: "06_rabs-threads.pdf, Folie 6"
-        },
-        {
-          question: "Welche eigenen Bestandteile hat ein Thread?",
-          answer: "Thread-ID, Programmzähler, Registerset, Stack und Zustand.",
-          source: "06_rabs-threads.pdf, Folie 12"
-        },
-        {
-          question: "Was ist der zentrale Nachteil von User-Level-Threads bei blockierenden Systemaufrufen?",
-          answer: "Ein blockierender Systemaufruf blockiert alle User-Level-Threads des Prozesses.",
-          source: "06_rabs-threads.pdf, Folie 23"
-        },
-        {
-          question: "Was ist der Vorteil von Kernel-Level-Threads bei Blockierung?",
-          answer: "Wenn ein Thread blockiert, kann das Betriebssystem einen anderen Thread desselben Prozesses auswählen.",
-          source: "06_rabs-threads.pdf, Folie 28"
-        },
-        {
-          question: "Was bedeutet 1:1-Implementierung bei Threads?",
-          answer: "Jedem Benutzer-Thread ist genau eine Kernel-Aktivität beziehungsweise ein Kernel-Thread zugeordnet.",
-          source: "06_rabs-threads.pdf, Folien 26 und 35"
-        }
-      ],
       flashcards: [
         {
           front: "Was ist ein Thread?",
-          back: "Ein Thread ist ein paralleler Kontrollfluss innerhalb eines Prozesses.",
+          back: "Ein paralleler Kontrollfluss innerhalb eines Prozesses, der gemeinsame Ressourcen, insbesondere Speicher, mit anderen Threads des Prozesses teilt.",
           source: "06_rabs-threads.pdf, Folie 6"
+        },
+        {
+          front: "Welche eigenen Bestandteile hat ein Thread?",
+          back: "Thread-ID, Programmzähler, Registerset, Stack und Zustand.",
+          source: "06_rabs-threads.pdf, Folie 12"
         },
         {
           front: "Was zeigt Thread_create?",
@@ -1086,9 +983,24 @@ const rabs = {
           source: "06_rabs-threads.pdf, Folie 22"
         },
         {
+          front: "Was ist der zentrale Nachteil von User-Level-Threads bei blockierenden Systemaufrufen?",
+          back: "Ein blockierender Systemaufruf blockiert alle User-Level-Threads des Prozesses.",
+          source: "06_rabs-threads.pdf, Folie 23"
+        },
+        {
+          front: "Was bedeutet 1:1-Implementierung bei Threads?",
+          back: "Jedem Benutzer-Thread ist genau eine Kernel-Aktivität beziehungsweise ein Kernel-Thread zugeordnet.",
+          source: "06_rabs-threads.pdf, Folien 26 und 35"
+        },
+        {
           front: "Was kennzeichnet Kernel-Level-Threads?",
           back: "Bei Kernel-Level-Threads verwaltet der Kernel die Threads, und Operationen sind Kernel-Aufrufe.",
           source: "06_rabs-threads.pdf, Folie 26"
+        },
+        {
+          front: "Was ist der Vorteil von Kernel-Level-Threads bei Blockierung?",
+          back: "Wenn ein Thread blockiert, kann das Betriebssystem einen anderen Thread desselben Prozesses auswählen.",
+          source: "06_rabs-threads.pdf, Folie 28"
         },
         {
           front: "Was ist NPTL?",
@@ -1170,43 +1082,21 @@ const rabs = {
           source: "07_rabs-scheduling.pdf, Folie 47"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was bedeutet Scheduling im Betriebssystemkontext?",
-          answer: "Die zeitliche Zuordnung von CPU-Ressourcen zu Prozessen beziehungsweise Aktivitäten.",
+          front: "Was bedeutet Scheduling im Betriebssystemkontext?",
+          back: "Die zeitliche Zuordnung von CPU-Ressourcen zu Prozessen beziehungsweise Aktivitäten.",
           source: "07_rabs-scheduling.pdf, Folie 5"
         },
         {
-          question: "Was ist der Unterschied zwischen Scheduler und Dispatcher?",
-          answer: "Der Scheduler wählt den Prozess aus; der Dispatcher führt den Prozesskontextwechsel durch.",
+          front: "Was ist der Unterschied zwischen Scheduler und Dispatcher?",
+          back: "Der Scheduler wählt den Prozess aus; der Dispatcher führt den Prozesskontextwechsel durch.",
           source: "07_rabs-scheduling.pdf, Folien 6 und 8"
         },
         {
-          question: "Was unterscheidet präemptives von nicht-präemptivem Scheduling?",
-          answer: "Beim präemptiven Scheduling kann einem Prozess die CPU vor Fertigstellung entzogen werden; beim nicht-präemptiven behält er sie bis Fertigstellung oder freiwilliger Abgabe.",
+          front: "Was unterscheidet präemptives von nicht-präemptivem Scheduling?",
+          back: "Beim präemptiven Scheduling kann einem Prozess die CPU vor Fertigstellung entzogen werden; beim nicht-präemptiven behält er sie bis Fertigstellung oder freiwilliger Abgabe.",
           source: "07_rabs-scheduling.pdf, Folien 11-12"
-        },
-        {
-          question: "Warum ist das Zeitquantum bei Round Robin wichtig?",
-          answer: "Zu kurze Quanten erzeugen viele Prozesswechsel und Overhead; zu lange Quanten lassen Gleichzeitigkeit verloren gehen.",
-          source: "07_rabs-scheduling.pdf, Folie 23"
-        },
-        {
-          question: "Wie arbeitet Earliest Deadline First?",
-          answer: "Prozesse kündigen Präsenz und Deadline an; der Scheduler sortiert nach kürzester Deadline und unterbricht laufende Prozesse, wenn ein neuer Prozess mit kürzerer Deadline auftaucht.",
-          source: "07_rabs-scheduling.pdf, Folie 44"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Welche Aufgabe hat der Scheduler?",
-          back: "Der Scheduler ist die Komponente zur Prozessauswahl.",
-          source: "07_rabs-scheduling.pdf, Folie 6"
-        },
-        {
-          front: "Welche Aufgabe hat der Dispatcher beim Scheduling?",
-          back: "Der Dispatcher führt den Prozesskontextwechsel durch.",
-          source: "07_rabs-scheduling.pdf, Folie 8"
         },
         {
           front: "Was bedeutet SJF?",
@@ -1219,8 +1109,13 @@ const rabs = {
           source: "07_rabs-scheduling.pdf, Folie 22"
         },
         {
+          front: "Warum ist das Zeitquantum bei Round Robin wichtig?",
+          back: "Zu kurze Quanten erzeugen viele Prozesswechsel und Overhead; zu lange Quanten lassen Gleichzeitigkeit verloren gehen.",
+          source: "07_rabs-scheduling.pdf, Folie 23"
+        },
+        {
           front: "Was bedeutet EDF?",
-          back: "EDF bedeutet Earliest Deadline First: Die kürzeste Deadline kommt zuerst.",
+          back: "EDF bedeutet Earliest Deadline First: Prozesse kündigen Präsenz und Deadline an; der Scheduler sortiert nach kürzester Deadline und unterbricht laufende Prozesse, wenn ein neuer Prozess mit kürzerer Deadline auftaucht.",
           source: "07_rabs-scheduling.pdf, Folie 44"
         }
       ]
@@ -1301,38 +1196,26 @@ const rabs = {
           source: "08_rabs-synchro-1.pdf, Folien 38-41"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was bedeutet Nebenläufigkeit laut Definition?",
-          answer: "Parallel oder quasi-parallel ausgeführte Abläufe, die inhaltlich zusammenwirken, voneinander abhängig sind und sich gegenseitig beeinflussen können.",
-          source: "08_rabs-synchro-1.pdf, Folie 13"
-        },
-        {
-          question: "Was ist eine Race Condition?",
-          answer: "Mehrere Prozesse greifen konkurrierend auf gemeinsame Daten zu, mindestens einer manipuliert sie, und das Ergebnis hängt von der Zugriffsreihenfolge ab.",
-          source: "08_rabs-synchro-1.pdf, Folie 32"
-        },
-        {
-          question: "Was ist ein kritischer Abschnitt?",
-          answer: "Ein Programmabschnitt, der Zugriffe auf ein gemeinsam genutztes Objekt beziehungsweise eine kritische Ressource enthält.",
-          source: "08_rabs-synchro-1.pdf, Folie 34"
-        },
-        {
-          question: "Welche drei Grundformen der Interaktion stehen in Beziehung?",
-          answer: "Koordination, Kommunikation und Kooperation; Koordination ist elementar, weil Kommunikation und Kooperation zeitliche Abstimmung benötigen.",
+          front: "Welche drei Grundformen der Interaktion stehen in Beziehung?",
+          back: "Koordination, Kommunikation und Kooperation; Koordination ist elementar, weil Kommunikation und Kooperation zeitliche Abstimmung benötigen.",
           source: "08_rabs-synchro-1.pdf, Folien 7-8"
         },
         {
-          question: "Warum ist eine einfache Sperrvariable problematisch?",
-          answer: "Sie kann selbst eine Race Condition erzeugen, weil Prüfung und Setzen nicht atomar geschützt sind.",
-          source: "08_rabs-synchro-1.pdf, Folie 39"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Wie definieren die Folien Nebenläufigkeit?",
-          back: "Nebenläufigkeit ist Parallelität plus Abhängigkeit.",
+          front: "Was bedeutet Nebenläufigkeit laut Definition?",
+          back: "Parallel oder quasi-parallel ausgeführte Abläufe, die inhaltlich zusammenwirken, voneinander abhängig sind und sich gegenseitig beeinflussen können.",
           source: "08_rabs-synchro-1.pdf, Folie 13"
+        },
+        {
+          front: "Wie arbeitet DMA laut Folie?",
+          back: "Bei DMA werden Kopiervorgänge in kleine Teile zerlegt; jeder Teil erhält den Bus atomar.",
+          source: "08_rabs-synchro-1.pdf, Folie 18"
+        },
+        {
+          front: "Was ist eine Race Condition?",
+          back: "Mehrere Prozesse greifen konkurrierend auf gemeinsame Daten zu, mindestens einer manipuliert sie, und das Ergebnis hängt von der Zugriffsreihenfolge ab.",
+          source: "08_rabs-synchro-1.pdf, Folie 32"
         },
         {
           front: "Was bedeutet Mutual Exclusion?",
@@ -1340,9 +1223,9 @@ const rabs = {
           source: "08_rabs-synchro-1.pdf, Folie 32"
         },
         {
-          front: "Was ist eine Race Condition?",
-          back: "Bei einer Race Condition hängt das Ergebnis gemeinsamer Datenzugriffe von der Zugriffsreihenfolge ab.",
-          source: "08_rabs-synchro-1.pdf, Folie 32"
+          front: "Was ist ein kritischer Abschnitt?",
+          back: "Ein Programmabschnitt, der Zugriffe auf ein gemeinsam genutztes Objekt beziehungsweise eine kritische Ressource enthält.",
+          source: "08_rabs-synchro-1.pdf, Folie 34"
         },
         {
           front: "Was fordert Bounded Waiting?",
@@ -1350,9 +1233,9 @@ const rabs = {
           source: "08_rabs-synchro-1.pdf, Folie 37"
         },
         {
-          front: "Wie arbeitet DMA laut Folie?",
-          back: "Bei DMA werden Kopiervorgänge in kleine Teile zerlegt; jeder Teil erhält den Bus atomar.",
-          source: "08_rabs-synchro-1.pdf, Folie 18"
+          front: "Warum ist eine einfache Sperrvariable problematisch?",
+          back: "Sie kann selbst eine Race Condition erzeugen, weil Prüfung und Setzen nicht atomar geschützt sind.",
+          source: "08_rabs-synchro-1.pdf, Folie 39"
         }
       ]
     },
@@ -1431,37 +1314,15 @@ const rabs = {
           source: "09_rabs-synchro-2.pdf, Folie 50"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was ist ein Semaphor?",
-          answer: "Ein allgemeines Synchronisationskonstrukt mit Zähler und Warteschlange, das ohne aktives Warten wechselseitigen Ausschluss und Reihenfolgensynchronisation ermöglichen kann.",
+          front: "Was ist ein Semaphor?",
+          back: "Ein allgemeines Synchronisationskonstrukt mit Zähler und Warteschlange, das ohne aktives Warten wechselseitigen Ausschluss und Reihenfolgensynchronisation ermöglichen kann.",
           source: "09_rabs-synchro-2.pdf, Folien 5-6"
         },
         {
-          question: "Was passiert bei Wait() auf einem Semaphor?",
-          answer: "Der Zähler wird dekrementiert; ist er danach negativ, wird der Prozess blockiert und in die Warteschlange eingereiht.",
-          source: "09_rabs-synchro-2.pdf, Folie 8"
-        },
-        {
-          question: "Was ist ein Deadlock?",
-          answer: "Eine Situation, in der Prozesse gegenseitig auf Ereignisse oder Ressourcen warten, die von anderen wartenden Prozessen nicht freigegeben werden können.",
-          source: "09_rabs-synchro-2.pdf, Folien 19-20"
-        },
-        {
-          question: "Welche vier Coffman-Bedingungen nennt die Vorlesung?",
-          answer: "Wechselseitiger Ausschluss, Halten und Warten, Ununterbrechbarkeit und zyklisches Warten.",
-          source: "09_rabs-synchro-2.pdf, Folie 30"
-        },
-        {
-          question: "Welche vier Strategien zur Deadlock-Behandlung werden genannt?",
-          answer: "Ignorieren, Erkennen und Beheben, Vermeidung und Verhinderung.",
-          source: "09_rabs-synchro-2.pdf, Folie 50"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Was macht Wait() bei Semaphoren?",
-          back: "Wait() dekrementiert den Semaphorzähler und blockiert bei negativem Wert.",
+          front: "Was passiert bei Wait() auf einem Semaphor?",
+          back: "Der Zähler wird dekrementiert; ist er danach negativ, wird der Prozess blockiert und in die Warteschlange eingereiht.",
           source: "09_rabs-synchro-2.pdf, Folie 8"
         },
         {
@@ -1476,13 +1337,18 @@ const rabs = {
         },
         {
           front: "Was ist ein Deadlock?",
-          back: "Bei einem Deadlock warten Prozesse ewig auf Ereignisse, die andere wartende Prozesse nicht freigeben können.",
-          source: "09_rabs-synchro-2.pdf, Folie 19"
+          back: "Eine Situation, in der Prozesse gegenseitig auf Ereignisse oder Ressourcen warten, die von anderen wartenden Prozessen nicht freigegeben werden können.",
+          source: "09_rabs-synchro-2.pdf, Folien 19-20"
         },
         {
-          front: "Welche Coffman-Bedingungen nennen die Folien?",
-          back: "Die Coffman-Bedingungen sind Mutual Exclusion, Hold and Wait, Non-Preemption und Cyclic Waiting.",
+          front: "Welche vier Coffman-Bedingungen nennt die Vorlesung?",
+          back: "Wechselseitiger Ausschluss (Mutual Exclusion), Halten und Warten (Hold and Wait), Ununterbrechbarkeit (Non-Preemption) und zyklisches Warten (Cyclic Waiting).",
           source: "09_rabs-synchro-2.pdf, Folie 30"
+        },
+        {
+          front: "Welche vier Strategien zur Deadlock-Behandlung werden genannt?",
+          back: "Ignorieren, Erkennen und Beheben, Vermeidung und Verhinderung.",
+          source: "09_rabs-synchro-2.pdf, Folie 50"
         }
       ]
     },
@@ -1561,34 +1427,17 @@ const rabs = {
           source: "10_rabs-ipc.pdf, Folie 44"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Warum sind Kommunikation und Synchronisation verbunden?",
-          answer: "Wenn ein Prozess eine Information von einem anderen benötigt, muss er warten, bis diese Information bereitgestellt ist.",
+          front: "Warum sind Kommunikation und Synchronisation verbunden?",
+          back: "Wenn ein Prozess eine Information von einem anderen benötigt, muss er warten, bis diese Information bereitgestellt ist.",
           source: "10_rabs-ipc.pdf, Folie 7"
         },
         {
-          question: "Was unterscheidet nachrichtenbasierte von speicherbasierter Kommunikation?",
-          answer: "Nachrichtenbasierte Kommunikation läuft über das Betriebssystem und synchronisiert implizit; speicherbasierte Kommunikation nutzt gemeinsamen Speicher und erfordert explizite Synchronisation.",
+          front: "Was unterscheidet nachrichtenbasierte von speicherbasierter Kommunikation?",
+          back: "Nachrichtenbasierte Kommunikation läuft über das Betriebssystem und synchronisiert implizit; speicherbasierte Kommunikation nutzt gemeinsamen Speicher und erfordert explizite Synchronisation.",
           source: "10_rabs-ipc.pdf, Folie 8"
         },
-        {
-          question: "Was ist eine Mailbox?",
-          answer: "Eine Warteschlange im Speicherbereich des Betriebssystems, über die mehrere Sender und Empfänger n:m kommunizieren können.",
-          source: "10_rabs-ipc.pdf, Folie 15"
-        },
-        {
-          question: "Was ist eine Pipe?",
-          answer: "Ein unidirektionaler Datenstrom, der Bytes in FIFO-Reihenfolge zwischen Prozessen überträgt.",
-          source: "10_rabs-ipc.pdf, Folien 26-28"
-        },
-        {
-          question: "Welche UNIX-Funktionen nennt der Foliensatz für Shared Memory?",
-          answer: "<code>shmget</code>, <code>shmat</code>, <code>shmdt</code> und <code>shmctl</code>.",
-          source: "10_rabs-ipc.pdf, Folie 44"
-        }
-      ],
-      flashcards: [
         {
           front: "Was sind send und receive?",
           back: "send und receive sind abstrakte Primitive für Nachrichtenaustausch.",
@@ -1596,7 +1445,7 @@ const rabs = {
         },
         {
           front: "Was ist eine Mailbox?",
-          back: "Eine Mailbox ist eine OS-Warteschlange für n:m-Kommunikation.",
+          back: "Eine Warteschlange im Speicherbereich des Betriebssystems, über die mehrere Sender und Empfänger n:m kommunizieren können.",
           source: "10_rabs-ipc.pdf, Folie 15"
         },
         {
@@ -1606,13 +1455,18 @@ const rabs = {
         },
         {
           front: "Was ist eine Pipe?",
-          back: "Eine Pipe ist ein unidirektionaler FIFO-Bytestrom zwischen Prozessen.",
+          back: "Ein unidirektionaler Datenstrom, der Bytes in FIFO-Reihenfolge zwischen Prozessen überträgt.",
           source: "10_rabs-ipc.pdf, Folien 26-28"
         },
         {
           front: "Was ist Shared Memory?",
           back: "Shared Memory ist gemeinsamer Speicher im Prozessadressraum; der Zugriff muss synchronisiert werden.",
           source: "10_rabs-ipc.pdf, Folien 38-40"
+        },
+        {
+          front: "Welche UNIX-Funktionen nennt der Foliensatz für Shared Memory?",
+          back: "<code>shmget</code>, <code>shmat</code>, <code>shmdt</code> und <code>shmctl</code>.",
+          source: "10_rabs-ipc.pdf, Folie 44"
         }
       ]
     }

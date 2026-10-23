@@ -1,6 +1,8 @@
 <script lang="ts">
   import { richText } from "../lib/richText";
+  import { walkthroughsAfterCards } from "../lib/walkthrough";
   import Source from "./Source.svelte";
+  import WalkthroughCard from "./WalkthroughCard.svelte";
   import type { ContentTag, Topic } from "../types/content";
 
   interface Props {
@@ -8,6 +10,7 @@
   }
 
   let { topic }: Props = $props();
+  let placement = $derived(walkthroughsAfterCards(topic));
 
   function tagLabel(tag: ContentTag): string {
     if (tag === "wichtig") return "Wichtig";
@@ -19,7 +22,7 @@
   }
 </script>
 
-{#each topic.cards as card}
+{#each topic.cards as card, index}
   <div class="study-card fade-in">
     <h3>
       {card.title}
@@ -32,4 +35,11 @@
       <Source source={card.source} />
     </div>
   </div>
+  {#each placement.afterCard[index] || [] as walkthrough (walkthrough.id)}
+    <WalkthroughCard {walkthrough} />
+  {/each}
+{/each}
+
+{#each placement.atEnd as walkthrough (walkthrough.id)}
+  <WalkthroughCard {walkthrough} />
 {/each}

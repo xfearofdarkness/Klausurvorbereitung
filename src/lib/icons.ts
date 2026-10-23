@@ -8,8 +8,6 @@ import layoutRight from "@tabler/icons/outline/layout-sidebar-right.svg?raw";
 import layoutTop from "@tabler/icons/outline/layout-navbar.svg?raw";
 import list from "@tabler/icons/outline/list.svg?raw";
 import pencil from "@tabler/icons/outline/pencil.svg?raw";
-import question from "@tabler/icons/outline/help-circle.svg?raw";
-import route from "@tabler/icons/outline/route.svg?raw";
 
 export const ICONS = {
   book,
@@ -21,9 +19,7 @@ export const ICONS = {
   layoutRight,
   layoutTop,
   list,
-  pencil,
-  question,
-  route
+  pencil
 };
 
 export type IconName = keyof typeof ICONS;

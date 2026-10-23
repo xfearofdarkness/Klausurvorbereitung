@@ -2,7 +2,7 @@ import type { IconName } from "../lib/icons";
 
 export type SubjectId = "rabs" | "laa" | "vs" | "aud";
 
-export type ModeId = "study" | "quiz" | "flash" | "practice" | "walkthrough";
+export type ModeId = "study" | "flash" | "practice";
 
 export type ContentTag = "wichtig" | "formel" | "def" | "satz" | "beispiel" | "";
 
@@ -40,7 +40,6 @@ export interface RawTopic {
   title: string;
   icon?: string;
   cards?: RawCard[];
-  questions?: RawQuestion[];
   flashcards?: RawFlashcard[];
   exercises?: RawExercise[];
   walkthroughs?: Walkthrough[];
@@ -51,7 +50,6 @@ export interface Topic {
   title: string;
   icon: string;
   cards: Card[];
-  questions: Question[];
   flashcards: Flashcard[];
   exercises: Exercise[];
   walkthroughs: Walkthrough[];
@@ -71,20 +69,6 @@ export interface Card {
   source: string;
 }
 
-export interface RawQuestion {
-  question?: string;
-  answer?: string;
-  source?: string;
-}
-
-export interface Question {
-  /** Stabiler Fortschritts-Schlüssel, aus dem Inhalt berechnet (nicht die Listenposition). */
-  key: string;
-  question: string;
-  answer: string;
-  source: string;
-}
-
 export interface RawFlashcard {
   front?: string;
   back?: string;
@@ -92,6 +76,7 @@ export interface RawFlashcard {
 }
 
 export interface Flashcard {
+  /** Stabiler Fortschritts-Schlüssel, aus der Vorderseite berechnet (nicht die Listenposition). */
   key: string;
   front: string;
   back: string;
@@ -123,6 +108,8 @@ export interface Walkthrough {
   title: string;
   source: string;
   intro?: string;
+  /** Titel der Lernkarte, nach der der Ablauf im Modus „Lernen“ steht; ohne Angabe am Ende des Themas. */
+  afterCard?: string;
   /** Eigene Legendenbeschriftung pro Rolle, wenn die Folien eine treffendere Bezeichnung nutzen. */
   legend?: Partial<Record<WalkthroughRole, string>>;
   visual: MatrixVisual | ArrayVisual | TreeVisual | GraphVisual;
@@ -255,9 +242,11 @@ export interface ModeConfig {
   /** Beschriftung für schmale Leisten (z. B. „Karten“ statt „Karteikarten“). */
   shortLabel: string;
   icon: IconName;
-  key: keyof Pick<Topic, "cards" | "questions" | "flashcards" | "exercises" | "walkthroughs">;
+  /** Inhalte, von denen mindestens einer vorhanden sein muss, damit der Modus wählbar ist. */
+  keys: Array<keyof Pick<Topic, "cards" | "flashcards" | "exercises" | "walkthroughs">>;
 }
 
+/** Markierungen des früheren Modus „Fragen“; nur noch für die Übernahme alter Stände. */
 export type QuizMark = "correct" | "wrong";
 export type FlashMark = "know" | "repeat";
 export type PracticeMark = "done";
@@ -266,13 +255,15 @@ export type PracticeMark = "done";
 export type MarkState<T> = Record<string, T>;
 
 export interface SubjectProgress {
-  /** 2 = Markierungen über Inhaltsschlüssel; ältere Stände nutzten Listenpositionen. */
+  /** 3 = Fragen in Karteikarten überführt, 2 = Inhaltsschlüssel, 1 = Listenpositionen. */
   version?: number;
-  quiz: Record<string, MarkState<QuizMark>>;
+  /** Nur noch für die Übernahme alter Stände gelesen. */
+  quiz?: Record<string, MarkState<QuizMark>>;
   flash: Record<string, MarkState<FlashMark>>;
   practice?: Record<string, MarkState<PracticeMark>>;
   ui?: {
-    lastMode?: ModeId;
+    /** Kann aus älteren Ständen einen entfernten Modus enthalten. */
+    lastMode?: ModeId | string;
     lastTopicId?: string;
     /** Nur noch für die Übernahme alter Stände gelesen. */
     lastTopicIndex?: number;

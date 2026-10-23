@@ -45,18 +45,23 @@ Fächer unterscheiden sich didaktisch. Die App bildet das über
 generische, deklarative Optionen in den Fachdaten ab, nie über
 Sonderlogik:
 
-- Modi sind inhaltsgetrieben und beziehen sich auf das aktuelle
-  Thema: Alle Modi (Lernen, Fragen, Karteikarten, Üben, Abläufe) haben
-  einen festen Platz in der Modusleiste. Modi ohne Inhalte im aktuellen
-  Thema werden ausgegraut und sind nicht wählbar, damit die Plätze beim
-  Themenwechsel nicht springen.
+- Modi sind nach Tätigkeit getrennt, nicht nach Inhaltsart: Lernen
+  (verstehen), Karteikarten (abrufen und wiederholen) und Üben (selbst
+  anwenden). Alle drei haben einen festen Platz in der Modusleiste.
+  Modi ohne Inhalte im aktuellen Thema werden ausgegraut und sind nicht
+  wählbar, damit die Plätze beim Themenwechsel nicht springen.
+- Der Modus „Lernen“ zeigt die Lernkarten und bettet die Abläufe des
+  Themas ein, jeweils direkt nach der Lernkarte, die sie
+  veranschaulichen. Ein vorgerechnetes Beispiel steht so neben seiner
+  Erklärung, ohne Moduswechsel.
+- Karteikarten sind das einzige Abfrageformat. Es gibt keinen
+  getrennten Fragenmodus mit ähnlichen Inhalten.
 - Der Modus „Üben“ rendert den optionalen Themenabschnitt
   `exercises` (Aufgaben ohne hinterlegte Lösung, mit
   Bearbeitet-Fortschritt). Aufgaben mit `generator`-Feld sind
   generierte Rechenmodule: Zahlen per Zufall, berechnete Lösung
   ein-/ausblendbar, Button „Neue Zahlen“.
-- Der Modus „Abläufe“ rendert den optionalen Themenabschnitt
-  `walkthroughs`. Er zeigt deklarative Schrittfolgen mit
+- Abläufe (`walkthroughs`) sind deklarative Schrittfolgen mit
   generischen Visualtypen: `matrix`, `array`, `tree` (Knoten
   mit links/rechts-Kindern) und `graph` (Knoten mit Koordinaten,
   Kanten optional gerichtet und beschriftet).
@@ -114,7 +119,6 @@ Standardkomponenten:
 - Seitenleiste und Themenauswahl
 - Modusleiste
 - Lernkarte
-- Quizkarte
 - Flashcard
 - Übungskarte
 - Ablaufkarte
@@ -128,8 +132,8 @@ und `beispiel` ausgezeichnet werden. Die Tag-Farben sind zentral
 definiert und in allen Fächern gleich.
 
 Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
-in Lernkarten unter dem Text, in Quizkarten unter der Antwort, bei
-Flashcards auf der Rückseite. Das stützt die Kernregel, dass die
+in Lernkarten unter dem Text, in Abläufen unter dem Schritt, bei
+Karteikarten auf der Rückseite. Das stützt die Kernregel, dass die
 Folien Vorrang haben, und macht das Nachschlagen einfach.
 
 Regeln:
@@ -182,7 +186,7 @@ Regeln:
 
 Diese Anforderungen sind verbindlich:
 
-- Vom Startbildschirm bis zur ersten Lerneinheit oder Frage sind maximal zwei Interaktionen erlaubt.
+- Vom Startbildschirm bis zur ersten Lerneinheit oder Karteikarte sind maximal zwei Interaktionen erlaubt.
 - Der Nutzer muss immer sehen, in welchem Fach, Modus und Thema er sich befindet.
 - Die wichtigsten Aktionen müssen ohne Nachdenken erkennbar sein.
 - Die App darf keine Fachlogik voraussetzen; jedes Fach nutzt dieselbe Bedienung.

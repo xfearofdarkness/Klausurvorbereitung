@@ -1,4 +1,4 @@
-import type { Walkthrough, WalkthroughRole } from "../types/content";
+import type { Topic, Walkthrough, WalkthroughRole } from "../types/content";
 
 export type LegendKey = WalkthroughRole | "changed";
 
@@ -56,4 +56,26 @@ function changesValue(update: NonNullable<Walkthrough["steps"][number]["values"]
   if (update.kind === "tree-node") return update.value !== undefined || update.note !== undefined;
   if (update.kind === "graph-node") return update.note !== undefined;
   return false;
+}
+
+export interface WalkthroughPlacement {
+  /** Abläufe je Lernkarten-Index, die direkt nach dieser Karte stehen. */
+  afterCard: Record<number, Walkthrough[]>;
+  /** Abläufe ohne passende Lernkarte, am Ende des Themas. */
+  atEnd: Walkthrough[];
+}
+
+/** Ordnet jeden Ablauf der Lernkarte zu, die er veranschaulicht; die Reihenfolge der Daten bleibt erhalten. */
+export function walkthroughsAfterCards(topic: Topic): WalkthroughPlacement {
+  const cardIndexByTitle = new Map(topic.cards.map((card, index) => [card.title, index]));
+  const placement: WalkthroughPlacement = { afterCard: {}, atEnd: [] };
+  for (const walkthrough of topic.walkthroughs) {
+    const index = walkthrough.afterCard === undefined ? undefined : cardIndexByTitle.get(walkthrough.afterCard);
+    if (index === undefined) {
+      placement.atEnd.push(walkthrough);
+    } else {
+      (placement.afterCard[index] ||= []).push(walkthrough);
+    }
+  }
+  return placement;
 }

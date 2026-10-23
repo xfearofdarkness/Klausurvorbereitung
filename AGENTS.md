@@ -79,7 +79,7 @@ CI, weil `sources/` nur lokal existiert. Sie müssen lokal laufen.
   `eq`, `"\sqrt"` zu `sqrt`. KaTeX und `npm run validate` melden das nicht.
   Backslashes in Fachdaten verdoppeln (`"\\times"`). In Generatoren wird
   stattdessen `String.raw` verwendet.
-- Fortschritt hängt am Text von Fragen, Flashcard-Vorderseiten und Aufgaben.
+- Fortschritt hängt am Text von Karteikarten-Vorderseiten und Aufgaben.
   Diese Texte nur ändern, wenn es inhaltlich nötig ist.
 - `sources/` steht in `.gitignore`. Nie per `git add -f` oder Umbenennung
   einchecken. Auch keine Auszüge, Screenshots oder Volltexte der Folien in

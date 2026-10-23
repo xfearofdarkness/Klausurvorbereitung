@@ -81,68 +81,41 @@ const vs = {
           source: "02_vs-overview.pdf, Folien 25-26"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Wie sind Verteilte Systeme definiert?",
-          answer: "Geografische Verteilung von Komponenten, kein gemeinsamer Speicher, dezentrale Administration — die Komponenten kooperieren, um ein gemeinsames Ziel zu erreichen.",
+          front: "Wie sind Verteilte Systeme definiert?",
+          back: "Geografische Verteilung von Komponenten, kein gemeinsamer Speicher, dezentrale Administration — die Komponenten kooperieren, um ein gemeinsames Ziel zu erreichen.",
           source: "02_vs-overview.pdf, Folie 5"
         },
         {
-          question: "Wie definiert Tanenbaum ein verteiltes System?",
-          answer: "Eine Sammlung unabhängiger Computer, die dem Benutzer als ein einziges, verbundenes System erscheinen.",
+          front: "Wie definiert Tanenbaum ein verteiltes System?",
+          back: "Eine Sammlung unabhängiger Computer, die dem Benutzer als ein einziges, verbundenes System erscheinen.",
           source: "02_vs-overview.pdf, Folie 6"
         },
         {
-          question: "Nennen Sie Beispiele für Systeme, die KEINE Verteilten Systeme sind.",
-          answer: "Zentraler Mainframe mit Terminals ohne lokale Funktionalität (Thin Clients), Shared-Memory-Hypercube, Workstation-Cluster ohne zielgerichtete Zusammenarbeit.",
+          front: "Nennen Sie Beispiele für Systeme, die KEINE Verteilten Systeme sind.",
+          back: "Zentraler Mainframe mit Terminals ohne lokale Funktionalität (Thin Clients), Shared-Memory-Hypercube, Workstation-Cluster ohne zielgerichtete Zusammenarbeit.",
           source: "02_vs-overview.pdf, Folie 12"
         },
         {
-          question: "Welche Konsequenzen ergeben sich aus der Verteilung?",
-          answer: "Nebenläufigkeit ist der Normalfall (Knoten arbeiten parallel), es gibt keine globale Uhr (Koordination über Nachrichten) und unabhängige Fehlerfälle (Funktionalität soll auch bei Fehlern erbracht werden).",
+          front: "Was bedeutet Verteilungstransparenz?",
+          back: "Verteilungstransparenz bedeutet, dass die Verteilung verborgen bleibt und das System einheitlich erscheinen soll.",
+          source: "02_vs-overview.pdf, Folie 13"
+        },
+        {
+          front: "Welche Konsequenzen ergeben sich aus der Verteilung?",
+          back: "Nebenläufigkeit ist der Normalfall (Knoten arbeiten parallel), es gibt keine globale Uhr (Koordination über Nachrichten) und unabhängige Fehlerfälle (Funktionalität soll auch bei Fehlern erbracht werden).",
           source: "02_vs-overview.pdf, Folie 14"
         },
         {
-          question: "Was ist Middleware und wo ist sie angesiedelt?",
-          answer: "Programme, die zwischen Applikationen vermitteln und die Komplexität des Gesamtsystems verbergen. Sie implementiert die Grundlagen für Transparenz und ist in den oberen Schichten des OSI-Modells angesiedelt; für Anwendungen spielt sie eine ähnliche Rolle wie das Betriebssystem für Prozesse.",
-          source: "02_vs-overview.pdf, Folien 22-24"
-        },
-        {
-          question: "Warum wird das Client-Server-Modell eingeführt, obwohl es das OSI-Modell gibt?",
-          answer: "Das OSI-Modell ist zu komplex, um die Kommunikation zwischen Prozessen auf der Anwendungsebene zu beschreiben. Verteilte Systeme werden als Menge von Prozessen betrachtet; Server bieten Dienste für Clients an, Kommunikation wird über einfache Routinen ermöglicht.",
-          source: "02_vs-overview.pdf, Folie 25"
-        },
-        {
-          question: "Welche Schritte der historischen Entwicklung Verteilter Systeme unterscheiden die Folien?",
-          answer: "1. Klassische Verteilte Systeme (nebenläufige Betriebssysteme, RPC/RMI/JMS), 2. Plattformen (Middleware wie CORBA, Application Server, Componentware, SOA), 3. Web-Technologien (XML, Web-Services, Cloud), 4. Mobile Computing.",
+          front: "Welche Schritte der historischen Entwicklung Verteilter Systeme unterscheiden die Folien?",
+          back: "1. Klassische Verteilte Systeme (nebenläufige Betriebssysteme, RPC/RMI/JMS), 2. Plattformen (Middleware wie CORBA, Application Server, Componentware, SOA), 3. Web-Technologien (XML, Web-Services, Cloud), 4. Mobile Computing.",
           source: "02_vs-overview.pdf, Folie 17"
         },
         {
-          question: "Welche Elemente enthalten Architekturbeschreibungen?",
-          answer: "Komponenten, Schnittstellen, Implementierungen, Relationen zwischen den Komponenten, Kommunikation und Constraints.",
+          front: "Welche Elemente enthalten Architekturbeschreibungen?",
+          back: "Komponenten, Schnittstellen, Implementierungen, Relationen zwischen den Komponenten, Kommunikation und Constraints.",
           source: "02_vs-overview.pdf, Folie 20"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Welche drei Kernmerkmale haben Verteilte Systeme?",
-          back: "Verteilte Systeme haben geografische Verteilung, keinen gemeinsamen Speicher und dezentrale Administration; sie kooperieren für ein gemeinsames Ziel.",
-          source: "02_vs-overview.pdf, Folie 5"
-        },
-        {
-          front: "Wie definiert Tanenbaum ein Verteiltes System?",
-          back: "Nach Tanenbaum ist ein Verteiltes System eine Sammlung unabhängiger Computer, die dem Benutzer als ein einziges, verbundenes System erscheinen.",
-          source: "02_vs-overview.pdf, Folie 6"
-        },
-        {
-          front: "Welche drei Konsequenzen hat Verteilung laut Folien?",
-          back: "Die Konsequenzen sind Nebenläufigkeit als Normalfall, keine globale Uhr und unabhängige Fehlerfälle.",
-          source: "02_vs-overview.pdf, Folie 14"
-        },
-        {
-          front: "Welche Rolle hat Middleware?",
-          back: "Middleware vermittelt zwischen Applikationen, verbirgt Komplexität und implementiert Transparenz in den oberen OSI-Schichten.",
-          source: "02_vs-overview.pdf, Folie 22"
         },
         {
           front: "Welche Aufgaben haben OSI-Schicht 4 und Schicht 3?",
@@ -150,14 +123,19 @@ const vs = {
           source: "02_vs-overview.pdf, Folie 21"
         },
         {
+          front: "Was ist Middleware und wo ist sie angesiedelt?",
+          back: "Programme, die zwischen Applikationen vermitteln und die Komplexität des Gesamtsystems verbergen. Sie implementiert die Grundlagen für Transparenz und ist in den oberen Schichten des OSI-Modells angesiedelt; für Anwendungen spielt sie eine ähnliche Rolle wie das Betriebssystem für Prozesse.",
+          source: "02_vs-overview.pdf, Folien 22-24"
+        },
+        {
+          front: "Warum wird das Client-Server-Modell eingeführt, obwohl es das OSI-Modell gibt?",
+          back: "Das OSI-Modell ist zu komplex, um die Kommunikation zwischen Prozessen auf der Anwendungsebene zu beschreiben. Verteilte Systeme werden als Menge von Prozessen betrachtet; Server bieten Dienste für Clients an, Kommunikation wird über einfache Routinen ermöglicht.",
+          source: "02_vs-overview.pdf, Folie 25"
+        },
+        {
           front: "Welche Plattformdienste nennen die Folien neben Kommunikation?",
           back: "Neben Kommunikation nennen die Folien Transaktionen, Service Composition und Reliability.",
           source: "02_vs-overview.pdf, Folie 26"
-        },
-        {
-          front: "Was bedeutet Verteilungstransparenz?",
-          back: "Verteilungstransparenz bedeutet, dass die Verteilung verborgen bleibt und das System einheitlich erscheinen soll.",
-          source: "02_vs-overview.pdf, Folie 13"
         }
       ]
     },
@@ -243,62 +221,10 @@ const vs = {
           source: "02_vs-overview.1.pdf, Folien 26-27"
         }
       ],
-      questions: [
-        {
-          question: "Auf welchen Ebenen kann Heterogenität auftreten?",
-          answer: "Hardware (Rechnerarchitekturen, Befehlssätze, Datenrepräsentation), Netzwerk (Übertragungsmedien, Signale, Schnittstellen, Protokolle) und Software (Betriebssysteme, Anwendungsprogramme).",
-          source: "02_vs-overview.1.pdf, Folie 5"
-        },
-        {
-          question: "Was ist Transparenz und welche Aspekte gibt es?",
-          answer: "Transparenz verbirgt Details der Implementierung. Aspekte: Zugriffs-, Location-, Nebenläufigkeits-, Replikations-, Fehler-, Migrations- und Ressourcentransparenz.",
-          source: "02_vs-overview.1.pdf, Folien 7-8"
-        },
-        {
-          question: "Was zeichnet ein offenes System aus?",
-          answer: "Es bietet Komponenten an, die leicht in andere Systeme integriert werden können — über standardisierte Schnittstellen (z. B. per IDL definiert). Damit werden Interoperabilität und Portabilität erreicht; Offenheit ist Voraussetzung für Erweiterbarkeit.",
-          source: "02_vs-overview.1.pdf, Folie 9"
-        },
-        {
-          question: "Welche drei Dimensionen der Skalierbarkeit gibt es?",
-          answer: "Größen-Skalierbarkeit, geografische Skalierbarkeit und administrative Skalierbarkeit.",
-          source: "02_vs-overview.1.pdf, Folie 10"
-        },
-        {
-          question: "Aus welchen Gründen werden zentrale Server zu Bottlenecks?",
-          answer: "Begrenzte CPU, begrenzter Speicherplatz bzw. I/O-Transferrate und begrenzte Netzwerkkapazität.",
-          source: "02_vs-overview.1.pdf, Folie 11"
-        },
-        {
-          question: "Welche Skalierungstechniken nennen die Folien?",
-          answer: "Scaling Up (Knoten verbessern) vs. Scaling Out (mehr Maschinen). Strategien: Kommunikations-Latenzen verbergen, Partitionieren und Verteilen, Replikation.",
-          source: "02_vs-overview.1.pdf, Folie 14"
-        },
-        {
-          question: "Worin unterscheiden sich Caching und Replikation?",
-          answer: "Caching ist eine besondere Form der Replikation, geht aber auf eine Entscheidung des Clients zurück, während Replikation eher vom Server veranlasst wird. Beide führen zu Konsistenzproblemen.",
-          source: "02_vs-overview.1.pdf, Folie 18"
-        },
-        {
-          question: "Nennen Sie vier falsche Annahmen über Netzwerke.",
-          answer: "Z. B.: Das Netzwerk ist verlässlich; das Netzwerk ist sicher; die Latenz ist null; die Bandbreite ist unendlich (außerdem: homogen, feste Topologie, Transportkosten null, nur ein Administrator).",
-          source: "02_vs-overview.1.pdf, Folie 19"
-        },
-        {
-          question: "Was bedeuten Vertraulichkeit, Integrität und Authentizität?",
-          answer: "Vertraulichkeit: Daten können nur vom Empfänger gelesen werden (Verschlüsselung). Integrität: Daten wurden nicht verändert. Authentizität: Daten kommen von der Person, die als Sender firmiert.",
-          source: "02_vs-overview.1.pdf, Folie 21"
-        },
-        {
-          question: "Welche Fehlermodelle unterscheiden die Folien?",
-          answer: "Unterlassungsfehler (Crash, Kommunikationsfehler), Timing-Fehler (synchrone Systeme, Echtzeitsysteme) und willkürliche Fehler (byzantine failures: fehlerhafte Werte, verfälschte Nachrichten).",
-          source: "02_vs-overview.1.pdf, Folie 24"
-        }
-      ],
       flashcards: [
         {
-          front: "Welche drei Ebenen der Heterogenität nennen die Folien?",
-          back: "Die drei Ebenen der Heterogenität sind Hardware, Netzwerk und Software.",
+          front: "Auf welchen Ebenen kann Heterogenität auftreten?",
+          back: "Hardware (Rechnerarchitekturen, Befehlssätze, Datenrepräsentation), Netzwerk (Übertragungsmedien, Signale, Schnittstellen, Protokolle) und Software (Betriebssysteme, Anwendungsprogramme).",
           source: "02_vs-overview.1.pdf, Folie 5"
         },
         {
@@ -307,29 +233,49 @@ const vs = {
           source: "02_vs-overview.1.pdf, Folie 6"
         },
         {
-          front: "Welche Transparenz-Aspekte nennen die Folien?",
-          back: "Die Folien nennen Zugriff, Location, Nebenläufigkeit, Replikation, Fehler, Migration und Ressourcen.",
-          source: "02_vs-overview.1.pdf, Folie 8"
+          front: "Was ist Transparenz und welche Aspekte gibt es?",
+          back: "Transparenz verbirgt Details der Implementierung. Aspekte: Zugriffs-, Location-, Nebenläufigkeits-, Replikations-, Fehler-, Migrations- und Ressourcentransparenz.",
+          source: "02_vs-overview.1.pdf, Folien 7-8"
+        },
+        {
+          front: "Was zeichnet ein offenes System aus?",
+          back: "Es bietet Komponenten an, die leicht in andere Systeme integriert werden können — über standardisierte Schnittstellen (z. B. per IDL definiert). Damit werden Interoperabilität und Portabilität erreicht; Offenheit ist Voraussetzung für Erweiterbarkeit.",
+          source: "02_vs-overview.1.pdf, Folie 9"
         },
         {
           front: "Welche drei Dimensionen der Skalierbarkeit gibt es?",
-          back: "Die drei Dimensionen der Skalierbarkeit sind Größe, Geografie und Administration.",
+          back: "Größen-Skalierbarkeit, geografische Skalierbarkeit und administrative Skalierbarkeit.",
           source: "02_vs-overview.1.pdf, Folie 10"
         },
         {
-          front: "Worin unterscheiden sich Scaling Up und Scaling Out?",
-          back: "Scaling Up verbessert die Kapazitäten der Knoten; Scaling Out bezieht mehr Maschinen ein.",
+          front: "Aus welchen Gründen werden zentrale Server zu Bottlenecks?",
+          back: "Begrenzte CPU, begrenzter Speicherplatz bzw. I/O-Transferrate und begrenzte Netzwerkkapazität.",
+          source: "02_vs-overview.1.pdf, Folie 11"
+        },
+        {
+          front: "Welche Skalierungstechniken nennen die Folien?",
+          back: "Scaling Up (Knoten verbessern) vs. Scaling Out (mehr Maschinen). Strategien: Kommunikations-Latenzen verbergen, Partitionieren und Verteilen, Replikation.",
           source: "02_vs-overview.1.pdf, Folie 14"
         },
         {
-          front: "Welche drei Skalierungs-Strategien nennen die Folien?",
-          back: "Die Folien nennen Latenzen verbergen, Partitionieren und Verteilen sowie Replikation.",
-          source: "02_vs-overview.1.pdf, Folie 14"
+          front: "Worin unterscheiden sich Caching und Replikation?",
+          back: "Caching ist eine besondere Form der Replikation, geht aber auf eine Entscheidung des Clients zurück, während Replikation eher vom Server veranlasst wird. Beide führen zu Konsistenzproblemen.",
+          source: "02_vs-overview.1.pdf, Folie 18"
         },
         {
-          front: "Welche drei Security-Ziele nennen die Folien?",
-          back: "Die drei Security-Ziele sind Vertraulichkeit, Integrität und Authentizität.",
+          front: "Nennen Sie vier falsche Annahmen über Netzwerke.",
+          back: "Z. B.: Das Netzwerk ist verlässlich; das Netzwerk ist sicher; die Latenz ist null; die Bandbreite ist unendlich (außerdem: homogen, feste Topologie, Transportkosten null, nur ein Administrator).",
+          source: "02_vs-overview.1.pdf, Folie 19"
+        },
+        {
+          front: "Was bedeuten Vertraulichkeit, Integrität und Authentizität?",
+          back: "Vertraulichkeit: Daten können nur vom Empfänger gelesen werden (Verschlüsselung). Integrität: Daten wurden nicht verändert. Authentizität: Daten kommen von der Person, die als Sender firmiert.",
           source: "02_vs-overview.1.pdf, Folie 21"
+        },
+        {
+          front: "Welche Fehlermodelle unterscheiden die Folien?",
+          back: "Unterlassungsfehler (Crash, Kommunikationsfehler), Timing-Fehler (synchrone Systeme, Echtzeitsysteme) und willkürliche Fehler (byzantine failures: fehlerhafte Werte, verfälschte Nachrichten).",
+          source: "02_vs-overview.1.pdf, Folie 24"
         },
         {
           front: "Was sind Byzantine Failures?",
@@ -422,57 +368,10 @@ const vs = {
           source: "01_ds-concept-networks.pdf, Folie 34"
         }
       ],
-      questions: [
-        {
-          question: "Was ist Latenz und wie berechnet sich die Datenübertragungszeit?",
-          answer: "Latenz ist die Verzögerung zwischen Versenden und Empfangen von Daten. Datenübertragungszeit = Latenz + Länge/Datenübertragungsrate.",
-          source: "01_ds-concept-networks.pdf, Folie 4"
-        },
-        {
-          question: "Welche Arten von Netzwerken gibt es?",
-          answer: "PAN (persönliche Geräte, z. B. Bluetooth), LAN (Organisation, z. B. Ethernet), WAN (zwischen Organisationen, Latenz durch Routing erhöht) und MAN (Glasfaser/Kupfer mit großer Bandbreite). Jede Art hat eine drahtlose Variante.",
-          source: "01_ds-concept-networks.pdf, Folie 9"
-        },
-        {
-          question: "Was ist ein Paket und warum ist die Längenbeschränkung bedeutsam?",
-          answer: "Eine Folge binärer Daten mit festgelegter Länge plus Adressinformationen über Sender und Empfänger. Die Beschränkung ermöglicht das Reservieren von Speicherplatz und vermeidet große Verzögerungen durch sehr lange Nachrichten.",
-          source: "01_ds-concept-networks.pdf, Folie 12"
-        },
-        {
-          question: "Welche Switching-Schemata gibt es?",
-          answer: "Broadcast (an alle erreichbaren Knoten), Circuit Switching (Verbindung aus Teilstücken), Packet Switching (zwischenspeichern und weitersenden) und Frame Relay (Frames on-the-fly, für Echtzeitsysteme).",
-          source: "01_ds-concept-networks.pdf, Folie 15"
-        },
-        {
-          question: "Welche zwei Aspekte definiert ein Protokoll?",
-          answer: "Die Reihenfolge, in der bestimmte Nachrichten ausgetauscht werden müssen, und das Format der ausgetauschten Nachrichten.",
-          source: "01_ds-concept-networks.pdf, Folie 17"
-        },
-        {
-          question: "Worin unterscheiden sich Datagramme und verbindungsorientierter Transport?",
-          answer: "Datagramme funktionieren wie Postkarten: Adressinfo, keine Infrastruktur, verschiedene Routen möglich. Verbindungsorientiert: erst wird eine virtuelle Verbindung aufgebaut, über die die Pakete geschickt werden. Beispiele auf der Transportebene: UDP bzw. TCP.",
-          source: "01_ds-concept-networks.pdf, Folie 23"
-        },
-        {
-          question: "Welche Merkmale bietet TCP?",
-          answer: "Sequencing (Reihenfolge bleibt erhalten), Flow Control (Rückmeldung der Aufnahmekapazität), Retransmission (erneutes Senden ohne Bestätigung), Buffering (Empfängerpuffer) und Checksum (Integrität von Header und Daten).",
-          source: "01_ds-concept-networks.pdf, Folie 33"
-        },
-        {
-          question: "Wozu dient der DNS?",
-          answer: "Er übersetzt hierarchisch organisierte, symbolische Domänen-Namen in IP-Adressen.",
-          source: "01_ds-concept-networks.pdf, Folie 34"
-        },
-        {
-          question: "Warum wurde IPv6 entwickelt?",
-          answer: "IPv4 stellt nur 2³² (4 Milliarden) Adressen zur Verfügung — das ist der Hauptgrund für die Entwicklung von IPv6.",
-          source: "01_ds-concept-networks.pdf, Folie 29"
-        }
-      ],
       flashcards: [
         {
-          front: "Wie berechnet sich die Datenübertragungszeit?",
-          back: "Die Datenübertragungszeit berechnet sich als Latenz plus Länge geteilt durch Datenübertragungsrate.",
+          front: "Was ist Latenz und wie berechnet sich die Datenübertragungszeit?",
+          back: "Latenz ist die Verzögerung zwischen Versenden und Empfangen von Daten. Datenübertragungszeit = Latenz + Länge/Datenübertragungsrate.",
           source: "01_ds-concept-networks.pdf, Folie 4"
         },
         {
@@ -481,14 +380,29 @@ const vs = {
           source: "01_ds-concept-networks.pdf, Folie 5"
         },
         {
+          front: "Welche Arten von Netzwerken gibt es?",
+          back: "PAN (persönliche Geräte, z. B. Bluetooth), LAN (Organisation, z. B. Ethernet), WAN (zwischen Organisationen, Latenz durch Routing erhöht) und MAN (Glasfaser/Kupfer mit großer Bandbreite). Jede Art hat eine drahtlose Variante.",
+          source: "01_ds-concept-networks.pdf, Folie 9"
+        },
+        {
           front: "Wofür stehen PAN, LAN, WAN und MAN?",
           back: "PAN, LAN, WAN und MAN stehen für Personal, Local, Wide und Metropolitan Area Network.",
           source: "01_ds-concept-networks.pdf, Folie 9"
         },
         {
-          front: "Welche Switching-Schemata nennen die Folien?",
-          back: "Die Folien nennen Broadcast, Circuit Switching, Packet Switching und Frame Relay.",
+          front: "Was ist ein Paket und warum ist die Längenbeschränkung bedeutsam?",
+          back: "Eine Folge binärer Daten mit festgelegter Länge plus Adressinformationen über Sender und Empfänger. Die Beschränkung ermöglicht das Reservieren von Speicherplatz und vermeidet große Verzögerungen durch sehr lange Nachrichten.",
+          source: "01_ds-concept-networks.pdf, Folie 12"
+        },
+        {
+          front: "Welche Switching-Schemata gibt es?",
+          back: "Broadcast (an alle erreichbaren Knoten), Circuit Switching (Verbindung aus Teilstücken), Packet Switching (zwischenspeichern und weitersenden) und Frame Relay (Frames on-the-fly, für Echtzeitsysteme).",
           source: "01_ds-concept-networks.pdf, Folie 15"
+        },
+        {
+          front: "Welche zwei Aspekte definiert ein Protokoll?",
+          back: "Die Reihenfolge, in der bestimmte Nachrichten ausgetauscht werden müssen, und das Format der ausgetauschten Nachrichten.",
+          source: "01_ds-concept-networks.pdf, Folie 17"
         },
         {
           front: "Woraus besteht eine Transportadresse?",
@@ -496,9 +410,14 @@ const vs = {
           source: "01_ds-concept-networks.pdf, Folie 22"
         },
         {
-          front: "Welche fünf Merkmale hat TCP laut Folien?",
-          back: "TCP bietet Sequencing, Flow Control, Retransmission, Buffering und Checksum.",
-          source: "01_ds-concept-networks.pdf, Folie 33"
+          front: "Worin unterscheiden sich Datagramme und verbindungsorientierter Transport?",
+          back: "Datagramme funktionieren wie Postkarten: Adressinfo, keine Infrastruktur, verschiedene Routen möglich. Verbindungsorientiert: erst wird eine virtuelle Verbindung aufgebaut, über die die Pakete geschickt werden. Beispiele auf der Transportebene: UDP bzw. TCP.",
+          source: "01_ds-concept-networks.pdf, Folie 23"
+        },
+        {
+          front: "Warum wurde IPv6 entwickelt?",
+          back: "IPv4 stellt nur 2³² (4 Milliarden) Adressen zur Verfügung — das ist der Hauptgrund für die Entwicklung von IPv6.",
+          source: "01_ds-concept-networks.pdf, Folie 29"
         },
         {
           front: "Wie ist eine IPv4-Adresse aufgebaut?",
@@ -506,8 +425,13 @@ const vs = {
           source: "01_ds-concept-networks.pdf, Folie 29"
         },
         {
-          front: "Welche Aufgabe hat DNS?",
-          back: "DNS übersetzt hierarchische Domänen-Namen in IP-Adressen.",
+          front: "Welche Merkmale bietet TCP?",
+          back: "Sequencing (Reihenfolge bleibt erhalten), Flow Control (Rückmeldung der Aufnahmekapazität), Retransmission (erneutes Senden ohne Bestätigung), Buffering (Empfängerpuffer) und Checksum (Integrität von Header und Daten).",
+          source: "01_ds-concept-networks.pdf, Folie 33"
+        },
+        {
+          front: "Wozu dient der DNS?",
+          back: "Er übersetzt hierarchisch organisierte, symbolische Domänen-Namen in IP-Adressen.",
           source: "01_ds-concept-networks.pdf, Folie 34"
         }
       ]
@@ -583,53 +507,16 @@ const vs = {
           source: "01_ds-concept-sockets.pdf, Folie 37"
         }
       ],
-      questions: [
-        {
-          question: "Was ist ein Socket?",
-          answer: "Der Endpunkt einer bidirektionalen Kommunikationsverbindung zwischen zwei Programmen, gebunden an eine Portnummer, damit die TCP-Schicht die empfangende Anwendung identifizieren kann.",
-          source: "01_ds-concept-sockets.pdf, Folie 8"
-        },
-        {
-          question: "Wie läuft der Verbindungsaufbau zwischen Client und Server ab?",
-          answer: "Der Server horcht an einem Socket mit Portnummer; der Client kennt Rechnername und Port und startet eine Verbindungsanfrage; der Server akzeptiert; auf der Client-Seite wird ein Socket erzeugt — dann können beide kommunizieren.",
-          source: "01_ds-concept-sockets.pdf, Folie 8"
-        },
-        {
-          question: "Wann ist UDP gut geeignet?",
-          answer: "Für Anwendungen, die große Mengen von Zustandsdaten übertragen, wo ein Verbindungsaufbau pro Nachricht zu aufwändig wäre — z. B. ein Zeit-Server (verlorene Datagramme werden durch das nächste ersetzt) oder ping.",
-          source: "01_ds-concept-sockets.pdf, Folie 6"
-        },
-        {
-          question: "Welche vier Schritte umfasst die Socket-Programmierung generell?",
-          answer: "1. Socket öffnen, 2. Input-/Output-Streams erhalten, 3. in/aus den Streams schreiben/lesen (die eigentliche Funktionalität), 4. schließen und Speicherplatz freigeben.",
-          source: "01_ds-concept-sockets.pdf, Folie 14"
-        },
-        {
-          question: "Was macht die Methode accept() eines ServerSocket?",
-          answer: "Sie wartet blockierend, bis eine Verbindung vom Client angefragt wird, und liefert dann den Socket für die Kommunikation.",
-          source: "01_ds-concept-sockets.pdf, Folie 15"
-        },
-        {
-          question: "Wie funktioniert ein asynchroner Echo-Server?",
-          answer: "Der von accept() erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet. Währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten — Verbindungsaufbau und Verarbeitung sind entkoppelt.",
-          source: "01_ds-concept-sockets.pdf, Folien 31, 33"
-        },
-        {
-          question: "Was müssen Java-Objekte erfüllen, um über Streams versendet zu werden?",
-          answer: "Sie müssen in eine für den Netzwerkverkehr geeignete Repräsentation umgewandelt werden — ihre Klassen müssen das Interface Serializable implementieren.",
-          source: "01_ds-concept-sockets.pdf, Folie 29"
-        },
-        {
-          question: "Was charakterisiert Java NIO?",
-          answer: "Non-Blocking (nicht blockierende IO-Vorgänge, gleichzeitiges Arbeiten möglich) und Pufferung (Daten werden in Puffern zwischengespeichert).",
-          source: "01_ds-concept-sockets.pdf, Folie 37"
-        }
-      ],
       flashcards: [
         {
-          front: "Was ist ein Socket?",
-          back: "Ein Socket ist der Endpunkt einer bidirektionalen Kommunikationsverbindung und an eine Portnummer gebunden.",
-          source: "01_ds-concept-sockets.pdf, Folie 8"
+          front: "Wie unterscheiden sich TCP und UDP aus Socket-Sicht?",
+          back: "TCP ist verbindungsorientiert, verlässlich und Punkt-zu-Punkt; UDP ist verbindungslos und nutzt unabhängige Datagramme ohne Ankunftsgarantie.",
+          source: "01_ds-concept-sockets.pdf, Folien 5-6"
+        },
+        {
+          front: "Wann ist UDP gut geeignet?",
+          back: "Für Anwendungen, die große Mengen von Zustandsdaten übertragen, wo ein Verbindungsaufbau pro Nachricht zu aufwändig wäre — z. B. ein Zeit-Server (verlorene Datagramme werden durch das nächste ersetzt) oder ping.",
+          source: "01_ds-concept-sockets.pdf, Folie 6"
         },
         {
           front: "Welche Rolle haben Port-Nummern?",
@@ -637,9 +524,14 @@ const vs = {
           source: "01_ds-concept-sockets.pdf, Folie 7"
         },
         {
-          front: "Wie unterscheiden sich TCP und UDP aus Socket-Sicht?",
-          back: "TCP ist verbindungsorientiert, verlässlich und Punkt-zu-Punkt; UDP ist verbindungslos und nutzt unabhängige Datagramme ohne Ankunftsgarantie.",
-          source: "01_ds-concept-sockets.pdf, Folien 5-6"
+          front: "Was ist ein Socket?",
+          back: "Der Endpunkt einer bidirektionalen Kommunikationsverbindung zwischen zwei Programmen, gebunden an eine Portnummer, damit die TCP-Schicht die empfangende Anwendung identifizieren kann.",
+          source: "01_ds-concept-sockets.pdf, Folie 8"
+        },
+        {
+          front: "Wie läuft der Verbindungsaufbau zwischen Client und Server ab?",
+          back: "Der Server horcht an einem Socket mit Portnummer; der Client kennt Rechnername und Port und startet eine Verbindungsanfrage; der Server akzeptiert; auf der Client-Seite wird ein Socket erzeugt — dann können beide kommunizieren.",
+          source: "01_ds-concept-sockets.pdf, Folie 8"
         },
         {
           front: "Welche Java-Klassen gehören zu TCP und UDP?",
@@ -647,19 +539,29 @@ const vs = {
           source: "01_ds-concept-sockets.pdf, Folie 10"
         },
         {
-          front: "Welche Schritte gehören zur Socket-Programmierung?",
-          back: "Die Schritte sind öffnen, Streams holen, lesen beziehungsweise schreiben und schließen beziehungsweise freigeben.",
+          front: "Welche vier Schritte umfasst die Socket-Programmierung generell?",
+          back: "1. Socket öffnen, 2. Input-/Output-Streams erhalten, 3. in/aus den Streams schreiben/lesen (die eigentliche Funktionalität), 4. schließen und Speicherplatz freigeben.",
           source: "01_ds-concept-sockets.pdf, Folie 14"
         },
         {
-          front: "Was macht accept()?",
-          back: "accept() wartet blockierend auf eine Verbindungsanfrage des Clients.",
+          front: "Was macht die Methode accept() eines ServerSocket?",
+          back: "Sie wartet blockierend, bis eine Verbindung vom Client angefragt wird, und liefert dann den Socket für die Kommunikation.",
           source: "01_ds-concept-sockets.pdf, Folie 15"
         },
         {
-          front: "Was ist die Grundidee eines asynchronen Servers?",
-          back: "Ein asynchroner Server entkoppelt den Verbindungsaufbau von der Verarbeitung: Der Client-Socket wird an einen Thread übergeben, während der ServerSocket weiter wartet.",
+          front: "Was müssen Java-Objekte erfüllen, um über Streams versendet zu werden?",
+          back: "Sie müssen in eine für den Netzwerkverkehr geeignete Repräsentation umgewandelt werden — ihre Klassen müssen das Interface Serializable implementieren.",
+          source: "01_ds-concept-sockets.pdf, Folie 29"
+        },
+        {
+          front: "Wie funktioniert ein asynchroner Echo-Server?",
+          back: "Der von accept() erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet. Währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten — Verbindungsaufbau und Verarbeitung sind entkoppelt.",
           source: "01_ds-concept-sockets.pdf, Folien 31, 33"
+        },
+        {
+          front: "Was charakterisiert Java NIO?",
+          back: "Non-Blocking (nicht blockierende IO-Vorgänge, gleichzeitiges Arbeiten möglich) und Pufferung (Daten werden in Puffern zwischengespeichert).",
+          source: "01_ds-concept-sockets.pdf, Folie 37"
         }
       ]
     },
@@ -729,62 +631,20 @@ const vs = {
           source: "02_ds-java-threads.pdf, Folien 28-30"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was ist der Unterschied zwischen Prozess und Thread?",
-          answer: "Ein Prozess hat eine eigene, vom Betriebssystem verwaltete Ausführungsumgebung mit zugewiesenen Ressourcen (in Java: eine VM-Instanz = ein Prozess). Ein Thread ist ein Lightweight Process innerhalb eines Prozesses; Threads teilen sich die Ressourcen des Prozesses.",
+          front: "Was ist der Unterschied zwischen Prozess und Thread?",
+          back: "Ein Prozess hat eine eigene, vom Betriebssystem verwaltete Ausführungsumgebung mit zugewiesenen Ressourcen (in Java: eine VM-Instanz = ein Prozess). Ein Thread ist ein Lightweight Process innerhalb eines Prozesses; Threads teilen sich die Ressourcen des Prozesses.",
           source: "02_ds-java-threads.pdf, Folien 11-12"
         },
         {
-          question: "Auf welche zwei Arten können Threads in Java erzeugt werden und welche ist allgemeiner?",
-          answer: "Ableitung von der Klasse Thread oder Implementierung des Interface Runnable. Runnable ist allgemeiner: Die Klasse kann von anderen Klassen erben (keine Mehrfachvererbung in Java) und der Task ist vom Thread getrennt.",
+          front: "Auf welche zwei Arten können Threads in Java erzeugt werden und welche ist allgemeiner?",
+          back: "Ableitung von der Klasse Thread oder Implementierung des Interface Runnable. Runnable ist allgemeiner: Die Klasse kann von anderen Klassen erben (keine Mehrfachvererbung in Java) und der Task ist vom Thread getrennt.",
           source: "02_ds-java-threads.pdf, Folien 15-16"
         },
         {
-          question: "Warum sollte man start() und nicht run() aufrufen?",
-          answer: "start() startet den Thread asynchron. Wird run() direkt aufgerufen, wird der Code synchron im aufrufenden Thread ausgeführt.",
-          source: "02_ds-java-threads.pdf, Folie 20"
-        },
-        {
-          question: "Wie verhalten sich Thread.interrupted() und isInterrupted() unterschiedlich?",
-          answer: "Die statische Methode Thread.interrupted() löscht das Interrupt-Flag beim Aufruf; die nicht-statische isInterrupted() löscht es nicht und wird verwendet, um den Interrupt-Status eines anderen Threads zu prüfen.",
-          source: "02_ds-java-threads.pdf, Folie 25"
-        },
-        {
-          question: "Was bewirkt join()?",
-          answer: "Der aufrufende Thread wartet, bis der andere Thread beendet ist (optional mit Timeout). Auf einen Interrupt reagiert join() wie sleep() mit einer InterruptedException.",
-          source: "02_ds-java-threads.pdf, Folie 27"
-        },
-        {
-          question: "Ist garantiert, dass sleep() die angegebene Zeit exakt einhält?",
-          answer: "Nein — es ist nicht garantiert, dass die angegebene Zeit für die Unterbrechung genau eingehalten wird; außerdem kann sleep() durch einen Interrupt mit InterruptedException abgebrochen werden.",
-          source: "02_ds-java-threads.pdf, Folie 22"
-        },
-        {
-          question: "Garantiert die JVM, dass yield() befolgt wird?",
-          answer: "Nein — yield() zeigt der JVM nur an, dass der Thread die CPU verlassen kann; die JVM garantiert nicht, dass sie dem nachkommt.",
-          source: "02_ds-java-threads.pdf, Folie 23"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Was ist ein Prozess in Java?",
-          back: "Ein Prozess ist eine konsistente, vom OS verwaltete Ausführungsumgebung; eine VM-Instanz entspricht einem Prozess.",
-          source: "02_ds-java-threads.pdf, Folie 11"
-        },
-        {
-          front: "Was ist ein Thread?",
-          back: "Ein Thread ist ein Lightweight Process und teilt sich die Ressourcen seines Prozesses.",
-          source: "02_ds-java-threads.pdf, Folie 12"
-        },
-        {
-          front: "Welche zwei Wege der Thread-Erzeugung gibt es?",
-          back: "Threads können über extends Thread erzeugt werden, was einfach ist, aber keine weitere Vererbung erlaubt, oder über implements Runnable, was allgemeiner ist und den Task trennt.",
-          source: "02_ds-java-threads.pdf, Folien 15-16"
-        },
-        {
-          front: "Sollte man run() direkt aufrufen?",
-          back: "Nein, denn dann läuft der Code synchron; zum Starten eines Threads soll start() verwendet werden.",
+          front: "Warum sollte man start() und nicht run() aufrufen?",
+          back: "start() startet den Thread asynchron. Wird run() direkt aufgerufen, wird der Code synchron im aufrufenden Thread ausgeführt.",
           source: "02_ds-java-threads.pdf, Folie 20"
         },
         {
@@ -793,13 +653,23 @@ const vs = {
           source: "02_ds-java-threads.pdf, Folie 22"
         },
         {
+          front: "Garantiert die JVM, dass yield() befolgt wird?",
+          back: "Nein — yield() zeigt der JVM nur an, dass der Thread die CPU verlassen kann; die JVM garantiert nicht, dass sie dem nachkommt.",
+          source: "02_ds-java-threads.pdf, Folie 23"
+        },
+        {
           front: "Was bedeutet ein Interrupt bei Threads?",
           back: "Ein Interrupt ist die Aufforderung an einen Thread, seine Aktivität zu unterbrechen; er setzt das Interrupt-Flag und muss vom Thread unterstützt werden.",
           source: "02_ds-java-threads.pdf, Folie 24"
         },
         {
-          front: "Was macht t.join()?",
-          back: "t.join() wartet, bis Thread t beendet ist, optional mit Timeout.",
+          front: "Wie verhalten sich Thread.interrupted() und isInterrupted() unterschiedlich?",
+          back: "Die statische Methode Thread.interrupted() löscht das Interrupt-Flag beim Aufruf; die nicht-statische isInterrupted() löscht es nicht und wird verwendet, um den Interrupt-Status eines anderen Threads zu prüfen.",
+          source: "02_ds-java-threads.pdf, Folie 25"
+        },
+        {
+          front: "Was bewirkt join()?",
+          back: "Der aufrufende Thread wartet, bis der andere Thread beendet ist (optional mit Timeout). Auf einen Interrupt reagiert join() wie sleep() mit einer InterruptedException.",
           source: "02_ds-java-threads.pdf, Folie 27"
         }
       ]
@@ -882,53 +752,6 @@ const vs = {
           source: "03_ds-concept-threads-2.pdf, Folie 24"
         }
       ],
-      questions: [
-        {
-          question: "Was beschreibt das Java Memory Model?",
-          answer: "Welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren — die Beziehung zwischen Programmvariablen und ihrer Speicherung/Abruf in realen Systemen, korrekt implementierbar über verschiedene Hardware und Compileroptimierungen.",
-          source: "03_ds-concept-threads-2.pdf, Folie 5"
-        },
-        {
-          question: "Welche zwei Hauptprobleme adressiert das JMM?",
-          answer: "Sichtbarkeit von Thread-Aktualisierungen (Schreibvorgängen) in gemeinsam genutzte Variablen und Race Conditions beim Lesen, Prüfen und Schreiben von Shared-Variablen.",
-          source: "03_ds-concept-threads-2.pdf, Folie 7"
-        },
-        {
-          question: "Was bewirkt das Schlüsselwort volatile?",
-          answer: "Geänderte Werte werden immer in den Hauptspeicher zurückgeschrieben (und vor Zugriff anderer Threads neu geladen). Aber: Zusammengesetzte Operationen wie ++ sind auch auf volatilen Variablen nicht atomar.",
-          source: "03_ds-concept-threads-2.pdf, Folien 9, 16"
-        },
-        {
-          question: "Was ist eine Race Condition (Beispiel der Folien)?",
-          answer: "Zwei gleichzeitige Inkremente ohne Synchronisation: Egal welcher Thread seinen Wert zurückschreibt, der Zähler ist trotz zweier Inkremente nur um 1 höher als der Ursprungswert.",
-          source: "03_ds-concept-threads-2.pdf, Folie 10"
-        },
-        {
-          question: "Welche drei Ziele verfolgen die Regeln des JMM?",
-          answer: "Atomizität (welche Zugriffe sind ununterbrechbar), Sichtbarkeit (wann sind Auswirkungen sichtbar) und Reihenfolge (wann erscheint die Ausführungsreihenfolge fehlerhaft).",
-          source: "03_ds-concept-threads-2.pdf, Folie 12"
-        },
-        {
-          question: "Welche Zugriffe sind in Java garantiert atomar?",
-          answer: "Lesen und Schreiben von Variablen der Basistypen — außer long und double; für volatile long und double gilt Atomizität ebenfalls.",
-          source: "03_ds-concept-threads-2.pdf, Folie 13"
-        },
-        {
-          question: "Unter welchen Bedingungen sind Änderungen an Variablen sichtbar?",
-          answer: "Bei Erwerb und Rückgabe eines Locks, bei volatilen Variablen (Flush in den Hauptspeicher und Neuladen) und wenn ein Thread terminiert (alle veränderten Variablen werden zurückgeschrieben).",
-          source: "03_ds-concept-threads-2.pdf, Folie 14"
-        },
-        {
-          question: "Was ist die happens-before-Relation?",
-          answer: "Eine vom JMM definierte partielle Ordnung auf allen Aktionen im Programm. B sieht die Ergebnisse von A nur garantiert, wenn zwischen A und B eine happens-before-Beziehung besteht.",
-          source: "03_ds-concept-threads-2.pdf, Folie 18"
-        },
-        {
-          question: "Wie wird Thread-Interferenz in Java unterbunden?",
-          answer: "Mit dem synchronized-Schlüsselwort: Das Interleaving von Methoden wird ausgeschlossen und die Sichtbarkeit der Variablen erreicht.",
-          source: "03_ds-concept-threads-2.pdf, Folie 24"
-        }
-      ],
       flashcards: [
         {
           front: "Wie kommunizieren Threads miteinander?",
@@ -936,33 +759,48 @@ const vs = {
           source: "03_ds-concept-threads-2.pdf, Folie 4"
         },
         {
-          front: "Welche zwei Hauptprobleme behandelt das JMM?",
-          back: "Das JMM behandelt die Sichtbarkeit von Schreibvorgängen und Race Conditions.",
+          front: "Was beschreibt das Java Memory Model?",
+          back: "Welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren — die Beziehung zwischen Programmvariablen und ihrer Speicherung/Abruf in realen Systemen, korrekt implementierbar über verschiedene Hardware und Compileroptimierungen.",
+          source: "03_ds-concept-threads-2.pdf, Folie 5"
+        },
+        {
+          front: "Welche zwei Hauptprobleme adressiert das JMM?",
+          back: "Sichtbarkeit von Thread-Aktualisierungen (Schreibvorgängen) in gemeinsam genutzte Variablen und Race Conditions beim Lesen, Prüfen und Schreiben von Shared-Variablen.",
           source: "03_ds-concept-threads-2.pdf, Folie 7"
         },
         {
-          front: "Was bewirkt volatile?",
-          back: "Bei volatile werden Werte immer in den Hauptspeicher zurückgeschrieben; ++ bleibt dabei aber nicht-atomar.",
+          front: "Was bewirkt das Schlüsselwort volatile?",
+          back: "Geänderte Werte werden immer in den Hauptspeicher zurückgeschrieben (und vor Zugriff anderer Threads neu geladen). Aber: Zusammengesetzte Operationen wie ++ sind auch auf volatilen Variablen nicht atomar.",
           source: "03_ds-concept-threads-2.pdf, Folien 9, 16"
         },
         {
-          front: "Welche drei Ziele hat das JMM?",
-          back: "Die drei Ziele des JMM sind Atomizität, Sichtbarkeit und Reihenfolge.",
+          front: "Was ist eine Race Condition (Beispiel der Folien)?",
+          back: "Zwei gleichzeitige Inkremente ohne Synchronisation: Egal welcher Thread seinen Wert zurückschreibt, der Zähler ist trotz zweier Inkremente nur um 1 höher als der Ursprungswert.",
+          source: "03_ds-concept-threads-2.pdf, Folie 10"
+        },
+        {
+          front: "Welche drei Ziele verfolgen die Regeln des JMM?",
+          back: "Atomizität (welche Zugriffe sind ununterbrechbar), Sichtbarkeit (wann sind Auswirkungen sichtbar) und Reihenfolge (wann erscheint die Ausführungsreihenfolge fehlerhaft).",
           source: "03_ds-concept-threads-2.pdf, Folie 12"
         },
         {
-          front: "Welche Ausnahme gibt es bei atomaren Basistypen-Zugriffen?",
-          back: "Die Ausnahme sind long und double, außer sie sind als volatile deklariert.",
+          front: "Welche Zugriffe sind in Java garantiert atomar?",
+          back: "Lesen und Schreiben von Variablen der Basistypen — außer long und double; für volatile long und double gilt Atomizität ebenfalls.",
           source: "03_ds-concept-threads-2.pdf, Folie 13"
         },
         {
-          front: "Was bedeutet happens-before?",
-          back: "happens-before ist eine partielle Ordnung des JMM: B sieht Ergebnisse von A nur bei bestehender happens-before-Beziehung.",
+          front: "Unter welchen Bedingungen sind Änderungen an Variablen sichtbar?",
+          back: "Bei Erwerb und Rückgabe eines Locks, bei volatilen Variablen (Flush in den Hauptspeicher und Neuladen) und wenn ein Thread terminiert (alle veränderten Variablen werden zurückgeschrieben).",
+          source: "03_ds-concept-threads-2.pdf, Folie 14"
+        },
+        {
+          front: "Was ist die happens-before-Relation?",
+          back: "Eine vom JMM definierte partielle Ordnung auf allen Aktionen im Programm. B sieht die Ergebnisse von A nur garantiert, wenn zwischen A und B eine happens-before-Beziehung besteht.",
           source: "03_ds-concept-threads-2.pdf, Folie 18"
         },
         {
-          front: "Was leistet synchronized?",
-          back: "synchronized schließt Interleaving aus, unterbindet Thread-Interferenz und stellt Sichtbarkeit her.",
+          front: "Wie wird Thread-Interferenz in Java unterbunden?",
+          back: "Mit dem synchronized-Schlüsselwort: Das Interleaving von Methoden wird ausgeschlossen und die Sichtbarkeit der Variablen erreicht.",
           source: "03_ds-concept-threads-2.pdf, Folie 24"
         }
       ]
@@ -1045,57 +883,10 @@ const vs = {
           source: "06_ds-java-threads-3.pdf, Folien 40, 42-46"
         }
       ],
-      questions: [
-        {
-          question: "Was ist ein Deadlock?",
-          answer: "Ein Anwendungszustand, in dem Threads bereits eine Teilmenge von Ressourcen erworben haben, aber keine Chance haben, weitere Ressourcen zu erhalten — z. B. durch verschachtelte synchronized-Blöcke in unterschiedlicher Reihenfolge.",
-          source: "06_ds-java-threads-3.pdf, Folie 5"
-        },
-        {
-          question: "Was unterscheidet Starvation und Livelock?",
-          answer: "Starvation: Threads bekommen die benötigten Ressourcen nicht, weil andere Threads sie stark nutzen. Livelock: Threads sind so mit Kommunikation beschäftigt, dass sie ihre eigentliche Funktionalität nicht mehr erbringen.",
-          source: "06_ds-java-threads-3.pdf, Folien 9-10"
-        },
-        {
-          question: "Was unterscheidet ein Framework von einer Bibliothek?",
-          answer: "Eine Bibliothek liefert Hilfsmodule, die vom Programm angefordert werden. Ein Framework gibt die Anwendungsarchitektur vor — mit Inversion of Control: Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.",
-          source: "06_ds-java-threads-3.pdf, Folien 12-13"
-        },
-        {
-          question: "Welche Nachteile von Threads adressieren Thread-Pools?",
-          answer: "Thread-Lifecycle-Overhead (Erzeugung/Verwaltung kostet), Ressourcenverbrauch (wartende Threads binden Speicher) und Stabilität (Thread-Anzahl durch Speicher begrenzt). Worker-Threads laufen dauerhaft und übernehmen Tasks aus einer Queue.",
-          source: "06_ds-java-threads-3.pdf, Folien 15-16, 21"
-        },
-        {
-          question: "Welche Factory-Methoden bietet die Klasse Executors?",
-          answer: "newCachedThreadPool() (Größe wächst mit den Anfragen), newFixedThreadPool(n) (maximal n Threads), newSingleThreadScheduledExecutor() und newScheduledThreadPool(corePoolSize) (mit Timing-Constraints).",
-          source: "06_ds-java-threads-3.pdf, Folie 22"
-        },
-        {
-          question: "Was unterscheidet shutdown() von shutdownNow()?",
-          answer: "shutdown(): laufende Threads werden nicht abgebrochen, neue Anfragen nicht mehr angenommen. shutdownNow(): ausführende Befehle werden zum Stoppen angeregt, Rückgabe ist die Liste der zu beendenden Kommandos.",
-          source: "06_ds-java-threads-3.pdf, Folie 28"
-        },
-        {
-          question: "Wozu dienen Callable und Future?",
-          answer: "Callable ist ein Runnable mit Rückgabewert (Typparameter V, Methode call()). submit() übergibt es dem ExecutorService; das Ergebnis wird asynchron in einem Future gespeichert, das mit get() (blockierend), get(timeout) oder isDone() abgefragt werden kann.",
-          source: "06_ds-java-threads-3.pdf, Folien 32-36"
-        },
-        {
-          question: "Was sind virtuelle Threads und welche Vorteile haben sie?",
-          answer: "User-Threads, die von der Java Runtime (JVM) gescheduled werden statt vom OS. Vorteile: kleiner Footprint (große Anzahl möglich), keine Kontextwechsel, kein Pooling nötig, blockierendes Warten unproblematisch — besonders gut bei I/O-lastigen Anwendungen.",
-          source: "06_ds-java-threads-3.pdf, Folien 38-40, 46"
-        },
-        {
-          question: "Was ist ein Carrier-Thread?",
-          answer: "Der Platform Thread, auf den ein virtueller Thread beim Scheduling gemountet wird. In bestimmten Situationen (z. B. blockierendes Warten auf IO) wird der virtuelle Thread wieder unmounted.",
-          source: "06_ds-java-threads-3.pdf, Folie 45"
-        }
-      ],
       flashcards: [
         {
           front: "Was ist ein Deadlock?",
-          back: "Bei einem Deadlock halten Threads Teilressourcen und können die restlichen nie erwerben.",
+          back: "Ein Anwendungszustand, in dem Threads bereits eine Teilmenge von Ressourcen erworben haben, aber keine Chance haben, weitere Ressourcen zu erhalten — z. B. durch verschachtelte synchronized-Blöcke in unterschiedlicher Reihenfolge.",
           source: "06_ds-java-threads-3.pdf, Folie 5"
         },
         {
@@ -1109,9 +900,14 @@ const vs = {
           source: "06_ds-java-threads-3.pdf, Folie 10"
         },
         {
-          front: "Was bedeutet Inversion of Control?",
-          back: "Inversion of Control bedeutet, dass das Framework registrierte Implementierungen des Programmierers steuert und nicht umgekehrt.",
-          source: "06_ds-java-threads-3.pdf, Folie 13"
+          front: "Was unterscheidet ein Framework von einer Bibliothek?",
+          back: "Eine Bibliothek liefert Hilfsmodule, die vom Programm angefordert werden. Ein Framework gibt die Anwendungsarchitektur vor — mit Inversion of Control: Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.",
+          source: "06_ds-java-threads-3.pdf, Folien 12-13"
+        },
+        {
+          front: "Welche Nachteile von Threads adressieren Thread-Pools?",
+          back: "Thread-Lifecycle-Overhead (Erzeugung/Verwaltung kostet), Ressourcenverbrauch (wartende Threads binden Speicher) und Stabilität (Thread-Anzahl durch Speicher begrenzt). Worker-Threads laufen dauerhaft und übernehmen Tasks aus einer Queue.",
+          source: "06_ds-java-threads-3.pdf, Folien 15-16, 21"
         },
         {
           front: "Welche Aufgabe hat das Interface Executor?",
@@ -1119,9 +915,19 @@ const vs = {
           source: "06_ds-java-threads-3.pdf, Folien 16, 19"
         },
         {
-          front: "Worin unterscheiden sich Callable und Runnable?",
-          back: "Callable ist ein Runnable mit typisiertem Rückgabewert über call(); die Ausführung erfolgt per submit(), das Ergebnis liegt im Future.",
-          source: "06_ds-java-threads-3.pdf, Folien 32-34"
+          front: "Welche Factory-Methoden bietet die Klasse Executors?",
+          back: "newCachedThreadPool() (Größe wächst mit den Anfragen), newFixedThreadPool(n) (maximal n Threads), newSingleThreadScheduledExecutor() und newScheduledThreadPool(corePoolSize) (mit Timing-Constraints).",
+          source: "06_ds-java-threads-3.pdf, Folie 22"
+        },
+        {
+          front: "Was unterscheidet shutdown() von shutdownNow()?",
+          back: "shutdown(): laufende Threads werden nicht abgebrochen, neue Anfragen nicht mehr angenommen. shutdownNow(): ausführende Befehle werden zum Stoppen angeregt, Rückgabe ist die Liste der zu beendenden Kommandos.",
+          source: "06_ds-java-threads-3.pdf, Folie 28"
+        },
+        {
+          front: "Wozu dienen Callable und Future?",
+          back: "Callable ist ein Runnable mit Rückgabewert (Typparameter V, Methode call()). submit() übergibt es dem ExecutorService; das Ergebnis wird asynchron in einem Future gespeichert, das mit get() (blockierend), get(timeout) oder isDone() abgefragt werden kann.",
+          source: "06_ds-java-threads-3.pdf, Folien 32-36"
         },
         {
           front: "Was macht Future.get()?",
@@ -1129,9 +935,19 @@ const vs = {
           source: "06_ds-java-threads-3.pdf, Folie 36"
         },
         {
+          front: "Was sind virtuelle Threads und welche Vorteile haben sie?",
+          back: "User-Threads, die von der Java Runtime (JVM) gescheduled werden statt vom OS. Vorteile: kleiner Footprint (große Anzahl möglich), keine Kontextwechsel, kein Pooling nötig, blockierendes Warten unproblematisch — besonders gut bei I/O-lastigen Anwendungen.",
+          source: "06_ds-java-threads-3.pdf, Folien 38-40, 46"
+        },
+        {
           front: "Wie unterscheiden sich Platform Threads und Virtual Threads?",
           back: "Platform Threads sind Kernel-Threads mit OS-Scheduling und teuer; Virtual Threads werden von der JVM verwaltet, haben einen kleineren Footprint und keine Kontextwechsel.",
           source: "06_ds-java-threads-3.pdf, Folien 38-39"
+        },
+        {
+          front: "Was ist ein Carrier-Thread?",
+          back: "Der Platform Thread, auf den ein virtueller Thread beim Scheduling gemountet wird. In bestimmten Situationen (z. B. blockierendes Warten auf IO) wird der virtuelle Thread wieder unmounted.",
+          source: "06_ds-java-threads-3.pdf, Folie 45"
         }
       ]
     },
@@ -1248,68 +1064,31 @@ const vs = {
           source: "03-ds-architektur-021.pdf, Folie 12"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Welche 4+1 Architectural Views werden unterschieden?",
-          answer: "Logical View (Endnutzer-Funktionalität), Development View (Entwicklersicht), Process View (Prozesse), Physical View (Verteilung/Deployment auf Hardware) und Scenario als fünfte Sicht (Abläufe und Nutzerinteraktion).",
-          source: "03-ds-architektur.pdf, Folie 5"
+          front: "Was beschreibt die Systemarchitektur?",
+          back: "Die Verteilung der Software-Komponenten auf den Knoten — also das Deployment. Unterschieden werden zentralisierte und dezentralisierte Architekturen.",
+          source: "03-ds-architektur-021.pdf, Folie 4"
         },
         {
-          question: "Was beschreibt ein Architekturstil?",
-          answer: "Die enthaltenen Komponenten, die Verbindungen/Beziehungen zwischen ihnen, die Nachrichten und ausgetauschten Daten sowie Bedingungen/Invarianten über Struktur und Verhalten.",
-          source: "03-ds-architektur.pdf, Folie 8"
+          front: "Wie sind Server und Client definiert?",
+          back: "Ein Server ist ein Prozess, der einen Dienst über eine Schnittstelle anbietet; ein Client fragt ihn per Request/Reply nach.",
+          source: "03-ds-architektur-021.pdf, Folie 5"
         },
         {
-          question: "Welche drei Kommunikationsparadigmen gibt es?",
-          answer: "Interprozess-Kommunikation (z. B. Sockets), Remote Invocation (Request-Reply, RPC, RMI — synchron nach dem Vorbild des Prozeduraufrufs) und indirekte Kommunikation (Gruppen, Topics, Queues — Sender und Empfänger entkoppelt).",
-          source: "03-ds-architektur.pdf, Folie 12"
-        },
-        {
-          question: "Warum skaliert die Client-Server-Architektur schlecht und was macht P2P anders?",
-          answer: "Die ganze Last betrifft einen zentralen Server. Bei Peer-to-Peer haben alle Prozesse die gleichen Verantwortlichkeiten — Peers sind Client und Server zugleich, sodass die Verfügbarkeit automatisch mit der Nachfrage wächst.",
-          source: "03-ds-architektur.pdf, Folie 17"
-        },
-        {
-          question: "Welche Deployment-Strategien nennen die Folien?",
-          answer: "Services auf mehreren Servern abbilden, Caching, mobiler Code und mobile Agenten.",
-          source: "03-ds-architektur.pdf, Folie 18"
-        },
-        {
-          question: "Wie ist die Schichtenarchitektur definiert?",
-          answer: "Komponenten sind übereinander geschichtet; eine Komponente in Schicht Lj ruft Komponenten tieferer Schichten Li (i < j) auf und erwartet eine Antwort. Aufwärts-Aufrufe gibt es nur in Ausnahmefällen.",
-          source: "03-ds-architektur.pdf, Folie 26"
-        },
-        {
-          question: "Aus welchen Schichten besteht die 3-Schichten-Architektur?",
-          answer: "Präsentationsschicht (Darstellung/Interaktion), Verarbeitungsschicht (Verarbeitung der Anforderungen und Daten) und Datenschicht (persistente Datenhaltung).",
-          source: "03-ds-architektur.pdf, Folie 30"
-        },
-        {
-          question: "Welche drei Grundprinzipien hat REST?",
-          answer: "1. Ressourcen werden durch einfache Namensschemata identifiziert. 2. Alle Dienste bieten die gleiche Schnittstelle mit den gleichen Operationen. 3. Zustandslose Ausführung — nach einer Operation werden alle Informationen über den Aufruf vergessen.",
-          source: "03-ds-architektur.pdf, Folie 35"
-        },
-        {
-          question: "Was ist das wesentliche Merkmal von Publish-Subscribe-Architekturen?",
-          answer: "Die referentielle Entkopplung der Prozesse — sie „kennen“ einander nicht; Funktionalität wird von der Koordination getrennt.",
-          source: "03-ds-architektur.pdf, Folie 39"
-        },
-        {
-          question: "Was bedeutet idempotent und warum ist das bei verbindungsloser Kommunikation wichtig?",
-          answer: "Eine idempotente Nachricht kann beliebig oft wiederholt werden, ohne Schaden anzurichten. Bei Nachrichtenverlust in verbindungsloser Kommunikation kann nur erneut gesendet werden — das ist nur bei idempotenten Nachrichten unproblematisch.",
+          front: "Was bedeutet idempotent und warum ist das bei verbindungsloser Kommunikation wichtig?",
+          back: "Eine idempotente Nachricht kann beliebig oft wiederholt werden, ohne Schaden anzurichten. Bei Nachrichtenverlust in verbindungsloser Kommunikation kann nur erneut gesendet werden — das ist nur bei idempotenten Nachrichten unproblematisch.",
           source: "03-ds-architektur-021.pdf, Folie 6"
         },
         {
-          question: "Was beschreibt die Systemarchitektur?",
-          answer: "Die Verteilung der Software-Komponenten auf den Knoten — also das Deployment. Unterschieden werden zentralisierte und dezentralisierte Architekturen.",
-          source: "03-ds-architektur-021.pdf, Folie 4"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Welche Sichten umfasst das 4+1-Views-Modell?",
-          back: "Das 4+1-Views-Modell umfasst Logical, Development, Process und Physical View plus Scenario.",
+          front: "Welche 4+1 Architectural Views werden unterschieden?",
+          back: "Logical View (Endnutzer-Funktionalität), Development View (Entwicklersicht), Process View (Prozesse), Physical View (Verteilung/Deployment auf Hardware) und Scenario als fünfte Sicht (Abläufe und Nutzerinteraktion).",
           source: "03-ds-architektur.pdf, Folie 5"
+        },
+        {
+          front: "Was beschreibt ein Architekturstil?",
+          back: "Die enthaltenen Komponenten, die Verbindungen/Beziehungen zwischen ihnen, die Nachrichten und ausgetauschten Daten sowie Bedingungen/Invarianten über Struktur und Verhalten.",
+          source: "03-ds-architektur.pdf, Folie 8"
         },
         {
           front: "Was ist eine Komponente?",
@@ -1317,8 +1096,8 @@ const vs = {
           source: "03-ds-architektur.pdf, Folie 8"
         },
         {
-          front: "Welche drei Kommunikationsparadigmen nennen die Folien?",
-          back: "Die drei Kommunikationsparadigmen sind IPC, Remote Invocation und indirekte Kommunikation.",
+          front: "Welche drei Kommunikationsparadigmen gibt es?",
+          back: "Interprozess-Kommunikation (z. B. Sockets), Remote Invocation (Request-Reply, RPC, RMI — synchron nach dem Vorbild des Prozeduraufrufs) und indirekte Kommunikation (Gruppen, Topics, Queues — Sender und Empfänger entkoppelt).",
           source: "03-ds-architektur.pdf, Folie 12"
         },
         {
@@ -1327,24 +1106,34 @@ const vs = {
           source: "03-ds-architektur.pdf, Folie 15"
         },
         {
-          front: "Welche Schichten hat die 3-Schichten-Architektur?",
-          back: "Die 3-Schichten-Architektur besteht aus Präsentation, Verarbeitung und Daten.",
+          front: "Warum skaliert die Client-Server-Architektur schlecht und was macht P2P anders?",
+          back: "Die ganze Last betrifft einen zentralen Server. Bei Peer-to-Peer haben alle Prozesse die gleichen Verantwortlichkeiten — Peers sind Client und Server zugleich, sodass die Verfügbarkeit automatisch mit der Nachfrage wächst.",
+          source: "03-ds-architektur.pdf, Folie 17"
+        },
+        {
+          front: "Welche Deployment-Strategien nennen die Folien?",
+          back: "Services auf mehreren Servern abbilden, Caching, mobiler Code und mobile Agenten.",
+          source: "03-ds-architektur.pdf, Folie 18"
+        },
+        {
+          front: "Wie ist die Schichtenarchitektur definiert?",
+          back: "Komponenten sind übereinander geschichtet; eine Komponente in Schicht Lj ruft Komponenten tieferer Schichten Li (i < j) auf und erwartet eine Antwort. Aufwärts-Aufrufe gibt es nur in Ausnahmefällen.",
+          source: "03-ds-architektur.pdf, Folie 26"
+        },
+        {
+          front: "Aus welchen Schichten besteht die 3-Schichten-Architektur?",
+          back: "Präsentationsschicht (Darstellung/Interaktion), Verarbeitungsschicht (Verarbeitung der Anforderungen und Daten) und Datenschicht (persistente Datenhaltung).",
           source: "03-ds-architektur.pdf, Folie 30"
         },
         {
           front: "Welche drei Grundprinzipien hat REST?",
-          back: "REST nutzt ein Namensschema für Ressourcen, eine einheitliche Schnittstelle und zustandslose Ausführung.",
+          back: "1. Ressourcen werden durch einfache Namensschemata identifiziert. 2. Alle Dienste bieten die gleiche Schnittstelle mit den gleichen Operationen. 3. Zustandslose Ausführung — nach einer Operation werden alle Informationen über den Aufruf vergessen.",
           source: "03-ds-architektur.pdf, Folie 35"
         },
         {
-          front: "Was ist eine idempotente Nachricht?",
-          back: "Eine idempotente Nachricht kann beliebig oft wiederholt werden, ohne Schaden anzurichten.",
-          source: "03-ds-architektur-021.pdf, Folie 6"
-        },
-        {
-          front: "Wie sind Server und Client definiert?",
-          back: "Ein Server ist ein Prozess, der einen Dienst über eine Schnittstelle anbietet; ein Client fragt ihn per Request/Reply nach.",
-          source: "03-ds-architektur-021.pdf, Folie 5"
+          front: "Was ist das wesentliche Merkmal von Publish-Subscribe-Architekturen?",
+          back: "Die referentielle Entkopplung der Prozesse — sie „kennen“ einander nicht; Funktionalität wird von der Koordination getrennt.",
+          source: "03-ds-architektur.pdf, Folie 39"
         }
       ]
     },
@@ -1402,58 +1191,36 @@ const vs = {
           source: "03-ds-http.pdf, Folie 23"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Welche besonderen Funktionen hat http?",
-          answer: "Request-Reply-Protokoll, asymmetrisch (Client ruft Ressourcen ab), zustandslos, Inhaltstypen nach MIME-Typ, eine Anfrage pro Ressource, einfache Zugriffskontrolle. Es baut auf dem TCP/IP-Stack auf.",
+          front: "Welche besonderen Funktionen hat http?",
+          back: "Request-Reply-Protokoll, asymmetrisch (Client ruft Ressourcen ab), zustandslos, Inhaltstypen nach MIME-Typ, eine Anfrage pro Ressource, einfache Zugriffskontrolle. Es baut auf dem TCP/IP-Stack auf.",
           source: "03-ds-http.pdf, Folien 4-5"
         },
         {
-          question: "Was unterscheidet URI und URL?",
-          answer: "Eine URI ist ein Name, der eine Ressource identifiziert; eine URL ist eine URI, aus der man zusätzlich den Ort der Ressource ablesen kann.",
+          front: "Wozu dienen MIME-Types?",
+          back: "Sie kennzeichnen die Inhaltstypen der übertragenen Ressourcen (z. B. text/plain, text/html, image/gif), damit Inhalte je nach Typ unterschiedlich behandelt werden können.",
+          source: "03-ds-http.pdf, Folien 4, 23"
+        },
+        {
+          front: "Was unterscheidet URI und URL?",
+          back: "Eine URI ist ein Name, der eine Ressource identifiziert; eine URL ist eine URI, aus der man zusätzlich den Ort der Ressource ablesen kann.",
           source: "03-ds-http.pdf, Folie 6"
         },
         {
-          question: "Aus welchen vier Teilen besteht eine URL?",
-          answer: "Protokoll, Hostname (DNS-Name oder IP), Port (TCP-Portnummer) sowie Pfad- und Dateiname der Ressource.",
+          front: "Aus welchen vier Teilen besteht eine URL?",
+          back: "Protokoll, Hostname (DNS-Name oder IP), Port (TCP-Portnummer) sowie Pfad- und Dateiname der Ressource.",
           source: "03-ds-http.pdf, Folie 7"
         },
         {
-          question: "Aus welchen drei Teilen besteht eine http-Nachricht?",
-          answer: "Startzeile, Block von Headern und optionaler Textkörper — gesendet als ASCII-Text über einen TCP-Stream.",
+          front: "Aus welchen drei Teilen besteht eine http-Nachricht?",
+          back: "Startzeile, Block von Headern und optionaler Textkörper — gesendet als ASCII-Text über einen TCP-Stream.",
           source: "03-ds-http.pdf, Folien 8, 11"
         },
         {
-          question: "Was unterscheidet GET und HEAD?",
-          answer: "HEAD ist identisch mit GET, gibt aber keine Daten zurück — nur Informationen über die Daten (z. B. letzte Änderung, Größe).",
+          front: "Was unterscheidet GET und HEAD?",
+          back: "HEAD ist identisch mit GET, gibt aber keine Daten zurück — nur Informationen über die Daten (z. B. letzte Änderung, Größe).",
           source: "03-ds-http.pdf, Folie 13"
-        },
-        {
-          question: "Woraus besteht die Statuszeile einer Antwort?",
-          answer: "HTTP-Version, dreistelligem Statuscode und einer reason-phrase. Beispiele: 200 OK, 404 Not Found, 403 Forbidden, 500 Internal Server Error.",
-          source: "03-ds-http.pdf, Folie 19"
-        },
-        {
-          question: "Wozu dienen MIME-Types?",
-          answer: "Sie kennzeichnen die Inhaltstypen der übertragenen Ressourcen (z. B. text/plain, text/html, image/gif), damit Inhalte je nach Typ unterschiedlich behandelt werden können.",
-          source: "03-ds-http.pdf, Folien 4, 23"
-        }
-      ],
-      flashcards: [
-        {
-          front: "Welche drei Kerneigenschaften hat http?",
-          back: "http arbeitet mit Request-Reply, ist asymmetrisch und zustandslos; es ist das Protokoll des WWW auf dem TCP/IP-Stack.",
-          source: "03-ds-http.pdf, Folien 4-5"
-        },
-        {
-          front: "Wie ist die URL-Syntax aufgebaut?",
-          back: "Die URL-Syntax lautet Protokoll://Hostname:Port/Pfad-und-Dateiname.",
-          source: "03-ds-http.pdf, Folie 7"
-        },
-        {
-          front: "Wie ist eine http-Nachricht aufgebaut?",
-          back: "Eine http-Nachricht besteht aus Startzeile, Header-Block und optionalem Textkörper; übertragen wird ASCII über TCP.",
-          source: "03-ds-http.pdf, Folien 8, 11"
         },
         {
           front: "Wofür stehen GET, HEAD, POST und PUT?",
@@ -1461,13 +1228,8 @@ const vs = {
           source: "03-ds-http.pdf, Folie 13"
         },
         {
-          front: "Woraus besteht die Statuszeile?",
-          back: "Die Statuszeile besteht aus HTTP-Version, dreistelligem Statuscode und reason-phrase.",
-          source: "03-ds-http.pdf, Folie 19"
-        },
-        {
-          front: "Welche häufigen Statuscodes nennen die Folien?",
-          back: "Häufige Statuscodes sind 200 OK, 404 Not Found, 403 Forbidden und 500 Internal Server Error.",
+          front: "Woraus besteht die Statuszeile einer Antwort?",
+          back: "HTTP-Version, dreistelligem Statuscode und einer reason-phrase. Beispiele: 200 OK, 404 Not Found, 403 Forbidden, 500 Internal Server Error.",
           source: "03-ds-http.pdf, Folie 19"
         }
       ]
@@ -1544,63 +1306,36 @@ const vs = {
           source: "04-ds-glassfish.pdf, Folie 10"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was ist ein Servlet und wo läuft es?",
-          answer: "Eine Java-Klasse zur Erweiterung von Webservern (Anforderungs-Antwort-Modell). Es wird dynamisch geladen und in der JVM des Servers ausgeführt; Anfragen werden in separaten Threads verarbeitet.",
-          source: "05_ds-servlets.pdf, Folien 6-7, 11"
-        },
-        {
-          question: "Welche Vorteile haben Servlets gegenüber CGI?",
-          answer: "Bei CGI wird für jede Anfrage ein OS-Prozess erstellt, der kaum mit dem Server interagieren kann. Servlets: Portabilität, kein Betriebssystem-Overhead, voller Zugriff auf Java-APIs, Strong Typing, enge Interaktion mit dem Server.",
-          source: "05_ds-servlets.pdf, Folien 5, 7-8"
-        },
-        {
-          question: "Welche Methoden überschreibt ein http-Servlet üblicherweise?",
-          answer: "doGet() und doPost() — die service-Methode wird nicht überschrieben. Zusätzlich können doPut() und doDelete() überschrieben werden; für HEAD, TRACE und OPTIONS gibt es Standardimplementierungen.",
-          source: "05_ds-servlets.pdf, Folie 16"
-        },
-        {
-          question: "Beschreiben Sie den Servlet-Lebenszyklus.",
-          answer: "Der Container lädt bei Bedarf die Servlet-Klasse, erstellt eine Instanz, initialisiert sie mit init, ruft für Anfragen die Service-Methode auf, finalisiert beim Entfernen mit destroy — danach räumt der Garbage Collector auf. Nach dem Laden sind Servlets multithreaded.",
-          source: "05_ds-servlets.pdf, Folien 29, 31"
-        },
-        {
-          question: "Wozu dienen servlet und servlet-mapping in der web.xml?",
-          answer: "servlet definiert das zu ladende Servlet, servlet-mapping ordnet das Servlet einer URL zu.",
-          source: "05_ds-servlets.pdf, Folie 33"
-        },
-        {
-          question: "Wie werden Sitzungen in Servlets verwaltet und was ist die Einschränkung?",
-          answer: "Über HttpSession (request.getSession()), Werte per setAttribute/getAttribute. Einschränkung: Sitzungen funktionieren auf Serverclustern nicht gut.",
-          source: "05_ds-servlets.pdf, Folie 42"
-        },
-        {
-          question: "Was ist ein Application Server?",
-          answer: "Ein Server, auf dem Applikationen zum Laufen gebracht werden können — er stellt Infrastrukturmerkmale wie Clustering, Fail-Over und Load Balancing bereit und entlastet Entwickler von Infrastruktur-Aspekten.",
+          front: "Was ist ein Application Server?",
+          back: "Ein Server, auf dem Applikationen zum Laufen gebracht werden können — er stellt Infrastrukturmerkmale wie Clustering, Fail-Over und Load Balancing bereit und entlastet Entwickler von Infrastruktur-Aspekten.",
           source: "04-ds-glassfish.pdf, Folie 9"
         },
         {
-          question: "Welche logischen Container definiert Jakarta EE in Glassfish?",
-          answer: "EJB-Container (Enterprise Java Beans), Web-Container (Jakarta-Servlets, Jakarta Server Pages) und JMS-Provider (Java Messaging Service).",
+          front: "Welche logischen Container definiert Jakarta EE in Glassfish?",
+          back: "EJB-Container (Enterprise Java Beans), Web-Container (Jakarta-Servlets, Jakarta Server Pages) und JMS-Provider (Java Messaging Service).",
           source: "04-ds-glassfish.pdf, Folie 10"
-        }
-      ],
-      flashcards: [
+        },
         {
-          front: "Was ist ein Servlet?",
-          back: "Ein Servlet ist eine Java-Klasse zur Webserver-Erweiterung, läuft in der JVM des Servers und bearbeitet Anfragen in separaten Threads.",
+          front: "Welche Vorteile haben Servlets gegenüber CGI?",
+          back: "Bei CGI wird für jede Anfrage ein OS-Prozess erstellt, der kaum mit dem Server interagieren kann. Servlets: Portabilität, kein Betriebssystem-Overhead, voller Zugriff auf Java-APIs, Strong Typing, enge Interaktion mit dem Server.",
+          source: "05_ds-servlets.pdf, Folien 5, 7-8"
+        },
+        {
+          front: "Was ist ein Servlet und wo läuft es?",
+          back: "Eine Java-Klasse zur Erweiterung von Webservern (Anforderungs-Antwort-Modell). Es wird dynamisch geladen und in der JVM des Servers ausgeführt; Anfragen werden in separaten Threads verarbeitet.",
           source: "05_ds-servlets.pdf, Folien 6-7, 11"
         },
         {
-          front: "Welchen Nachteil hat CGI?",
-          back: "Bei CGI wird für jede Anfrage ein eigener OS-Prozess erstellt, der kaum mit dem Server interagieren kann.",
-          source: "05_ds-servlets.pdf, Folie 5"
+          front: "Welche Methoden überschreibt ein http-Servlet üblicherweise?",
+          back: "doGet() und doPost() — die service-Methode wird nicht überschrieben. Zusätzlich können doPut() und doDelete() überschrieben werden; für HEAD, TRACE und OPTIONS gibt es Standardimplementierungen.",
+          source: "05_ds-servlets.pdf, Folie 16"
         },
         {
-          front: "Welche Methoden gehören zum Servlet-Lifecycle?",
-          back: "Zum Servlet-Lifecycle gehören init, service mit doGet/doPost und destroy.",
-          source: "05_ds-servlets.pdf, Folie 31"
+          front: "Beschreiben Sie den Servlet-Lebenszyklus.",
+          back: "Der Container lädt bei Bedarf die Servlet-Klasse, erstellt eine Instanz, initialisiert sie mit init, ruft für Anfragen die Service-Methode auf, finalisiert beim Entfernen mit destroy — danach räumt der Garbage Collector auf. Nach dem Laden sind Servlets multithreaded.",
+          source: "05_ds-servlets.pdf, Folien 29, 31"
         },
         {
           front: "Welche Rolle hat web.xml?",
@@ -1608,24 +1343,14 @@ const vs = {
           source: "05_ds-servlets.pdf, Folie 33"
         },
         {
-          front: "Wofür dient HttpSession?",
-          back: "HttpSession speichert Benutzerinformationen über mehrere HTTP-Anfragen hinweg, funktioniert auf Serverclustern aber nicht gut.",
+          front: "Wie werden Sitzungen in Servlets verwaltet und was ist die Einschränkung?",
+          back: "Über HttpSession (request.getSession()): Sie speichert Benutzerinformationen über mehrere HTTP-Anfragen hinweg, Werte per setAttribute/getAttribute. Einschränkung: Sitzungen funktionieren auf Serverclustern nicht gut.",
           source: "05_ds-servlets.pdf, Folie 42"
         },
         {
           front: "Was ist ein Cookie?",
           back: "Ein Cookie ist ein kleines Datenstück auf dem Client; addCookie() wird am Response genutzt, getCookies() am Request.",
           source: "05_ds-servlets.pdf, Folien 43-44"
-        },
-        {
-          front: "Welche Aufgabe hat ein Application Server?",
-          back: "Ein Application Server bringt Applikationen zum Laufen und liefert Infrastruktur wie Clustering, Fail-Over und Load Balancing.",
-          source: "04-ds-glassfish.pdf, Folie 9"
-        },
-        {
-          front: "Welche drei Jakarta-EE-Container gibt es in Glassfish?",
-          back: "Glassfish enthält EJB-Container, Web-Container und JMS-Provider.",
-          source: "04-ds-glassfish.pdf, Folie 10"
         }
       ]
     },
@@ -1713,53 +1438,16 @@ const vs = {
           source: "04_vvs-jms-intro.pdf, Folien 34-35, 37-39"
         }
       ],
-      questions: [
-        {
-          question: "Was ist Message-oriented Middleware (MOM)?",
-          answer: "Middleware, die den Datenaustausch zwischen Softwarekomponenten über Nachrichten ermöglicht. Sie stellt die Verteilung der Daten über das Netz sicher und bietet Features wie Fault Tolerance, Load Balancing, Skalierbarkeit und Transaktionen.",
-          source: "04_vvs-jms-intro.pdf, Folie 4"
-        },
-        {
-          question: "Welche Nachteile von Remote-Aufrufen motivieren das Messaging?",
-          answer: "Synchrones (blockierendes) Verhalten, geringe Entkopplung (Client braucht Server-Informationen), Zuverlässigkeit (Server muss betriebsbereit sein) und nur ein Sender/Empfänger pro Interaktion.",
-          source: "04_vvs-jms-intro.pdf, Folie 5"
-        },
-        {
-          question: "Welche Vorteile bietet Messaging?",
-          answer: "Blockierungsfreie (asynchrone) Anfrageverarbeitung, Entkopplung (Sender kennt Empfänger nicht), Zuverlässigkeit (Zustellung auch bei vorübergehend nicht erreichbarem Empfänger) und mehrere Sender/Empfänger durch Broadcasting- und Routing-Mechanismen.",
-          source: "04_vvs-jms-intro.pdf, Folie 8"
-        },
-        {
-          question: "Was unterscheidet Point-to-Point und Publish/Subscribe?",
-          answer: "Point-to-Point: Queues, jede Nachricht hat genau einen Empfänger, Nachrichten bleiben bis zum Verbrauch/Ablauf. Pub/Sub: Topics wie ein Schwarzes Brett, jede Nachricht wird an alle registrierten Abonnenten gepusht; ein Konsument muss aktiv sein.",
-          source: "04_vvs-jms-intro.pdf, Folien 24-26"
-        },
-        {
-          question: "Wie funktioniert synchroner vs. asynchroner Nachrichtenkonsum in JMS?",
-          answer: "Synchron: expliziter Abruf mit receive() (blockierend oder mit Timeout). Asynchron: Message-Listener registrieren — der Provider ruft bei Nachrichteneingang onMessage auf; in Java EE übernimmt das eine Message-Driven Bean.",
-          source: "04_vvs-jms-intro.pdf, Folie 27"
-        },
-        {
-          question: "Welche Komponenten hat die JMS-Architektur?",
-          answer: "JMS Provider (implementiert die Schnittstellen), JMS-Clients (erzeugen/konsumieren Nachrichten), Messages und verwaltete Objekte (Destinations und ConnectionFactorys).",
-          source: "04_vvs-jms-intro.pdf, Folie 21"
-        },
-        {
-          question: "Welche Schritte umfasst das JMS-Programmiermodell?",
-          answer: "ConnectionFactory per JNDI suchen → Connection erstellen → Session erstellen → Destination per JNDI suchen → Producer/Consumer erstellen → Nachricht senden bzw. empfangen.",
-          source: "04_vvs-jms-intro.pdf, Folie 30"
-        },
-        {
-          question: "Welche Eigenschaften haben Message-Driven Beans?",
-          answer: "Vom Container erstellt und annotiert; mehrere Instanzen können Nachrichten gleichzeitig verarbeiten; kein direkter Client-Zugriff; sie werden durch Nachrichten über die JMS-API ausgelöst und implementieren MessageListener mit onMessage.",
-          source: "04_vvs-jms-intro.pdf, Folien 38-39"
-        }
-      ],
       flashcards: [
         {
-          front: "Was ist MOM?",
-          back: "MOM bedeutet Message-oriented Middleware und verteilt in sich abgeschlossene Datenpakete, also Nachrichten, über das Netz.",
+          front: "Was ist Message-oriented Middleware (MOM)?",
+          back: "Middleware, die den Datenaustausch zwischen Softwarekomponenten über Nachrichten ermöglicht. Sie stellt die Verteilung der Daten über das Netz sicher und bietet Features wie Fault Tolerance, Load Balancing, Skalierbarkeit und Transaktionen.",
           source: "04_vvs-jms-intro.pdf, Folie 4"
+        },
+        {
+          front: "Welche Nachteile von Remote-Aufrufen motivieren das Messaging?",
+          back: "Synchrones (blockierendes) Verhalten, geringe Entkopplung (Client braucht Server-Informationen), Zuverlässigkeit (Server muss betriebsbereit sein) und nur ein Sender/Empfänger pro Interaktion.",
+          source: "04_vvs-jms-intro.pdf, Folie 5"
         },
         {
           front: "Wie lautet der Wheeler-Grundsatz?",
@@ -1767,9 +1455,14 @@ const vs = {
           source: "04_vvs-jms-intro.pdf, Folie 7"
         },
         {
-          front: "Welche vier Vorteile hat Messaging?",
-          back: "Messaging ist asynchron beziehungsweise blockierungsfrei, entkoppelt, bietet Zuverlässigkeit und unterstützt mehrere Sender und Empfänger.",
+          front: "Welche Vorteile bietet Messaging?",
+          back: "Blockierungsfreie (asynchrone) Anfrageverarbeitung, Entkopplung (Sender kennt Empfänger nicht), Zuverlässigkeit (Zustellung auch bei vorübergehend nicht erreichbarem Empfänger) und mehrere Sender/Empfänger durch Broadcasting- und Routing-Mechanismen.",
           source: "04_vvs-jms-intro.pdf, Folie 8"
+        },
+        {
+          front: "Welche Komponenten hat die JMS-Architektur?",
+          back: "JMS Provider (implementiert die Schnittstellen), JMS-Clients (erzeugen/konsumieren Nachrichten), Messages und verwaltete Objekte (Destinations und ConnectionFactorys).",
+          source: "04_vvs-jms-intro.pdf, Folie 21"
         },
         {
           front: "Was kennzeichnet Point-to-Point-Messaging?",
@@ -1782,19 +1475,19 @@ const vs = {
           source: "04_vvs-jms-intro.pdf, Folien 25-26"
         },
         {
-          front: "Welche zwei verwalteten JMS-Objekte gibt es?",
-          back: "Die zwei verwalteten JMS-Objekte sind Destinations, also Ziele, und ConnectionFactorys; sie werden im JNDI-Namespace konfiguriert.",
-          source: "04_vvs-jms-intro.pdf, Folien 21, 33"
-        },
-        {
-          front: "Was ist ein MessageListener?",
-          back: "Ein MessageListener ist ein Interface mit onMessage, dient als asynchroner Ereignishandler und erscheint in Java EE als Message-Driven Bean.",
-          source: "04_vvs-jms-intro.pdf, Folien 34-35"
-        },
-        {
-          front: "Was macht receive()?",
-          back: "receive() ist ein synchroner Nachrichtenabruf und blockiert bis zum Eintreffen einer Nachricht oder bis zum Timeout.",
+          front: "Wie funktioniert synchroner vs. asynchroner Nachrichtenkonsum in JMS?",
+          back: "Synchron: expliziter Abruf mit receive() (blockierend oder mit Timeout). Asynchron: Message-Listener registrieren — der Provider ruft bei Nachrichteneingang onMessage auf; in Java EE übernimmt das eine Message-Driven Bean.",
           source: "04_vvs-jms-intro.pdf, Folie 27"
+        },
+        {
+          front: "Welche Schritte umfasst das JMS-Programmiermodell?",
+          back: "ConnectionFactory per JNDI suchen → Connection erstellen → Session erstellen → Destination per JNDI suchen → Producer/Consumer erstellen → Nachricht senden bzw. empfangen.",
+          source: "04_vvs-jms-intro.pdf, Folie 30"
+        },
+        {
+          front: "Welche Eigenschaften haben Message-Driven Beans?",
+          back: "Vom Container erstellt und annotiert; mehrere Instanzen können Nachrichten gleichzeitig verarbeiten; kein direkter Client-Zugriff; sie werden durch Nachrichten über die JMS-API ausgelöst und implementieren MessageListener mit onMessage.",
+          source: "04_vvs-jms-intro.pdf, Folien 38-39"
         }
       ]
     },
@@ -1858,78 +1551,46 @@ const vs = {
           source: "07_ds-java-rmi.pdf, Folien 29, 31"
         }
       ],
-      questions: [
+      flashcards: [
         {
-          question: "Was leisten Stubs und Skeletons beim RPC?",
-          answer: "Sie enthalten Routinen für die Kommunikation und Synchronisierung; das Marshaling transformiert die Daten in die Zielformate.",
+          front: "Was leisten Stubs und Skeletons beim RPC?",
+          back: "Sie enthalten Routinen für die Kommunikation und Synchronisierung; das Marshaling transformiert die Daten in die Zielformate.",
           source: "07_ds-java-rmi.pdf, Folie 7"
         },
-        {
-          question: "Welche drei Aspekte des RPC werden betrachtet?",
-          answer: "Schnittstellen (beschreiben aufrufbare Operationen), Aufruf-Semantik (Retransmission, Duplikatbehandlung, Ergebnis-Historie) und Transparenz (Orts-/Zugriffstransparenz, aber größere Latenzen).",
-          source: "07_ds-java-rmi.pdf, Folie 8"
-        },
-        {
-          question: "Was unterscheidet RMI von RPC?",
-          answer: "RMI erweitert RPC um Objekte: objektorientierte Konzepte (Klassen, Objekte, Vererbung) und Objekt-Identität — insbesondere ist call-by-reference möglich. Gemeinsam: Schnittstellen, Request-Reply-Basis, ähnliche Transparenz.",
-          source: "07_ds-java-rmi.pdf, Folie 15"
-        },
-        {
-          question: "Aus welchen Schichten besteht die RMI-Architektur?",
-          answer: "Anwendungsschicht, Stub-&-Skeleton-Schicht (Marshalling), Remote Reference Layer (lokalisiert Serverobjekte, leitet Aufrufe weiter) und Transport Layer (TCP-basierte Konnektivität).",
-          source: "07_ds-java-rmi.pdf, Folie 20"
-        },
-        {
-          question: "Wodurch ist ein Remote-Interface in Java charakterisiert?",
-          answer: "Es wird vom Interface java.rmi.Remote abgeleitet und jede Methode deklariert java.rmi.RemoteException im throws-Statement.",
-          source: "07_ds-java-rmi.pdf, Folie 24"
-        },
-        {
-          question: "Welche Rolle spielt die RMI-Registry?",
-          answer: "Sie ist der Namensdienst: Der Server bindet Instanzen der Remote-Objekte an Namen; Clients erfragen Referenzen. Die Referenz enthält Rechnername, Portnummer und Objektidentifikator.",
-          source: "07_ds-java-rmi.pdf, Folien 29, 31"
-        },
-        {
-          question: "Was bedeutet Call-by-Value-Unterstützung bei RMI?",
-          answer: "Beliebig komplexe Objektstrukturen können serialisiert, über das Netz übertragen und auf der Empfängerseite wiederhergestellt werden.",
-          source: "07_ds-java-rmi.pdf, Folie 26"
-        }
-      ],
-      flashcards: [
         {
           front: "Was ist RPC?",
           back: "RPC überträgt den Funktionsaufruf auf Verteilte Systeme und nutzt Stubs beziehungsweise Skeletons plus Marshaling.",
           source: "07_ds-java-rmi.pdf, Folie 7"
         },
         {
-          front: "Was bedeutet Marshaling?",
-          back: "Marshaling ist die Transformation der Daten in verschiedene Zielformate.",
-          source: "07_ds-java-rmi.pdf, Folie 7"
+          front: "Welche drei Aspekte des RPC werden betrachtet?",
+          back: "Schnittstellen (beschreiben aufrufbare Operationen), Aufruf-Semantik (Retransmission, Duplikatbehandlung, Ergebnis-Historie) und Transparenz (Orts-/Zugriffstransparenz, aber größere Latenzen).",
+          source: "07_ds-java-rmi.pdf, Folie 8"
         },
         {
-          front: "Wie unterscheidet sich RMI von RPC?",
-          back: "RMI ist RPC plus Objekte: Klassen, Vererbung, Objekt-Identität und call-by-reference sind möglich.",
+          front: "Was unterscheidet RMI von RPC?",
+          back: "RMI erweitert RPC um Objekte: objektorientierte Konzepte (Klassen, Objekte, Vererbung) und Objekt-Identität — insbesondere ist call-by-reference möglich. Gemeinsam: Schnittstellen, Request-Reply-Basis, ähnliche Transparenz.",
           source: "07_ds-java-rmi.pdf, Folie 15"
         },
         {
-          front: "Welche vier RMI-Schichten nennen die Folien?",
-          back: "Die vier RMI-Schichten sind Anwendung, Stub & Skeleton, Remote Reference und Transport über TCP.",
+          front: "Aus welchen Schichten besteht die RMI-Architektur?",
+          back: "Anwendungsschicht, Stub-&-Skeleton-Schicht (Marshalling), Remote Reference Layer (lokalisiert Serverobjekte, leitet Aufrufe weiter) und Transport Layer (TCP-basierte Konnektivität).",
           source: "07_ds-java-rmi.pdf, Folie 20"
         },
         {
-          front: "Welche zwei Eigenschaften hat ein Java-Remote-Interface?",
-          back: "Ein Java-Remote-Interface erbt von java.rmi.Remote, und jede Methode deklariert RemoteException.",
+          front: "Wodurch ist ein Remote-Interface in Java charakterisiert?",
+          back: "Es wird vom Interface java.rmi.Remote abgeleitet und jede Methode deklariert java.rmi.RemoteException im throws-Statement.",
           source: "07_ds-java-rmi.pdf, Folie 24"
         },
         {
-          front: "Welche Aufgabe hat die RMI-Registry?",
-          back: "Die RMI-Registry ist ein Namensdienst: Server binden Remote-Objekte an Namen, Clients holen Referenzen.",
-          source: "07_ds-java-rmi.pdf, Folien 29, 31"
+          front: "Was bedeutet Call-by-Value-Unterstützung bei RMI?",
+          back: "Beliebig komplexe Objektstrukturen können serialisiert, über das Netz übertragen und auf der Empfängerseite wiederhergestellt werden.",
+          source: "07_ds-java-rmi.pdf, Folie 26"
         },
         {
-          front: "Was enthält eine Remote-Referenz?",
-          back: "Eine Remote-Referenz enthält Rechnername, Portnummer des Servers und Objektidentifikator.",
-          source: "07_ds-java-rmi.pdf, Folie 31"
+          front: "Welche Rolle spielt die RMI-Registry?",
+          back: "Sie ist der Namensdienst: Der Server bindet Instanzen der Remote-Objekte an Namen; Clients erfragen Referenzen. Die Referenz enthält Rechnername, Portnummer und Objektidentifikator.",
+          source: "07_ds-java-rmi.pdf, Folien 29, 31"
         }
       ]
     },
@@ -2017,57 +1678,15 @@ const vs = {
           source: "07_ds-concept-components.pdf, Folien 39-40"
         }
       ],
-      questions: [
-        {
-          question: "Wie definiert Szyperski eine Softwarekomponente?",
-          answer: "Eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten — alle Kontextabhängigkeiten müssen explizit sein.",
-          source: "07_ds-concept-components.pdf, Folie 6"
-        },
-        {
-          question: "Was ist ein Container und was verwaltet er?",
-          answer: "Ein Host, der Dienste für Gastanwendungen bereitstellt — die Schnittstelle zwischen Komponente und plattformspezifischer Low-Level-Funktionalität. Er verwaltet Lebenszyklus, Datenpersistenz, Ressourcenpooling, Transaktionen, Sicherheit und Low-Level-Kommunikation.",
-          source: "07_ds-concept-components.pdf, Folien 15-16"
-        },
-        {
-          question: "Was ist Dependency Injection?",
-          answer: "Der Container kümmert sich um die Beziehungen einer Komponente zu ihren Abhängigkeiten. Per Annotation (z. B. @EJB) wird ein Attribut deklariert; der Container stellt zur Laufzeit sicher, dass die richtige Abhängigkeit eingefügt wird.",
-          source: "07_ds-concept-components.pdf, Folie 21"
-        },
-        {
-          question: "Was ist eine Enterprise Java Bean und welche Arten gibt es?",
-          answer: "Eine serverseitige Java-Komponente mit der Geschäftslogik einer Anwendung, bereitgestellt als Dienst. Zwei Arten: Session Beans (Aufgaben für Clients, optional Webdienst) und Message-Driven Beans (Nachrichten-Listener, z. B. JMS).",
-          source: "07_ds-concept-components.pdf, Folien 23-24"
-        },
-        {
-          question: "Worin unterscheiden sich Stateless und Stateful Session Beans?",
-          answer: "Stateless: kein für den Client sichtbarer Status über den Methodenaufruf hinaus, Instanzen gleichwertig und poolbar, bessere Skalierbarkeit, Webdienste möglich. Stateful: behalten den Konversationszustand eines einzelnen Clients über mehrere Aufrufe; nur ein Client; kein Webdienst.",
-          source: "07_ds-concept-components.pdf, Folien 28-29, 36"
-        },
-        {
-          question: "Was ist Passivierung?",
-          answer: "Das Swapping des EJB-Containers für Stateful Session Beans: Weil der Konversationszustand groß sein kann, wird die Bean ausgelagert und wieder aktiviert, wenn ein Client sie aufruft.",
-          source: "07_ds-concept-components.pdf, Folie 38"
-        },
-        {
-          question: "Wofür stehen @PostConstruct und @PreDestroy?",
-          answer: "@PostConstruct wird sofort nach Erstellung, Einrichtung und Ressourcen-Injektion einer Bean-Instanz aufgerufen; @PreDestroy direkt vor ihrer Zerstörung.",
-          source: "07_ds-concept-components.pdf, Folie 34"
-        },
-        {
-          question: "Was zeichnet Singleton Session Beans aus?",
-          answer: "Eine Instanz pro Anwendung für deren gesamten Lebenszyklus, von allen Clients gemeinsam und gleichzeitig genutzt; Steuerung des gleichzeitigen Zugriffs; anwendungsglobaler gemeinsamer Status; Webdienste möglich.",
-          source: "07_ds-concept-components.pdf, Folien 39-40"
-        }
-      ],
       flashcards: [
         {
-          front: "Wie definiert Szyperski eine Komponente?",
-          back: "Nach Szyperski ist eine Komponente eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten.",
+          front: "Wie definiert Szyperski eine Softwarekomponente?",
+          back: "Eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten — alle Kontextabhängigkeiten müssen explizit sein.",
           source: "07_ds-concept-components.pdf, Folie 6"
         },
         {
-          front: "Was ist ein Container?",
-          back: "Ein Container ist ein Host, der Gastanwendungen generische Dienste wie Lifecycle, Pooling, Transaktionen und Security bereitstellt.",
+          front: "Was ist ein Container und was verwaltet er?",
+          back: "Ein Host, der Dienste für Gastanwendungen bereitstellt — die Schnittstelle zwischen Komponente und plattformspezifischer Low-Level-Funktionalität. Er verwaltet Lebenszyklus, Datenpersistenz, Ressourcenpooling, Transaktionen, Sicherheit und Low-Level-Kommunikation.",
           source: "07_ds-concept-components.pdf, Folien 15-16"
         },
         {
@@ -2076,14 +1695,14 @@ const vs = {
           source: "07_ds-concept-components.pdf, Folie 20"
         },
         {
-          front: "Was bedeutet Dependency Injection?",
-          back: "Dependency Injection bedeutet, dass der Container zur Laufzeit die richtigen Abhängigkeiten einfügt, zum Beispiel mit @EJB.",
+          front: "Was ist Dependency Injection?",
+          back: "Der Container kümmert sich um die Beziehungen einer Komponente zu ihren Abhängigkeiten. Per Annotation (z. B. @EJB) wird ein Attribut deklariert; der Container stellt zur Laufzeit sicher, dass die richtige Abhängigkeit eingefügt wird.",
           source: "07_ds-concept-components.pdf, Folie 21"
         },
         {
-          front: "Welche zwei Arten von EJBs gibt es?",
-          back: "Die zwei Arten von EJBs sind Session Beans und Message-Driven Beans.",
-          source: "07_ds-concept-components.pdf, Folie 24"
+          front: "Was ist eine Enterprise Java Bean und welche Arten gibt es?",
+          back: "Eine serverseitige Java-Komponente mit der Geschäftslogik einer Anwendung, bereitgestellt als Dienst. Zwei Arten: Session Beans (Aufgaben für Clients, optional Webdienst) und Message-Driven Beans (Nachrichten-Listener, z. B. JMS).",
+          source: "07_ds-concept-components.pdf, Folien 23-24"
         },
         {
           front: "Welche drei Arten von Session Beans gibt es?",
@@ -2091,14 +1710,24 @@ const vs = {
           source: "07_ds-concept-components.pdf, Folie 26"
         },
         {
-          front: "Was bedeutet Passivierung?",
-          back: "Passivierung ist Swapping von Stateful Beans: Sie werden ausgelagert und bei Aufruf wieder aktiviert.",
+          front: "Worin unterscheiden sich Stateless und Stateful Session Beans?",
+          back: "Stateless: kein für den Client sichtbarer Status über den Methodenaufruf hinaus, Instanzen gleichwertig und poolbar, bessere Skalierbarkeit, Webdienste möglich. Stateful: behalten den Konversationszustand eines einzelnen Clients über mehrere Aufrufe; nur ein Client; kein Webdienst.",
+          source: "07_ds-concept-components.pdf, Folien 28-29, 36"
+        },
+        {
+          front: "Wofür stehen @PostConstruct und @PreDestroy?",
+          back: "@PostConstruct wird sofort nach Erstellung, Einrichtung und Ressourcen-Injektion einer Bean-Instanz aufgerufen; @PreDestroy direkt vor ihrer Zerstörung.",
+          source: "07_ds-concept-components.pdf, Folie 34"
+        },
+        {
+          front: "Was ist Passivierung?",
+          back: "Das Swapping des EJB-Containers für Stateful Session Beans: Weil der Konversationszustand groß sein kann, wird die Bean ausgelagert und wieder aktiviert, wenn ein Client sie aufruft.",
           source: "07_ds-concept-components.pdf, Folie 38"
         },
         {
-          front: "Welche Lifecycle-Callbacks nennen die Folien?",
-          back: "Die Lifecycle-Callbacks sind @PostConstruct nach Erstellung beziehungsweise Injektion und @PreDestroy vor Zerstörung.",
-          source: "07_ds-concept-components.pdf, Folie 34"
+          front: "Was zeichnet Singleton Session Beans aus?",
+          back: "Eine Instanz pro Anwendung für deren gesamten Lebenszyklus, von allen Clients gemeinsam und gleichzeitig genutzt; Steuerung des gleichzeitigen Zugriffs; anwendungsglobaler gemeinsamer Status; Webdienste möglich.",
+          source: "07_ds-concept-components.pdf, Folien 39-40"
         }
       ]
     },
@@ -2156,53 +1785,21 @@ const vs = {
           source: "11-ds-soa.pdf, Folie 28"
         }
       ],
-      questions: [
-        {
-          question: "Wie ist SOA definiert?",
-          answer: "Ein Paradigma für die Strukturierung und Nutzung verteilter Funktionalität, die von unterschiedlichen Besitzern verantwortet wird — keine Architektur, sondern ein Framework zum Architektur-Management.",
-          source: "11-ds-soa.pdf, Folie 4"
-        },
-        {
-          question: "Aus welchen Bestandteilen besteht das SOA-Framework?",
-          answer: "Dienste (in sich abgeschlossene Funktionalitäten), spezifische Infrastruktur sowie Policys und Prozesse zur Steuerung.",
-          source: "11-ds-soa.pdf, Folie 6"
-        },
-        {
-          question: "Nennen Sie wesentliche Eigenschaften von Diensten in der SOA.",
-          answer: "IT-Repräsentation fachlicher Funktionalität; autark; im Netzwerk verfügbar; wohldefinierte veröffentlichte Schnittstelle (Vertrag); plattformunabhängig; in einem Verzeichnis registriert; dynamisch gebunden; grobgranular.",
-          source: "11-ds-soa.pdf, Folie 12"
-        },
-        {
-          question: "Welche typischen Themen behandelt das SOA-Architektur-Management?",
-          answer: "Redundanzen (derselbe Dienst mehrfach erbracht), Outsourcing (externe, kostengünstigere Angebote) und Insellösungen (Silo-/Legacy-Anwendungen ohne Schnittstellen).",
-          source: "11-ds-soa.pdf, Folie 15"
-        },
-        {
-          question: "Woraus besteht eine SOAP-Nachricht?",
-          answer: "Aus einem Envelope, der einen optionalen Header (Meta-Informationen, z. B. Authentifizierung) und einen Body (die eigentliche Nutzlast für den Dienstaufruf) enthält.",
-          source: "11-ds-soa.pdf, Folien 23-24"
-        },
-        {
-          question: "Welche Nachteile hat SOAP?",
-          answer: "Performance-Einschränkungen durch die XML-basierte Datenrepräsentation und keine automatische Speicherverwaltung oder Referenzen wie bei RMI.",
-          source: "11-ds-soa.pdf, Folie 23"
-        },
-        {
-          question: "Welche Elemente beschreibt WSDL?",
-          answer: "Types (Datentypen per XML-Schema), Messages (ausgetauschte Nachrichten), portType (Interfaces mit Operationen), Binding (Nachrichtenformat und Transportprotokoll), Port (Endpunkt für ein Binding) und Service (logische Zusammenfassung von Endpunkten).",
-          source: "11-ds-soa.pdf, Folien 27-28"
-        }
-      ],
       flashcards: [
         {
-          front: "Was ist SOA?",
-          back: "SOA ist ein Paradigma zur Strukturierung und Nutzung verteilter Funktionalität verschiedener Besitzer sowie ein Framework fürs Architektur-Management.",
+          front: "Wie ist SOA definiert?",
+          back: "Ein Paradigma für die Strukturierung und Nutzung verteilter Funktionalität, die von unterschiedlichen Besitzern verantwortet wird — keine Architektur, sondern ein Framework zum Architektur-Management.",
           source: "11-ds-soa.pdf, Folie 4"
         },
         {
-          front: "Aus welchen drei Bestandteilen besteht das SOA-Framework?",
-          back: "Das SOA-Framework besteht aus Diensten, Infrastruktur sowie Policys und Prozessen.",
+          front: "Aus welchen Bestandteilen besteht das SOA-Framework?",
+          back: "Dienste (in sich abgeschlossene Funktionalitäten), spezifische Infrastruktur sowie Policys und Prozesse zur Steuerung.",
           source: "11-ds-soa.pdf, Folie 6"
+        },
+        {
+          front: "Nennen Sie wesentliche Eigenschaften von Diensten in der SOA.",
+          back: "IT-Repräsentation fachlicher Funktionalität; autark; im Netzwerk verfügbar; wohldefinierte veröffentlichte Schnittstelle (Vertrag); plattformunabhängig; in einem Verzeichnis registriert; dynamisch gebunden; grobgranular.",
+          source: "11-ds-soa.pdf, Folie 12"
         },
         {
           front: "Welche Granularität sollen Dienste in SOA haben?",
@@ -2215,19 +1812,24 @@ const vs = {
           source: "11-ds-soa.pdf, Folie 12"
         },
         {
-          front: "Wie ist eine SOAP-Nachricht aufgebaut?",
-          back: "Eine SOAP-Nachricht besteht aus einem Envelope mit optionalem Header für Metadaten und Body für die Nutzlast.",
+          front: "Welche typischen Themen behandelt das SOA-Architektur-Management?",
+          back: "Redundanzen (derselbe Dienst mehrfach erbracht), Outsourcing (externe, kostengünstigere Angebote) und Insellösungen (Silo-/Legacy-Anwendungen ohne Schnittstellen).",
+          source: "11-ds-soa.pdf, Folie 15"
+        },
+        {
+          front: "Woraus besteht eine SOAP-Nachricht?",
+          back: "Aus einem Envelope, der einen optionalen Header (Meta-Informationen, z. B. Authentifizierung) und einen Body (die eigentliche Nutzlast für den Dienstaufruf) enthält.",
+          source: "11-ds-soa.pdf, Folien 23-24"
+        },
+        {
+          front: "Welche Nachteile hat SOAP?",
+          back: "Performance-Einschränkungen durch die XML-basierte Datenrepräsentation und keine automatische Speicherverwaltung oder Referenzen wie bei RMI.",
           source: "11-ds-soa.pdf, Folie 23"
         },
         {
-          front: "Welche WSDL-Elemente nennen die Folien?",
-          back: "Die WSDL-Elemente sind types, message, portType, binding, port und service.",
+          front: "Welche Elemente beschreibt WSDL?",
+          back: "Types (Datentypen per XML-Schema), Messages (ausgetauschte Nachrichten), portType (Interfaces mit Operationen), Binding (Nachrichtenformat und Transportprotokoll), Port (Endpunkt für ein Binding) und Service (logische Zusammenfassung von Endpunkten).",
           source: "11-ds-soa.pdf, Folien 27-28"
-        },
-        {
-          front: "Welche typischen SOA-Themen nennen die Folien?",
-          back: "Typische SOA-Themen sind Redundanzen, Outsourcing und Insellösungen beziehungsweise Legacy.",
-          source: "11-ds-soa.pdf, Folie 15"
         }
       ]
     }
