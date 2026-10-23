@@ -23,8 +23,6 @@
 </script>
 
 <div class="fc-container fade-in">
-  <div class="section-title"><span class="emoji">{topic.icon}</span> {topic.title} – Karteikarten</div>
-
   {#if deck.length === 0}
     <p class="empty-state">Für dieses Thema gibt es keine Karteikarten.</p>
   {:else if position >= deck.length}
@@ -56,13 +54,13 @@
         <div class="fc-face fc-front">
           <div class="fc-label">Frage</div>
           <div class="fc-text">{@html richText(card.front)}</div>
-          <div class="fc-hint">Klicken zum Umdrehen</div>
+          <div class="fc-hint"><span class="hint-pointer">Klicken oder Leertaste zum Umdrehen</span><span class="hint-touch">Tippen zum Umdrehen</span></div>
         </div>
         <div class="fc-face fc-back">
           <div class="fc-label">Antwort</div>
           <div class="fc-text">{@html richText(card.back)}</div>
           <Source source={card.source} className="card-source fc-source" />
-          <div class="fc-hint">Klicken zum Zurückdrehen</div>
+          <div class="fc-hint"><span class="hint-pointer">Klicken zum Zurückdrehen</span><span class="hint-touch">Tippen zum Zurückdrehen</span></div>
         </div>
       </div>
     </button>

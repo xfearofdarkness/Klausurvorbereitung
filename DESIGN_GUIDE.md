@@ -2,73 +2,99 @@
 
 ## Ziel
 
-Die App ist ein statischer Klausurtrainer fuer GitHub Pages mit Vite,
+Die App ist ein statischer Klausurtrainer für GitHub Pages mit Vite,
 Svelte und TypeScript.
 
 Sie soll:
 
 - schnell laden
 - auf Desktop und Smartphone gut nutzbar sein
-- in allen Faechern gleich funktionieren
-- moeglichst kompakt bleiben
-- neue Faecher ohne UI-Sonderfaelle aufnehmen
+- in allen Fächern gleich funktionieren
+- möglichst kompakt bleiben
+- neue Fächer ohne UI-Sonderfälle aufnehmen
 
 ## Verbindliche Struktur
 
 Die App verwendet diese Struktur:
 
-- `index.html` fuer die Fachuebersicht
+- `index.html` für die Fachübersicht
 - `trainer.html` als generische Trainerseite
-- `src/pages/Home.svelte` fuer die Startseite
-- `src/pages/Trainer.svelte` fuer die Trainerseite
-- `src/components/` fuer wiederverwendbare UI-Komponenten
-- `src/styles.css` fuer zentrales Styling
-- `src/data/catalog.ts` fuer Fachliste und Loader
-- `src/data/subjects/<fach>.ts` fuer die Fachdaten
-- `src/types/content.ts` fuer das Datenmodell
-- `dist/` als Build-Ausgabe fuer GitHub Pages
+- `src/pages/Home.svelte` für die Startseite
+- `src/pages/Trainer.svelte` für die Trainerseite
+- `src/components/` für wiederverwendbare UI-Komponenten
+- `src/styles.css` für zentrales Styling
+- `src/data/catalog.ts` für Fachliste und Loader
+- `src/data/subjects/<fach>.ts` für die Fachdaten
+- `src/types/content.ts` für das Datenmodell
+- `dist/` als Build-Ausgabe für GitHub Pages
 
 Regeln:
 
 - Keine neue HTML-Datei pro Fach.
 - Keine fachspezifische UI-Logik.
-- Keine Mutation von Quelldaten fuer UI-Zustaende.
-- Cache-Busting geschieht ueber Vite-Hashes im Build, nicht ueber
+- Keine Mutation von Quelldaten für UI-Zustände.
+- Cache-Busting geschieht über Vite-Hashes im Build, nicht über
   manuelle `?v=N`-Parameter.
 - GitHub Pages deployt die gebaute Ausgabe aus `dist/`.
+- Schriften und Icons werden mitgebündelt, keine externen Font- oder
+  Icon-Dienste.
 
 ## Didaktische Varianz pro Fach
 
-Faecher unterscheiden sich didaktisch. Die App bildet das ueber
-generische, deklarative Optionen in den Fachdaten ab, nie ueber
+Fächer unterscheiden sich didaktisch. Die App bildet das über
+generische, deklarative Optionen in den Fachdaten ab, nie über
 Sonderlogik:
 
 - Modi sind inhaltsgetrieben und beziehen sich auf das aktuelle
-  Thema: Die Modus-Buttons (Lernen, Fragen, Karteikarten, Ueben,
-  Ablaeufe) werden nur angezeigt, wenn das aktuell ausgewaehlte
-  Thema Inhalte fuer diesen Modus hat.
-- Der Modus "Ueben" rendert den optionalen Themenabschnitt
-  `exercises` (Aufgaben ohne hinterlegte Loesung, mit
+  Thema: Alle Modi (Lernen, Fragen, Karteikarten, Üben, Abläufe) haben
+  einen festen Platz in der Modusleiste. Modi ohne Inhalte im aktuellen
+  Thema werden ausgegraut und sind nicht wählbar, damit die Plätze beim
+  Themenwechsel nicht springen.
+- Der Modus „Üben“ rendert den optionalen Themenabschnitt
+  `exercises` (Aufgaben ohne hinterlegte Lösung, mit
   Bearbeitet-Fortschritt). Aufgaben mit `generator`-Feld sind
-  generierte Rechenmodule: Zahlen per Zufall, berechnete Loesung
-  ein-/ausblendbar, Button "Neue Zahlen".
-- Der Modus "Ablaeufe" rendert den optionalen Themenabschnitt
+  generierte Rechenmodule: Zahlen per Zufall, berechnete Lösung
+  ein-/ausblendbar, Button „Neue Zahlen“.
+- Der Modus „Abläufe“ rendert den optionalen Themenabschnitt
   `walkthroughs`. Er zeigt deklarative Schrittfolgen mit
   generischen Visualtypen: `matrix`, `array`, `tree` (Knoten
   mit links/rechts-Kindern) und `graph` (Knoten mit Koordinaten,
   Kanten optional gerichtet und beschriftet).
 - `features.math: true` im Fachobjekt aktiviert Formel-Rendering
-  mit KaTeX. KaTeX wird ueber npm gebuendelt; die App bleibt
-  GitHub-Pages-tauglich.
+  mit KaTeX. Formeln werden vor dem Einfügen in die Seite gerendert,
+  nicht nachträglich im DOM.
 - Formeln stehen in den Inhalten als LaTeX in `\(...\)` (inline)
   bzw. `\[...\]` (abgesetzt).
 
-Neue didaktische Beduerfnisse werden als weitere generische Option
-dieser Art ergaenzt, nicht als fachspezifischer Sonderfall.
+Neue didaktische Bedürfnisse werden als weitere generische Option
+dieser Art ergänzt, nicht als fachspezifischer Sonderfall.
+
+## Navigation
+
+Die Trainerseite hat drei Layoutstufen nach Bildschirmbreite:
+
+- Smartphone (unter 48rem): Kopfzeile mit Zurück-Button und
+  Themenauswahl (Fach, „Thema n von m“, Thementitel). Die Modusleiste
+  liegt unten in Daumenreichweite, mit Icon und kurzer Beschriftung.
+- Tablet und Smartphone quer (48rem bis 64rem): eine Kopfzeile mit
+  Zurück-Button, Themenauswahl und Modusleiste.
+- Desktop (ab 64rem): Seitenleiste mit allen Themen und ihrem
+  Fortschritt. Die Lage ist wählbar: links (Standard), rechts oder oben
+  wie bei Tablets. Die Wahl ist eine Ansichtseinstellung pro Browser.
+
+Regeln:
+
+- Der Inhalt hat Vorrang vor der Navigation. Die Seitenleiste ist
+  zurückhaltend gestaltet (Seitenhintergrund, gedämpfte Schrift, nur
+  das aktive Thema hervorgehoben), und der Inhalt bleibt in der
+  Bildschirmmitte, solange der Platz reicht.
+- Die Themenauswahl zeigt immer alle Themen eines Fachs mit
+  Fortschritt; kein seitliches Suchen in Tab-Leisten.
+- Fach, Thema und Modus sind in jeder Layoutstufe sichtbar.
 
 ## Designprinzipien
 
-Die Oberflaeche ist funktional, kompakt und sachlich.
+Die Oberfläche ist funktional, kompakt und sachlich.
 
 Regeln:
 
@@ -76,81 +102,81 @@ Regeln:
 - Hohe Informationsdichte ohne die Lesbarkeit zu verlieren.
 - Konsistente Interaktion in allen Modi.
 - Visuelle Hierarchie muss sofort erkennbar sein.
-- Aktives Thema und aktiver Modus muessen jederzeit sichtbar sein.
+- Aktives Thema und aktiver Modus müssen jederzeit sichtbar sein.
+- Farbe trägt Bedeutung (Navigation, Status, Kategorie), nicht Dekoration.
+- Keine Verläufe, Glüheffekte oder Schatten als Schmuck.
 
 ## Komponenten
 
 Standardkomponenten:
 
 - Fachkarte
-- Header
-- Modus-Schalter
-- Themen-Tabs
+- Seitenleiste und Themenauswahl
+- Modusleiste
 - Lernkarte
 - Quizkarte
 - Flashcard
-- Uebungskarte
+- Übungskarte
 - Ablaufkarte
-- Matrix- und Array-Visualisierung
+- Matrix-, Array-, Baum- und Graph-Visualisierung
 - Fortschrittsleiste
 - Statistikleiste
 - Fehler- und Leerstates
 
-Lernkarten koennen mit den Tags `wichtig`, `formel`, `def`, `satz`
+Lernkarten können mit den Tags `wichtig`, `formel`, `def`, `satz`
 und `beispiel` ausgezeichnet werden. Die Tag-Farben sind zentral
-definiert und in allen Faechern gleich.
+definiert und in allen Fächern gleich.
 
 Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
 in Lernkarten unter dem Text, in Quizkarten unter der Antwort, bei
-Flashcards auf der Rueckseite. Das stuetzt die Kernregel, dass die
+Flashcards auf der Rückseite. Das stützt die Kernregel, dass die
 Folien Vorrang haben, und macht das Nachschlagen einfach.
+
+Regeln:
+
+- Jede Komponente hat genau eine klar erkennbare Hauptfunktion.
+- Gleichartige Komponenten sehen in allen Fächern gleich aus.
+- Nicht klickbare Karten reagieren nicht auf Hover.
 
 ## Barrierefreiheit
 
 - Tastatur-Fokus ist auf allen interaktiven Elementen sichtbar
   (`:focus-visible` mit Akzentfarbe).
-- `prefers-reduced-motion` wird respektiert: Einblend- und
-  Flip-Animationen sind dann deaktiviert.
-- Der aktive Themen-Tab wird beim Laden und Wechseln automatisch
-  mittig in den sichtbaren Bereich gescrollt; Themen- und
-  Moduswechsel setzen die Scrollposition nach oben.
-- Ueberlaufende Themen-Tabs sind erkennbar und erreichbar:
-  Fade-Kanten zeigen weitere Tabs an, auf Desktop gibt es
-  Blaetter-Buttons und Mausrad-Scrolling; auf Touch-Displays
-  bleibt das Wischen der primaere Weg (keine Buttons).
-
-Regeln:
-
-- Jede Komponente hat genau eine klar erkennbare Hauptfunktion.
-- Gleichartige Komponenten sehen in allen Faechern gleich aus.
-- Buttons verwenden konsistente Zustandsfarben fuer aktiv, gewusst und wiederholen.
+- `prefers-reduced-motion` wird respektiert: Übergänge und Animationen
+  sind dann deaktiviert.
+- Nebentext erreicht mindestens 4,5:1 Kontrast zum Hintergrund.
+- Die Themenauswahl ist ein modaler Dialog: Escape und Tipp auf den
+  Hintergrund schließen ihn, der Fokus kehrt zum Auslöser zurück.
+- Themen- und Moduswechsel setzen die Scrollposition nach oben.
 
 ## Design Tokens
 
-Farben, Abstaende und Radien werden zentral definiert.
+Farben, Abstände und Radien werden zentral in `src/styles.css`
+definiert.
 
 Regeln:
 
-- Keine direkten Einzelfarben in neuen Komponenten.
+- Keine direkten Einzelfarben in Komponenten, nur Tokens.
+- Flächen sind neutrale Grautöne in wenigen Stufen.
 - Keine abweichenden Randradien pro Seite.
+- Maße in `rem`, damit größere Systemschriften sauber skalieren.
 - Statusfarben bleiben fest:
-  - `accent` fuer Navigation und aktive Auswahl
-  - `success` oder gruen fuer gewusst
-  - `warning` oder orange/pink fuer wiederholen
+  - `accent` für Navigation und aktive Auswahl
+  - `success` (grün) für gewusst und erledigt
+  - `warning` (orange) für wiederholen
 
 ## Typografie
 
-Empfehlung:
-
-- `Outfit` fuer UI und Lesetext
-- `Space Mono` fuer Fachbegriffe, Code und technische Marker
+- `Outfit` für UI und Lesetext
+- `Space Mono` für Quellenangaben, Code und technische Marker
 
 Regeln:
 
-- Ueberschriften kurz halten.
+- Überschriften kurz halten.
 - Kartentitel sollen scannbar sein.
-- Textbloecke so kurz wie fachlich moeglich.
-- Fettung nur fuer wirklich wichtige Fachbegriffe.
+- Textblöcke so kurz wie fachlich möglich.
+- Fettung nur für wirklich wichtige Fachbegriffe.
+- Beschriftungen in normaler Schreibweise, nicht in Versalien.
 
 ## UX-Anforderungen
 
@@ -158,11 +184,11 @@ Diese Anforderungen sind verbindlich:
 
 - Vom Startbildschirm bis zur ersten Lerneinheit oder Frage sind maximal zwei Interaktionen erlaubt.
 - Der Nutzer muss immer sehen, in welchem Fach, Modus und Thema er sich befindet.
-- Die wichtigsten Aktionen muessen ohne Nachdenken erkennbar sein.
+- Die wichtigsten Aktionen müssen ohne Nachdenken erkennbar sein.
 - Die App darf keine Fachlogik voraussetzen; jedes Fach nutzt dieselbe Bedienung.
-- Leere und fehlerhafte Zustaende muessen klar und knapp erklaert werden.
-- Lokaler Fortschritt darf die Inhalte nie veraendern.
-- Die App muss nach Reload mit vertretbarem Kontext weitermachen koennen, wenn Fortschritt lokal gespeichert ist.
+- Leere und fehlerhafte Zustände müssen klar und knapp erklärt werden.
+- Lokaler Fortschritt darf die Inhalte nie verändern.
+- Die App muss nach Reload mit vertretbarem Kontext weitermachen können, wenn Fortschritt lokal gespeichert ist.
 
 ## Kompaktheitsregeln
 
@@ -170,12 +196,14 @@ Die UI soll bewusst dicht sein.
 
 Regeln:
 
-- Header so niedrig wie moeglich halten.
-- Sekundaere Hinweise klein und unaufdringlich halten.
-- Karten-Padding nicht groesser als noetig.
-- Zwischenraeume nur dort vergroessern, wo sie Orientierung verbessern.
+- Kopfzeile so niedrig wie möglich halten.
+- Keine Überschriften, die nur wiederholen, was Navigation und
+  Modusleiste schon zeigen.
+- Sekundäre Hinweise klein und unaufdringlich halten.
+- Karten-Padding nicht größer als nötig.
+- Zwischenräume nur dort vergrößern, wo sie Orientierung verbessern.
 - Lange Inhalte nach Themen oder Abschnitten segmentieren.
-- Antworten standardmaessig eingeklappt lassen, wenn das Platz spart.
+- Antworten standardmäßig eingeklappt lassen, wenn das Platz spart.
 
 ## Mobile Regeln
 
@@ -183,27 +211,29 @@ Die App muss auf Smartphones voll nutzbar sein.
 
 Regeln:
 
-- Touch-Ziele muessen gross genug fuer Daumenbedienung sein.
-- Tabs duerfen horizontal scrollen, der Hauptinhalt moeglichst nicht.
-- Header und Navigation duerfen auf kleinen Displays nicht zu viel Hoehe belegen.
+- Touch-Ziele müssen groß genug für Daumenbedienung sein.
+- Der Hauptinhalt scrollt nicht horizontal; nur breite Formeln und
+  Tabellen dürfen in ihrem eigenen Bereich scrollen.
+- Kopfzeile und Navigation dürfen auf kleinen Displays nicht zu viel Höhe belegen.
 - Wichtige Aktionen sollen im sichtbaren Bereich bleiben.
-- Lange Karten muessen ohne Layoutbruch lesbar sein.
-- Inhalte und Bedienelemente muessen auch auf schmalen Displays sauber umbrechen.
+- Feste Leisten berücksichtigen die Safe Area (`env(safe-area-inset-bottom)`).
+- Lange Karten müssen ohne Layoutbruch lesbar sein.
+- Inhalte und Bedienelemente müssen auch auf schmalen Displays (ab 320px) sauber umbrechen.
 
 ## Verhaltensregeln der App
 
 Regeln:
 
-- `index.html` rendert Faecher nur aus `src/data/catalog.ts`.
-- `trainer.html` laedt ein Fach nur ueber `?subject=<id>`.
+- `index.html` rendert Fächer nur aus `src/data/catalog.ts`.
+- `trainer.html` lädt ein Fach nur über `?subject=<id>`.
 - Fachdaten werden in `src/data/subjects/<fach>.ts` gehalten.
-- Fortschritt gehoert in State oder `localStorage`, nie in die Fachdaten.
+- Fortschritt gehört in State oder `localStorage`, nie in die Fachdaten.
 
 ## Was nicht gemacht werden soll
 
 - Kein visuelles Redesign ohne funktionalen Mehrwert.
 - Keine Animationen, die Lesefluss oder Bedienung verlangsamen.
-- Keine zusaetzlichen UI-Muster pro Fach.
-- Kein Backend, kein SvelteKit und kein SPA-Router ohne ausdrueckliche Entscheidung.
-- Keine algorithmusspezifischen Mini-Apps; neue visuelle Logik wird ueber
-  generische Renderer und deklarative Daten geloest.
+- Keine zusätzlichen UI-Muster pro Fach.
+- Kein Backend, kein SvelteKit und kein SPA-Router ohne ausdrückliche Entscheidung.
+- Keine algorithmusspezifischen Mini-Apps; neue visuelle Logik wird über
+  generische Renderer und deklarative Daten gelöst.

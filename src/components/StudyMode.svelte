@@ -10,16 +10,14 @@
   let { topic }: Props = $props();
 
   function tagLabel(tag: ContentTag): string {
-    if (tag === "wichtig") return "WICHTIG";
-    if (tag === "formel") return "FORMEL";
-    if (tag === "def") return "DEFINITION";
-    if (tag === "satz") return "SATZ";
-    if (tag === "beispiel") return "BEISPIEL";
+    if (tag === "wichtig") return "Wichtig";
+    if (tag === "formel") return "Formel";
+    if (tag === "def") return "Definition";
+    if (tag === "satz") return "Satz";
+    if (tag === "beispiel") return "Beispiel";
     return "";
   }
 </script>
-
-<div class="section-title fade-in"><span class="emoji">{topic.icon}</span> {topic.title} – Lernseiten</div>
 
 {#each topic.cards as card}
   <div class="study-card fade-in">

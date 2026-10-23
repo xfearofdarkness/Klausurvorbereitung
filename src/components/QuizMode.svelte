@@ -30,7 +30,6 @@
   }
 </script>
 
-<div class="section-title fade-in"><span class="emoji">{topic.icon}</span> {topic.title} – Klausurfragen</div>
 <div class="stats-bar fade-in">
   <div class="stats-group">
     <span class="stat-pill stat-pill-neutral">{topic.questions.length} Fragen</span>
@@ -51,7 +50,7 @@
 {:else}
   {#each questions as question}
     <div class="quiz-card fade-in">
-      <div class="quiz-q"><span>{question.index + 1}. </span><span>{@html richText(question.question)}</span></div>
+      <div class="quiz-q"><span class="quiz-num">{question.index + 1}.</span><span>{@html richText(question.question)}</span></div>
       <div class:visible={visibleAnswers.has(question.index)} class="quiz-a">
         <div>{@html richText(question.answer)}</div>
         <Source source={question.source} />

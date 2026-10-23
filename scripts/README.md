@@ -2,12 +2,12 @@
 
 ## Manifest validieren
 
-Prueft ein lokales Quellen-Manifest auf:
+Prüft ein lokales Quellen-Manifest auf:
 
 - Pflichtfelder
-- gueltige Dateieintraege
+- gültige Dateieinträge
 - doppelte Pfade
-- doppelte oder lueckenhafte Reihenfolge
+- doppelte oder lückenhafte Reihenfolge
 - Existenz der referenzierten PDF-Dateien
 
 Beispiel:
@@ -18,13 +18,13 @@ npm run validate:manifest -- sources/<fach-id>/manifest.json
 
 ## Fachdaten validieren
 
-Prueft die typisierten Fachdaten aus `src/data/subjects/` auf:
+Prüft die typisierten Fachdaten aus `src/data/subjects/` auf:
 
 - Pflichtfelder
 - eindeutige Topic-IDs
 - Quellenangaben
 - eindeutige Fortschritts-Schlüssel (keine doppelten Fragen, Flashcards oder Aufgaben pro Thema)
-- gueltige Cards, Questions, Flashcards, Exercises und Walkthroughs
+- gültige Cards, Questions, Flashcards, Exercises und Walkthroughs
 
 Beispiele:
 
@@ -35,8 +35,8 @@ npm run validate -- <fach-id>
 
 ## Quellenabdeckung validieren
 
-Prueft, ob die `source`-Angaben einer Fachdaten-Datei nur Dateien
-referenzieren, die im zugehoerigen Manifest stehen.
+Prüft, ob die `source`-Angaben einer Fachdaten-Datei nur Dateien
+referenzieren, die im zugehörigen Manifest stehen.
 
 Optional kann erzwungen werden, dass jede Manifest-Datei mindestens
 einmal referenziert wird.

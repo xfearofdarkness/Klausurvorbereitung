@@ -14,8 +14,6 @@
   let doneCount = $derived(topic.exercises.filter((exercise) => practiceState[exercise.key] === "done").length);
 </script>
 
-<div class="section-title fade-in"><span class="emoji">{topic.icon}</span> {topic.title} – Übungsaufgaben</div>
-
 {#if topic.exercises.length === 0}
   <p class="empty-state">Für dieses Thema gibt es keine Übungsaufgaben.</p>
 {:else}

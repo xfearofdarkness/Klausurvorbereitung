@@ -1,3 +1,5 @@
+import type { IconName } from "../lib/icons";
+
 export type SubjectId = "rabs" | "laa" | "vs" | "aud";
 
 export type ModeId = "study" | "quiz" | "flash" | "practice" | "walkthrough";
@@ -244,6 +246,9 @@ export type WalkthroughValueUpdate =
 export interface ModeConfig {
   id: ModeId;
   label: string;
+  /** Beschriftung für schmale Leisten (z. B. „Karten“ statt „Karteikarten“). */
+  shortLabel: string;
+  icon: IconName;
   key: keyof Pick<Topic, "cards" | "questions" | "flashcards" | "exercises" | "walkthroughs">;
 }
 

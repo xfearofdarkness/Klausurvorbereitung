@@ -134,3 +134,21 @@ export function saveUiState(progress: AppProgress, subject: Subject, mode: ModeI
   progress.lastSubjectId = subject.id;
   saveProgress(progress);
 }
+
+export interface TopicProgressSummary {
+  done: number;
+  total: number;
+}
+
+/** Gewusste Fragen und Karten plus bearbeitete Aufgaben eines Themas; liest nur, legt nichts an. */
+export function summarizeTopicProgress(progress: AppProgress, subject: Subject, topic: Topic): TopicProgressSummary {
+  const subjectProgress = progress.subjects[subject.id];
+  const quiz = subjectProgress?.quiz?.[topic.id] || {};
+  const flash = subjectProgress?.flash?.[topic.id] || {};
+  const practice = subjectProgress?.practice?.[topic.id] || {};
+  const done =
+    topic.questions.filter((question) => quiz[question.key] === "correct").length +
+    topic.flashcards.filter((flashcard) => flash[flashcard.key] === "know").length +
+    topic.exercises.filter((exercise) => practice[exercise.key] === "done").length;
+  return { done, total: topic.questions.length + topic.flashcards.length + topic.exercises.length };
+}

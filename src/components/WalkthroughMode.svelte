@@ -9,8 +9,6 @@
   let { topic }: Props = $props();
 </script>
 
-<div class="section-title fade-in"><span class="emoji">{topic.icon}</span> {topic.title} – Abläufe</div>
-
 {#if topic.walkthroughs.length === 0}
   <p class="empty-state">Für dieses Thema gibt es keine Abläufe.</p>
 {:else}
