@@ -178,7 +178,7 @@ const polynomdivision: Generator = (rng) => {
   const divisor = polyStr([1, -a]);
   const quotient = polyStr([1, p, r]);
 
-  const restTerm = rest === 0 ? "" : String.raw` + \frac{${rest}}{${divisor}}`;
+  const restTerm = rest === 0 ? "" : String.raw` ${rest < 0 ? "-" : "+"} \frac{${Math.abs(rest)}}{${divisor}}`;
   const probe =
     rest === 0
       ? String.raw`Probe: \((${divisor})(${quotient}) = ${polyStr(dividend)}\).`
@@ -249,7 +249,7 @@ const gaussLgs2x2: Generator = (rng) => {
   if (caseRoll < 0.8) {
     return {
       task: String.raw`Berechnen Sie mithilfe des Gauß-Algorithmus sämtliche Lösungen des linearen Gleichungssystems \[\begin{aligned} ${polyLine(a11, a12)} &= ${b1} \\ ${polyLine(k * a11, k * a12)} &= ${k * b1} \end{aligned}\]`,
-      solution: String.raw`Zeile II ist das \(${k}\)-Fache von Zeile I. Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Nullzeile \(0 = 0\) — eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(${polyLine(a11, a12)} = ${b1}\) mit unendlich vielen Lösungen: \(x_2\) frei wählbar und \[x_1 = \frac{${b1} ${a12 < 0 ? "+" : "-"} ${Math.abs(a12)} x_2}{${a11}}\]`
+      solution: String.raw`Zeile II ist das \(${k}\)-Fache von Zeile I. Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Nullzeile \(0 = 0\) — eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(${polyLine(a11, a12)} = ${b1}\) mit unendlich vielen Lösungen: \(x_2\) frei wählbar und \[x_1 = ${a12 === 0 ? frac(b1, a11) : String.raw`\frac{${b1} ${a12 < 0 ? "+" : "-"} ${Math.abs(a12) === 1 ? "" : Math.abs(a12)} x_2}{${a11}}`}\]`
     };
   }
 
@@ -428,6 +428,12 @@ const skalarproduktWinkel: Generator = (rng) => {
   };
 };
 
+/** Linearfaktor (λ − r) als LaTeX; für r = 0 nur λ. */
+function linearFactor(root: number): string {
+  if (root === 0) return String.raw`\lambda`;
+  return String.raw`(\lambda ${root < 0 ? "+" : "-"} ${Math.abs(root)})`;
+}
+
 const eigenwerte2x2: Generator = (rng) => {
   for (let attempt = 0; attempt < 200; attempt += 1) {
     const lambda1 = int(rng, -4, 4);
@@ -470,7 +476,7 @@ const eigenwerte2x2: Generator = (rng) => {
 
     return {
       task: String.raw`Bestimmen Sie die Eigenwerte der Matrix \[A = ${pmatrix(matrix)}\]`,
-      solution: String.raw`Charakteristisches Polynom über \(\det(A - \lambda E) = 0\): \[\det \begin{pmatrix} ${a} - \lambda & ${b} \\ ${c} & ${d} - \lambda \end{pmatrix} = \lambda^2 ${trace === 0 ? "" : trace < 0 ? `+ ${-trace}\\lambda` : `- ${trace}\\lambda`} ${detValue === 0 ? "" : detValue < 0 ? `- ${-detValue}` : `+ ${detValue}`} = (\lambda ${low < 0 ? `+ ${-low}` : `- ${low}`})(\lambda ${high < 0 ? `+ ${-high}` : `- ${high}`})\] Die Nullstellen des charakteristischen Polynoms sind die Eigenwerte: \(\lambda_1 = ${low}\), \(\lambda_2 = ${high}\). Die zugehörigen Eigenvektoren ergeben sich jeweils aus dem LGS \((A - \lambda E)\vec{v} = \vec{0}\).`
+      solution: String.raw`Charakteristisches Polynom über \(\det(A - \lambda E) = 0\): \[\det \begin{pmatrix} ${a} - \lambda & ${b} \\ ${c} & ${d} - \lambda \end{pmatrix} = \lambda^2 ${trace === 0 ? "" : `${trace < 0 ? "+" : "-"} ${Math.abs(trace) === 1 ? "" : Math.abs(trace)}\\lambda`} ${detValue === 0 ? "" : detValue < 0 ? `- ${-detValue}` : `+ ${detValue}`} = ${linearFactor(low)}${linearFactor(high)}\] Die Nullstellen des charakteristischen Polynoms sind die Eigenwerte: \(\lambda_1 = ${low}\), \(\lambda_2 = ${high}\). Die zugehörigen Eigenvektoren ergeben sich jeweils aus dem LGS \((A - \lambda E)\vec{v} = \vec{0}\).`
     };
   }
 

@@ -8,7 +8,7 @@
 
 <main class="home-shell">
   <h1 class="home-title">📚 Klausurvorbereitung</h1>
-  <p class="home-sub">Interaktive Trainer: Lernen, Fragen und Karteikarten</p>
+  <p class="home-sub">Interaktive Klausurtrainer auf Basis der Vorlesungsfolien</p>
   <div class="grid" id="subjectGrid">
     {#each catalog as subject}
       <a class:is-last={subject.id === lastSubjectId} class="card" href={`trainer.html?subject=${encodeURIComponent(subject.id)}`}>

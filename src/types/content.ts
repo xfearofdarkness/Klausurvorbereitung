@@ -76,6 +76,8 @@ export interface RawQuestion {
 }
 
 export interface Question {
+  /** Stabiler Fortschritts-Schlüssel, aus dem Inhalt berechnet (nicht die Listenposition). */
+  key: string;
   question: string;
   answer: string;
   source: string;
@@ -88,6 +90,7 @@ export interface RawFlashcard {
 }
 
 export interface Flashcard {
+  key: string;
   front: string;
   back: string;
   source: string;
@@ -103,6 +106,7 @@ export interface RawExercise {
 }
 
 export interface Exercise {
+  key: string;
   task: string;
   ref: string;
   note: string;
@@ -247,12 +251,19 @@ export type QuizMark = "correct" | "wrong";
 export type FlashMark = "know" | "repeat";
 export type PracticeMark = "done";
 
+/** Markierungen eines Themas, je Eintrag über dessen `key`. */
+export type MarkState<T> = Record<string, T>;
+
 export interface SubjectProgress {
-  quiz: Record<string, Record<number, QuizMark>>;
-  flash: Record<string, Record<number, FlashMark>>;
-  practice?: Record<string, Record<number, PracticeMark>>;
+  /** 2 = Markierungen über Inhaltsschlüssel; ältere Stände nutzten Listenpositionen. */
+  version?: number;
+  quiz: Record<string, MarkState<QuizMark>>;
+  flash: Record<string, MarkState<FlashMark>>;
+  practice?: Record<string, MarkState<PracticeMark>>;
   ui?: {
     lastMode?: ModeId;
+    lastTopicId?: string;
+    /** Nur noch für die Übernahme alter Stände gelesen. */
     lastTopicIndex?: number;
   };
 }

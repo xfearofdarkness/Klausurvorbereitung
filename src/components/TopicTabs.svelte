@@ -53,8 +53,10 @@
 
   onMount(() => {
     updateTabsNav();
-    window.addEventListener("resize", updateTabsNav);
-    return () => window.removeEventListener("resize", updateTabsNav);
+    const observer = new ResizeObserver(updateTabsNav);
+    observer.observe(tabs);
+    for (const tab of tabs.children) observer.observe(tab);
+    return () => observer.disconnect();
   });
 </script>
 

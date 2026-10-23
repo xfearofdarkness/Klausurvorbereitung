@@ -187,6 +187,7 @@ Pflicht:
 - stabile Topic-IDs
 - konsistente Langfelder: `title`/`body` für Lernkarten und `question`/`answer` für Fragen; Kurzfelder `t`/`b`/`q`/`a` sind nicht erlaubt
 - `source` bei jedem Eintrag
+- innerhalb eines Themas eindeutige Fragen, Flashcard-Vorderseiten und Aufgaben; der lokale Fortschritt hängt an diesem Text, eine Textänderung setzt nur die Markierung dieses Eintrags zurück
 
 Optional:
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
   import { generateTask, randomSeed } from "../lib/exerciseGenerators";
   import type { Exercise } from "../types/content";
@@ -26,12 +27,12 @@
     <div class="ex-ref">{exercise.ref}</div>
   {/if}
   {#if generated}
-    <div class="quiz-q ex-task" data-math-content>{@html generated.task}</div>
+    <div class="quiz-q ex-task">{@html richText(generated.task)}</div>
     {#if exercise.note}
-      <div class="ex-note" data-math-content>{@html exercise.note}</div>
+      <div class="ex-note">{@html richText(exercise.note)}</div>
     {/if}
     <div class:visible={showSolution} class="quiz-a">
-      <div data-math-content>{@html generated.solution}</div>
+      <div>{@html richText(generated.solution)}</div>
     </div>
     <Source source={exercise.source} />
     <div class="quiz-btns">

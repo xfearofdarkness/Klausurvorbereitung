@@ -3,6 +3,7 @@
 import katex from "katex";
 import { catalog, subjectLoaders } from "../src/data/catalog";
 import { generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
+import { MATH_PATTERN } from "../src/lib/math";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
   ArrayVisual,
@@ -18,7 +19,7 @@ import type {
   WalkthroughValueUpdate
 } from "../src/types/content";
 
-let failed = false;
+let failureCount = 0;
 const DANGEROUS_HTML_PATTERNS = [
   { label: "script tag", pattern: /<\s*script\b/i },
   { label: "javascript URL", pattern: /javascript\s*:/i },
@@ -28,11 +29,10 @@ const MATH_DELIMITER_PATTERNS = [
   { label: "inline math", open: /(?<!\\)\\\(/g, close: /(?<!\\)\\\)/g },
   { label: "display math", open: /(?<!\\)\\\[/g, close: /(?<!\\)\\\]/g }
 ];
-const MATH_FORMULA_PATTERN = /(?<!\\)\\\(([\s\S]*?)(?<!\\)\\\)|(?<!\\)\\\[([\s\S]*?)(?<!\\)\\\]/g;
 
 function fail(message: string): void {
   console.error(`ERROR: ${message}`);
-  failed = true;
+  failureCount += 1;
 }
 
 async function loadSubject(subjectId: SubjectId): Promise<Subject | null> {
@@ -49,6 +49,7 @@ async function loadSubject(subjectId: SubjectId): Promise<Subject | null> {
 }
 
 function validateSubject(subjectId: SubjectId, subject: Subject | null): void {
+  const failuresBefore = failureCount;
   if (!subject || typeof subject !== "object") {
     fail(`Subject "${subjectId}" is missing or invalid.`);
     return;
@@ -71,7 +72,7 @@ function validateSubject(subjectId: SubjectId, subject: Subject | null): void {
 
   subject.topics.forEach((topic, topicIndex) => validateTopic(subjectId, topic, topicIndex, topicIds, subject.features.math === true));
 
-  if (!failed) {
+  if (failureCount === failuresBefore) {
     console.log(`OK: ${subjectId}`);
   }
 }
@@ -145,6 +146,21 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     validateHtmlField(`${topicLabel} flashcard[${flashIndex}].back`, flashcard.back, validateMath);
     requireSource(topicLabel, "flashcard", flashIndex, flashcard.source);
   });
+
+  for (const [kind, items] of [
+    ["question", topic.questions],
+    ["flashcard", topic.flashcards],
+    ["exercise", topic.exercises]
+  ] as const) {
+    const seenKeys = new Map<string, number>();
+    items.forEach((item, itemIndex) => {
+      const previousIndex = seenKeys.get(item.key);
+      if (previousIndex !== undefined) {
+        fail(`${topicLabel} ${kind}[${itemIndex}] has the same progress key as ${kind}[${previousIndex}] (identical text).`);
+      }
+      seenKeys.set(item.key, itemIndex);
+    });
+  }
 
   const walkthroughIds = new Set<string>();
   topic.walkthroughs.forEach((walkthrough, walkthroughIndex) =>
@@ -356,11 +372,17 @@ function validateGraphVisual(label: string, visual: GraphVisual): void {
     return;
   }
 
+  const edgeKeys = new Set<string>();
   visual.edges.forEach((edge, edgeIndex) => {
     const edgeLabel = `${label} visual.edges[${edgeIndex}]`;
     if (!nodeIds.has(edge.from) || !nodeIds.has(edge.to)) {
       fail(`${edgeLabel} references unknown node "${edge.from}"/"${edge.to}".`);
     }
+    const edgeKey = visual.directed ? `${edge.from}->${edge.to}` : [edge.from, edge.to].sort().join("--");
+    if (edgeKeys.has(edgeKey)) {
+      fail(`${edgeLabel} duplicates edge "${edge.from}" -- "${edge.to}".`);
+    }
+    edgeKeys.add(edgeKey);
   });
 }
 
@@ -621,7 +643,7 @@ function validateMathField(label: string, value: string): void {
     }
   }
 
-  for (const match of value.matchAll(MATH_FORMULA_PATTERN)) {
+  for (const match of value.matchAll(MATH_PATTERN)) {
     const isDisplay = match[2] !== undefined;
     const tex = match[1] ?? match[2] ?? "";
     if (!tex.trim()) {
@@ -656,6 +678,6 @@ for (const subjectId of subjectIds) {
   validateSubject(subjectId, subject);
 }
 
-if (failed) {
+if (failureCount > 0) {
   process.exit(1);
 }

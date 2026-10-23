@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
   import type { ContentTag, Topic } from "../types/content";
 
@@ -29,7 +30,7 @@
       {/if}
     </h3>
     <div class="study-body">
-      <p data-math-content>{@html card.body}</p>
+      <p>{@html richText(card.body)}</p>
       <Source source={card.source} />
     </div>
   </div>

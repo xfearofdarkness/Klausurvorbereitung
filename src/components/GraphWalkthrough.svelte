@@ -76,7 +76,7 @@
   }
 
   function edgeKey(from: string, to: string): string {
-    return [from, to].sort().join("--");
+    return visual?.directed ? `${from}->${to}` : [from, to].sort().join("--");
   }
 
   function nodeClasses(nodeId: string): string {
@@ -158,7 +158,7 @@
           </marker>
         </defs>
       {/if}
-      {#each visual.edges as edge (edgeKey(edge.from, edge.to) + edge.from)}
+      {#each visual.edges as edge, edgeIndex (edgeIndex)}
         {@const line = endpoints(edge)}
         {#if line}
           <line
@@ -171,7 +171,7 @@
           />
         {/if}
       {/each}
-      {#each visual.edges as edge (edgeKey(edge.from, edge.to) + edge.from + "-label")}
+      {#each visual.edges as edge, edgeIndex (edgeIndex)}
         {@const pos = labelPosition(edge)}
         {#if pos && edge.label !== undefined}
           <text class="walk-edge-label" x={pos.x} y={pos.y}>{edge.label}</text>

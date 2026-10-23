@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
   import MatrixWalkthrough from "./MatrixWalkthrough.svelte";
   import ArrayWalkthrough from "./ArrayWalkthrough.svelte";
@@ -78,9 +79,8 @@
       {#if currentStep}
         <div class="walk-step">
           <h4>{currentStep.title}</h4>
-          {#if !(currentStep.formula || currentStep.product || currentStep.sum)}
-            <p data-math-content>{@html currentStep.text}</p>
-          {:else}
+          <p>{@html richText(currentStep.text)}</p>
+          {#if currentStep.formula || currentStep.product || currentStep.sum}
             <div class="walk-calculation" aria-label="Rechnung">
               {#if currentStep.formula}
                 <span class="walk-formula">{currentStep.formula}</span>
@@ -98,7 +98,7 @@
               {#each explanationRows(currentStep) as row}
                 <div>
                   <dt>{row.label}</dt>
-                  <dd data-math-content>{row.value}</dd>
+                  <dd>{@html richText(row.value)}</dd>
                 </div>
               {/each}
             </dl>

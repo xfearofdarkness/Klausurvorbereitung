@@ -1,10 +1,11 @@
 <script lang="ts">
+  import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
-  import type { FlashMark, Topic } from "../types/content";
+  import type { FlashMark, MarkState, Topic } from "../types/content";
 
   interface Props {
     topic: Topic;
-    results: Record<number, FlashMark>;
+    results: MarkState<FlashMark>;
     deck: number[];
     position: number;
     flipped: boolean;
@@ -14,8 +15,8 @@
   }
 
   let { topic, results, deck, position, flipped, onFlip, onMark, onRestart }: Props = $props();
-  let knownCount = $derived(Object.values(results).filter((value) => value === "know").length);
-  let repeatCount = $derived(Object.values(results).filter((value) => value === "repeat").length);
+  let knownCount = $derived(topic.flashcards.filter((flashcard) => results[flashcard.key] === "know").length);
+  let repeatCount = $derived(topic.flashcards.filter((flashcard) => results[flashcard.key] === "repeat").length);
   let progress = $derived(deck.length ? (position / deck.length) * 100 : 0);
   let cardIndex = $derived(deck[position]);
   let card = $derived(topic.flashcards[cardIndex]);
@@ -54,12 +55,12 @@
       <div class:flipped class="fc-card">
         <div class="fc-face fc-front">
           <div class="fc-label">Frage</div>
-          <div class="fc-text" data-math-content>{@html card.front}</div>
+          <div class="fc-text">{@html richText(card.front)}</div>
           <div class="fc-hint">Klicken zum Umdrehen</div>
         </div>
         <div class="fc-face fc-back">
           <div class="fc-label">Antwort</div>
-          <div class="fc-text" data-math-content>{@html card.back}</div>
+          <div class="fc-text">{@html richText(card.back)}</div>
           <Source source={card.source} className="card-source fc-source" />
           <div class="fc-hint">Klicken zum Zurückdrehen</div>
         </div>

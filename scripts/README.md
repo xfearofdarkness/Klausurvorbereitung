@@ -23,6 +23,7 @@ Prueft die typisierten Fachdaten aus `src/data/subjects/` auf:
 - Pflichtfelder
 - eindeutige Topic-IDs
 - Quellenangaben
+- eindeutige Fortschritts-Schlüssel (keine doppelten Fragen, Flashcards oder Aufgaben pro Thema)
 - gueltige Cards, Questions, Flashcards, Exercises und Walkthroughs
 
 Beispiele:

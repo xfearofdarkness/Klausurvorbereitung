@@ -116,7 +116,7 @@
   function cellAria(matrix: MatrixDefinition, row: number, col: number): string {
     const value = cellValue(matrix, row, col);
     const renderedValue = value === null ? "noch offen" : String(value);
-    return `${matrix.label}, k ${rowLabel(matrix, row)}, w ${colLabel(matrix, col)}: ${renderedValue}`;
+    return `${matrix.label}, Zeile ${rowLabel(matrix, row)}, Spalte ${colLabel(matrix, col)}: ${renderedValue}`;
   }
 </script>
 

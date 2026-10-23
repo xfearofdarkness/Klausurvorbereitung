@@ -53,6 +53,7 @@ function normalizeCard(card: RawCard): Card {
 
 function normalizeQuestion(question: RawQuestion): Question {
   return {
+    key: contentKey(question.question || ""),
     question: question.question || "",
     answer: question.answer || "",
     source: question.source || ""
@@ -61,6 +62,7 @@ function normalizeQuestion(question: RawQuestion): Question {
 
 function normalizeFlashcard(flashcard: RawFlashcard): Flashcard {
   return {
+    key: contentKey(flashcard.front || ""),
     front: flashcard.front || "",
     back: flashcard.back || "",
     source: flashcard.source || ""
@@ -69,12 +71,31 @@ function normalizeFlashcard(flashcard: RawFlashcard): Flashcard {
 
 function normalizeExercise(exercise: RawExercise): Exercise {
   return {
+    key: contentKey(`${exercise.ref || ""}\n${exercise.generator || exercise.task || ""}`),
     task: exercise.task || "",
     ref: exercise.ref || "",
     note: exercise.note || "",
     source: exercise.source || "",
     ...(exercise.generator ? { generator: exercise.generator } : {})
   };
+}
+
+const FNV1A_OFFSET_BASIS = 0x811c9dc5;
+const FNV1A_PRIME = 0x01000193;
+const KEY_RADIX = 36;
+
+/**
+ * Fortschritts-Schlüssel aus dem Inhalt (FNV-1a, 32 Bit). Umsortieren oder Einfügen
+ * verschiebt so keine Markierungen; eine Textänderung setzt nur diesen Eintrag zurück.
+ */
+function contentKey(text: string): string {
+  let hash = FNV1A_OFFSET_BASIS;
+  const normalized = text.replace(/\s+/g, " ").trim();
+  for (let index = 0; index < normalized.length; index += 1) {
+    hash ^= normalized.charCodeAt(index);
+    hash = Math.imul(hash, FNV1A_PRIME);
+  }
+  return (hash >>> 0).toString(KEY_RADIX);
 }
 
 function slugify(value: string): string {

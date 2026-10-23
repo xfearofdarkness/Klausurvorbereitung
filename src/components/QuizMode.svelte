@@ -1,22 +1,23 @@
 <script lang="ts">
+  import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
-  import type { Question, QuizMark, Topic } from "../types/content";
+  import type { MarkState, QuizMark, Topic } from "../types/content";
 
   interface Props {
     topic: Topic;
-    quizState: Record<number, QuizMark>;
+    quizState: MarkState<QuizMark>;
     showOnlyWrong: boolean;
     onToggleWrongFilter: () => void;
-    onMark: (index: number, value: QuizMark) => void;
+    onMark: (key: string, value: QuizMark) => void;
   }
 
   let { topic, quizState, showOnlyWrong, onToggleWrongFilter, onMark }: Props = $props();
   let visibleAnswers = $state<Set<number>>(new Set());
 
   let indexedQuestions = $derived(topic.questions.map((question, index) => ({ ...question, index })));
-  let questions = $derived(showOnlyWrong ? indexedQuestions.filter((question) => quizState[question.index] === "wrong") : indexedQuestions);
-  let wrongCount = $derived(topic.questions.filter((_, index) => quizState[index] === "wrong").length);
-  let correctCount = $derived(topic.questions.filter((_, index) => quizState[index] === "correct").length);
+  let questions = $derived(showOnlyWrong ? indexedQuestions.filter((question) => quizState[question.key] === "wrong") : indexedQuestions);
+  let wrongCount = $derived(topic.questions.filter((question) => quizState[question.key] === "wrong").length);
+  let correctCount = $derived(topic.questions.filter((question) => quizState[question.key] === "correct").length);
 
   function toggleAnswer(index: number): void {
     const next = new Set(visibleAnswers);
@@ -37,7 +38,7 @@
     <span class="stat-pill stat-pill-warning">↻ {wrongCount}</span>
   </div>
   <div class="stats-actions">
-    {#if wrongCount > 0}
+    {#if wrongCount > 0 || showOnlyWrong}
       <button class:active={showOnlyWrong} class="filter-btn" type="button" onclick={onToggleWrongFilter}>
         {showOnlyWrong ? "Alle" : "Nur Schwächen"} ({wrongCount})
       </button>
@@ -50,15 +51,17 @@
 {:else}
   {#each questions as question}
     <div class="quiz-card fade-in">
-      <div class="quiz-q"><span>{question.index + 1}. </span><span data-math-content>{@html question.question}</span></div>
+      <div class="quiz-q"><span>{question.index + 1}. </span><span>{@html richText(question.question)}</span></div>
       <div class:visible={visibleAnswers.has(question.index)} class="quiz-a">
-        <div data-math-content>{@html question.answer}</div>
+        <div>{@html richText(question.answer)}</div>
         <Source source={question.source} />
       </div>
       <div class="quiz-btns">
-        <button class="q-btn show-btn" type="button" onclick={() => toggleAnswer(question.index)}>Antwort zeigen</button>
-        <button class:correct={quizState[question.index] === "correct"} class="q-btn" type="button" onclick={() => onMark(question.index, "correct")}>Gewusst</button>
-        <button class:wrong={quizState[question.index] === "wrong"} class="q-btn" type="button" onclick={() => onMark(question.index, "wrong")}>Wiederholen</button>
+        <button class="q-btn show-btn" type="button" onclick={() => toggleAnswer(question.index)}>
+          {visibleAnswers.has(question.index) ? "Antwort ausblenden" : "Antwort zeigen"}
+        </button>
+        <button class:correct={quizState[question.key] === "correct"} class="q-btn" type="button" onclick={() => onMark(question.key, "correct")}>Gewusst</button>
+        <button class:wrong={quizState[question.key] === "wrong"} class="q-btn" type="button" onclick={() => onMark(question.key, "wrong")}>Wiederholen</button>
       </div>
     </div>
   {/each}
