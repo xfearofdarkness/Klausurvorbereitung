@@ -283,11 +283,12 @@ function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): voi
 }
 
 function validateArrayVisual(label: string, visual: ArrayVisual): void {
-  if (!Array.isArray(visual.values) || visual.values.length === 0) {
-    fail(`${label} array visual must contain at least one value.`);
+  if (visual.arrays === undefined) {
+    if (!Array.isArray(visual.values) || visual.values.length === 0) {
+      fail(`${label} array visual must contain at least one value.`);
+    }
+    return;
   }
-
-  if (visual.arrays === undefined) return;
   if (!Array.isArray(visual.arrays) || visual.arrays.length === 0) {
     fail(`${label} array visual field "arrays" must contain at least one row when present.`);
     return;

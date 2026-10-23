@@ -1718,8 +1718,18 @@ a.card.is-last {
 
 .walk-array-stack {
   display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 0.5rem;
   width: 100%;
+}
+
+.walk-array-stack .walk-array-row {
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.walk-array-stack .walk-array-row > .walk-array:only-child {
+  grid-column: 2;
 }
 
 .walk-array-row {
@@ -1760,7 +1770,7 @@ a.card.is-last {
   flex: 1 1 0;
   justify-items: center;
   gap: 4px;
-  min-width: 0;
+  min-width: 1.125rem;
 }
 
 .walk-array-cell {

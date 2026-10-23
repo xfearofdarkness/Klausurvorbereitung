@@ -23,6 +23,8 @@
   const DEFAULT_ARRAY_ID = "__default";
 
   let { walkthrough, stepIndex }: Props = $props();
+  let scrollArea = $state<HTMLDivElement | null>(null);
+  const reduceMotion = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
   let visual = $derived(walkthrough.visual.kind === "array" ? walkthrough.visual : null);
   let rows = $derived(buildRows(visual));
@@ -114,6 +116,22 @@
     return scales;
   }
 
+  /** Hält bei breiten Arrays den hervorgehobenen Bereich im sichtbaren Ausschnitt, ohne die Seite zu scrollen. */
+  $effect(() => {
+    renderState;
+    const area = scrollArea;
+    if (!area || area.scrollWidth <= area.clientWidth) return;
+    const overflowingRows = [...area.querySelectorAll<HTMLElement>(".walk-array")].filter((row) => row.scrollWidth > area.clientWidth);
+    const marked = overflowingRows.flatMap((row) => [...row.querySelectorAll<HTMLElement>(".walk-active, .walk-changed")]);
+    if (marked.length === 0) return;
+    const areaLeft = area.getBoundingClientRect().left - area.scrollLeft;
+    const left = Math.min(...marked.map((element) => element.getBoundingClientRect().left - areaLeft));
+    const right = Math.max(...marked.map((element) => element.getBoundingClientRect().right - areaLeft));
+    if (left < area.scrollLeft || right > area.scrollLeft + area.clientWidth) {
+      area.scrollTo({ left: Math.max(0, (left + right - area.clientWidth) / 2), behavior: reduceMotion ? "auto" : "smooth" });
+    }
+  });
+
   function roleKey(rowId: string, index: number): string {
     return `${rowId}:${index}`;
   }
@@ -143,7 +161,7 @@
     {#if visual.label && rows.length === 1}
       <div class="walk-matrix-title">{visual.label}</div>
     {/if}
-    <div class="walk-array-scroll">
+    <div class="walk-array-scroll" bind:this={scrollArea}>
       <div class:walk-array-stack={rows.length > 1}>
         {#each rows as row}
           <div class="walk-array-row">
