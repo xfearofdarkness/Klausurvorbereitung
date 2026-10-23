@@ -1641,6 +1641,11 @@ const laa = {
             {
               title: "Erster Anteil für C11",
               text: "Für C11 wird die erste Zeile von A mit der ersten Spalte von B kombiniert.",
+              explanation: {
+                action: "Zeile 1 von A auf Spalte 1 von B legen.",
+                rule: "\\(c_{11} = a_{11} \\cdot b_{11} + a_{12} \\cdot b_{21}\\)",
+                decision: "Erster Summand: \\(2 \\cdot 4 = 8\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 0, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 0, role: "active" },
@@ -1656,6 +1661,11 @@ const laa = {
             {
               title: "C11 fertig addieren",
               text: "Der zweite Anteil wird addiert; damit ist C11 berechnet.",
+              explanation: {
+                action: "Den zweiten Summanden addieren.",
+                rule: "\\(c_{11} = a_{11} \\cdot b_{11} + a_{12} \\cdot b_{21}\\)",
+                decision: "\\(c_{11} = 8 + 1 \\cdot 6 = 14\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 0, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 0, role: "active" },
@@ -1671,6 +1681,11 @@ const laa = {
             {
               title: "Erster Anteil für C12",
               text: "Für C12 bleibt die erste Zeile von A aktiv, aber jetzt wird die zweite Spalte von B verwendet.",
+              explanation: {
+                action: "Zeile 1 von A auf Spalte 2 von B legen.",
+                rule: "\\(c_{12} = a_{11} \\cdot b_{12} + a_{12} \\cdot b_{22}\\)",
+                decision: "Erster Summand: \\(2 \\cdot 5 = 10\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 0, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 1, role: "active" },
@@ -1686,6 +1701,11 @@ const laa = {
             {
               title: "C12 fertig addieren",
               text: "Der zweite Anteil der Zeile-Spalte-Kombination wird ergänzt.",
+              explanation: {
+                action: "Den zweiten Summanden addieren.",
+                rule: "\\(c_{12} = a_{11} \\cdot b_{12} + a_{12} \\cdot b_{22}\\)",
+                decision: "\\(c_{12} = 10 + 1 \\cdot 7 = 17\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 0, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 1, role: "active" },
@@ -1701,6 +1721,11 @@ const laa = {
             {
               title: "Erster Anteil für C21",
               text: "Für C21 wird die zweite Zeile von A mit der ersten Spalte von B kombiniert.",
+              explanation: {
+                action: "Zeile 2 von A auf Spalte 1 von B legen.",
+                rule: "\\(c_{21} = a_{21} \\cdot b_{11} + a_{22} \\cdot b_{21}\\)",
+                decision: "Erster Summand: \\(0 \\cdot 4 = 0\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 1, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 0, role: "active" },
@@ -1716,6 +1741,11 @@ const laa = {
             {
               title: "C21 fertig addieren",
               text: "Der zweite Anteil liefert den eigentlichen Wert von C21.",
+              explanation: {
+                action: "Den zweiten Summanden addieren.",
+                rule: "\\(c_{21} = a_{21} \\cdot b_{11} + a_{22} \\cdot b_{21}\\)",
+                decision: "\\(c_{21} = 0 + 3 \\cdot 6 = 18\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 1, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 0, role: "active" },
@@ -1731,6 +1761,11 @@ const laa = {
             {
               title: "Erster Anteil für C22",
               text: "Für C22 wird die zweite Zeile von A mit der zweiten Spalte von B kombiniert.",
+              explanation: {
+                action: "Zeile 2 von A auf Spalte 2 von B legen.",
+                rule: "\\(c_{22} = a_{21} \\cdot b_{12} + a_{22} \\cdot b_{22}\\)",
+                decision: "Erster Summand: \\(0 \\cdot 5 = 0\\)."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 1, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 1, role: "active" },
@@ -1746,6 +1781,11 @@ const laa = {
             {
               title: "C22 fertig addieren",
               text: "Nach dem zweiten Anteil ist die Ergebnismatrix vollständig.",
+              explanation: {
+                action: "Den zweiten Summanden addieren.",
+                rule: "\\(c_{22} = a_{21} \\cdot b_{12} + a_{22} \\cdot b_{22}\\)",
+                decision: "\\(c_{22} = 0 + 3 \\cdot 7 = 21\\); die Ergebnismatrix ist vollständig."
+              },
               highlights: [
                 { kind: "matrix-row", matrix: "A", row: 1, role: "active" },
                 { kind: "matrix-col", matrix: "B", col: 1, role: "active" },

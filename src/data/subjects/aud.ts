@@ -499,7 +499,7 @@ const aud = {
         {
           id: "stack-operationen",
           title: "Stack: Operationsfolge",
-          source: "02_abstract_data_types.pdf, Folie 109",
+          source: "02_abstract_data_types.pdf, Folien 108-109",
           intro: "Die Operationsfolge von Folie 109, dargestellt als Array mit Index 0 als unterstem Element.",
           visual: {
             kind: "array",
@@ -510,18 +510,33 @@ const aud = {
             {
               title: "push(5)",
               text: "Rückgabewert true. Inhalt des Stacks: (5).",
+              explanation: {
+                action: "push(5)",
+                rule: "push(e) fügt das Element e oben auf den Stapel ein.",
+                decision: "5 liegt oben; Rückgabe true."
+              },
               values: [{ kind: "array-index", index: 0, value: 5 }],
               highlights: [{ kind: "array-index", index: 0, role: "active" }]
             },
             {
               title: "push(3)",
               text: "Rückgabewert true. Inhalt des Stacks: (3, 5).",
+              explanation: {
+                action: "push(3)",
+                rule: "push(e) fügt das Element e oben auf den Stapel ein.",
+                decision: "3 liegt über 5; Rückgabe true."
+              },
               values: [{ kind: "array-index", index: 1, value: 3 }],
               highlights: [{ kind: "array-index", index: 1, role: "active" }]
             },
             {
               title: "isFull()",
               text: "Rückgabewert false. Inhalt des Stacks unverändert: (3, 5).",
+              explanation: {
+                action: "isFull()",
+                rule: "isFull() gibt einen Boolean zurück, der angibt, ob der Stapel voll ist.",
+                decision: "Der Stapel ist nicht voll → false."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" }
@@ -530,38 +545,73 @@ const aud = {
             {
               title: "pop()",
               text: "Rückgabewert 3. Das oberste Element wird entfernt, Inhalt: (5).",
+              explanation: {
+                action: "pop()",
+                rule: "pop() entfernt das oberste Element des Stapels und gibt es zurück.",
+                decision: "3 wird entfernt und zurückgegeben."
+              },
               values: [{ kind: "array-index", index: 1, value: "" }],
               highlights: [{ kind: "array-index", index: 0, role: "active" }]
             },
             {
               title: "isEmpty()",
               text: "Rückgabewert false. Inhalt: (5).",
+              explanation: {
+                action: "isEmpty()",
+                rule: "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.",
+                decision: "5 liegt noch auf dem Stapel → false."
+              },
               highlights: [{ kind: "array-index", index: 0, role: "done" }]
             },
             {
               title: "pop()",
               text: "Rückgabewert 5. Der Stack ist jetzt leer: ().",
+              explanation: {
+                action: "pop()",
+                rule: "pop() entfernt das oberste Element des Stapels und gibt es zurück.",
+                decision: "5 wird entfernt und zurückgegeben; der Stapel ist leer."
+              },
               values: [{ kind: "array-index", index: 0, value: "" }]
             },
             {
               title: "isEmpty()",
               text: "Rückgabewert true. Inhalt: ().",
+              explanation: {
+                action: "isEmpty()",
+                rule: "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.",
+                decision: "Der Stapel ist leer → true."
+              },
             },
             {
               title: "push(7)",
               text: "Rückgabewert true. Inhalt: (7).",
+              explanation: {
+                action: "push(7)",
+                rule: "push(e) fügt das Element e oben auf den Stapel ein.",
+                decision: "7 liegt oben; Rückgabe true."
+              },
               values: [{ kind: "array-index", index: 0, value: 7 }],
               highlights: [{ kind: "array-index", index: 0, role: "active" }]
             },
             {
               title: "push(9)",
               text: "Rückgabewert true. Inhalt: (9, 7).",
+              explanation: {
+                action: "push(9)",
+                rule: "push(e) fügt das Element e oben auf den Stapel ein.",
+                decision: "9 liegt über 7; Rückgabe true."
+              },
               values: [{ kind: "array-index", index: 1, value: 9 }],
               highlights: [{ kind: "array-index", index: 1, role: "active" }]
             },
             {
               title: "top()",
               text: "Rückgabewert 9. Das oberste Element wird nur gelesen, nicht entfernt: (9, 7).",
+              explanation: {
+                action: "top()",
+                rule: "top() gibt das oberste Element des Stapels zurück, ohne es zu entfernen.",
+                decision: "Rückgabe 9; der Inhalt bleibt (9, 7)."
+              },
               highlights: [{ kind: "array-index", index: 1, role: "compare" }]
             }
           ]
@@ -889,11 +939,21 @@ const aud = {
             {
               title: "i = 0",
               text: "arr[0] = 4 wird mit dem Zielwert 23 verglichen — kein Treffer.",
+              explanation: {
+                action: "arr[0] mit dem Zielwert vergleichen.",
+                rule: "<code>if (arr[i]==target) return i;</code>",
+                decision: "4 ≠ 23 → die Schleife läuft mit i = 1 weiter."
+              },
               highlights: [{ kind: "array-index", index: 0, role: "active" }]
             },
             {
               title: "i = 1",
               text: "arr[1] = 8 — kein Treffer.",
+              explanation: {
+                action: "arr[1] mit dem Zielwert vergleichen.",
+                rule: "<code>if (arr[i]==target) return i;</code>",
+                decision: "8 ≠ 23 → weiter mit i = 2."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "active" }
@@ -902,6 +962,11 @@ const aud = {
             {
               title: "i = 2",
               text: "arr[2] = 15 — kein Treffer.",
+              explanation: {
+                action: "arr[2] mit dem Zielwert vergleichen.",
+                rule: "<code>if (arr[i]==target) return i;</code>",
+                decision: "15 ≠ 23 → weiter mit i = 3."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" },
@@ -911,6 +976,11 @@ const aud = {
             {
               title: "i = 3",
               text: "arr[3] = 16 — kein Treffer.",
+              explanation: {
+                action: "arr[3] mit dem Zielwert vergleichen.",
+                rule: "<code>if (arr[i]==target) return i;</code>",
+                decision: "16 ≠ 23 → weiter mit i = 4."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" },
@@ -921,6 +991,11 @@ const aud = {
             {
               title: "i = 4: gefunden",
               text: "arr[4] = 23 stimmt mit dem Zielwert überein — return 4.",
+              explanation: {
+                action: "arr[4] mit dem Zielwert vergleichen.",
+                rule: "<code>if (arr[i]==target) return i;</code>",
+                decision: "23 = 23 → return 4."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" },
@@ -934,7 +1009,7 @@ const aud = {
         {
           id: "binaere-suche",
           title: "Binäre Suche: Zielwert 70",
-          source: "03_fundamental-algorithms.pdf, Folien 16-22",
+          source: "03_fundamental-algorithms.pdf, Folien 16-23",
           intro: "Das sortierte Array wird wiederholt am mittleren Element (median) geteilt.",
           visual: {
             kind: "array",
@@ -944,11 +1019,21 @@ const aud = {
             {
               title: "median = arr[5] = 42",
               text: "Suchbereich 0-11, mid = (0+11)/2 = 5. 70 > 42 → weiter in der oberen Hälfte.",
+              explanation: {
+                action: "mid = (low + high) / 2 = (0 + 11) / 2 = 5; target mit arr[mid] = 42 vergleichen.",
+                rule: "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.",
+                decision: "70 > 42 → <code>binarySearch(arr, mid+1, high, target)</code> mit low = 6."
+              },
               highlights: [{ kind: "array-index", index: 5, role: "active" }]
             },
             {
               title: "median = arr[8] = 55",
               text: "Suchbereich 6-11, mid = (6+11)/2 = 8. 70 > 55 → weiter in der oberen Hälfte.",
+              explanation: {
+                action: "mid = (6 + 11) / 2 = 8; target mit arr[mid] = 55 vergleichen.",
+                rule: "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.",
+                decision: "70 > 55 → weiter mit low = 9."
+              },
               highlights: [
                 { kind: "array-index", index: 5, role: "done" },
                 { kind: "array-index", index: 8, role: "active" }
@@ -957,6 +1042,11 @@ const aud = {
             {
               title: "median = arr[10] = 72",
               text: "Suchbereich 9-11, mid = (9+11)/2 = 10. 70 < 72 → weiter in der unteren Hälfte.",
+              explanation: {
+                action: "mid = (9 + 11) / 2 = 10; target mit arr[mid] = 72 vergleichen.",
+                rule: "Wenn target < median, suche in der unteren Hälfte des Arrays weiter.",
+                decision: "70 < 72 → <code>binarySearch(arr, low, mid-1, target)</code> mit high = 9."
+              },
               highlights: [
                 { kind: "array-index", index: 8, role: "done" },
                 { kind: "array-index", index: 10, role: "active" }
@@ -965,6 +1055,11 @@ const aud = {
             {
               title: "median = arr[9] = 70: gefunden",
               text: "Suchbereich 9-9, mid = 9. 70 = 70 → return 9. Nach jeder Iteration blieb nur die Hälfte der Elemente übrig.",
+              explanation: {
+                action: "mid = (9 + 9) / 2 = 9; target mit arr[mid] = 70 vergleichen.",
+                rule: "Wenn target = median, gib den Index des mittleren Elements zurück.",
+                decision: "70 = 70 → return 9."
+              },
               highlights: [
                 { kind: "array-index", index: 10, role: "done" },
                 { kind: "array-index", index: 9, role: "target" }
@@ -975,7 +1070,7 @@ const aud = {
         {
           id: "insertion-sort",
           title: "Insertion Sort",
-          source: "03_fundamental-algorithms.pdf, Folien 110-133",
+          source: "03_fundamental-algorithms.pdf, Folien 109-133",
           intro: "Jedes Element wird an die richtige Stelle im bereits sortierten linken Bereich eingefügt.",
           visual: {
             kind: "array",
@@ -986,6 +1081,11 @@ const aud = {
             {
               title: "3 einfügen",
               text: "3 < 4: die 4 gleitet nach rechts, 3 wird an Position 0 eingefügt → 3 4 1 9 2 10 6 8 7 5.",
+              explanation: {
+                action: "i = 1: toInsert = 3.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "3 < 4 → 4 gleitet; bei j = 0 endet die Schleife, arr[0] = 3."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 3 },
                 { kind: "array-index", index: 1, value: 4 }
@@ -998,6 +1098,11 @@ const aud = {
             {
               title: "1 einfügen",
               text: "1 ist kleiner als 3 und 4: beide gleiten nach rechts → 1 3 4 9 2 10 6 8 7 5.",
+              explanation: {
+                action: "i = 2: toInsert = 1.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "1 < 4 und 1 < 3 → beide gleiten; arr[0] = 1."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 1 },
                 { kind: "array-index", index: 1, value: 3 },
@@ -1012,11 +1117,21 @@ const aud = {
             {
               title: "9 bleibt",
               text: "9 ist größer als 4 — keine Verschiebung nötig → 1 3 4 9 2 10 6 8 7 5.",
+              explanation: {
+                action: "i = 3: toInsert = 9.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "9 < 4 ist falsch → die innere Schleife läuft nicht, 9 bleibt an Position 3."
+              },
               highlights: [{ kind: "array-index", index: 3, role: "active" }]
             },
             {
               title: "2 einfügen",
               text: "2 wird zwischen 1 und 3 eingefügt → 1 2 3 4 9 10 6 8 7 5.",
+              explanation: {
+                action: "i = 4: toInsert = 2.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "9, 4 und 3 gleiten; 2 < 1 ist falsch → arr[1] = 2."
+              },
               values: [
                 { kind: "array-index", index: 1, value: 2 },
                 { kind: "array-index", index: 2, value: 3 },
@@ -1033,11 +1148,21 @@ const aud = {
             {
               title: "10 bleibt",
               text: "10 ist größer als 9 — keine Verschiebung → 1 2 3 4 9 10 6 8 7 5.",
+              explanation: {
+                action: "i = 5: toInsert = 10.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "10 < 9 ist falsch → 10 bleibt an Position 5."
+              },
               highlights: [{ kind: "array-index", index: 5, role: "active" }]
             },
             {
               title: "6 einfügen",
               text: "6 wird zwischen 4 und 9 eingefügt → 1 2 3 4 6 9 10 8 7 5.",
+              explanation: {
+                action: "i = 6: toInsert = 6.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "10 und 9 gleiten; 6 < 4 ist falsch → arr[4] = 6."
+              },
               values: [
                 { kind: "array-index", index: 4, value: 6 },
                 { kind: "array-index", index: 5, value: 9 },
@@ -1052,6 +1177,11 @@ const aud = {
             {
               title: "8 einfügen",
               text: "8 wird zwischen 6 und 9 eingefügt → 1 2 3 4 6 8 9 10 7 5.",
+              explanation: {
+                action: "i = 7: toInsert = 8.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "10 und 9 gleiten; 8 < 6 ist falsch → arr[5] = 8."
+              },
               values: [
                 { kind: "array-index", index: 5, value: 8 },
                 { kind: "array-index", index: 6, value: 9 },
@@ -1066,6 +1196,11 @@ const aud = {
             {
               title: "7 einfügen",
               text: "7 wird zwischen 6 und 8 eingefügt → 1 2 3 4 6 7 8 9 10 5.",
+              explanation: {
+                action: "i = 8: toInsert = 7.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "10, 9 und 8 gleiten; 7 < 6 ist falsch → arr[5] = 7."
+              },
               values: [
                 { kind: "array-index", index: 5, value: 7 },
                 { kind: "array-index", index: 6, value: 8 },
@@ -1082,6 +1217,11 @@ const aud = {
             {
               title: "5 einfügen: fertig",
               text: "5 wird zwischen 4 und 6 eingefügt → 1 2 3 4 5 6 7 8 9 10. Das Array ist sortiert.",
+              explanation: {
+                action: "i = 9: toInsert = 5.",
+                rule: "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
+                decision: "10, 9, 8, 7 und 6 gleiten; 5 < 4 ist falsch → arr[4] = 5."
+              },
               values: [
                 { kind: "array-index", index: 4, value: 5 },
                 { kind: "array-index", index: 5, value: 6 },
@@ -1230,7 +1370,8 @@ const aud = {
           id: "selection-sort",
           title: "Selection Sort",
           source: "03_fundamental-algorithms.pdf, Folien 53-100",
-          intro: "In jedem Durchlauf wird das kleinste Element (rot) im unsortierten Bereich gesucht und an die erste unsortierte Stelle getauscht; der sortierte Bereich (grün) wächst von links.",
+          intro: "In jedem Durchlauf wird das kleinste Element im unsortierten Bereich gesucht und an die erste unsortierte Stelle getauscht; der sortierte Bereich wächst von links.",
+          legend: { target: "Kleinstes Element", done: "Sortierter Bereich" },
           visual: {
             kind: "array",
             bars: true,
@@ -1418,7 +1559,8 @@ const aud = {
           id: "quicksort-partitionierung",
           title: "Quicksort: Partitionierung",
           source: "03_fundamental-algorithms.pdf, Folien 216-257",
-          intro: "Pivot ist das letzte Element (rot). Index i (blau) läuft von links, Index j (pink) von rechts; „fehl am Platz“ stehende Elemente werden getauscht.",
+          intro: "Pivot ist das letzte Element. Index i läuft von links, Index j von rechts; „fehl am Platz“ stehende Elemente werden getauscht.",
+          legend: { target: "Pivot", active: "Index i", compare: "Index j", done: "Linkes Teilarray (≤ Pivot)" },
           visual: {
             kind: "array",
             bars: true,
@@ -1428,11 +1570,21 @@ const aud = {
             {
               title: "Pivot wählen",
               text: "Als Pivot dient das letzte Element: p = 5.",
+              explanation: {
+                action: "Pivot-Element festlegen.",
+                rule: "Wähle das Pivot-Element; die Folie nimmt das letzte Element.",
+                decision: "p = 5."
+              },
               highlights: [{ kind: "array-index", index: 9, role: "target" }]
             },
             {
               title: "i läuft von links",
               text: "4, 3 und 1 sind kleiner als der Pivot; i stoppt bei Position 3, denn 9 >= 5.",
+              explanation: {
+                action: "i von links nach rechts bewegen.",
+                rule: "Gehe von links nach rechts (i = 0, 1, …) bis arr[i] ≥ p.",
+                decision: "4, 3 und 1 sind kleiner als 5; bei i = 3 gilt 9 ≥ 5 → i stoppt."
+              },
               highlights: [
                 { kind: "array-index", index: 3, role: "active" },
                 { kind: "array-index", index: 9, role: "target" }
@@ -1441,6 +1593,11 @@ const aud = {
             {
               title: "j läuft von rechts",
               text: "j stoppt sofort bei Position 9, denn 5 <= 5. Die Elemente an i und j stehen „fehl am Platz“.",
+              explanation: {
+                action: "j von rechts nach links bewegen.",
+                rule: "Gehe von rechts nach links (j = n−1, …) bis arr[j] ≤ p.",
+                decision: "Bei j = 9 gilt 5 ≤ 5 → j stoppt sofort."
+              },
               highlights: [
                 { kind: "array-index", index: 3, role: "active" },
                 { kind: "array-index", index: 9, role: "compare" }
@@ -1449,6 +1606,11 @@ const aud = {
             {
               title: "Tausch 9 ↔ 5",
               text: "arr[i] und arr[j] werden getauscht: 4 3 1 5 2 10 6 8 7 9.",
+              explanation: {
+                action: "Die beiden „fehl am Platz“ stehenden Elemente tauschen.",
+                rule: "Tausche arr[i] ↔ arr[j] und wiederhole ab Schritt 2 bis i > j.",
+                decision: "i = 3 < j = 9 → 9 und 5 werden getauscht."
+              },
               values: [
                 { kind: "array-index", index: 3, value: 5 },
                 { kind: "array-index", index: 9, value: 9 }
@@ -1461,6 +1623,11 @@ const aud = {
             {
               title: "Weiter ab Schritt 2",
               text: "i läuft weiter und stoppt bei Position 5 (10 >= 5); j läuft nach links und stoppt bei Position 4 (2 <= 5).",
+              explanation: {
+                action: "Schritt 2 wiederholen.",
+                rule: "i läuft bis arr[i] ≥ p, j läuft bis arr[j] ≤ p.",
+                decision: "i stoppt bei 5 (10 ≥ 5), j stoppt bei 4 (2 ≤ 5)."
+              },
               highlights: [
                 { kind: "array-index", index: 5, role: "active" },
                 { kind: "array-index", index: 4, role: "compare" }
@@ -1469,6 +1636,11 @@ const aud = {
             {
               title: "i > j: Partitionierung fertig",
               text: "Mit i = 5 und j = 4 ist i > j — der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
+              explanation: {
+                action: "Abbruchbedingung prüfen.",
+                rule: "Wiederhole ab Schritt 2 bis i > j.",
+                decision: "i = 5 > j = 4 → die Partitionierung endet."
+              },
               highlights: [
                 { kind: "array-index", index: 0, role: "done" },
                 { kind: "array-index", index: 1, role: "done" },
@@ -1886,6 +2058,11 @@ const aud = {
             {
               title: "Vergleich mit der Wurzel 26",
               text: "7 stimmt nicht mit 26 überein und ist kleiner — der linke Teilbaum wird durchsucht.",
+              explanation: {
+                action: "7 mit dem Schlüssel der Wurzel 26 vergleichen.",
+                rule: "Wenn der Schlüssel k kleiner ist als der Schlüssel des Wurzelknotens, wird der linke Teilbaum durchsucht.",
+                decision: "7 < 26 → linker Teilbaum."
+              },
               highlights: [
                 { kind: "tree-node", node: "26", role: "active" },
                 { kind: "tree-edge", from: "26", to: "12", role: "active" }
@@ -1894,6 +2071,11 @@ const aud = {
             {
               title: "Vergleich mit 12",
               text: "7 < 12 — weiter im linken Teilbaum.",
+              explanation: {
+                action: "7 mit 12 vergleichen.",
+                rule: "Wenn der Schlüssel k kleiner ist als der Schlüssel des Wurzelknotens, wird der linke Teilbaum durchsucht.",
+                decision: "7 < 12 → linker Teilbaum."
+              },
               values: [{ kind: "tree-node", node: "26", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "12", role: "active" },
@@ -1903,6 +2085,11 @@ const aud = {
             {
               title: "Vergleich mit 4",
               text: "7 > 4 — der rechte Teilbaum wird durchsucht.",
+              explanation: {
+                action: "7 mit 4 vergleichen.",
+                rule: "Andernfalls wird der rechte Teilbaum durchsucht.",
+                decision: "7 > 4 → rechter Teilbaum."
+              },
               values: [{ kind: "tree-node", node: "12", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "4", role: "active" },
@@ -1912,6 +2099,11 @@ const aud = {
             {
               title: "7 gefunden",
               text: "Der Schlüssel 7 stimmt mit dem Knoten überein — die Suche ist beendet.",
+              explanation: {
+                action: "7 mit dem Knoten 7 vergleichen.",
+                rule: "Wenn der Schlüssel k mit dem Schlüssel des Wurzelknotens übereinstimmt, ist die Suche beendet.",
+                decision: "7 = 7 → gefunden."
+              },
               values: [{ kind: "tree-node", node: "4", mark: "done" }],
               highlights: [{ kind: "tree-node", node: "7", role: "target" }]
             }
@@ -1940,6 +2132,11 @@ const aud = {
             {
               title: "Suche ab der Wurzel 26",
               text: "35 > 26 — weiter im rechten Teilbaum.",
+              explanation: {
+                action: "Nach einem Knoten mit dem Schlüssel 35 suchen, Start bei der Wurzel 26.",
+                rule: "Suche nach einem Knoten mit dem Schlüssel k.",
+                decision: "35 > 26 → rechter Teilbaum."
+              },
               highlights: [
                 { kind: "tree-node", node: "26", role: "active" },
                 { kind: "tree-edge", from: "26", to: "32", role: "active" }
@@ -1948,6 +2145,11 @@ const aud = {
             {
               title: "Vergleich mit 32",
               text: "35 > 32 — weiter im rechten Teilbaum.",
+              explanation: {
+                action: "35 mit 32 vergleichen.",
+                rule: "Suche nach einem Knoten mit dem Schlüssel k.",
+                decision: "35 > 32 → rechter Teilbaum."
+              },
               values: [{ kind: "tree-node", node: "26", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "32", role: "active" },
@@ -1957,12 +2159,22 @@ const aud = {
             {
               title: "Vergleich mit 38",
               text: "35 < 38, und 38 hat kein linkes Kind — 38 wird Elternknoten P des neuen Knotens.",
+              explanation: {
+                action: "35 mit 38 vergleichen.",
+                rule: "Andernfalls wird der zuletzt gefundene Knoten zum Eltern-Knoten P des neuen Knotens.",
+                decision: "35 < 38, aber 38 hat kein linkes Kind → kein Knoten mit 35 vorhanden, P = 38."
+              },
               values: [{ kind: "tree-node", node: "32", mark: "done" }],
               highlights: [{ kind: "tree-node", node: "38", role: "active" }]
             },
             {
               title: "35 als linkes Kind einfügen",
               text: "Da 35 < Schlüssel des Elternknotens ist, wird der neue Knoten linkes Kind von 38.",
+              explanation: {
+                action: "Den neuen Knoten an P anhängen.",
+                rule: "Wenn der Schlüssel k < der Schlüssel des Eltern-Knotens, mache den neuen Knoten zum linken Kind von P.",
+                decision: "35 < 38 → linkes Kind von 38."
+              },
               values: [
                 { kind: "tree-node", node: "38", mark: "done" },
                 { kind: "tree-node", node: "35", hidden: false }
@@ -1993,12 +2205,22 @@ const aud = {
             {
               title: "Besuche die Wurzel 7",
               text: "Preorder beginnt mit dem Wurzelknoten: Ausgabe 7.",
+              explanation: {
+                action: "Wurzelknoten N = 7 besuchen.",
+                rule: "1. Besuche den Wurzelknoten N.",
+                decision: "Ausgabe 7; danach folgt der linke Teilbaum von 7."
+              },
               values: [{ kind: "tree-node", node: "7", mark: "done" }],
               highlights: [{ kind: "tree-node", node: "7", role: "active" }]
             },
             {
               title: "Linker Teilbaum: besuche 5",
               text: "Rekursiver Aufruf für das linke Kind von 7: Ausgabe 7 5.",
+              explanation: {
+                action: "Preorder für den linken Teilbaum von 7 starten.",
+                rule: "2. Führe rekursiv eine Preorder-Traversierung des linken Teilbaums von N durch.",
+                decision: "N = 5 wird zuerst besucht: Ausgabe 5."
+              },
               values: [{ kind: "tree-node", node: "5", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "5", role: "active" },
@@ -2008,6 +2230,11 @@ const aud = {
             {
               title: "Besuche 2",
               text: "Wieder zuerst der linke Teilbaum: Ausgabe 7 5 2.",
+              explanation: {
+                action: "Preorder für den linken Teilbaum von 5 starten.",
+                rule: "2. Führe rekursiv eine Preorder-Traversierung des linken Teilbaums von N durch.",
+                decision: "N = 2 wird besucht: Ausgabe 2."
+              },
               values: [{ kind: "tree-node", node: "2", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "2", role: "active" },
@@ -2017,6 +2244,11 @@ const aud = {
             {
               title: "Besuche 3",
               text: "2 hat kein linkes Kind; das rechte Kind 3 folgt: Ausgabe 7 5 2 3.",
+              explanation: {
+                action: "2 hat keinen linken Teilbaum; der rechte folgt.",
+                rule: "3. Führe rekursiv eine Preorder-Traversierung des rechten Teilbaums von N durch.",
+                decision: "N = 3 wird besucht: Ausgabe 3."
+              },
               values: [{ kind: "tree-node", node: "3", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "3", role: "active" },
@@ -2026,6 +2258,11 @@ const aud = {
             {
               title: "Besuche 6",
               text: "Der linke Teilbaum von 5 ist fertig; das rechte Kind 6 folgt: Ausgabe 7 5 2 3 6.",
+              explanation: {
+                action: "Der linke Teilbaum von 5 ist fertig; der rechte folgt.",
+                rule: "3. Führe rekursiv eine Preorder-Traversierung des rechten Teilbaums von N durch.",
+                decision: "N = 6 wird besucht: Ausgabe 6."
+              },
               values: [{ kind: "tree-node", node: "6", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "6", role: "active" },
@@ -2035,6 +2272,11 @@ const aud = {
             {
               title: "Rechter Teilbaum: besuche 9",
               text: "Der linke Teilbaum der Wurzel ist fertig; rekursiver Aufruf für 9: Ausgabe 7 5 2 3 6 9.",
+              explanation: {
+                action: "Der linke Teilbaum von 7 ist fertig; der rechte folgt.",
+                rule: "3. Führe rekursiv eine Preorder-Traversierung des rechten Teilbaums von N durch.",
+                decision: "N = 9 wird besucht: Ausgabe 9."
+              },
               values: [{ kind: "tree-node", node: "9", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "9", role: "active" },
@@ -2044,6 +2286,11 @@ const aud = {
             {
               title: "Besuche 8: fertig",
               text: "Das linke Kind von 9 wird besucht — die Preorder-Reihenfolge ist 7 5 2 3 6 9 8.",
+              explanation: {
+                action: "Preorder für den linken Teilbaum von 9 starten.",
+                rule: "2. Führe rekursiv eine Preorder-Traversierung des linken Teilbaums von N durch.",
+                decision: "N = 8 wird besucht: Ausgabe 8; danach sind alle Teilbäume abgearbeitet."
+              },
               values: [{ kind: "tree-node", node: "8", mark: "done" }],
               highlights: [
                 { kind: "tree-node", node: "8", role: "active" },
@@ -2598,15 +2845,16 @@ const aud = {
             kind: "tree",
             root: "3",
             nodes: [
-              { id: "3", value: 3, right: "5" },
-              { id: "5", value: 5, right: "8" },
+              { id: "3", value: 3, right: "5", note: "bal 2" },
+              { id: "5", value: 5, right: "8", note: "bal 1" },
               { id: "8", value: 8 }
             ]
           },
           steps: [
             {
               title: "Ausgangsformation",
-              text: "Die Kette 3-5-8 ist rechtslastig; in der Folie ist bei 3 bal(T) = 2 und bei 5 bal(T) = 1 markiert.",
+              text: "Die Kette 3-5-8 ist rechtslastig: bal(T) = 2 bei 3 und bal(T) = 1 bei 5.",
+              source: "05_balanced_trees.pdf, Folie 19",
               explanation: {
                 action: "Den betroffenen Teilbaum ansehen.",
                 rule: "Rotation tauscht ein untergeordnetes Element über sein übergeordnetes Element.",
@@ -2628,8 +2876,8 @@ const aud = {
               },
               values: [
                 { kind: "tree-root", root: "5" },
-                { kind: "tree-node", node: "3", right: null },
-                { kind: "tree-node", node: "5", left: "3", right: "8" }
+                { kind: "tree-node", node: "3", right: null, note: null },
+                { kind: "tree-node", node: "5", left: "3", right: "8", note: "bal 0" }
               ],
               highlights: [
                 { kind: "tree-node", node: "5", role: "active" },
@@ -2639,7 +2887,8 @@ const aud = {
             },
             {
               title: "Teilbaum ist ausgeglichen",
-              text: "Das Ergebnis ist 5 mit den Kindern 3 und 8; in der Folie ist bal(T) = 0 markiert.",
+              text: "Das Ergebnis ist 5 mit den Kindern 3 und 8; bei 5 gilt jetzt bal(T) = 0.",
+              source: "05_balanced_trees.pdf, Folie 19",
               explanation: {
                 action: "Neue Formation prüfen.",
                 rule: "Beim AVL-Baum muss bal(N) für jeden Knoten in {-1, 0, +1} liegen.",
@@ -2664,15 +2913,16 @@ const aud = {
             kind: "tree",
             root: "3",
             nodes: [
-              { id: "3", value: 3, right: "8" },
-              { id: "8", value: 8, left: "5" },
+              { id: "3", value: 3, right: "8", note: "bal 2" },
+              { id: "8", value: 8, left: "5", note: "bal −1" },
               { id: "5", value: 5 }
             ]
           },
           steps: [
             {
               title: "Ausgangsformation",
-              text: "Die Kette ist 3-8-5; die Folie markiert bei 3 bal(T) = 2 und bei 8 bal(T) = -1.",
+              text: "Die Kette ist 3-8-5: bal(T) = 2 bei 3 und bal(T) = −1 bei 8.",
+              source: "05_balanced_trees.pdf, Folie 19",
               explanation: {
                 action: "Den inneren Knoten 5 identifizieren.",
                 rule: "Wenn eine einfache Rotation nicht direkt zur Endformation führt, braucht es zwei Tausche.",
@@ -2686,7 +2936,8 @@ const aud = {
             },
             {
               title: "Erster Tausch: 5 über 8",
-              text: "5 wird über seinen Elternknoten 8 getauscht; daraus entsteht die Zwischenform 3-5-8.",
+              text: "5 wird über seinen Elternknoten 8 getauscht; daraus entsteht die Zwischenform 3-5-8 mit bal(T) = 2 bei 3 und bal(T) = 1 bei 5.",
+              source: "05_balanced_trees.pdf, Folie 19",
               explanation: {
                 action: "Untergeordnetes Element 5 über 8 heben.",
                 rule: "5 liegt zwischen 3 und 8.",
@@ -2694,8 +2945,8 @@ const aud = {
               },
               values: [
                 { kind: "tree-node", node: "3", right: "5" },
-                { kind: "tree-node", node: "5", right: "8" },
-                { kind: "tree-node", node: "8", left: null }
+                { kind: "tree-node", node: "5", right: "8", note: "bal 1" },
+                { kind: "tree-node", node: "8", left: null, note: null }
               ],
               highlights: [
                 { kind: "tree-node", node: "5", role: "active" },
@@ -2713,8 +2964,8 @@ const aud = {
               },
               values: [
                 { kind: "tree-root", root: "5" },
-                { kind: "tree-node", node: "3", right: null },
-                { kind: "tree-node", node: "5", left: "3", right: "8" }
+                { kind: "tree-node", node: "3", right: null, note: null },
+                { kind: "tree-node", node: "5", left: "3", right: "8", note: "bal 0" }
               ],
               highlights: [
                 { kind: "tree-node", node: "5", role: "active" },
@@ -2724,7 +2975,8 @@ const aud = {
             },
             {
               title: "Teilbaum ist ausgeglichen",
-              text: "Das Ergebnis ist wieder 5 mit den Kindern 3 und 8; die Folie markiert bal(T) = 0.",
+              text: "Das Ergebnis ist wieder 5 mit den Kindern 3 und 8; bei 5 gilt jetzt bal(T) = 0.",
+              source: "05_balanced_trees.pdf, Folie 19",
               explanation: {
                 action: "Endformation prüfen.",
                 rule: "Ein AVL-Baum erlaubt nur Balancewerte -1, 0 oder +1.",
@@ -2801,36 +3053,18 @@ const aud = {
               ]
             },
             {
-              title: "62 über 50 drehen",
-              text: "62 wird über 50 gedreht; 54 bleibt als rechter Teilbaum von 50 sichtbar.",
+              title: "Teilbaum von z durch b ersetzen",
+              text: "Der Teilbaum mit dem Wurzelknoten z = 78 wird durch einen neuen Teilbaum mit dem Wurzelknoten b = 62 ersetzt.",
+              source: "05_balanced_trees.pdf, Folien 25-26",
               explanation: {
-                action: "Den ersten Tausch innerhalb des linken Teilbaums ausführen.",
-                rule: "62 liegt zwischen 50 und 78; 50 bleibt links von 62.",
-                decision: "54 bleibt rechts von 50, weil 50 < 54 < 62 gilt."
-              },
-              values: [
-                { kind: "tree-node", node: "78", left: "62" },
-                { kind: "tree-node", node: "50", right: "54" },
-                { kind: "tree-node", node: "62", left: "50", right: null }
-              ],
-              highlights: [
-                { kind: "tree-node", node: "62", role: "active" },
-                { kind: "tree-edge", from: "78", to: "62", role: "active" },
-                { kind: "tree-edge", from: "62", to: "50", role: "active" },
-                { kind: "tree-edge", from: "50", to: "54", role: "active" }
-              ]
-            },
-            {
-              title: "62 über 78 drehen",
-              text: "62 ersetzt jetzt z = 78 als Wurzel des Teilbaums; 78 wird rechtes Kind von 62.",
-              explanation: {
-                action: "Den zweiten Tausch ausführen.",
-                rule: "b wird neue Wurzel; a wird linkes Kind, c rechtes Kind.",
-                decision: "50 bleibt links von 62, 78 wandert rechts von 62."
+                action: "Die Trinode-Umstrukturierung in einem Schritt ausführen.",
+                rule: "Ersetze den Teilbaum mit dem Wurzelknoten z durch einen neuen Teilbaum mit dem Wurzelknoten b.",
+                decision: "62 ist die neue Wurzel des Teilbaums."
               },
               values: [
                 { kind: "tree-root", root: "62" },
                 { kind: "tree-node", node: "62", left: "50", right: "78" },
+                { kind: "tree-node", node: "50", right: "54" },
                 { kind: "tree-node", node: "78", left: null }
               ],
               highlights: [
@@ -2840,8 +3074,41 @@ const aud = {
               ]
             },
             {
+              title: "a mit T1 und T2",
+              text: "a = 50 ist das linke Kind von b; T1 = 48 und T2 = 54 sind seine Teilbäume.",
+              source: "05_balanced_trees.pdf, Folien 25-26",
+              explanation: {
+                action: "Linke Seite der neuen Formation prüfen.",
+                rule: "Sei a das linke Kind von b, wobei T1 und T2 Teilbäume sind.",
+                decision: "54 war T2 unter 62 und hängt jetzt rechts an 50."
+              },
+              highlights: [
+                { kind: "tree-node", node: "50", role: "active" },
+                { kind: "tree-node", node: "48", role: "compare" },
+                { kind: "tree-node", node: "54", role: "compare" },
+                { kind: "tree-edge", from: "50", to: "48", role: "active" },
+                { kind: "tree-edge", from: "50", to: "54", role: "active" }
+              ]
+            },
+            {
+              title: "c mit T3 und T4",
+              text: "c = 78 ist das rechte Kind von b; T3 ist im Beispiel leer, T4 = 88.",
+              source: "05_balanced_trees.pdf, Folien 25-26",
+              explanation: {
+                action: "Rechte Seite der neuen Formation prüfen.",
+                rule: "Sei c das rechte Kind von b, wobei T3 und T4 Teilbäume sind.",
+                decision: "78 behält 88 als rechten Teilbaum."
+              },
+              highlights: [
+                { kind: "tree-node", node: "78", role: "active" },
+                { kind: "tree-node", node: "88", role: "compare" },
+                { kind: "tree-edge", from: "78", to: "88", role: "active" }
+              ]
+            },
+            {
               title: "Umstrukturierung fertig",
               text: "Das Ergebnis ist 62 als Wurzel, links 50 mit 48 und 54 sowie rechts 78 mit 88.",
+              source: "05_balanced_trees.pdf, Folien 28-29",
               explanation: {
                 action: "Endzustand lesen.",
                 rule: "Die Suchbaum-Reihenfolge bleibt erhalten.",
@@ -3111,6 +3378,11 @@ const aud = {
             {
               title: "Heap aufbauen",
               text: "new Heap(arr) wandelt das Array per makeHeap in einen min-at-top Heap um: 3 6 5 10 13 22 45.",
+              explanation: {
+                action: "<code>Heap heap = new Heap(arr);</code>",
+                rule: "Heapsort ermittelt wiederholt das kleinste verbleibende Element und setzt es an seinen Platz.",
+                decision: "Der Heap ist 3 6 5 10 13 22 45; endUnsorted = 6."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 3 },
                 { kind: "array-index", index: 1, value: 6 },
@@ -3125,6 +3397,11 @@ const aud = {
             {
               title: "remove() → 3",
               text: "Das kleinste Element 3 wird entfernt und an Position 6 gesetzt; der Heap ordnet sich neu: 5 6 22 10 13 45 | 3.",
+              explanation: {
+                action: "heap.remove() liefert 3.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "3 steht an Position 6; endUnsorted = 5."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 5 },
                 { kind: "array-index", index: 1, value: 6 },
@@ -3142,6 +3419,11 @@ const aud = {
             {
               title: "remove() → 5",
               text: "Das kleinste Element 5 wird entfernt und an Position 5 gesetzt: 6 10 22 45 13 | 5 3.",
+              explanation: {
+                action: "heap.remove() liefert 5.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "5 steht an Position 5; endUnsorted = 4."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 6 },
                 { kind: "array-index", index: 1, value: 10 },
@@ -3157,8 +3439,120 @@ const aud = {
               ]
             },
             {
-              title: "Restliche remove()-Aufrufe",
-              text: "Die Schleife läuft weiter, bis der unsortierte Bereich leer ist. Ergebnis: 45 22 13 10 6 5 3 — mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
+              title: "remove() → 6",
+              text: "Das kleinste Element 6 wird entfernt und an Position 4 gesetzt: 10 13 22 45 | 6 5 3.",
+              source: "06_heaps_hash-tables.pdf, Folie 59",
+              explanation: {
+                action: "heap.remove() liefert 6.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "6 steht an Position 4; endUnsorted = 3."
+              },
+              values: [
+                { kind: "array-index", index: 0, value: 10 },
+                { kind: "array-index", index: 1, value: 13 },
+                { kind: "array-index", index: 2, value: 22 },
+                { kind: "array-index", index: 3, value: 45 },
+                { kind: "array-index", index: 4, value: 6 },
+                { kind: "array-index", index: 5, value: 5 },
+                { kind: "array-index", index: 6, value: 3 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "active" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" }
+              ]
+            },
+            {
+              title: "remove() → 10",
+              text: "Das kleinste Element 10 wird entfernt und an Position 3 gesetzt: 13 45 22 | 10 6 5 3.",
+              source: "06_heaps_hash-tables.pdf, Folie 61",
+              explanation: {
+                action: "heap.remove() liefert 10.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "10 steht an Position 3; endUnsorted = 2."
+              },
+              values: [
+                { kind: "array-index", index: 0, value: 13 },
+                { kind: "array-index", index: 1, value: 45 },
+                { kind: "array-index", index: 2, value: 22 },
+                { kind: "array-index", index: 3, value: 10 },
+                { kind: "array-index", index: 4, value: 6 },
+                { kind: "array-index", index: 5, value: 5 },
+                { kind: "array-index", index: 6, value: 3 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "active" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" }
+              ]
+            },
+            {
+              title: "remove() → 13",
+              text: "Das kleinste Element 13 wird entfernt und an Position 2 gesetzt: 22 45 | 13 10 6 5 3.",
+              source: "06_heaps_hash-tables.pdf, Folie 63",
+              explanation: {
+                action: "heap.remove() liefert 13.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "13 steht an Position 2; endUnsorted = 1."
+              },
+              values: [
+                { kind: "array-index", index: 0, value: 22 },
+                { kind: "array-index", index: 1, value: 45 },
+                { kind: "array-index", index: 2, value: 13 },
+                { kind: "array-index", index: 3, value: 10 },
+                { kind: "array-index", index: 4, value: 6 },
+                { kind: "array-index", index: 5, value: 5 },
+                { kind: "array-index", index: 6, value: 3 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "active" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" }
+              ]
+            },
+            {
+              title: "remove() → 22",
+              text: "Das kleinste Element 22 wird entfernt und an Position 1 gesetzt: 45 | 22 13 10 6 5 3.",
+              source: "06_heaps_hash-tables.pdf, Folie 65",
+              explanation: {
+                action: "heap.remove() liefert 22.",
+                rule: "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
+                decision: "22 steht an Position 1; endUnsorted = 0."
+              },
+              values: [
+                { kind: "array-index", index: 0, value: 45 },
+                { kind: "array-index", index: 1, value: 22 },
+                { kind: "array-index", index: 2, value: 13 },
+                { kind: "array-index", index: 3, value: 10 },
+                { kind: "array-index", index: 4, value: 6 },
+                { kind: "array-index", index: 5, value: 5 },
+                { kind: "array-index", index: 6, value: 3 }
+              ],
+              highlights: [
+                { kind: "array-index", index: 0, role: "active" },
+                { kind: "array-index", index: 1, role: "done" },
+                { kind: "array-index", index: 2, role: "done" },
+                { kind: "array-index", index: 3, role: "done" },
+                { kind: "array-index", index: 4, role: "done" },
+                { kind: "array-index", index: 5, role: "done" },
+                { kind: "array-index", index: 6, role: "done" }
+              ]
+            },
+            {
+              title: "Schleife endet",
+              text: "Mit endUnsorted = 0 endet die Schleife. Ergebnis: 45 22 13 10 6 5 3 — mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
+              source: "06_heaps_hash-tables.pdf, Folie 67",
+              explanation: {
+                action: "Schleifenbedingung prüfen.",
+                rule: "<code>while (endUnsorted &gt; 0)</code>",
+                decision: "0 > 0 ist falsch → heapSort ist fertig."
+              },
               values: [
                 { kind: "array-index", index: 0, value: 45 },
                 { kind: "array-index", index: 1, value: 22 },
@@ -3372,6 +3766,7 @@ const aud = {
           title: "Breitensuche von Knoten 1",
           source: "07_graphs.pdf, Folien 60-73",
           intro: "Knoten werden mit einer Queue verwaltet: besuchen, dann alle unbesuchten Nachbarn einreihen. Ergebnis: 1 3 6 8 7 4 5 2.",
+          legend: { active: "Wird besucht", compare: "In die Queue eingefügt" },
           visual: {
             kind: "graph",
             nodes: [
@@ -3401,6 +3796,11 @@ const aud = {
             {
               title: "Besuche 1",
               text: "Knoten 1 wird aus der Queue entfernt und besucht; die unbesuchten Nachbarn 3, 6 und 8 kommen in die Queue. Queue: 3, 6, 8.",
+              explanation: {
+                action: "Knoten 1 aus der Queue entfernen und besuchen.",
+                rule: "Für jeden Knoten x in w’s Nachbarschaft: wenn x noch nicht besucht wurde, füge x in die Queue ein und markiere ihn als besucht.",
+                decision: "3, 6 und 8 sind unbesucht → Queue: 3, 6, 8."
+              },
               values: [{ kind: "graph-node", node: "1", mark: "done" }],
               highlights: [
                 { kind: "graph-node", node: "1", role: "active" },
@@ -3415,6 +3815,11 @@ const aud = {
             {
               title: "Besuche 3",
               text: "Der unbesuchte Nachbar 7 kommt in die Queue. Queue: 6, 8, 7.",
+              explanation: {
+                action: "Knoten 3 aus der Queue entfernen und besuchen.",
+                rule: "Für jeden Knoten x in w’s Nachbarschaft: wenn x noch nicht besucht wurde, füge x in die Queue ein und markiere ihn als besucht.",
+                decision: "7 ist unbesucht → Queue: 6, 8, 7."
+              },
               values: [{ kind: "graph-node", node: "3", mark: "done" }],
               highlights: [
                 { kind: "graph-node", node: "3", role: "active" },
@@ -3425,6 +3830,11 @@ const aud = {
             {
               title: "Besuche 6",
               text: "Die unbesuchten Nachbarn 4 und 5 kommen in die Queue. Queue: 8, 7, 4, 5.",
+              explanation: {
+                action: "Knoten 6 aus der Queue entfernen und besuchen.",
+                rule: "Für jeden Knoten x in w’s Nachbarschaft: wenn x noch nicht besucht wurde, füge x in die Queue ein und markiere ihn als besucht.",
+                decision: "4 und 5 sind unbesucht → Queue: 8, 7, 4, 5."
+              },
               values: [{ kind: "graph-node", node: "6", mark: "done" }],
               highlights: [
                 { kind: "graph-node", node: "6", role: "active" },
@@ -3437,6 +3847,11 @@ const aud = {
             {
               title: "Besuche 8",
               text: "Der unbesuchte Nachbar 2 kommt in die Queue. Queue: 7, 4, 5, 2.",
+              explanation: {
+                action: "Knoten 8 aus der Queue entfernen und besuchen.",
+                rule: "Für jeden Knoten x in w’s Nachbarschaft: wenn x noch nicht besucht wurde, füge x in die Queue ein und markiere ihn als besucht.",
+                decision: "2 ist unbesucht → Queue: 7, 4, 5, 2."
+              },
               values: [{ kind: "graph-node", node: "8", mark: "done" }],
               highlights: [
                 { kind: "graph-node", node: "8", role: "active" },
@@ -3447,24 +3862,44 @@ const aud = {
             {
               title: "Besuche 7",
               text: "Alle Nachbarn von 7 sind bereits besucht oder in der Queue. Queue: 4, 5, 2.",
+              explanation: {
+                action: "Knoten 7 aus der Queue entfernen und besuchen.",
+                rule: "Nur noch nicht besuchte Nachbarn kommen in die Queue.",
+                decision: "Kein neuer Nachbar → Queue: 4, 5, 2."
+              },
               values: [{ kind: "graph-node", node: "7", mark: "done" }],
               highlights: [{ kind: "graph-node", node: "7", role: "active" }]
             },
             {
               title: "Besuche 4",
               text: "Keine neuen Nachbarn. Queue: 5, 2.",
+              explanation: {
+                action: "Knoten 4 aus der Queue entfernen und besuchen.",
+                rule: "Nur noch nicht besuchte Nachbarn kommen in die Queue.",
+                decision: "Kein neuer Nachbar → Queue: 5, 2."
+              },
               values: [{ kind: "graph-node", node: "4", mark: "done" }],
               highlights: [{ kind: "graph-node", node: "4", role: "active" }]
             },
             {
               title: "Besuche 5",
               text: "Keine neuen Nachbarn. Queue: 2.",
+              explanation: {
+                action: "Knoten 5 aus der Queue entfernen und besuchen.",
+                rule: "Nur noch nicht besuchte Nachbarn kommen in die Queue.",
+                decision: "Kein neuer Nachbar → Queue: 2."
+              },
               values: [{ kind: "graph-node", node: "5", mark: "done" }],
               highlights: [{ kind: "graph-node", node: "5", role: "active" }]
             },
             {
               title: "Besuche 2: fertig",
               text: "Die Queue ist leer — Besuchsreihenfolge: 1 3 6 8 7 4 5 2.",
+              explanation: {
+                action: "Knoten 2 aus der Queue entfernen und besuchen.",
+                rule: "Solange die Queue nicht leer ist, wird der nächste Knoten entfernt und besucht.",
+                decision: "Die Queue ist leer → die Breitensuche endet."
+              },
               values: [{ kind: "graph-node", node: "2", mark: "done" }],
               highlights: [{ kind: "graph-node", node: "2", role: "active" }]
             }
@@ -3610,7 +4045,8 @@ const aud = {
           id: "prim-jarnik",
           title: "Prim-Jarnik von Knoten 1",
           source: "08_graph-algorithms.pdf, Folien 50-85",
-          intro: "Über jedem Knoten stehen seine aktuellen Kosten. In jedem Schritt wird der günstigste nicht finalisierte Knoten finalisiert; grüne Kanten gehören zum minimalen Spannbaum.",
+          intro: "Über jedem Knoten stehen seine aktuellen Kosten. In jedem Schritt wird der günstigste nicht finalisierte Knoten finalisiert; markierte Kanten gehören zum minimalen Spannbaum.",
+          legend: { active: "Wird finalisiert", compare: "Kosten aktualisiert", done: "Finalisiert / im Spannbaum" },
           visual: {
             kind: "graph",
             nodes: [
@@ -3640,11 +4076,21 @@ const aud = {
             {
               title: "Initialisierung",
               text: "Alle Knotenkosten werden auf unendlich gesetzt, der Startknoten 1 auf 0.",
+              explanation: {
+                action: "Kosten aller Knoten setzen.",
+                rule: "Für jeden Knoten v: v.kosten = unendlich; Startknoten.kosten = 0.",
+                decision: "1 hat die Kosten 0, alle anderen ∞."
+              },
               highlights: [{ kind: "graph-node", node: "1", role: "active" }]
             },
             {
               title: "Finalisiere 1 (Kosten 0)",
               text: "Die Nachbarn von 1 werden aktualisiert: 3 auf 20, 8 auf 39, 6 auf 50 (Eltern jeweils 1).",
+              explanation: {
+                action: "Minimum: 1 (0) — alle anderen haben ∞.",
+                rule: "Für jeden nicht finalisierten Nachbarn x von w: wenn kanten_kosten(w, x) &lt; x.kosten, dann x.kosten = kanten_kosten(w, x) und x.Eltern = w.",
+                decision: "1 wird finalisiert; 3 → 20, 8 → 39, 6 → 50."
+              },
               values: [
                 { kind: "graph-node", node: "1", mark: "done" },
                 { kind: "graph-node", node: "3", note: "20" },
@@ -3661,6 +4107,11 @@ const aud = {
             {
               title: "Finalisiere 3 (Kosten 20)",
               text: "3 hat die minimalen Kosten — die Kante (1, 3) kommt in den Spannbaum. Nachbar 7 wird auf 33 gesetzt.",
+              explanation: {
+                action: "Minimum: 3 (20) vor 8 (39) und 6 (50).",
+                rule: "Finde den nicht finalisierten Knoten w mit den minimalen Kosten und markiere ihn als finalisiert.",
+                decision: "3 wird finalisiert; 7 → 33."
+              },
               values: [
                 { kind: "graph-node", node: "3", mark: "done" },
                 { kind: "graph-edge", from: "1", to: "3", mark: "done" },
@@ -3674,6 +4125,11 @@ const aud = {
             {
               title: "Finalisiere 7 (Kosten 33)",
               text: "Kante (3, 7) kommt in den Spannbaum. Nachbar 5 wird auf 33 gesetzt.",
+              explanation: {
+                action: "Minimum: 7 (33) vor 8 (39) und 6 (50).",
+                rule: "Finde den nicht finalisierten Knoten w mit den minimalen Kosten und markiere ihn als finalisiert.",
+                decision: "7 wird finalisiert; 5 → 33."
+              },
               values: [
                 { kind: "graph-node", node: "7", mark: "done" },
                 { kind: "graph-edge", from: "3", to: "7", mark: "done" },
@@ -3687,6 +4143,11 @@ const aud = {
             {
               title: "Finalisiere 5 (Kosten 33)",
               text: "Kante (7, 5) kommt in den Spannbaum. Die Nachbarn von 5 werden verbessert: 8 auf 25, 4 auf 10, 6 auf 30.",
+              explanation: {
+                action: "Minimum: 5 (33) vor 8 (39) und 6 (50).",
+                rule: "Wenn kanten_kosten(w, x) &lt; x.kosten, dann x.kosten = kanten_kosten(w, x) und x.Eltern = w.",
+                decision: "5 wird finalisiert; 25 < 39 → 8 auf 25, 4 auf 10, 30 < 50 → 6 auf 30."
+              },
               values: [
                 { kind: "graph-node", node: "5", mark: "done" },
                 { kind: "graph-edge", from: "5", to: "7", mark: "done" },
@@ -3704,6 +4165,11 @@ const aud = {
             {
               title: "Finalisiere 4 (Kosten 10)",
               text: "Kante (5, 4) kommt in den Spannbaum. Nachbar 6 wird auf 27 verbessert.",
+              explanation: {
+                action: "Minimum: 4 (10) vor 8 (25) und 6 (30).",
+                rule: "Wenn kanten_kosten(w, x) &lt; x.kosten, dann x.kosten = kanten_kosten(w, x) und x.Eltern = w.",
+                decision: "4 wird finalisiert; 27 < 30 → 6 auf 27."
+              },
               values: [
                 { kind: "graph-node", node: "4", mark: "done" },
                 { kind: "graph-edge", from: "4", to: "5", mark: "done" },
@@ -3717,6 +4183,11 @@ const aud = {
             {
               title: "Finalisiere 8 (Kosten 25)",
               text: "Kante (5, 8) kommt in den Spannbaum. Nachbar 2 wird auf 20 gesetzt.",
+              explanation: {
+                action: "Minimum: 8 (25) vor 6 (27) und 2 (∞).",
+                rule: "Wenn kanten_kosten(w, x) &lt; x.kosten, dann x.kosten = kanten_kosten(w, x) und x.Eltern = w.",
+                decision: "8 wird finalisiert; 2 → 20."
+              },
               values: [
                 { kind: "graph-node", node: "8", mark: "done" },
                 { kind: "graph-edge", from: "5", to: "8", mark: "done" },
@@ -3730,6 +4201,11 @@ const aud = {
             {
               title: "Finalisiere 2 (Kosten 20)",
               text: "Kante (8, 2) kommt in den Spannbaum.",
+              explanation: {
+                action: "Minimum: 2 (20) vor 6 (27).",
+                rule: "Finde den nicht finalisierten Knoten w mit den minimalen Kosten und markiere ihn als finalisiert.",
+                decision: "2 wird finalisiert; keine Kosten ändern sich."
+              },
               values: [
                 { kind: "graph-node", node: "2", mark: "done" },
                 { kind: "graph-edge", from: "2", to: "8", mark: "done" }
@@ -3738,7 +4214,12 @@ const aud = {
             },
             {
               title: "Finalisiere 6 (Kosten 27): fertig",
-              text: "Kante (4, 6) kommt in den Spannbaum. Alle Knoten sind finalisiert — die grünen Kanten bilden den minimalen Spannbaum.",
+              text: "Kante (4, 6) kommt in den Spannbaum. Alle Knoten sind finalisiert — die markierten Kanten bilden den minimalen Spannbaum.",
+              explanation: {
+                action: "Nur 6 (27) ist noch nicht finalisiert.",
+                rule: "Solange es noch nicht finalisierte Knoten mit Kosten &lt; unendlich gibt, wird weiter finalisiert.",
+                decision: "6 wird finalisiert; danach ist kein Knoten mehr übrig → fertig."
+              },
               values: [
                 { kind: "graph-node", node: "6", mark: "done" },
                 { kind: "graph-edge", from: "4", to: "6", mark: "done" }
@@ -3751,7 +4232,8 @@ const aud = {
           id: "dijkstra-kuerzeste-wege",
           title: "Dijkstra: kürzeste Wege ab 1",
           source: "08_graph-algorithms.pdf, Folien 103-139",
-          intro: "Über jedem Knoten steht die aktuell beste bekannte Distanz vom Startknoten 1. Grün markierte Kanten bilden den endgültigen Vorgängerpfad.",
+          intro: "Über jedem Knoten steht die aktuell beste bekannte Distanz vom Startknoten 1. Markierte Kanten bilden den endgültigen Vorgängerpfad.",
+          legend: { active: "Aktueller Knoten", compare: "Distanz geprüft", done: "Finalisiert / Vorgängerpfad" },
           visual: {
             kind: "graph",
             nodes: [
