@@ -16,6 +16,7 @@ import type {
   TreeVisual,
   Walkthrough,
   WalkthroughHighlight,
+  WalkthroughRole,
   WalkthroughValueUpdate
 } from "../src/types/content";
 
@@ -25,6 +26,7 @@ const DANGEROUS_HTML_PATTERNS = [
   { label: "javascript URL", pattern: /javascript\s*:/i },
   { label: "inline event handler", pattern: /\son[a-z]+\s*=/i }
 ];
+const WALKTHROUGH_ROLES: WalkthroughRole[] = ["active", "compare", "done", "target", "factor"];
 const MATH_DELIMITER_PATTERNS = [
   { label: "inline math", open: /(?<!\\)\\\(/g, close: /(?<!\\)\\\)/g },
   { label: "display math", open: /(?<!\\)\\\[/g, close: /(?<!\\)\\\]/g }
@@ -208,6 +210,15 @@ function validateWalkthrough(
   }
 
   validateWalkthroughVisual(label, walkthrough);
+
+  for (const [role, legendLabel] of Object.entries(walkthrough.legend || {})) {
+    if (!WALKTHROUGH_ROLES.includes(role as WalkthroughRole)) {
+      fail(`${label}.legend uses unknown role "${role}".`);
+    }
+    if (typeof legendLabel !== "string" || !legendLabel.trim()) {
+      fail(`${label}.legend.${role} must be a non-empty string.`);
+    }
+  }
 
   walkthrough.steps.forEach((step, stepIndex) => {
     if (!step.title || !step.text) {

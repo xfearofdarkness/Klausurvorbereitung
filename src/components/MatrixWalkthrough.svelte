@@ -9,6 +9,7 @@
   interface MatrixRenderState {
     values: Map<string, MatrixValue>;
     done: Set<string>;
+    changed: Set<string>;
     roles: Map<string, string[]>;
   }
 
@@ -28,6 +29,7 @@
   ): MatrixRenderState {
     const values = new Map<string, MatrixValue>();
     const done = new Set<string>();
+    const changed = new Set<string>();
     const roles = new Map<string, string[]>();
     const matrixById = new Map(matrixList.map((matrix) => [matrix.id, matrix]));
 
@@ -44,6 +46,9 @@
       for (const update of steps[index]?.values || []) {
         if (update.kind !== "matrix-cell") continue;
         const key = cellKey(update.matrix, update.row, update.col);
+        if (!isPreviousStep && values.get(key) !== update.value) {
+          changed.add(key);
+        }
         values.set(key, update.value);
         if (isPreviousStep) {
           done.add(key);
@@ -59,7 +64,7 @@
       }
     }
 
-    return { values, done, roles };
+    return { values, done, changed, roles };
   }
 
   function highlightedCellKeys(highlight: WalkthroughHighlight, matrixById: Map<string, MatrixDefinition>): string[] {
@@ -95,6 +100,7 @@
     const classes = [baseClass];
     if (cellValue(matrix, row, col) === null) classes.push("walk-empty");
     if (renderState.done.has(key)) classes.push("walk-done");
+    if (renderState.changed.has(key)) classes.push("walk-changed");
     for (const role of renderState.roles.get(key) || []) {
       classes.push(`walk-${role}`);
     }
@@ -116,7 +122,8 @@
   function cellAria(matrix: MatrixDefinition, row: number, col: number): string {
     const value = cellValue(matrix, row, col);
     const renderedValue = value === null ? "noch offen" : String(value);
-    return `${matrix.label}, Zeile ${rowLabel(matrix, row)}, Spalte ${colLabel(matrix, col)}: ${renderedValue}`;
+    const changedNote = renderState.changed.has(cellKey(matrix.id, row, col)) ? ", in diesem Schritt geändert" : "";
+    return `${matrix.label}, Zeile ${rowLabel(matrix, row)}, Spalte ${colLabel(matrix, col)}: ${renderedValue}${changedNote}`;
   }
 </script>
 
@@ -127,7 +134,7 @@
         <div class="walk-matrix-title">{matrix.label}</div>
         {#if matrix.layout === "table"}
           <div class="walk-data-table-wrap">
-            <table class="walk-data-table" aria-label={matrix.label}>
+            <table class="walk-data-table" style={`--walk-cols: ${matrix.values[0]?.length || 1}`} aria-label={matrix.label}>
               <thead>
                 <tr>
                   <th class="walk-table-corner" scope="col">{matrix.cornerLabel || ""}</th>

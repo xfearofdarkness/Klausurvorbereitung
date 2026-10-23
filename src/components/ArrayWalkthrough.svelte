@@ -8,6 +8,7 @@
 
   interface ArrayRenderState {
     values: Map<string, Array<number | string>>;
+    changed: Set<string>;
     roles: Map<string, string[]>;
   }
 
@@ -58,6 +59,7 @@
   ): ArrayRenderState {
     const values = new Map<string, Array<number | string>>();
     const roles = new Map<string, string[]>();
+    const changed = new Set<string>();
 
     for (const row of arrayRows) {
       values.set(row.id, [...row.values]);
@@ -66,8 +68,12 @@
     for (let index = 0; index <= activeStepIndex; index += 1) {
       for (const update of steps[index]?.values || []) {
         if (update.kind === "array-index") {
-          const rowValues = values.get(update.array || DEFAULT_ARRAY_ID);
+          const rowId = update.array || DEFAULT_ARRAY_ID;
+          const rowValues = values.get(rowId);
           if (rowValues) {
+            if (index === activeStepIndex && rowValues[update.index] !== update.value) {
+              changed.add(roleKey(rowId, update.index));
+            }
             rowValues[update.index] = update.value;
           }
         }
@@ -82,7 +88,7 @@
       roles.set(key, nextRoles);
     }
 
-    return { values, roles };
+    return { values, changed, roles };
   }
 
   function computeBarScales(arrayRows: ArrayRow[], steps: WalkthroughStep[]): Map<string, number> {
@@ -124,6 +130,7 @@
 
   function roleClasses(row: ArrayRow, index: number, base: string): string {
     const classes = [base];
+    if (renderState.changed.has(roleKey(row.id, index))) classes.push("walk-changed");
     for (const role of renderState.roles.get(roleKey(row.id, index)) || []) {
       classes.push(`walk-${role}`);
     }
@@ -143,13 +150,13 @@
             {#if row.label}
               <div class="walk-array-label">{row.label}</div>
             {/if}
-            <div class="walk-array" class:walk-array-bars={row.bars}>
+            <div class="walk-array" class:walk-array-bars={row.bars} style={`--walk-len: ${row.values.length}`}>
               {#each row.values as _, index}
                 <div class="walk-array-item">
                   {#if row.bars}
                     <div class="walk-bar-box">
                       {#if typeof valueAt(row, index) === "number"}
-                        <span class="walk-bar-value">{valueAt(row, index)}</span>
+                        <span class:walk-value-changed={renderState.changed.has(roleKey(row.id, index))} class="walk-bar-value">{valueAt(row, index)}</span>
                         <div class={roleClasses(row, index, "walk-bar")} style={`height: ${barHeight(row, index)}%`}></div>
                       {/if}
                     </div>

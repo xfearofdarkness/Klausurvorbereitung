@@ -116,11 +116,15 @@ export interface Exercise {
   generator?: string;
 }
 
+export type WalkthroughRole = "active" | "compare" | "done" | "target" | "factor";
+
 export interface Walkthrough {
   id: string;
   title: string;
   source: string;
   intro?: string;
+  /** Eigene Legendenbeschriftung pro Rolle, wenn die Folien eine treffendere Bezeichnung nutzen. */
+  legend?: Partial<Record<WalkthroughRole, string>>;
   visual: MatrixVisual | ArrayVisual | TreeVisual | GraphVisual;
   steps: WalkthroughStep[];
 }
@@ -175,6 +179,7 @@ export interface TreeNodeDefinition {
   left?: string;
   right?: string;
   hidden?: boolean;
+  note?: string;
 }
 
 export interface GraphVisual {
@@ -235,6 +240,7 @@ export type WalkthroughValueUpdate =
       node: string;
       value?: number | string;
       hidden?: boolean;
+      note?: string | null;
       mark?: "done" | null;
       left?: string | null;
       right?: string | null;

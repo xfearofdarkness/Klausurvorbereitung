@@ -1172,7 +1172,11 @@ a.card.is-last {
 }
 
 .walk-header {
-  margin-bottom: 0.375rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
 }
 
 .walk-header h3 {
@@ -1182,10 +1186,93 @@ a.card.is-last {
   overflow-wrap: anywhere;
 }
 
+.walk-step-count {
+  color: var(--text3);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.walk-intro {
+  margin-top: 0.25rem;
+  color: var(--text2);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.walk-stage {
+  margin-top: 0.5rem;
+}
+
+.walk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 0.875rem;
+  margin-top: 0.25rem;
+  color: var(--text3);
+  font-size: 0.75rem;
+  list-style: none;
+}
+
+.walk-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: opacity var(--transition);
+}
+
+.walk-legend li.walk-legend-idle {
+  opacity: 0.4;
+}
+
+.walk-swatch {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1.5px solid;
+  border-radius: 3px;
+}
+
+.walk-swatch-active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.walk-swatch-compare {
+  border-color: var(--pink);
+  background: var(--pink-dim);
+}
+
+.walk-swatch-factor {
+  border-color: var(--yellow);
+  background: var(--yellow-dim);
+}
+
+.walk-swatch-target {
+  border-color: var(--cyan);
+  background: var(--cyan-dim);
+}
+
+.walk-swatch-done {
+  border-color: var(--success);
+  background: var(--success-dim);
+}
+
+.walk-swatch-changed {
+  border-color: var(--warning);
+  border-style: dashed;
+}
+
+.walk-step-nav {
+  flex: 1;
+  min-width: 0;
+}
+
 .walk-step-nav ol {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.25rem;
+  justify-content: center;
+  gap: 0.125rem;
   list-style: none;
 }
 
@@ -1234,8 +1321,7 @@ a.card.is-last {
 }
 
 .walk-step {
-  padding-top: 0.625rem;
-  border-top: 1px solid var(--border);
+  margin-top: 0.625rem;
 }
 
 .walk-step h4 {
@@ -1305,11 +1391,16 @@ a.card.is-last {
 
 .walk-controls {
   display: flex;
-  justify-content: space-between;
-  gap: 0.625rem;
-  margin-top: 0.75rem;
-  padding-top: 0.625rem;
-  border-top: 1px solid var(--border);
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.625rem;
+  padding-block: 0.5rem;
+  border-block: 1px solid var(--border);
+}
+
+.walk-controls .walk-nav-btn {
+  flex-shrink: 0;
+  min-width: 5.5rem;
 }
 
 .walk-nav-primary {
@@ -1425,7 +1516,7 @@ a.card.is-last {
 }
 
 .walk-data-table {
-  width: max-content;
+  width: min(100%, calc(var(--walk-cols, 1) * 2.125rem + 2.625rem));
   margin: 0 auto;
   border-collapse: collapse;
   table-layout: fixed;
@@ -1434,8 +1525,7 @@ a.card.is-last {
 
 .walk-data-table th,
 .walk-data-cell {
-  width: 2.125rem;
-  min-width: 2.125rem;
+  min-width: 1.25rem;
   height: 1.875rem;
   text-align: center;
   vertical-align: middle;
@@ -1450,7 +1540,6 @@ a.card.is-last {
 .walk-table-corner,
 .walk-table-row-head {
   width: 2.625rem;
-  min-width: 2.625rem;
   color: var(--text2);
 }
 
@@ -1526,7 +1615,34 @@ a.card.is-last {
   width: 100%;
   max-width: 27.5rem;
   height: auto;
+  max-height: min(27.5rem, 52vh);
   margin: 0 auto;
+}
+
+.walk-changed {
+  outline: 2px dashed var(--warning);
+  outline-offset: 1px;
+}
+
+.walk-svg .walk-node.walk-changed {
+  outline: none;
+}
+
+.walk-svg .walk-node.walk-changed circle {
+  stroke: var(--warning);
+  stroke-dasharray: 1.6 1;
+  stroke-width: 1.1;
+}
+
+.walk-svg .walk-node text.walk-note-changed,
+.walk-svg .walk-node.walk-changed text.walk-node-note,
+.walk-bar-value.walk-value-changed {
+  fill: var(--warning);
+  color: var(--warning);
+}
+
+.walk-bar.walk-changed {
+  outline-offset: 1px;
 }
 
 .walk-tree-svg {
@@ -1611,21 +1727,25 @@ a.card.is-last {
 }
 
 .walk-array-scroll {
+  padding: 0.25rem;
   overflow-x: auto;
 }
 
 .walk-array-stack {
   display: grid;
   gap: 0.5rem;
-  width: max-content;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .walk-array-row {
   display: grid;
-  grid-template-columns: 2.25rem max-content;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
   align-items: end;
   gap: 0.5rem;
+}
+
+.walk-array-row:not(:has(.walk-array-label)) {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .walk-array-label {
@@ -1641,8 +1761,8 @@ a.card.is-last {
 .walk-array {
   display: flex;
   align-items: flex-end;
-  gap: 6px;
-  width: max-content;
+  gap: clamp(2px, 0.8vw, 6px);
+  width: min(100%, calc(var(--walk-len, 1) * 3.125rem));
   margin: 0 auto;
 }
 
@@ -1652,14 +1772,21 @@ a.card.is-last {
 
 .walk-array-item {
   display: grid;
+  flex: 1 1 0;
   justify-items: center;
   gap: 4px;
+  min-width: 0;
 }
 
 .walk-array-cell {
   display: grid;
   place-items: center;
-  min-width: 2.75rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 2.75rem;
+  height: auto;
+  aspect-ratio: 1;
+  font-size: clamp(0.75rem, 3.2vw, 0.96rem);
 }
 
 .walk-array-index {
@@ -1674,7 +1801,8 @@ a.card.is-last {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  min-width: 2rem;
+  width: 100%;
+  min-width: 0;
   height: 8.25rem;
 }
 
@@ -1688,7 +1816,8 @@ a.card.is-last {
 }
 
 .walk-bar {
-  width: 1.5rem;
+  width: 75%;
+  max-width: 1.5rem;
   border: 1px solid var(--border-strong);
   border-radius: 4px 4px 2px 2px;
   background: var(--surface-3);
@@ -1767,6 +1896,19 @@ a.card.is-last {
     gap: 0.1rem;
   }
 
+  .walk-controls {
+    flex-wrap: wrap;
+  }
+
+  .walk-step-nav {
+    flex-basis: 100%;
+    order: -1;
+  }
+
+  .walk-controls .walk-nav-btn {
+    flex: 1;
+  }
+
   .walk-matrix-visual {
     grid-template-columns: max-content auto max-content auto max-content;
     gap: 0.35rem;
@@ -1786,23 +1928,33 @@ a.card.is-last {
     font-size: 0.9rem;
   }
 
-  .walk-array-cell {
-    min-width: 2.375rem;
-    height: 2.375rem;
-  }
-
   .walk-bar-box {
-    min-width: 1.5rem;
     height: 6.5rem;
-  }
-
-  .walk-bar {
-    width: 1.125rem;
   }
 
   .study-card table,
   .quiz-card table {
     display: block;
     overflow-x: auto;
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .walk-matrix-visual {
+    gap: 0.25rem;
+  }
+
+  .walk-matrix {
+    border-spacing: 3px;
+  }
+
+  .walk-matrix-paren {
+    padding-inline: 0.3rem;
+  }
+
+  .walk-matrix-cell {
+    min-width: 1.625rem;
+    height: 1.625rem;
+    font-size: 0.8rem;
   }
 }

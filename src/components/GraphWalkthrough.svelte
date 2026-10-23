@@ -8,6 +8,7 @@
 
   interface GraphNodeState {
     note: string | null;
+    noteChanged: boolean;
     marked: boolean;
   }
 
@@ -41,7 +42,7 @@
     if (!graphVisual) return { nodes, nodeRoles, edgeMarks, edgeRoles };
 
     for (const node of graphVisual.nodes) {
-      nodes.set(node.id, { note: node.note ?? null, marked: false });
+      nodes.set(node.id, { note: node.note ?? null, noteChanged: false, marked: false });
     }
 
     for (let index = 0; index <= activeStepIndex; index += 1) {
@@ -49,7 +50,10 @@
         if (update.kind === "graph-node") {
           const state = nodes.get(update.node);
           if (!state) continue;
-          if (update.note !== undefined) state.note = update.note;
+          if (update.note !== undefined) {
+            state.noteChanged = index === activeStepIndex && state.note !== update.note;
+            state.note = update.note;
+          }
           if (update.mark !== undefined) state.marked = update.mark === "done";
         } else if (update.kind === "graph-edge") {
           if (update.mark !== undefined) {
@@ -182,7 +186,12 @@
           <circle cx={node.x} cy={node.y} r={NODE_RADIUS} />
           <text x={node.x} y={node.y}>{node.label ?? node.id}</text>
           {#if renderState.nodes.get(node.id)?.note}
-            <text class="walk-node-note" x={notePosition(node).x} y={notePosition(node).y}>
+            <text
+              class:walk-note-changed={renderState.nodes.get(node.id)?.noteChanged}
+              class="walk-node-note"
+              x={notePosition(node).x}
+              y={notePosition(node).y}
+            >
               {renderState.nodes.get(node.id)?.note}
             </text>
           {/if}
