@@ -42,6 +42,32 @@ const rabs = {
           source: "01_rabs_intro-01.pdf, Folie 11"
         },
         {
+          title: "Historie: vom Abakus zum Webstuhl",
+          body: "Ca. 1100 v. Chr. Abakus, die älteste Rechenhilfe der Welt, noch heute im asiatischen Raum in Gebrauch. 1629 Rechenschieber (William Oughtred). 1642 Pascaline (Blaise Pascal), eine mechanische Rechenmaschine, nur Addition. 1804 automatischer Webstuhl (Joseph Jacquard): Lochkarten bestimmen das Muster, der erste Nur-Lese-Speicher (ROM).",
+          source: "01_rabs_intro-01.pdf, Folien 13-14"
+        },
+        {
+          title: "Historie: Boole, Hollerith, Zuse",
+          body: "1847 Boolesche Algebra (George Boole): binäre logische Operationen, Basis für heutige Digitalrechner. 1890 Tabelliermaschine (Herman Hollerith): Zähl- und Sortiermaschine für die Volkszählung auf Basis von Lochkarten; Holleriths Firma wurde später IBM. 1940 Z3 (Konrad Zuse): 2.200 Relais, 10 Hertz Taktfrequenz, 22-stellige Binärzahlen im Gleitkomma-Format, dezimale Ein-/Ausgabe, Speicher mit 64 Worten, Steuereinheit mit Sequenzer; Addition in 3, Multiplikation in 16 Takten.",
+          source: "01_rabs_intro-01.pdf, Folien 15-16"
+        },
+        {
+          title: "1945: Von-Neumann-Architektur",
+          body: "Von Presper Eckert, John Mauchly und John von Neumann: der klassische Universalrechner. Vier wesentliche Komponenten: Leitwerk, Rechenwerk, Speicherwerk sowie Ein- und Ausgabewerk. Programme und Daten liegen in einem Speicher, das Rechenwerk hat ALU und Register, das Leitwerk den <em>fetch-decode-execute</em>-Instruktionszyklus; Codierung binär.",
+          tag: "wichtig",
+          source: "01_rabs_intro-01.pdf, Folie 17"
+        },
+        {
+          title: "Triebkräfte der Entwicklung",
+          body: "Mooresches Gesetz (Gordon Moore, Mitbegründer von Intel, 1965): Die Anzahl der auf einem Chip integrierten Transistoren verdoppelt sich alle 18 Monate. Nathans erstes Softwaregesetz (Nathan Myhrvold, Microsoft): Software ist ein Gas, sie dehnt sich aus und füllt den Behälter, in dem sie sich befindet.",
+          source: "01_rabs_intro-01.pdf, Folie 18"
+        },
+        {
+          title: "Entwicklung der Mikroprozessoren",
+          body: "Die Transistorzahl der Mikroprozessoren stieg von 1971 (4004) bis 2011 (Core i7, Xeon) exponentiell. Herausforderungen sind Energieverbrauch und Hitzeentwicklung. Strategie: mehrere Prozessoren auf einem Chip, die über Caches kommunizieren, denn Speicher verbraucht nicht viel Energie.",
+          source: "01_rabs_intro-01.pdf, Folien 19-20"
+        },
+        {
           title: "Bestandteile eines Rechnersystems",
           body: "Die Folien unterscheiden Anwendungssoftware, Systemsoftware und Hardware. Zur Systemsoftware zählen unter anderem Compiler, Betriebssystem und Dateimanager; zur Hardware unter anderem CPU, RAM, SSD, HDD, PCIe, USB sowie Netzwerk-, Grafik- und Soundkarten.",
           source: "01_rabs_intro-01.pdf, Folie 23"
@@ -50,6 +76,16 @@ const rabs = {
           title: "Ebenen eines Rechnersystems",
           body: "Die Ebenen reichen von Anwendungsebene und Assemblerebene über Betriebssystem und Instruction Set Architecture bis zu Mikroarchitektur, digital-logischer Ebene und Transistorebene.",
           source: "01_rabs_intro-01.pdf, Folie 25"
+        },
+        {
+          title: "Mehrschichten-Architektur",
+          body: "Die oberen Schichten (4 und 5) sind für den Anwendungsprogrammierer gedacht und nutzen Sprachen mit Wörtern oder Abkürzungen (z. B. Assembler). Die unteren Schichten (0 bis 3) sind für den Systemprogrammierer und nutzen eher numerische Sprachen.",
+          source: "01_rabs_intro-01.pdf, Folie 26"
+        },
+        {
+          title: "Eigenschaften einer Rechnerarchitektur",
+          body: "Rechnerarchitekturen unterscheiden sich in der Rechnerarithmetik (Addition, Subtraktion, Multiplikation, Division, Gleitkommaarithmetik), im Prozessor mit Datenpfad und Steuerwerk (Entwurf von Logikschaltungen, Implementierungsmethoden, Steuerwerksentwurf) und in der Speicherorganisation (Speicherhierarchie, Cache).",
+          source: "01_rabs_intro-01.pdf, Folie 27"
         },
         {
           title: "Klassifikation von Rechnerarchitekturen",
@@ -74,6 +110,36 @@ const rabs = {
           source: "01_rabs_intro-01.pdf, Folie 10"
         },
         {
+          front: "Welche Bedeutung hat der automatische Webstuhl von Jacquard (1804)?",
+          back: "Lochkarten bestimmen das Muster, indem Löcher das Anheben und Senken der Kettfäden steuern; das gilt als erster Nur-Lese-Speicher (ROM).",
+          source: "01_rabs_intro-01.pdf, Folie 14"
+        },
+        {
+          front: "Was brachten Boole (1847) und Hollerith (1890) für die Rechnerentwicklung?",
+          back: "Boole: die Boolesche Algebra mit binären logischen Operationen als Basis heutiger Digitalrechner. Hollerith: die Tabelliermaschine auf Lochkartenbasis für die Volkszählung; seine Firma wurde später IBM.",
+          source: "01_rabs_intro-01.pdf, Folie 15"
+        },
+        {
+          front: "Welche Merkmale hat die Von-Neumann-Architektur von 1945?",
+          back: "Klassischer Universalrechner mit Leitwerk, Rechenwerk, Speicherwerk und Ein-/Ausgabewerk; Programme und Daten in einem Speicher; Rechenwerk mit ALU und Registern; Leitwerk mit fetch-decode-execute-Zyklus; binäre Codierung.",
+          source: "01_rabs_intro-01.pdf, Folie 17"
+        },
+        {
+          front: "Was besagt das Mooresche Gesetz?",
+          back: "Die Anzahl der auf einem Chip integrierten Transistoren verdoppelt sich alle 18 Monate (Gordon Moore, 1965).",
+          source: "01_rabs_intro-01.pdf, Folie 18"
+        },
+        {
+          front: "Was besagt Nathans erstes Softwaregesetz?",
+          back: "Software ist ein Gas: Sie dehnt sich aus und füllt den Behälter, in dem sie sich befindet (Nathan Myhrvold, Microsoft).",
+          source: "01_rabs_intro-01.pdf, Folie 18"
+        },
+        {
+          front: "Welche Herausforderungen und welche Strategie nennen die Folien für Mikroprozessoren?",
+          back: "Herausforderungen: Energieverbrauch und Hitzeentwicklung. Strategie: mehrere Prozessoren auf einem Chip, Kommunikation über Caches.",
+          source: "01_rabs_intro-01.pdf, Folie 19"
+        },
+        {
           front: "Welche drei großen Bestandteile eines Rechnersystems zeigen die Folien?",
           back: "Anwendungssoftware, Systemsoftware und Hardware.",
           source: "01_rabs_intro-01.pdf, Folie 23"
@@ -89,6 +155,16 @@ const rabs = {
           source: "01_rabs_intro-01.pdf, Folie 25"
         },
         {
+          front: "Wie unterscheiden sich obere und untere Schichten der Mehrschichten-Architektur?",
+          back: "Obere Schichten (4 und 5): für Anwendungsprogrammierer, Sprachen mit Wörtern oder Abkürzungen wie Assembler. Untere Schichten (0 bis 3): für Systemprogrammierer, eher numerische Sprachen.",
+          source: "01_rabs_intro-01.pdf, Folie 26"
+        },
+        {
+          front: "In welchen Punkten unterscheiden sich Rechnerarchitekturen?",
+          back: "In der Rechnerarithmetik, im Prozessor mit Datenpfad und Steuerwerk und in der Speicherorganisation mit Speicherhierarchie und Cache.",
+          source: "01_rabs_intro-01.pdf, Folie 27"
+        },
+        {
           front: "Welche Rechenprinzipien nennt die Klassifikation?",
           back: "Die Klassifikation nennt Von-Neumann, Harvard, Datenfluss, Reduktion und objektorientierte Rechenprinzipien.",
           source: "01_rabs_intro-01.pdf, Folie 28"
@@ -100,6 +176,11 @@ const rabs = {
       title: "Architektur, CPU & E/A",
       icon: "🖥️",
       cards: [
+        {
+          title: "Speicherverwaltungseinheit (MMU)",
+          body: "Im Mehrprogrammbetrieb müssen Betriebssystem und Programme voreinander geschützt und Programme an unterschiedliche Adressen geladen werden. Lösung: Adressumsetzung. Die Hardware-MMU setzt virtuelle Adressen des Programms auf physische Speicheradressen um und prüft dabei Zugriffsrechte. Einfachste Variante: Basis- und Limit-Register, physische Adresse = Basis + virtuelle Adresse; das Limit-Register legt die Länge des zugreifbaren Adressraums fest.",
+          source: "01_rabs_grundlagen.pdf, Folie 26"
+        },
         {
           title: "Von-Neumann-Komponenten",
           body: "Die Von-Neumann-Architektur besteht aus ALU, Control Unit, Memory, I/O-Unit und Bus-System. Die ALU führt Rechenoperationen und logische Verknüpfungen aus, die Control Unit interpretiert Anweisungen und steuert die Befehlsabfolge.",
@@ -124,6 +205,11 @@ const rabs = {
           source: "01_rabs_grundlagen.pdf, Folie 6"
         },
         {
+          title: "Aufbau eines typischen PCs",
+          body: "Stark vereinfacht: Der Prozessor besteht aus Rechenwerk (Register wie R1, R2, R3 und Stack Pointer SP) und Leitwerk (Befehlszähler PC, Programmstatuswort PSW). Prozessor, Speicher und die Ein-/Ausgabe-Controller der Geräte hängen am Systembus mit Adressen, Steuersignalen und Daten. Realistischer: Die CPU enthält CPU-Kern, L1-Befehls- und L1-Daten-Cache, ein L2-Cache-Interface und ein Systembus-Interface; der Chipsatz verbindet Hauptspeicher, Grafikbeschleuniger (AGP) und E/A-Bus (PCI, z. B. USB, IDE, Ethernet), über eine Bus-Brücke auch ältere E/A-Busse (ISA/EISA, z. B. Parallel, RS232).",
+          source: "02_rabs_vna1.pdf, Folien 10-11"
+        },
+        {
           title: "CPU und ihre Komponenten",
           body: "Die CPU führt Programme aus, deren Anweisungen im Hauptspeicher liegen. Zu ihren Komponenten gehören Steuerwerk, ALU, Register, Befehlszähler (PC) und Instruction Register (IR).",
           source: "02_rabs_vna1.pdf, Folien 13-14"
@@ -132,6 +218,11 @@ const rabs = {
           title: "Fetch-Decode-Execute-Zyklus",
           body: "Der Zyklus lädt den nächsten Befehl in das Befehlsregister, erhöht den Programmzähler, bestimmt den Befehlstyp, lädt Operanden, führt den Befehl aus und beginnt danach erneut.",
           source: "01_rabs_grundlagen.pdf, Folie 19"
+        },
+        {
+          title: "Operationen und Datenpfad",
+          body: "Eine CPU führt Lade- und Speicheroperationen, arithmetische und logische Operationen, bedingte und unbedingte Sprünge (Änderung des Befehlszählers) sowie Unterprogramm-Aufrufe und -Rücksprünge aus. Im Datenpfad holt die ALU die Operanden aus den Registern, führt die Operation aus und schreibt das Ergebnis in ein Register.",
+          source: "02_rabs_vna1.pdf, Folien 15-16"
         },
         {
           title: "Pipeline, superskalar und Mehrkern",
@@ -153,6 +244,17 @@ const rabs = {
           body: "CPUs besitzen Kernmodus und Benutzermodus; der Modus wird im Programmstatuswort durch ein Bit festgehalten. Privilegierte Befehle im Benutzermodus führen zu einer Exception. Interrupts reagieren auf externe asynchrone Ereignisse.",
           tag: "wichtig",
           source: "02_rabs_vna1.pdf, Folien 30-34"
+        },
+        {
+          title: "Kontrollierter Moduswechsel",
+          body: "Ein Programm wechselt kontrolliert mit einem speziellen Befehl in den Systemmodus (Systemaufruf, Trap, System Call): Der Prozessor sichert den PC als Rückkehradresse im Keller, schaltet in den Systemmodus und verzweigt an eine vordefinierte Adresse im Betriebssystem. Dieses analysiert und führt den Aufruf aus; ein Rückkehrbefehl schaltet wieder in den Benutzermodus.",
+          source: "02_rabs_vna1.pdf, Folie 32"
+        },
+        {
+          title: "Unterbrechungen des Programmablaufs",
+          body: "Unterbrechungen sind synchron oder asynchron. Synchron sind die Ausnahme (Exception) und der Systemaufruf (Trap), asynchron ist der Interrupt.",
+          tag: "wichtig",
+          source: "02_rabs_vna1.pdf, Folie 35"
         }
       ],
       flashcards: [
@@ -172,6 +274,11 @@ const rabs = {
           source: "01_rabs_grundlagen.pdf, Folie 19"
         },
         {
+          front: "Wie arbeitet die einfachste Variante der Adressumsetzung durch die MMU?",
+          back: "Mit Basis- und Limit-Register: physische Adresse = Basis + virtuelle Adresse; das Limit-Register legt die Länge des zugreifbaren Adressraums fest.",
+          source: "01_rabs_grundlagen.pdf, Folie 26"
+        },
+        {
           front: "Welche Komponenten nennt die Von-Neumann-Architektur?",
           back: "ALU, Control Unit, Memory, I/O-Unit und Bus-System.",
           source: "02_rabs_vna1.pdf, Folie 5"
@@ -182,13 +289,63 @@ const rabs = {
           source: "02_rabs_vna1.pdf, Folie 5"
         },
         {
+          front: "Welche Signale überträgt der Systembus eines typischen PCs?",
+          back: "Adressen, Steuersignale und Daten.",
+          source: "02_rabs_vna1.pdf, Folie 10"
+        },
+        {
           front: "Was bedeutet PC in der CPU?",
           back: "PC bedeutet Program Counter beziehungsweise Befehlszähler.",
           source: "02_rabs_vna1.pdf, Folie 14"
         },
         {
+          front: "Welche Operationen führt eine CPU aus?",
+          back: "Lade- und Speicheroperationen, arithmetische und logische Operationen, bedingte und unbedingte Sprünge sowie Unterprogramm-Aufrufe und -Rücksprünge.",
+          source: "02_rabs_vna1.pdf, Folie 15"
+        },
+        {
+          front: "Was beschreibt der Datenpfad?",
+          back: "Die ALU holt die Operanden aus den Registern, führt die Operation aus und schreibt das Ergebnis in ein Register.",
+          source: "02_rabs_vna1.pdf, Folie 16"
+        },
+        {
+          front: "Was unterscheidet Pipeline-, superskalare und Mehrkern-Prozessoren?",
+          back: "Pipeline: getrennte Hol-, Dekodier- und Ausführungseinheiten, mehrere Befehle werden parallel bearbeitet. Superskalar: mehrere Ausführungseinheiten, oft werden mehrere Befehle gleichzeitig geholt und gepuffert. Mehrkern: mehrere komplette Prozessoren auf einem Chip.",
+          source: "02_rabs_vna1.pdf, Folien 18-20"
+        },
+        {
+          front: "Welche Anforderungen an Speicher führen zur Speicherhierarchie?",
+          back: "Speicher soll sehr schnell (schneller als ein Befehl), sehr groß und spottbillig sein; keine Speichertechnologie erfüllt aktuell alle Anforderungen.",
+          source: "02_rabs_vna1.pdf, Folie 22"
+        },
+        {
+          front: "Wie groß und wie schnell sind L1- und L2-Cache typischerweise?",
+          back: "L1-Cache: typischerweise 16 KB innerhalb der CPU, Zugriff ohne Verzögerung. L2-Cache: typischerweise mehrere MB, Zugriff in 1 bis 2 Taktzyklen.",
+          source: "02_rabs_vna1.pdf, Folie 24"
+        },
+        {
+          front: "Was leistet ein Gerätecontroller?",
+          back: "Spezielle Hardware, oft mit eigenem Mikroprozessor, die ein Gerät weitgehend autonom steuert; sie hat Register für Kommandos, Daten und Status und kann einen Interrupt an die CPU senden, wenn Eingabedaten vorhanden sind oder eine Ausgabe abgeschlossen ist.",
+          source: "02_rabs_vna1.pdf, Folie 26"
+        },
+        {
+          front: "Was unterscheidet speicherbasierte E/A von einem separaten E/A-Adressraum?",
+          back: "Speicherbasiert: Die Controller-Register sind in den Speicheradressraum eingeblendet, Zugriff mit normalen Lese-/Schreibbefehlen, Schutz über die MMU. Separater E/A-Adressraum (bei x86 üblich): Zugriff nur über spezielle privilegierte E/A-Befehle. Beide Varianten sind in Gebrauch.",
+          source: "02_rabs_vna1.pdf, Folie 27"
+        },
+        {
+          front: "Was unterscheidet zeichen- und blockorientierte E/A-Geräte?",
+          back: "Zeichenorientiert: Ein-/Ausgabe einzelner Zeichen, z. B. Tastatur, Maus, Modem. Blockorientiert: größere Datenblöcke, z. B. Festplatte, Netzwerk; Vorteil ist eine geringere Interrupt-Rate.",
+          source: "02_rabs_vna1.pdf, Folie 28"
+        },
+        {
           front: "Worin unterscheiden sich Kernmodus und Benutzermodus?",
           back: "Im Kernmodus hat das Betriebssystem unbeschränkten Zugriff auf Rechnerkomponenten. Im Benutzermodus ist der Zugriff eingeschränkt, Speicher ist nur über Adressabbildung zugreifbar und privilegierte Befehle sind nicht erlaubt.",
+          source: "02_rabs_vna1.pdf, Folie 30"
+        },
+        {
+          front: "Wo wird der Ausführungsmodus der CPU festgehalten?",
+          back: "In der Hardware im Programmstatuswort (PSW) durch 1 Bit.",
           source: "02_rabs_vna1.pdf, Folie 30"
         },
         {
@@ -197,14 +354,39 @@ const rabs = {
           source: "02_rabs_vna1.pdf, Folie 31"
         },
         {
+          front: "Was passiert, wenn im Benutzermodus ein privilegierter Befehl ausgeführt wird?",
+          back: "Es entsteht eine Ausnahme: Der Prozessor bricht den Befehl ab, sichert den PC im Keller und setzt die Ausführung an einer vordefinierten Adresse im Systemmodus fort. Das Betriebssystem behandelt die Ausnahme, z. B. durch Abbruch des Prozesses; ein Rückkehrbefehl schaltet zurück in den Benutzermodus.",
+          source: "02_rabs_vna1.pdf, Folie 31"
+        },
+        {
+          front: "Wie läuft ein Systemaufruf (Trap) auf Prozessorebene ab?",
+          back: "PC als Rückkehradresse im Keller sichern, in den Systemmodus schalten, an eine vordefinierte Adresse im Betriebssystem verzweigen; das Betriebssystem analysiert und führt den Aufruf aus; ein Rückkehrbefehl schaltet zurück in den Benutzermodus.",
+          source: "02_rabs_vna1.pdf, Folie 32"
+        },
+        {
           front: "Was ist die Hauptanwendung von Interrupts laut Folien?",
           back: "Ein-/Ausgabe; der Prozessor kann auf externe asynchrone Ereignisse reagieren und in eine Unterbrechungsbehandlungsroutine verzweigen.",
+          source: "02_rabs_vna1.pdf, Folie 33"
+        },
+        {
+          front: "Wie läuft die Behandlung eines Interrupts ab?",
+          back: "Das Unterbrechungssignal wird nach jedem Befehl abgefragt. Ist es gesetzt, sichert der Prozessor den PC im Keller, schaltet in den Systemmodus und verzweigt in die Unterbrechungsbehandlungsroutine (ISR); danach schaltet ein Rückkehrbefehl zurück in den Benutzermodus.",
           source: "02_rabs_vna1.pdf, Folie 33"
         },
         {
           front: "Was ist ein Unterbrechungsvektor?",
           back: "Ein Unterbrechungsvektor ist eine Tabelle von Adressen, über die Interrupts Behandlungsroutinen zugewiesen werden.",
           source: "02_rabs_vna1.pdf, Folie 34"
+        },
+        {
+          front: "Können Interrupts ausgeschaltet werden?",
+          back: "Ja, Interrupts können maskiert werden; das ist ein privilegierter Befehl.",
+          source: "02_rabs_vna1.pdf, Folie 34"
+        },
+        {
+          front: "Welche Unterbrechungen des Programmablaufs sind synchron, welche asynchron?",
+          back: "Synchron: Ausnahme (Exception) und Systemaufruf (Trap). Asynchron: Interrupt.",
+          source: "02_rabs_vna1.pdf, Folie 35"
         }
       ]
     },
@@ -214,15 +396,30 @@ const rabs = {
       icon: "⚙️",
       cards: [
         {
+          title: "Stellung des Betriebssystems",
+          body: "Im Schichtenbild liegen Anwendungsprogramme (z. B. Bankensystem, Flugbuchungen, Web-Browser) und Systemprogramme (Compiler, Editoren, Kommando-Interpreter) über dem Betriebssystem; darunter folgt die Hardware mit Maschinensprache, Mikroarchitektur und physischen Geräten.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 4"
+        },
+        {
           title: "Betriebssystem nach DIN 44300",
           body: "Ein Betriebssystem sind die Programme eines digitalen Rechensystems, die zusammen mit den Eigenschaften der Rechenanlage die Basis der möglichen Betriebsarten bilden und insbesondere die Abwicklung von Programmen steuern und überwachen.",
           tag: "def",
           source: "01_rabs_grundlagen-04.pdf, Folie 5"
         },
         {
+          title: "Komplexität von Betriebssystemen",
+          body: "Heutige Betriebssysteme sind historisch gewachsen und sehr komplex. Gemessen in Source Lines of Code (SLOC): z. B. Windows NT 4.0 16 Mio., Windows XP 40 Mio., Windows Vista 50 Mio., Linux-Kernel 3.6 15,9 Mio. Richtwert aus Erfahrung: 5 bis 50 Bugs pro 1000 Lines of Code, daher ist strukturiertes Design unabdingbar.",
+          source: "01_rabs_grundlagen-04.pdf, Folien 5, 7-8"
+        },
+        {
           title: "Arten von Betriebssystemen",
           body: "Die Folien nennen unter anderem Mainframe-, Server-, Multiprozessor-, PC-, Smartphone-, eingebettete und Echtzeit-Betriebssysteme. Die Beispiele reichen von z/OS und BS2000 über Windows, Linux, iOS, Android, QNX, VxWorks bis RTOS.",
           source: "01_rabs_grundlagen-04.pdf, Folie 6"
+        },
+        {
+          title: "Entwicklung: 1. Generation",
+          body: "1945 bis 1955, vorwiegend Elektronenröhren. Es gab kein Betriebssystem; Teams von Ingenieuren betreuten die Rechner, programmiert wurde in Maschinensprache oder durch Verdrahtung. Beispiele: Zuse Z3, Howard Aikens Mark I (Harvard), Colossus (Bletchley Park).",
+          source: "01_rabs_grundlagen-04.pdf, Folie 9"
         },
         {
           title: "Entwicklung: Stapelbetrieb",
@@ -233,6 +430,11 @@ const rabs = {
           title: "Entwicklung: Multiprogrammierung",
           body: "In der dritten Generation (1965-1980) treten integrierte Schaltkreise und Multiprogrammierung auf. OS/360 wird als erstes Betriebssystem mit Multiprogramming genannt; Mehrprogrammbetrieb verbessert die CPU-Nutzung, verlangt aber Betriebsmittelverwaltung und Schutz.",
           source: "01_rabs_grundlagen-04.pdf, Folie 11"
+        },
+        {
+          title: "Entwicklung: 4. und 5. Generation",
+          body: "4. Generation (ab 1980): Zeitalter des PCs mit Mikroprozessoren, zunächst wieder Einbenutzersysteme (DOS, Windows 95), dann zunehmende Vernetzung und Client/Server-Systeme mit mehreren Benutzern (UNIX, Linux, Windows ab NT). Trend: verteilte Betriebssysteme, bei denen mehrere Rechner wie einer erscheinen, für höhere Leistung und Zuverlässigkeit. 5. Generation (ab 1990): mobile Geräte mit Vorläufern wie dem PDA; Symbian OS, RIM Blackberry OS, iOS, Android.",
+          source: "01_rabs_grundlagen-04.pdf, Folien 12-13"
         },
         {
           title: "OS-Konzepte im Überblick",
@@ -248,6 +450,11 @@ const rabs = {
           title: "Monolithische Systeme",
           body: "Monolithische Betriebssysteme kapseln Betriebssystemdienste in einem großen Kern. Dienste werden im Systemmodus ausgeführt; der Systemcall entspricht bei prozedurorientierter Sicht einem Prozeduraufruf.",
           source: "01_rabs_grundlagen-04.pdf, Folien 17-19"
+        },
+        {
+          title: "Monolith: Benutzermodus und Aufbau",
+          body: "Im Benutzermodus sind nur nicht-privilegierte Befehle verfügbar, z. B. Zugriff auf den eigenen Prozessadressraum. Ein privilegierter Befehl führt zu einem Trap-Signal; auch der Aufruf eines Systemdienstes per Systemcall führt zu einem Trap mit kontrolliertem Einsprung ins Betriebssystem. Aufbau: Ein Hauptprogramm ruft den gewünschten Dienst auf, Service-Prozeduren führen die System Calls aus, Utility-Prozeduren erledigen Teilaufgaben. Nachladbare Komponenten wie Gerätetreiber gibt es in Unix als statische Libraries, in Windows als DLL.",
+          source: "01_rabs_grundlagen-04.pdf, Folien 20-21"
         },
         {
           title: "Mikrokern-Architektur",
@@ -266,12 +473,57 @@ const rabs = {
           source: "01_rabs_grundlagen-05.pdf, Folien 9-16"
         },
         {
+          title: "Hardwareabstraktion (HAL)",
+          body: "Die Hardware Abstraction Layer ist die Schicht des Betriebssystems, die Kern und übrige Software von der Hardware isoliert; nur sie greift auf die Hardware zu. Das erleichtert die Anpassung an andere Prozessorarchitekturen (NetBSD läuft auf über 50 Plattformen). Auch die Firmware (BIOS bzw. UEFI) kann Abstraktionsaufgaben übernehmen; moderne Betriebssysteme setzen nach dem Booten eigene Treiber ein.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 13"
+        },
+        {
+          title: "Betriebssystem als Vermittler",
+          body: "Anwendungen dürfen nicht direkt, also unkontrolliert, auf die Hardware zugreifen; das Betriebssystem vermittelt. Unterstützende Hardware-Mechanismen sind die Ausführungsmodi des Prozessors (System- und Benutzermodus) und die Adressumsetzung (virtueller Speicher).",
+          source: "01_rabs_grundlagen-05.pdf, Folien 16-18"
+        },
+        {
           title: "Starten des Computers",
           body: "Beim Start läuft das BIOS an, prüft Speicher und wichtige Geräte, durchsucht PCIe/PCI, bestimmt das Bootgerät, kopiert dessen ersten Sektor in den Speicher und lädt danach über Bootloader und Betriebssystem Gerätetreiber, Tabellen, Hintergrundprozesse und Login oder GUI.",
           source: "01_rabs_grundlagen-05.pdf, Folien 20-21"
         }
       ],
       flashcards: [
+        {
+          front: "Wie definiert DIN 44300 ein Betriebssystem?",
+          back: "Die Programme eines digitalen Rechensystems, die zusammen mit den Eigenschaften der Rechenanlage die Basis der möglichen Betriebsarten bilden und insbesondere die Abwicklung von Programmen steuern und überwachen.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 5"
+        },
+        {
+          front: "Welchen Richtwert für Fehler in Software nennen die Folien?",
+          back: "5 bis 50 Bugs pro 1000 Lines of Code; deshalb ist strukturiertes Design unabdingbar.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 5"
+        },
+        {
+          front: "Welche Arten von Betriebssystemen unterscheiden die Folien?",
+          back: "Mainframe-, Server-, Multiprozessor-, PC-, Smartphone-, Embedded- und Echtzeit-Betriebssysteme.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 6"
+        },
+        {
+          front: "Was kennzeichnet die 1. Generation der Betriebssystem-Entwicklung?",
+          back: "1945 bis 1955, Elektronenröhren, noch kein Betriebssystem: Ingenieurteams betreuten die Rechner, programmiert wurde in Maschinensprache oder durch Verdrahtung.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 9"
+        },
+        {
+          front: "Was kennzeichnet die 2. Generation der Betriebssystem-Entwicklung?",
+          back: "1955 bis 1965, Transistoren und Stapelverarbeitung: Programme auf Lochkarten, später mehrere Jobs nacheinander auf Magnetband (batch), verwaltet vom Betriebssystem.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 10"
+        },
+        {
+          front: "Warum führte die 3. Generation Multiprogrammierung ein?",
+          back: "Die CPU wartete oft bis zu 90 % der Zeit auf Geräte; statt zu warten wird ein anderer Job bearbeitet. Neues Problem: Verwaltung und Zuteilung der Betriebsmittel.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 11"
+        },
+        {
+          front: "Was kennzeichnet die 4. Generation der Betriebssystem-Entwicklung?",
+          back: "Ab 1980 PCs mit Mikroprozessoren, zunächst Einbenutzersysteme, dann Vernetzung und Client/Server-Systeme mit mehreren Benutzern; Trend zu verteilten Betriebssystemen.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 12"
+        },
         {
           front: "Welche Konzepte nennt der Überblick zu Betriebssystemen?",
           back: "Prozesse, Adressräume, Dateisystem, Eingabe/Ausgabe, Schutz der Daten und Kommandozeilen-Interpreter.",
@@ -293,6 +545,26 @@ const rabs = {
           source: "01_rabs_grundlagen-04.pdf, Folien 17-19; 01_rabs_grundlagen-05.pdf, Folien 4-6"
         },
         {
+          front: "Welche Mechanismen führten monolithische Systeme ein?",
+          back: "Verschiedene Ausführungsmodi (System- und User-Modus) mit direktem Hardwarezugriff nur im Systemmodus sowie Traps, Kontextumschaltung und Scheduling.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 17"
+        },
+        {
+          front: "Wie ist ein monolithisches Betriebssystem intern aufgebaut?",
+          back: "Ein Hauptprogramm ruft den gewünschten Dienst auf, Service-Prozeduren führen die System Calls aus, Utility-Prozeduren erledigen Teilaufgaben; dazu kommen nachladbare Komponenten wie Gerätetreiber.",
+          source: "01_rabs_grundlagen-04.pdf, Folie 21"
+        },
+        {
+          front: "Was ist das Ziel der Mikrokern-Architektur?",
+          back: "Die im privilegierten Modus ablaufende Funktionalität zu minimieren: Betriebssystemkomponenten laufen als Server-Prozesse im nichtprivilegierten Modus und interagieren über Nachrichten (IPC).",
+          source: "01_rabs_grundlagen-05.pdf, Folie 4"
+        },
+        {
+          front: "Wie arbeiten Clients und Server in der Mikrokern-Architektur zusammen?",
+          back: "Verwandte Systemdienste werden zu Diensteklassen zusammengefasst und von Serverprozessen realisiert; Clientprozesse nutzen sie über Nachrichtenaustausch.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 5"
+        },
+        {
           front: "Was ist der Nachteil der Mikrokern-Architektur laut Folien?",
           back: "Schlechtere Performance durch Nachrichtenaustausch anstatt Systemcalls.",
           source: "01_rabs_grundlagen-05.pdf, Folie 6"
@@ -308,14 +580,49 @@ const rabs = {
           source: "01_rabs_grundlagen-05.pdf, Folie 7"
         },
         {
+          front: "Wie laufen virtuelle Maschinen, und welchen Vorteil bieten sie?",
+          back: "Sie laufen im User-Mode und müssen trotzdem System Calls absetzen können. Vorteil: Entkopplung, mehrere Server und Betriebssysteme laufen auf einer Hardware, ohne dass der Crash eines Servers die anderen beeinflusst.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 8"
+        },
+        {
           front: "Welche drei Aufgaben eines Betriebssystems nennt der Foliensatz?",
           back: "Erweiterung/Veredelung der Hardware, Abstraktion der Hardware und Verwaltung von Betriebsmitteln.",
           source: "01_rabs_grundlagen-05.pdf, Folie 9"
         },
         {
+          front: "Was bedeutet Erweiterung oder Veredelung der Hardware?",
+          back: "Die Hardware beschränkt sich auf das Notwendige und ist schwer zu programmieren; das Betriebssystem stellt komplexe Funktionen bereit, z. B. findet es beim Schreiben auf die Festplatte automatisch freie Blöcke.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 10"
+        },
+        {
+          front: "Was bedeutet Abstraktion der Hardware?",
+          back: "Das Betriebssystem verbirgt die Unterschiede der Rechner und Geräte und bietet Anwendungen eine einheitliche Sicht, eine abstrakte Maschine; z. B. abstrahieren Dateien den externen Speicher.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 11"
+        },
+        {
+          front: "Was ist die Hardware Abstraction Layer (HAL)?",
+          back: "Die Schicht des Betriebssystems, die Kern und übrige Software von der Hardware isoliert; nur sie kann auf die Hardware zugreifen.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 13"
+        },
+        {
+          front: "Was ist ein Betriebsmittel, und was verlangt seine Verwaltung?",
+          back: "Alles, was eine Anwendung zur Ausführung benötigt: Prozessor, Speicher, Geräte. Im Mehrprozess- und Mehrbenutzerbetrieb sind Fairness (gerechte Verteilung) und Sicherheit (Schutz voreinander) notwendig.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 14"
+        },
+        {
+          front: "Welche Hardware-Mechanismen unterstützen das Betriebssystem als Vermittler?",
+          back: "Die Ausführungsmodi des Prozessors (System- und Benutzermodus) und die Adressumsetzung (virtueller Speicher).",
+          source: "01_rabs_grundlagen-05.pdf, Folie 16"
+        },
+        {
           front: "Welche Rolle hat das BIOS beim Starten des Computers?",
           back: "Es startet nach dem Einschalten, prüft Speicher und wichtige Geräte, durchsucht Bussysteme, bestimmt das Bootgerät und kopiert dessen ersten Sektor in den Speicher.",
           source: "01_rabs_grundlagen-05.pdf, Folie 20"
+        },
+        {
+          front: "Was passiert beim Booten, nachdem der erste Sektor des Bootgeräts ausgeführt wurde?",
+          back: "Der Bootloader wird von der aktiven Partition geladen und startet das Betriebssystem. Dieses fragt das BIOS nach der Konfiguration, sucht und lädt Gerätetreiber in den Kernel, initialisiert interne Tabellen und Hintergrundprozesse und startet Login-Programm oder GUI.",
+          source: "01_rabs_grundlagen-05.pdf, Folie 21"
         }
       ]
     },
@@ -1244,7 +1551,6 @@ const rabs = {
           source: "07_rabs-scheduling.pdf, Folie 47"
         }
       ],
-
       walkthroughs: [
         {
           id: "scheduling-fcfs",
