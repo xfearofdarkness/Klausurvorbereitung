@@ -663,27 +663,6 @@ a.card.is-last .card-badge {
     display: flex;
   }
 
-  .layout-switch {
-    display: flex;
-    gap: 2px;
-    padding: 2px;
-    border-radius: var(--radius);
-    background: var(--chip);
-  }
-
-  .layout-switch .icon-btn {
-    background: transparent;
-  }
-
-  .layout-switch .icon-btn:hover {
-    background: var(--chip-hover);
-  }
-
-  .layout-switch .icon-btn.active {
-    background: var(--chip-active);
-    color: var(--text);
-  }
-
   .topbar-expand {
     display: inline-flex;
   }
@@ -762,6 +741,7 @@ a.card.is-last .card-badge {
 }
 
 .sidebar-head {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -801,10 +781,65 @@ a.card.is-last .card-badge {
   font-size: 0.75rem;
 }
 
-.sidebar-footer {
-  margin-top: auto;
-  padding: 0.5rem 0.25rem 0;
-  border-top: 1px solid var(--border);
+.sidebar-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.layout-menu {
+  position: relative;
+}
+
+.layout-menu-list {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  min-width: 12rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+/* In der Seitenleiste nimmt das Menü die Breite des Kopfs ein, damit es nicht über den Rand ragt. */
+.sidebar .layout-menu {
+  position: static;
+}
+
+.sidebar .layout-menu-list {
+  left: 0;
+  min-width: 0;
+}
+
+.layout-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4375rem 0.5rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text2);
+  font: inherit;
+  font-size: 0.8125rem;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.layout-menu-item:hover,
+.layout-menu-item:focus-visible {
+  background: var(--chip-hover);
+  color: var(--text);
+}
+
+.layout-menu-item.active {
+  background: var(--chip-active);
+  color: var(--text);
 }
 
 /* Karten und Inhalte */
