@@ -47,7 +47,7 @@
 
   --sidebar-w: clamp(13.5rem, 17vw, 16rem);
   --content-max: 60rem;
-  --prose-max: 42rem;
+  --prose-max: 70rem;
   --gutter: clamp(0.75rem, 2.5vw, 1.5rem);
   --topbar-h: 3.25rem;
   --modebar-h: 3.75rem;
