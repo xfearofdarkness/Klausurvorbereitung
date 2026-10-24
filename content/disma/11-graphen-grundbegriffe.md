@@ -147,19 +147,19 @@ quelle: DiskreteMathematikVLHO.pdf, Folien 209-211
 
 \(d_n = \frac{1}{2}n(n-3)\): Kantenzahl des vollständigen Graphen minus die \(n\) Seiten, \(d_n = e_n - n\).
 
-## Aufgabe: Aufgabe 25 (Variante)
+## Aufgabe: Summe der Knotengrade
 id: aufgabe-25-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 25
 
 Beweisen Sie den Satz aus der Vorlesung, nach dem die Summe aller Knotengrade eines Graphen mit \(e\) Kanten gleich \(2e\) ist. Tipp: Was trägt jede Kante zur Summe bei?
 
-## Aufgabe: Aufgabe 26 (Variante)
+## Aufgabe: Maximaler Knotengrad
 id: aufgabe-26-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 26
 
 Beweisen Sie den Satz aus der Vorlesung über den maximal möglichen Knotengrad in einem schlichten Graphen mit \(n \ge 1\) Knoten.
 
-## Aufgabe: Aufgabe 28 (Variante)
+## Aufgabe: Kanten im vollständigen Graphen
 id: aufgabe-28-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 28
 

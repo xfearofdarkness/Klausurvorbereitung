@@ -129,20 +129,20 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 133
 
 Man wählt \(f(x) := x\) und \(g'(x) := e^x\): \(\int_a^b x e^x\,dx = x e^x\big|_a^b - \int_a^b 1 \cdot e^x\,dx = (x - 1)e^x\big|_a^b\).
 
-## Aufgabe: Aufgabe 25 (Variante)
+## Aufgabe: Flächeninhalt
 id: aufgabe-25-variante
 notiz: Die Theoriefragen sind auch als Karteikarten dieses Themas mit Folienbeleg enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 25
 
 a) Erklären Sie an einer eigenen Skizze, wie man den Flächeninhalt unter einem Funktionsgraphen durch Rechtecke annähert.<br>b) Welche Funktionen sind laut Vorlesung integrierbar? Gehören differenzierbare Funktionen dazu?<br>c) Wie berechnet man mit dem Hauptsatz ein bestimmtes Integral aus einer Stammfunktion?
 
-## Aufgabe: Aufgabe 26 (Variante)
+## Aufgabe: Stammfunktion plus Konstante
 id: aufgabe-26-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 26
 
 Sei \(F\) eine Stammfunktion von \(f\). Zeigen Sie durch eine allgemeine Rechnung, dass \(\int_a^b f(x)\,dx\) mit \(F + C\) für jede Konstante \(C\) denselben Wert ergibt, und erklären Sie, was das für die Flächenberechnung bedeutet.
 
-## Aufgabe: Aufgabe 27 (Variante)
+## Aufgabe: Stammfunktionen
 id: aufgabe-27-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 27
 

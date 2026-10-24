@@ -76,7 +76,7 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 157
 
 Nach dem Schubfachprinzip spätestens beim \((n+1)\)-ten Objekt.
 
-## Aufgabe: Aufgabe 23 (Variante)
+## Aufgabe: Schubfachprinzip
 id: aufgabe-23-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 23
 

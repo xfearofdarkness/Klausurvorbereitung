@@ -7,11 +7,10 @@
   interface Props {
     exercise: Exercise;
     isDone: boolean;
-    showNote?: boolean;
     onMark: () => void;
   }
 
-  let { exercise, isDone, showNote = true, onMark }: Props = $props();
+  let { exercise, isDone, onMark }: Props = $props();
   let seed = $state(randomSeed());
   let showSolution = $state(false);
 
@@ -28,9 +27,6 @@
   <div class="study-body">
     {#if generated}
       <div class="ex-task">{@html richText(generated.task)}</div>
-      {#if showNote && exercise.note}
-        <p class="ex-note">{@html richText(exercise.note)}</p>
-      {/if}
       <div class:visible={showSolution} class="quiz-a">
         <div>{@html richText(generated.solution)}</div>
       </div>
@@ -39,8 +35,8 @@
           {showSolution ? "Lösung ausblenden" : "Lösung anzeigen"}
         </button>
         <button class="q-btn" type="button" onclick={rollNewNumbers}>Neue Zahlen</button>
-        <button class:correct={isDone} class="q-btn" type="button" onclick={onMark}>
-          {isDone ? "Bearbeitet ✓" : "Als bearbeitet markieren"}
+        <button class:correct={isDone} class="q-btn" type="button" aria-pressed={isDone} onclick={onMark}>
+          Erledigt
         </button>
       </div>
     {:else}

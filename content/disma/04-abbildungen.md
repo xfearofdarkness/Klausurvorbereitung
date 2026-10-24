@@ -112,7 +112,7 @@ generator: umkehrfunktion-linear
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 12; DiskreteMathematikVLHO.pdf, Folien 71 und 80
 
-## Aufgabe: Aufgabe 13 (Variante)
+## Aufgabe: Komposition
 id: aufgabe-13-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 13
 

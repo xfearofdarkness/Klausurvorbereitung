@@ -152,31 +152,31 @@ quelle: DiskreteMathematikVLHO.pdf, Folien 28-29
 
 Nicht als Äquivalenz: Es gilt nur die Implikation \(\exists x \forall y B(x,y) \to \forall y \exists x B(x,y)\). Gleichartige Quantoren (\(\forall\forall\) oder \(\exists\exists\)) dürfen vertauscht werden.
 
-## Aufgabe: Aufgabe 1 (Variante)
+## Aufgabe: De Morgan
 id: aufgabe-1-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 1
 
 Seien \(A_1\) und \(A_2\) Aussagen. Beweisen oder widerlegen Sie mit einer Wahrheitstabelle: \[\neg(A_1 \land A_2) \leftrightarrow (\neg A_1 \lor \neg A_2)\]
 
-## Aufgabe: Aufgabe 2 (Variante)
+## Aufgabe: Der Lügner
 id: aufgabe-2-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 2
 
 Entlarven Sie durch explizite Verwendung der Aussagenlogik den Lügner: In einer Welt, in der jeder Mensch entweder stets lügt oder stets die Wahrheit sagt, fragt eine Kommissarin den Verdächtigen Herrn K. nach ihm und seinem Bruder. Herr K. antwortet: „Mindestens einer von uns beiden ist ein Lügner.“ Was weiß die Kommissarin nun über Herrn K. und seinen Bruder?
 
-## Aufgabe: Aufgabe 3 (Variante)
+## Aufgabe: Mehrstellige Prädikate
 id: aufgabe-3-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 3
 
 Formulieren Sie ein drei- und ein fünfstelliges Prädikat aus dem Bereich der Mathematik.
 
-## Aufgabe: Aufgabe 4 (Variante)
+## Aufgabe: Aussagen mit Quantoren
 id: aufgabe-4-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 4
 
 Formulieren Sie mit Prädikaten und Quantoren: a) Alle Katzen haben Schnurrhaare. b) Alles ist Pflanze und braucht Licht. c) Es gibt wenigstens einen Fluss nördlich von Dessau. d) Es existiert ein gemeinsamer Onkel von Mia und Leon. Hinweis: Dass ein Objekt \(x\) eine Banane ist, würden Sie als Prädikat durch „Banane(\(x\))“ ausdrücken.
 
-## Aufgabe: Aufgabe 5 (Variante)
+## Aufgabe: Quantoren im Gitter
 id: aufgabe-5-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 5
 

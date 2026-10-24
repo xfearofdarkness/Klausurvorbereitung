@@ -211,43 +211,43 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 115
 
 \(T^{n,0}_f(x) = \sum_{i=0}^{n} \frac{x^i}{i!}\), denn beim Ableiten ändert sich die Exponentialfunktion nicht und damit ist \(f^{(i)}(0) = e^0 = 1\) für alle \(i\).
 
-## Aufgabe: Aufgabe 18 (Variante)
+## Aufgabe: Ableitung einer geraden Funktion
 id: aufgabe-18-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 18
 
 Zeigen Sie: Ist \(f\) gerade und in 0 differenzierbar, so ist \(f'(0) = 0\).
 
-## Aufgabe: Aufgabe 19 (Variante)
+## Aufgabe: Produktregel
 id: aufgabe-19-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 19
 
 a) Differenzieren Sie die Funktion \(h(x) := x^2 \cdot \sin x \cdot e^{-x}\).<br>b) Leiten Sie \(h'\) ein weiteres Mal ab.
 
-## Aufgabe: Aufgabe 20 (Variante)
+## Aufgabe: Differentialquotient
 id: aufgabe-20-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 20
 
 Betrachten Sie \(f(x) := 2x^2 - 5x\). Bilden Sie die Ableitung dieser Funktion unter Verwendung des Differentialquotienten.
 
-## Aufgabe: Aufgabe 21 (Variante)
+## Aufgabe: Kettenregel
 id: aufgabe-21-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 21
 
 Differenzieren Sie die Funktionen \[g_1(x) := \sqrt{2 + \sin x}, \quad g_2(x) := \ln(x^2 + 1), \quad g_3(x) := e^{\sin x}\] und geben Sie zuvor den jeweiligen Definitionsbereich an.
 
-## Aufgabe: Aufgabe 22 (Variante)
+## Aufgabe: Lokale Extrema
 id: aufgabe-22-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 22
 
 Bestimmen Sie sämtliche lokalen Extrema von \[f: \,]0, \infty[ \to \mathbb{R}, \quad f(x) := \frac{\ln x}{x^2}\]
 
-## Aufgabe: Aufgabe 23 (Variante)
+## Aufgabe: Taylorpolynom
 id: aufgabe-23-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 23
 
 Betrachten Sie \(f(x) = x^3 - 4x^2 + x - 5\). Bilden Sie \(T^{3}_{f,0}(x)\). Was fällt Ihnen am Ergebnis auf?
 
-## Aufgabe: Aufgabe 24 (Variante)
+## Aufgabe: Taylorpolynome des Kosinus
 id: aufgabe-24-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 24
 

@@ -124,13 +124,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 160
 
 Wenn \(A = A^T\) gilt, d. h. \(a_{ij} = a_{ji}\) für alle Einträge.
 
-## Aufgabe: Aufgabe 29 (Typ)
+## Aufgabe: Matrixprodukt
 id: 1p8eg6a
 generator: matrixprodukt-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 29
 
-## Aufgabe: Aufgabe 30 (Variante)
+## Aufgabe: Symmetrische Matrix
 id: aufgabe-30-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 30
 

@@ -117,13 +117,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 197
 
 Die Spalten (Zeilen) von \(A\) sind linear unabhängig, es gilt \(\operatorname{Rang} A = n\), und die Inverse \(A^{-1}\) existiert (der große Äquivalenzsatz).
 
-## Aufgabe: Aufgabe 33 (Typ)
+## Aufgabe: Determinante
 id: 1yg56bb
 generator: determinante-3x3
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 33
 
-## Aufgabe: Aufgaben 34, 35 (Typ)
+## Aufgabe: Unabhängig und invertierbar
 id: sj664k
 generator: unabhaengig-invertierbar
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Es kommen abhängige und unabhängige Fälle vor.

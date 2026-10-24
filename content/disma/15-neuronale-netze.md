@@ -122,7 +122,7 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 353
 
 Nein. Dafür braucht man ein mehrschichtiges Netz; dass es mit einer Schicht nicht geht, bewies M. Minsky 1969.
 
-## Aufgabe: Perzeptron auf das xor trainieren
+## Aufgabe: Perzeptron auf XOR trainieren
 id: xor-trainieren
 quelle: DiskreteMathematikVLHO.pdf, Folie 351
 

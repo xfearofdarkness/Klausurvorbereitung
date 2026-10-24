@@ -93,13 +93,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 220
 
 Das charakteristische Polynom \(\lambda^2 + 1\) ist im Reellen nicht zu faktorisieren. Es gibt keine reellen Eigenwerte. Im Komplexen gilt \(\lambda^2 + 1 = (\lambda + \mathrm{i})(\lambda - \mathrm{i})\), und \(A\) hat die komplexen Eigenwerte \(\lambda_{1,2} = \pm\mathrm{i}\).
 
-## Aufgabe: Aufgabe 38 (Typ)
+## Aufgabe: Eigenwerte
 id: 13lzoof
 generator: eigenwerte-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Die Eigenwerte sind stets ganzzahlig.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 38
 
-## Aufgabe: Aufgabe 39 (Variante)
+## Aufgabe: Wiederholung bis Eigenwerte
 id: aufgabe-39-variante
 notiz: Fragt den Stoff der Kapitel Vektorräume bis Eigenwerte ab. Die Theoriefragen sind auch als Karteikarten der jeweiligen Themen enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 39

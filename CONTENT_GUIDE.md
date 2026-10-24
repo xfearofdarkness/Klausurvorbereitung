@@ -114,7 +114,7 @@ Sie stammen aus zwei Quellen:
 - **Übungsblätter:** Aufgaben eines offiziellen Übungsblatts. Sie werden nicht
   wortgleich übernommen, damit sich Lösungen zum Blatt nicht abschreiben
   lassen: Aufgaben mit konkreten Daten werden zu Varianten mit anderen Daten
-  (`ref` z. B. "Aufgabe 7 (Variante)") oder zu Rechenmodulen; offene Aufgaben
+  oder zu Rechenmodulen; offene Aufgaben
   werden so umformuliert, dass sie denselben Stoff üben. Jede Variante muss
   lösbar sein und darf die Lösung einer anderen Blattaufgabe nicht verraten.
 - **Folien:** Aufgaben, die ein auf den Folien beschriebenes oder
@@ -127,10 +127,10 @@ Regeln:
 - Lösungen werden nie erfunden oder aus KI-Wissen ergänzt. Feste Aufgaben
   haben keine hinterlegte Lösung; Rechenmodule berechnen sie algorithmisch.
 - Theoriefragen eines Übungsblatts, deren Antwort explizit auf den Folien steht, dürfen zusätzlich als `flashcards` mit Folien-`source` geführt werden.
-- `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5" oder "FCFS"),
-  `source` die Pflicht-Quellenangabe: die Aufgabe des Übungsblatts oder die
-  Folien, die das Verfahren erklären und vorrechnen.
-- `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
+- `ref` ist ein kurzer deutscher Titel zum Inhalt (z. B. "Umkehrfunktion" oder "FCFS"), ohne Aufgabennummer und ohne "(Variante)". Die Nummer steht nur in `source`.
+  `source` ist die Pflicht-Quellenangabe: die Aufgabe des Übungsblatts oder die
+  Folien, die das Verfahren erklären und vorrechnen. Die Oberfläche kürzt sie beim Anzeigen.
+- `note` ist optional und wird in Üben nicht angezeigt.
 
 ### Generierte Rechenmodule
 
@@ -138,8 +138,8 @@ Rechenaufgaben, deren Lösung sich eindeutig berechnen lässt, dürfen als
 generierte Rechenmodule geführt werden (`generator`-Feld statt `task`):
 
 - Ein Modul entspricht genau einem Aufgabentyp: einer Aufgabe eines
-  Übungsblatts (Kennzeichnung z. B. "Aufgabe 5 (Typ)") oder einem Verfahren
-  der Folien. `ref` und `source` verweisen darauf.
+  Übungsblatts oder einem Verfahren
+  der Folien. `ref` nennt den Inhalt, `source` das Blatt oder die Folien.
 - Die Zahlen werden zufällig erzeugt; die Lösung samt Rechenweg wird vom
   Generator algorithmisch berechnet — nie aus KI-Wissen ergänzt. Der
   Rechenweg folgt dem Vorgehen und den Regeln der Folien.

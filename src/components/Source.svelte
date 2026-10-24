@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { formatSource } from "../lib/formatSource";
+
   interface Props {
     source: string;
     className?: string;
@@ -8,5 +10,5 @@
 </script>
 
 {#if source}
-  <div class={className}>{source}</div>
+  <div class={className}>{formatSource(source)}</div>
 {/if}

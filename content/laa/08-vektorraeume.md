@@ -94,7 +94,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 145
 
 Die Vektoren \(\vec{e}_1 = (1, 0, \ldots, 0)^T\) bis \(\vec{e}_n = (0, \ldots, 0, 1)^T\). Bei jedem ist genau eine Koordinate 1 und alle anderen sind 0.
 
-## Aufgabe: Aufgabe 28 (Variante)
+## Aufgabe: Basis im Raum
 id: aufgabe-28-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 28
 

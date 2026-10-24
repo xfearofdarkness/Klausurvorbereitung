@@ -169,13 +169,13 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 58
 
 Bei einem \(n\)-Tupel ist die Anordnung der nummerierten, nicht notwendig verschiedenen Objekte zumeist von Bedeutung; bei einer Menge gibt es keine Reihenfolge.
 
-## Aufgabe: Aufgabe 6 (Variante)
+## Aufgabe: Russellsche Menge
 id: aufgabe-6-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 6
 
 Betrachten Sie die Menge \(M\) aller Mengen, die sich nicht selbst als Element enthalten. Schreiben Sie \(M\) formal auf und untersuchen Sie beide Fälle \(M \in M\) und \(M \notin M\). Was folgt daraus?
 
-## Aufgabe: Aufgabe 7 (Variante)
+## Aufgabe: Vereinigung und Schnitt
 id: aufgabe-7-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 7
 
@@ -187,13 +187,13 @@ generator: potenzmenge
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 8; DiskreteMathematikVLHO.pdf, Folien 52 und 139
 
-## Aufgabe: Aufgabe 9 (Variante)
+## Aufgabe: Vereinigung mit dem Schnitt
 id: aufgabe-9-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 9
 
 Beweisen Sie, dass die folgende Behauptung gilt: \(x \in A \cup (A \cap B) \Rightarrow x \in A\).
 
-## Aufgabe: Aufgabe 10 (Variante)
+## Aufgabe: Vereinigungen und Schnitte
 id: aufgabe-10-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 10
 
@@ -205,7 +205,7 @@ generator: kartesisches-produkt
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 11; DiskreteMathematikVLHO.pdf, Folie 57
 
-## Aufgabe: Aufgabe 11 (Variante)
+## Aufgabe: Dreifaches Produkt
 id: aufgabe-11-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 11
 
