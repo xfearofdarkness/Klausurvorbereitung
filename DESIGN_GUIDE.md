@@ -100,6 +100,12 @@ Regeln:
 - Die Themenauswahl zeigt immer alle Themen eines Fachs mit
   Fortschritt; kein seitliches Suchen in Tab-Leisten.
 - Fach, Thema und Modus sind in jeder Layoutstufe sichtbar.
+- Die Lage der Navigation wählt ein kleiner Knopf „Ansicht“. In der
+  Seitenleiste steht er im Kopf neben dem Knopf zum Einklappen, bei
+  Navigation oben am rechten Ende der Kopfzeile. Er öffnet ein kleines
+  Menü mit den drei Lagen als Text mit Icon, die aktive ist
+  hervorgehoben. Escape, ein Klick daneben oder eine Wahl schließt es.
+  Die Seitenleiste hat keine Fußzeile.
 
 ## Designprinzipien
 
@@ -113,7 +119,7 @@ Regeln:
 - Visuelle Hierarchie muss sofort erkennbar sein.
 - Aktives Thema und aktiver Modus müssen jederzeit sichtbar sein.
 - Farbe trägt Bedeutung (Status, Kategorie), nicht Dekoration.
-- Wählbare Elemente (Modusleiste, Statusanzeigen, Themenzeilen, Bewertungsbuttons, Suchknopf, Layoutschalter) haben keinen Rand. Die Fläche liegt nur wenig über dem Untergrund. Hover ist eine Stufe heller, der aktive Zustand deutlich heller mit hellerer Schrift. Der Fokusring erscheint nur bei Tastaturfokus.
+- Wählbare Elemente (Modusleiste, Statusanzeigen, Themenzeilen, Bewertungsbuttons, Suchknopf, Ansicht-Knopf und seine Menüeinträge) haben keinen Rand. Die Fläche liegt nur wenig über dem Untergrund. Hover ist eine Stufe heller, der aktive Zustand deutlich heller mit hellerer Schrift. Der Fokusring erscheint nur bei Tastaturfokus.
 - Die Suche ist ein Knopf in der Kopfzeile neben der Modusleiste und öffnet einen Dialog. Strg+K, Cmd+K und / öffnen ihn, Escape schließt ihn. Auf schmalen Displays bleibt ein Icon-Knopf.
 - Keine Verläufe, Glüheffekte oder Schatten als Schmuck.
 

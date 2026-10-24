@@ -3,6 +3,7 @@ import cards from "@tabler/icons/outline/cards.svg?raw";
 import chevronDown from "@tabler/icons/outline/chevron-down.svg?raw";
 import chevronLeft from "@tabler/icons/outline/chevron-left.svg?raw";
 import close from "@tabler/icons/outline/x.svg?raw";
+import layout from "@tabler/icons/outline/layout.svg?raw";
 import layoutLeft from "@tabler/icons/outline/layout-sidebar.svg?raw";
 import layoutRight from "@tabler/icons/outline/layout-sidebar-right.svg?raw";
 import layoutTop from "@tabler/icons/outline/layout-navbar.svg?raw";
@@ -20,6 +21,7 @@ export const ICONS = {
   chevronDown,
   chevronLeft,
   close,
+  layout,
   layoutLeft,
   layoutRight,
   layoutTop,

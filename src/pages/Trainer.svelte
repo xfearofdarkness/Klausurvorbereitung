@@ -6,7 +6,7 @@
   import SearchDialog from "../components/SearchDialog.svelte";
   import StudyMode from "../components/StudyMode.svelte";
   import Icon from "../components/Icon.svelte";
-  import LayoutSwitch from "../components/LayoutSwitch.svelte";
+  import LayoutMenu from "../components/LayoutMenu.svelte";
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
   import { catalog } from "../data/catalog";
@@ -294,24 +294,24 @@
     <aside class="sidebar" aria-label="Themen">
       <div class="sidebar-head">
         <a class="sidebar-back" href="index.html"><Icon name="chevronLeft" /> Übersicht</a>
-        <button
-          class="icon-btn icon-btn-small"
-          type="button"
-          aria-label="Seitenleiste einklappen"
-          title="Seitenleiste einklappen"
-          onclick={() => setSidebarCollapsed(true)}
-        >
-          <Icon name={navPlacement === "right" ? "sidebarRightCollapse" : "sidebarLeftCollapse"} />
-        </button>
+        <div class="sidebar-head-actions">
+          <LayoutMenu value={navPlacement} onChange={changeNavPlacement} />
+          <button
+            class="icon-btn icon-btn-small"
+            type="button"
+            aria-label="Seitenleiste einklappen"
+            title="Seitenleiste einklappen"
+            onclick={() => setSidebarCollapsed(true)}
+          >
+            <Icon name={navPlacement === "right" ? "sidebarRightCollapse" : "sidebarLeftCollapse"} />
+          </button>
+        </div>
       </div>
       <div class="sidebar-subject">
         <span class="sidebar-subject-title">{subject.title}</span>
         {#if subject.subtitle}<span class="sidebar-subject-subtitle">{subject.subtitle}</span>{/if}
       </div>
       <TopicList topics={subject.topics} progress={topicProgress} {currentTopicIndex} onSelect={selectTopic} />
-      <div class="sidebar-footer">
-        <LayoutSwitch value={navPlacement} onChange={changeNavPlacement} />
-      </div>
     </aside>
   {/if}
 
@@ -342,7 +342,7 @@
           <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} />
           <SearchDialog {subject} onSelect={openHit} />
           <div class="topbar-layout-switch">
-            <LayoutSwitch value={navPlacement} onChange={changeNavPlacement} />
+            <LayoutMenu value={navPlacement} onChange={changeNavPlacement} />
           </div>
         {:else}
           <h1 class="topbar-title topbar-title-fallback">Klausurtrainer</h1>
