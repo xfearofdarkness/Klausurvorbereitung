@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { catalog } from "../src/data/catalog";
-import { buildPublicFiles, PUBLIC_FORMAT, SITE_ORIGIN } from "./publish_content";
+import { buildPublicFiles, PUBLIC_FORMAT, SITE_ORIGIN, topicModesLine } from "./publish_content";
 
 describe("öffentliche Inhaltsdateien", () => {
   const files = buildPublicFiles();
@@ -35,5 +35,26 @@ describe("öffentliche Inhaltsdateien", () => {
     const sitemap = byName.get("sitemap.xml") ?? "";
     expect(sitemap).toContain(`${SITE_ORIGIN}/llms.txt`);
     for (const subject of catalog) expect(sitemap).toContain(`${SITE_ORIGIN}/content/${subject.id}.md`);
+  });
+
+  it("sagt je Thema, welche Modi es gibt", () => {
+    expect(topicModesLine({ lernen: 2, karteikarten: 0, aufgaben: 3 })).toBe("Lernen: 2. Karteikarten: keine. Aufgaben: 3");
+    expect(topicModesLine({ lernen: 0, karteikarten: 4, aufgaben: 0 })).toBe("Lernen: keine. Karteikarten: 4. Aufgaben: keine");
+    const llms = byName.get("llms.txt") ?? "";
+    expect(llms).toContain("Üben gibt es nur für Themen mit Aufgaben.");
+    for (const subject of catalog) {
+      const data = JSON.parse(byName.get(`content/${subject.id}.json`) ?? "{}") as {
+        topics: Array<{ title: string; modes: string }>;
+      };
+      const markdown = byName.get(`content/${subject.id}.md`) ?? "";
+      for (const topic of data.topics) {
+        expect(topic.modes).toMatch(/^Lernen: (?:[1-9]\d*|keine)\. Karteikarten: (?:[1-9]\d*|keine)\. Aufgaben: (?:[1-9]\d*|keine)$/);
+        expect(markdown).toContain(`## ${topic.title}\n\n${topic.modes}\n`);
+      }
+    }
+    const rabs = JSON.parse(byName.get("content/rabs.json") ?? "{}") as { topics: Array<{ title: string; modes: string }> };
+    expect(rabs.topics.find((topic) => topic.title === "Einordnung & Historie")?.modes).toContain("Aufgaben: keine");
+    const disma = JSON.parse(byName.get("content/disma.json") ?? "{}") as { topics: Array<{ title: string; modes: string }> };
+    expect(disma.topics.find((topic) => topic.title === "Aussagen- und Prädikatenlogik")?.modes).toMatch(/Aufgaben: [1-9]/);
   });
 });

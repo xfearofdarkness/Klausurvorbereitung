@@ -49,8 +49,11 @@ Sonderlogik:
 - Modi sind nach Tätigkeit getrennt, nicht nach Inhaltsart: Lernen
   (verstehen), Karteikarten (abrufen und wiederholen) und Üben (selbst
   anwenden). Alle drei haben einen festen Platz in der Modusleiste.
-  Modi ohne Inhalte im aktuellen Thema werden ausgegraut und sind nicht
-  wählbar, damit die Plätze beim Themenwechsel nicht springen.
+  Modi ohne Inhalte im aktuellen Thema bleiben in der Leiste, sind
+  ausgegraut und nicht wählbar, damit die Plätze beim Themenwechsel
+  nicht springen. Der Knopf bleibt erreichbar und nennt den fehlenden
+  Inhalt, etwa „Üben (keine Aufgaben in diesem Thema)“, ohne weiteren
+  sichtbaren Text.
 - Der Modus „Lernen“ zeigt die Lernkarten und bettet die Abläufe des
   Themas ein, jeweils direkt nach der Lernkarte, die sie
   veranschaulichen. Ein vorgerechnetes Beispiel steht so neben seiner
