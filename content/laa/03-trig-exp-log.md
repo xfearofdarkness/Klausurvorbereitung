@@ -7,7 +7,7 @@ icon: 📐
 ## Karte: Sinus und Kosinus
 quelle: VorlesungFolienLAA-2026.pdf, Folien 37, 39
 
-Schwingungsprozesse tauchen besonders in der Physik und den Ingenieurwissenschaften sehr häufig auf. Die sie beschreibenden Funktionen heißen Sinus und Kosinus (\(\sin\) und \(\cos\)). Sie gehen durch Verschieben um \(\frac{\pi}{2}\) ineinander über und sind \(2\pi\)-periodisch.
+Schwingungsprozesse tauchen besonders in der Physik und den Ingenieurwissenschaften sehr häufig auf; die sie beschreibenden Funktionen heißen Sinus und Kosinus (\(\sin\) und \(\cos\)). Sie gehen durch Verschieben um \(\frac{\pi}{2}\) ineinander über und sind \(2\pi\)-periodisch.
 
 ## Karte: Nullstellen von Sinus und Kosinus
 tag: formel
@@ -85,7 +85,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 41, 43
 id: 1fhx88u
 quelle: VorlesungFolienLAA-2026.pdf, Folie 44
 
-\(e = 2{,}71828\ldots\). Die Basis der Exponentialfunktion \(e^x\) mit reellem Exponenten \(x\).
+\(e = 2{,}71828\ldots\): die Basis der Exponentialfunktion \(e^x\) mit reellem Exponenten \(x\).
 
 ## Frage: In welchem Zusammenhang stehen Exponentialfunktion und natürlicher Logarithmus?
 id: 1lfhnjm
@@ -109,13 +109,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 47
 id: 148xtnw
 quelle: VorlesungFolienLAA-2026.pdf, Folie 48
 
-\(\log_a xy = \log_a x + \log_a y\). Der Logarithmus eines Produkts ist die Summe der Logarithmen (für \(a, x, y > 0\)).
+\(\log_a xy = \log_a x + \log_a y\): der Logarithmus eines Produkts ist die Summe der Logarithmen (für \(a, x, y > 0\)).
 
 ## Frage: Wie lautet die Logarithmusregel für eine Potenz, also \(\log_a x^y\)?
 id: 1od9n90
 quelle: VorlesungFolienLAA-2026.pdf, Folie 48
 
-\(\log_a x^y = y \log_a x\). Der Exponent darf vor den Logarithmus gezogen werden. Für Quotienten gilt außerdem \(\log_a \frac{x}{y} = \log_a x - \log_a y\).
+\(\log_a x^y = y \log_a x\): der Exponent darf vor den Logarithmus gezogen werden. Für Quotienten gilt außerdem \(\log_a \frac{x}{y} = \log_a x - \log_a y\).
 
 ## Aufgabe: Kosinus am Einheitskreis
 id: aufgabe-7-variante

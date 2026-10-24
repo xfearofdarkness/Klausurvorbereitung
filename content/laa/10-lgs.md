@@ -26,7 +26,7 @@ Der Vektor \(\vec{x}\) heißt Lösungsvektor des LGSs, wenn seine Komponenten \(
 tag: wichtig
 quelle: VorlesungFolienLAA-2026.pdf, Folien 165-166
 
-Beim Lösen sind gestattet: Tauschen von Zeilen; Addition eines (ggf. negativen) Vielfachen einer Zeile zu einer anderen; Multiplikation einer Zeile mit einer Zahl ungleich Null. Diese Operationen ändern die Lösungsmenge nicht und genügen, um jedes lösbare LGS zu lösen. Sie sind der Kern des Gauß-Algorithmus.
+Beim Lösen sind gestattet: Tauschen von Zeilen; Addition eines (ggf. negativen) Vielfachen einer Zeile zu einer anderen; Multiplikation einer Zeile mit einer Zahl ungleich Null. Diese Operationen ändern die Lösungsmenge nicht und genügen, um jedes lösbare LGS zu lösen: sie sind der Kern des Gauß-Algorithmus.
 
 ## Karte: Beispiel: Gauß-Algorithmus
 tag: beispiel
@@ -43,7 +43,7 @@ Ein LGS mit \(m\) Gleichungen und \(m\) Variablen kann unter gewissen Voraussetz
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 168-169
 
-Beispiel: \(3x_1 + 6x_2 = 9\), \(4x_1 + 8x_2 = 12\) führt nach Umformungen auf eine Nullzeile \(0 = 0\). Eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(x_1 + 2x_2 = 3\) mit unendlich vielen Lösungen in der Abhängigkeit \(x_1 = 3 - 2x_2\): Eine konkrete Lösung ergibt sich durch konkretes Wählen von \(x_2\).
+Beispiel: \(3x_1 + 6x_2 = 9\), \(4x_1 + 8x_2 = 12\) führt nach Umformungen auf eine Nullzeile \(0 = 0\): eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(x_1 + 2x_2 = 3\) mit unendlich vielen Lösungen in der Abhängigkeit \(x_1 = 3 - 2x_2\): Eine konkrete Lösung ergibt sich durch konkretes Wählen von \(x_2\).
 
 ## Karte: Keine Lösung
 tag: beispiel
@@ -84,13 +84,13 @@ Die erweiterte Koeffizientenmatrix wird so umgeformt, dass im linken Teil die Ei
 id: 1ftg0ge
 quelle: VorlesungFolienLAA-2026.pdf, Folien 168-169
 
-Sie ist eine wahre Aussage und schränkt die Lösungsmenge nicht ein. Es verbleiben Gleichungen mit Abhängigkeiten (z. B. \(x_1 = 3 - 2x_2\)). Das LGS hat dann unendlich viele Lösungen, und eine konkrete Lösung ergibt sich durch konkretes Wählen der freien Variablen.
+Sie ist eine wahre Aussage und schränkt die Lösungsmenge nicht ein. Es verbleiben Gleichungen mit Abhängigkeiten (z. B. \(x_1 = 3 - 2x_2\)): das LGS hat dann unendlich viele Lösungen, und eine konkrete Lösung ergibt sich durch konkretes Wählen der freien Variablen.
 
 ## Frage: Was bedeutet eine Zeile „\(0 = 1\)“ nach den Umformungen?
 id: kerljc
 quelle: VorlesungFolienLAA-2026.pdf, Folie 170
 
-Eine falsche Aussage. Das ursprüngliche LGS hat keine Lösung.
+Eine falsche Aussage: das ursprüngliche LGS hat keine Lösung.
 
 ## Frage: Wann heißt ein lineares Gleichungssystem homogen, wann inhomogen?
 id: 13owxd1
@@ -102,13 +102,13 @@ Homogen, wenn alle Inhomogenitäten \(b_j = 0\) sind; sonst inhomogen. Die \(a_{
 id: 1rii7ql
 quelle: VorlesungFolienLAA-2026.pdf, Folien 172-173
 
-\(A\vec{x} = \vec{b}\) mit der Koeffizientenmatrix \(A\) und dem Inhomogenitätsvektor \(\vec{b}\). Beim Rechnen verzichtet man gern auf \(\vec{x}\), da alle wichtigen Informationen in \(A\) und \(\vec{b}\) stehen. Übrig bleibt die erweiterte Koeffizientenmatrix \((A|\vec{b})\).
+\(A\vec{x} = \vec{b}\) mit der Koeffizientenmatrix \(A\) und dem Inhomogenitätsvektor \(\vec{b}\). Beim Rechnen verzichtet man gern auf \(\vec{x}\), da alle wichtigen Informationen in \(A\) und \(\vec{b}\) stehen: übrig bleibt die erweiterte Koeffizientenmatrix \((A|\vec{b})\).
 
 ## Frage: Was gilt für Linearkombinationen von Lösungen eines homogenen LGS?
 id: 4jt82x
 quelle: VorlesungFolienLAA-2026.pdf, Folien 176-177
 
-Sie sind wieder Lösungen. Die Lösungsmenge eines homogenen LGS ist ein Vektorraum (Lösungsraum).
+Sie sind wieder Lösungen: die Lösungsmenge eines homogenen LGS ist ein Vektorraum (Lösungsraum).
 
 ## Frage: Wie ist die Lösungsmenge eines inhomogenen LGS aufgebaut?
 id: 1230j8i

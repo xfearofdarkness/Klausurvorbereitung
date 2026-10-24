@@ -41,11 +41,27 @@ interface PublishedExercise {
 interface PublishedTopic {
   id?: string;
   title: string;
+  modes: string;
   icon?: string;
   cards: PublishedCard[];
   flashcards: PublishedFlashcard[];
   exercises: PublishedExercise[];
   walkthroughs: Walkthrough[];
+}
+
+interface ModeCounts {
+  lernen: number;
+  karteikarten: number;
+  aufgaben: number;
+}
+
+function modeCount(label: string, count: number): string {
+  return `${label}: ${count > 0 ? count : "keine"}`;
+}
+
+/** Eine Zeile je Thema, damit Agenten den Modus nicht erst anklicken müssen. */
+export function topicModesLine(counts: ModeCounts): string {
+  return `${modeCount("Lernen", counts.lernen)}. ${modeCount("Karteikarten", counts.karteikarten)}. ${modeCount("Aufgaben", counts.aufgaben)}`;
 }
 
 interface PublishedSubject {
@@ -69,6 +85,11 @@ function publishTopic(topic: RawTopic): PublishedTopic {
   return {
     ...(topic.id ? { id: topic.id } : {}),
     title: topic.title,
+    modes: topicModesLine({
+      lernen: (topic.cards?.length ?? 0) + (topic.walkthroughs?.length ?? 0),
+      karteikarten: topic.flashcards?.length ?? 0,
+      aufgaben: topic.exercises?.length ?? 0
+    }),
     ...(topic.icon ? { icon: topic.icon } : {}),
     cards: (topic.cards ?? []).map((card) => ({
       title: card.title ?? "",
@@ -117,7 +138,7 @@ function block(title: string, body: string, source: string): string[] {
 function markdownFor(subject: PublishedSubject): string {
   const lines = [`# ${subject.title}`, "", subject.subtitle, ""];
   for (const topic of subject.topics) {
-    lines.push(`## ${topic.title}`, "");
+    lines.push(`## ${topic.title}`, "", topic.modes, "");
     if (topic.cards.length > 0) {
       lines.push("### Lernen", "");
       for (const card of topic.cards) lines.push(...block(card.title, card.body, card.source));
@@ -158,6 +179,7 @@ function llmsTxt(subjects: PublishedSubject[]): string {
     `> Statischer Klausurtrainer. Produktion: ${SITE_ORIGIN}`,
     "",
     "Die Dateien unter /content/ enthalten nur, was die App ausliefert: Lerntext, Karteikarten mit Rückseite, Aufgaben und, wo die App eine Lösung erzeugt, ein festes Beispiel mit Seed 1. Abläufe stehen im JSON vollständig, im Markdown als Schritttext. Vorlesungsfolien sind nicht enthalten.",
+    "Üben gibt es nur für Themen mit Aufgaben.",
     "",
     "## Fächer",
     ""

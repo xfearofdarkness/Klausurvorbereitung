@@ -293,6 +293,11 @@ Der Build schreibt aus den kompilierten Fachdaten, nie aus `sources/`:
   Aufgaben ohne Generator haben keine hinterlegte Lösung.
 - `/content/<fach-id>.md` ist derselbe Stoff als Text: Lernen,
   Karteikarten, Üben, Abläufe als Schritttext.
+- Jedes Thema nennt in JSON (`modes`) und unter der Markdown-Überschrift,
+  welche Modi es gibt: `Lernen: 12. Karteikarten: 8. Aufgaben: keine.`
+  Die Zahl bei Lernen zählt Lernkarten und Abläufe. `keine` heißt, der
+  Modus ist in dem Thema nicht wählbar. `/llms.txt` sagt: Üben gibt es
+  nur für Themen mit Aufgaben.
 
 `format` ist `1`. Fortschritts-Ids sind die `id`s der Karteikarten und
 Aufgaben.

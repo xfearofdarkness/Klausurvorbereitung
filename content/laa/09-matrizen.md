@@ -62,7 +62,7 @@ Bei quadratischen Matrizen aus \(M(n \times n)\): Eine Diagonalmatrix hat nur au
 tag: def
 quelle: VorlesungFolienLAA-2026.pdf, Folie 159
 
-Aus \(A := (a_{ij})\) ergibt sich die transponierte Matrix durch \(A^T := (a_{ji})\). Zeilen und Spalten werden vertauscht. Es gilt \((AB)^T = B^T A^T\). Eine quadratische Matrix \(A\) heißt invertierbar, wenn ein \(B \in M(n \times n)\) existiert mit \(AB = E_n\, (= BA)\). Für \(B\) wird dann \(A^{-1}\) geschrieben; sie heißt Inverse von \(A\).
+Aus \(A := (a_{ij})\) ergibt sich die transponierte Matrix durch \(A^T := (a_{ji})\): Zeilen und Spalten werden vertauscht. Es gilt \((AB)^T = B^T A^T\). Eine quadratische Matrix \(A\) heißt invertierbar, wenn ein \(B \in M(n \times n)\) existiert mit \(AB = E_n\, (= BA)\). Für \(B\) wird dann \(A^{-1}\) geschrieben; sie heißt Inverse von \(A\).
 
 ## Karte: Symmetrische Matrix
 tag: def
@@ -98,19 +98,19 @@ Für \(A \in M(m \times n)\) und \(B \in M(n \times p)\) gilt \(AB = \left(\sum_
 id: 4m6ng
 quelle: VorlesungFolienLAA-2026.pdf, Folie 154
 
-Die Anzahl ihrer linear unabhängigen Spaltenvektoren. Was gleich der Anzahl ihrer linear unabhängigen Zeilenvektoren ist.
+Die Anzahl ihrer linear unabhängigen Spaltenvektoren, was gleich der Anzahl ihrer linear unabhängigen Zeilenvektoren ist.
 
 ## Frage: Gilt für Matrizen \(AB = BA\)?
 id: q5ata2
 quelle: VorlesungFolienLAA-2026.pdf, Folie 155
 
-Nein. Die Matrizenmultiplikation ist allgemein nicht kommutativ.
+Nein, die Matrizenmultiplikation ist allgemein nicht kommutativ.
 
 ## Frage: Was ist die transponierte Matrix \(A^T\)?
 id: j5xvs6
 quelle: VorlesungFolienLAA-2026.pdf, Folie 159
 
-\(A^T := (a_{ji})\). Zeilen und Spalten werden vertauscht. Für Produkte gilt die Regel \((AB)^T = B^T A^T\).
+\(A^T := (a_{ji})\): Zeilen und Spalten werden vertauscht. Für Produkte gilt die Regel \((AB)^T = B^T A^T\).
 
 ## Frage: Wann heißt eine Matrix invertierbar?
 id: 1se33z6

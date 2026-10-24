@@ -45,7 +45,7 @@ Die Performanz eines Caches misst die Hit-Ratio = Hits / (Hits + Misses). Gründ
 ## Karte: Direkte Speicherverwaltung
 quelle: 02_rabs_speicher.pdf, Folien 17-18
 
-Bei direkter Speicherverwaltung läuft immer genau ein Programm neben dem Betriebssystem. Der Speicher wird nur zwischen beiden geteilt, beide liegen an festen Adressen, eine MMU ist nicht nötig. Das gibt es nur noch in einfachen eingebetteten Systemen. Alle anderen Systeme nutzen Auslagerung mit logischem Adressraum, Swapping und Paging.
+Bei direkter Speicherverwaltung läuft immer genau ein Programm neben dem Betriebssystem. Der Speicher wird nur zwischen beiden geteilt, beide liegen an festen Adressen, eine MMU ist nicht nötig. Das gibt es nur noch in einfachen eingebetteten Systemen. Die weiteren Mechanismen der Folien sind Auslagerung (logischer Adressraum, Swapping) und virtueller Speicher (Paging).
 
 ## Karte: MMU und Adressumsetzung
 quelle: 02_rabs_speicher.pdf, Folie 19

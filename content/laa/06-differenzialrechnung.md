@@ -30,7 +30,7 @@ Mit ihr lässt sich zumeist etwas besser rechnen: \[f'(x) := \lim_{h \to 0} \fra
 ## Karte: Notationen der Ableitung
 quelle: VorlesungFolienLAA-2026.pdf, Folie 94
 
-Statt \(f'(x)\) schreibt man häufig \(\frac{df(x)}{dx}\) oder. Wenn \(f\) von der Zeit abhängt: \(\dot{f}(t)\) (bei Physikern beliebt). Das Intervall \(I\) wird zumeist als offen angenommen, weil das in der Theorie Vorteile bringt.
+Statt \(f'(x)\) schreibt man häufig \(\frac{df(x)}{dx}\) oder (wenn \(f\) von der Zeit abhängt) \(\dot{f}(t)\) (bei Physikern beliebt). Das Intervall \(I\) wird zumeist als offen angenommen, weil das in der Theorie Vorteile bringt.
 
 ## Karte: Ableitung von x² über den Differenzialquotienten
 tag: beispiel
@@ -72,7 +72,7 @@ Für differenzierbares \(f\) gilt \[\lim_{x \to x_0}(f(x) - f(x_0)) = \lim_{x \t
 tag: def
 quelle: VorlesungFolienLAA-2026.pdf, Folien 103-105
 
-Ist die Ableitung \(f'\) wiederum differenzierbar, erhält man die zweite Ableitung \(f'' := (f')' = \frac{d^2 f}{dx^2}\). Ist \(f\) insgesamt \(k\)-mal differenzierbar, erhält man die \(k\)-te Ableitung \[f^{(k)} = \frac{d^k f}{dx^k}\] Die 0-te Ableitung ist \(f^{(0)} := f\), die Funktion selbst. Achtung: \(f^k\) statt \(f^{(k)}\) zu schreiben ist falsch. Die Klammern vermeiden die Verwechselung mit der \(k\)-ten Potenz.
+Ist die Ableitung \(f'\) wiederum differenzierbar, erhält man die zweite Ableitung \(f'' := (f')' = \frac{d^2 f}{dx^2}\). Ist \(f\) insgesamt \(k\)-mal differenzierbar, erhält man die \(k\)-te Ableitung \[f^{(k)} = \frac{d^k f}{dx^k}\] Die 0-te Ableitung ist \(f^{(0)} := f\), die Funktion selbst. Achtung: \(f^k\) statt \(f^{(k)}\) zu schreiben ist falsch: die Klammern vermeiden die Verwechselung mit der \(k\)-ten Potenz.
 
 ## Karte: Geschwindigkeit und Beschleunigung
 tag: beispiel
@@ -96,7 +96,7 @@ Sei \(f\) \(n\)-mal differenzierbar und \(x_0\) mit \[f'(x_0) = \ldots = f^{(n-1
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 110-111
 
-\(f'(x) = 2x - 2\), \(f''(x) = 2\). Einzige Nullstelle der Ableitung: \(x = 1\) mit \(f''(1) = 2 > 0\). Dort liegt ein lokales Minimum mit \(f(1) = 4\). An den Rändern gilt \(f(-2) = 13\), \(f(2) = 5\); da \(f\) auf \([-2, 1[\) streng monoton fällt und auf \(]1, 2]\) streng monoton steigt, liegen bei \(x = \pm 2\) lokale Maxima. Vergleich der Funktionswerte: globales Minimum \(y = 4\) bei \(x = 1\), globales Maximum \(y = 13\) bei \(x = -2\).
+\(f'(x) = 2x - 2\), \(f''(x) = 2\). Einzige Nullstelle der Ableitung: \(x = 1\) mit \(f''(1) = 2 > 0\): dort liegt ein lokales Minimum mit \(f(1) = 4\). An den Rändern gilt \(f(-2) = 13\), \(f(2) = 5\); da \(f\) auf \([-2, 1[\) streng monoton fällt und auf \(]1, 2]\) streng monoton steigt, liegen bei \(x = \pm 2\) lokale Maxima. Vergleich der Funktionswerte: globales Minimum \(y = 4\) bei \(x = 1\), globales Maximum \(y = 13\) bei \(x = -2\).
 
 ## Karte: Warnung: Das Schulkriterium ist nicht die ganze Weisheit
 tag: wichtig
@@ -137,7 +137,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 89-90
 id: 3o93ho
 quelle: VorlesungFolienLAA-2026.pdf, Folien 91-92
 
-\(f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\). Inhaltlich ändert sich nichts. Der betrachtete Punkt heißt \(x\) statt \(x_0\) und der Abstand \(h\); mit dieser Form lässt sich zumeist etwas besser rechnen.
+\(f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}\). Inhaltlich ändert sich nichts: der betrachtete Punkt heißt \(x\) statt \(x_0\) und der Abstand \(h\); mit dieser Form lässt sich zumeist etwas besser rechnen.
 
 ## Frage: Welcher Zusammenhang besteht zwischen Differenzierbarkeit und Stetigkeit?
 id: 1wc27et
@@ -155,7 +155,7 @@ Für differenzierbare Funktionen \(f\) und \(g\) gilt: \((f \cdot g)'(x) = f'(x)
 id: 1b9edj5
 quelle: VorlesungFolienLAA-2026.pdf, Folie 98
 
-\(\left(\frac{f}{g}\right)'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}\). Dort, wo der Ausdruck definiert ist.
+\(\left(\frac{f}{g}\right)'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{g^2(x)}\), dort, wo der Ausdruck definiert ist.
 
 ## Frage: Wie lautet die Kettenregel?
 id: 1u25bn0
@@ -173,7 +173,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 99
 id: 78vus5
 quelle: VorlesungFolienLAA-2026.pdf, Folie 99
 
-\((x^s)' = s \cdot x^{s-1}\) für \(s \in \mathbb{R}\) und \((\sqrt{x})' = \frac{1}{2\sqrt{x}}\). Dabei die jeweiligen Definitionsbereiche beachten.
+\((x^s)' = s \cdot x^{s-1}\) für \(s \in \mathbb{R}\) und \((\sqrt{x})' = \frac{1}{2\sqrt{x}}\); dabei die jeweiligen Definitionsbereiche beachten.
 
 ## Frage: Was ist die 0-te Ableitung und warum schreibt man f⁽ᵏ⁾ mit Klammern?
 id: 1k8v4ok

@@ -14,19 +14,19 @@ quelle: 09_algorithm-patterns.pdf, Folien 2, 70
 tag: def
 quelle: 09_algorithm-patterns.pdf, Folie 4
 
-Auch: Brute-Force-Suche (brute force = rohe Gewalt), exhaustive search. Ziel: eine korrekte Lösung finden. Einfachster Ansatz: alle möglichen Lösungen durchprobieren, bis die richtige gefunden ist. Sehr aufwendig, manchmal aber das einzige Mittel der Wahl. Anwendungen: „Knacken“ von Passwörtern (Security), Spieltheorie (z. B. Computer-Schach).
+Auch: Brute-Force-Suche (brute force = rohe Gewalt), exhaustive search. Ziel: eine korrekte Lösung finden. Einfachster Ansatz: alle möglichen Lösungen durchprobieren, bis die richtige gefunden ist: sehr aufwendig, manchmal aber das einzige Mittel der Wahl. Anwendungen: „Knacken“ von Passwörtern (Security), Spieltheorie (z. B. Computer-Schach).
 
 ## Karte: Türme von Hanoi
 tag: beispiel
 quelle: 09_algorithm-patterns.pdf, Folien 5-7
 
-Gegeben: 3 Pfosten mit n unterschiedlich großen Scheiben; alle Scheiben liegen nach Größe geordnet als Turm auf Pfosten 1; Ziel: alle n Scheiben nach Pfosten 3 legen. Restriktionen: immer nur die oberste Scheibe eines Pfostens nehmen; niemals eine größere auf eine kleinere Scheibe legen. Rekursives Muster für h Scheiben (von, nach, über): 1. (h−1) Scheiben (von, über, nach), 2. von → nach, 3. (h−1) Scheiben (über, nach, von). Zeitkomplexität O(2ⁿ). Zwei Möglichkeiten für jede Platte; zusätzlicher Platz O(n) für die Funktionsaufrufe (Stack).
+Gegeben: 3 Pfosten mit n unterschiedlich großen Scheiben; alle Scheiben liegen nach Größe geordnet als Turm auf Pfosten 1; Ziel: alle n Scheiben nach Pfosten 3 legen. Restriktionen: immer nur die oberste Scheibe eines Pfostens nehmen; niemals eine größere auf eine kleinere Scheibe legen. Rekursives Muster für h Scheiben (von, nach, über): 1. (h−1) Scheiben (von, über, nach), 2. von → nach, 3. (h−1) Scheiben (über, nach, von). Zeitkomplexität O(2ⁿ): zwei Möglichkeiten für jede Platte; zusätzlicher Platz O(n) für die Funktionsaufrufe (Stack).
 
 ## Karte: Backtracking
 tag: def
 quelle: 09_algorithm-patterns.pdf, Folie 8
 
-Prinzip: Versuch, eine Teillösung eines Problems systematisch zu einer Gesamtlösung auszubauen. Ist ein weiterer Ausbau nicht mehr möglich („Sackgasse“), werden eine oder mehrere der letzten Teilschritte rückgängig gemacht, und die reduzierte Teillösung wird auf einem anderen Weg ausgebaut. Bis eine Lösung gefunden wird oder man erkennt, dass keine existiert. Bekannte Probleme: Springerproblem, Acht-Damenproblem, Labyrinthsuche.
+Prinzip: Versuch, eine Teillösung eines Problems systematisch zu einer Gesamtlösung auszubauen. Ist ein weiterer Ausbau nicht mehr möglich („Sackgasse“), werden eine oder mehrere der letzten Teilschritte rückgängig gemacht, und die reduzierte Teillösung wird auf einem anderen Weg ausgebaut, bis eine Lösung gefunden wird oder man erkennt, dass keine existiert. Bekannte Probleme: Springerproblem, Acht-Damenproblem, Labyrinthsuche.
 
 ## Karte: Damenproblem
 tag: beispiel
@@ -44,7 +44,7 @@ quelle: 09_algorithm-patterns.pdf, Folie 10
 tag: wichtig
 quelle: 09_algorithm-patterns.pdf, Folie 11
 
-<b>Suchraum begrenzen („Pruning“):</b> Branch and bound. Alle Äste des Suchbaums abschneiden, für die sicher ist, dass dort keine optimale Lösung zu finden ist. <b>Approximation mittels Greedy:</b> dem Optimum annähern, z. B. Objekte absteigend nach Nutzen/Kosten-Faktor sortieren. <b>Dynamische Programmierung:</b> ganzzahlige Gewichte gegen Objekte in einer Matrix abtragen; jede Zelle enthält den maximalen Nutzwert für ein Teilproblem.
+<b>Suchraum begrenzen („Pruning“):</b> Branch and bound: alle Äste des Suchbaums abschneiden, für die sicher ist, dass dort keine optimale Lösung zu finden ist. <b>Approximation mittels Greedy:</b> dem Optimum annähern, z. B. Objekte absteigend nach Nutzen/Kosten-Faktor sortieren. <b>Dynamische Programmierung:</b> ganzzahlige Gewichte gegen Objekte in einer Matrix abtragen; jede Zelle enthält den maximalen Nutzwert für ein Teilproblem.
 
 ## Karte: Rucksackproblem (Definition)
 tag: def
@@ -56,7 +56,7 @@ Gegeben ein Rucksack mit maximaler Kapazität cmax und eine Menge S aus n Gegens
 tag: wichtig
 quelle: 09_algorithm-patterns.pdf, Folien 14-18
 
-In jeder Phase das tun, was „lokal“ am besten ist. Bezogen auf den maximalen Nutzwert bi [€], das minimale Gewicht wi [kg] oder den maximalen Profit pi [€/kg]. Beispiel mit cmax = 12: nach maximalem Nutzwert Elemente 2, 5, 1, 3 (Wert 18, Gewicht 11); nach minimalem Gewicht Elemente 1, 2, 3, 4 (Wert 16, Gewicht 10); nach maximalem Profit Elemente 1, 2, 3, 5 (Wert 18, Gewicht 11). <b>Keine Garantie, dass die optimale Konfiguration erreicht wird</b>. Die Lösung hängt vom Entscheidungskriterium ab; oft findet man schnell „gute“ Konfigurationen, meist wird nur ein lokales Optimum erreicht.
+In jeder Phase das tun, was „lokal“ am besten ist, bezogen auf den maximalen Nutzwert bi [€], das minimale Gewicht wi [kg] oder den maximalen Profit pi [€/kg]. Beispiel mit cmax = 12: nach maximalem Nutzwert Elemente 2, 5, 1, 3 (Wert 18, Gewicht 11); nach minimalem Gewicht Elemente 1, 2, 3, 4 (Wert 16, Gewicht 10); nach maximalem Profit Elemente 1, 2, 3, 5 (Wert 18, Gewicht 11). <b>Keine Garantie, dass die optimale Konfiguration erreicht wird</b>: die Lösung hängt vom Entscheidungskriterium ab; oft findet man schnell „gute“ Konfigurationen, meist wird nur ein lokales Optimum erreicht.
 
 ## Karte: Dynamische Programmierung
 tag: def
@@ -92,7 +92,7 @@ Gegeben zwei Strings s1 und s2: Der Editabstand ist die minimale Anzahl der notw
 tag: wichtig
 quelle: 09_algorithm-patterns.pdf, Folien 65-68
 
-Der rein rekursive Ansatz führt zu zahlreichen Mehrfachberechnungen der Teillösungen. Besser: dynamische Programmierung mit einer Abstandsmatrix: Teillösungen speichern, mit festen Werten d(i, 0) und d(0, j) initialisieren, dann d(i, j) sukzessive mit steigenden i, j berechnen. Beispiel RASEN/HASE: Edit-Abstand 2, String-Ähnlichkeit 1 − 2/max(5; 4) = 0,6. <b>Traceback:</b> die Matrix rückwärts durchlaufen. Diagonal = Match/Mismatch, vertikal = Einfügung, horizontal = Löschung.
+Der rein rekursive Ansatz führt zu zahlreichen Mehrfachberechnungen der Teillösungen; besser: dynamische Programmierung mit einer Abstandsmatrix: Teillösungen speichern, mit festen Werten d(i, 0) und d(0, j) initialisieren, dann d(i, j) sukzessive mit steigenden i, j berechnen. Beispiel RASEN/HASE: Edit-Abstand 2, String-Ähnlichkeit 1 − 2/max(5; 4) = 0,6. <b>Traceback:</b> die Matrix rückwärts durchlaufen: diagonal = Match/Mismatch, vertikal = Einfügung, horizontal = Löschung.
 
 ## Frage: Nennen Sie die vier behandelten Entwurfsverfahren mit ihrem Grundprinzip.
 id: 15nctbm
@@ -110,13 +110,13 @@ Brute-Force bedeutet, alle möglichen Lösungen durchzuprobieren, bis die richti
 id: 16rnu5d
 quelle: 09_algorithm-patterns.pdf, Folie 7
 
-Zeitkomplexität O(2ⁿ). Zwei Möglichkeiten für jede Platte (2·2·…·2, n-mal). Zusätzlicher Platz O(n) für die Funktionsaufrufe auf dem Stack.
+Zeitkomplexität O(2ⁿ): zwei Möglichkeiten für jede Platte (2·2·…·2, n-mal). Zusätzlicher Platz O(n) für die Funktionsaufrufe auf dem Stack.
 
 ## Frage: Wie funktioniert das Backtracking-Verfahren?
 id: t9rx5v
 quelle: 09_algorithm-patterns.pdf, Folie 8
 
-Eine Teillösung wird systematisch zur Gesamtlösung ausgebaut. In einer Sackgasse werden die letzten Teilschritte rückgängig gemacht und die reduzierte Teillösung auf einem anderen Weg ausgebaut. Bis eine Lösung gefunden wird oder feststeht, dass keine existiert.
+Eine Teillösung wird systematisch zur Gesamtlösung ausgebaut. In einer Sackgasse werden die letzten Teilschritte rückgängig gemacht und die reduzierte Teillösung auf einem anderen Weg ausgebaut, bis eine Lösung gefunden wird oder feststeht, dass keine existiert.
 
 ## Frage: Was bedeutet Greedy?
 id: 1ofz9et
@@ -128,7 +128,7 @@ Greedy wählt in jeder Phase die lokal beste Wahl, gibt aber keine Garantie für
 id: 6ya0me
 quelle: 09_algorithm-patterns.pdf, Folie 18
 
-Sie trifft in jeder Phase nur die lokal beste Wahl (nach Nutzwert, Gewicht oder Profit). Die Lösung hängt vom Entscheidungskriterium ab, und meist wird nur ein lokales Optimum erreicht. Dafür findet man oft schnell gute Konfigurationen.
+Sie trifft in jeder Phase nur die lokal beste Wahl (nach Nutzwert, Gewicht oder Profit): die Lösung hängt vom Entscheidungskriterium ab, und meist wird nur ein lokales Optimum erreicht. Dafür findet man oft schnell gute Konfigurationen.
 
 ## Frage: Was ist die Grundidee der dynamischen Programmierung?
 id: l87xlj
@@ -146,7 +146,7 @@ Die Fibonacci-Folge ist definiert durch fib(0) = 0, fib(1) = 1 und fib(n) = fib(
 id: syunc
 quelle: 09_algorithm-patterns.pdf, Folien 21-23
 
-Sich überschneidende Teilprobleme werden mehrfach berechnet. Fib(5) braucht bereits 15 Funktionsaufrufe, fib(10) 177. Mit dynamischer Programmierung wird jedes Teilproblem nur einmal gelöst (O(n)).
+Sich überschneidende Teilprobleme werden mehrfach berechnet: fib(5) braucht bereits 15 Funktionsaufrufe, fib(10) 177. Mit dynamischer Programmierung wird jedes Teilproblem nur einmal gelöst (O(n)).
 
 ## Frage: Wie lautet die rekursive Formel der dynamischen Programmierung für das Rucksackproblem?
 id: 1e1jyoe
@@ -158,7 +158,7 @@ S_benefit[0, w] = 0 für alle w <= cmax. S_benefit[k, w] = S_benefit[k−1, w], 
 id: 1hlypj9
 quelle: 09_algorithm-patterns.pdf, Folie 56
 
-Rückwärts durch die Tabelle: Mit i = n und w = cmax prüfen, ob S_benefit[i, w] ≠ S_benefit[i−1, w]. Dann gehört Element i in den Rucksack und w wird um wk verringert; andernfalls nur i verringern.
+Rückwärts durch die Tabelle: Mit i = n und w = cmax prüfen, ob S_benefit[i, w] ≠ S_benefit[i−1, w]: dann gehört Element i in den Rucksack und w wird um wk verringert; andernfalls nur i verringern.
 
 ## Frage: Was ist der Editabstand zweier Strings, und welche Operationen sind erlaubt?
 id: he3pw7

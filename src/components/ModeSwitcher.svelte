@@ -1,5 +1,6 @@
 <script lang="ts">
   import Icon from "./Icon.svelte";
+  import { modeAccessName, modeAccessTitle } from "../lib/modes";
   import type { ModeConfig, ModeId } from "../types/content";
 
   interface Props {
@@ -21,11 +22,13 @@
       class:unavailable={!available}
       class="mode-btn"
       type="button"
-      aria-label={mode.label}
+      aria-label={modeAccessName(mode, available)}
       aria-current={mode.id === currentMode ? "true" : undefined}
       aria-disabled={available ? undefined : "true"}
-      title={available ? undefined : "Für dieses Thema nicht vorhanden"}
-      onclick={() => available && onSelect(mode.id)}
+      title={modeAccessTitle(mode, available)}
+      onclick={() => {
+        if (available) onSelect(mode.id);
+      }}
     >
       <Icon name={mode.icon} />
       <span class="mode-label-long">{mode.label}</span>

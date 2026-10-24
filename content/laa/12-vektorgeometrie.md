@@ -4,7 +4,7 @@ title: Kreuzprodukt, Norm & Skalarprodukt
 icon: 📏
 ---
 
-## Karte: Kreuzprodukt. Nur im R³
+## Karte: Kreuzprodukt (nur im R³)
 quelle: VorlesungFolienLAA-2026.pdf, Folie 198
 
 Das Kreuzprodukt gibt eine Möglichkeit, zwei Vektoren miteinander zu multiplizieren. Es ist allerdings nur für Vektoren des \(\mathbb{R}^3\) definiert, bietet dort aber eine schöne geometrische Interpretation. Das Skalarprodukt ist ein weiteres Produkt von Vektoren, das gänzlich anders aussieht.
@@ -55,7 +55,7 @@ Eine Basis \(\{\vec{b}_1, \ldots, \vec{b}_n\}\) des \(\mathbb{R}^n\) heißt Orth
 tag: def
 quelle: VorlesungFolienLAA-2026.pdf, Folien 209-210
 
-Sind \(\vec{v}, \vec{w}\) orthogonal zueinander, schreibt man \(\vec{v} \perp \vec{w}\). Die Bedingung lautet: \[\vec{x} \perp \vec{y} \;\Leftrightarrow\; \langle\vec{x}, \vec{y}\rangle = 0\] Beispiel im \(\mathbb{R}^2\): \(\vec{x} = (1, 0)^T\), \(\vec{y} = (0, 1)^T\) mit \(\langle\vec{x}, \vec{y}\rangle = 1 \cdot 0 + 0 \cdot 1 = 0\). Die Vektoren sind bezüglich des Standardskalarproduktes senkrecht zueinander.
+Sind \(\vec{v}, \vec{w}\) orthogonal zueinander, schreibt man \(\vec{v} \perp \vec{w}\). Die Bedingung lautet: \[\vec{x} \perp \vec{y} \;\Leftrightarrow\; \langle\vec{x}, \vec{y}\rangle = 0\] Beispiel im \(\mathbb{R}^2\): \(\vec{x} = (1, 0)^T\), \(\vec{y} = (0, 1)^T\) mit \(\langle\vec{x}, \vec{y}\rangle = 1 \cdot 0 + 0 \cdot 1 = 0\): die Vektoren sind bezüglich des Standardskalarproduktes senkrecht zueinander.
 
 ## Frage: Wie ist das Kreuzprodukt definiert, und für welche Vektoren existiert es?
 id: 10xtrpz
@@ -85,13 +85,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 204-205
 id: 11pp3lw
 quelle: VorlesungFolienLAA-2026.pdf, Folien 205-206
 
-\(\langle\vec{x}, \vec{y}\rangle = x_1y_1 + \ldots + x_ny_n\). Die Koordinaten werden paarweise multipliziert und die Produkte addiert.
+\(\langle\vec{x}, \vec{y}\rangle = x_1y_1 + \ldots + x_ny_n\): die Koordinaten werden paarweise multipliziert und die Produkte addiert.
 
 ## Frage: Welcher Zusammenhang besteht zwischen Norm und Skalarprodukt?
 id: 1t7nxby
 quelle: VorlesungFolienLAA-2026.pdf, Folien 205-207
 
-Wegen \(\langle\vec{x}, \vec{x}\rangle = x_1^2 + \ldots + x_n^2\) gilt \(\lVert\vec{x}\rVert = \sqrt{\langle\vec{x}, \vec{x}\rangle}\). Die Standardnorm wird vom Standardskalarprodukt induziert. Jedes Skalarprodukt induziert eine Norm, aber nicht umgekehrt.
+Wegen \(\langle\vec{x}, \vec{x}\rangle = x_1^2 + \ldots + x_n^2\) gilt \(\lVert\vec{x}\rVert = \sqrt{\langle\vec{x}, \vec{x}\rangle}\): die Standardnorm wird vom Standardskalarprodukt induziert. Jedes Skalarprodukt induziert eine Norm, aber nicht umgekehrt.
 
 ## Frage: Wie berechnet man den Winkel zwischen zwei Vektoren?
 id: 6iy5i8
@@ -103,7 +103,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 207
 id: ugnvar
 quelle: VorlesungFolienLAA-2026.pdf, Folie 208
 
-Eine Basis mit \(\langle\vec{b}_i, \vec{b}_j\rangle = 1\) für \(i = j\) und \(0\) für \(i \ne j\). Also paarweise orthogonale Vektoren der Länge 1.
+Eine Basis mit \(\langle\vec{b}_i, \vec{b}_j\rangle = 1\) für \(i = j\) und \(0\) für \(i \ne j\), also paarweise orthogonale Vektoren der Länge 1.
 
 ## Frage: Wann heißen zwei Vektoren orthogonal?
 id: 1cxc1k
