@@ -37,6 +37,9 @@ jobs:
         run: npm run validate
 
       - name: Build
+        env:
+          VITE_BASE: /Klausurvorbereitung/
+          VITE_PAGES_REDIRECT: "1"
         run: npm run build
 
       - name: Configure Pages
