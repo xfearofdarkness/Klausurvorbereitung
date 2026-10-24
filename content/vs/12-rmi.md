@@ -20,19 +20,19 @@ quelle: 07_ds-java-rmi.pdf, Folien 7-8
 tag: def
 quelle: 07_ds-java-rmi.pdf, Folie 15
 
-RMI erweitert RPC um das Konzept der Objekte. Gemeinsamkeiten mit RPC: Verwendung von Schnittstellen, basiert auf Request-Reply-Protokollen, ähnliche Transparenz. Unterschiede: Objektorientierte Konzepte stehen zur Verfügung (Klassen, Objekte, Vererbung); Objekt-Identität — insbesondere ist call-by-reference möglich.
+RMI erweitert RPC um das Konzept der Objekte. Gemeinsamkeiten mit RPC: Verwendung von Schnittstellen, basiert auf Request-Reply-Protokollen, ähnliche Transparenz. Unterschiede: Objektorientierte Konzepte stehen zur Verfügung (Klassen, Objekte, Vererbung); Objekt-Identität. Insbesondere ist call-by-reference möglich.
 
 ## Karte: Verteilte Objekte und Remote Interfaces
 tag: def
 quelle: 07_ds-java-rmi.pdf, Folien 16-17
 
-Lokale und entfernte Objekte können Aufrufe empfangen; entfernte Objekte werden über Remote Object References adressiert und besitzen Remote Interfaces. Objekte von einem anderen Knoten können nur Methoden aus dem Remote-Interface aufrufen. Spezielle Interface-Beschreibungssprachen: CORBA-IDL, SOAP-XML — in Java durch Interfaces abgebildet.
+Lokale und entfernte Objekte können Aufrufe empfangen; entfernte Objekte werden über Remote Object References adressiert und besitzen Remote Interfaces. Objekte von einem anderen Knoten können nur Methoden aus dem Remote-Interface aufrufen. Spezielle Interface-Beschreibungssprachen: CORBA-IDL, SOAP-XML. In Java durch Interfaces abgebildet.
 
 ## Karte: RMI-Architektur: Schichten
 tag: wichtig
 quelle: 07_ds-java-rmi.pdf, Folien 18-20
 
-<b>Anwendungsschicht:</b> Client und Server kommunizieren im Hinblick auf den Service. <b>Stub-&-Skeleton-Schicht:</b> realisiert die Schnittstelle des serverseitigen Objekts auf beiden Seiten — der Client-Stub erledigt das Marshalling und sendet die Anfrage an die unteren Schichten. <b>Remote Reference Layer:</b> (in JVM integriert) lokalisiert anhand von Objektreferenzen Serverobjekte und leitet Aufrufe weiter. <b>Transport Layer:</b> stellt basierend auf TCP-Verbindungen die grundlegende Konnektivität bereit.
+<b>Anwendungsschicht:</b> Client und Server kommunizieren im Hinblick auf den Service. <b>Stub-&-Skeleton-Schicht:</b> realisiert die Schnittstelle des serverseitigen Objekts auf beiden Seiten. Der Client-Stub erledigt das Marshalling und sendet die Anfrage an die unteren Schichten. <b>Remote Reference Layer:</b> (in JVM integriert) lokalisiert anhand von Objektreferenzen Serverobjekte und leitet Aufrufe weiter. <b>Transport Layer:</b> stellt basierend auf TCP-Verbindungen die grundlegende Konnektivität bereit.
 
 ## Karte: Typische Aufgaben der RMI-Infrastruktur
 tag: def
@@ -44,7 +44,7 @@ Lokalisierung von verteilten Objekten (Referenzen auf serverseitige Objekte kön
 tag: wichtig
 quelle: 07_ds-java-rmi.pdf, Folien 24, 26-27
 
-Eine verteilte RMI-Applikation besteht aus Interfaces und Klassen: Interfaces deklarieren Methoden, Klassen implementieren sie. Ein Remote Object implementiert ein Remote-Interface mit zwei Eigenschaften: Das Interface wird von <code>java.rmi.Remote</code> abgeleitet, und jede Methode deklariert <code>java.rmi.RemoteException</code> (oder eine Oberklasse) im throws-Statement. RMI ist Java-spezifisch — die Schnittstelle kann in Java definiert werden (geringere Komplexität als CORBA). Call-by-Value: Beliebig komplexe Objektstrukturen können serialisiert, übertragen und auf der Empfängerseite wiederhergestellt werden.
+Eine verteilte RMI-Applikation besteht aus Interfaces und Klassen: Interfaces deklarieren Methoden, Klassen implementieren sie. Ein Remote Object implementiert ein Remote-Interface mit zwei Eigenschaften: Das Interface wird von <code>java.rmi.Remote</code> abgeleitet, und jede Methode deklariert <code>java.rmi.RemoteException</code> (oder eine Oberklasse) im throws-Statement. RMI ist Java-spezifisch. Die Schnittstelle kann in Java definiert werden (geringere Komplexität als CORBA). Call-by-Value: Beliebig komplexe Objektstrukturen können serialisiert, übertragen und auf der Empfängerseite wiederhergestellt werden.
 
 ## Karte: Entwurf und Implementierung
 tag: wichtig
@@ -80,7 +80,7 @@ Schnittstellen (beschreiben aufrufbare Operationen), Aufruf-Semantik (Retransmis
 id: wcox0u
 quelle: 07_ds-java-rmi.pdf, Folie 15
 
-RMI erweitert RPC um Objekte: objektorientierte Konzepte (Klassen, Objekte, Vererbung) und Objekt-Identität — insbesondere ist call-by-reference möglich. Gemeinsam: Schnittstellen, Request-Reply-Basis, ähnliche Transparenz.
+RMI erweitert RPC um Objekte: objektorientierte Konzepte (Klassen, Objekte, Vererbung) und Objekt-Identität. Insbesondere ist call-by-reference möglich. Gemeinsam: Schnittstellen, Request-Reply-Basis, ähnliche Transparenz.
 
 ## Frage: Aus welchen Schichten besteht die RMI-Architektur?
 id: 1u1l9s

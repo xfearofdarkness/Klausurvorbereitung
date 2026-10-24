@@ -12,6 +12,7 @@ import sidebarRightCollapse from "@tabler/icons/outline/layout-sidebar-right-col
 import sidebarRightExpand from "@tabler/icons/outline/layout-sidebar-right-expand.svg?raw";
 import list from "@tabler/icons/outline/list.svg?raw";
 import pencil from "@tabler/icons/outline/pencil.svg?raw";
+import search from "@tabler/icons/outline/search.svg?raw";
 
 export const ICONS = {
   book,
@@ -24,6 +25,7 @@ export const ICONS = {
   layoutTop,
   list,
   pencil,
+  search,
   sidebarLeftCollapse,
   sidebarLeftExpand,
   sidebarRightCollapse,

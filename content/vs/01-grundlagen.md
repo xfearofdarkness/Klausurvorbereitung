@@ -37,13 +37,13 @@ Zentraler Mainframe mit sternförmig verbundenen Terminals ohne lokale Funktiona
 tag: wichtig
 quelle: 02_vs-overview.pdf, Folie 13
 
-Ein Verteiltes System besteht aus einer Ansammlung rechnender Elemente (Knoten). Ein Knoten reagiert auf eintreffende Nachrichten, verarbeitet sie und versendet in Reaktion wiederum Nachrichten. Da die Knoten unabhängig arbeiten, gibt es keine gemeinsame global gültige Zeit. Es muss Mechanismen geben, die Zugehörigkeit, Zugang und Verlassen des Systems regeln. Die Verteilung soll transparent bleiben — das System soll einheitlich erscheinen (Verteilungstransparenz).
+Ein Verteiltes System besteht aus einer Ansammlung rechnender Elemente (Knoten). Ein Knoten reagiert auf eintreffende Nachrichten, verarbeitet sie und versendet in Reaktion wiederum Nachrichten. Da die Knoten unabhängig arbeiten, gibt es keine gemeinsame global gültige Zeit. Es muss Mechanismen geben, die Zugehörigkeit, Zugang und Verlassen des Systems regeln. Die Verteilung soll transparent bleiben. Das System soll einheitlich erscheinen (Verteilungstransparenz).
 
 ## Karte: Konsequenzen der Verteilung
 tag: wichtig
 quelle: 02_vs-overview.pdf, Folie 14
 
-<b>Nebenläufigkeit</b> ist der Normalfall — die Knoten arbeiten parallel. <b>Keine globale Uhr:</b> Die Knoten koordinieren ihre Aktivitäten in Form von versendeten Nachrichten. <b>Unabhängige Fehlerfälle:</b> Es können viele Fehlersituationen auftreten; zu den Eigenschaften Verteilter Systeme gehört, dass auch in solchen Fällen Funktionalität erbracht werden kann.
+<b>Nebenläufigkeit</b> ist der Normalfall. Die Knoten arbeiten parallel. <b>Keine globale Uhr:</b> Die Knoten koordinieren ihre Aktivitäten in Form von versendeten Nachrichten. <b>Unabhängige Fehlerfälle:</b> Es können viele Fehlersituationen auftreten; zu den Eigenschaften Verteilter Systeme gehört, dass auch in solchen Fällen Funktionalität erbracht werden kann.
 
 ## Karte: Historische Entwicklung
 quelle: 02_vs-overview.pdf, Folien 16-17
@@ -54,7 +54,7 @@ Seit Mitte der 80er Jahre Trend zur Abkehr von zentralisierten Systemen. Einflus
 tag: def
 quelle: 02_vs-overview.pdf, Folien 19-20
 
-Systemarchitektur ist ein Ansatz zur methodischen Beschreibung komplexer und insbesondere verteilter Systeme. Verteilte Systeme sind heterogen und nicht durchgängig in einer einzigen Programmiersprache realisiert — deshalb sind abstraktere Beschreibungskonzepte notwendig. Wichtige Aspekte: Struktur, Verhalten, Kommunikation, Deployment. Elemente von Architekturbeschreibungen: Komponenten, Schnittstellen, Implementierungen, Relationen, Kommunikation, Constraints.
+Systemarchitektur ist ein Ansatz zur methodischen Beschreibung komplexer und insbesondere verteilter Systeme. Verteilte Systeme sind heterogen und nicht durchgängig in einer einzigen Programmiersprache realisiert. Deshalb sind abstraktere Beschreibungskonzepte notwendig. Wichtige Aspekte: Struktur, Verhalten, Kommunikation, Deployment. Elemente von Architekturbeschreibungen: Komponenten, Schnittstellen, Implementierungen, Relationen, Kommunikation, Constraints.
 
 ## Karte: OSI-Modell
 tag: def
@@ -71,13 +71,13 @@ Allgemeine Programme, die zwischen Applikationen vermitteln und dabei die Komple
 ## Karte: Kommunikation und weitere Plattformdienste
 quelle: 02_vs-overview.pdf, Folien 25-26
 
-Kommunikation spielt sich auf den Anwendungsschichten ab und dient der Koordination zwischen Prozessen. Das OSI-Modell ist zu komplex, um Kommunikation auf Anwendungsebene zu beschreiben — daher das Client-Server-Modell: Server sind Prozesse, die Dienste für andere Prozesse (Clients) anbieten. Weitere Plattformdienste: Transaktionen (alles-oder-nichts), Service Composition (Dienste kombinieren) und Reliability (Zuverlässigkeit der Nachrichtenübermittlung).
+Kommunikation spielt sich auf den Anwendungsschichten ab und dient der Koordination zwischen Prozessen. Das OSI-Modell ist zu komplex, um Kommunikation auf Anwendungsebene zu beschreiben. Daher das Client-Server-Modell: Server sind Prozesse, die Dienste für andere Prozesse (Clients) anbieten. Weitere Plattformdienste: Transaktionen (alles-oder-nichts), Service Composition (Dienste kombinieren) und Reliability (Zuverlässigkeit der Nachrichtenübermittlung).
 
 ## Frage: Wie sind Verteilte Systeme definiert?
 id: 1k89eo3
 quelle: 02_vs-overview.pdf, Folie 5
 
-Geografische Verteilung von Komponenten, kein gemeinsamer Speicher, dezentrale Administration — die Komponenten kooperieren, um ein gemeinsames Ziel zu erreichen.
+Geografische Verteilung von Komponenten, kein gemeinsamer Speicher, dezentrale Administration. Die Komponenten kooperieren, um ein gemeinsames Ziel zu erreichen.
 
 ## Frage: Wie definiert Tanenbaum ein verteiltes System?
 id: 19t42py

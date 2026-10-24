@@ -121,13 +121,13 @@ Einfügen eines Elements mit Schlüssel k: Suche nach einem Knoten mit dem Schl�
 tag: wichtig
 quelle: 04_tree_structures.pdf, Folien 149-161
 
-<b>Fall 1 — Knoten x hat keine Kinder:</b> x entfernen, indem die Referenz seines Elternknotens auf null gesetzt wird. <b>Fall 2 — x hat ein Kind:</b> der Verweis des Elternteils auf x zeigt stattdessen auf das Kind von x. <b>Fall 3 — x hat zwei Kinder:</b> x kann nicht einfach gelöscht werden; ersetze x durch den kleinsten Knoten y in x' rechtem Teilbaum. Nachdem der Inhalt von y in x kopiert wurde, wird y gemäß Fall 1 oder 2 gelöscht.
+<b>Fall 1: Knoten x hat keine Kinder:</b> x entfernen, indem die Referenz seines Elternknotens auf null gesetzt wird. <b>Fall 2: x hat ein Kind:</b> der Verweis des Elternteils auf x zeigt stattdessen auf das Kind von x. <b>Fall 3: x hat zwei Kinder:</b> x kann nicht einfach gelöscht werden; ersetze x durch den kleinsten Knoten y in x' rechtem Teilbaum. Nachdem der Inhalt von y in x kopiert wurde, wird y gemäß Fall 1 oder 2 gelöscht.
 
 ## Karte: Binärer Suchbaum: Effizienz
 tag: formel
 quelle: 04_tree_structures.pdf, Folie 163
 
-Die drei wichtigsten Operationen (Suchen, Einfügen, Löschen) haben dieselbe Zeitkomplexität — Einfügen und Löschen beinhalten eine Suche plus eine konstante Anzahl zusätzlicher Operationen. Zeitkomplexität der Suche: best case O(1), worst case O(h), average case O(h), mit h als Höhe des Baumes.
+Die drei wichtigsten Operationen (Suchen, Einfügen, Löschen) haben dieselbe Zeitkomplexität. Einfügen und Löschen beinhalten eine Suche plus eine konstante Anzahl zusätzlicher Operationen. Zeitkomplexität der Suche: best case O(1), worst case O(h), average case O(h), mit h als Höhe des Baumes.
 
 ## Frage: Was ist der Unterschied zwischen Blattknoten und inneren Knoten?
 id: b9i7ny
@@ -225,7 +225,7 @@ quelle: 04_tree_structures.pdf, Folien 136-139
   "steps": [
              {
                "title": "Vergleich mit der Wurzel 26",
-               "text": "7 stimmt nicht mit 26 überein und ist kleiner — der linke Teilbaum wird durchsucht.",
+               "text": "7 stimmt nicht mit 26 überein und ist kleiner. Der linke Teilbaum wird durchsucht.",
                "explanation": {
                                 "action": "7 mit dem Schlüssel der Wurzel 26 vergleichen.",
                                 "rule": "Wenn der Schlüssel k kleiner ist als der Schlüssel des Wurzelknotens, wird der linke Teilbaum durchsucht.",
@@ -238,7 +238,7 @@ quelle: 04_tree_structures.pdf, Folien 136-139
              },
              {
                "title": "Vergleich mit 12",
-               "text": "7 < 12 — weiter im linken Teilbaum.",
+               "text": "7 < 12. Weiter im linken Teilbaum.",
                "explanation": {
                                 "action": "7 mit 12 vergleichen.",
                                 "rule": "Wenn der Schlüssel k kleiner ist als der Schlüssel des Wurzelknotens, wird der linke Teilbaum durchsucht.",
@@ -252,7 +252,7 @@ quelle: 04_tree_structures.pdf, Folien 136-139
              },
              {
                "title": "Vergleich mit 4",
-               "text": "7 > 4 — der rechte Teilbaum wird durchsucht.",
+               "text": "7 > 4. Der rechte Teilbaum wird durchsucht.",
                "explanation": {
                                 "action": "7 mit 4 vergleichen.",
                                 "rule": "Andernfalls wird der rechte Teilbaum durchsucht.",
@@ -266,7 +266,7 @@ quelle: 04_tree_structures.pdf, Folien 136-139
              },
              {
                "title": "7 gefunden",
-               "text": "Der Schlüssel 7 stimmt mit dem Knoten überein — die Suche ist beendet.",
+               "text": "Der Schlüssel 7 stimmt mit dem Knoten überein. Die Suche ist beendet.",
                "explanation": {
                                 "action": "7 mit dem Knoten 7 vergleichen.",
                                 "rule": "Wenn der Schlüssel k mit dem Schlüssel des Wurzelknotens übereinstimmt, ist die Suche beendet.",
@@ -304,7 +304,7 @@ quelle: 04_tree_structures.pdf, Folien 142-146
   "steps": [
              {
                "title": "Suche ab der Wurzel 26",
-               "text": "35 > 26 — weiter im rechten Teilbaum.",
+               "text": "35 > 26. Weiter im rechten Teilbaum.",
                "explanation": {
                                 "action": "Nach einem Knoten mit dem Schlüssel 35 suchen, Start bei der Wurzel 26.",
                                 "rule": "Suche nach einem Knoten mit dem Schlüssel k.",
@@ -317,7 +317,7 @@ quelle: 04_tree_structures.pdf, Folien 142-146
              },
              {
                "title": "Vergleich mit 32",
-               "text": "35 > 32 — weiter im rechten Teilbaum.",
+               "text": "35 > 32. Weiter im rechten Teilbaum.",
                "explanation": {
                                 "action": "35 mit 32 vergleichen.",
                                 "rule": "Suche nach einem Knoten mit dem Schlüssel k.",
@@ -331,7 +331,7 @@ quelle: 04_tree_structures.pdf, Folien 142-146
              },
              {
                "title": "Vergleich mit 38",
-               "text": "35 < 38, und 38 hat kein linkes Kind — 38 wird Elternknoten P des neuen Knotens.",
+               "text": "35 < 38, und 38 hat kein linkes Kind: 38 wird Elternknoten P des neuen Knotens.",
                "explanation": {
                                 "action": "35 mit 38 vergleichen.",
                                 "rule": "Andernfalls wird der zuletzt gefundene Knoten zum Eltern-Knoten P des neuen Knotens.",
@@ -365,7 +365,7 @@ quelle: 04_tree_structures.pdf, Folien 37-48
 ```json
 {
   "id": "preorder-traversierung",
-  "intro": "Wurzel besuchen, dann rekursiv den linken, dann den rechten Teilbaum — Ergebnis: 7 5 2 3 6 9 8.",
+  "intro": "Wurzel besuchen, dann rekursiv den linken, dann den rechten Teilbaum. Ergebnis: 7 5 2 3 6 9 8.",
   "visual": {
               "kind": "tree",
               "root": "7",
@@ -463,7 +463,7 @@ quelle: 04_tree_structures.pdf, Folien 37-48
              },
              {
                "title": "Besuche 8: fertig",
-               "text": "Das linke Kind von 9 wird besucht — die Preorder-Reihenfolge ist 7 5 2 3 6 9 8.",
+               "text": "Das linke Kind von 9 wird besucht. Die Preorder-Reihenfolge ist 7 5 2 3 6 9 8.",
                "explanation": {
                                 "action": "Preorder für den linken Teilbaum von 9 starten.",
                                 "rule": "2. Führe rekursiv eine Preorder-Traversierung des linken Teilbaums von N durch.",
@@ -486,7 +486,7 @@ quelle: 04_tree_structures.pdf, Folien 64-76
 ```json
 {
   "id": "postorder-traversierung",
-  "intro": "Erst linker Teilbaum, dann rechter Teilbaum, dann Wurzel — Ergebnis: 3 2 6 5 8 9 7.",
+  "intro": "Erst linker Teilbaum, dann rechter Teilbaum, dann Wurzel. Ergebnis: 3 2 6 5 8 9 7.",
   "visual": {
               "kind": "tree",
               "root": "7",
@@ -598,7 +598,7 @@ quelle: 04_tree_structures.pdf, Folien 92-103
 ```json
 {
   "id": "inorder-traversierung",
-  "intro": "Erst linker Teilbaum, dann Wurzel, dann rechter Teilbaum — Ergebnis: 2 3 5 6 7 8 9.",
+  "intro": "Erst linker Teilbaum, dann Wurzel, dann rechter Teilbaum. Ergebnis: 2 3 5 6 7 8 9.",
   "visual": {
               "kind": "tree",
               "root": "7",
@@ -713,7 +713,7 @@ quelle: 04_tree_structures.pdf, Folien 119-126
 ```json
 {
   "id": "level-order-traversierung",
-  "intro": "Von oben nach unten und links nach rechts; umgesetzt mit einer Queue — Ergebnis: 7 5 9 2 6 8 3.",
+  "intro": "Von oben nach unten und links nach rechts; umgesetzt mit einer Queue. Ergebnis: 7 5 9 2 6 8 3.",
   "visual": {
               "kind": "tree",
               "root": "7",

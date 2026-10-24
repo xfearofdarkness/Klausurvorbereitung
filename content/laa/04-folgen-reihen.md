@@ -7,7 +7,7 @@ icon: ♾️
 ## Karte: Wozu Folgen?
 quelle: VorlesungFolienLAA-2026.pdf, Folien 49-50
 
-Folgen werden wesentlich verwendet, um sich um die Begriffe Konvergenz und Divergenz zu kümmern und Konsequenzen daraus abzuleiten. Später sind Folgen Hilfsmittel, um sich an bestimmte Werte „anzuschleichen“ — sie sind die Grundlage für Begriffe wie Stetigkeit und Differenzierbarkeit.
+Folgen werden wesentlich verwendet, um sich um die Begriffe Konvergenz und Divergenz zu kümmern und Konsequenzen daraus abzuleiten. Später sind Folgen Hilfsmittel, um sich an bestimmte Werte „anzuschleichen“. Sie sind die Grundlage für Begriffe wie Stetigkeit und Differenzierbarkeit.
 
 ## Karte: Folge
 tag: def
@@ -54,7 +54,7 @@ Seien \((x_n)\), \((y_n)\) konvergent mit \(\lim x_n = a\), \(\lim y_n = b\) und
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 63-64
 
-Die Folge \(\left(\frac{1}{1 + \frac{1}{n}}\right)\) ist aus der konstanten Folge \((1)\) und der Nullfolge \(\left(\frac{1}{n}\right)\) zusammengesetzt: Grenzwert \(\frac{1}{1+0} = 1\). Bei \(\left(\frac{n}{n+1}\right)\) ist Vorsicht geboten, denn \((n)\) ist nicht konvergent — hier hilft Kürzen: \(\frac{n}{n+1} = \frac{1}{1 + \frac{1}{n}}\).
+Die Folge \(\left(\frac{1}{1 + \frac{1}{n}}\right)\) ist aus der konstanten Folge \((1)\) und der Nullfolge \(\left(\frac{1}{n}\right)\) zusammengesetzt: Grenzwert \(\frac{1}{1+0} = 1\). Bei \(\left(\frac{n}{n+1}\right)\) ist Vorsicht geboten, denn \((n)\) ist nicht konvergent. Hier hilft Kürzen: \(\frac{n}{n+1} = \frac{1}{1 + \frac{1}{n}}\).
 
 ## Karte: Wichtige Grenzwerte (zum Merken)
 tag: wichtig
@@ -108,13 +108,13 @@ Eine Folge mit dem Grenzwert 0. Standardbeispiel: \(x_n := \frac{1}{n}\), denn e
 id: 1j5ktg2
 quelle: VorlesungFolienLAA-2026.pdf, Folien 55-57
 
-Das Intervall \(]a - \varepsilon, a + \varepsilon[\) um den Punkt \(a\) (stets \(\varepsilon > 0\)). Eine Folge konvergiert gegen \(a\), wenn sich in jeder noch so kleinen \(\varepsilon\)-Umgebung fast alle — also alle bis auf endlich viele — Folgenglieder befinden.
+Das Intervall \(]a - \varepsilon, a + \varepsilon[\) um den Punkt \(a\) (stets \(\varepsilon > 0\)). Eine Folge konvergiert gegen \(a\), wenn sich in jeder noch so kleinen \(\varepsilon\)-Umgebung fast alle. Also alle bis auf endlich viele. Folgenglieder befinden.
 
 ## Frage: Ist der Grenzwert einer konvergenten Folge eindeutig?
 id: widv9l
 quelle: VorlesungFolienLAA-2026.pdf, Folie 57
 
-Ja — ist eine Folge konvergent, so ist ihr Grenzwert eindeutig.
+Ja. Ist eine Folge konvergent, so ist ihr Grenzwert eindeutig.
 
 ## Frage: Nennen Sie Beispiele für konvergente und divergente Reihen bzw. Folgen von den Folien.
 id: 1ec0lo0
@@ -138,7 +138,7 @@ Mit \(\lim x_n = a\), \(\lim y_n = b\): \(\lim(x_n + y_n) = a + b\); \(\lim(x_n 
 id: 1mh10c
 quelle: VorlesungFolienLAA-2026.pdf, Folie 66
 
-Gegen \(e^a\) — einer der wichtigen Grenzwerte zum Merken.
+Gegen \(e^a\). Einer der wichtigen Grenzwerte zum Merken.
 
 ## Frage: Wogegen konvergiert \(b^n\) für \(|b| < 1\)?
 id: 1kq31gb
@@ -150,7 +150,7 @@ Gegen 0. Weitere Merk-Grenzwerte: Für positives \(a\) gilt \(a^{1/n} \to 1\) un
 id: 68cslj
 quelle: VorlesungFolienLAA-2026.pdf, Folie 70
 
-\(S_n := \sum_{k=0}^{n} a_k\) — einfach die Summe der ersten \(n\) Folgenglieder.
+\(S_n := \sum_{k=0}^{n} a_k\). Einfach die Summe der ersten \(n\) Folgenglieder.
 
 ## Frage: Was ist eine Reihe, und wann heißt sie konvergent?
 id: 1pcjxcz

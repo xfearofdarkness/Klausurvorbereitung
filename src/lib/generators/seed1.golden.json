@@ -69,7 +69,7 @@
   },
   "gauss-lgs-2x2": {
     "task": "Berechnen Sie mithilfe des Gauß-Algorithmus sämtliche Lösungen des linearen Gleichungssystems \\[\\begin{aligned} -4 x_1 &= 6 \\\\ -12 x_1 &= 18 \\end{aligned}\\]",
-    "solution": "Zeile II ist das \\(3\\)-Fache von Zeile I. Die Zeilenoperation \\(\\mathrm{II} - 3 \\cdot \\mathrm{I}\\) liefert die Nullzeile \\(0 = 0\\) — eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \\(-4 x_1 = 6\\) mit unendlich vielen Lösungen: \\(x_2\\) frei wählbar und \\[x_1 = -\\frac{3}{2}\\]"
+    "solution": "Zeile II ist das \\(3\\)-Fache von Zeile I. Die Zeilenoperation \\(\\mathrm{II} - 3 \\cdot \\mathrm{I}\\) liefert die Nullzeile \\(0 = 0\\). Eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \\(-4 x_1 = 6\\) mit unendlich vielen Lösungen: \\(x_2\\) frei wählbar und \\[x_1 = -\\frac{3}{2}\\]"
   },
   "determinante-3x3": {
     "task": "Berechnen Sie die Determinante der Matrix \\[A = \\begin{pmatrix} 1 & -4 & 0 \\\\ 4 & 4 & -2 \\\\ 1 & 2 & -1 \\end{pmatrix}\\]",

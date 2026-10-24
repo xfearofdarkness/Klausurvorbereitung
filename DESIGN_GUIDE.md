@@ -109,7 +109,9 @@ Regeln:
 - Konsistente Interaktion in allen Modi.
 - Visuelle Hierarchie muss sofort erkennbar sein.
 - Aktives Thema und aktiver Modus müssen jederzeit sichtbar sein.
-- Farbe trägt Bedeutung (Navigation, Status, Kategorie), nicht Dekoration.
+- Farbe trägt Bedeutung (Status, Kategorie), nicht Dekoration.
+- Wählbare Elemente (Modusleiste, Statusanzeigen, Themenzeilen, Bewertungsbuttons, Suchknopf, Layoutschalter) haben keinen Rand. Die Fläche liegt nur wenig über dem Untergrund. Hover ist eine Stufe heller, der aktive Zustand deutlich heller mit hellerer Schrift. Der Fokusring erscheint nur bei Tastaturfokus.
+- Die Suche ist ein Knopf in der Kopfzeile neben der Modusleiste und öffnet einen Dialog. Strg+K, Cmd+K und / öffnen ihn, Escape schließt ihn. Auf schmalen Displays bleibt ein Icon-Knopf.
 - Keine Verläufe, Glüheffekte oder Schatten als Schmuck.
 
 ## Komponenten
@@ -129,13 +131,25 @@ Standardkomponenten:
 - Fehler- und Leerstates
 
 Lernkarten können mit den Tags `wichtig`, `formel`, `def`, `satz`
-und `beispiel` ausgezeichnet werden. Die Tag-Farben sind zentral
-definiert und in allen Fächern gleich.
+und `beispiel` ausgezeichnet werden. Im Modus Lernen stehen sie im
+Fließtext, nicht in umrandeten Karten. Alle Abschnitte sitzen bündig.
+Nur `wichtig` behält eine Markierung: eine linke Linie und das Wort
+„Wichtig“. Andere Tags wie `formel`, `def`, `satz` und `beispiel`
+bleiben ohne Badge. Die Farben sind zentral definiert.
 
-Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
-in Lernkarten unter dem Text, in Abläufen unter dem Schritt, bei
-Karteikarten auf der Rückseite. Das stützt die Kernregel, dass die
-Folien Vorrang haben, und macht das Nachschlagen einfach.
+Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an.
+Im Modus Lernen steht der Fließtext auf etwa 68 Zeichen bei 18px und
+Zeilenhöhe mindestens 1,5. Ab 80rem liegt die Folienangabe jedes
+Abschnitts in der Randspalte, auf einer Höhe mit der Überschrift.
+Darunter steht sie wieder unter dem Text. Tabellen, Formeln, Abläufe
+und Aufgaben nutzen die ganze Inhaltsspalte. Üben folgt demselben
+Fließtext: Überschrift, dünne Trennung, Aktionsknöpfe unter der
+Aufgabe, Folienangabe in der Randspalte. Die Zählung ist eine kleine
+Fläche ohne Rand. In Abläufen steht die Quelle unter dem Schritt, bei
+Karteikarten auf der Rückseite. Die Karteikarte sitzt in der
+Inhaltsspalte horizontal und, soweit der Platz reicht, vertikal mittig.
+Das stützt die Kernregel, dass die Folien Vorrang haben, und macht das
+Nachschlagen einfach.
 
 Regeln:
 
@@ -166,9 +180,9 @@ Regeln:
 - Keine abweichenden Randradien pro Seite.
 - Maße in `rem`, damit größere Systemschriften sauber skalieren.
 - Statusfarben bleiben fest:
-  - `accent` für Navigation und aktive Auswahl
   - `success` (grün) für gewusst und erledigt
   - `warning` (orange) für wiederholen
+- Aktive Schalter nutzen eine hellere Fläche und hellere Schrift, keinen Akzentrahmen.
 
 ## Typografie
 
@@ -233,6 +247,7 @@ Regeln:
 - `trainer.html` lädt ein Fach nur über `?subject=<id>`.
 - Fachdaten werden in `content/<fach>/` gehalten.
 - Fortschritt gehört in State oder `localStorage`, nie in die Fachdaten.
+- „Fortschritt sichern“ und „Fortschritt laden“ stehen nur auf der Startseite, als zwei kleine Textlinks über dem Fußhinweis. Eine Zeile meldet Erfolg oder Fehler.
 
 ## Was nicht gemacht werden soll
 

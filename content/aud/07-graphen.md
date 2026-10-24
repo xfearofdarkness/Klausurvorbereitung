@@ -32,13 +32,13 @@ Ein <b>Pfad</b> ist eine Folge von Kanten, die zwei Knoten verbindet. Ein Graph 
 tag: def
 quelle: 07_graphs.pdf, Folien 9-12
 
-Jede Kante weist eine Richtung auf (dargestellt durch einen Pfeil) und hat einen ausgehenden und einen eingehenden Knoten. Kanten werden oft als geordnete Paare (Startknoten, Endknoten) dargestellt: (a,b) kann eine Kante sein, ohne dass (b,a) eine ist. Ein Pfad in einem gerichteten Graphen ist eine Folge von Kanten, bei der der Endknoten der Kante i mit dem Startknoten der Kante i+1 identisch sein muss — {(a,b),(b,e),(e,f)} ist valide, {(a,b),(c,b),(c,a)} nicht.
+Jede Kante weist eine Richtung auf (dargestellt durch einen Pfeil) und hat einen ausgehenden und einen eingehenden Knoten. Kanten werden oft als geordnete Paare (Startknoten, Endknoten) dargestellt: (a,b) kann eine Kante sein, ohne dass (b,a) eine ist. Ein Pfad in einem gerichteten Graphen ist eine Folge von Kanten, bei der der Endknoten der Kante i mit dem Startknoten der Kante i+1 identisch sein muss: {(a,b),(b,e),(e,f)} ist valide, {(a,b),(c,b),(c,a)} nicht.
 
 ## Karte: Baum vs. Graph
 tag: wichtig
 quelle: 07_graphs.pdf, Folien 13-14
 
-Ein Baum ist ein spezieller Typ eines Graphen: Er ist zusammenhängend und ungerichtet und er ist azyklisch — es gibt keinen Pfad mit unterschiedlichen Kanten, der am selben Knoten beginnt und endet. Normalerweise wird einer der Knoten als Wurzel bezeichnet, obwohl die Graphentheorie dies nicht verlangt.
+Ein Baum ist ein spezieller Typ eines Graphen: Er ist zusammenhängend und ungerichtet und er ist azyklisch. Es gibt keinen Pfad mit unterschiedlichen Kanten, der am selben Knoten beginnt und endet. Normalerweise wird einer der Knoten als Wurzel bezeichnet, obwohl die Graphentheorie dies nicht verlangt.
 
 ## Karte: Spannbaum (Spanning Tree)
 tag: def
@@ -49,13 +49,13 @@ Eine Teilmenge eines zusammenhängenden Graphen, die alle Knoten und eine Teilme
 ## Karte: Darstellung: Kantenliste und Knotenliste
 quelle: 07_graphs.pdf, Folien 16-19
 
-<b>Kantenliste:</b> eine Liste oder ein Array zur Darstellung der Kanten, z. B. int[] edgelist = {Anzahl Knoten, Anzahl Kanten, dann je Kante Start- und Endknoten}. <b>Knotenliste:</b> stellt die Nachbarschaften der Knoten dar — pro Knoten die Anzahl seiner Kanten gefolgt von den Nachbarn; alternativ zwei Arrays neighborhoods und nodeNhd, wobei die Nachbarschaft von Knoten i in den Positionen nodeNhd[i-1] bis nodeNhd[i]−1 liegt.
+<b>Kantenliste:</b> eine Liste oder ein Array zur Darstellung der Kanten, z. B. int[] edgelist = {Anzahl Knoten, Anzahl Kanten, dann je Kante Start- und Endknoten}. <b>Knotenliste:</b> stellt die Nachbarschaften der Knoten dar. Pro Knoten die Anzahl seiner Kanten gefolgt von den Nachbarn; alternativ zwei Arrays neighborhoods und nodeNhd, wobei die Nachbarschaft von Knoten i in den Positionen nodeNhd[i-1] bis nodeNhd[i]−1 liegt.
 
 ## Karte: Darstellung: Adjazenz-Matrix
 tag: wichtig
 quelle: 07_graphs.pdf, Folien 20-23
 
-Ein zweidimensionales Array zur Darstellung der Kanten: edge[r][c] = die Kante zwischen den Knoten r und c bzw. die Kosten für den Weg von r nach c. Ein Spezialwert zeigt an, dass man nicht von r nach c gelangen kann — bei ungewichteten Graphen 0, bei gewichteten Graphen darf 0 nicht verwendet werden, da es tatsächlich Kosten von 0 geben kann. Gut geeignet für <b>dichte</b> Graphen (viele Kanten pro Knoten); verschwendet Speicherplatz bei <b>spärlichen</b> Graphen.
+Ein zweidimensionales Array zur Darstellung der Kanten: edge[r][c] = die Kante zwischen den Knoten r und c bzw. die Kosten für den Weg von r nach c. Ein Spezialwert zeigt an, dass man nicht von r nach c gelangen kann. Bei ungewichteten Graphen 0, bei gewichteten Graphen darf 0 nicht verwendet werden, da es tatsächlich Kosten von 0 geben kann. Gut geeignet für <b>dichte</b> Graphen (viele Kanten pro Knoten); verschwendet Speicherplatz bei <b>spärlichen</b> Graphen.
 
 ## Karte: Darstellung: Adjazenz-Liste
 tag: wichtig
@@ -115,7 +115,7 @@ Zusammenhängend, wenn es zwischen zwei beliebigen Knoten einen Pfad gibt. Volls
 id: 1drq61q
 quelle: 07_graphs.pdf, Folien 10-12
 
-Wenn der Endknoten der Kante i mit dem Startknoten der Kante i+1 identisch ist — z. B. ist {(a,b),(b,e),(e,f)} valide, {(a,b),(c,b),(c,a)} nicht.
+Wenn der Endknoten der Kante i mit dem Startknoten der Kante i+1 identisch ist. Z. B. ist {(a,b),(b,e),(e,f)} valide, {(a,b),(c,b),(c,a)} nicht.
 
 ## Frage: Was unterscheidet einen Baum von einem allgemeinen Graphen?
 id: 1o04ibb
@@ -133,7 +133,7 @@ Ein Spannbaum ist eine Teilmenge eines zusammenhängenden Graphen mit allen Knot
 id: 18ymgua
 quelle: 07_graphs.pdf, Folie 22
 
-Weil es tatsächlich Kanten mit Kosten 0 geben kann — es muss ein anderer spezieller Wert verwendet werden.
+Weil es tatsächlich Kanten mit Kosten 0 geben kann. Es muss ein anderer spezieller Wert verwendet werden.
 
 ## Frage: Wann eignet sich die Adjazenz-Matrix, wann die Adjazenz-Liste?
 id: 1dnscn1
@@ -145,7 +145,7 @@ Die Adjazenz-Matrix eignet sich für dichte Graphen (viele Kanten pro Knoten), v
 id: 14shq4
 quelle: 07_graphs.pdf, Folien 29, 30-73
 
-Tiefensuche geht so weit wie möglich einen Pfad entlang, bevor sie zurückgeht (rekursiv). Breitensuche besucht erst alle Nachbarn, dann alle Knoten zwei Kanten entfernt usw. — implementiert mit einer Queue.
+Tiefensuche geht so weit wie möglich einen Pfad entlang, bevor sie zurückgeht (rekursiv). Breitensuche besucht erst alle Nachbarn, dann alle Knoten zwei Kanten entfernt usw.. Implementiert mit einer Queue.
 
 ## Frage: Nennen Sie Anwendungen der Graph-Traversierung.
 id: 1umzm5p
@@ -307,7 +307,7 @@ quelle: 07_graphs.pdf, Folien 60-73
              },
              {
                "title": "Besuche 2: fertig",
-               "text": "Die Queue ist leer — Besuchsreihenfolge: 1 3 6 8 7 4 5 2.",
+               "text": "Die Queue ist leer. Besuchsreihenfolge: 1 3 6 8 7 4 5 2.",
                "explanation": {
                                 "action": "Knoten 2 aus der Queue entfernen und besuchen.",
                                 "rule": "Solange die Queue nicht leer ist, wird der nächste Knoten entfernt und besucht.",

@@ -89,6 +89,8 @@ existiert. Sie müssen lokal laufen.
   (siehe `DESIGN_GUIDE.md`).
 - Texte, Kommentare und Inhalte auf Deutsch mit echten Umlauten (`ä`, `ö`,
   `ü`, `ß`), nicht `ae`/`oe`/`ue`.
+- Ausgelieferter Text enthält keinen Geviertstrich (—). Halbgeviertstriche
+  in Zahlenbereichen (14–18) bleiben erlaubt.
 
 ## Fallstricke
 

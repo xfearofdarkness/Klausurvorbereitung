@@ -8,19 +8,19 @@ icon: 🫘
 tag: def
 quelle: 07_ds-concept-components.pdf, Folien 4, 6
 
-Eine Softwarekomponente ist eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten. Komponenten geben die Schnittstellen an, die sie bieten und die sie benötigen — die Beziehungen werden oft als Vertrag bezeichnet. Dazu kommen: strukturierte und transparente Kommunikation mit der Middleware, Nutzung von Infrastrukturdiensten, Unterstützung beim Deployment. Verteilte Objekte können als Vorläufer von Komponenten betrachtet werden.
+Eine Softwarekomponente ist eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten. Komponenten geben die Schnittstellen an, die sie bieten und die sie benötigen. Die Beziehungen werden oft als Vertrag bezeichnet. Dazu kommen: strukturierte und transparente Kommunikation mit der Middleware, Nutzung von Infrastrukturdiensten, Unterstützung beim Deployment. Verteilte Objekte können als Vorläufer von Komponenten betrachtet werden.
 
 ## Karte: Komponenten-basierte Programmierung
 tag: def
 quelle: 07_ds-concept-components.pdf, Folie 9
 
-Befasst sich mit der Entwicklung von Komponenten und deren Komposition. Ziel ist ein Stil der Software-Entwicklung ähnlich der Hardware-Entwicklung: Komponenten von der Stange verwenden und zusammensetzen — ein Übergang von der Software-Entwicklung zur Software-Zusammenstellung. Das unterstützt Drittanbieter-Komponenten und erleichtert die Anpassung von Systemkonfigurationen zur Laufzeit durch Austausch passgenauer Komponenten.
+Befasst sich mit der Entwicklung von Komponenten und deren Komposition. Ziel ist ein Stil der Software-Entwicklung ähnlich der Hardware-Entwicklung: Komponenten von der Stange verwenden und zusammensetzen. Ein Übergang von der Software-Entwicklung zur Software-Zusammenstellung. Das unterstützt Drittanbieter-Komponenten und erleichtert die Anpassung von Systemkonfigurationen zur Laufzeit durch Austausch passgenauer Komponenten.
 
 ## Karte: Kernanliegen vs. Plumbing
 tag: wichtig
 quelle: 07_ds-concept-components.pdf, Folien 11-13
 
-Der Fokus der Softwareentwicklung sollte auf den Kernanliegen der Anwendung liegen — allgemein als Geschäftslogik bezeichnet. Daneben gibt es das „Plumbing“: Auf Komponenten muss über Schnittstellen zugegriffen werden, für unterschiedliche Datenformate müssen Adapter erstellt werden. Anwendungen bestehen aus funktionalen, wiederverwendbaren Komponenten mit generischen Schnittstellen.
+Der Fokus der Softwareentwicklung sollte auf den Kernanliegen der Anwendung liegen. Allgemein als Geschäftslogik bezeichnet. Daneben gibt es das „Plumbing“: Auf Komponenten muss über Schnittstellen zugegriffen werden, für unterschiedliche Datenformate müssen Adapter erstellt werden. Anwendungen bestehen aus funktionalen, wiederverwendbaren Komponenten mit generischen Schnittstellen.
 
 ## Karte: Container
 tag: def
@@ -32,7 +32,7 @@ Ein Container ist ein Host, der Dienste für Gastanwendungen bereitstellt. Er st
 tag: wichtig
 quelle: 07_ds-concept-components.pdf, Folien 17-18
 
-Registrierung, Dependency Injection und Suche; Transaction Management (JTA — Komponenten sind automatisch transaktional); Pooling (Instanzen werden von Clients gemeinsam genutzt und nach Gebrauch in den Pool zurückgegeben); Sicherheit per Konfiguration; Thread-Sicherheit und Nebenläufigkeit; Lifecycle-Management; Fernzugriff (Beans werden zu netzwerkfähigen verteilten Komponenten); Unterstützung für gleichzeitige Anfragen; Clustering und Lastausgleich.
+Registrierung, Dependency Injection und Suche; Transaction Management (JTA. Komponenten sind automatisch transaktional); Pooling (Instanzen werden von Clients gemeinsam genutzt und nach Gebrauch in den Pool zurückgegeben); Sicherheit per Konfiguration; Thread-Sicherheit und Nebenläufigkeit; Lifecycle-Management; Fernzugriff (Beans werden zu netzwerkfähigen verteilten Komponenten); Unterstützung für gleichzeitige Anfragen; Clustering und Lastausgleich.
 
 ## Karte: Vereinfachtes Entwicklungs-Modell
 tag: def
@@ -44,7 +44,7 @@ XML und Annotationen (Deployment Descriptor vs. Annotations), Dependency Injecti
 tag: def
 quelle: 07_ds-concept-components.pdf, Folien 21-22
 
-<b>Dependency Injection:</b> Der Container kümmert sich um die Beziehung einer Komponente zu ihren Abhängigkeiten — beschrieben über Annotationen (z. B. <code>@EJB MyBean m;</code>): Das Attribut wird deklariert, der Container fügt zur Laufzeit die richtige Abhängigkeit ein. <b>Interception:</b> Mechanismus, das Default-Verhalten eines Containers durch eigene Methoden zu verändern — bei Methodenaufrufen (<code>@AroundInvoke</code>) und Lifecycle-Events (<code>@PostConstruct</code>, <code>@PreDestroy</code>).
+<b>Dependency Injection:</b> Der Container kümmert sich um die Beziehung einer Komponente zu ihren Abhängigkeiten. Beschrieben über Annotationen (z. B. <code>@EJB MyBean m;</code>): Das Attribut wird deklariert, der Container fügt zur Laufzeit die richtige Abhängigkeit ein. <b>Interception:</b> Mechanismus, das Default-Verhalten eines Containers durch eigene Methoden zu verändern. Bei Methodenaufrufen (<code>@AroundInvoke</code>) und Lifecycle-Events (<code>@PostConstruct</code>, <code>@PreDestroy</code>).
 
 ## Karte: Enterprise Java Bean (EJB)
 tag: def
@@ -62,7 +62,7 @@ Eine Session Bean kapselt Geschäftslogik, die ein Client programmgesteuert übe
 tag: wichtig
 quelle: 07_ds-concept-components.pdf, Folien 28-32
 
-Enthalten keine Konversationen, die sich über einen einzelnen Methodenaufruf hinaus erstrecken — kein für den Client sichtbarer Status. Instanzvariablen können nur für die Dauer eines Aufrufs Status enthalten; außerhalb sind alle Instanzen gleichwertig, sodass der Container jedem Client eine beliebige Instanz zuweisen kann. Bessere Skalierbarkeit (mehrere Clients); können Webdienste implementieren. Beispiel: <code>@Stateless public class HelloUserBean { public String sayHello(String name) {...} }</code> — automatisch threadsicher, transaktional und gepoolt. Einbettung ins Servlet per <code>@EJB</code>-Injektion.
+Enthalten keine Konversationen, die sich über einen einzelnen Methodenaufruf hinaus erstrecken. Kein für den Client sichtbarer Status. Instanzvariablen können nur für die Dauer eines Aufrufs Status enthalten; außerhalb sind alle Instanzen gleichwertig, sodass der Container jedem Client eine beliebige Instanz zuweisen kann. Bessere Skalierbarkeit (mehrere Clients); können Webdienste implementieren. Beispiel: <code>@Stateless public class HelloUserBean { public String sayHello(String name) {...} }</code>. Automatisch threadsicher, transaktional und gepoolt. Einbettung ins Servlet per <code>@EJB</code>-Injektion.
 
 ## Karte: Pooling und Lifecycle-Callbacks
 tag: def
@@ -74,7 +74,7 @@ Stateless Beans werden gepoolt: Der Container weist bei einer Anfrage eine Insta
 tag: def
 quelle: 07_ds-concept-components.pdf, Folien 36-38
 
-Für Geschäftsprozesse konzipiert, die mehrere Methodenanforderungen oder Transaktionen umfassen — sie behalten den Status eines einzelnen Clients bei (Konversationszustand). Ähnlich einer interaktiven Sitzung: nur ein Client; entfernt der Client die Bean, endet die Sitzung und der Status verschwindet. Pooling ist auch hier nötig; da der Konversationszustand groß sein kann, wird ähnlich wie bei Betriebssystemen Swapping eingesetzt — die <b>Passivierung</b>: Die Bean wird ausgelagert und wieder aktiviert, wenn ein Client sie aufruft.
+Für Geschäftsprozesse konzipiert, die mehrere Methodenanforderungen oder Transaktionen umfassen. Sie behalten den Status eines einzelnen Clients bei (Konversationszustand). Ähnlich einer interaktiven Sitzung: nur ein Client; entfernt der Client die Bean, endet die Sitzung und der Status verschwindet. Pooling ist auch hier nötig; da der Konversationszustand groß sein kann, wird ähnlich wie bei Betriebssystemen Swapping eingesetzt. Die <b>Passivierung</b>: Die Bean wird ausgelagert und wieder aktiviert, wenn ein Client sie aufruft.
 
 ## Karte: Singleton Session Beans
 tag: def
@@ -86,13 +86,13 @@ Werden nur einmal pro Anwendung instanziiert und existieren für deren Lebenszyk
 id: 1487s3
 quelle: 07_ds-concept-components.pdf, Folie 6
 
-Eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten — alle Kontextabhängigkeiten müssen explizit sein.
+Eine Kompositionseinheit mit vertraglich spezifizierten Schnittstellen und nur expliziten Kontextabhängigkeiten. Alle Kontextabhängigkeiten müssen explizit sein.
 
 ## Frage: Was ist ein Container und was verwaltet er?
 id: 1ptmupx
 quelle: 07_ds-concept-components.pdf, Folien 15-16
 
-Ein Host, der Dienste für Gastanwendungen bereitstellt — die Schnittstelle zwischen Komponente und plattformspezifischer Low-Level-Funktionalität. Er verwaltet Lebenszyklus, Datenpersistenz, Ressourcenpooling, Transaktionen, Sicherheit und Low-Level-Kommunikation.
+Ein Host, der Dienste für Gastanwendungen bereitstellt. Die Schnittstelle zwischen Komponente und plattformspezifischer Low-Level-Funktionalität. Er verwaltet Lebenszyklus, Datenpersistenz, Ressourcenpooling, Transaktionen, Sicherheit und Low-Level-Kommunikation.
 
 ## Frage: Welche Rolle haben @Stateless und @Stateful?
 id: 19d63

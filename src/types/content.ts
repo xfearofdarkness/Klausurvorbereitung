@@ -255,16 +255,25 @@ export type QuizMark = "correct" | "wrong";
 export type FlashMark = "know" | "repeat";
 export type PracticeMark = "done";
 
+/** Nächster Termin einer Karteikarte. `due` ist ein lokales Datum JJJJ-MM-TT. */
+export interface CardSchedule {
+  due: string;
+  interval: number;
+  ease: number;
+  reps: number;
+}
+
 /** Markierungen eines Themas, je Eintrag über dessen `key`. */
 export type MarkState<T> = Record<string, T>;
 
 export interface SubjectProgress {
-  /** 3 = Fragen in Karteikarten überführt, 2 = Inhaltsschlüssel, 1 = Listenpositionen. */
+  /** 4 = Fälligkeit je Karte, 3 = Fragen in Karteikarten überführt, 2 = Inhaltsschlüssel, 1 = Listenpositionen. */
   version?: number;
   /** Nur noch für die Übernahme alter Stände gelesen. */
   quiz?: Record<string, MarkState<QuizMark>>;
   flash: Record<string, MarkState<FlashMark>>;
   practice?: Record<string, MarkState<PracticeMark>>;
+  schedule?: Record<string, Record<string, CardSchedule>>;
   ui?: {
     /** Kann aus älteren Ständen einen entfernten Modus enthalten. */
     lastMode?: ModeId | string;

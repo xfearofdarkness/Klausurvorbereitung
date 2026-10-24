@@ -53,7 +53,7 @@ quelle: 02_abstract_data_types.pdf, Folie 18
 tag: wichtig
 quelle: 02_abstract_data_types.pdf, Folie 24
 
-Sequenz: eine geordnete Folge von Elementen. Die gängigste Darstellung ist ein Array. <b>Vorteile:</b> einfacher und effizienter Zugriff auf jedes Element (item[i] liefert das Element an Position i, Zugriff in konstanter Zeit — Direktzugriff); sehr kompakt. <b>Nachteile:</b> anfängliche Array-Größe muss festgelegt und bei Bedarf angepasst werden; es ist schwierig, Elemente an beliebigen Positionen einzufügen oder zu löschen; kann Speicherplatz verschwenden, wenn Positionen leer sind.
+Sequenz: eine geordnete Folge von Elementen. Die gängigste Darstellung ist ein Array. <b>Vorteile:</b> einfacher und effizienter Zugriff auf jedes Element (item[i] liefert das Element an Position i, Zugriff in konstanter Zeit. Direktzugriff); sehr kompakt. <b>Nachteile:</b> anfängliche Array-Größe muss festgelegt und bei Bedarf angepasst werden; es ist schwierig, Elemente an beliebigen Positionen einzufügen oder zu löschen; kann Speicherplatz verschwenden, wenn Positionen leer sind.
 
 ## Karte: Verkettete Liste (Linked List)
 tag: def
@@ -70,7 +70,7 @@ quelle: 02_abstract_data_types.pdf, Folien 30-35
 tag: wichtig
 quelle: 02_abstract_data_types.pdf, Folien 36-37
 
-<b>Vorteile:</b> kann unbegrenzt wachsen (genug Speicher vorausgesetzt); Einfügen/Löschen ist einfach — kein Verschieben anderer Elemente nötig, nur die Links werden angepasst. <b>Nachteile:</b> kein Direktzugriff (man muss die Liste „entlanglaufen“); die Links belegen zusätzlichen Speicher; Entfernen am Ende einer einfach verketteten Liste ist nicht effizient — es gibt keinen Weg in konstanter Zeit, tail auf den Vorgängerknoten zu setzen.
+<b>Vorteile:</b> kann unbegrenzt wachsen (genug Speicher vorausgesetzt); Einfügen/Löschen ist einfach. Kein Verschieben anderer Elemente nötig, nur die Links werden angepasst. <b>Nachteile:</b> kein Direktzugriff (man muss die Liste „entlanglaufen“); die Links belegen zusätzlichen Speicher; Entfernen am Ende einer einfach verketteten Liste ist nicht effizient. Es gibt keinen Weg in konstanter Zeit, tail auf den Vorgängerknoten zu setzen.
 
 ## Karte: Doppelt verkettete Liste (Doubly Linked List)
 tag: def
@@ -99,13 +99,13 @@ getItem(i): ArrayList O(1), LinkedLList O(1). addItem als letztes Element: Array
 tag: wichtig
 quelle: 02_abstract_data_types.pdf, Folien 90-91
 
-Problem: Für LinkedLList-Objekte startet jeder Aufruf von getItem() am Anfang der Liste und traversiert zu Element i — bei length = n werden insgesamt 1 + 2 + … + n Knoten zugegriffen = O(n²). Macht man die Zähl-Methode zur Methode der Liste, wird jeder Knoten nur einmal besucht (O(n)) — aber man kann nicht alle Operationen vorhersehen, die Benutzer ausführen möchten. Lösung: ein Iterator.
+Problem: Für LinkedLList-Objekte startet jeder Aufruf von getItem() am Anfang der Liste und traversiert zu Element i. Bei length = n werden insgesamt 1 + 2 + … + n Knoten zugegriffen = O(n²). Macht man die Zähl-Methode zur Methode der Liste, wird jeder Knoten nur einmal besucht (O(n)). Aber man kann nicht alle Operationen vorhersehen, die Benutzer ausführen möchten. Lösung: ein Iterator.
 
 ## Karte: Iterator
 tag: def
 quelle: 02_abstract_data_types.pdf, Folien 96-98
 
-Ein Iterator ist ein Objekt, das es ermöglicht, eine Liste zu durchlaufen, ohne die Kapselung zu verletzen. Interface ListIterator: <b>hasNext()</b> — hat der Iterator weitere Elemente zu besuchen? <b>next()</b> — liefert das nächste Element und setzt den Iterator weiter (macht immer zwei Dinge auf einmal: Element zurückliefern und Iterator weitersetzen).
+Ein Iterator ist ein Objekt, das es ermöglicht, eine Liste zu durchlaufen, ohne die Kapselung zu verletzen. Interface ListIterator: <b>hasNext()</b>. Hat der Iterator weitere Elemente zu besuchen? <b>next()</b>. Liefert das nächste Element und setzt den Iterator weiter (macht immer zwei Dinge auf einmal: Element zurückliefern und Iterator weitersetzen).
 
 ## Karte: Stack (Stapel)
 tag: def
@@ -135,13 +135,13 @@ Einen rekursiven Algorithmus in einen iterativen umwandeln (Stack emuliert den L
 tag: def
 quelle: 02_abstract_data_types.pdf, Folie 148
 
-Eine Queue ist eine Folge von Elementen, in der Elemente hinten hinzugefügt und vorne entfernt werden: first in, first out (FIFO) — im Gegensatz zum Stack (LIFO). Man kann nur auf das Element zugreifen, das gerade an erster Stelle steht. Operationen: <b>enqueue(e)</b> fügt e am Ende hinzu, <b>dequeue()</b> entfernt und liefert das erste Element (oder null, wenn leer), <b>first()</b> liefert das erste Element ohne Entfernen, <b>size()</b>, <b>isFull()</b>, <b>isEmpty()</b>.
+Eine Queue ist eine Folge von Elementen, in der Elemente hinten hinzugefügt und vorne entfernt werden: first in, first out (FIFO). Im Gegensatz zum Stack (LIFO). Man kann nur auf das Element zugreifen, das gerade an erster Stelle steht. Operationen: <b>enqueue(e)</b> fügt e am Ende hinzu, <b>dequeue()</b> entfernt und liefert das erste Element (oder null, wenn leer), <b>first()</b> liefert das erste Element ohne Entfernen, <b>size()</b>, <b>isFull()</b>, <b>isEmpty()</b>.
 
 ## Karte: Ringwarteschlange (Circular Queue)
 tag: wichtig
 quelle: 02_abstract_data_types.pdf, Folien 151-153
 
-Problem: Erreicht man das Ende des Arrays, müssten Elemente nach links verschoben werden, um weitere einzufügen. Lösung: Ringwarteschlange — am Ende des Arrays springt man wieder an den Anfang. Die Indizes werden mit dem Modulo-Operator verschoben: front = (front + 1) % items.length; rear = (rear + 1) % items.length. Beispiel: items.length = 8, rear = 7 → rear = (7 + 1) % 8 = 0.
+Problem: Erreicht man das Ende des Arrays, müssten Elemente nach links verschoben werden, um weitere einzufügen. Lösung: Ringwarteschlange. Am Ende des Arrays springt man wieder an den Anfang. Die Indizes werden mit dem Modulo-Operator verschoben: front = (front + 1) % items.length; rear = (rear + 1) % items.length. Beispiel: items.length = 8, rear = 7 → rear = (7 + 1) % 8 = 0.
 
 ## Karte: ArrayQueue: leer oder voll?
 tag: wichtig
@@ -171,7 +171,7 @@ Menge: ungeordnete Sammlung, jedes Element kommt nur einmal vor (keine Duplikate
 id: 1vx38dm
 quelle: 02_abstract_data_types.pdf, Folie 24
 
-Vorteile: Direktzugriff — item[i] liefert das Element an Position i in konstanter Zeit; sehr kompakt. Nachteile: anfängliche Größe muss festgelegt und ggf. angepasst werden; Einfügen/Löschen an beliebigen Positionen ist schwierig; möglicher Speicherverschnitt bei leeren Positionen.
+Vorteile: Direktzugriff. Item[i] liefert das Element an Position i in konstanter Zeit; sehr kompakt. Nachteile: anfängliche Größe muss festgelegt und ggf. angepasst werden; Einfügen/Löschen an beliebigen Positionen ist schwierig; möglicher Speicherverschnitt bei leeren Positionen.
 
 ## Frage: Was bedeuten head und tail in einer verketteten Liste?
 id: 1ktkr8w
@@ -189,7 +189,7 @@ Vorteile: kann unbegrenzt wachsen; Einfügen/Löschen ohne Verschieben anderer E
 id: 9bexum
 quelle: 02_abstract_data_types.pdf, Folie 37
 
-Es gibt keine Möglichkeit, in konstanter Zeit den tail-Verweis auf den Vorgängerknoten zu setzen — man müsste die Liste durchlaufen.
+Es gibt keine Möglichkeit, in konstanter Zeit den tail-Verweis auf den Vorgängerknoten zu setzen. Man müsste die Liste durchlaufen.
 
 ## Frage: Wie unterscheidet sich eine doppelt verkettete Liste von einer einfach verketteten?
 id: 18dh8tb
@@ -201,7 +201,7 @@ Jeder Knoten hat zusätzlich einen Link auf den vorherigen Knoten (prev und next
 id: 1ec1jw9
 quelle: 02_abstract_data_types.pdf, Folie 44
 
-Ein Modell einer Datenstruktur, das die Eigenschaften der Datensammlung und die darauf möglichen Operationen festlegt. Abstrakt, weil nicht festgelegt ist, wie der ADT implementiert wird — das Interface spezifiziert WAS jede Operation macht, die Klasse WIE.
+Ein Modell einer Datenstruktur, das die Eigenschaften der Datensammlung und die darauf möglichen Operationen festlegt. Abstrakt, weil nicht festgelegt ist, wie der ADT implementiert wird. Das Interface spezifiziert WAS jede Operation macht, die Klasse WIE.
 
 ## Frage: Wie effizient sind addItem und removeItem bei ArrayList und LinkedLList?
 id: 4foo7y

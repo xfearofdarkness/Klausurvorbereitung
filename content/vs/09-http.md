@@ -38,7 +38,7 @@ quelle: 03-ds-http.pdf, Folie 13
 tag: beispiel
 quelle: 03-ds-http.pdf, Folien 16-17
 
-Die Request-Zeile besteht aus drei Komponenten: Methoden-Name, URI, http-Version — z. B. <code>GET /test.html HTTP/1.1</code>. Request-Header haben die Form von Namens-Wert-Paaren, z. B. <code>Host: www.xyz.com</code>, <code>Connection: Keep-Alive</code>, <code>Accept: image/gif, image/jpeg, */*</code>.
+Die Request-Zeile besteht aus drei Komponenten: Methoden-Name, URI, http-Version. Z. B. <code>GET /test.html HTTP/1.1</code>. Request-Header haben die Form von Namens-Wert-Paaren, z. B. <code>Host: www.xyz.com</code>, <code>Connection: Keep-Alive</code>, <code>Accept: image/gif, image/jpeg, */*</code>.
 
 ## Karte: Response und Statuszeile
 tag: wichtig
@@ -80,13 +80,13 @@ Protokoll, Hostname (DNS-Name oder IP), Port (TCP-Portnummer) sowie Pfad- und Da
 id: ju7ioh
 quelle: 03-ds-http.pdf, Folien 8, 11
 
-Startzeile, Block von Headern und optionaler Textkörper — gesendet als ASCII-Text über einen TCP-Stream.
+Startzeile, Block von Headern und optionaler Textkörper. Gesendet als ASCII-Text über einen TCP-Stream.
 
 ## Frage: Was unterscheidet GET und HEAD?
 id: 1qjn0lf
 quelle: 03-ds-http.pdf, Folie 13
 
-HEAD ist identisch mit GET, gibt aber keine Daten zurück — nur Informationen über die Daten (z. B. letzte Änderung, Größe).
+HEAD ist identisch mit GET, gibt aber keine Daten zurück. Nur Informationen über die Daten (z. B. letzte Änderung, Größe).
 
 ## Frage: Wofür stehen GET, HEAD, POST und PUT?
 id: eycprb

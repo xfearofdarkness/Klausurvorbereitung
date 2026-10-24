@@ -1,7 +1,10 @@
 #!/usr/bin/env tsx
 
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import katex from "katex";
 import { catalog } from "../src/data/catalog";
+import { emDashPaths } from "./no_em_dash";
 import { ContentError } from "./content_compiler";
 import { loadRawSubject } from "./load_content";
 import { checkSlideExample, generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
@@ -699,6 +702,11 @@ const subjectIds = requestedSubjectId ? [requestedSubjectId] : catalog.map((entr
 for (const subjectId of subjectIds) {
   const subject = await loadSubject(subjectId);
   validateSubject(subjectId, subject);
+}
+
+const projectRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
+for (const path of emDashPaths(projectRoot)) {
+  fail(`Geviertstrich in ausgeliefertem Text: ${path}`);
 }
 
 if (failureCount > 0) {

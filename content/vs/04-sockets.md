@@ -14,24 +14,24 @@ In einer Client/Server-Architektur muss Kommunikation in vielen Fällen verläss
 tag: def
 quelle: 01_ds-concept-sockets.pdf, Folie 6
 
-UDP sendet unabhängige Datenpakete (Datagramme); die Ankunft ist nicht garantiert und es wird keine Verbindung aufgebaut. Gut geeignet für Anwendungen, die große Mengen von Zustandsdaten übertragen — der Verbindungsaufbau wäre zu aufwändig. Beispiel: ein Server, der die aktuelle Uhrzeit sendet (bei Verlust reicht das nächste Datagramm); außerdem ping.
+UDP sendet unabhängige Datenpakete (Datagramme); die Ankunft ist nicht garantiert und es wird keine Verbindung aufgebaut. Gut geeignet für Anwendungen, die große Mengen von Zustandsdaten übertragen. Der Verbindungsaufbau wäre zu aufwändig. Beispiel: ein Server, der die aktuelle Uhrzeit sendet (bei Verlust reicht das nächste Datagramm); außerdem ping.
 
 ## Karte: Ports
 tag: def
 quelle: 01_ds-concept-sockets.pdf, Folie 7
 
-Ein Rechner hat im Allgemeinen eine einzige physikalische Verbindung zum Internet — verschiedene Anwendungen teilen sich diese Verbindung. Daten für verschiedene Anwendungen werden durch Port-Nummern unterschieden: 16-Bit-Zahlen (Wertebereich 0–65.535), verwendet von TCP und UDP. TCP-Server binden ihren Socket an einen Port, um alle Daten an diesen Port zu empfangen; UDP-Datagramme werden dynamisch zum jeweiligen Port geroutet.
+Ein Rechner hat im Allgemeinen eine einzige physikalische Verbindung zum Internet. Verschiedene Anwendungen teilen sich diese Verbindung. Daten für verschiedene Anwendungen werden durch Port-Nummern unterschieden: 16-Bit-Zahlen (Wertebereich 0–65.535), verwendet von TCP und UDP. TCP-Server binden ihren Socket an einen Port, um alle Daten an diesen Port zu empfangen; UDP-Datagramme werden dynamisch zum jeweiligen Port geroutet.
 
 ## Karte: Socket
 tag: def
 quelle: 01_ds-concept-sockets.pdf, Folie 8
 
-Endpunkt einer bidirektionalen Kommunikationsverbindung zwischen zwei Programmen. Ein Socket ist an eine Portnummer gebunden, sodass die TCP-Schicht die Anwendung identifizieren kann, die die Daten empfangen soll. Verbindungsaufbau: Der Server wartet und horcht an einem Socket; der Client kennt Rechnername und Portnummer und startet eine Verbindungsanfrage; der Server akzeptiert; danach wird auf der Client-Seite ein Socket erzeugt — Client und Server können kommunizieren.
+Endpunkt einer bidirektionalen Kommunikationsverbindung zwischen zwei Programmen. Ein Socket ist an eine Portnummer gebunden, sodass die TCP-Schicht die Anwendung identifizieren kann, die die Daten empfangen soll. Verbindungsaufbau: Der Server wartet und horcht an einem Socket; der Client kennt Rechnername und Portnummer und startet eine Verbindungsanfrage; der Server akzeptiert; danach wird auf der Client-Seite ein Socket erzeugt. Client und Server können kommunizieren.
 
 ## Karte: Das Paket java.net
 quelle: 01_ds-concept-sockets.pdf, Folie 10
 
-Socket-Programmierung findet auf der Anwendungsebene statt. Wichtige Klassen — TCP: <code>Socket</code> und <code>ServerSocket</code>, <code>URL</code> und <code>URLConnection</code>; UDP: <code>DatagramSocket</code>, <code>DatagramPacket</code>, <code>MulticastSocket</code>.
+Socket-Programmierung findet auf der Anwendungsebene statt. Wichtige Klassen. TCP: <code>Socket</code> und <code>ServerSocket</code>, <code>URL</code> und <code>URLConnection</code>; UDP: <code>DatagramSocket</code>, <code>DatagramPacket</code>, <code>MulticastSocket</code>.
 
 ## Karte: Generelles Vorgehen (4 Schritte)
 tag: wichtig
@@ -43,31 +43,31 @@ quelle: 01_ds-concept-sockets.pdf, Folie 14
 tag: beispiel
 quelle: 01_ds-concept-sockets.pdf, Folien 15-18
 
-ServerSocket anlegen und blockierend auf Verbindungen warten: <code>ServerSocket ss = new ServerSocket(port); Socket cs = ss.accept();</code> — <code>accept</code> wartet blockierend, bis eine Verbindung angefragt wird. Streams erhalten: <code>PrintWriter out = new PrintWriter(cs.getOutputStream(), true);</code> (true aktiviert Auto-Flush) und <code>BufferedReader in = new BufferedReader(new InputStreamReader(cs.getInputStream()));</code>. Danach Server-Logik über die Streams (z. B. Echo). Schließen: im finally-Block oder automatisch über try-with-resources.
+ServerSocket anlegen und blockierend auf Verbindungen warten: <code>ServerSocket ss = new ServerSocket(port); Socket cs = ss.accept();</code>: <code>accept</code> wartet blockierend, bis eine Verbindung angefragt wird. Streams erhalten: <code>PrintWriter out = new PrintWriter(cs.getOutputStream(), true);</code> (true aktiviert Auto-Flush) und <code>BufferedReader in = new BufferedReader(new InputStreamReader(cs.getInputStream()));</code>. Danach Server-Logik über die Streams (z. B. Echo). Schließen: im finally-Block oder automatisch über try-with-resources.
 
 ## Karte: Client-Seite in Java
 tag: beispiel
 quelle: 01_ds-concept-sockets.pdf, Folien 20-22
 
-Client-Socket anlegen: <code>Socket cs = new Socket(hostname, port);</code> — der Socket startet intern die Verbindungsanfrage. Streams wie beim Server erzeugen, zusätzlich ein Stream für Konsoleneingaben. Client-Logik: <code>readLine()</code> wartet blockierend, bis Benutzer oder Server ihren Input gesendet haben.
+Client-Socket anlegen: <code>Socket cs = new Socket(hostname, port);</code>. Der Socket startet intern die Verbindungsanfrage. Streams wie beim Server erzeugen, zusätzlich ein Stream für Konsoleneingaben. Client-Logik: <code>readLine()</code> wartet blockierend, bis Benutzer oder Server ihren Input gesendet haben.
 
 ## Karte: Java IO: Streams
 tag: def
 quelle: 01_ds-concept-sockets.pdf, Folien 28-30
 
-Streams sind Datenstrukturen, die einen kontinuierlichen Datenfluss repräsentieren — Abstraktionen für verschiedene Datenquellen und -senken (Dateisystem, Netzwerk usw.). Sie haben eine Ausrichtung (Input/Output); <code>InputStream</code> und <code>OutputStream</code> arbeiten auf Byte-Ebene. Objekte müssen für den Netzwerkverkehr umgewandelt werden und dazu das Interface <code>Serializable</code> implementieren. Wichtige Klassen: <code>PrintWriter</code> (formatierter Text), <code>InputStreamReader</code> (Bytes zu Characters), <code>BufferedReader</code> (zeichenbasiert mit Zwischenspeicher), <code>Scanner</code> (zerteilt Eingabe in Tokens).
+Streams sind Datenstrukturen, die einen kontinuierlichen Datenfluss repräsentieren. Abstraktionen für verschiedene Datenquellen und -senken (Dateisystem, Netzwerk usw.). Sie haben eine Ausrichtung (Input/Output); <code>InputStream</code> und <code>OutputStream</code> arbeiten auf Byte-Ebene. Objekte müssen für den Netzwerkverkehr umgewandelt werden und dazu das Interface <code>Serializable</code> implementieren. Wichtige Klassen: <code>PrintWriter</code> (formatierter Text), <code>InputStreamReader</code> (Bytes zu Characters), <code>BufferedReader</code> (zeichenbasiert mit Zwischenspeicher), <code>Scanner</code> (zerteilt Eingabe in Tokens).
 
 ## Karte: Asynchrone Server
 tag: wichtig
 quelle: 01_ds-concept-sockets.pdf, Folien 31, 33
 
-Ein einfacher Server ist während der Bearbeitung einer Anfrage nicht für weitere Clients erreichbar. Lösung: asynchrone Server — der Aufbau einer Verbindung wird von der eigentlichen Verarbeitung der Nachricht getrennt (entkoppelt). Der von <code>accept()</code> erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet; währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten.
+Ein einfacher Server ist während der Bearbeitung einer Anfrage nicht für weitere Clients erreichbar. Lösung: asynchrone Server. Der Aufbau einer Verbindung wird von der eigentlichen Verarbeitung der Nachricht getrennt (entkoppelt). Der von <code>accept()</code> erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet; währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten.
 
 ## Karte: Java Non-Blocking IO (NIO)
 tag: def
 quelle: 01_ds-concept-sockets.pdf, Folie 37
 
-Charakteristika: <b>Non-Blocking</b> — Java NIO führt nicht blockierende IO-Vorgänge aus; es kann auf Daten gewartet und gleichzeitig andere Arbeit ausgeführt werden. <b>Pufferung</b> — die zu verarbeitenden Daten werden in Puffern zwischengespeichert.
+Charakteristika: <b>Non-Blocking</b>. Java NIO führt nicht blockierende IO-Vorgänge aus; es kann auf Daten gewartet und gleichzeitig andere Arbeit ausgeführt werden. <b>Pufferung</b>. Die zu verarbeitenden Daten werden in Puffern zwischengespeichert.
 
 ## Frage: Wie unterscheiden sich TCP und UDP aus Socket-Sicht?
 id: 1prj63w
@@ -79,7 +79,7 @@ TCP ist verbindungsorientiert, verlässlich und Punkt-zu-Punkt; UDP ist verbindu
 id: jipbu1
 quelle: 01_ds-concept-sockets.pdf, Folie 6
 
-Für Anwendungen, die große Mengen von Zustandsdaten übertragen, wo ein Verbindungsaufbau pro Nachricht zu aufwändig wäre — z. B. ein Zeit-Server (verlorene Datagramme werden durch das nächste ersetzt) oder ping.
+Für Anwendungen, die große Mengen von Zustandsdaten übertragen, wo ein Verbindungsaufbau pro Nachricht zu aufwändig wäre. Z. B. ein Zeit-Server (verlorene Datagramme werden durch das nächste ersetzt) oder ping.
 
 ## Frage: Welche Rolle haben Port-Nummern?
 id: 6bxihk
@@ -97,7 +97,7 @@ Der Endpunkt einer bidirektionalen Kommunikationsverbindung zwischen zwei Progra
 id: 1s7fw2l
 quelle: 01_ds-concept-sockets.pdf, Folie 8
 
-Der Server horcht an einem Socket mit Portnummer; der Client kennt Rechnername und Port und startet eine Verbindungsanfrage; der Server akzeptiert; auf der Client-Seite wird ein Socket erzeugt — dann können beide kommunizieren.
+Der Server horcht an einem Socket mit Portnummer; der Client kennt Rechnername und Port und startet eine Verbindungsanfrage; der Server akzeptiert; auf der Client-Seite wird ein Socket erzeugt. Dann können beide kommunizieren.
 
 ## Frage: Welche Java-Klassen gehören zu TCP und UDP?
 id: 1nevok1
@@ -121,13 +121,13 @@ Sie wartet blockierend, bis eine Verbindung vom Client angefragt wird, und liefe
 id: obfdr6
 quelle: 01_ds-concept-sockets.pdf, Folie 29
 
-Sie müssen in eine für den Netzwerkverkehr geeignete Repräsentation umgewandelt werden — ihre Klassen müssen das Interface Serializable implementieren.
+Sie müssen in eine für den Netzwerkverkehr geeignete Repräsentation umgewandelt werden. Ihre Klassen müssen das Interface Serializable implementieren.
 
 ## Frage: Wie funktioniert ein asynchroner Echo-Server?
 id: p8ohow
 quelle: 01_ds-concept-sockets.pdf, Folien 31, 33
 
-Der von accept() erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet. Währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten — Verbindungsaufbau und Verarbeitung sind entkoppelt.
+Der von accept() erzeugte Client-Socket wird an einen Thread weitergereicht, der die Anfrage bearbeitet. Währenddessen kann der ServerSocket asynchron auf weitere Anfragen warten. Verbindungsaufbau und Verarbeitung sind entkoppelt.
 
 ## Frage: Was charakterisiert Java NIO?
 id: ab82u2

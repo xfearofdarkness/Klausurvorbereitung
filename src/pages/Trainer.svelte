@@ -3,10 +3,10 @@
   import FlashMode from "../components/FlashMode.svelte";
   import ModeSwitcher from "../components/ModeSwitcher.svelte";
   import PracticeMode from "../components/PracticeMode.svelte";
+  import SearchDialog from "../components/SearchDialog.svelte";
   import StudyMode from "../components/StudyMode.svelte";
   import Icon from "../components/Icon.svelte";
   import LayoutSwitch from "../components/LayoutSwitch.svelte";
-  import ProgressBackup from "../components/ProgressBackup.svelte";
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
   import { catalog, subjectLoaders } from "../data/catalog";
@@ -14,10 +14,12 @@
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
   import { prepareRichText } from "../lib/richText";
-  import { searchSubject, type SearchHit } from "../lib/search";
+  import { keyboardScroll } from "../lib/keyboardScroll";
+  import type { SearchHit } from "../lib/search";
   import {
     getFlashState,
     getPracticeState,
+    getScheduleState,
     getSubjectProgress,
     loadProgress,
     migrateLegacyProgress,
@@ -27,7 +29,10 @@
     type LegacySubjectKeys,
     type TopicProgressSummary
   } from "../lib/progress";
+  import { countDueCards, orderByDue, reviewCard, todayIso, type ReviewGrade } from "../lib/schedule";
   import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, Topic } from "../types/content";
+
+  const AGAIN_GAP = 2;
 
   const SUBJECT_ID_PATTERN = /^[a-z0-9-]+$/;
 
@@ -42,7 +47,6 @@
   let flashFlipped = $state(false);
   let navPlacement = $state<NavPlacement>(loadNavPlacement());
   let sidebarCollapsed = $state(loadSidebarCollapsed());
-  let query = $state("");
   let hasSidebar = $derived(navPlacement !== "top");
   let layoutClass = $derived(hasSidebar && sidebarCollapsed ? "nav-top" : `nav-${navPlacement}`);
 
@@ -53,7 +57,7 @@
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
-  let searchHits = $derived(subject ? searchSubject(subject, query) : []);
+  let dueCount = $derived(subject ? countDueCards(subject, progress, todayIso()) : 0);
 
   onMount(() => {
     progress = loadProgress();
@@ -181,7 +185,6 @@
   function openHit(hit: SearchHit): void {
     const topic = getTopicAt(hit.topicIndex);
     if (!topic) return;
-    query = "";
     currentTopicIndex = hit.topicIndex;
     if (isModeAvailableForTopic(hit.mode, topic)) preferredMode = hit.mode;
     syncFlashDeck();
@@ -218,14 +221,24 @@
     flashFlipped = !flashFlipped;
   }
 
-  function markFlash(value: FlashMark): void {
-    if (!subject || !currentTopic || flashPosition >= flashDeck.length) return;
+  function markFlash(grade: ReviewGrade): void {
+    if (!subject || !currentTopic || !flashFlipped || flashPosition >= flashDeck.length) return;
     const card = currentTopic.flashcards[flashDeck[flashPosition]];
     if (!card) return;
     const state = getFlashState(progress, subject, currentTopic.id);
-    state[card.key] = value;
-    flashPosition += 1;
-    flashFlipped = false;
+    const schedules = getScheduleState(progress, subject, currentTopic.id);
+    schedules[card.key] = reviewCard(schedules[card.key], grade, todayIso());
+    state[card.key] = grade === "again" ? "repeat" : "know";
+    if (grade === "again") {
+      const cardIndex = flashDeck[flashPosition];
+      const next = flashDeck.slice(0, flashPosition).concat(flashDeck.slice(flashPosition + 1));
+      next.splice(Math.min(flashPosition + AGAIN_GAP, next.length), 0, cardIndex);
+      flashDeck = next;
+      flashFlipped = false;
+    } else {
+      flashPosition += 1;
+      flashFlipped = false;
+    }
     persistUi();
   }
 
@@ -246,12 +259,15 @@
     const state = readFlashState(topic);
     const allIndices = topic.flashcards.map((_, index) => index);
     const wrongIndices = allIndices.filter((index) => state[topic.flashcards[index].key] === "repeat");
-    flashDeck = onlyWrong && wrongIndices.length ? wrongIndices : allIndices;
+    const chosen = onlyWrong && wrongIndices.length ? wrongIndices : allIndices;
+    const schedules = progress.subjects[subject.id]?.schedule?.[topic.id] || {};
+    flashDeck = orderByDue(chosen, (index) => schedules[topic.flashcards[index].key], todayIso());
     flashPosition = 0;
     flashFlipped = false;
   }
 
   function handleKeydown(event: KeyboardEvent): void {
+    if (document.querySelector(".search-layer")) return;
     if (currentMode !== "flash" || !subject) return;
     if (event.altKey || event.ctrlKey || event.metaKey) return;
     const target = event.target instanceof Element ? event.target : null;
@@ -266,18 +282,14 @@
       flipCard();
       return;
     }
-    if (event.repeat) return;
-    if (event.key === "ArrowRight" || event.key === "2") {
-      markFlash("know");
-      return;
-    }
-    if (event.key === "ArrowLeft" || event.key === "1") {
-      markFlash("repeat");
-    }
+    if (event.repeat || !flashFlipped) return;
+    if (event.key === "1" || event.key === "ArrowLeft") markFlash("again");
+    else if (event.key === "2") markFlash("hard");
+    else if (event.key === "3" || event.key === "ArrowRight") markFlash("good");
   }
 </script>
 
-<div class={`trainer ${layoutClass}`}>
+<div class="trainer {layoutClass}" use:keyboardScroll>
   {#if subject}
     <aside class="sidebar" aria-label="Themen">
       <div class="sidebar-head">
@@ -295,6 +307,7 @@
       <div class="sidebar-subject">
         <span class="sidebar-subject-title">{subject.title}</span>
         {#if subject.subtitle}<span class="sidebar-subject-subtitle">{subject.subtitle}</span>{/if}
+        <span class="sidebar-due">Heute fällig: {dueCount}</span>
       </div>
       <TopicList topics={subject.topics} progress={topicProgress} {currentTopicIndex} onSelect={selectTopic} />
       <div class="sidebar-footer">
@@ -328,6 +341,7 @@
             onSelect={selectTopic}
           />
           <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} />
+          <SearchDialog {subject} onSelect={openHit} />
           <div class="topbar-layout-switch">
             <LayoutSwitch value={navPlacement} onChange={changeNavPlacement} />
           </div>
@@ -339,25 +353,7 @@
 
     <main class="main content-frame" id="content">
       {#if subject}
-        <form class="search" role="search" onsubmit={(event) => event.preventDefault()}>
-          <input type="search" aria-label="Im Fach suchen" placeholder="Im Fach suchen" bind:value={query} />
-        </form>
-        {#if query.trim()}
-          {#if searchHits.length === 0}
-            <p class="empty-state">Nichts gefunden.</p>
-          {:else}
-            <ul class="search-hits">
-              {#each searchHits as hit}
-                <li>
-                  <button class="search-hit" type="button" onclick={() => openHit(hit)}>
-                    <span class="search-hit-where">{hit.topicTitle} · {hit.kind}</span>
-                    <span>{hit.label}</span>
-                  </button>
-                </li>
-              {/each}
-            </ul>
-          {/if}
-        {/if}
+        <p class="due-line">Heute fällig: {dueCount}</p>
       {/if}
       {#if errorMessage}
         <div class="error-card fade-in">
@@ -367,7 +363,7 @@
         </div>
       {:else if !subject || !currentTopic}
         <p class="empty-state">Fachdaten werden geladen.</p>
-      {:else if !query.trim()}
+      {:else}
         {#key `${currentTopic.id}:${currentMode}`}
           {#if currentMode === "study"}
             <StudyMode topic={currentTopic} />
@@ -381,14 +377,11 @@
               position={flashPosition}
               flipped={flashFlipped}
               onFlip={flipCard}
-              onMark={markFlash}
+              onGrade={markFlash}
               onRestart={resetFlashDeck}
             />
           {/if}
         {/key}
-      {/if}
-      {#if subject && !query.trim()}
-        <ProgressBackup />
       {/if}
     </main>
   </div>

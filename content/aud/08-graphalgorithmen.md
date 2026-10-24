@@ -14,7 +14,7 @@ Topologisches Sortieren wird verwendet, um die Knoten in einem gerichteten azykl
 tag: wichtig
 quelle: 08_graph-algorithms.pdf, Folien 6-22
 
-Ein Nachfolger eines Knotens v ist ein Knoten w, sodass (v, w) eine Kante ist. Grundgedanke: Knoten ohne (unbesuchte) Nachfolger finden und rückwärts gehen. Algorithmus: Solange es unbesuchte Knoten gibt, finde einen noch nicht besuchten Knoten w ohne unbesuchte Nachfolger, markiere ihn als besucht und lege ihn auf einen Stack. Nimmt man die Knoten vom Stack ab, erhält man eine mögliche topologische Ordnung — im Folienbeispiel: 2 1 8 5 4 7 6 3.
+Ein Nachfolger eines Knotens v ist ein Knoten w, sodass (v, w) eine Kante ist. Grundgedanke: Knoten ohne (unbesuchte) Nachfolger finden und rückwärts gehen. Algorithmus: Solange es unbesuchte Knoten gibt, finde einen noch nicht besuchten Knoten w ohne unbesuchte Nachfolger, markiere ihn als besucht und lege ihn auf einen Stack. Nimmt man die Knoten vom Stack ab, erhält man eine mögliche topologische Ordnung. Im Folienbeispiel: 2 1 8 5 4 7 6 3.
 
 ## Karte: Topologisches Sortieren (vorwärts)
 tag: wichtig
@@ -44,7 +44,7 @@ Eingabe: ein ungerichteter, gewichteter, zusammenhängender Graph G und ein Star
 tag: wichtig
 quelle: 08_graph-algorithms.pdf, Folie 99
 
-Der minimale Spannbaum ist der Spannbaum mit den geringsten Gesamtkosten der Kanten — er enthält aber nicht unbedingt den Weg mit den geringsten Kosten zwischen zwei Knoten. Beispiel: Der kürzeste Weg von Hamburg nach Berlin verläuft entlang der einzigen direkten Kante zwischen beiden Städten; diese Kante ist nicht im minimalen Spannbaum.
+Der minimale Spannbaum ist der Spannbaum mit den geringsten Gesamtkosten der Kanten. Er enthält aber nicht unbedingt den Weg mit den geringsten Kosten zwischen zwei Knoten. Beispiel: Der kürzeste Weg von Hamburg nach Berlin verläuft entlang der einzigen direkten Kante zwischen beiden Städten; diese Kante ist nicht im minimalen Spannbaum.
 
 ## Karte: Dijkstra-Algorithmus
 tag: wichtig
@@ -104,7 +104,7 @@ Prim-Jarnik erhält einen ungerichteten, gewichteten, zusammenhängenden Graphen
 id: 7hc2lo
 quelle: 08_graph-algorithms.pdf, Folie 99
 
-Nein. Der MST minimiert die Gesamtkosten aller Kanten, nicht die Kosten einzelner Verbindungen — z. B. liegt die direkte (kürzeste) Kante Hamburg-Berlin nicht im MST des Folienbeispiels.
+Nein. Der MST minimiert die Gesamtkosten aller Kanten, nicht die Kosten einzelner Verbindungen. Z. B. liegt die direkte (kürzeste) Kante Hamburg-Berlin nicht im MST des Folienbeispiels.
 
 ## Frage: Was berechnet Dijkstra?
 id: r3xihj
@@ -165,7 +165,7 @@ quelle: 08_graph-algorithms.pdf, Folien 50-85
                "title": "Finalisiere 1 (Kosten 0)",
                "text": "Die Nachbarn von 1 werden aktualisiert: 3 auf 20, 8 auf 39, 6 auf 50 (Eltern jeweils 1).",
                "explanation": {
-                                "action": "Minimum: 1 (0) — alle anderen haben ∞.",
+                                "action": "Minimum: 1 (0). Alle anderen haben ∞.",
                                 "rule": "Für jeden nicht finalisierten Nachbarn x von w: wenn kanten_kosten(w, x) &lt; x.kosten, dann x.kosten = kanten_kosten(w, x) und x.Eltern = w.",
                                 "decision": "1 wird finalisiert; 3 → 20, 8 → 39, 6 → 50."
                               },
@@ -184,7 +184,7 @@ quelle: 08_graph-algorithms.pdf, Folien 50-85
              },
              {
                "title": "Finalisiere 3 (Kosten 20)",
-               "text": "3 hat die minimalen Kosten — die Kante (1, 3) kommt in den Spannbaum. Nachbar 7 wird auf 33 gesetzt.",
+               "text": "3 hat die minimalen Kosten. Die Kante (1, 3) kommt in den Spannbaum. Nachbar 7 wird auf 33 gesetzt.",
                "explanation": {
                                 "action": "Minimum: 3 (20) vor 8 (39) und 6 (50).",
                                 "rule": "Finde den nicht finalisierten Knoten w mit den minimalen Kosten und markiere ihn als finalisiert.",
@@ -292,7 +292,7 @@ quelle: 08_graph-algorithms.pdf, Folien 50-85
              },
              {
                "title": "Finalisiere 6 (Kosten 27): fertig",
-               "text": "Kante (4, 6) kommt in den Spannbaum. Alle Knoten sind finalisiert — die markierten Kanten bilden den minimalen Spannbaum.",
+               "text": "Kante (4, 6) kommt in den Spannbaum. Alle Knoten sind finalisiert. Die markierten Kanten bilden den minimalen Spannbaum.",
                "explanation": {
                                 "action": "Nur 6 (27) ist noch nicht finalisiert.",
                                 "rule": "Solange es noch nicht finalisierte Knoten mit Kosten &lt; unendlich gibt, wird weiter finalisiert.",

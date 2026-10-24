@@ -14,13 +14,13 @@ Threads teilen sich Ressourcen, die ihrem Prozess vom Betriebssystem zugewiesen 
 tag: def
 quelle: 03_ds-concept-threads-2.pdf, Folie 5
 
-Das JMM beschreibt, welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren können. Es beschreibt die Beziehung zwischen Variablen im Programm und den Details, wie sie in einem realen Computersystem gespeichert und abgerufen werden — auf eine Weise, die mit vielfältiger Hardware und Compileroptimierungen korrekt implementiert werden kann.
+Das JMM beschreibt, welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren können. Es beschreibt die Beziehung zwischen Variablen im Programm und den Details, wie sie in einem realen Computersystem gespeichert und abgerufen werden. Auf eine Weise, die mit vielfältiger Hardware und Compileroptimierungen korrekt implementiert werden kann.
 
 ## Karte: Kritische Szenarien
 tag: wichtig
 quelle: 03_ds-concept-threads-2.pdf, Folien 6-7
 
-In Multiprozessorarchitekturen gibt es neben dem globalen Hauptspeicher lokale Speicher (CPU-Register, Cache). Im Extremfall läuft jeder Thread auf seinem eigenen Prozessor; auf Register anderer CPUs kann nicht zugegriffen werden — Änderungen eines Threads können für andere unsichtbar sein. Zwei Hauptprobleme: <b>Sichtbarkeit</b> von Thread-Aktualisierungen in gemeinsam genutzten Variablen und <b>Race Conditions</b> beim Lesen, Prüfen und Schreiben von Shared-Variablen.
+In Multiprozessorarchitekturen gibt es neben dem globalen Hauptspeicher lokale Speicher (CPU-Register, Cache). Im Extremfall läuft jeder Thread auf seinem eigenen Prozessor; auf Register anderer CPUs kann nicht zugegriffen werden. Änderungen eines Threads können für andere unsichtbar sein. Zwei Hauptprobleme: <b>Sichtbarkeit</b> von Thread-Aktualisierungen in gemeinsam genutzten Variablen und <b>Race Conditions</b> beim Lesen, Prüfen und Schreiben von Shared-Variablen.
 
 ## Karte: Sichtbarkeitsproblem und volatile
 tag: wichtig
@@ -38,7 +38,7 @@ Zwei Inkremente werden gleichzeitig ohne ordnungsgemäße Synchronisation ausgef
 tag: wichtig
 quelle: 03_ds-concept-threads-2.pdf, Folie 11
 
-In nicht-synchronisierten nebenläufigen Programmen kann die Reihenfolge der Anweisungen durch Compiler, Prozessor oder Laufzeitumgebung verändert werden — Hypothesen über die Ausführungsreihenfolge sind sehr unsicher. Compiler ordnen Anweisungen um; Variablen liegen in Registern statt im Hauptspeicher; Prozessoren arbeiten parallel oder in anderer Reihenfolge; Caches ändern die Schreib-Reihenfolge in den Hauptspeicher; lokale Cache-Werte sind für andere Prozessoren nicht sichtbar.
+In nicht-synchronisierten nebenläufigen Programmen kann die Reihenfolge der Anweisungen durch Compiler, Prozessor oder Laufzeitumgebung verändert werden. Hypothesen über die Ausführungsreihenfolge sind sehr unsicher. Compiler ordnen Anweisungen um; Variablen liegen in Registern statt im Hauptspeicher; Prozessoren arbeiten parallel oder in anderer Reihenfolge; Caches ändern die Schreib-Reihenfolge in den Hauptspeicher; lokale Cache-Werte sind für andere Prozessoren nicht sichtbar.
 
 ## Karte: Ziele des JMM
 tag: def
@@ -86,7 +86,7 @@ Threads kommunizieren über Shared Memory; jeder Thread hat einen eigenen Progra
 id: 611g4u
 quelle: 03_ds-concept-threads-2.pdf, Folie 5
 
-Welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren — die Beziehung zwischen Programmvariablen und ihrer Speicherung/Abruf in realen Systemen, korrekt implementierbar über verschiedene Hardware und Compileroptimierungen.
+Welche Verhaltensweisen in Multithread-Code zulässig sind und wie Threads über den Speicher interagieren. Die Beziehung zwischen Programmvariablen und ihrer Speicherung/Abruf in realen Systemen, korrekt implementierbar über verschiedene Hardware und Compileroptimierungen.
 
 ## Frage: Welche zwei Hauptprobleme adressiert das JMM?
 id: 17hiaxj
@@ -116,7 +116,7 @@ Atomizität (welche Zugriffe sind ununterbrechbar), Sichtbarkeit (wann sind Ausw
 id: 1ci0lae
 quelle: 03_ds-concept-threads-2.pdf, Folie 13
 
-Lesen und Schreiben von Variablen der Basistypen — außer long und double; für volatile long und double gilt Atomizität ebenfalls.
+Lesen und Schreiben von Variablen der Basistypen. Außer long und double; für volatile long und double gilt Atomizität ebenfalls.
 
 ## Frage: Unter welchen Bedingungen sind Änderungen an Variablen sichtbar?
 id: cdx7r

@@ -1,7 +1,7 @@
 import { catalog } from "../data/catalog";
 import { NAV_PLACEMENTS, NAV_STORAGE_KEY, SIDEBAR_COLLAPSED_KEY, SIDEBAR_COLLAPSED_VALUE, type NavPlacement } from "./navPlacement";
 import { STORAGE_KEY } from "./progress";
-import type { AppProgress, FlashMark, PracticeMark, QuizMark, SubjectId, SubjectProgress } from "../types/content";
+import type { AppProgress, CardSchedule, FlashMark, PracticeMark, QuizMark, SubjectId, SubjectProgress } from "../types/content";
 
 const NEW_SITE_ORIGIN = "https://learn.jamiehuta.com";
 const FRAGMENT_KEY = "m";
@@ -17,6 +17,11 @@ const MODE_IDS = new Set(["study", "flash", "practice", "quiz", "walkthrough"]);
 const FLASH_MARKS = new Set<FlashMark>(["know", "repeat"]);
 const PRACTICE_MARKS = new Set<PracticeMark>(["done"]);
 const QUIZ_MARKS = new Set<QuizMark>(["correct", "wrong"]);
+const MIN_EASE = 1.3;
+const MAX_EASE = 5;
+const MAX_INTERVAL_DAYS = 36500;
+const MAX_REPS = 100000;
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 const SUBJECT_IDS = new Set<string>(catalog.map((subject) => subject.id));
 
@@ -125,14 +130,49 @@ function sanitizeMarks<T extends string>(
   return Object.keys(topics).length > 0 ? topics : undefined;
 }
 
+function isIsoDate(value: string): boolean {
+  if (!ISO_DATE.test(value)) return false;
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(year, month - 1, day);
+  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+}
+
+function sanitizeCardSchedule(value: unknown): CardSchedule | null {
+  if (!isRecord(value)) return null;
+  if (typeof value.due !== "string" || !isIsoDate(value.due)) return null;
+  if (!Number.isInteger(value.interval) || (value.interval as number) < 0 || (value.interval as number) > MAX_INTERVAL_DAYS) return null;
+  if (typeof value.ease !== "number" || !Number.isFinite(value.ease) || value.ease < MIN_EASE || value.ease > MAX_EASE) return null;
+  if (!Number.isInteger(value.reps) || (value.reps as number) < 0 || (value.reps as number) > MAX_REPS) return null;
+  return { due: value.due, interval: value.interval as number, ease: value.ease, reps: value.reps as number };
+}
+
+function sanitizeSchedule(value: unknown): Record<string, Record<string, CardSchedule>> | undefined {
+  if (!isRecord(value)) return undefined;
+  const topics: Record<string, Record<string, CardSchedule>> = {};
+  for (const [topicId, cards] of Object.entries(value)) {
+    if (Object.keys(topics).length >= MAX_TOPICS_PER_SUBJECT) break;
+    if (!isId(topicId) || !isRecord(cards)) continue;
+    const clean: Record<string, CardSchedule> = {};
+    for (const [key, schedule] of Object.entries(cards)) {
+      if (Object.keys(clean).length >= MAX_MARKS_PER_TOPIC) break;
+      const card = sanitizeCardSchedule(schedule);
+      if (isId(key) && card) clean[key] = card;
+    }
+    if (Object.keys(clean).length > 0) topics[topicId] = clean;
+  }
+  return Object.keys(topics).length > 0 ? topics : undefined;
+}
+
 function sanitizeSubject(value: unknown): SubjectProgress | null {
   if (!isRecord(value)) return null;
   const flash = sanitizeMarks(value.flash, FLASH_MARKS) ?? {};
   const practice = sanitizeMarks(value.practice, PRACTICE_MARKS);
   const quiz = sanitizeMarks(value.quiz, QUIZ_MARKS);
+  const schedule = sanitizeSchedule(value.schedule);
   const subject: SubjectProgress = { flash };
   if (practice) subject.practice = practice;
   if (quiz) subject.quiz = quiz;
+  if (schedule) subject.schedule = schedule;
   if (typeof value.version === "number" && Number.isInteger(value.version) && value.version >= 1 && value.version <= MAX_VERSION) {
     subject.version = value.version;
   }
@@ -145,7 +185,7 @@ function sanitizeSubject(value: unknown): SubjectProgress | null {
     }
     if (Object.keys(ui).length > 0) subject.ui = ui;
   }
-  const hasContent = Object.keys(flash).length > 0 || practice || quiz || subject.ui || subject.version !== undefined;
+  const hasContent = Object.keys(flash).length > 0 || practice || quiz || schedule || subject.ui || subject.version !== undefined;
   return hasContent ? subject : null;
 }
 
@@ -189,8 +229,34 @@ function fillMarks(
   return { value: marks, changed };
 }
 
+function fillSchedules(
+  existing: unknown,
+  incoming: Record<string, Record<string, CardSchedule>> | undefined,
+  skipIndexes: boolean
+): { value: Record<string, unknown> | undefined; changed: boolean } {
+  if (!incoming) return { value: undefined, changed: false };
+  const topics: Record<string, unknown> = isRecord(existing) ? { ...existing } : {};
+  let changed = false;
+  for (const [topicId, cards] of Object.entries(incoming)) {
+    const current = topics[topicId];
+    const topic: Record<string, unknown> = isRecord(current) ? { ...current } : {};
+    let topicChanged = false;
+    for (const [key, schedule] of Object.entries(cards)) {
+      if (skipIndexes && INDEX_KEY.test(key)) continue;
+      if (topic[key] !== undefined) continue;
+      topic[key] = schedule;
+      topicChanged = true;
+    }
+    if (topicChanged) {
+      topics[topicId] = topic;
+      changed = true;
+    }
+  }
+  return { value: topics, changed };
+}
+
 /**
- * Füllt Lücken aus der alten Seite. Eine Markierung, die hier schon steht, bleibt — auch wenn sie
+ * Füllt Lücken aus der alten Seite. Eine Markierung, die hier schon steht, bleibt. Auch wenn sie
  * anders lautet. Zeitstempel gibt es nicht, deshalb gilt der Stand auf dieser Seite bei Konflikt.
  * Listenpositionen aus der alten Version werden nicht in einen Stand ab Version 2 gemischt.
  * Ansicht (Modus, Thema) und `lastSubjectId` werden nur gesetzt, wenn sie hier noch fehlen.
@@ -225,6 +291,11 @@ export function mergeProgress(existingRaw: unknown, incoming: AppProgress): Reco
     apply("flash", imported.flash);
     apply("practice", imported.practice);
     apply("quiz", imported.quiz);
+    const filledSchedule = fillSchedules(subject.schedule, imported.schedule, version >= 2);
+    if (filledSchedule.changed && filledSchedule.value) {
+      subject.schedule = filledSchedule.value;
+      subjectChanged = true;
+    }
     if (subject.version === undefined && imported.version !== undefined) {
       subject.version = imported.version;
       subjectChanged = true;
