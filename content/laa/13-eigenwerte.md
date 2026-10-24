@@ -37,7 +37,7 @@ Der Determinantenterm \(P_A(\lambda) := \det(A - \lambda E)\) wird charakteristi
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folie 217
 
-Für \(A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\): \[\det(A - \lambda E) = \begin{vmatrix} -\lambda & 1 \\ 1 & -\lambda \end{vmatrix} = \lambda^2 - 1\] Die Nullstellen — und damit die Eigenwerte — sind \(\lambda_{1,2} = \pm 1\).
+Für \(A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\): \[\det(A - \lambda E) = \begin{vmatrix} -\lambda & 1 \\ 1 & -\lambda \end{vmatrix} = \lambda^2 - 1\] Die Nullstellen. Und damit die Eigenwerte. Sind \(\lambda_{1,2} = \pm 1\).
 
 ## Karte: Eigenvektoren berechnen
 tag: beispiel
@@ -67,13 +67,13 @@ Der Nullvektor würde die Eigenwertgleichung für jedes \(\lambda\) erfüllen. F
 id: xl8w7g
 quelle: VorlesungFolienLAA-2026.pdf, Folie 215
 
-Wenn \(\det(A - \lambda E) = 0\) gilt — genau dann hat das Gleichungssystem \((A - \lambda E)\vec{v} = \vec{0}\) eine Lösung, die nicht nur aus dem Nullvektor besteht.
+Wenn \(\det(A - \lambda E) = 0\) gilt. Genau dann hat das Gleichungssystem \((A - \lambda E)\vec{v} = \vec{0}\) eine Lösung, die nicht nur aus dem Nullvektor besteht.
 
 ## Frage: Was ist das charakteristische Polynom?
 id: bvjyhw
 quelle: VorlesungFolienLAA-2026.pdf, Folie 216
 
-\(P_A(\lambda) := \det(A - \lambda E)\) — nach dem Ausrechnen ein Polynom \(n\)-ten Grades in \(\lambda\). Seine Nullstellen liefern die Eigenwerte von \(A\).
+\(P_A(\lambda) := \det(A - \lambda E)\). Nach dem Ausrechnen ein Polynom \(n\)-ten Grades in \(\lambda\). Seine Nullstellen liefern die Eigenwerte von \(A\).
 
 ## Frage: Welche Eigenwerte hat die Matrix \(\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\)?
 id: q8crta
@@ -91,12 +91,12 @@ Als Lösungen des linearen Gleichungssystems \((A - \lambda E)\vec{v} = \vec{0}\
 id: 1mmgk6j
 quelle: VorlesungFolienLAA-2026.pdf, Folie 220
 
-Das charakteristische Polynom \(\lambda^2 + 1\) ist im Reellen nicht zu faktorisieren — es gibt keine reellen Eigenwerte. Im Komplexen gilt \(\lambda^2 + 1 = (\lambda + \mathrm{i})(\lambda - \mathrm{i})\), und \(A\) hat die komplexen Eigenwerte \(\lambda_{1,2} = \pm\mathrm{i}\).
+Das charakteristische Polynom \(\lambda^2 + 1\) ist im Reellen nicht zu faktorisieren. Es gibt keine reellen Eigenwerte. Im Komplexen gilt \(\lambda^2 + 1 = (\lambda + \mathrm{i})(\lambda - \mathrm{i})\), und \(A\) hat die komplexen Eigenwerte \(\lambda_{1,2} = \pm\mathrm{i}\).
 
 ## Aufgabe: Aufgabe 38 (Typ)
 id: 13lzoof
 generator: eigenwerte-2x2
-notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — die Eigenwerte sind stets ganzzahlig.
+notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Die Eigenwerte sind stets ganzzahlig.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 38
 
 ## Aufgabe: Aufgabe 39 (Variante)

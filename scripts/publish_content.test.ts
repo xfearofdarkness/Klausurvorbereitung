@@ -8,6 +8,8 @@ describe("öffentliche Inhaltsdateien", () => {
 
   it("veröffentlicht Index, llms.txt und je Fach JSON und Markdown", () => {
     expect(byName.has("llms.txt")).toBe(true);
+    expect(byName.has("robots.txt")).toBe(true);
+    expect(byName.has("sitemap.xml")).toBe(true);
     expect(byName.has("content/index.json")).toBe(true);
     for (const subject of catalog) {
       expect(byName.has(`content/${subject.id}.json`), subject.id).toBe(true);
@@ -23,6 +25,15 @@ describe("öffentliche Inhaltsdateien", () => {
     expect(index.format).toBe(PUBLIC_FORMAT);
     expect(index.site).toBe(SITE_ORIGIN);
     expect(index.subjects.map((subject) => subject.id)).toEqual(catalog.map((subject) => subject.id));
-    for (const body of byName.values()) expect(body).not.toContain("sources/");
+    for (const body of byName.values()) {
+      expect(body).not.toContain("sources/");
+      expect(body).not.toContain("\u2014");
+    }
+    const robots = byName.get("robots.txt") ?? "";
+    expect(robots).toContain("/llms.txt");
+    expect(robots).toContain(`${SITE_ORIGIN}/sitemap.xml`);
+    const sitemap = byName.get("sitemap.xml") ?? "";
+    expect(sitemap).toContain(`${SITE_ORIGIN}/llms.txt`);
+    for (const subject of catalog) expect(sitemap).toContain(`${SITE_ORIGIN}/content/${subject.id}.md`);
   });
 });

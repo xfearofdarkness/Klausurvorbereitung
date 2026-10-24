@@ -32,7 +32,7 @@ quelle: 02_vs-overview.1.pdf, Folie 8
 tag: def
 quelle: 02_vs-overview.1.pdf, Folie 9
 
-Ein offenes System bietet Komponenten an, die leicht in andere Systeme integriert werden können — und besteht umgekehrt oft aus Komponenten anderer Systeme. Allgemeiner Ansatz: standardisierte Schnittstellen, z. B. in einer formalen Sprache definiert (Interface Definition Language, IDL). Dadurch werden auch Interoperabilität und Portabilität erreicht. Offenheit ist die Voraussetzung für Erweiterbarkeit.
+Ein offenes System bietet Komponenten an, die leicht in andere Systeme integriert werden können. Und besteht umgekehrt oft aus Komponenten anderer Systeme. Allgemeiner Ansatz: standardisierte Schnittstellen, z. B. in einer formalen Sprache definiert (Interface Definition Language, IDL). Dadurch werden auch Interoperabilität und Portabilität erreicht. Offenheit ist die Voraussetzung für Erweiterbarkeit.
 
 ## Karte: Dimensionen der Skalierbarkeit
 tag: def
@@ -43,7 +43,7 @@ quelle: 02_vs-overview.1.pdf, Folie 10
 ## Karte: Skalierbarkeits-Probleme
 quelle: 02_vs-overview.1.pdf, Folien 11-13
 
-Zentrale Server werden schnell zu Bottlenecks — aus drei Gründen: begrenzte CPU, begrenzter Speicherplatz bzw. I/O-Transferrate, begrenzte Netzwerkkapazität. Geografische Skalierbarkeit wird häufig durch synchrone Kommunikation beeinträchtigt; Netzwerktechniken skalieren schlecht (was im LAN funktioniert, muss nicht im WAN funktionieren). Bei administrativer Skalierung: widersprüchliche Policys bei Ressourcennutzung, Payment, Management, Security — das System muss sich gegen die neue Domäne schützen und umgekehrt.
+Zentrale Server werden schnell zu Bottlenecks. Aus drei Gründen: begrenzte CPU, begrenzter Speicherplatz bzw. I/O-Transferrate, begrenzte Netzwerkkapazität. Geografische Skalierbarkeit wird häufig durch synchrone Kommunikation beeinträchtigt; Netzwerktechniken skalieren schlecht (was im LAN funktioniert, muss nicht im WAN funktionieren). Bei administrativer Skalierung: widersprüchliche Policys bei Ressourcennutzung, Payment, Management, Security. Das System muss sich gegen die neue Domäne schützen und umgekehrt.
 
 ## Karte: Skalierungstechniken
 tag: wichtig
@@ -55,7 +55,7 @@ Zwei Dimensionen: <b>Scaling Up</b> (Kapazitäten der Knoten verbessern: CPU, Me
 tag: def
 quelle: 02_vs-overview.1.pdf, Folie 18
 
-Die Replikation einer Komponente erhöht ihre Verfügbarkeit und ermöglicht Load-Balancing. Caching ist eine besondere Form der Replikation — Caching geht auf eine Entscheidung des Clients zurück, Replikation eher auf den Server. Beide führen zu Konsistenzproblemen; wie streng die Konsistenzanforderungen sind, hängt von der Anwendung ab (finanzielle Transaktionen strenger als Web-Browsing). Allgemeine Synchronisierungs-Mechanismen sind schwer zu etablieren.
+Die Replikation einer Komponente erhöht ihre Verfügbarkeit und ermöglicht Load-Balancing. Caching ist eine besondere Form der Replikation. Caching geht auf eine Entscheidung des Clients zurück, Replikation eher auf den Server. Beide führen zu Konsistenzproblemen; wie streng die Konsistenzanforderungen sind, hängt von der Anwendung ab (finanzielle Transaktionen strenger als Web-Browsing). Allgemeine Synchronisierungs-Mechanismen sind schwer zu etablieren.
 
 ## Karte: Falsche Annahmen über Netzwerke
 tag: wichtig
@@ -78,7 +78,7 @@ Jede Komponente kann ausfallen, überlastet sein oder die Verbindung verlieren. 
 ## Karte: Nebenläufigkeit als Herausforderung
 quelle: 02_vs-overview.1.pdf, Folien 26-27
 
-Geschwindigkeitsgewinne einzelner CPUs sind derzeit nicht leicht zu erzielen, während die Transistordichte zunimmt — Multicore-Architekturen setzen sich durch, nebenläufige Programmierung bestimmt zunehmend die Praxis. Nebenläufige Ausführung ist der Standardfall in Verteilten Systemen; nebenläufiger Zugriff auf Ressourcen muss synchronisiert werden. Lösungsansätze: Java Threads, Java Semaphores, nicht-blockierende Systemaufrufe (z. B. Java NewIO).
+Geschwindigkeitsgewinne einzelner CPUs sind derzeit nicht leicht zu erzielen, während die Transistordichte zunimmt. Multicore-Architekturen setzen sich durch, nebenläufige Programmierung bestimmt zunehmend die Praxis. Nebenläufige Ausführung ist der Standardfall in Verteilten Systemen; nebenläufiger Zugriff auf Ressourcen muss synchronisiert werden. Lösungsansätze: Java Threads, Java Semaphores, nicht-blockierende Systemaufrufe (z. B. Java NewIO).
 
 ## Frage: Auf welchen Ebenen kann Heterogenität auftreten?
 id: 1ae145t
@@ -102,7 +102,7 @@ Transparenz verbirgt Details der Implementierung. Aspekte: Zugriffs-, Location-,
 id: fcssy1
 quelle: 02_vs-overview.1.pdf, Folie 9
 
-Es bietet Komponenten an, die leicht in andere Systeme integriert werden können — über standardisierte Schnittstellen (z. B. per IDL definiert). Damit werden Interoperabilität und Portabilität erreicht; Offenheit ist Voraussetzung für Erweiterbarkeit.
+Es bietet Komponenten an, die leicht in andere Systeme integriert werden können. Über standardisierte Schnittstellen (z. B. per IDL definiert). Damit werden Interoperabilität und Portabilität erreicht; Offenheit ist Voraussetzung für Erweiterbarkeit.
 
 ## Frage: Welche drei Dimensionen der Skalierbarkeit gibt es?
 id: 1lyzngj

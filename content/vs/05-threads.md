@@ -8,7 +8,7 @@ icon: 🧵
 tag: wichtig
 quelle: 02_ds-java-threads.pdf, Folien 8-9
 
-Häufig wird unter Programmierung die Entwicklung sequentieller Programme verstanden — Abarbeitung von Programmschritten in festgelegter Reihenfolge. In Verteilten Systemen und seit dem Aufkommen von Multicore-Systemen ist diese Vorstellung überholt: Nebenläufigkeit ist heute der Standardfall, nicht die Ausnahme. Die Nebenläufigkeit einer Anwendung ermöglicht es, mehrere Prozessorkerne auszunutzen.
+Häufig wird unter Programmierung die Entwicklung sequentieller Programme verstanden. Abarbeitung von Programmschritten in festgelegter Reihenfolge. In Verteilten Systemen und seit dem Aufkommen von Multicore-Systemen ist diese Vorstellung überholt: Nebenläufigkeit ist heute der Standardfall, nicht die Ausnahme. Die Nebenläufigkeit einer Anwendung ermöglicht es, mehrere Prozessorkerne auszunutzen.
 
 ## Karte: Prozess
 tag: def
@@ -26,7 +26,7 @@ Lightweight Process. Ein Prozess kann einen oder mehrere Threads enthalten; Thre
 tag: wichtig
 quelle: 02_ds-java-threads.pdf, Folien 15-17
 
-Ableitung von der Klasse <code>Thread</code>: <code>public class HelloThread extends Thread { public void run() {...} }</code> — einfach, aber eingeschränkt, da Java keine Mehrfachvererbung unterstützt. Implementierung des Interface <code>Runnable</code>: <code>new Thread(new HelloRunnable()).start()</code> — allgemeiner: Die Klasse kann von anderen Klassen abgeleitet werden, und der Task (Runnable) ist vom Thread getrennt. Auch anonyme Implementierung und Lambda-Ausdrücke sind möglich.
+Ableitung von der Klasse <code>Thread</code>: <code>public class HelloThread extends Thread { public void run() {...} }</code>. Einfach, aber eingeschränkt, da Java keine Mehrfachvererbung unterstützt. Implementierung des Interface <code>Runnable</code>: <code>new Thread(new HelloRunnable()).start()</code>. Allgemeiner: Die Klasse kann von anderen Klassen abgeleitet werden, und der Task (Runnable) ist vom Thread getrennt. Auch anonyme Implementierung und Lambda-Ausdrücke sind möglich.
 
 ## Karte: start() statt run()
 tag: wichtig
@@ -92,7 +92,7 @@ Thread.sleep() stoppt den Ausführungsfluss; bei Unterbrechung entsteht eine Int
 id: 1ns6wpu
 quelle: 02_ds-java-threads.pdf, Folie 23
 
-Nein — yield() zeigt der JVM nur an, dass der Thread die CPU verlassen kann; die JVM garantiert nicht, dass sie dem nachkommt.
+Nein. Yield() zeigt der JVM nur an, dass der Thread die CPU verlassen kann; die JVM garantiert nicht, dass sie dem nachkommt.
 
 ## Frage: Was bedeutet ein Interrupt bei Threads?
 id: 1pqoo3j

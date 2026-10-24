@@ -1,6 +1,7 @@
 <script lang="ts">
   import { richText } from "../lib/richText";
   import Source from "./Source.svelte";
+  import type { ReviewGrade } from "../lib/schedule";
   import type { FlashMark, MarkState, Topic } from "../types/content";
 
   interface Props {
@@ -10,11 +11,11 @@
     position: number;
     flipped: boolean;
     onFlip: () => void;
-    onMark: (value: FlashMark) => void;
+    onGrade: (grade: ReviewGrade) => void;
     onRestart: (onlyWrong?: boolean) => void;
   }
 
-  let { topic, results, deck, position, flipped, onFlip, onMark, onRestart }: Props = $props();
+  let { topic, results, deck, position, flipped, onFlip, onGrade, onRestart }: Props = $props();
   let knownCount = $derived(topic.flashcards.filter((flashcard) => results[flashcard.key] === "know").length);
   let repeatCount = $derived(topic.flashcards.filter((flashcard) => results[flashcard.key] === "repeat").length);
   let progress = $derived(deck.length ? (position / deck.length) * 100 : 0);
@@ -64,9 +65,12 @@
         </div>
       </div>
     </button>
-    <div class="fc-controls">
-      <button class="fc-btn fc-repeat" type="button" onclick={() => onMark("repeat")}>Wiederholen</button>
-      <button class="fc-btn fc-know" type="button" onclick={() => onMark("know")}>Gewusst</button>
-    </div>
+    {#if flipped}
+      <div class="fc-controls">
+        <button class="fc-btn fc-again" type="button" onclick={() => onGrade("again")}>Nochmal</button>
+        <button class="fc-btn fc-hard" type="button" onclick={() => onGrade("hard")}>Schwer</button>
+        <button class="fc-btn fc-good" type="button" onclick={() => onGrade("good")}>Gut</button>
+      </div>
+    {/if}
   {/if}
 </div>

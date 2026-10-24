@@ -25,7 +25,7 @@ Diverse wichtige Funktionen sind auf ganz \(\mathbb{R}\) stetig: Polynome, die E
 tag: satz
 quelle: VorlesungFolienLAA-2026.pdf, Folien 81-82
 
-Summen, Differenzen, Produkte, Quotienten und Kompositionen stetiger Funktionen sind (dort wo definiert) stetig. Damit wird nochmals deutlich, dass Polynome stetig sind — und auch rationale Funktionen, denn diese sind der Quotient von Polynomen.
+Summen, Differenzen, Produkte, Quotienten und Kompositionen stetiger Funktionen sind (dort wo definiert) stetig. Damit wird nochmals deutlich, dass Polynome stetig sind. Und auch rationale Funktionen, denn diese sind der Quotient von Polynomen.
 
 ## Karte: Globales Maximum und Minimum
 tag: def
@@ -61,7 +61,7 @@ Polynome, die Exponentialfunktion \(e^x\), der Logarithmus \(\ln x\) sowie Sinus
 id: 1uuzrqg
 quelle: VorlesungFolienLAA-2026.pdf, Folien 81-82
 
-Sie sind (dort, wo sie definiert sind) wieder stetig. Deshalb sind auch rationale Funktionen stetig — sie sind Quotienten von Polynomen.
+Sie sind (dort, wo sie definiert sind) wieder stetig. Deshalb sind auch rationale Funktionen stetig. Sie sind Quotienten von Polynomen.
 
 ## Frage: Wann nimmt \(f\) in \(\tilde{x}\) das globale Maximum an?
 id: 1mocpyj

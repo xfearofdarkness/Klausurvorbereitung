@@ -56,7 +56,7 @@ Die Transportschicht stellt einen Transportdienst zwischen zwei Ports bereit. Po
 tag: wichtig
 quelle: 01_ds-concept-networks.pdf, Folie 23
 
-<b>Datagramme:</b> wie eine Postkarte — Pakete erhalten Adressinformationen, es wird keine Infrastruktur aufgebaut; verschiedene Pakete können verschiedene Routen nehmen (z. B. IP). <b>Verbindungsorientierter Transport:</b> Es wird zunächst eine virtuelle Verbindung aufgebaut, über die die Pakete geschickt werden. Beide Verfahren können auf jeder Netzwerkebene angewendet werden — bekannte Beispiele: UDP und TCP auf der Transportebene.
+<b>Datagramme:</b> wie eine Postkarte. Pakete erhalten Adressinformationen, es wird keine Infrastruktur aufgebaut; verschiedene Pakete können verschiedene Routen nehmen (z. B. IP). <b>Verbindungsorientierter Transport:</b> Es wird zunächst eine virtuelle Verbindung aufgebaut, über die die Pakete geschickt werden. Beide Verfahren können auf jeder Netzwerkebene angewendet werden. Bekannte Beispiele: UDP und TCP auf der Transportebene.
 
 ## Karte: Routing
 tag: def
@@ -68,7 +68,7 @@ Router sind Rechnerknoten an bestimmten Stellen im Netzwerk, die Pakete auf den 
 tag: def
 quelle: 01_ds-concept-networks.pdf, Folien 28-29
 
-Das Internet integriert viele Protokolle, Technologien und Sub-Netze. Voraussetzungen: einheitliches Adressschema, einheitliches Paketformat und Verarbeitungsregeln, verbindende Komponenten für das Routing — erfüllt durch IP-Adressen, das IP-Protokoll und Internet-Router. IPv4-Adressen sind 32-Bit-Werte (Bezeichner für Sub-Netz und Knoten), notiert als vier Dezimalzahlen mit Punkten (je ein Byte). Class A: 2²⁴ Knoten pro Subnetz (sehr große Organisationen), Class B: Organisationen mit mehr als 255 Knoten, Class C: alle anderen. IPv4 bietet nur 2³² (4 Milliarden) Adressen — der Hauptgrund für IPv6.
+Das Internet integriert viele Protokolle, Technologien und Sub-Netze. Voraussetzungen: einheitliches Adressschema, einheitliches Paketformat und Verarbeitungsregeln, verbindende Komponenten für das Routing. Erfüllt durch IP-Adressen, das IP-Protokoll und Internet-Router. IPv4-Adressen sind 32-Bit-Werte (Bezeichner für Sub-Netz und Knoten), notiert als vier Dezimalzahlen mit Punkten (je ein Byte). Class A: 2²⁴ Knoten pro Subnetz (sehr große Organisationen), Class B: Organisationen mit mehr als 255 Knoten, Class C: alle anderen. IPv4 bietet nur 2³² (4 Milliarden) Adressen. Der Hauptgrund für IPv6.
 
 ## Karte: TCP-Merkmale
 tag: wichtig
@@ -140,7 +140,7 @@ Datagramme funktionieren wie Postkarten: Adressinfo, keine Infrastruktur, versch
 id: ietp6s
 quelle: 01_ds-concept-networks.pdf, Folie 29
 
-IPv4 stellt nur 2³² (4 Milliarden) Adressen zur Verfügung — das ist der Hauptgrund für die Entwicklung von IPv6.
+IPv4 stellt nur 2³² (4 Milliarden) Adressen zur Verfügung. Das ist der Hauptgrund für die Entwicklung von IPv6.
 
 ## Frage: Wie ist eine IPv4-Adresse aufgebaut?
 id: 56yczv

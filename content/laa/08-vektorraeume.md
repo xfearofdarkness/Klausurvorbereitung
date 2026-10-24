@@ -32,7 +32,7 @@ Ein Vektor \(\vec{v} \in \mathbb{R}^n\) heißt Linearkombination der Vektoren \(
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 140-141
 
-\(\vec{v} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}\) soll aus \(\vec{v}_1 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\) und \(\vec{v}_2 = \begin{pmatrix} 6 \\ 0 \end{pmatrix}\) linear kombiniert werden: \[\vec{v} = 5 \vec{v}_1 + \tfrac{1}{3} \vec{v}_2, \quad \text{also } \lambda_1 = 5,\; \lambda_2 = \tfrac{1}{3}\] Gegenbeispiel: \((0, 0, 1)^T\) ist aus \((1, 0, 0)^T\) und \((0, 1, 0)^T\) nicht linear kombinierbar — die dritte Koordinate liefert die unerfüllbare Gleichung \(1 = 0\).
+\(\vec{v} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}\) soll aus \(\vec{v}_1 = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\) und \(\vec{v}_2 = \begin{pmatrix} 6 \\ 0 \end{pmatrix}\) linear kombiniert werden: \[\vec{v} = 5 \vec{v}_1 + \tfrac{1}{3} \vec{v}_2, \quad \text{also } \lambda_1 = 5,\; \lambda_2 = \tfrac{1}{3}\] Gegenbeispiel: \((0, 0, 1)^T\) ist aus \((1, 0, 0)^T\) und \((0, 1, 0)^T\) nicht linear kombinierbar. Die dritte Koordinate liefert die unerfüllbare Gleichung \(1 = 0\).
 
 ## Karte: Lineare Abhängigkeit und Unabhängigkeit
 tag: def
@@ -74,7 +74,7 @@ Wenn er sich mit Zahlen \(\lambda_1, \ldots, \lambda_k \in \mathbb{R}\) darstell
 id: 1tj0an3
 quelle: VorlesungFolienLAA-2026.pdf, Folie 143
 
-Linear unabhängig, wenn aus \(\lambda_1 \vec{v}_1 + \ldots + \lambda_k \vec{v}_k = \vec{0}\) folgt, dass \(\lambda_1 = \ldots = \lambda_k = 0\). Linear abhängig, wenn es eine solche Linearkombination gibt, bei der mindestens ein \(\lambda_i\) ungleich Null ist — die Vektoren heben sich dann genau gegeneinander auf.
+Linear unabhängig, wenn aus \(\lambda_1 \vec{v}_1 + \ldots + \lambda_k \vec{v}_k = \vec{0}\) folgt, dass \(\lambda_1 = \ldots = \lambda_k = 0\). Linear abhängig, wenn es eine solche Linearkombination gibt, bei der mindestens ein \(\lambda_i\) ungleich Null ist. Die Vektoren heben sich dann genau gegeneinander auf.
 
 ## Frage: Was ist eine Basis des \(\mathbb{R}^n\)?
 id: 17api19
@@ -92,7 +92,7 @@ Die Anzahl der Vektoren in einer Basis. Der \(\mathbb{R}^n\) ist wegen der Stand
 id: 1ikikqj
 quelle: VorlesungFolienLAA-2026.pdf, Folie 145
 
-Die Vektoren \(\vec{e}_1 = (1, 0, \ldots, 0)^T\) bis \(\vec{e}_n = (0, \ldots, 0, 1)^T\) — bei jedem ist genau eine Koordinate 1 und alle anderen sind 0.
+Die Vektoren \(\vec{e}_1 = (1, 0, \ldots, 0)^T\) bis \(\vec{e}_n = (0, \ldots, 0, 1)^T\). Bei jedem ist genau eine Koordinate 1 und alle anderen sind 0.
 
 ## Aufgabe: Aufgabe 28 (Variante)
 id: aufgabe-28-variante

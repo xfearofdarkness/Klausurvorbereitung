@@ -26,7 +26,7 @@ Ein vollständiger Binärbaum, bei dem jeder innere Knoten bei <b>max-at-top</b>
 tag: wichtig
 quelle: 06_heaps_hash-tables.pdf, Folien 13, 34-35
 
-<b>insert(e):</b> fügt e in den nächsten freien Platz ein (erweitert das Array bei Bedarf) und „verschiebt“ das neue Element nach oben (shiftUp), bis es <= seinen Kindern ist oder Wurzel wird. <b>remove():</b> entfernt das Wurzelelement und gibt es zurück; versetzt das letzte Element an die Wurzel und „verschiebt“ es nach unten (shiftDown), bis die Heap-Bedingung wieder gilt. <b>makeHeap():</b> wandelt ein Array in einen Heap um — shiftDown wird vom Elternknoten des letzten Elements (parentOfLast = (last−1)/2) rückwärts bis zur Wurzel aufgerufen.
+<b>insert(e):</b> fügt e in den nächsten freien Platz ein (erweitert das Array bei Bedarf) und „verschiebt“ das neue Element nach oben (shiftUp), bis es <= seinen Kindern ist oder Wurzel wird. <b>remove():</b> entfernt das Wurzelelement und gibt es zurück; versetzt das letzte Element an die Wurzel und „verschiebt“ es nach unten (shiftDown), bis die Heap-Bedingung wieder gilt. <b>makeHeap():</b> wandelt ein Array in einen Heap um. ShiftDown wird vom Elternknoten des letzten Elements (parentOfLast = (last−1)/2) rückwärts bis zur Wurzel aufgerufen.
 
 ## Karte: Heap: Zeitkomplexität
 tag: formel
@@ -38,13 +38,13 @@ Ein Heap mit n Elementen hat eine Höhe von <= log₂n. Daher haben sowohl Entfe
 tag: def
 quelle: 06_heaps_hash-tables.pdf, Folien 50-52
 
-Selection Sort ermittelt wiederholt das größte verbleibende Element per linearem Durchlauf — O(n) Schritte pro Durchlauf, insgesamt O(n²). Heapsort ermittelt wiederholt das kleinste verbleibende Element und setzt es an seinen Platz: Das Array wird in einen Heap umgewandelt, sodass das kleinste verbleibende Element in O(log₂n) Schritten gefunden und entfernt werden kann — insgesamt O(n·log₂n). Ablauf: heap.remove() liefert das kleinste Element, das ans Ende des unsortierten Bereichs gesetzt wird.
+Selection Sort ermittelt wiederholt das größte verbleibende Element per linearem Durchlauf. O(n) Schritte pro Durchlauf, insgesamt O(n²). Heapsort ermittelt wiederholt das kleinste verbleibende Element und setzt es an seinen Platz: Das Array wird in einen Heap umgewandelt, sodass das kleinste verbleibende Element in O(log₂n) Schritten gefunden und entfernt werden kann. Insgesamt O(n·log₂n). Ablauf: heap.remove() liefert das kleinste Element, das ans Ende des unsortierten Bereichs gesetzt wird.
 
 ## Karte: Heapsort im Vergleich
 tag: wichtig
 quelle: 06_heaps_hash-tables.pdf, Folie 68
 
-Heapsort: best, average und worst case O(n·log₂n), <b>instabil</b>. Heapsort erreicht die gleiche Worst-Case-Zeitkomplexität wie Mergesort, hat aber eine bessere Raumkomplexität. Insertion Sort eignet sich nach wie vor am besten für fast sortierte Arrays — Heapsort mischt ein fast sortiertes Array vor dem Sortieren durcheinander. Quicksort ist im Durchschnitt in der Regel immer noch am schnellsten.
+Heapsort: best, average und worst case O(n·log₂n), <b>instabil</b>. Heapsort erreicht die gleiche Worst-Case-Zeitkomplexität wie Mergesort, hat aber eine bessere Raumkomplexität. Insertion Sort eignet sich nach wie vor am besten für fast sortierte Arrays. Heapsort mischt ein fast sortiertes Array vor dem Sortieren durcheinander. Quicksort ist im Durchschnitt in der Regel immer noch am schnellsten.
 
 ## Karte: Hashing: Idee
 tag: def
@@ -62,13 +62,13 @@ Für eine Hash-Tabelle der Größe n definiert die Hash-Funktion eine Abbildung 
 tag: wichtig
 quelle: 06_heaps_hash-tables.pdf, Folien 73-74
 
-Elemente mit demselben Hash-Code werden „verkettet“: Jede Position der Hash-Tabelle dient als „Bucket“ für mehrere Datenelemente. Implementierung 1 — jeder Bucket ist ein Array: große Buckets können Speicher verschwenden, ein Bucket kann voll werden (Überlauf beim Hinzufügen zu einem vollen Bucket). Implementierung 2 — jeder Bucket ist eine verkettete Liste: die Verweise in den Knoten beanspruchen zusätzlichen Speicherplatz.
+Elemente mit demselben Hash-Code werden „verkettet“: Jede Position der Hash-Tabelle dient als „Bucket“ für mehrere Datenelemente. Implementierung 1: jeder Bucket ist ein Array: große Buckets können Speicher verschwenden, ein Bucket kann voll werden (Überlauf beim Hinzufügen zu einem vollen Bucket). Implementierung 2: jeder Bucket ist eine verkettete Liste: die Verweise in den Knoten beanspruchen zusätzlichen Speicherplatz.
 
 ## Karte: Kollisionen II: Offene Adressierung
 tag: def
 quelle: 06_heaps_hash-tables.pdf, Folie 75
 
-Ist die von der Hash-Funktion zugewiesene Position belegt, wird eine andere freie Position gesucht — dieser Vorgang heißt Sondieren (Probing). Auch die Suche nach einem Element sondiert: Sie kann erst beendet werden, wenn eine freie Position erreicht wird. Drei Verfahren: lineare Sondierung, quadratische Sondierung, doppeltes Hashing.
+Ist die von der Hash-Funktion zugewiesene Position belegt, wird eine andere freie Position gesucht. Dieser Vorgang heißt Sondieren (Probing). Auch die Suche nach einem Element sondiert: Sie kann erst beendet werden, wenn eine freie Position erreicht wird. Drei Verfahren: lineare Sondierung, quadratische Sondierung, doppeltes Hashing.
 
 ## Karte: Lineare Sondierung
 tag: wichtig
@@ -86,13 +86,13 @@ Die Offsets sind perfekte Quadrate: h + 1², h + 2², h + 3², … (mit Sprung a
 tag: wichtig
 quelle: 06_heaps_hash-tables.pdf, Folien 84-86
 
-Verwendet zwei Hash-Funktionen: h1 berechnet den Hash-Code, h2 den Schrittwert für die Suche. Kombiniert die Vorteile der linearen und der quadratischen Sondierung: verringert die Häufung und findet eine freie Position, sofern eine vorhanden ist — vorausgesetzt, die Tabellengröße ist eine Primzahl.
+Verwendet zwei Hash-Funktionen: h1 berechnet den Hash-Code, h2 den Schrittwert für die Suche. Kombiniert die Vorteile der linearen und der quadratischen Sondierung: verringert die Häufung und findet eine freie Position, sofern eine vorhanden ist. Vorausgesetzt, die Tabellengröße ist eine Primzahl.
 
 ## Karte: Offene Adressierung: Elemente entfernen
 tag: wichtig
 quelle: 06_heaps_hash-tables.pdf, Folien 87-90
 
-Beim einfachen Entfernen würden spätere Suchen fälschlich abbrechen (die Suche stoppt bei einer freien Position, obwohl das gesuchte Element weiter hinten liegt). Deshalb wird an der Position ein spezieller Wert hinterlassen: Es gibt drei Arten von Positionen — belegt, leer, entfernt. Die Suche endet bei einer leeren Position, nicht jedoch bei einer entfernten; eingefügt werden kann in leere oder entfernte Positionen.
+Beim einfachen Entfernen würden spätere Suchen fälschlich abbrechen (die Suche stoppt bei einer freien Position, obwohl das gesuchte Element weiter hinten liegt). Deshalb wird an der Position ein spezieller Wert hinterlassen: Es gibt drei Arten von Positionen. Belegt, leer, entfernt. Die Suche endet bei einer leeren Position, nicht jedoch bei einer entfernten; eingefügt werden kann in leere oder entfernte Positionen.
 
 ## Karte: Überlauf und Auslastungsgrad
 tag: formel
@@ -110,7 +110,7 @@ quelle: 06_heaps_hash-tables.pdf, Folie 97
 tag: beispiel
 quelle: 06_heaps_hash-tables.pdf, Folie 98
 
-<b>Version 1 — Summe der Unicode-Werte:</b> z. B. h('eat') = 101 + 97 + 116 = 314. Achtung: Alle Permutationen eines Zeichensatzes erhalten den gleichen Code (h('tea') = h('eat')). <b>Version 2 — gewichtete Summe der Unicode-Werte</b> mit Potenzen einer Konstante b: Die Positionen der Zeichen beeinflussen den Hash-Code, verschiedene Permutationen erhalten unterschiedliche Codes. Java verwendet b = 31 in der hashCode()-Methode der String-Klasse.
+<b>Version 1: Summe der Unicode-Werte:</b> z. B. h('eat') = 101 + 97 + 116 = 314. Achtung: Alle Permutationen eines Zeichensatzes erhalten den gleichen Code (h('tea') = h('eat')). <b>Version 2: gewichtete Summe der Unicode-Werte</b> mit Potenzen einer Konstante b: Die Positionen der Zeichen beeinflussen den Hash-Code, verschiedene Permutationen erhalten unterschiedliche Codes. Java verwendet b = 31 in der hashCode()-Methode der String-Klasse.
 
 ## Karte: Hash-Tabelle: Effizienz
 tag: formel
@@ -152,13 +152,13 @@ Beim Heap dauern insert und remove O(log₂n), makeHeap dauert O(n), und die Hö
 id: 16dl7pl
 quelle: 06_heaps_hash-tables.pdf, Folien 50-51
 
-Selection Sort findet das jeweils kleinste/größte verbleibende Element per linearem Durchlauf (O(n) pro Durchlauf, insgesamt O(n²)). Heapsort wandelt das Array in einen Heap um und kann das kleinste verbleibende Element in O(log₂n) Schritten finden und entfernen — insgesamt O(n·log₂n).
+Selection Sort findet das jeweils kleinste/größte verbleibende Element per linearem Durchlauf (O(n) pro Durchlauf, insgesamt O(n²)). Heapsort wandelt das Array in einen Heap um und kann das kleinste verbleibende Element in O(log₂n) Schritten finden und entfernen. Insgesamt O(n·log₂n).
 
 ## Frage: Wie schneidet Heapsort im Vergleich zu Mergesort und Quicksort ab?
 id: 8b2prn
 quelle: 06_heaps_hash-tables.pdf, Folie 68
 
-Heapsort erreicht wie Mergesort O(n·log₂n) im Worst Case, hat aber eine bessere Raumkomplexität; es ist instabil. Quicksort ist im Durchschnitt in der Regel am schnellsten. Für fast sortierte Arrays bleibt Insertion Sort am besten — Heapsort mischt ein fast sortiertes Array vor dem Sortieren durcheinander.
+Heapsort erreicht wie Mergesort O(n·log₂n) im Worst Case, hat aber eine bessere Raumkomplexität; es ist instabil. Quicksort ist im Durchschnitt in der Regel am schnellsten. Für fast sortierte Arrays bleibt Insertion Sort am besten. Heapsort mischt ein fast sortiertes Array vor dem Sortieren durcheinander.
 
 ## Frage: Was ist eine Kollision beim Hashing?
 id: ijzvb5
@@ -176,7 +176,7 @@ Eine Hash-Funktion bildet Schlüsselwerte auf ganze Zahlen von 0 bis n−1 ab; h
 id: 124q3v3
 quelle: 06_heaps_hash-tables.pdf, Folien 73-75
 
-Separate Verkettung (jede Position ist ein Bucket — als Array oder verkettete Liste — für mehrere Elemente) und offene Adressierung (bei belegter Position wird per Sondieren eine andere freie Position gesucht: linear, quadratisch oder doppeltes Hashing).
+Separate Verkettung (jede Position ist ein Bucket. Als Array oder verkettete Liste. Für mehrere Elemente) und offene Adressierung (bei belegter Position wird per Sondieren eine andere freie Position gesucht: linear, quadratisch oder doppeltes Hashing).
 
 ## Frage: Was ist der Nachteil der linearen Sondierung, und wie helfen quadratische Sondierung und doppeltes Hashing?
 id: lil41o
@@ -188,7 +188,7 @@ Bei linearer Sondierung bilden sich Cluster belegter Positionen, die nachfolgend
 id: 1tg020q
 quelle: 06_heaps_hash-tables.pdf, Folien 87-90
 
-Die Suche endet bei einer leeren Position. Würde ein Element einfach gelöscht, könnte die Suche nach einem später einsortierten Element fälschlich abbrechen. Deshalb gibt es drei Positionsarten: belegt, leer, entfernt — die Suche läuft über entfernte Positionen hinweg, eingefügt werden darf in leere und entfernte.
+Die Suche endet bei einer leeren Position. Würde ein Element einfach gelöscht, könnte die Suche nach einem später einsortierten Element fälschlich abbrechen. Deshalb gibt es drei Positionsarten: belegt, leer, entfernt. Die Suche läuft über entfernte Positionen hinweg, eingefügt werden darf in leere und entfernte.
 
 ## Frage: Wie ist der Auslastungsgrad definiert, und welche Richtwerte gelten?
 id: h2xlpz
@@ -200,7 +200,7 @@ Auslastungsgrad = Anzahl der Schlüssel in der Tabelle / Größe der Tabelle. Be
 id: ppdlsp
 quelle: 06_heaps_hash-tables.pdf, Folie 98
 
-Alle Permutationen eines Zeichensatzes erhalten den gleichen Code (h('tea') = h('eat')). Besser ist eine gewichtete Summe mit Potenzen einer Konstante b, sodass die Zeichenpositionen den Code beeinflussen — Java nutzt b = 31 in String.hashCode().
+Alle Permutationen eines Zeichensatzes erhalten den gleichen Code (h('tea') = h('eat')). Besser ist eine gewichtete Summe mit Potenzen einer Konstante b, sodass die Zeichenpositionen den Code beeinflussen. Java nutzt b = 31 in String.hashCode().
 
 ## Frage: Welche Worst-Case-Komplexität hat eine Hash-Tabelle?
 id: gu1uz4
@@ -389,7 +389,7 @@ quelle: 06_heaps_hash-tables.pdf, Folien 52-67
              },
              {
                "title": "Schleife endet",
-               "text": "Mit endUnsorted = 0 endet die Schleife. Ergebnis: 45 22 13 10 6 5 3 — mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
+               "text": "Mit endUnsorted = 0 endet die Schleife. Ergebnis: 45 22 13 10 6 5 3. Mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
                "source": "06_heaps_hash-tables.pdf, Folie 67",
                "explanation": {
                                 "action": "Schleifenbedingung prüfen.",

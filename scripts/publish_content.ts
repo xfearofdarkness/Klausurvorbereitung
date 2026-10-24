@@ -157,7 +157,7 @@ function llmsTxt(subjects: PublishedSubject[]): string {
     "",
     `> Statischer Klausurtrainer. Produktion: ${SITE_ORIGIN}`,
     "",
-    "Die Dateien unter /content/ enthalten nur, was die App ausliefert: Lerntext, Karteikarten mit Rückseite, Aufgaben und — wo die App eine Lösung erzeugt — ein festes Beispiel mit Seed 1. Abläufe stehen im JSON vollständig, im Markdown als Schritttext. Vorlesungsfolien sind nicht enthalten.",
+    "Die Dateien unter /content/ enthalten nur, was die App ausliefert: Lerntext, Karteikarten mit Rückseite, Aufgaben und, wo die App eine Lösung erzeugt, ein festes Beispiel mit Seed 1. Abläufe stehen im JSON vollständig, im Markdown als Schritttext. Vorlesungsfolien sind nicht enthalten.",
     "",
     "## Fächer",
     ""
@@ -170,6 +170,25 @@ function llmsTxt(subjects: PublishedSubject[]): string {
   }
   lines.push("", "## Index", "", `- [Fächerliste](${SITE_ORIGIN}/content/index.json)`, "");
   return `${lines.join("\n")}`;
+}
+
+function robotsTxt(): string {
+  return [
+    "User-agent: *",
+    "Allow: /",
+    "Allow: /llms.txt",
+    "Allow: /content/",
+    "",
+    "# Inhalte für Agenten: /llms.txt",
+    `Sitemap: ${SITE_ORIGIN}/sitemap.xml`,
+    ""
+  ].join("\n");
+}
+
+function sitemapXml(subjects: PublishedSubject[]): string {
+  const urls = [`${SITE_ORIGIN}/llms.txt`, ...subjects.map((subject) => `${SITE_ORIGIN}/content/${subject.id}.md`)];
+  const body = urls.map((url) => `  <url><loc>${url}</loc></url>`).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`;
 }
 
 /** Stabile Dateien für Agenten. Liest nur `content/`, nie `sources/`. */
@@ -202,6 +221,10 @@ export function buildPublicFiles(): PublicFile[] {
       contentType: "text/markdown; charset=utf-8"
     });
   }
+  files.push(
+    { fileName: "robots.txt", body: robotsTxt(), contentType: "text/plain; charset=utf-8" },
+    { fileName: "sitemap.xml", body: sitemapXml(subjects), contentType: "application/xml; charset=utf-8" }
+  );
   for (const file of files) {
     if (file.body.includes(SOURCES_MARKER)) {
       throw new Error(`${file.fileName} enthält sources/ und wird nicht veröffentlicht.`);

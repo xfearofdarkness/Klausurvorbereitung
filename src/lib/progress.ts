@@ -1,5 +1,6 @@
 import type {
   AppProgress,
+  CardSchedule,
   FlashMark,
   MarkState,
   ModeId,
@@ -10,7 +11,7 @@ import type {
 } from "../types/content";
 
 export const STORAGE_KEY = "klausurtrainer-progress-v1";
-const PROGRESS_VERSION = 3;
+const PROGRESS_VERSION = 4;
 const CONTENT_KEY_VERSION = 2;
 const LEGACY_INDEX_PATTERN = /^\d+$/;
 /** Modi, die es nicht mehr gibt, und wo ihre Inhalte jetzt stehen. */
@@ -62,6 +63,9 @@ export function getSubjectProgress(progress: AppProgress, subject: Subject): Sub
   }
   if (subjectProgress.ui !== undefined && !isRecord(subjectProgress.ui)) {
     subjectProgress.ui = {};
+  }
+  if (subjectProgress.schedule !== undefined && !isRecord(subjectProgress.schedule)) {
+    subjectProgress.schedule = {};
   }
   if (subjectProgress.version !== PROGRESS_VERSION) {
     if ((subjectProgress.version ?? 1) < CONTENT_KEY_VERSION) discardIndexMarks(subjectProgress);
@@ -167,6 +171,13 @@ export function getFlashState(progress: AppProgress, subject: Subject, topicId: 
   const subjectProgress = getSubjectProgress(progress, subject);
   subjectProgress.flash[topicId] = subjectProgress.flash[topicId] || {};
   return subjectProgress.flash[topicId];
+}
+
+export function getScheduleState(progress: AppProgress, subject: Subject, topicId: string): Record<string, CardSchedule> {
+  const subjectProgress = getSubjectProgress(progress, subject);
+  subjectProgress.schedule = subjectProgress.schedule || {};
+  subjectProgress.schedule[topicId] = subjectProgress.schedule[topicId] || {};
+  return subjectProgress.schedule[topicId];
 }
 
 export function getPracticeState(progress: AppProgress, subject: Subject, topicId: string): MarkState<PracticeMark> {

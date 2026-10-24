@@ -56,7 +56,7 @@ Der Bruch zweier Polynome \(f(z) := \frac{p(z)}{q(z)}\) mit \(q(z) \ne 0\) heiß
 tag: wichtig
 quelle: VorlesungFolienLAA-2026.pdf, Folie 22
 
-Die Nullstellen von \(f\) sind identisch mit denen des Zählerpolynoms \(p\). An den Nullstellen des Nennerpolynoms \(q\) ist \(f\) nicht definiert — solche Punkte heißen Pole. Da sich Polynome ähnlich wie reelle Zahlen dividieren lassen (Polynomdivision), kann die Darstellung einer rationalen Funktion oft vereinfacht werden.
+Die Nullstellen von \(f\) sind identisch mit denen des Zählerpolynoms \(p\). An den Nullstellen des Nennerpolynoms \(q\) ist \(f\) nicht definiert. Solche Punkte heißen Pole. Da sich Polynome ähnlich wie reelle Zahlen dividieren lassen (Polynomdivision), kann die Darstellung einer rationalen Funktion oft vereinfacht werden.
 
 ## Karte: Polynomdivision
 tag: beispiel
@@ -116,7 +116,7 @@ In vielen Fällen ist die Darstellung einer rationalen Funktion unnötig kompliz
 id: 1ri27pp
 quelle: VorlesungFolienLAA-2026.pdf, Folie 22
 
-Die Nullstellen des Nennerpolynoms \(q\) — an diesen Punkten ist die rationale Funktion nicht definiert. Die Nullstellen von \(f\) selbst sind dagegen die Nullstellen des Zählerpolynoms \(p\).
+Die Nullstellen des Nennerpolynoms \(q\). An diesen Punkten ist die rationale Funktion nicht definiert. Die Nullstellen von \(f\) selbst sind dagegen die Nullstellen des Zählerpolynoms \(p\).
 
 ## Aufgabe: Aufgabe 1 (Variante)
 id: aufgabe-1-variante
@@ -145,5 +145,5 @@ Beweisen oder widerlegen Sie: Die Summe einer geraden und einer ungeraden Funkti
 ## Aufgabe: Aufgabe 5 (Typ)
 id: y8p0ie
 generator: polynomdivision
-notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.
+notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 5

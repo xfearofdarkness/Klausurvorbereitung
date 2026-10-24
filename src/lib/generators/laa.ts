@@ -129,14 +129,14 @@ export const gaussLgs2x2: Generator = (rng) => {
   if (caseRoll < 0.8) {
     return {
       task: String.raw`Berechnen Sie mithilfe des Gauß-Algorithmus sämtliche Lösungen des linearen Gleichungssystems \[\begin{aligned} ${polyLine(a11, a12)} &= ${b1} \\ ${polyLine(k * a11, k * a12)} &= ${k * b1} \end{aligned}\]`,
-      solution: String.raw`Zeile II ist das \(${k}\)-Fache von Zeile I. Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Nullzeile \(0 = 0\) — eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(${polyLine(a11, a12)} = ${b1}\) mit unendlich vielen Lösungen: \(x_2\) frei wählbar und \[x_1 = ${a12 === 0 ? frac(b1, a11) : String.raw`\frac{${b1} ${a12 < 0 ? "+" : "-"} ${Math.abs(a12) === 1 ? "" : Math.abs(a12)} x_2}{${a11}}`}\]`
+      solution: String.raw`Zeile II ist das \(${k}\)-Fache von Zeile I. Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Nullzeile \(0 = 0\). Eine wahre Aussage, die die Lösungsmenge nicht einschränkt. Es verbleibt \(${polyLine(a11, a12)} = ${b1}\) mit unendlich vielen Lösungen: \(x_2\) frei wählbar und \[x_1 = ${a12 === 0 ? frac(b1, a11) : String.raw`\frac{${b1} ${a12 < 0 ? "+" : "-"} ${Math.abs(a12) === 1 ? "" : Math.abs(a12)} x_2}{${a11}}`}\]`
     };
   }
 
   const m = nonZeroInt(rng, -4, 4);
   return {
     task: String.raw`Berechnen Sie mithilfe des Gauß-Algorithmus sämtliche Lösungen des linearen Gleichungssystems \[\begin{aligned} ${polyLine(a11, a12)} &= ${b1} \\ ${polyLine(k * a11, k * a12)} &= ${k * b1 + m} \end{aligned}\]`,
-    solution: String.raw`Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Zeile \(0 = ${m}\) — eine falsche Aussage. Das ursprüngliche LGS hat keine Lösung.`
+    solution: String.raw`Die Zeilenoperation \(\mathrm{II} - ${par(k)} \cdot \mathrm{I}\) liefert die Zeile \(0 = ${m}\). Eine falsche Aussage. Das ursprüngliche LGS hat keine Lösung.`
   };
 };
 
@@ -208,7 +208,7 @@ export const unabhaengigInvertierbar: Generator = (rng) => {
   const betaAbs = Math.abs(beta) === 1 ? "" : `${Math.abs(beta)} \\cdot `;
   const relation =
     dependent && value === 0
-      ? String.raw` — hier gilt \(\vec{v}_3 = ${alphaStr}\vec{v}_1 ${beta < 0 ? "-" : "+"} ${betaAbs}\vec{v}_2\)`
+      ? String.raw`. Hier gilt \(\vec{v}_3 = ${alphaStr}\vec{v}_1 ${beta < 0 ? "-" : "+"} ${betaAbs}\vec{v}_2\)`
       : "";
 
   return {

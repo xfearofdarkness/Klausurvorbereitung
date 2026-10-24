@@ -28,9 +28,7 @@
       message = "";
       return;
     }
-    const notice = plan.changed
-      ? "Stand übernommen. Bereits gesetzte Markierungen bleiben."
-      : "Nichts Neues. Bereits gesetzte Markierungen bleiben.";
+    const notice = "Fortschritt geladen.";
     if (!plan.changed) {
       errorMessage = "";
       message = notice;
@@ -39,18 +37,17 @@
     try {
       sessionStorage.setItem(IMPORT_NOTICE_KEY, notice);
     } catch {
-      // Reload zeigt den neuen Stand auch ohne Hinweis.
+      // Reload zeigt den neuen Fortschritt auch ohne Hinweis.
     }
     window.location.reload();
   }
 </script>
 
-<section class="backup" aria-label="Lernstand">
-  <p class="backup-note">Lernstand sichern oder aus einer Datei übernehmen. Vorhandene Markierungen bleiben; die Datei füllt nur Lücken.</p>
+<section class="backup" aria-label="Fortschritt">
   <div class="backup-actions">
-    <button class="text-btn" type="button" onclick={downloadProgressFile}>Stand herunterladen</button>
+    <button class="text-btn" type="button" onclick={downloadProgressFile}>Fortschritt sichern</button>
     <label class="text-btn">
-      Stand laden
+      Fortschritt laden
       <input class="backup-file" type="file" accept="application/json,.json" onchange={upload} />
     </label>
   </div>

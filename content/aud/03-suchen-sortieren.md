@@ -14,7 +14,7 @@ Eingabe: eine Sequenz von unsortierten Elementen und ein Zielwert; Ausgabe: Posi
 tag: formel
 quelle: 03_fundamental-algorithms.pdf, Folie 13
 
-Best case: C(1). Worst case: C(n). Average case (nicht gefunden): C(n). Average case (gefunden): C((n+1)/2) — bei gleichmäßig verteiltem Array hat jeder Vergleich die gleiche Wahrscheinlichkeit: 1/n·(1 + 2 + … + n) = (n+1)/2.
+Best case: C(1). Worst case: C(n). Average case (nicht gefunden): C(n). Average case (gefunden): C((n+1)/2). Bei gleichmäßig verteiltem Array hat jeder Vergleich die gleiche Wahrscheinlichkeit: 1/n·(1 + 2 + … + n) = (n+1)/2.
 
 ## Karte: Binäre Suche
 tag: def
@@ -26,7 +26,7 @@ Eingabe: eine Sequenz von <b>sortierten</b> Elementen und ein Zielwert. Grundide
 tag: formel
 quelle: 03_fundamental-algorithms.pdf, Folie 25
 
-Best case: C(1). Worst case und average case: C(log₂n + 1). Begründung: Nach jeder Iteration halbiert sich die Anzahl der Elemente — nach der 1. Iteration bleiben n/2, nach der 2. n/4, nach der k. Iteration n/2ᵏ Elemente übrig.
+Best case: C(1). Worst case und average case: C(log₂n + 1). Begründung: Nach jeder Iteration halbiert sich die Anzahl der Elemente. Nach der 1. Iteration bleiben n/2, nach der 2. n/4, nach der k. Iteration n/2ᵏ Elemente übrig.
 
 ## Karte: Reihenfolge der Funktionen
 tag: wichtig
@@ -38,7 +38,7 @@ n² wächst stärker als n·log₂n; n·log₂n wächst stärker als n; n wächs
 tag: wichtig
 quelle: 03_fundamental-algorithms.pdf, Folie 28
 
-Laufzeit messen (mehrere Durchläufe, Mittelwerte) ist nur vergleichbar auf gleichem Computer, abhängig von der Geschicklichkeit des Programmierenden und vom Computer (z. B. viel vs. wenig RAM bei hohem Speicherbedarf) — und vergleicht nur Programme, nicht die Algorithmen!
+Laufzeit messen (mehrere Durchläufe, Mittelwerte) ist nur vergleichbar auf gleichem Computer, abhängig von der Geschicklichkeit des Programmierenden und vom Computer (z. B. viel vs. wenig RAM bei hohem Speicherbedarf). Und vergleicht nur Programme, nicht die Algorithmen!
 
 ## Karte: O-Notation (Landau-Notation)
 tag: def
@@ -56,7 +56,7 @@ quelle: 03_fundamental-algorithms.pdf, Folie 30
 tag: def
 quelle: 03_fundamental-algorithms.pdf, Folie 36
 
-<b>Groß O:</b> asymptotische obere Schranke. <b>Groß Omega:</b> asymptotische untere Schranke. <b>Groß Theta:</b> beides. Am häufigsten wird die Worst-case-Laufzeitkomplexität betrachtet: die Laufzeit T(n), die maximal benötigt wird. Beispiel: T(n) in O(n²) — der Algorithmus benötigt höchstens quadratisch viele Schritte, muss aber nicht tatsächlich quadratisch viele benötigen.
+<b>Groß O:</b> asymptotische obere Schranke. <b>Groß Omega:</b> asymptotische untere Schranke. <b>Groß Theta:</b> beides. Am häufigsten wird die Worst-case-Laufzeitkomplexität betrachtet: die Laufzeit T(n), die maximal benötigt wird. Beispiel: T(n) in O(n²). Der Algorithmus benötigt höchstens quadratisch viele Schritte, muss aber nicht tatsächlich quadratisch viele benötigen.
 
 ## Karte: Zählt nur der Worst-case?
 quelle: 03_fundamental-algorithms.pdf, Folie 37
@@ -73,7 +73,7 @@ Grundvoraussetzung: Algorithmus verstehen! 1. Schleifen mit Bezug zur Eingabelä
 tag: beispiel
 quelle: 03_fundamental-algorithms.pdf, Folien 31-32
 
-<b>minNaive:</b> pro Zahl mit (bis zu) allen anderen vergleichen (brute force) — O(n²). <b>minSmart:</b> bisheriges Minimum merken und mit dem nächsten Element vergleichen — O(n). Linear: Verdopplung von n → ungefähre Verdopplung des Aufwands; quadratisch: Verdopplung von n → ungefähre Vervierfachung.
+<b>minNaive:</b> pro Zahl mit (bis zu) allen anderen vergleichen (brute force). O(n²). <b>minSmart:</b> bisheriges Minimum merken und mit dem nächsten Element vergleichen. O(n). Linear: Verdopplung von n → ungefähre Verdopplung des Aufwands; quadratisch: Verdopplung von n → ungefähre Vervierfachung.
 
 ## Karte: Sortieren: Grundlagen
 tag: def
@@ -132,7 +132,7 @@ Best case (bereits sortiert): C(n) = n − 1 = O(n), M(n) = 0. Worst case (umgek
 tag: def
 quelle: 03_fundamental-algorithms.pdf, Folie 215
 
-Rekursiver „Teile und herrsche“-Algorithmus (divide & conquer). <b>Divide:</b> Ordne die Elemente so neu an, dass zwei Teilarrays entstehen, wobei jedes Element im linken Array <= jedem Element im rechten Array ist. <b>Conquer:</b> Wende Quicksort rekursiv auf die Teilarrays an; höre auf, sobald ein Teilarray nur noch ein Element enthält. <b>Combine:</b> nichts zu tun — das Kriterium der Teilarray-Bildung sorgt bereits dafür.
+Rekursiver „Teile und herrsche“-Algorithmus (divide & conquer). <b>Divide:</b> Ordne die Elemente so neu an, dass zwei Teilarrays entstehen, wobei jedes Element im linken Array <= jedem Element im rechten Array ist. <b>Conquer:</b> Wende Quicksort rekursiv auf die Teilarrays an; höre auf, sobald ein Teilarray nur noch ein Element enthält. <b>Combine:</b> nichts zu tun. Das Kriterium der Teilarray-Bildung sorgt bereits dafür.
 
 ## Karte: Quicksort: Partitionierung
 tag: wichtig
@@ -144,7 +144,7 @@ Die Neuanordnung erfolgt mithilfe eines Wertes, der als <b>Pivot</b> bezeichnet 
 tag: wichtig
 quelle: 03_fundamental-algorithms.pdf, Folie 327
 
-Mögliche Pivot-Werte: erstes oder letztes Element (riskant, kann zu Worst-case-Verhalten führen), mittleres Element, zufällig gewähltes Element, Median aus drei Elementen (links, Mitte, rechts oder drei zufällige — verringert die Wahrscheinlichkeit eines schlechten Pivots).
+Mögliche Pivot-Werte: erstes oder letztes Element (riskant, kann zu Worst-case-Verhalten führen), mittleres Element, zufällig gewähltes Element, Median aus drei Elementen (links, Mitte, rechts oder drei zufällige. Verringert die Wahrscheinlichkeit eines schlechten Pivots).
 
 ## Karte: Quicksort: Zeitanalyse und Stabilität
 tag: formel
@@ -186,7 +186,7 @@ Best case C(1), worst case C(n), average case nicht gefunden C(n), average case 
 id: 11clg0q
 quelle: 03_fundamental-algorithms.pdf, Folien 15-22
 
-Eine sortierte Elementfolge. Der Zielwert wird mit dem mittleren Element (median) verglichen: bei Gleichheit Index zurückgeben, bei target < median in der unteren Hälfte weitersuchen, bei target > median in der oberen — wiederholt für das jeweilige Teilarray.
+Eine sortierte Elementfolge. Der Zielwert wird mit dem mittleren Element (median) verglichen: bei Gleichheit Index zurückgeben, bei target < median in der unteren Hälfte weitersuchen, bei target > median in der oberen. Wiederholt für das jeweilige Teilarray.
 
 ## Frage: Wie viele Vergleiche benötigt die binäre Suche im schlechtesten Fall, und warum?
 id: 1xxe7yk
@@ -198,9 +198,9 @@ C(log₂n + 1): Nach jeder Iteration halbiert sich die Anzahl der verbleibenden 
 id: 1tj44vo
 quelle: 03_fundamental-algorithms.pdf, Folie 28
 
-Messungen sind nur auf gleichem Computer vergleichbar, hängen von der Geschicklichkeit des Programmierenden und vom Computer ab (z. B. RAM) — und sie vergleichen nur Programme, nicht die Algorithmen.
+Messungen sind nur auf gleichem Computer vergleichbar, hängen von der Geschicklichkeit des Programmierenden und vom Computer ab (z. B. RAM). Und sie vergleichen nur Programme, nicht die Algorithmen.
 
-## Frage: Was sagt eine Komplexitätsklasse aus — und was nicht?
+## Frage: Was sagt eine Komplexitätsklasse aus. Und was nicht?
 id: d9hhh
 quelle: 03_fundamental-algorithms.pdf, Folie 29
 
@@ -270,7 +270,7 @@ Ein Pivot wird gewählt. Von links nach rechts läuft Index i, bis arr[i] >= Piv
 id: s01dvs
 quelle: 03_fundamental-algorithms.pdf, Folien 327-329
 
-Wenn das Pivotelement immer der größte oder kleinste Wert ist — ein Teilarray hat dann immer 1 Element, das andere n-1. C(n) = n + (n-1) + … + 2 = O(n²). Deshalb ist die Pivot-Wahl (erstes/letztes Element riskant) wichtig.
+Wenn das Pivotelement immer der größte oder kleinste Wert ist. Ein Teilarray hat dann immer 1 Element, das andere n-1. C(n) = n + (n-1) + … + 2 = O(n²). Deshalb ist die Pivot-Wahl (erstes/letztes Element riskant) wichtig.
 
 ## Frage: Welche Pivot-Strategien gibt es bei Quicksort?
 id: 1g43iwq
@@ -308,7 +308,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
   "steps": [
              {
                "title": "i = 0",
-               "text": "arr[0] = 4 wird mit dem Zielwert 23 verglichen — kein Treffer.",
+               "text": "arr[0] = 4 wird mit dem Zielwert 23 verglichen. Kein Treffer.",
                "explanation": {
                                 "action": "arr[0] mit dem Zielwert vergleichen.",
                                 "rule": "<code>if (arr[i]==target) return i;</code>",
@@ -318,7 +318,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
              },
              {
                "title": "i = 1",
-               "text": "arr[1] = 8 — kein Treffer.",
+               "text": "arr[1] = 8. Kein Treffer.",
                "explanation": {
                                 "action": "arr[1] mit dem Zielwert vergleichen.",
                                 "rule": "<code>if (arr[i]==target) return i;</code>",
@@ -331,7 +331,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
              },
              {
                "title": "i = 2",
-               "text": "arr[2] = 15 — kein Treffer.",
+               "text": "arr[2] = 15. Kein Treffer.",
                "explanation": {
                                 "action": "arr[2] mit dem Zielwert vergleichen.",
                                 "rule": "<code>if (arr[i]==target) return i;</code>",
@@ -345,7 +345,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
              },
              {
                "title": "i = 3",
-               "text": "arr[3] = 16 — kein Treffer.",
+               "text": "arr[3] = 16. Kein Treffer.",
                "explanation": {
                                 "action": "arr[3] mit dem Zielwert vergleichen.",
                                 "rule": "<code>if (arr[i]==target) return i;</code>",
@@ -360,7 +360,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
              },
              {
                "title": "i = 4: gefunden",
-               "text": "arr[4] = 23 stimmt mit dem Zielwert überein — return 4.",
+               "text": "arr[4] = 23 stimmt mit dem Zielwert überein. Return 4.",
                "explanation": {
                                 "action": "arr[4] mit dem Zielwert vergleichen.",
                                 "rule": "<code>if (arr[i]==target) return i;</code>",
@@ -489,7 +489,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 109-133
              },
              {
                "title": "9 bleibt",
-               "text": "9 ist größer als 4 — keine Verschiebung nötig → 1 3 4 9 2 10 6 8 7 5.",
+               "text": "9 ist größer als 4. Keine Verschiebung nötig → 1 3 4 9 2 10 6 8 7 5.",
                "explanation": {
                                 "action": "i = 3: toInsert = 9.",
                                 "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
@@ -520,7 +520,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 109-133
              },
              {
                "title": "10 bleibt",
-               "text": "10 ist größer als 9 — keine Verschiebung → 1 2 3 4 9 10 6 8 7 5.",
+               "text": "10 ist größer als 9. Keine Verschiebung → 1 2 3 4 9 10 6 8 7 5.",
                "explanation": {
                                 "action": "i = 5: toInsert = 10.",
                                 "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
@@ -755,7 +755,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
   "steps": [
              {
                "title": "Durchlauf 1: Minimum 1",
-               "text": "Das kleinste Element im Bereich 0-9 ist 1 (Position 2) — Tausch mit Position 0.",
+               "text": "Das kleinste Element im Bereich 0-9 ist 1 (Position 2). Tausch mit Position 0.",
                "explanation": {
                                 "action": "Suche das Minimum im gesamten noch unsortierten Bereich 0-9.",
                                 "rule": "Selection Sort setzt das kleinste gefundene Element an die erste unsortierte Position.",
@@ -769,7 +769,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 2: Minimum 2",
-               "text": "Das kleinste Element im Bereich 1-9 ist 2 (Position 4) — Tausch mit Position 1.",
+               "text": "Das kleinste Element im Bereich 1-9 ist 2 (Position 4). Tausch mit Position 1.",
                "explanation": {
                                 "action": "Suche das Minimum im restlichen Bereich 1-9.",
                                 "rule": "Der linke sortierte Bereich bleibt fixiert und wird nicht erneut verändert.",
@@ -786,7 +786,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 3: Minimum 3",
-               "text": "Das kleinste Element im Bereich 2-9 ist 3 (Position 4) — Tausch mit Position 2.",
+               "text": "Das kleinste Element im Bereich 2-9 ist 3 (Position 4). Tausch mit Position 2.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 2-9.",
                                 "rule": "Nach jedem Durchlauf wächst der sortierte Bereich links um eine Position.",
@@ -804,7 +804,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 4: Minimum 4",
-               "text": "Das kleinste Element im Bereich 3-9 ist 4 (Position 4) — Tausch mit Position 3.",
+               "text": "Das kleinste Element im Bereich 3-9 ist 4 (Position 4). Tausch mit Position 3.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 3-9.",
                                 "rule": "Das gefundene Minimum wird an den Anfang des unsortierten Bereichs getauscht.",
@@ -823,7 +823,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 5: Minimum 5",
-               "text": "Das kleinste Element im Bereich 4-9 ist 5 (Position 9) — Tausch mit Position 4.",
+               "text": "Das kleinste Element im Bereich 4-9 ist 5 (Position 9). Tausch mit Position 4.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 4-9.",
                                 "rule": "Nur der unsortierte Bereich wird durchsucht.",
@@ -843,7 +843,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 6: Minimum 6",
-               "text": "Das kleinste Element im Bereich 5-9 ist 6 (Position 6) — Tausch mit Position 5.",
+               "text": "Das kleinste Element im Bereich 5-9 ist 6 (Position 6). Tausch mit Position 5.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 5-9.",
                                 "rule": "Der kleinste Wert des Restbereichs besetzt die nächste freie sortierte Position.",
@@ -864,7 +864,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 7: Minimum 7",
-               "text": "Das kleinste Element im Bereich 6-9 ist 7 (Position 8) — Tausch mit Position 6.",
+               "text": "Das kleinste Element im Bereich 6-9 ist 7 (Position 8). Tausch mit Position 6.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 6-9.",
                                 "rule": "Die Auswahlregel bleibt in jedem Durchlauf gleich.",
@@ -886,7 +886,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
              },
              {
                "title": "Durchlauf 8: Minimum 8",
-               "text": "Das kleinste Element im Bereich 7-9 ist 8 — es steht bereits an Position 7.",
+               "text": "Das kleinste Element im Bereich 7-9 ist 8. Es steht bereits an Position 7.",
                "explanation": {
                                 "action": "Suche das Minimum im Bereich 7-9.",
                                 "rule": "Wenn das Minimum bereits vorne steht, ist kein Tausch nötig.",
@@ -904,8 +904,8 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
                              ]
              },
              {
-               "title": "Durchlauf 9: Minimum 9 — fertig",
-               "text": "Das kleinste Element im Bereich 8-9 ist 9 (Position 9) — Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
+               "title": "Durchlauf 9: Minimum 9. Fertig",
+               "text": "Das kleinste Element im Bereich 8-9 ist 9 (Position 9). Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
                "explanation": {
                                 "action": "Bearbeite den letzten unsortierten Bereich.",
                                 "rule": "Nach n−1 Durchläufen ist jedes Element an seiner sortierten Position.",
@@ -1016,7 +1016,7 @@ quelle: 03_fundamental-algorithms.pdf, Folien 216-257
              },
              {
                "title": "i > j: Partitionierung fertig",
-               "text": "Mit i = 5 und j = 4 ist i > j — der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
+               "text": "Mit i = 5 und j = 4 ist i > j. Der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
                "explanation": {
                                 "action": "Abbruchbedingung prüfen.",
                                 "rule": "Wiederhole ab Schritt 2 bis i > j.",

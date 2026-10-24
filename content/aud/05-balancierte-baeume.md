@@ -20,13 +20,13 @@ Nach den Erfindern benannt: Adelson-Velskii und Landis. Ein binärer Suchbaum T 
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folie 8
 
-Für einen ausgeglichenen binären Suchbaum mit n Knoten gilt: Höhe = O(log₂n). Das ergibt im schlechtesten Fall eine logarithmische Zeitkomplexität O(log₂n) — die beste Worst-Case-Zeit für binäre Suchbäume.
+Für einen ausgeglichenen binären Suchbaum mit n Knoten gilt: Höhe = O(log₂n). Das ergibt im schlechtesten Fall eine logarithmische Zeitkomplexität O(log₂n). Die beste Worst-Case-Zeit für binäre Suchbäume.
 
 ## Karte: Degeneration unausgeglichener Suchbäume
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folien 9-12
 
-Bei einem binären Suchbaum lässt sich nicht gewährleisten, dass der Baum ausgeglichen bleibt — er kann zu einem Zeitaufwand von O(n) degenerieren. Extremfall: Der Baum entspricht einer verketteten Liste mit Höhe n − 1 und Worst-Case-Zeitkomplexität O(n).
+Bei einem binären Suchbaum lässt sich nicht gewährleisten, dass der Baum ausgeglichen bleibt. Er kann zu einem Zeitaufwand von O(n) degenerieren. Extremfall: Der Baum entspricht einer verketteten Liste mit Höhe n − 1 und Worst-Case-Zeitkomplexität O(n).
 
 ## Karte: Rotation
 tag: def
@@ -56,7 +56,7 @@ Ein ausgeglichener Mehrwegebaum, bei dem alle Knoten Teilbäume gleicher Höhe h
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folien 39-41
 
-Suche nach k, aber höre nicht auf, bis ein Blattknoten L erreicht ist. Ist L ein 2- oder 3-Knoten: füge k zu L hinzu (L wird 3- bzw. 4-Knoten). Ist L ein 4-Knoten: teile L in zwei Knoten auf — einen 3-Knoten mit den Schlüsseln k1 und k2 und einen 2-Knoten mit dem Schlüssel k4; ist L Wurzelknoten, erstelle einen neuen Wurzelknoten K mit Schlüssel k3, andernfalls wandert k3 in den Elternknoten.
+Suche nach k, aber höre nicht auf, bis ein Blattknoten L erreicht ist. Ist L ein 2- oder 3-Knoten: füge k zu L hinzu (L wird 3- bzw. 4-Knoten). Ist L ein 4-Knoten: teile L in zwei Knoten auf. Einen 3-Knoten mit den Schlüsseln k1 und k2 und einen 2-Knoten mit dem Schlüssel k4; ist L Wurzelknoten, erstelle einen neuen Wurzelknoten K mit Schlüssel k3, andernfalls wandert k3 in den Elternknoten.
 
 ## Karte: (2,4)-Baum: Analyse des Einfügens
 tag: formel
@@ -68,13 +68,13 @@ Sei T ein (2,4)-Baum mit n Elementen: T hat eine Höhe von O(log₂n). Das Finde
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folien 54-73
 
-Suche nach k bis zum Blattknoten L. Ist L ein 4- oder 3-Knoten: lösche k aus L (L wird 3- bzw. 2-Knoten). Ist L ein 2-Knoten (<b>Unterlaufbedingung</b>): Sind die benachbarten Geschwister 4- oder 3-Knoten, führe eine Übertragungsoperation (transfer) durch; sind sie 2-Knoten, führe eine Fusionsoperation durch. Analyse: Höhe O(log₂n), Finden der Löschposition O(log₂n), Unterlaufbehandlung durch O(log₂n) Fusionen plus höchstens eine Übertragung (je O(1)) — insgesamt O(log₂n).
+Suche nach k bis zum Blattknoten L. Ist L ein 4- oder 3-Knoten: lösche k aus L (L wird 3- bzw. 2-Knoten). Ist L ein 2-Knoten (<b>Unterlaufbedingung</b>): Sind die benachbarten Geschwister 4- oder 3-Knoten, führe eine Übertragungsoperation (transfer) durch; sind sie 2-Knoten, führe eine Fusionsoperation durch. Analyse: Höhe O(log₂n), Finden der Löschposition O(log₂n), Unterlaufbehandlung durch O(log₂n) Fusionen plus höchstens eine Übertragung (je O(1)). Insgesamt O(log₂n).
 
 ## Karte: B-Bäume: Motivation
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folien 74-75
 
-Die bisher behandelten ausgeglichenen Bäume eignen sich nicht gut für externe Speicherung (Data Dictionary auf Festplatte). Fakten zu Festplatten: Daten werden in Blöcken (i. d. R. 4 oder 8 KB) übertragen; Festplattenzugriffe sind langsam — das Lesen eines Blocks dauert etwa 10 Millisekunden, das Lesen aus dem Arbeitsspeicher etwa 10 Nanosekunden; in 10 ms kann eine moderne CPU Millionen von Operationen ausführen.
+Die bisher behandelten ausgeglichenen Bäume eignen sich nicht gut für externe Speicherung (Data Dictionary auf Festplatte). Fakten zu Festplatten: Daten werden in Blöcken (i. d. R. 4 oder 8 KB) übertragen; Festplattenzugriffe sind langsam. Das Lesen eines Blocks dauert etwa 10 Millisekunden, das Lesen aus dem Arbeitsspeicher etwa 10 Nanosekunden; in 10 ms kann eine moderne CPU Millionen von Operationen ausführen.
 
 ## Karte: B-Baum
 tag: def
@@ -98,7 +98,7 @@ Sei T ein B-Baum mit n Elementen: Alle internen Knoten haben mindestens m (genau
 tag: wichtig
 quelle: 05_balanced_trees.pdf, Folie 108
 
-Binäre Suchbäume können O(log₂n) erreichen, aber auf O(n) zurückfallen, wenn sie unausgewogen sind. (2,4)-Bäume und B-Bäume sind ausgewogene Suchbäume, die O(log₂n) garantieren. Bei Daten auf der Festplatte ist die Reduzierung der Festplattenzugriffe der wichtigste Leistungsaspekt — B-Bäume bieten verbesserte Leistung für Data Dictionaries auf der Festplatte.
+Binäre Suchbäume können O(log₂n) erreichen, aber auf O(n) zurückfallen, wenn sie unausgewogen sind. (2,4)-Bäume und B-Bäume sind ausgewogene Suchbäume, die O(log₂n) garantieren. Bei Daten auf der Festplatte ist die Reduzierung der Festplattenzugriffe der wichtigste Leistungsaspekt. B-Bäume bieten verbesserte Leistung für Data Dictionaries auf der Festplatte.
 
 ## Frage: Wie ist das Gleichgewicht bal(T) eines Baumes definiert?
 id: 1fyuie7
@@ -110,7 +110,7 @@ bal(T) = h(T_RIGHT) − h(T_LEFT): die Differenz zwischen der Höhe des rechten 
 id: 9vd9k3
 quelle: 05_balanced_trees.pdf, Folie 7
 
-Wenn für jeden Knoten N gilt: bal(N) ∈ {−1, 0, +1} — die Höhen der Teilbäume jeder internen Position unterscheiden sich um höchstens 1.
+Wenn für jeden Knoten N gilt: bal(N) ∈ {−1, 0, +1}. Die Höhen der Teilbäume jeder internen Position unterscheiden sich um höchstens 1.
 
 ## Frage: Warum braucht man ausgeglichene Suchbäume?
 id: 1gby36d

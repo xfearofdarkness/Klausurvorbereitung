@@ -247,17 +247,69 @@ a.card.is-last .card-badge {
   background: var(--chip);
 }
 
-.semester {
+.semester,
+.due-count,
+.sidebar-due,
+.due-line {
   color: var(--text2);
   font-size: 0.8125rem;
 }
 
-.footer {
+.due-count,
+.sidebar-due {
+  margin-top: 0.15rem;
+}
+
+.due-line {
+  margin-bottom: 0.75rem;
+}
+
+.home-foot {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer,
+.agent-hint {
   margin-top: auto;
   padding: 2.5rem var(--gutter) 1.25rem;
   color: var(--text3);
   font-size: 0.8125rem;
   text-align: center;
+}
+
+.home-foot .footer {
+  margin-top: 0.35rem;
+  padding-top: 0;
+}
+
+.agent-hint {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.agent-hint a,
+.agent-subjects a {
+  color: var(--text2);
+}
+
+.agent-subjects {
+  margin: 0 var(--gutter) 1rem;
+  color: var(--text3);
+  font-size: 0.8125rem;
+}
+
+.agent-subjects ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 /* Trainer-Layout */
@@ -682,7 +734,9 @@ a.card.is-last .card-badge {
   .nav-left .topic-picker,
   .nav-right .topic-picker,
   .nav-left .topbar-layout-switch,
-  .nav-right .topbar-layout-switch {
+  .nav-right .topbar-layout-switch,
+  .nav-left .due-line,
+  .nav-right .due-line {
     display: none;
   }
 
@@ -1269,20 +1323,32 @@ a.card.is-last .card-badge {
 }
 
 .fc-btn.fc-know,
-.fc-btn.fc-repeat {
+.fc-btn.fc-good,
+.fc-btn.fc-repeat,
+.fc-btn.fc-again,
+.fc-btn.fc-hard {
   border: 0;
 }
 
-.fc-btn.fc-know {
+.fc-btn.fc-know,
+.fc-btn.fc-good {
   color: var(--success);
 }
 
-.fc-btn.fc-repeat {
+.fc-btn.fc-repeat,
+.fc-btn.fc-again {
   color: var(--warning);
 }
 
+.fc-btn.fc-hard {
+  color: var(--text2);
+}
+
 .fc-btn.fc-know:hover,
-.fc-btn.fc-repeat:hover {
+.fc-btn.fc-good:hover,
+.fc-btn.fc-repeat:hover,
+.fc-btn.fc-again:hover,
+.fc-btn.fc-hard:hover {
   color: var(--text);
 }
 
@@ -2217,7 +2283,7 @@ a.card.is-last .card-badge {
 }
 
 .search-hit-where {
-  color: var(--text3);
+  color: var(--text2);
   font-size: 0.75rem;
 }
 
@@ -2237,38 +2303,39 @@ a.card.is-last .card-badge {
 .text-btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.4rem 0.7rem;
+  padding: 0.15rem 0.1rem;
   border: 0;
-  border-radius: var(--radius);
-  background: var(--chip);
+  background: transparent;
   color: var(--text2);
   font: inherit;
   font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
   cursor: pointer;
 }
 
 .text-btn:hover {
-  background: var(--chip-hover);
   color: var(--text);
 }
 
 .backup {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  margin: 0;
+  padding: 0;
 }
 
 .backup-note,
 .backup-status {
+  margin-top: 0.25rem;
   color: var(--text3);
   font-size: 0.8125rem;
+  text-align: center;
 }
 
 .backup-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  justify-content: center;
+  gap: 0.35rem 1rem;
 }
 
 .backup-file {

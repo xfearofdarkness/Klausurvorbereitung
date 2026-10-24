@@ -6,7 +6,7 @@ import type { AppProgress } from "../types/content";
 export const PROGRESS_FILE_VERSION = 1;
 export const IMPORT_NOTICE_KEY = "klausurtrainer-import-notice";
 
-const INVALID_FILE = "Die Datei ist kein gültiger Lernstand.";
+const INVALID_FILE = "Datei konnte nicht gelesen werden.";
 const KNOWN_KEYS = new Set<string>([STORAGE_KEY, NAV_STORAGE_KEY, SIDEBAR_COLLAPSED_KEY]);
 
 export interface ProgressFile {
@@ -130,7 +130,7 @@ export function downloadProgressFile(): void {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "klausurtrainer-stand.json";
+  link.download = "klausurtrainer-fortschritt.json";
   link.click();
   URL.revokeObjectURL(url);
 }

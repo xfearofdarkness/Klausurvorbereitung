@@ -2,6 +2,7 @@ import { dirname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineConfig, loadEnv, type Plugin } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { catalog } from "./src/data/catalog";
 import { buildPublicFiles } from "./scripts/publish_content";
 import { contentPlugin } from "./scripts/vite_content_plugin";
 
@@ -16,6 +17,15 @@ function publishPlugin(): Plugin {
         this.emitFile({ type: "asset", fileName: file.fileName, source: file.body });
       }
     },
+    transformIndexHtml: {
+      order: "pre",
+      handler(html, ctx) {
+        if (!ctx.filename.endsWith(`${sep}index.html`)) return html;
+        const items = catalog.map((subject) => `<li><a href="/content/${subject.id}.md">${subject.title}</a></li>`).join("");
+        const nav = `<nav class="agent-subjects" aria-label="Inhalte als Text"><ul>${items}</ul></nav>\n  `;
+        return html.replace('<footer class="agent-hint">', `${nav}<footer class="agent-hint">`);
+      }
+    },
     configureServer(server) {
       const base = server.config.base;
       const dropCache = (file: string): void => {
@@ -28,7 +38,7 @@ function publishPlugin(): Plugin {
         let path = req.url?.split("?")[0] ?? "";
         if (base !== "/" && path.startsWith(base)) path = `/${path.slice(base.length)}`;
         const name = path.replace(/^\//, "");
-        if (name !== "llms.txt" && !name.startsWith("content/")) {
+        if (name !== "llms.txt" && name !== "robots.txt" && name !== "sitemap.xml" && !name.startsWith("content/")) {
           next();
           return;
         }

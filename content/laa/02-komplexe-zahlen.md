@@ -19,7 +19,7 @@ Das Quadrat einer reellen Zahl ist nie negativ. Um beispielsweise die Gleichung 
 tag: wichtig
 quelle: VorlesungFolienLAA-2026.pdf, Folie 26
 
-Real- und Imaginärteil sind reelle Zahlen — was beim Imaginärteil gerne vergessen wird. Ist \(b = 0\), bleibt nur der Realteil übrig: \(a + 0\mathrm{i} = a \in \mathbb{R}\).
+Real- und Imaginärteil sind reelle Zahlen. Was beim Imaginärteil gerne vergessen wird. Ist \(b = 0\), bleibt nur der Realteil übrig: \(a + 0\mathrm{i} = a \in \mathbb{R}\).
 
 ## Karte: Addition und Subtraktion
 tag: formel
@@ -66,7 +66,7 @@ Alternative Beschreibung über den Abstand \(r\) vom Koordinatenursprung und den
 tag: formel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 34-35
 
-\[e^{\mathrm{i}\varphi} = \cos\varphi + \mathrm{i}\sin\varphi\] Damit ist eine kürzere Schreibweise möglich: \(z = r e^{\mathrm{i}\varphi}\). Jede Notation hat ihre Vor- und Nachteile — abhängig davon, was betrachtet wird, ist die eine oder andere hilfreich.
+\[e^{\mathrm{i}\varphi} = \cos\varphi + \mathrm{i}\sin\varphi\] Damit ist eine kürzere Schreibweise möglich: \(z = r e^{\mathrm{i}\varphi}\). Jede Notation hat ihre Vor- und Nachteile. Abhängig davon, was betrachtet wird, ist die eine oder andere hilfreich.
 
 ## Karte: Multiplikation in Polarform
 tag: wichtig
@@ -84,7 +84,7 @@ Durch die Gleichung \(\mathrm{i}^2 = -1\). Komplexe Zahlen sind Zahlen der Form 
 id: 1kjq18h
 quelle: VorlesungFolienLAA-2026.pdf, Folien 24, 26
 
-\(\operatorname{Re} z = a\) und \(\operatorname{Im} z = b\). Beide sind reelle Zahlen — was beim Imaginärteil gerne vergessen wird.
+\(\operatorname{Re} z = a\) und \(\operatorname{Im} z = b\). Beide sind reelle Zahlen. Was beim Imaginärteil gerne vergessen wird.
 
 ## Frage: Gibt es einen Zusammenhang zwischen reellen und komplexen Zahlen?
 id: w34r3v
@@ -132,7 +132,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 33-34
 id: gf15m0
 quelle: VorlesungFolienLAA-2026.pdf, Folie 34
 
-\(e^{\mathrm{i}\varphi} = \cos\varphi + \mathrm{i}\sin\varphi\). Damit lässt sich eine komplexe Zahl in Polarkoordinaten kurz als \(z = r e^{\mathrm{i}\varphi}\) schreiben — mit dem Abstand \(r\) vom Ursprung und dem Winkel \(\varphi\) von der positiven reellen Achse aus.
+\(e^{\mathrm{i}\varphi} = \cos\varphi + \mathrm{i}\sin\varphi\). Damit lässt sich eine komplexe Zahl in Polarkoordinaten kurz als \(z = r e^{\mathrm{i}\varphi}\) schreiben. Mit dem Abstand \(r\) vom Ursprung und dem Winkel \(\varphi\) von der positiven reellen Achse aus.
 
 ## Frage: Warum gibt es so viele Darstellungen komplexer Zahlen?
 id: zor6uo
@@ -149,5 +149,5 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 36
 ## Aufgabe: Aufgaben 6, 8 (Typ)
 id: jo4n76
 generator: komplex-produkt-quotient
-notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.
+notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgaben 6 und 8
