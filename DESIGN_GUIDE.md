@@ -135,10 +135,14 @@ feine linke Linie. `wichtig` ist eine kräftigere linke Linie plus das
 Wort „Wichtig“. Die übrigen Tags bleiben kleine Farbmarken. Die Farben
 sind zentral definiert und in allen Fächern gleich.
 
-Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
-in Lernkarten unter dem Text, in Abläufen unter dem Schritt, bei
-Karteikarten auf der Rückseite. Das stützt die Kernregel, dass die
-Folien Vorrang haben, und macht das Nachschlagen einfach.
+Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an.
+Im Modus Lernen steht der Fließtext auf etwa 68 Zeichen bei 18px und
+Zeilenhöhe mindestens 1,5. Ab 80rem liegt rechts daneben eine Randspalte
+mit „Auf dieser Seite“ und der Folienangabe des Absatzes; darunter rutscht
+beides wieder unter den Text. Tabellen, Formeln, Abläufe und Aufgaben
+nutzen die ganze Inhaltsspalte. In Abläufen steht die Quelle unter dem
+Schritt, bei Karteikarten auf der Rückseite. Das stützt die Kernregel,
+dass die Folien Vorrang haben, und macht das Nachschlagen einfach.
 
 Regeln:
 

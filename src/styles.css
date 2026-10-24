@@ -47,7 +47,7 @@
 
   --sidebar-w: clamp(13.5rem, 17vw, 16rem);
   --content-max: 60rem;
-  --prose-max: 70rem;
+  --prose-max: 68ch;
   --gutter: clamp(0.75rem, 2.5vw, 1.5rem);
   --topbar-h: 3.25rem;
   --modebar-h: 3.75rem;
@@ -729,9 +729,10 @@ a.card.is-last {
 .study-block {
   padding: 1.15rem 0 1.2rem;
   border-top: 1px solid var(--border);
+  scroll-margin-top: 1rem;
 }
 
-.study-block:first-child {
+.study-block:first-of-type {
   padding-top: 0.15rem;
   border-top: 0;
 }
@@ -756,23 +757,30 @@ a.card.is-last {
   gap: 0.5rem 0.75rem;
   max-width: var(--prose-max);
   color: var(--text);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .study-body {
   margin-top: 0.4rem;
+  color: var(--text2);
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 .study-body p,
-.study-body ul,
-.study-body .card-source {
+.study-body ul {
   max-width: var(--prose-max);
 }
 
 .study-block p,
-.study-block ul,
+.study-block ul {
+  color: var(--text2);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
 .error-card p {
   color: var(--text2);
   font-size: 1rem;
@@ -842,7 +850,97 @@ a.card.is-last {
   margin-top: 0.5rem;
   color: var(--text3);
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
+}
+
+.study-toc {
+  margin-bottom: 1.25rem;
+}
+
+.study-toc-label {
+  margin-bottom: 0.35rem;
+  color: var(--text3);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.study-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.study-toc a {
+  display: block;
+  padding: 0.2rem 0;
+  color: var(--text2);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.study-toc a:hover {
+  color: var(--text);
+}
+
+.study-block table,
+.study-body .katex-display {
+  max-width: none;
+}
+
+@media (min-width: 80rem) {
+  .study-doc {
+    display: grid;
+    grid-template-columns: minmax(0, 68ch) minmax(13rem, 1fr);
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: start;
+  }
+
+  .study-toc {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .study-block {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    column-gap: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .study-block-first {
+    grid-column: 1;
+    grid-row: 1;
+    display: block;
+  }
+
+  .study-main {
+    grid-column: 1;
+    min-width: 0;
+  }
+
+  .study-source {
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 0.15rem;
+  }
+
+  .study-block:not(.study-block-first):has(table) .study-main,
+  .study-block:not(.study-block-first):has(.katex-display) .study-main {
+    grid-column: 1 / -1;
+  }
+
+  .study-block:not(.study-block-first):has(table) .study-source,
+  .study-block:not(.study-block-first):has(.katex-display) .study-source {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: var(--prose-max);
+  }
+
+  .study-doc > .walk-card {
+    grid-column: 1 / -1;
+  }
 }
 
 .katex {

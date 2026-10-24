@@ -12,6 +12,21 @@
 
   let { topic, practiceState, onMark }: Props = $props();
   let doneCount = $derived(topic.exercises.filter((exercise) => practiceState[exercise.key] === "done").length);
+
+  function isModuleNote(note: string): boolean {
+    return note.startsWith("Rechenmodul:");
+  }
+
+  let moduleNotes = $derived.by(() => {
+    const seen = new Set<string>();
+    const notes: string[] = [];
+    for (const exercise of topic.exercises) {
+      if (!isModuleNote(exercise.note) || seen.has(exercise.note)) continue;
+      seen.add(exercise.note);
+      notes.push(exercise.note);
+    }
+    return notes;
+  });
 </script>
 
 {#if topic.exercises.length === 0}
@@ -23,17 +38,21 @@
       <span class="stat-pill stat-pill-success">✓ {doneCount} bearbeitet</span>
     </div>
   </div>
+  {#each moduleNotes as note (note)}
+    <p class="ex-note module-note">{@html richText(note)}</p>
+  {/each}
   {#each topic.exercises as exercise (exercise.key)}
     {@const isDone = practiceState[exercise.key] === "done"}
+    {@const showNote = !isModuleNote(exercise.note)}
     {#if exercise.generator}
-      <GeneratedExercise {exercise} {isDone} onMark={() => onMark(exercise.key)} />
+      <GeneratedExercise {exercise} {isDone} {showNote} onMark={() => onMark(exercise.key)} />
     {:else}
       <div class:ex-done={isDone} class="quiz-card ex-card fade-in">
         {#if exercise.ref}
           <div class="ex-ref">{exercise.ref}</div>
         {/if}
         <div class="quiz-q ex-task">{@html richText(exercise.task)}</div>
-        {#if exercise.note}
+        {#if showNote && exercise.note}
           <div class="ex-note">{@html richText(exercise.note)}</div>
         {/if}
         <Source source={exercise.source} />

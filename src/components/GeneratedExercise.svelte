@@ -7,10 +7,11 @@
   interface Props {
     exercise: Exercise;
     isDone: boolean;
+    showNote?: boolean;
     onMark: () => void;
   }
 
-  let { exercise, isDone, onMark }: Props = $props();
+  let { exercise, isDone, showNote = true, onMark }: Props = $props();
   let seed = $state(randomSeed());
   let showSolution = $state(false);
 
@@ -28,7 +29,7 @@
   {/if}
   {#if generated}
     <div class="quiz-q ex-task">{@html richText(generated.task)}</div>
-    {#if exercise.note}
+    {#if showNote && exercise.note}
       <div class="ex-note">{@html richText(exercise.note)}</div>
     {/if}
     <div class:visible={showSolution} class="quiz-a">
