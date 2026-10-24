@@ -1,7 +1,9 @@
 #!/usr/bin/env tsx
 
 import katex from "katex";
-import { catalog, subjectLoaders } from "../src/data/catalog";
+import { catalog } from "../src/data/catalog";
+import { ContentError } from "./content_compiler";
+import { loadRawSubject } from "./load_content";
 import { checkSlideExample, generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
 import { MATH_PATTERN } from "../src/lib/math";
 import { normalizeSubject } from "../src/lib/normalize";
@@ -9,7 +11,6 @@ import type {
   ArrayVisual,
   GraphVisual,
   MatrixDefinition,
-  RawSubject,
   Subject,
   SubjectId,
   Topic,
@@ -39,15 +40,19 @@ function fail(message: string): void {
 
 async function loadSubject(subjectId: SubjectId): Promise<Subject | null> {
   const meta = catalog.find((entry) => entry.id === subjectId);
-  const loader = subjectLoaders[subjectId];
 
-  if (!meta || !loader) {
-    fail(`Subject "${subjectId}" is not registered in catalog/loaders.`);
+  if (!meta) {
+    fail(`Subject "${subjectId}" is not registered in the catalog.`);
     return null;
   }
 
-  const module = await loader();
-  return normalizeSubject(module.default as RawSubject, meta);
+  try {
+    return normalizeSubject(loadRawSubject(subjectId).subject, meta);
+  } catch (error) {
+    if (!(error instanceof ContentError)) throw error;
+    fail(error.message);
+    return null;
+  }
 }
 
 function validateSubject(subjectId: SubjectId, subject: Subject | null): void {
@@ -152,7 +157,7 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
     items.forEach((item, itemIndex) => {
       const previousIndex = seenKeys.get(item.key);
       if (previousIndex !== undefined) {
-        fail(`${topicLabel} ${kind}[${itemIndex}] has the same progress key as ${kind}[${previousIndex}] (identical text).`);
+        fail(`${topicLabel} ${kind}[${itemIndex}] has the same id as ${kind}[${previousIndex}].`);
       }
       seenKeys.set(item.key, itemIndex);
     });

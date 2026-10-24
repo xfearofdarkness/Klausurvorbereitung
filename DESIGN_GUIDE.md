@@ -24,7 +24,7 @@ Die App verwendet diese Struktur:
 - `src/components/` für wiederverwendbare UI-Komponenten
 - `src/styles.css` für zentrales Styling
 - `src/data/catalog.ts` für Fachliste und Loader
-- `src/data/subjects/<fach>.ts` für die Fachdaten
+- `content/<fach>/` für die Fachdaten (Autorendateien, beim Build zu JSON kompiliert)
 - `src/types/content.ts` für das Datenmodell
 - `dist/` als Build-Ausgabe für GitHub Pages
 
@@ -230,7 +230,7 @@ Regeln:
 
 - `index.html` rendert Fächer nur aus `src/data/catalog.ts`.
 - `trainer.html` lädt ein Fach nur über `?subject=<id>`.
-- Fachdaten werden in `src/data/subjects/<fach>.ts` gehalten.
+- Fachdaten werden in `content/<fach>/` gehalten.
 - Fortschritt gehört in State oder `localStorage`, nie in die Fachdaten.
 
 ## Was nicht gemacht werden soll

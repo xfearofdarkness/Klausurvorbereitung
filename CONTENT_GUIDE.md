@@ -100,8 +100,8 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 6. Verdichtungs-Pass: fehlende explizite Aussagen aus denselben Folienclustern ergänzen.
 7. Lernkarten (`cards`) und Karteikarten (`flashcards`) erzeugen.
 8. Jede Aussage gegen die Folien prüfen.
-9. Fachdaten in `src/data/subjects/<fach-id>.ts` eintragen.
-10. Fach in `src/data/catalog.ts` registrieren.
+9. Inhalte in `content/<fach-id>/` schreiben (Abschnitt „Datenformat“).
+10. Fach in `src/data/catalog.ts` und `SubjectId` registrieren.
 11. Validatoren ausführen.
 12. Im Browser kurz prüfen.
 13. Vor Freigabe eine fachliche Endprüfung gegen die Folien machen.
@@ -165,7 +165,7 @@ Regeln:
 Für Fächer mit `features.math: true` gilt:
 
 - Formeln werden als LaTeX geschrieben: `\(...\)` inline, `\[...\]` abgesetzt.
-- In den TypeScript-Datendateien müssen Backslashes in Strings verdoppelt werden (`\\(`, `\\frac`, ...).
+- In Karten, Fragen und Aufgaben steht LaTeX unverändert mit einfachem Backslash (`\(`, `\frac`). Nur im JSON-Block eines Ablaufs gelten JSON-Regeln: dort Backslashes verdoppeln (`\\frac`).
 - Formeln werden zeichengetreu aus den Folien übernommen, nicht umgeformt.
 
 ## Karteikarten (`flashcards`)
@@ -178,44 +178,74 @@ abgefragt: keine zweite Karte, die dieselbe Frage anders formuliert.
 
 ## Datenformat
 
-```ts
-import type { RawSubject } from "../../types/content";
+Fachdaten sind Autorendateien in `content/<fach-id>/`. Ein Compiler
+(`scripts/content_compiler.ts`) übersetzt sie beim Build und bei jeder
+Validierung in JSON. Er bricht bei jedem Formatfehler mit Datei und Zeile ab.
 
-const subject = {
-  id: "fach-id",
-  title: "Fachname",
-  subtitle: "Untertitel",
-  icon: "📘",
-  features: { math: false },
-  topics: [
-    {
-      id: "thema-1",
-      title: "Thema 1",
-      icon: "🧠",
-      cards: [{ title: "Begriff", body: "Inhalt", tag: "def", source: "01.pdf, Folie 12" }],
-      flashcards: [{ front: "Frage", back: "Antwort", source: "01.pdf, Folie 12" }],
-      exercises: [{ ref: "Aufgabe 1", task: "Aufgabentext", source: "uebungen.pdf, Aufgabe 1" }],
-      walkthroughs: []
-    }
-  ]
-} satisfies RawSubject;
+- `fach.md`: nur der Kopfbereich mit `id`, `title`, `subtitle`, `icon` und
+  optional `math: true`.
+- Ein Thema pro Datei `NN-<thema-id>.md`. `NN` legt die Reihenfolge fest, die
+  `id` im Kopf muss zum Dateinamen passen.
 
-export default subject;
+~~~markdown
+---
+id: thema-1
+title: Thema 1
+icon: 🧠
+---
+
+## Karte: Begriff
+tag: def
+quelle: 01.pdf, Folie 12
+
+Inhalt der Lernkarte, auch über mehrere Zeilen, HTML und \(LaTeX\) erlaubt.
+
+## Frage: Was ist ein Begriff?
+id: begriff-definition
+quelle: 01.pdf, Folie 12
+
+Antwort auf der Rückseite.
+
+## Aufgabe: Aufgabe 1
+id: aufgabe-1
+quelle: uebungen.pdf, Aufgabe 1
+
+Aufgabentext.
+
+## Ablauf: Titel des Ablaufs
+nach: Begriff
+quelle: 01.pdf, Folien 13-15
+
+```json
+{ "id": "ablauf-1", "visual": { … }, "steps": [ … ] }
 ```
+~~~
+
+Aufbau eines Eintrags: Überschrift `## Art: …`, direkt darunter die Felder
+(`name: wert`, je eins pro Zeile), eine Leerzeile, dann der Text. Die
+Überschrift trägt den Titel der Lernkarte, die Vorderseite der Karteikarte,
+die `ref` der Aufgabe bzw. den Titel des Ablaufs.
+
+| Art | Felder (Pflicht fett) | Text |
+| --- | --- | --- |
+| `Karte` | **`quelle`**, `tag` | Inhalt |
+| `Frage` | **`id`**, **`quelle`** | Rückseite |
+| `Aufgabe` | **`id`**, **`quelle`**, `generator`, `notiz` | Aufgabentext, entfällt bei `generator` |
+| `Ablauf` | **`quelle`**, `nach` (= `afterCard`) | ein `json`-Block mit `id`, `visual`, `steps` und optional `intro`, `legend` |
 
 Pflicht:
 
-- `id`, `title`, `topics`
+- `source` (Feld `quelle`) bei jedem Eintrag
 - stabile Topic-IDs
-- konsistente Langfelder: `title`/`body` für Lernkarten und `front`/`back` für Karteikarten; Kurzfelder wie `t`/`b` sind nicht erlaubt
-- `source` bei jedem Eintrag
-- innerhalb eines Themas eindeutige Karteikarten-Vorderseiten und Aufgaben; der lokale Fortschritt hängt an diesem Text, eine Textänderung setzt nur die Markierung dieses Eintrags zurück
+- `id` bei Karteikarten und Aufgaben: innerhalb des Themas eindeutig, nur
+  `a-z`, `0-9` und `-`. Der lokale Fortschritt hängt an dieser Id, nicht am
+  Text. Eine Id wird einmal vergeben und nie geändert oder wiederverwendet;
+  Texte dürfen sich ändern, ohne dass Markierungen verloren gehen.
 
 Optional:
 
-- `features` (z. B. `math`)
-- `exercises` pro Thema
-- `walkthroughs` pro Thema
+- `math` im Kopf von `fach.md`
+- Aufgaben und Abläufe pro Thema
 - `tag` bei Lernkarten: `wichtig`, `formel`, `def`, `satz`, `beispiel`
 
 ## Qualitätssicherung

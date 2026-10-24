@@ -28,8 +28,8 @@ export const catalog = [
 ] satisfies SubjectMeta[];
 
 export const subjectLoaders: Record<SubjectId, () => Promise<{ default: import("../types/content").RawSubject }>> = {
-  rabs: () => import("./subjects/rabs"),
-  laa: () => import("./subjects/laa"),
-  vs: () => import("./subjects/vs"),
-  aud: () => import("./subjects/aud")
+  rabs: () => import("virtual:subject/rabs"),
+  laa: () => import("virtual:subject/laa"),
+  vs: () => import("virtual:subject/vs"),
+  aud: () => import("virtual:subject/aud")
 };

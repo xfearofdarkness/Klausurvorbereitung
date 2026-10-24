@@ -70,13 +70,15 @@ export interface Card {
 }
 
 export interface RawFlashcard {
+  /** Feste Id für den Lernfortschritt; einmal vergeben, nie ändern. */
+  id: string;
   front?: string;
   back?: string;
   source?: string;
 }
 
 export interface Flashcard {
-  /** Stabiler Fortschritts-Schlüssel, aus der Vorderseite berechnet (nicht die Listenposition). */
+  /** Fortschritts-Schlüssel: die feste Id der Karte, unabhängig von Text und Listenposition. */
   key: string;
   front: string;
   back: string;
@@ -84,6 +86,8 @@ export interface Flashcard {
 }
 
 export interface RawExercise {
+  /** Feste Id für den Lernfortschritt; einmal vergeben, nie ändern. */
+  id: string;
   task?: string;
   ref?: string;
   note?: string;

@@ -18,12 +18,12 @@ npm run validate:manifest -- sources/<fach-id>/manifest.json
 
 ## Fachdaten validieren
 
-Prüft die typisierten Fachdaten aus `src/data/subjects/` auf:
+Kompiliert die Autorendateien aus `content/<fach-id>/` und prüft sie auf:
 
 - Pflichtfelder
 - eindeutige Topic-IDs
 - Quellenangaben
-- eindeutige Fortschritts-Schlüssel (keine doppelten Karteikarten oder Aufgaben pro Thema)
+- eindeutige Ids von Karteikarten und Aufgaben pro Thema
 - gültige Cards, Flashcards, Exercises und Walkthroughs, `afterCard` verweist auf genau eine Lernkarte
 
 Beispiele:

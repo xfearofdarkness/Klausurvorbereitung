@@ -2,9 +2,10 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { catalog, subjectLoaders } from "../src/data/catalog";
+import { catalog } from "../src/data/catalog";
+import { loadRawSubject } from "./load_content";
 import { normalizeSubject } from "../src/lib/normalize";
-import type { RawSubject, Subject, SubjectId, WalkthroughStep } from "../src/types/content";
+import type { Subject, SubjectId, WalkthroughStep } from "../src/types/content";
 
 interface Manifest {
   subject_id?: string;
@@ -27,10 +28,8 @@ function sourceFiles(source: string): string[] {
 
 async function loadSubject(subjectId: SubjectId): Promise<Subject | null> {
   const meta = catalog.find((entry) => entry.id === subjectId);
-  const loader = subjectLoaders[subjectId];
-  if (!meta || !loader) return null;
-  const module = await loader();
-  return normalizeSubject(module.default as RawSubject, meta);
+  if (!meta) return null;
+  return normalizeSubject(loadRawSubject(subjectId).subject, meta);
 }
 
 function collectSources(subject: Subject): Array<{ label: string; source: string }> {

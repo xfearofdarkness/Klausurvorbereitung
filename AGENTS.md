@@ -8,8 +8,8 @@ Fehler wiederholt. Ziel: unter 150 Zeilen.
 # AGENTS.md
 
 Statischer Klausurtrainer für GitHub Pages: Vite 8, Svelte 5, TypeScript
-(strict), KaTeX für Formeln. Kein Backend. Fachdaten sind typisierte
-TS-Module, keine JSON-Dateien.
+(strict), KaTeX für Formeln. Kein Backend. Fachdaten sind Autorendateien in
+`content/<fach-id>/`, die ein Compiler beim Build in JSON übersetzt.
 
 ## Maßgebliche Guides
 
@@ -48,11 +48,13 @@ CI, weil `sources/` nur lokal existiert. Sie müssen lokal laufen.
 
 ## Wo was hingehört
 
-- Neues Fach: `src/data/subjects/<fach-id>.ts` anlegen, dann an drei Stellen
-  registrieren: `SubjectId` in `src/types/content.ts`, `catalog` und
-  `subjectLoaders` in `src/data/catalog.ts`. Keine neue HTML-Datei.
-- Datenmodell: `src/types/content.ts`. Vorlage für Fachdaten: Abschnitt
-  „Datenformat“ in `CONTENT_GUIDE.md`.
+- Neues Fach: `content/<fach-id>/` mit `fach.md` und Themendateien anlegen,
+  dann an drei Stellen registrieren: `SubjectId` in `src/types/content.ts`,
+  `catalog` und `subjectLoaders` in `src/data/catalog.ts`. Keine neue
+  HTML-Datei.
+- Datenformat und Vorlage: Abschnitt „Datenformat“ in `CONTENT_GUIDE.md`.
+  Compiler: `scripts/content_compiler.ts`, eingebunden über
+  `scripts/vite_content_plugin.ts`. Datenmodell: `src/types/content.ts`.
 - Rechenmodule: Generator in `src/lib/exerciseGenerators.ts` schreiben und in
   `GENERATORS` eintragen. Fachdaten referenzieren nur die Generator-Id.
 - Abläufe: nur deklarative `walkthroughs`-Daten. Die Renderer in
@@ -74,13 +76,12 @@ CI, weil `sources/` nur lokal existiert. Sie müssen lokal laufen.
 
 ## Fallstricke
 
-- LaTeX in normalen TS-Strings: Ein einfacher Backslash wird still zum
-  Escape. `"\times"` wird zu Tab plus `imes`, `"\neq"` zu Zeilenumbruch plus
-  `eq`, `"\sqrt"` zu `sqrt`. KaTeX und `npm run validate` melden das nicht.
-  Backslashes in Fachdaten verdoppeln (`"\\times"`). In Generatoren wird
-  stattdessen `String.raw` verwendet.
-- Fortschritt hängt am Text von Karteikarten-Vorderseiten und Aufgaben.
-  Diese Texte nur ändern, wenn es inhaltlich nötig ist.
+- LaTeX steht in Autorendateien mit einfachem Backslash. Ausnahme: im
+  JSON-Block eines Ablaufs und in normalen TS-Strings wird ein einfacher
+  Backslash still zum Escape (`"\times"` wird zu Tab plus `imes`), dort
+  verdoppeln. In Generatoren wird `String.raw` verwendet.
+- Fortschritt hängt an der `id` von Karteikarten und Aufgaben. Eine Id nie
+  ändern oder für einen anderen Eintrag wiederverwenden.
 - `sources/` steht in `.gitignore`. Nie per `git add -f` oder Umbenennung
   einchecken. Auch keine Auszüge, Screenshots oder Volltexte der Folien in
   versionierte Dateien kopieren.
