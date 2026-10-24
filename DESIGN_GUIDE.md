@@ -129,8 +129,11 @@ Standardkomponenten:
 - Fehler- und Leerstates
 
 Lernkarten können mit den Tags `wichtig`, `formel`, `def`, `satz`
-und `beispiel` ausgezeichnet werden. Die Tag-Farben sind zentral
-definiert und in allen Fächern gleich.
+und `beispiel` ausgezeichnet werden. Im Modus Lernen stehen sie im
+Fließtext, nicht in umrandeten Karten. `def` hat keine Badge, nur eine
+feine linke Linie. `wichtig` ist eine kräftigere linke Linie plus das
+Wort „Wichtig“. Die übrigen Tags bleiben kleine Farbmarken. Die Farben
+sind zentral definiert und in allen Fächern gleich.
 
 Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an:
 in Lernkarten unter dem Text, in Abläufen unter dem Schritt, bei

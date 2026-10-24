@@ -47,6 +47,7 @@
 
   --sidebar-w: clamp(13.5rem, 17vw, 16rem);
   --content-max: 60rem;
+  --prose-max: 42rem;
   --gutter: clamp(0.75rem, 2.5vw, 1.5rem);
   --topbar-h: 3.25rem;
   --modebar-h: 3.75rem;
@@ -650,14 +651,11 @@ a.card.is-last {
     text-overflow: ellipsis;
   }
 
-  .nav-left .content-frame {
-    margin-left: max(0px, calc((100vw - var(--content-max)) / 2 - var(--sidebar-w)));
-    margin-right: auto;
-  }
-
+  .nav-left .content-frame,
   .nav-right .content-frame {
-    margin-left: auto;
-    margin-right: max(0px, calc((100vw - var(--content-max)) / 2 - var(--sidebar-w)));
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
@@ -719,7 +717,6 @@ a.card.is-last {
 
 /* Karten und Inhalte */
 
-.study-card,
 .quiz-card,
 .error-card {
   margin-bottom: 0.625rem;
@@ -729,23 +726,53 @@ a.card.is-last {
   background: var(--surface);
 }
 
-.study-card h3 {
+.study-block {
+  padding: 1.15rem 0 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.study-block:first-child {
+  padding-top: 0.15rem;
+  border-top: 0;
+}
+
+.study-def,
+.study-wichtig {
+  padding-left: 0.85rem;
+}
+
+.study-def {
+  border-left: 2px solid var(--border-strong);
+}
+
+.study-wichtig {
+  border-left: 3px solid var(--warning);
+}
+
+.study-block h3 {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  max-width: var(--prose-max);
   color: var(--text);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1.35;
 }
 
 .study-body {
-  margin-top: 0.375rem;
+  margin-top: 0.4rem;
 }
 
-.study-card p,
-.study-card ul,
+.study-body p,
+.study-body ul,
+.study-body .card-source {
+  max-width: var(--prose-max);
+}
+
+.study-block p,
+.study-block ul,
 .error-card p {
   color: var(--text2);
   font-size: 1rem;
@@ -757,23 +784,23 @@ a.card.is-last {
   font-size: 1rem;
 }
 
-.study-card ul {
+.study-block ul {
   margin-top: 0.3rem;
   padding-left: 1.2rem;
 }
 
-.study-card li {
+.study-block li {
   margin-bottom: 0.2rem;
 }
 
-.study-card table,
+.study-block table,
 .quiz-card table {
   border-collapse: collapse;
   font-size: 0.9375rem;
 }
 
-.study-card th,
-.study-card td,
+.study-block th,
+.study-block td,
 .quiz-card th,
 .quiz-card td {
   padding: 0.25rem 0.5rem;
@@ -789,18 +816,16 @@ a.card.is-last {
 }
 
 .tag-wichtig {
-  background: var(--danger-dim);
-  color: var(--danger);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--warning);
+  font-size: 0.8125rem;
 }
 
 .tag-formel {
   background: var(--yellow-dim);
   color: var(--yellow);
-}
-
-.tag-def {
-  background: var(--blue-dim);
-  color: var(--blue);
 }
 
 .tag-satz {
@@ -1889,7 +1914,6 @@ a.card.is-last {
 }
 
 @media (max-width: 40rem) {
-  .study-card,
   .quiz-card,
   .error-card,
   .walk-card {
@@ -1949,7 +1973,7 @@ a.card.is-last {
     height: 6.5rem;
   }
 
-  .study-card table,
+  .study-block table,
   .quiz-card table {
     display: block;
     overflow-x: auto;

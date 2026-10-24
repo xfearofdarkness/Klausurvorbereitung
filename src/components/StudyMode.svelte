@@ -22,24 +22,26 @@
   }
 </script>
 
-{#each topic.cards as card, index}
-  <div class="study-card fade-in">
-    <h3>
-      {card.title}
-      {#if card.tag}
-        <span class={`tag tag-${card.tag}`}>{tagLabel(card.tag)}</span>
-      {/if}
-    </h3>
-    <div class="study-body">
-      <p>{@html richText(card.body)}</p>
-      <Source source={card.source} />
-    </div>
-  </div>
-  {#each placement.afterCard[index] || [] as walkthrough (walkthrough.id)}
+<article class="study-doc">
+  {#each topic.cards as card, index}
+    <section class="study-block fade-in" class:study-def={card.tag === "def"} class:study-wichtig={card.tag === "wichtig"}>
+      <h3>
+        {card.title}
+        {#if card.tag && card.tag !== "def"}
+          <span class={`tag tag-${card.tag}`}>{tagLabel(card.tag)}</span>
+        {/if}
+      </h3>
+      <div class="study-body">
+        <p>{@html richText(card.body)}</p>
+        <Source source={card.source} />
+      </div>
+    </section>
+    {#each placement.afterCard[index] || [] as walkthrough (walkthrough.id)}
+      <WalkthroughCard {walkthrough} />
+    {/each}
+  {/each}
+
+  {#each placement.atEnd as walkthrough (walkthrough.id)}
     <WalkthroughCard {walkthrough} />
   {/each}
-{/each}
-
-{#each placement.atEnd as walkthrough (walkthrough.id)}
-  <WalkthroughCard {walkthrough} />
-{/each}
+</article>
