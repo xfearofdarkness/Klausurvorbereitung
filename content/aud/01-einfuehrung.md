@@ -32,7 +32,7 @@ Ziel: Identifikation von wiederkehrenden Gemeinsamkeiten und Unterschieden. Beis
 tag: def
 quelle: 01_introduction.pdf, Folie 9
 
-Ziel: Reduktion von Informationen auf die zur Lösung wesentlichen. Fokussieren auf wesentliche Details, um Komplexität zu reduzieren; z. T. Nutzung von Modellen und Diagrammen. Beispiel: Windkanaltests von Autos. Wichtig ist die Karosserie, Motor etc. können weggelassen werden.
+Ziel: Reduktion von Informationen auf die zur Lösung wesentlichen. Fokussieren auf wesentliche Details, um Komplexität zu reduzieren; z. T. Nutzung von Modellen und Diagrammen. Beispiel: Windkanaltests von Autos: wichtig ist die Karosserie, Motor etc. können weggelassen werden.
 
 ## Karte: Algorithmisierung
 tag: def
@@ -148,7 +148,7 @@ Ein Algorithmus ist eine Abfolge eindeutiger Anweisungen zur Lösung eines Probl
 id: w9fbul
 quelle: 01_introduction.pdf, Folie 15
 
-Berechnungsproblem (Ausgabedaten aus Eingabedaten berechnen), Entscheidungsproblem (gibt es eine Lösung mit bestimmtem Wert? Ja/Nein) und Optimierungsproblem (Wert der optimalen Lösung bestimmen bzw. die optimale Lösung zurückgeben. Suchproblem).
+Berechnungsproblem (Ausgabedaten aus Eingabedaten berechnen), Entscheidungsproblem (gibt es eine Lösung mit bestimmtem Wert? Ja/Nein) und Optimierungsproblem (Wert der optimalen Lösung bestimmen bzw. die optimale Lösung zurückgeben; Suchproblem).
 
 ## Frage: Welche fünf Eigenschaften muss ein Algorithmus besitzen?
 id: 9shoo5
@@ -190,4 +190,4 @@ Nur eine begrenzte Anzahl von Testdaten möglich; der Vergleich zweier Algorithm
 id: res99z
 quelle: 01_introduction.pdf, Folie 39
 
-Die Anzahl der Schritte, die ein Algorithmus benötigt, um ein Problem der Größe n zu lösen. Gezählt in Grundoperationen, die unabhängig von der Programmiersprache sind (arithmetische Operation, Zuweisung, Überprüfung, Indexzugriff).
+Die Anzahl der Schritte, die ein Algorithmus benötigt, um ein Problem der Größe n zu lösen, gezählt in Grundoperationen, die unabhängig von der Programmiersprache sind (arithmetische Operation, Zuweisung, Überprüfung, Indexzugriff).

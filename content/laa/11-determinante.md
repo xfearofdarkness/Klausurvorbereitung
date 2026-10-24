@@ -4,10 +4,10 @@ title: Determinante
 icon: 📦
 ---
 
-## Karte: Vektoren als Matrix. Wozu die Determinante?
+## Karte: Vektoren als Matrix: wozu die Determinante?
 quelle: VorlesungFolienLAA-2026.pdf, Folien 181-183
 
-Mehrere Vektoren (meist eine Basis) lassen sich zu einer Matrix zusammenfassen, indem jeder Vektor in eine Spalte geschrieben wird. So wird z. B. aus der Standardbasis des \(\mathbb{R}^3\) die \((3 \times 3)\)-Einheitsmatrix. Aus der Berechnung einer einzigen Größe, der Determinante, lässt sich eine Vielzahl von Eigenschaften ableiten. Interessant sind dabei: lineare Unabhängigkeit (einfachere Prüfung als bisher) und Volumenberechnung (Volumen eines Quaders im \(\mathbb{R}^n\), dessen Kanten durch \(n\) Vektoren gegeben sind).
+Mehrere Vektoren (meist eine Basis) lassen sich zu einer Matrix zusammenfassen, indem jeder Vektor in eine Spalte geschrieben wird: so wird z. B. aus der Standardbasis des \(\mathbb{R}^3\) die \((3 \times 3)\)-Einheitsmatrix. Aus der Berechnung einer einzigen Größe, der Determinante, lässt sich eine Vielzahl von Eigenschaften ableiten. Interessant sind dabei: lineare Unabhängigkeit (einfachere Prüfung als bisher) und Volumenberechnung (Volumen eines Quaders im \(\mathbb{R}^n\), dessen Kanten durch \(n\) Vektoren gegeben sind).
 
 ## Karte: Streichungsmatrix
 tag: def
@@ -25,7 +25,7 @@ Sei \(n > 1\). Die Determinante \(\det: M(n \times n) \to \mathbb{R}\) ist defin
 tag: wichtig
 quelle: VorlesungFolienLAA-2026.pdf, Folien 188-189
 
-Der Vorteil des Entwicklungssatzes: Man darf sich die Zeile oder Spalte aussuchen, die am wenigsten Rechenaufwand verspricht. Typischerweise die mit den meisten Nullen, denn so entfallen viele Determinantenberechnungen für die Streichungsmatrizen. Enthält eine quadratische Matrix eine Nullzeile oder -spalte, ist ihre Determinante Null.
+Der Vorteil des Entwicklungssatzes: Man darf sich die Zeile oder Spalte aussuchen, die am wenigsten Rechenaufwand verspricht, typischerweise die mit den meisten Nullen, denn so entfallen viele Determinantenberechnungen für die Streichungsmatrizen. Enthält eine quadratische Matrix eine Nullzeile oder -spalte, ist ihre Determinante Null.
 
 ## Karte: Determinante von (2×2)-Matrizen
 tag: formel
@@ -43,7 +43,7 @@ Die ersten beiden Spalten werden noch einmal hinten an die Matrix geschrieben. D
 tag: formel
 quelle: VorlesungFolienLAA-2026.pdf, Folie 194
 
-Die Determinante von (oberen wie unteren) Dreiecksmatrizen ist das Produkt der Diagonaleinträge: \[\det = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}\] (Als Übung zum Laplace'schen Entwicklungssatz eigenständig nachprüfen. Und wie ist das für Diagonalmatrizen?)
+Die Determinante von (oberen wie unteren) Dreiecksmatrizen ist das Produkt der Diagonaleinträge: \[\det = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}\] (Als Übung zum Laplace'schen Entwicklungssatz eigenständig nachprüfen, und wie ist das für Diagonalmatrizen?)
 
 ## Karte: Determinante und lineare Abhängigkeit in der Ebene
 tag: beispiel
@@ -79,7 +79,7 @@ Die Determinante lässt sich nach einer beliebigen Zeile oder Spalte entwickeln:
 id: 11rn3p4
 quelle: VorlesungFolienLAA-2026.pdf, Folie 185
 
-\(\det(a_{11}) = a_{11}\). Der Eintrag selbst. Das ist der Startpunkt der rekursiven Definition: Die Determinante größerer Matrizen ist über Determinanten kleinerer Matrizen definiert.
+\(\det(a_{11}) = a_{11}\), der Eintrag selbst. Das ist der Startpunkt der rekursiven Definition: Die Determinante größerer Matrizen ist über Determinanten kleinerer Matrizen definiert.
 
 ## Frage: Welche Zeile oder Spalte wählt man zur Entwicklung am besten und warum?
 id: lgjc15
@@ -91,13 +91,13 @@ Die mit den meisten Nullen, denn so entfallen viele Determinantenberechnungen f�
 id: 1gc4598
 quelle: VorlesungFolienLAA-2026.pdf, Folie 189
 
-Null. Entwickelt man nach dieser Zeile bzw. Spalte, verschwinden alle Summanden.
+Null: entwickelt man nach dieser Zeile bzw. Spalte, verschwinden alle Summanden.
 
 ## Frage: Wie berechnet man die Determinante einer \((2 \times 2)\)-Matrix?
 id: 1u8056m
 quelle: VorlesungFolienLAA-2026.pdf, Folien 191-192
 
-\(\det \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} = a_{11}a_{22} - a_{21}a_{12}\). Hauptdiagonale minus Nebendiagonale.
+\(\det \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} = a_{11}a_{22} - a_{21}a_{12}\): Hauptdiagonale minus Nebendiagonale.
 
 ## Frage: Wie berechnet man mit der Regel von Sarrus die Determinante von (3×3)-Matrizen?
 id: 192andm
@@ -109,7 +109,7 @@ Die ersten beiden Spalten hinten an die Matrix anschreiben; entlang der schräg 
 id: 1ig9u1g
 quelle: VorlesungFolienLAA-2026.pdf, Folie 194
 
-Als Produkt der Diagonaleinträge: \(\det = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}\). Bei oberen wie unteren Dreiecksmatrizen.
+Als Produkt der Diagonaleinträge: \(\det = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}\), bei oberen wie unteren Dreiecksmatrizen.
 
 ## Frage: Zu welchen Aussagen ist \(\det A \ne 0\) äquivalent?
 id: q4fhd7

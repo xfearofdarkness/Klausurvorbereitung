@@ -26,13 +26,13 @@ Dienste sind grobgranulare Bausteine von Softwaresystemen mit loser Kopplung zu 
 tag: wichtig
 quelle: 11-ds-soa.pdf, Folie 12
 
-Ein Dienst ist eine IT-Repräsentation fachlicher Funktionalität; in sich abgeschlossen (autark) und eigenständig nutzbar; im Netzwerk verfügbar; hat eine wohldefinierte veröffentlichte Schnittstelle (Vertrag). Für die Nutzung reicht die Kenntnis der Schnittstelle; plattformunabhängig (Anbieter und Nutzer können verschiedene Sprachen/Plattformen verwenden); in einem Verzeichnis registriert; dynamisch gebunden (wird erst bei der Ausführung lokalisiert und eingebunden); sollte grobgranular sein, um Abhängigkeiten zwischen verteilten Systemen zu senken.
+Ein Dienst ist eine IT-Repräsentation fachlicher Funktionalität; in sich abgeschlossen (autark) und eigenständig nutzbar; im Netzwerk verfügbar; hat eine wohldefinierte veröffentlichte Schnittstelle (Vertrag); für die Nutzung reicht die Kenntnis der Schnittstelle; plattformunabhängig (Anbieter und Nutzer können verschiedene Sprachen/Plattformen verwenden); in einem Verzeichnis registriert; dynamisch gebunden (wird erst bei der Ausführung lokalisiert und eingebunden); sollte grobgranular sein, um Abhängigkeiten zwischen verteilten Systemen zu senken.
 
 ## Karte: Typische Themen im Architektur-Management
 tag: def
 quelle: 11-ds-soa.pdf, Folie 15
 
-<b>Redundanzen:</b> Ein Dienst wird von mehreren Dienstleistern gleichzeitig erbracht (Folge von Zusammenschlüssen oder Eigeninitiativen). Unternehmensglobal sollte auf denselben Dienst gesetzt werden. <b>Outsourcing:</b> Wenn externe Angebote kostengünstiger sind; Entscheidung mit Bedacht treffen. <b>Insellösungen:</b> Historisch gewachsene Architekturen bilden Silo-Anwendungen ohne Schnittstellen zu den restlichen Anwendungen heraus (Legacy-Anwendungen).
+<b>Redundanzen:</b> Ein Dienst wird von mehreren Dienstleistern gleichzeitig erbracht (Folge von Zusammenschlüssen oder Eigeninitiativen); unternehmensglobal sollte auf denselben Dienst gesetzt werden. <b>Outsourcing:</b> Wenn externe Angebote kostengünstiger sind; Entscheidung mit Bedacht treffen. <b>Insellösungen:</b> Historisch gewachsene Architekturen bilden Silo-Anwendungen ohne Schnittstellen zu den restlichen Anwendungen heraus (Legacy-Anwendungen).
 
 ## Karte: SOAP
 tag: def
@@ -44,19 +44,19 @@ SOAP stützt sich intern auf ein Transportprotokoll (z. B. http); Parameter werd
 tag: def
 quelle: 11-ds-soa.pdf, Folie 27
 
-<b>Types:</b> komplexe Datentypen, definiert per XML-Schema. Für den Aufruf von Web Services. <b>Message:</b> Beschreibung der Nachrichten zwischen Clients und Web Services beim Aufruf einer Operation; eine Message kann aus mehreren Teilen bestehen, jeder Teil durch einen Datentyp repräsentiert. <b>portType (Interfaces):</b> fasst eine Menge von Operationen zusammen; jede Operation wird auf Basis der definierten Messages und Datentypen definiert.
+<b>Types:</b> komplexe Datentypen, definiert per XML-Schema, für den Aufruf von Web Services. <b>Message:</b> Beschreibung der Nachrichten zwischen Clients und Web Services beim Aufruf einer Operation; eine Message kann aus mehreren Teilen bestehen, jeder Teil durch einen Datentyp repräsentiert. <b>portType (Interfaces):</b> fasst eine Menge von Operationen zusammen; jede Operation wird auf Basis der definierten Messages und Datentypen definiert.
 
 ## Karte: WSDL: Bindings und Endpunkte
 tag: def
 quelle: 11-ds-soa.pdf, Folie 28
 
-<b>Binding (Protocol):</b> Definition für die Kommunikation mit dem abstrakten Interface eines Web Service. Spezifikation von Nachrichtenformat und Transportprotokoll (z. B. SOAP, http). <b>Port (Communication endpoint):</b> ein einzelner Service-Endpunkt, spezifiziert durch eine IP-Adresse für ein definiertes Binding. <b>Service:</b> Zusammenfassung einzelner Endpunkte unter einem logischen Namen; mehrere Ports können denselben portType referenzieren (ggf. mit verschiedenen Binding-Alternativen).
+<b>Binding (Protocol):</b> Definition für die Kommunikation mit dem abstrakten Interface eines Web Service: Spezifikation von Nachrichtenformat und Transportprotokoll (z. B. SOAP, http). <b>Port (Communication endpoint):</b> ein einzelner Service-Endpunkt, spezifiziert durch eine IP-Adresse für ein definiertes Binding. <b>Service:</b> Zusammenfassung einzelner Endpunkte unter einem logischen Namen; mehrere Ports können denselben portType referenzieren (ggf. mit verschiedenen Binding-Alternativen).
 
 ## Frage: Wie ist SOA definiert?
 id: 1u1b576
 quelle: 11-ds-soa.pdf, Folie 4
 
-Ein Paradigma für die Strukturierung und Nutzung verteilter Funktionalität, die von unterschiedlichen Besitzern verantwortet wird. Keine Architektur, sondern ein Framework zum Architektur-Management.
+Ein Paradigma für die Strukturierung und Nutzung verteilter Funktionalität, die von unterschiedlichen Besitzern verantwortet wird; keine Architektur, sondern ein Framework zum Architektur-Management.
 
 ## Frage: Aus welchen Bestandteilen besteht das SOA-Framework?
 id: 16qg2rs
