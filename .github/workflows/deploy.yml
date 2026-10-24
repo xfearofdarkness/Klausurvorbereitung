@@ -1,4 +1,4 @@
-name: Deploy static site to Pages
+name: Redirect build for GitHub Pages
 
 on:
   push:
@@ -35,6 +35,9 @@ jobs:
 
       - name: Validate content
         run: npm run validate
+
+      - name: Test
+        run: npm test
 
       - name: Build
         env:

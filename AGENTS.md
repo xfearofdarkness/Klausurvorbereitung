@@ -36,23 +36,25 @@ npm run validate             # alle Fachdaten prüfen
 npm run validate -- <fach-id>                                  # ein Fach
 npm run validate:manifest -- sources/<fach-id>/manifest.json   # nur lokal
 npm run validate:sources -- <fach-id> sources/<fach-id>/manifest.json --require-all-manifest-files  # nur lokal
-npm run build                # Ausgabe nach dist/
+npm run test                 # Vitest: Fortschritt und Generatoren
+npm run build                # Ausgabe nach dist/, inklusive /llms.txt und /content/
 npm run preview              # gebaute Seite lokal ansehen
 ```
 
-Es gibt keine Unit-Tests und keinen Linter. Die Validatoren in `scripts/`
-(Details: `scripts/README.md`) sind die inhaltliche Testsuite.
+Es gibt keinen Linter. Vitest prüft Fortschritt und Generatoren. Die
+Validatoren in `scripts/` (Details: `scripts/README.md`) prüfen die Fachdaten.
 
-Vercel baut über `vercel.json` (`typecheck`, `validate`, `build`) und
+Vercel baut über `vercel.json` (`typecheck`, `validate`, `test`, `build`) und
 liefert `dist/` aus. Schlägt `validate` fehl, gibt es kein Deployment.
 Node 24 kommt aus `.nvmrc`; `engines.node` ist `24.x`, damit Vercel diese
 Major-Version nimmt. Das Vercel-Projekt braucht keine Env-Variablen.
 `sources/` steht zusätzlich in `.vercelignore` und wird nicht hochgeladen.
 
-GitHub Pages (`.github/workflows/deploy.yml`) baut bei Push auf `main`
-weiter und deployt sofort, mit `VITE_BASE=/Klausurvorbereitung/` und
-`VITE_PAGES_REDIRECT=1`. Diese Fassung leitet auf die neue Seite um und
-nimmt den lokalen Fortschritt im URL-Fragment mit. `validate:manifest`
+GitHub Pages (`.github/workflows/deploy.yml`) ist nur noch die
+Weiterleitung: bei Push auf `main` baut sie mit
+`VITE_BASE=/Klausurvorbereitung/` und `VITE_PAGES_REDIRECT=1` und leitet
+auf https://learn.jamiehuta.com um, inklusive lokalem Fortschritt im
+URL-Fragment. `validate:manifest`
 und `validate:sources` laufen nicht in CI, weil `sources/` nur lokal
 existiert. Sie müssen lokal laufen.
 
@@ -65,8 +67,12 @@ existiert. Sie müssen lokal laufen.
 - Datenformat und Vorlage: Abschnitt „Datenformat“ in `CONTENT_GUIDE.md`.
   Compiler: `scripts/content_compiler.ts`, eingebunden über
   `scripts/vite_content_plugin.ts`. Datenmodell: `src/types/content.ts`.
-- Rechenmodule: Generator in `src/lib/exerciseGenerators.ts` schreiben und in
-  `GENERATORS` eintragen. Fachdaten referenzieren nur die Generator-Id.
+- Rechenmodule: Generator in `src/lib/generators/<bereich>.ts` schreiben und in
+  `GENERATORS` in `src/lib/exerciseGenerators.ts` eintragen. Fachdaten
+  referenzieren nur die Generator-Id.
+- Öffentliche Agentendateien (`/llms.txt`, `/content/<fach>.json`, `.md`)
+  erzeugt der Build aus den kompilierten Fachdaten. Format:
+  `CONTENT_GUIDE.md`. Nie `sources/`.
 - Abläufe: nur deklarative `walkthroughs`-Daten. Die Renderer in
   `src/components/*Walkthrough.svelte` sind generisch und werden nicht pro
   Fach oder Algorithmus erweitert.
@@ -103,11 +109,12 @@ existiert. Sie müssen lokal laufen.
 Eine Aufgabe ist erst fertig, wenn alle betroffenen Prüfungen grün sind:
 
 1. `npm run typecheck`
-2. `npm run validate`
-3. Bei Inhaltsänderungen an einem Fach zusätzlich `validate:manifest` und
+2. `npm run test`
+3. `npm run validate`
+4. Bei Inhaltsänderungen an einem Fach zusätzlich `validate:manifest` und
    `validate:sources` für dieses Fach (Befehle oben).
-4. `npm run build`
-5. Bei UI-Änderungen: im Dev-Server die Startseite und
+5. `npm run build`
+6. Bei UI-Änderungen: im Dev-Server die Startseite und
    `trainer.html?subject=<fach-id>` öffnen, betroffene Modi kurz durchklicken,
    auch in schmaler Breite.
 

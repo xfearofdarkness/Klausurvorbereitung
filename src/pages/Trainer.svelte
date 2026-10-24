@@ -6,6 +6,7 @@
   import StudyMode from "../components/StudyMode.svelte";
   import Icon from "../components/Icon.svelte";
   import LayoutSwitch from "../components/LayoutSwitch.svelte";
+  import ProgressBackup from "../components/ProgressBackup.svelte";
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
   import { catalog, subjectLoaders } from "../data/catalog";
@@ -13,6 +14,7 @@
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
   import { prepareRichText } from "../lib/richText";
+  import { searchSubject, type SearchHit } from "../lib/search";
   import {
     getFlashState,
     getPracticeState,
@@ -40,6 +42,7 @@
   let flashFlipped = $state(false);
   let navPlacement = $state<NavPlacement>(loadNavPlacement());
   let sidebarCollapsed = $state(loadSidebarCollapsed());
+  let query = $state("");
   let hasSidebar = $derived(navPlacement !== "top");
   let layoutClass = $derived(hasSidebar && sidebarCollapsed ? "nav-top" : `nav-${navPlacement}`);
 
@@ -50,6 +53,7 @@
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
+  let searchHits = $derived(subject ? searchSubject(subject, query) : []);
 
   onMount(() => {
     progress = loadProgress();
@@ -172,6 +176,22 @@
   function setSidebarCollapsed(collapsed: boolean): void {
     sidebarCollapsed = collapsed;
     saveSidebarCollapsed(collapsed);
+  }
+
+  function openHit(hit: SearchHit): void {
+    const topic = getTopicAt(hit.topicIndex);
+    if (!topic) return;
+    query = "";
+    currentTopicIndex = hit.topicIndex;
+    if (isModeAvailableForTopic(hit.mode, topic)) preferredMode = hit.mode;
+    syncFlashDeck();
+    if (hit.flashIndex !== undefined) {
+      flashDeck = topic.flashcards.map((_, index) => index);
+      flashPosition = hit.flashIndex;
+      flashFlipped = false;
+    }
+    persistUi();
+    window.scrollTo(0, 0);
   }
 
   function selectTopic(index: number): void {
@@ -318,6 +338,27 @@
     </header>
 
     <main class="main content-frame" id="content">
+      {#if subject}
+        <form class="search" role="search" onsubmit={(event) => event.preventDefault()}>
+          <input type="search" aria-label="Im Fach suchen" placeholder="Im Fach suchen" bind:value={query} />
+        </form>
+        {#if query.trim()}
+          {#if searchHits.length === 0}
+            <p class="empty-state">Nichts gefunden.</p>
+          {:else}
+            <ul class="search-hits">
+              {#each searchHits as hit}
+                <li>
+                  <button class="search-hit" type="button" onclick={() => openHit(hit)}>
+                    <span class="search-hit-where">{hit.topicTitle} · {hit.kind}</span>
+                    <span>{hit.label}</span>
+                  </button>
+                </li>
+              {/each}
+            </ul>
+          {/if}
+        {/if}
+      {/if}
       {#if errorMessage}
         <div class="error-card fade-in">
           <h2>Fach nicht verfügbar</h2>
@@ -326,7 +367,7 @@
         </div>
       {:else if !subject || !currentTopic}
         <p class="empty-state">Fachdaten werden geladen.</p>
-      {:else}
+      {:else if !query.trim()}
         {#key `${currentTopic.id}:${currentMode}`}
           {#if currentMode === "study"}
             <StudyMode topic={currentTopic} />
@@ -345,6 +386,9 @@
             />
           {/if}
         {/key}
+      {/if}
+      {#if subject && !query.trim()}
+        <ProgressBackup />
       {/if}
     </main>
   </div>
