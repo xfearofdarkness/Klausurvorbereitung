@@ -14,7 +14,7 @@ Ein Anwendungszustand, in dem Threads bereits eine Teilmenge von Ressourcen erwo
 tag: def
 quelle: 06_ds-java-threads-3.pdf, Folie 9
 
-Eine Situation, in der bestimmte Threads keine Chance haben, alle notwendigen Ressourcen zu erwerben. Häufig verursacht durch andere Threads, die diese Ressourcen stark nutzen. Häufige Gründe: Ändern von Thread-Prioritäten (unvorhersehbare, plattformabhängige Folgen) und Aufrufe von yield oder sleep(0), die Plattformabhängigkeiten einführen.
+Eine Situation, in der bestimmte Threads keine Chance haben, alle notwendigen Ressourcen zu erwerben, häufig verursacht durch andere Threads, die diese Ressourcen stark nutzen. Häufige Gründe: Ändern von Thread-Prioritäten (unvorhersehbare, plattformabhängige Folgen) und Aufrufe von yield oder sleep(0), die Plattformabhängigkeiten einführen.
 
 ## Karte: Livelock
 tag: def
@@ -26,7 +26,7 @@ Eine Situation, in der Threads so sehr damit beschäftigt sind zu kommunizieren,
 tag: def
 quelle: 06_ds-java-threads-3.pdf, Folien 12-13
 
-Eine <b>Bibliothek</b> ist eine Sammlung von Unterprogrammen für thematisch zusammengehörende Problemstellungen. Keine eigenständig lauffähige Einheit, sondern Hilfsmodule, die von Programmen angefordert werden. Ein <b>Framework</b> ist ein Programmiergerüst: selbst kein fertiges Programm, sondern der Rahmen, in dem der Programmierer eine Anwendung erstellt. Es gibt i. d. R. die Anwendungsarchitektur vor. Mit Umkehrung der Steuerung (Inversion of Control): Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.
+Eine <b>Bibliothek</b> ist eine Sammlung von Unterprogrammen für thematisch zusammengehörende Problemstellungen: keine eigenständig lauffähige Einheit, sondern Hilfsmodule, die von Programmen angefordert werden. Ein <b>Framework</b> ist ein Programmiergerüst: selbst kein fertiges Programm, sondern der Rahmen, in dem der Programmierer eine Anwendung erstellt. Es gibt i. d. R. die Anwendungsarchitektur vor, mit Umkehrung der Steuerung (Inversion of Control): Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.
 
 ## Karte: Tasks und Nachteile von Threads
 tag: def
@@ -38,7 +38,7 @@ Ein Task ist ein abstrakter Block von Funktionalität (z. B. ein Client-Request)
 tag: wichtig
 quelle: 06_ds-java-threads-3.pdf, Folien 16, 21
 
-Thread-Pools adressieren die Nachteile von Threads: Sie verwalten einen Pool von Worker-Threads plus eine Queue mit zu verarbeitenden Tasks. Worker-Threads laufen dauerhaft; Tasks aus der Queue werden ihnen zugewiesen. Das minimiert den Aufwand für Erzeugung und Verwaltung. Das Executor-Framework: <code>public interface Executor { void execute(Runnable command); }</code>. Entkopplung von Task-Einreichung und Task-Ausführung, verschiedene Ausführungs-Policys, Lifecycle-Support und Monitoring.
+Thread-Pools adressieren die Nachteile von Threads: Sie verwalten einen Pool von Worker-Threads plus eine Queue mit zu verarbeitenden Tasks. Worker-Threads laufen dauerhaft; Tasks aus der Queue werden ihnen zugewiesen: das minimiert den Aufwand für Erzeugung und Verwaltung. Das Executor-Framework: <code>public interface Executor { void execute(Runnable command); }</code>: Entkopplung von Task-Einreichung und Task-Ausführung, verschiedene Ausführungs-Policys, Lifecycle-Support und Monitoring.
 
 ## Karte: Konkrete Executoren und die Klasse Executors
 tag: def
@@ -62,25 +62,25 @@ Mit <code>schedule(task, delay, TimeUnit)</code> wird ein Task nach einer Verzö
 tag: wichtig
 quelle: 06_ds-java-threads-3.pdf, Folien 32-36
 
-Ein Thread kann Ergebnisse nur mit Schwierigkeiten liefern. Dafür gibt es das Interface <code>Callable</code>: Es unterstützt einen Datentyp V als Rückgabewert der Methode <code>call()</code>. Callables werden mit <code>submit()</code> an den ExecutorService übergeben; der Rückgabewert wird asynchron in einem <code>Future</code>-Objekt gespeichert. Future-Operationen: <code>get()</code> (blockiert bis der Wert verfügbar ist), <code>get(timeout, unit)</code> (wirft TimeoutException) und <code>isDone()</code>.
+Ein Thread kann Ergebnisse nur mit Schwierigkeiten liefern; dafür gibt es das Interface <code>Callable</code>: Es unterstützt einen Datentyp V als Rückgabewert der Methode <code>call()</code>. Callables werden mit <code>submit()</code> an den ExecutorService übergeben; der Rückgabewert wird asynchron in einem <code>Future</code>-Objekt gespeichert. Future-Operationen: <code>get()</code> (blockiert bis der Wert verfügbar ist), <code>get(timeout, unit)</code> (wirft TimeoutException) und <code>isDone()</code>.
 
 ## Karte: Virtuelle Threads
 tag: def
 quelle: 06_ds-java-threads-3.pdf, Folien 38-39
 
-Java-Threads entsprechen Kernel-Threads, werden vom Betriebssystem gescheduled und heißen Platform Threads. Seit einiger Zeit bietet Java auch User-Threads an: Virtual Threads, gescheduled von der Java Runtime. Schwächen von Platform Threads: großer Ressourcenbedarf (z. B. Arbeitsspeicher) und viele Kontextwechsel durch OS-Scheduling. Virtuelle Threads werden vollständig von der JVM verwaltet. Keine Kontextwechsel nötig.
+Java-Threads entsprechen Kernel-Threads, werden vom Betriebssystem gescheduled und heißen Platform Threads. Seit einiger Zeit bietet Java auch User-Threads an: Virtual Threads, gescheduled von der Java Runtime. Schwächen von Platform Threads: großer Ressourcenbedarf (z. B. Arbeitsspeicher) und viele Kontextwechsel durch OS-Scheduling. Virtuelle Threads werden vollständig von der JVM verwaltet: keine Kontextwechsel nötig.
 
 ## Karte: Eigenschaften virtueller Threads
 tag: wichtig
 quelle: 06_ds-java-threads-3.pdf, Folien 40, 42-46
 
-Kleinerer Ressourcenbedarf (Footprint). Große Zahlen virtueller Threads können gestartet werden; effizientere Verwaltung durch die JVM; einfache Handhabung ähnlich wie Platform Threads; besonders positiv bei Anwendungen mit vielen I/O-Operationen. Konzept: Beim Scheduling wird der virtuelle Thread auf einen Platform Thread (Carrier) gemountet; er kann unmounted werden, z. B. wenn er blockierend auf ein IO-Ereignis wartet. Da sie nicht ressourcenintensiv sind, müssen virtuelle Threads nicht gepoolt werden; blockierendes Warten ist kein Problem. Erzeugung: <code>Thread.ofVirtual().start(() -> ...)</code> oder <code>Executors.newVirtualThreadPerTaskExecutor()</code>.
+Kleinerer Ressourcenbedarf (Footprint): große Zahlen virtueller Threads können gestartet werden; effizientere Verwaltung durch die JVM; einfache Handhabung ähnlich wie Platform Threads; besonders positiv bei Anwendungen mit vielen I/O-Operationen. Konzept: Beim Scheduling wird der virtuelle Thread auf einen Platform Thread (Carrier) gemountet; er kann unmounted werden, z. B. wenn er blockierend auf ein IO-Ereignis wartet. Da sie nicht ressourcenintensiv sind, müssen virtuelle Threads nicht gepoolt werden; blockierendes Warten ist kein Problem. Erzeugung: <code>Thread.ofVirtual().start(() -> ...)</code> oder <code>Executors.newVirtualThreadPerTaskExecutor()</code>.
 
 ## Frage: Was ist ein Deadlock?
 id: 35abj0
 quelle: 06_ds-java-threads-3.pdf, Folie 5
 
-Ein Anwendungszustand, in dem Threads bereits eine Teilmenge von Ressourcen erworben haben, aber keine Chance haben, weitere Ressourcen zu erhalten. Z. B. durch verschachtelte synchronized-Blöcke in unterschiedlicher Reihenfolge.
+Ein Anwendungszustand, in dem Threads bereits eine Teilmenge von Ressourcen erworben haben, aber keine Chance haben, weitere Ressourcen zu erhalten, z. B. durch verschachtelte synchronized-Blöcke in unterschiedlicher Reihenfolge.
 
 ## Frage: Was ist Starvation?
 id: oe8x9a
@@ -98,7 +98,7 @@ Bei einem Livelock sind Threads so mit Kommunikation beschäftigt, dass keine ei
 id: qv0nlh
 quelle: 06_ds-java-threads-3.pdf, Folien 12-13
 
-Eine Bibliothek liefert Hilfsmodule, die vom Programm angefordert werden. Ein Framework gibt die Anwendungsarchitektur vor. Mit Inversion of Control: Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.
+Eine Bibliothek liefert Hilfsmodule, die vom Programm angefordert werden. Ein Framework gibt die Anwendungsarchitektur vor, mit Inversion of Control: Der Programmierer registriert Implementierungen, die vom Framework gesteuert und benutzt werden.
 
 ## Frage: Welche Nachteile von Threads adressieren Thread-Pools?
 id: 162ktcs
@@ -140,7 +140,7 @@ Future.get() blockiert, bis der Wert verfügbar ist; mit Timeout ist eine Timeou
 id: 1ac7owe
 quelle: 06_ds-java-threads-3.pdf, Folien 38-40, 46
 
-User-Threads, die von der Java Runtime (JVM) gescheduled werden statt vom OS. Vorteile: kleiner Footprint (große Anzahl möglich), keine Kontextwechsel, kein Pooling nötig, blockierendes Warten unproblematisch. Besonders gut bei I/O-lastigen Anwendungen.
+User-Threads, die von der Java Runtime (JVM) gescheduled werden statt vom OS. Vorteile: kleiner Footprint (große Anzahl möglich), keine Kontextwechsel, kein Pooling nötig, blockierendes Warten unproblematisch: besonders gut bei I/O-lastigen Anwendungen.
 
 ## Frage: Wie unterscheiden sich Platform Threads und Virtual Threads?
 id: 11htiz2

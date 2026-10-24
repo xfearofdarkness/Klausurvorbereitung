@@ -7,7 +7,7 @@ icon: 📊
 ## Karte: Grundidee der Integration
 quelle: VorlesungFolienLAA-2026.pdf, Folien 116-117
 
-Die Fläche zwischen einer Funktion und der x-Achse wird von oben und unten durch Rechtecke approximiert. Ist der Graph eine Gerade, lässt sich die Fläche einfach durch Dreiecke und Rechtecke zusammensetzen. Bei komplizierteren Funktionen ist das nicht so einfach.
+Die Fläche zwischen einer Funktion und der x-Achse wird von oben und unten durch Rechtecke approximiert. Ist der Graph eine Gerade, lässt sich die Fläche einfach durch Dreiecke und Rechtecke zusammensetzen; bei komplizierteren Funktionen ist das nicht so einfach.
 
 ## Karte: Zerlegung des Intervalls
 tag: def
@@ -43,7 +43,7 @@ Um sich nicht auf eine bestimmte Stammfunktion einigen zu müssen, schreibt man 
 tag: wichtig
 quelle: VorlesungFolienLAA-2026.pdf, Folien 124-126
 
-Die Konstante \(c\) wird oft gleich Null gesetzt. Ohne Schaden aber nur, wenn lediglich Interesse an einer möglichen Stammfunktion besteht. Beispiel 2. Newton'sches Gesetz mit \(\ddot{x}(t) = a\): Stammfunktionen liefern \(\dot{x}(t) = at + v_0\) und \(x(t) = \frac{a}{2}t^2 + v_0 t + x_0\). Werden die Konstanten vernachlässigt, verschwinden plötzlich Anfangsort \(x_0\) und Anfangsgeschwindigkeit \(v_0\)!
+Die Konstante \(c\) wird oft gleich Null gesetzt, ohne Schaden aber nur, wenn lediglich Interesse an einer möglichen Stammfunktion besteht. Beispiel 2. Newton'sches Gesetz mit \(\ddot{x}(t) = a\): Stammfunktionen liefern \(\dot{x}(t) = at + v_0\) und \(x(t) = \frac{a}{2}t^2 + v_0 t + x_0\). Werden die Konstanten vernachlässigt, verschwinden plötzlich Anfangsort \(x_0\) und Anfangsgeschwindigkeit \(v_0\)!
 
 ## Karte: Hauptsatz der Differential- und Integralrechnung
 tag: satz
@@ -55,7 +55,7 @@ Sei \(f: [a, b] \to \mathbb{R}\) eine stetige Funktion, dann gibt es eine Stammf
 tag: beispiel
 quelle: VorlesungFolienLAA-2026.pdf, Folien 129-130
 
-\[\int_{-1}^{1} x^2\,dx = \left[\frac{x^3}{3} + c\right]_{-1}^{1} = \left(\frac{1}{3} + c\right) - \left(\frac{-1}{3} + c\right) = \frac{2}{3}\] Die Konstante der Stammfunktion spielt bei der Berechnung keine Rolle. Das bestimmte Integral ist unabhängig von der Wahl der Stammfunktion.
+\[\int_{-1}^{1} x^2\,dx = \left[\frac{x^3}{3} + c\right]_{-1}^{1} = \left(\frac{1}{3} + c\right) - \left(\frac{-1}{3} + c\right) = \frac{2}{3}\] Die Konstante der Stammfunktion spielt bei der Berechnung keine Rolle: das bestimmte Integral ist unabhängig von der Wahl der Stammfunktion.
 
 ## Karte: Partielle Integration
 tag: satz
@@ -103,7 +103,7 @@ Die Gesamtheit aller Stammfunktionen: \(\int f(x)\,dx = F(x) + c\), geschrieben 
 id: xlncab
 quelle: VorlesungFolienLAA-2026.pdf, Folien 124-126
 
-Nur wenn lediglich eine mögliche Stammfunktion interessiert, kann \(c = 0\) gesetzt werden. Beim Newton-Beispiel \(\ddot{x}(t) = a\) sind die Konstanten die Anfangsgeschwindigkeit \(v_0\) und der Anfangsort \(x_0\). Vernachlässigt man sie, verschwinden diese Informationen.
+Nur wenn lediglich eine mögliche Stammfunktion interessiert, kann \(c = 0\) gesetzt werden. Beim Newton-Beispiel \(\ddot{x}(t) = a\) sind die Konstanten die Anfangsgeschwindigkeit \(v_0\) und der Anfangsort \(x_0\); vernachlässigt man sie, verschwinden diese Informationen.
 
 ## Frage: Was besagt der Hauptsatz der Differential- und Integralrechnung?
 id: v78794
