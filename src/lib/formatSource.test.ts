@@ -28,7 +28,7 @@ describe("formatSource", () => {
     }
     expect(formatSource("02_rabs_speicher.pdf, Folien 12 und 14")).toBe("Speicherverwaltung · Folien 12, 14");
     expect(formatSource("01_rabs_grundlagen-04.pdf, Folien 17-19; 01_rabs_grundlagen-05.pdf, Folien 4-6")).toBe(
-      "Grundlagen 4 · Folien 17-19 · Grundlagen 5 · Folien 4-6"
+      "Betriebssysteme · Folien 17-19 · Grundlagen Betriebssysteme · Folien 4-6"
     );
     expect(formatSource("ÜbungsaufgabenLAA.pdf, Aufgabe 12; 02_rabs_speicher.pdf, Folie 12")).toBe(
       "Übung 12 · Speicherverwaltung · Folie 12"
