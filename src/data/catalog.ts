@@ -1,4 +1,4 @@
-import type { SubjectId, SubjectMeta } from "../types/content";
+import type { SubjectMeta } from "../types/content";
 
 export const catalog = [
   {
@@ -32,11 +32,3 @@ export const catalog = [
     "icon": "🧩"
   }
 ] satisfies SubjectMeta[];
-
-export const subjectLoaders: Record<SubjectId, () => Promise<{ default: import("../types/content").RawSubject }>> = {
-  rabs: () => import("virtual:subject/rabs"),
-  laa: () => import("virtual:subject/laa"),
-  vs: () => import("virtual:subject/vs"),
-  aud: () => import("virtual:subject/aud"),
-  disma: () => import("virtual:subject/disma")
-};
