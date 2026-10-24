@@ -33,7 +33,8 @@
   let errorMessage = $state("");
   let progress = $state<AppProgress>({ subjects: {} });
   let currentTopicIndex = $state(0);
-  let currentMode = $state<ModeId>("study");
+  /** Gewählter Modus. Bleibt beim Themenwechsel erhalten, auch wenn das Thema ihn nicht anbietet. */
+  let preferredMode = $state<ModeId>("study");
   let flashDeck = $state<number[]>([]);
   let flashPosition = $state(0);
   let flashFlipped = $state(false);
@@ -44,6 +45,8 @@
 
   let currentTopic = $derived<Topic | null>(subject ? subject.topics[currentTopicIndex] || subject.topics[0] || null : null);
   let availableModes = $derived<ModeConfig[]>(modesForTopic(currentTopic));
+  /** Sichtbarer Modus: die Wahl, sonst der erste Modus, den das Thema hat. */
+  let currentMode = $derived(resolveMode(preferredMode, currentTopic));
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
@@ -120,6 +123,10 @@
     return modesForTopic(topic)[0]?.id || "study";
   }
 
+  function resolveMode(mode: ModeId, topic: Topic | null): ModeId {
+    return isModeAvailableForTopic(mode, topic) ? mode : fallbackModeForTopic(topic);
+  }
+
   function readFlashState(topic: Topic): MarkState<FlashMark> {
     if (!subject) return {};
     return progress.subjects[subject.id]?.flash?.[topic.id] || {};
@@ -137,21 +144,22 @@
     currentTopicIndex = Math.max(0, subject.topics.findIndex((topic) => topic.id === restoredTopicId));
 
     const restoredTopic = getTopicAt(currentTopicIndex);
-    const fallbackMode = fallbackModeForTopic(restoredTopic);
-    const restoredMode = isModeId(subjectProgress.ui?.lastMode) ? subjectProgress.ui.lastMode : fallbackMode;
-    currentMode = isModeAvailableForTopic(restoredMode, restoredTopic) ? restoredMode : fallbackMode;
+    const savedMode = subjectProgress.ui?.lastMode;
+    preferredMode = isModeId(savedMode) ? savedMode : fallbackModeForTopic(restoredTopic);
   }
 
   function persistUi(): void {
     if (!subject || !currentTopic) return;
-    saveUiState(progress, subject, currentMode, currentTopic.id);
+    saveUiState(progress, subject, preferredMode, currentTopic.id);
   }
 
   function selectMode(mode: ModeId): void {
-    if (mode === currentMode || !isModeAvailableForTopic(mode, currentTopic)) return;
-    currentMode = mode;
-    syncFlashDeck();
+    if (!isModeAvailableForTopic(mode, currentTopic) || mode === preferredMode) return;
+    const shown = currentMode;
+    preferredMode = mode;
     persistUi();
+    if (mode === shown) return;
+    syncFlashDeck();
     window.scrollTo(0, 0);
   }
 
@@ -170,9 +178,6 @@
     const nextTopic = getTopicAt(index);
     if (!nextTopic) return;
     currentTopicIndex = index;
-    if (!isModeAvailableForTopic(currentMode, nextTopic)) {
-      currentMode = fallbackModeForTopic(nextTopic);
-    }
     syncFlashDeck();
     persistUi();
     window.scrollTo(0, 0);

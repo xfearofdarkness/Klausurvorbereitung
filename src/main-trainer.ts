@@ -1,5 +1,6 @@
 import { mount } from "svelte";
 import Trainer from "./pages/Trainer.svelte";
+import { applySiteMigration } from "./lib/siteMigration";
 import "@fontsource-variable/outfit";
 import "@fontsource/space-mono/400.css";
 import "@fontsource/space-mono/700.css";
@@ -22,8 +23,7 @@ window.addEventListener("vite:preloadError", (event) => {
   window.location.reload();
 });
 
-const target = document.getElementById("app");
-
-if (target) {
-  mount(Trainer, { target });
+if (!applySiteMigration()) {
+  const target = document.getElementById("app");
+  if (target) mount(Trainer, { target });
 }
