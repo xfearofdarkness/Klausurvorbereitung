@@ -7,9 +7,11 @@ Fehler wiederholt. Ziel: unter 150 Zeilen.
 
 # AGENTS.md
 
-Statischer Klausurtrainer für GitHub Pages: Vite 8, Svelte 5, TypeScript
-(strict), KaTeX für Formeln. Kein Backend. Fachdaten sind Autorendateien in
-`content/<fach-id>/`, die ein Compiler beim Build in JSON übersetzt.
+Statischer Klausurtrainer: Vite 8, Svelte 5, TypeScript (strict), KaTeX.
+Kein Backend. Auslieferung auf Vercel (`https://learn.jamiehuta.com`,
+`base` `/`). GitHub Pages bleibt die Weiterleitung vom alten Pfad.
+Fachdaten sind Autorendateien in `content/<fach-id>/`, die ein Compiler
+beim Build in JSON übersetzt.
 
 ## Maßgebliche Guides
 
@@ -24,11 +26,11 @@ Bei Widerspruch zwischen dieser Datei und einem Guide gilt der Guide.
 
 ## Befehle
 
-Node 24 (`.nvmrc`, `engines`: `>=24 <27`).
+Node 24 (`.nvmrc`, `engines`: `24.x`).
 
 ```bash
 npm ci                       # Setup
-npm run dev                  # Dev-Server: http://localhost:5173/Klausurvorbereitung/
+npm run dev                  # Dev-Server: http://localhost:5173/
 npm run typecheck            # svelte-check über src/, scripts/, vite.config.ts
 npm run validate             # alle Fachdaten prüfen
 npm run validate -- <fach-id>                                  # ein Fach
@@ -41,10 +43,18 @@ npm run preview              # gebaute Seite lokal ansehen
 Es gibt keine Unit-Tests und keinen Linter. Die Validatoren in `scripts/`
 (Details: `scripts/README.md`) sind die inhaltliche Testsuite.
 
-CI (`.github/workflows/deploy.yml`) führt bei jedem Push auf `main`
-`npm ci`, `typecheck`, `validate` und `build` aus und deployt danach sofort
-auf GitHub Pages. `validate:manifest` und `validate:sources` laufen nicht in
-CI, weil `sources/` nur lokal existiert. Sie müssen lokal laufen.
+Vercel baut über `vercel.json` (`typecheck`, `validate`, `build`) und
+liefert `dist/` aus. Schlägt `validate` fehl, gibt es kein Deployment.
+Node 24 kommt aus `.nvmrc`; `engines.node` ist `24.x`, damit Vercel diese
+Major-Version nimmt. Das Vercel-Projekt braucht keine Env-Variablen.
+`sources/` steht zusätzlich in `.vercelignore` und wird nicht hochgeladen.
+
+GitHub Pages (`.github/workflows/deploy.yml`) baut bei Push auf `main`
+weiter und deployt sofort, mit `VITE_BASE=/Klausurvorbereitung/` und
+`VITE_PAGES_REDIRECT=1`. Diese Fassung leitet auf die neue Seite um und
+nimmt den lokalen Fortschritt im URL-Fragment mit. `validate:manifest`
+und `validate:sources` laufen nicht in CI, weil `sources/` nur lokal
+existiert. Sie müssen lokal laufen.
 
 ## Wo was hingehört
 
@@ -82,11 +92,10 @@ CI, weil `sources/` nur lokal existiert. Sie müssen lokal laufen.
   verdoppeln. In Generatoren wird `String.raw` verwendet.
 - Fortschritt hängt an der `id` von Karteikarten und Aufgaben. Eine Id nie
   ändern oder für einen anderen Eintrag wiederverwenden.
-- `sources/` steht in `.gitignore`. Nie per `git add -f` oder Umbenennung
-  einchecken. Auch keine Auszüge, Screenshots oder Volltexte der Folien in
-  versionierte Dateien kopieren.
-- `vite.config.ts` setzt `base: "/Klausurvorbereitung/"`, weil die Seite
-  unter diesem Unterpfad ausgeliefert wird. Links relativ halten wie in
+- `sources/` steht in `.gitignore` und `.vercelignore`. Nie per `git add -f`
+  oder Umbenennung einchecken. Auch keine Auszüge, Screenshots oder
+  Volltexte der Folien in versionierte Dateien kopieren.
+- `base` kommt aus `VITE_BASE`, Standard `/`. Links relativ halten wie in
   `src/pages/Home.svelte` (`trainer.html?subject=...`), nie mit führendem `/`.
 
 ## Definition of Done
@@ -116,7 +125,8 @@ Immer:
 
 Erst fragen:
 
-- Push auf `main` (löst sofort ein Deployment aus).
+- Push auf `main` (löst das Pages-Deployment aus; Vercel ebenso, sobald
+  das Projekt verbunden ist).
 - Neue npm-Abhängigkeiten oder Architekturwechsel (z. B. Router, SvelteKit,
   Backend).
 - Änderungen an Produktregeln in `DESIGN_GUIDE.md` oder `CONTENT_GUIDE.md`.
