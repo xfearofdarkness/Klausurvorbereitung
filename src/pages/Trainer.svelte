@@ -9,7 +9,8 @@
   import LayoutSwitch from "../components/LayoutSwitch.svelte";
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
-  import { catalog, subjectLoaders } from "../data/catalog";
+  import { catalog } from "../data/catalog";
+  import { subjectLoaders } from "../data/subjectLoaders";
   import { MODES } from "../lib/modes";
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
