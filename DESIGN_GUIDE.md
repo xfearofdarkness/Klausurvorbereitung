@@ -2,8 +2,9 @@
 
 ## Ziel
 
-Die App ist ein statischer Klausurtrainer für GitHub Pages mit Vite,
-Svelte und TypeScript.
+Die App ist ein statischer Klausurtrainer mit Vite, Svelte und TypeScript.
+Produktion ist Vercel unter https://learn.jamiehuta.com (`base` `/`).
+GitHub Pages liefert nur noch eine Weiterleitung dorthin.
 
 Sie soll:
 
@@ -26,7 +27,7 @@ Die App verwendet diese Struktur:
 - `src/data/catalog.ts` für Fachliste und Loader
 - `content/<fach>/` für die Fachdaten (Autorendateien, beim Build zu JSON kompiliert)
 - `src/types/content.ts` für das Datenmodell
-- `dist/` als Build-Ausgabe für GitHub Pages
+- `dist/` als Build-Ausgabe
 
 Regeln:
 
@@ -35,7 +36,7 @@ Regeln:
 - Keine Mutation von Quelldaten für UI-Zustände.
 - Cache-Busting geschieht über Vite-Hashes im Build, nicht über
   manuelle `?v=N`-Parameter.
-- GitHub Pages deployt die gebaute Ausgabe aus `dist/`.
+- Vercel liefert `dist/` aus. Der GitHub-Pages-Build leitet nur um.
 - Schriften und Icons werden mitgebündelt, keine externen Font- oder
   Icon-Dienste.
 

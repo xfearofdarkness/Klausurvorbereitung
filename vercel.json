@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run typecheck && npm run validate && npm run build",
+  "buildCommand": "npm run typecheck && npm run validate && npm test && npm run build",
   "outputDirectory": "dist",
   "headers": [
     {
@@ -20,6 +20,14 @@
           "value": "no-cache"
         }
       ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    },
+    {
+      "source": "/content/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
     },
     {
       "source": "/assets/(.*)",

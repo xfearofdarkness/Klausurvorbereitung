@@ -145,8 +145,9 @@ generierte Rechenmodule geführt werden (`generator`-Feld statt `task`):
   Rechenweg folgt dem Vorgehen und den Regeln der Folien.
 - Rechnen die Folien das Verfahren vor, muss der Generator dieses Beispiel
   exakt nachrechnen. Das prüft der Validator.
-- Generatoren sind generisch und leben in `src/lib/exerciseGenerators.ts`;
-  die Fachdaten referenzieren sie nur deklarativ über die Generator-Id.
+- Generatoren sind generisch und leben in `src/lib/generators/`;
+  `src/lib/exerciseGenerators.ts` registriert die Ids. Die Fachdaten
+  referenzieren sie nur deklarativ über die Generator-Id.
 - Der Validator prüft jede Generator-Referenz und erzeugt Stichproben.
 
 ## Abläufe (`walkthroughs`)
@@ -265,15 +266,29 @@ Vor Veröffentlichung prüfen:
 
 Wenn eine dieser Fragen nicht sicher mit ja beantwortet werden kann, wird der Inhalt nicht veröffentlicht.
 
-## GitHub Pages
+## Auslieferung
 
-GitHub Pages ist nur die Auslieferungsschicht.
+Produktion ist https://learn.jamiehuta.com auf Vercel (`base` `/`).
+GitHub Pages ist nur die Weiterleitung vom alten Pfad. PDF-Analyse
+findet lokal statt. Öffentlich liegen nur freigegebene statische
+Dateien, keine API-Keys und kein Server.
 
-Regeln:
+## Öffentliche Inhaltsdateien
 
-- PDF-Analyse findet lokal oder in einem separaten Vorprozess statt.
-- Auf GitHub Pages liegen nur freigegebene statische Dateien.
-- Keine API-Keys oder serverseitigen Prozesse im Frontend.
+Der Build schreibt aus den kompilierten Fachdaten, nie aus `sources/`:
+
+- `/llms.txt` beschreibt die Seite und verlinkt die Dateien.
+- `/content/index.json` listet die Fächer (`format`, `site`, `id`,
+  `title`, `subtitle`, Pfade zu Markdown und JSON).
+- `/content/<fach-id>.json` enthält Lernkarten, Karteikarten (mit
+  Rückseite), Aufgaben und Abläufe, wie die App sie lädt. Aufgaben mit
+  `generator` haben zusätzlich `example` (Seed 1, Aufgabe und Lösung).
+  Aufgaben ohne Generator haben keine hinterlegte Lösung.
+- `/content/<fach-id>.md` ist derselbe Stoff als Text: Lernen,
+  Karteikarten, Üben, Abläufe als Schritttext.
+
+`format` ist `1`. Fortschritts-Ids sind die `id`s der Karteikarten und
+Aufgaben.
 
 ## Was nicht gemacht werden soll
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ProgressBackup from "../components/ProgressBackup.svelte";
   import { catalog } from "../data/catalog";
   import { loadProgress } from "../lib/progress";
 
@@ -25,5 +26,6 @@
       </a>
     {/each}
   </div>
+  <ProgressBackup />
 </main>
 <div class="footer">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</div>

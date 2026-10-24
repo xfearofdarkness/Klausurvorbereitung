@@ -92,7 +92,7 @@ export interface RawExercise {
   ref?: string;
   note?: string;
   source?: string;
-  /** Id eines generischen Rechenmodul-Generators (src/lib/exerciseGenerators.ts). */
+  /** Id eines generischen Rechenmodul-Generators (src/lib/generators/). */
   generator?: string;
 }
 

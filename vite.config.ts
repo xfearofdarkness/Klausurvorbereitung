@@ -1,8 +1,48 @@
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, type Plugin } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { buildPublicFiles } from "./scripts/publish_content";
 import { contentPlugin } from "./scripts/vite_content_plugin";
+
+/** Schreibt /llms.txt und /content/* in den Build und stellt sie im Dev-Server bereit. */
+function publishPlugin(): Plugin {
+  let cache: ReturnType<typeof buildPublicFiles> | null = null;
+  const files = (): ReturnType<typeof buildPublicFiles> => (cache ??= buildPublicFiles());
+  return {
+    name: "klausurtrainer-publish",
+    generateBundle() {
+      for (const file of files()) {
+        this.emitFile({ type: "asset", fileName: file.fileName, source: file.body });
+      }
+    },
+    configureServer(server) {
+      const base = server.config.base;
+      const dropCache = (file: string): void => {
+        if (file.endsWith(".md") && file.includes(`${sep}content${sep}`)) cache = null;
+      };
+      server.watcher.on("add", dropCache);
+      server.watcher.on("change", dropCache);
+      server.watcher.on("unlink", dropCache);
+      server.middlewares.use((req, res, next) => {
+        let path = req.url?.split("?")[0] ?? "";
+        if (base !== "/" && path.startsWith(base)) path = `/${path.slice(base.length)}`;
+        const name = path.replace(/^\//, "");
+        if (name !== "llms.txt" && !name.startsWith("content/")) {
+          next();
+          return;
+        }
+        const file = files().find((entry) => entry.fileName === name);
+        if (!file) {
+          next();
+          return;
+        }
+        res.setHeader("Content-Type", file.contentType);
+        res.end(file.body);
+      });
+    }
+  };
+}
 
 const projectRoot = dirname(fileURLToPath(import.meta.url));
 
@@ -18,7 +58,7 @@ export default defineConfig(({ mode }) => {
   const fromFile = loadEnv(mode, projectRoot, "VITE_").VITE_BASE;
   return {
     base: siteBase(process.env.VITE_BASE ?? fromFile),
-    plugins: [contentPlugin(), svelte()],
+    plugins: [contentPlugin(), publishPlugin(), svelte()],
     build: {
       rollupOptions: {
         input: {
