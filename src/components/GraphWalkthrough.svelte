@@ -21,6 +21,12 @@
 
   const NODE_RADIUS = 5;
   const PADDING = 10;
+  const NOTE_GAP = 2;
+  /** Schriftgröße der Knotennotiz, wie `.walk-node-note` in styles.css. */
+  const NOTE_FONT_SIZE = 3.4;
+  /** Zeichenbreite der Monospace-Schrift relativ zur Schriftgröße. */
+  const MONO_ADVANCE = 0.62;
+  const NOTE_MARGIN = 1;
 
   let { walkthrough, stepIndex }: Props = $props();
 
@@ -134,18 +140,53 @@
     };
   }
 
-  function notePosition(node: GraphNodeDefinition): { x: number; y: number } {
-    return { x: node.x, y: node.y - NODE_RADIUS - 2 };
+  /** Die Notiz steht auf der Seite des Knotens, an der weniger Kanten ankommen, damit keine Linie sie kreuzt. */
+  function noteBelow(node: GraphNodeDefinition): boolean {
+    let above = 0;
+    let below = 0;
+    for (const edge of visual?.edges || []) {
+      const otherId = edge.from === node.id ? edge.to : edge.to === node.id ? edge.from : null;
+      const other = otherId ? nodeById.get(otherId) : undefined;
+      if (!other) continue;
+      if (other.y < node.y) above += 1;
+      else if (other.y > node.y) below += 1;
+    }
+    return above > below;
   }
 
+  function notePosition(node: GraphNodeDefinition): { x: number; y: number } {
+    const offset = NODE_RADIUS + NOTE_GAP;
+    return { x: node.x, y: noteBelow(node) ? node.y + offset + NOTE_FONT_SIZE / 2 : node.y - offset };
+  }
+
+  /** Umfasst Knoten und alle Notizen, die im Ablauf vorkommen, damit lange Notizen am Rand nicht abgeschnitten werden. */
   function viewBox(): string {
+    let minX = 0;
+    let minY = 0;
     let maxX = 0;
     let maxY = 0;
     for (const node of visual?.nodes || []) {
-      maxX = Math.max(maxX, node.x);
-      maxY = Math.max(maxY, node.y);
+      maxX = Math.max(maxX, node.x + PADDING);
+      maxY = Math.max(maxY, node.y + PADDING);
     }
-    return `0 0 ${maxX + PADDING} ${maxY + PADDING}`;
+    const notes = new Map<string, string[]>();
+    for (const node of visual?.nodes || []) notes.set(node.id, node.note ? [node.note] : []);
+    for (const step of walkthrough.steps) {
+      for (const update of step.values || []) {
+        if (update.kind === "graph-node" && update.note) notes.get(update.node)?.push(update.note);
+      }
+    }
+    for (const node of visual?.nodes || []) {
+      const longest = Math.max(0, ...(notes.get(node.id) || []).map((note) => note.length));
+      if (longest === 0) continue;
+      const halfWidth = (longest * NOTE_FONT_SIZE * MONO_ADVANCE) / 2 + NOTE_MARGIN;
+      const { y } = notePosition(node);
+      minX = Math.min(minX, node.x - halfWidth);
+      maxX = Math.max(maxX, node.x + halfWidth);
+      minY = Math.min(minY, y - NOTE_FONT_SIZE / 2 - NOTE_MARGIN);
+      maxY = Math.max(maxY, y + NOTE_FONT_SIZE / 2 + NOTE_MARGIN);
+    }
+    return `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
   }
 </script>
 

@@ -148,7 +148,7 @@ quelle: 09_rabs-synchro-2.pdf, Folie 50
 
 Ignorieren, Erkennen und Beheben, Vermeidung und Verhinderung.
 
-## Ablauf: Ablauf einer Verklemmung
+## Ablauf: Ablauf einer Verklemmung (Deadlock)
 nach: Belegungsanforderungsgraph
 quelle: 09_rabs-synchro-2.pdf, Folien 33-40
 
@@ -286,7 +286,7 @@ quelle: 09_rabs-synchro-2.pdf, Folien 33-40
 }
 ```
 
-## Ablauf: Verklemmung vermeiden
+## Ablauf: Verklemmung (Deadlock) vermeiden
 nach: Strategien gegen Deadlocks
 quelle: 09_rabs-synchro-2.pdf, Folien 41-49
 
