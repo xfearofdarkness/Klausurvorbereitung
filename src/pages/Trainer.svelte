@@ -10,7 +10,7 @@
   import TopicPicker from "../components/TopicPicker.svelte";
   import { catalog, subjectLoaders } from "../data/catalog";
   import { MODES } from "../lib/modes";
-  import { loadNavPlacement, saveNavPlacement, type NavPlacement } from "../lib/navPlacement";
+  import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
   import { prepareRichText } from "../lib/richText";
   import {
@@ -38,6 +38,9 @@
   let flashPosition = $state(0);
   let flashFlipped = $state(false);
   let navPlacement = $state<NavPlacement>(loadNavPlacement());
+  let sidebarCollapsed = $state(loadSidebarCollapsed());
+  let hasSidebar = $derived(navPlacement !== "top");
+  let layoutClass = $derived(hasSidebar && sidebarCollapsed ? "nav-top" : `nav-${navPlacement}`);
 
   let currentTopic = $derived<Topic | null>(subject ? subject.topics[currentTopicIndex] || subject.topics[0] || null : null);
   let availableModes = $derived<ModeConfig[]>(modesForTopic(currentTopic));
@@ -155,6 +158,12 @@
   function changeNavPlacement(placement: NavPlacement): void {
     navPlacement = placement;
     saveNavPlacement(placement);
+    setSidebarCollapsed(false);
+  }
+
+  function setSidebarCollapsed(collapsed: boolean): void {
+    sidebarCollapsed = collapsed;
+    saveSidebarCollapsed(collapsed);
   }
 
   function selectTopic(index: number): void {
@@ -243,10 +252,21 @@
   }
 </script>
 
-<div class={`trainer nav-${navPlacement}`}>
+<div class={`trainer ${layoutClass}`}>
   {#if subject}
     <aside class="sidebar" aria-label="Themen">
-      <a class="sidebar-back" href="index.html"><Icon name="chevronLeft" /> Übersicht</a>
+      <div class="sidebar-head">
+        <a class="sidebar-back" href="index.html"><Icon name="chevronLeft" /> Übersicht</a>
+        <button
+          class="icon-btn icon-btn-small"
+          type="button"
+          aria-label="Seitenleiste einklappen"
+          title="Seitenleiste einklappen"
+          onclick={() => setSidebarCollapsed(true)}
+        >
+          <Icon name={navPlacement === "right" ? "sidebarRightCollapse" : "sidebarLeftCollapse"} />
+        </button>
+      </div>
       <div class="sidebar-subject">
         <span class="sidebar-subject-title">{subject.title}</span>
         {#if subject.subtitle}<span class="sidebar-subject-subtitle">{subject.subtitle}</span>{/if}
@@ -262,6 +282,17 @@
     <header class="topbar">
       <div class="topbar-inner content-frame">
         <a class="icon-btn topbar-back" href="index.html" aria-label="Zur Übersicht"><Icon name="chevronLeft" /></a>
+        {#if hasSidebar && sidebarCollapsed}
+          <button
+            class="icon-btn topbar-expand"
+            type="button"
+            aria-label="Seitenleiste ausklappen"
+            title="Seitenleiste ausklappen"
+            onclick={() => setSidebarCollapsed(false)}
+          >
+            <Icon name={navPlacement === "right" ? "sidebarRightExpand" : "sidebarLeftExpand"} />
+          </button>
+        {/if}
         {#if subject && currentTopic}
           <h1 class="topbar-title">{currentTopic.title}</h1>
           <TopicPicker

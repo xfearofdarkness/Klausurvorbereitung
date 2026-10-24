@@ -6,6 +6,10 @@ import close from "@tabler/icons/outline/x.svg?raw";
 import layoutLeft from "@tabler/icons/outline/layout-sidebar.svg?raw";
 import layoutRight from "@tabler/icons/outline/layout-sidebar-right.svg?raw";
 import layoutTop from "@tabler/icons/outline/layout-navbar.svg?raw";
+import sidebarLeftCollapse from "@tabler/icons/outline/layout-sidebar-left-collapse.svg?raw";
+import sidebarLeftExpand from "@tabler/icons/outline/layout-sidebar-left-expand.svg?raw";
+import sidebarRightCollapse from "@tabler/icons/outline/layout-sidebar-right-collapse.svg?raw";
+import sidebarRightExpand from "@tabler/icons/outline/layout-sidebar-right-expand.svg?raw";
 import list from "@tabler/icons/outline/list.svg?raw";
 import pencil from "@tabler/icons/outline/pencil.svg?raw";
 
@@ -19,7 +23,11 @@ export const ICONS = {
   layoutRight,
   layoutTop,
   list,
-  pencil
+  pencil,
+  sidebarLeftCollapse,
+  sidebarLeftExpand,
+  sidebarRightCollapse,
+  sidebarRightExpand
 };
 
 export type IconName = keyof typeof ICONS;

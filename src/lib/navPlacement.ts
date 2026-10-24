@@ -26,3 +26,24 @@ export function saveNavPlacement(placement: NavPlacement): void {
     console.warn("Navigation placement could not be saved.", error);
   }
 }
+
+const COLLAPSED_KEY = "klausurtrainer-sidebar-collapsed";
+const COLLAPSED_VALUE = "1";
+
+/** Ob die Seitenleiste eingeklappt ist; reine Ansichtseinstellung pro Browser. */
+export function loadSidebarCollapsed(): boolean {
+  try {
+    return window.localStorage.getItem(COLLAPSED_KEY) === COLLAPSED_VALUE;
+  } catch {
+    return false;
+  }
+}
+
+export function saveSidebarCollapsed(collapsed: boolean): void {
+  try {
+    if (collapsed) window.localStorage.setItem(COLLAPSED_KEY, COLLAPSED_VALUE);
+    else window.localStorage.removeItem(COLLAPSED_KEY);
+  } catch (error) {
+    console.warn("Sidebar state could not be saved.", error);
+  }
+}

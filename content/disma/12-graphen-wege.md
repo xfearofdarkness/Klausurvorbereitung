@@ -20,7 +20,7 @@ Jede (endliche) Abfolge von Knoten und Kanten in einem Graphen heißt <em>Kanten
 tag: def
 quelle: DiskreteMathematikVLHO.pdf, Folien 220-222
 
-Objekte \(o_1, \ldots, o_n\) heißen paarweise verschieden, wenn keine zwei gleich sind: \(i \ne j \Rightarrow o_i \ne o_j\). Kommt keine Kante mehrfach vor, heißt eine Kantenfolge <em>Kantenzug</em>. Ein Graph mit der Knotenmenge \(\{X_1, \ldots, X_n\}\) und der Kantenmenge \(\{\{X_1, X_2\}, \{X_2, X_3\}, \ldots, \{X_{n-1}, X_n\}\}\) heißt <em>Weg</em>, wenn die Knoten \(X_i\) paarweise verschieden sind. Ein Kantenzug/Weg heißt <em>vollständig</em>, wenn er alle Kanten/Knoten des Graphen enthält. Ein Kantenzug heißt <em>geschlossen</em>, wenn Anfangs- und Endknoten identisch sind.
+Objekte \(o_1, \ldots, o_n\) heißen paarweise verschieden, wenn keine zwei gleich sind: \(i \ne j \Rightarrow o_i \ne o_j\). Kommt keine Kante mehrfach vor, heißt eine Kantenfolge <em>Kantenzug</em>. Ein Graph mit der Knotenmenge \(\{X_1, \ldots, X_n\}\) und der Kantenmenge \(\{\{X_1, X_2\},\) \(\{X_2, X_3\}, \ldots,\) \(\{X_{n-1}, X_n\}\}\) heißt <em>Weg</em>, wenn die Knoten \(X_i\) paarweise verschieden sind. Ein Kantenzug/Weg heißt <em>vollständig</em>, wenn er alle Kanten/Knoten des Graphen enthält. Ein Kantenzug heißt <em>geschlossen</em>, wenn Anfangs- und Endknoten identisch sind.
 
 ## Karte: Beispiele: Kantenfolge, Kantenzug, Weg
 tag: beispiel

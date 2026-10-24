@@ -46,7 +46,7 @@
   --transition: 0.16s ease;
 
   --sidebar-w: clamp(13.5rem, 17vw, 16rem);
-  --content-max: 54rem;
+  --content-max: 60rem;
   --gutter: clamp(0.75rem, 2.5vw, 1.5rem);
   --topbar-h: 3.25rem;
   --modebar-h: 3.75rem;
@@ -58,6 +58,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Ab Laptopbreite wächst die Grundgröße mit; alle rem-Maße skalieren dadurch gleichmäßig mit. */
+@media (min-width: 64rem) {
+  html {
+    font-size: clamp(100%, 0.5rem + 0.6vw, 125%);
+  }
 }
 
 body {
@@ -278,6 +285,10 @@ a.card.is-last {
 
 .topbar-back {
   margin-left: -0.5rem;
+}
+
+.topbar-expand {
+  display: none;
 }
 
 .topbar-title {
@@ -580,6 +591,10 @@ a.card.is-last {
     gap: 2px;
   }
 
+  .topbar-expand {
+    display: inline-flex;
+  }
+
   .nav-left,
   .nav-right {
     display: grid;
@@ -656,6 +671,13 @@ a.card.is-last {
   }
 }
 
+.sidebar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
 .sidebar-back {
   display: flex;
   align-items: center;
@@ -713,7 +735,7 @@ a.card.is-last {
   align-items: center;
   gap: 0.5rem;
   color: var(--text);
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.35;
 }
@@ -726,7 +748,7 @@ a.card.is-last {
 .study-card ul,
 .error-card p {
   color: var(--text2);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -747,7 +769,7 @@ a.card.is-last {
 .study-card table,
 .quiz-card table {
   border-collapse: collapse;
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
 }
 
 .study-card th,
@@ -868,7 +890,7 @@ a.card.is-last {
   gap: 0.375rem;
   margin-bottom: 0.625rem;
   color: var(--text);
-  font-size: 0.9375rem;
+  font-size: 1.0625rem;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -884,7 +906,7 @@ a.card.is-last {
   border-radius: var(--radius-sm);
   background: var(--surface-2);
   color: var(--text2);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.65;
 }
 
@@ -1066,7 +1088,7 @@ a.card.is-last {
 .fc-text {
   max-width: 90%;
   color: var(--text);
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.55;
 }
 
@@ -1181,7 +1203,7 @@ a.card.is-last {
 .walk-intro {
   margin-top: 0.25rem;
   color: var(--text2);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
 }
 
@@ -1311,14 +1333,14 @@ a.card.is-last {
 
 .walk-step h4 {
   margin-bottom: 0.25rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
   overflow-wrap: anywhere;
 }
 
 .walk-step p {
   color: var(--text2);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
@@ -1332,7 +1354,7 @@ a.card.is-last {
   background: var(--surface-2);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
@@ -1362,14 +1384,14 @@ a.card.is-last {
 
 .walk-explanation dt {
   color: var(--text3);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.55;
 }
 
 .walk-explanation dd {
   color: var(--text2);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
   overflow-wrap: anywhere;
 }
