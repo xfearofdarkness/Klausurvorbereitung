@@ -1,26 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import ProgressBackup from "../components/ProgressBackup.svelte";
-  import { catalog, subjectLoaders } from "../data/catalog";
-  import { normalizeSubject } from "../lib/normalize";
+  import { catalog } from "../data/catalog";
   import { loadProgress } from "../lib/progress";
-  import { countDueCards, todayIso } from "../lib/schedule";
-  import type { SubjectId } from "../types/content";
 
-  const progress = loadProgress();
-  const lastSubjectId = progress.lastSubjectId || "";
-  let dueCounts = $state<Partial<Record<SubjectId, number>>>({});
-
-  onMount(() => {
-    void Promise.all(
-      catalog.map(async (meta) => {
-        const loaded = await subjectLoaders[meta.id]();
-        return [meta.id, countDueCards(normalizeSubject(loaded.default, meta), progress, todayIso())] as const;
-      })
-    ).then((entries) => {
-      dueCounts = Object.fromEntries(entries);
-    });
-  });
+  const lastSubjectId = loadProgress().lastSubjectId || "";
 </script>
 
 <main class="home-shell">
@@ -38,9 +21,6 @@
             {/if}
           </div>
           <div class="semester">{subject.subtitle || ""}</div>
-          {#if dueCounts[subject.id] !== undefined}
-            <div class="due-count">Heute fällig: {dueCounts[subject.id]}</div>
-          {/if}
         </div>
       </a>
     {/each}

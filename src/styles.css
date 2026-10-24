@@ -250,21 +250,9 @@ a.card.is-last .card-badge {
   background: var(--chip);
 }
 
-.semester,
-.due-count,
-.sidebar-due,
-.due-line {
+.semester {
   color: var(--text2);
   font-size: 0.8125rem;
-}
-
-.due-count,
-.sidebar-due {
-  margin-top: 0.15rem;
-}
-
-.due-line {
-  margin-bottom: 0.75rem;
 }
 
 .home-foot {
@@ -737,9 +725,7 @@ a.card.is-last .card-badge {
   .nav-left .topic-picker,
   .nav-right .topic-picker,
   .nav-left .topbar-layout-switch,
-  .nav-right .topbar-layout-switch,
-  .nav-left .due-line,
-  .nav-right .due-line {
+  .nav-right .topbar-layout-switch {
     display: none;
   }
 
