@@ -588,6 +588,12 @@ a.card.is-last .card-badge {
     background: transparent;
   }
 
+  .mode-btn,
+  .mode-btn:hover:not(.unavailable):not(.active),
+  .mode-btn.active {
+    background: transparent;
+  }
+
   .mode-btn .icon {
     display: grid;
     place-items: center;
@@ -654,6 +660,10 @@ a.card.is-last .card-badge {
   .mode-btn .icon svg {
     width: 1rem;
     height: 1rem;
+  }
+
+  .mode-btn {
+    background: transparent;
   }
 
   .mode-btn.active {

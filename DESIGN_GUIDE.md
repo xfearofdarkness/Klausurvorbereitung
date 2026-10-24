@@ -110,7 +110,7 @@ Regeln:
 - Visuelle Hierarchie muss sofort erkennbar sein.
 - Aktives Thema und aktiver Modus müssen jederzeit sichtbar sein.
 - Farbe trägt Bedeutung (Status, Kategorie), nicht Dekoration.
-- Wählbare Elemente (Modusleiste, Themenzeilen, Bewertungsbuttons, Suchknopf, Layoutschalter) haben keinen Rand. Die Fläche liegt nur wenig über dem Untergrund. Hover ist eine Stufe heller, der aktive Zustand deutlich heller mit hellerer Schrift. Der Fokusring erscheint nur bei Tastaturfokus.
+- Wählbare Elemente (Modusleiste, Statusanzeigen, Themenzeilen, Bewertungsbuttons, Suchknopf, Layoutschalter) haben keinen Rand. Die Fläche liegt nur wenig über dem Untergrund. Hover ist eine Stufe heller, der aktive Zustand deutlich heller mit hellerer Schrift. Der Fokusring erscheint nur bei Tastaturfokus.
 - Die Suche ist ein Knopf in der Kopfzeile neben der Modusleiste und öffnet einen Dialog. Strg+K, Cmd+K und / öffnen ihn, Escape schließt ihn. Auf schmalen Displays bleibt ein Icon-Knopf.
 - Keine Verläufe, Glüheffekte oder Schatten als Schmuck.
 
@@ -247,6 +247,7 @@ Regeln:
 - `trainer.html` lädt ein Fach nur über `?subject=<id>`.
 - Fachdaten werden in `content/<fach>/` gehalten.
 - Fortschritt gehört in State oder `localStorage`, nie in die Fachdaten.
+- „Fortschritt sichern“ und „Fortschritt laden“ stehen nur auf der Startseite, als zwei kleine Textlinks über dem Fußhinweis. Eine Zeile meldet Erfolg oder Fehler.
 
 ## Was nicht gemacht werden soll
 
