@@ -129,7 +129,7 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 119
 
 Wenn \(Q_{alt} = Q_{neu}\) gilt, der rückgekoppelte Wert also mit dem neuen Ausgang übereinstimmt.
 
-## Aufgabe: Aufgabe 17 (Variante)
+## Aufgabe: NAND-Schaltung
 id: aufgabe-17-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 17
 
@@ -147,19 +147,19 @@ generator: disjunktive-normalform
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 18; DiskreteMathematikVLHO.pdf, Folien 99-100
 
-## Aufgabe: Aufgabe 18 (Variante)
+## Aufgabe: Normalformen
 id: aufgabe-18-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 18
 
 Berechnen Sie die disjunktive Normalform der logischen Operationen „nor“ und „Äquivalenz“.
 
-## Aufgabe: Aufgabe 19 (Variante)
+## Aufgabe: RS-Flipflop
 id: aufgabe-19-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 19
 
 Das RS-Flipflop aus zwei rückgekoppelten nor-Gattern (Eingänge \(S\), \(R\), Ausgang \(Q\)) speichert zunächst \(Q = 1\). Spielen Sie die Eingangsfolge \((S, R) = (0, 1)\), dann \((0, 0)\), dann \((1, 0)\), dann \((0, 0)\) durch. Welchen Wert hat \(Q\) nach jedem Schritt, und welche Zustände sind dabei stabil?
 
-## Aufgabe: Aufgabe 20 (Variante)
+## Aufgabe: Boolesche Darstellung
 id: aufgabe-20-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 20
 

@@ -82,13 +82,13 @@ generator: relation-eigenschaften
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgaben 21-22; DiskreteMathematikVLHO.pdf, Folie 124
 
-## Aufgabe: Aufgabe 21 (Variante)
+## Aufgabe: Irreflexive Relationen
 id: aufgabe-21-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 21
 
 Sei \(A = \{a, b, c\}\). 1) Welche der Relationen \(R_1 = \{(b, b)\}\), \(R_2 = \{(a, b), (b, c), (c, a)\}\), \(R_3 = \{(a, a), (b, b), (c, c)\}\) sind irreflexiv? 2) Welche der Relationen \(R_4 = \{(a, b), (b, a), (a, a)\}\), \(R_5 = \{(a, b), (b, c), (a, c)\}\), \(R_6 = \{(c, c)\}\) sind transitiv?
 
-## Aufgabe: Aufgabe 22 (Variante)
+## Aufgabe: Eigenschaften einer Relation
 id: aufgabe-22-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 22
 

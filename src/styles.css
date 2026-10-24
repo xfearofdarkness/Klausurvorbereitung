@@ -922,7 +922,6 @@ a.card.is-last .card-badge {
 .card-source {
   margin-top: 0.5rem;
   color: var(--text2);
-  font-family: var(--font-mono);
   font-size: 0.75rem;
 }
 
@@ -936,26 +935,9 @@ a.card.is-last .card-badge {
 }
 
 .practice-status {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.35rem;
-}
-
-.practice-status span {
-  padding: 0.15rem 0.55rem;
-  border-radius: var(--radius-pill);
-  background: var(--chip);
+  margin: 0 0 0.75rem;
   color: var(--text2);
   font-size: 0.8125rem;
-}
-
-.module-note {
-  max-width: var(--prose-max);
-  margin: 0 0 0.5rem;
-  color: var(--text2);
-  font-size: 1.125rem;
-  line-height: 1.6;
 }
 
 @media (min-width: 80rem) {

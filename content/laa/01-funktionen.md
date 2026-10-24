@@ -118,31 +118,31 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 22
 
 Die Nullstellen des Nennerpolynoms \(q\): an diesen Punkten ist die rationale Funktion nicht definiert. Die Nullstellen von \(f\) selbst sind dagegen die Nullstellen des Zählerpolynoms \(p\).
 
-## Aufgabe: Aufgabe 1 (Variante)
+## Aufgabe: Produkt beschränkter Funktionen
 id: aufgabe-1-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 1
 
 Beweisen oder widerlegen Sie: Das Produkt von zwei beschränkten Funktionen ist stets wieder beschränkt.
 
-## Aufgabe: Aufgabe 2 (Variante)
+## Aufgabe: Produkt periodischer Funktionen
 id: aufgabe-2-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 2
 
 Beweisen oder widerlegen Sie: Das Produkt von zwei periodischen Funktionen mit der gleichen Periode ist stets wieder periodisch.
 
-## Aufgabe: Aufgabe 3 (Variante)
+## Aufgabe: Produkt gerader Funktionen
 id: aufgabe-3-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 3
 
 Beweisen oder widerlegen Sie: Das Produkt von zwei geraden Funktionen ist stets gerade.
 
-## Aufgabe: Aufgabe 4 (Variante)
+## Aufgabe: Summe gerade und ungerade
 id: aufgabe-4-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 4
 
 Beweisen oder widerlegen Sie: Die Summe einer geraden und einer ungeraden Funktion ist stets gerade oder ungerade.
 
-## Aufgabe: Aufgabe 5 (Typ)
+## Aufgabe: Polynomdivision
 id: y8p0ie
 generator: polynomdivision
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.

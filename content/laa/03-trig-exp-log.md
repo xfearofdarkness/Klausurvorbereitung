@@ -117,13 +117,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 48
 
 \(\log_a x^y = y \log_a x\): der Exponent darf vor den Logarithmus gezogen werden. Für Quotienten gilt außerdem \(\log_a \frac{x}{y} = \log_a x - \log_a y\).
 
-## Aufgabe: Aufgabe 7 (Variante)
+## Aufgabe: Kosinus am Einheitskreis
 id: aufgabe-7-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 7
 
 Betrachten Sie den Einheitskreis. Verwenden Sie diesen, um mithilfe der Schuldefinition des Kosinus nachzuweisen, dass die Kosinuskurve die Ihnen bekannte Form hat.
 
-## Aufgabe: Aufgabe 10 (Variante)
+## Aufgabe: Exponentialgleichungen
 id: aufgabe-10-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 10
 

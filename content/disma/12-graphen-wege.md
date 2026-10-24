@@ -172,49 +172,49 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 261
 
 Wenn jeder Kante eine reelle Zahl (Gewicht bzw. Länge) zugeordnet ist; sie muss nicht der geometrischen Länge entsprechen.
 
-## Aufgabe: Aufgabe 27 (Variante)
+## Aufgabe: Wege und Kantenzüge
 id: aufgabe-27-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 27
 
 Zeichnen Sie jeweils einen Graphen mit sieben Knoten, der das Folgende enthält: Kantenfolge, Kantenzug, Weg, vollständiger Kantenzug, vollständiger Weg, geschlossener Kantenzug, geschlossener Weg.
 
-## Aufgabe: Aufgabe 29 (Variante)
+## Aufgabe: Zeichnen in einem Zug
 id: aufgabe-29-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 29
 
 Lassen sich die vollständigen Graphen mit 4, 5 und 6 Knoten jeweils in einem Zug zeichnen, ohne abzusetzen und ohne eine Linie doppelt zu malen? Begründen Sie mit den Knotengraden.
 
-## Aufgabe: Aufgabe 30 (Variante)
+## Aufgabe: Haus vom Nikolaus
 id: aufgabe-30-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 30
 
 Fügen Sie dem Haus vom Nikolaus genau eine Kante hinzu, sodass man es in einem geschlossenen Zug zeichnen kann, ohne abzusetzen und ohne eine Linie doppelt zu malen. Begründen Sie Ihre Wahl mit den Knotengraden.
 
-## Aufgabe: Aufgabe 31 (Variante)
+## Aufgabe: Wiederholung ohne Unterlagen
 id: aufgabe-31-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 31
 
 Beantworten Sie ohne Unterlagen: Was ist eine Abbildung, was eine Urbildmenge? Wann ist eine Abbildung bijektiv? Wie funktioniert vollständige Induktion (an einem eigenen Beispiel)? Wann heißen zwei Mengen gleichmächtig? Was heißt „überabzählbar“? Wie zeigt man, dass \(\mathbb{Q}\) abzählbar ist? Was besagt das Schubfachprinzip (an einem eigenen Beispiel)? Welche Sätze über Primzahlen und über Graphen kennen Sie, und welche davon können Sie beweisen?
 
-## Aufgabe: Aufgabe 32 (Variante)
+## Aufgabe: Weg in einer Kantenfolge
 id: aufgabe-32-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 32
 
 Weisen Sie den Satz aus der Vorlesung nach, nach dem jede Kantenfolge zwischen zwei verschiedenen Knoten A und B auch einen Weg von A nach B enthält.
 
-## Aufgabe: Aufgabe 33 (Variante)
+## Aufgabe: Graph mit Brücken
 id: aufgabe-33-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 33
 
 Zeichnen Sie einen Graphen mit 8 Knoten, der zusammenhängend und schlicht ist, 2 Brücken enthält und in dem ein Eulerkreis existiert.
 
-## Aufgabe: Aufgabe 34 (Variante)
+## Aufgabe: Zusammenhang prüfen
 id: aufgabe-34-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 34
 
-Zeigen Sie für Ihren Graphen aus Aufgabe 33 (Variante) algorithmisch, dass er zusammenhängend ist.
+Zeigen Sie für Ihren Graphen aus der vorigen Aufgabe algorithmisch, dass er zusammenhängend ist.
 
-## Aufgabe: Aufgabe 35 (Variante)
+## Aufgabe: Eulerkreis finden
 id: aufgabe-35-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 35
 

@@ -1,0 +1,18 @@
+{
+  "01_ds-concept-networks.pdf": "Netzwerkgrundlagen",
+  "01_ds-concept-sockets.pdf": "Sockets & Java Networking",
+  "02_ds-java-threads.pdf": "Threads: Grundlagen",
+  "02_vs-overview.1.pdf": "Merkmale & Entwurfsziele",
+  "02_vs-overview.pdf": "Grundlagen & Definitionen",
+  "03-ds-architektur-021.pdf": "Architektur 021",
+  "03-ds-architektur.pdf": "Architektur",
+  "03-ds-http.pdf": "HTTP",
+  "03_ds-concept-threads-2.pdf": "JMM & Synchronisation",
+  "04-ds-glassfish.pdf": "Glassfish",
+  "04_vvs-jms-intro.pdf": "Messaging & JMS",
+  "05_ds-servlets.pdf": "Servlets",
+  "06_ds-java-threads-3.pdf": "Liveness, Executor & virtuelle Threads",
+  "07_ds-concept-components.pdf": "Komponenten & EJB",
+  "07_ds-java-rmi.pdf": "RPC & RMI",
+  "11-ds-soa.pdf": "SOA & Web Services"
+}

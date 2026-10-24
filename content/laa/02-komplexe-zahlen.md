@@ -146,7 +146,7 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 36
 
 \(z_1 \cdot z_2 = r_1 e^{\mathrm{i}\varphi_1} \cdot r_2 e^{\mathrm{i}\varphi_2} = r_1 r_2\, e^{\mathrm{i}(\varphi_1 + \varphi_2)}\): Die Beträge multiplizieren sich und die Winkel addieren sich.
 
-## Aufgabe: Aufgaben 6, 8 (Typ)
+## Aufgabe: Produkt und Quotient
 id: jo4n76
 generator: komplex-produkt-quotient
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.

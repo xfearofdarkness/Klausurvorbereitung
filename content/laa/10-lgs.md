@@ -116,13 +116,13 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 178-179
 
 \(\vec{x}_P + L_H = \{\vec{x}_P + \vec{x}_H \,|\, \vec{x}_H \in L_H\}\): eine partikuläre (auch: spezielle) Lösung \(\vec{x}_P\) plus der Lösungsraum \(L_H\) des zugehörigen homogenen LGSs \(A\vec{x} = \vec{0}\).
 
-## Aufgabe: Aufgabe 31 (Typ)
+## Aufgabe: Gauß-Verfahren
 id: 36ncdd
 generator: gauss-lgs-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Es kommen alle drei Fälle vor (eindeutig, unendlich viele, keine Lösung).
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 31
 
-## Aufgabe: Aufgabe 32 (Variante)
+## Aufgabe: Lösungsmenge
 id: aufgabe-32-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 32
 

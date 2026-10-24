@@ -76,7 +76,7 @@ generator: lineare-regression
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 41; DiskreteMathematikVLHO.pdf, Folien 306-311
 
-## Aufgabe: Aufgabe 41 (Variante)
+## Aufgabe: Regression an der Tabelle
 id: aufgabe-41-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 41
 

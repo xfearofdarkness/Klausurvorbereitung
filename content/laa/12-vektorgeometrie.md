@@ -111,19 +111,19 @@ quelle: VorlesungFolienLAA-2026.pdf, Folien 209-210
 
 Wenn ihr Skalarprodukt Null ist: \(\vec{x} \perp \vec{y} \Leftrightarrow \langle\vec{x}, \vec{y}\rangle = 0\). Beispiel im \(\mathbb{R}^2\): \((1, 0)^T\) und \((0, 1)^T\) mit \(\langle\vec{x}, \vec{y}\rangle = 1 \cdot 0 + 0 \cdot 1 = 0\).
 
-## Aufgabe: Aufgabe 36 (Typ)
+## Aufgabe: Kreuzprodukt
 id: 4swhhf
 generator: kreuzprodukt
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 36
 
-## Aufgabe: Aufgabe 37a (Typ)
+## Aufgabe: Vektor normieren
 id: 1zetqi
 generator: vektor-normieren
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 37
 
-## Aufgabe: Aufgabe 37b (Typ)
+## Aufgabe: Skalarprodukt und Winkel
 id: 1lg6tzq
 generator: skalarprodukt-winkel
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet. Aufgabentyp wie im Übungsblatt.

@@ -95,31 +95,31 @@ quelle: DiskreteMathematikVLHO.pdf, Folie 300
 
 2 (Drehung und Skalierung), obwohl jedes Bild ein Vektor im 1024-dimensionalen Raum ist.
 
-## Aufgabe: Aufgabe 36 (Variante)
+## Aufgabe: Turing-Test
 id: aufgabe-36-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 36
 
 Beschreiben Sie eine Situation, in der ein Mensch den Turing-Test nicht bestehen würde. Was sagt das über den Test als Maß für Intelligenz aus?
 
-## Aufgabe: Aufgabe 37 (Variante)
+## Aufgabe: Eliza und Chatbots
 id: aufgabe-37-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 37
 
 Wie haben Eliza und spätere Chatbots die öffentliche Vorstellung von künstlicher Intelligenz geprägt? Antworten Sie in höchstens zehn Sätzen.
 
-## Aufgabe: Aufgabe 38 (Variante)
+## Aufgabe: Intelligenz ohne Verstehen
 id: aufgabe-38-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 38
 
 Nennen Sie zwei Beispiele, in denen ein System intelligent wirkt, ohne zu verstehen, und vergleichen Sie diese mit einem menschlichen Verhalten.
 
-## Aufgabe: Aufgabe 39 (Variante)
+## Aufgabe: Schwache und starke KI
 id: aufgabe-39-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 39
 
 Schwache oder starke KI: Welche Art von KI kann der Turing-Test überhaupt erkennen? Begründen Sie mit den Definitionen aus der Vorlesung.
 
-## Aufgabe: Aufgabe 40 (Variante)
+## Aufgabe: Fragen an Eliza
 id: aufgabe-40-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 40
 

@@ -1,0 +1,17 @@
+{
+  "01_rabs_grundlagen-04.pdf": "Betriebssysteme",
+  "01_rabs_grundlagen-05.pdf": "Grundlagen Betriebssysteme",
+  "01_rabs_grundlagen.pdf": "Rechnerarchitektur",
+  "01_rabs_intro-01.pdf": "Einordnung & Historie",
+  "02_rabs_speicher.pdf": "Speicherverwaltung",
+  "02_rabs_vna1.pdf": "Von-Neumann-Architektur 1",
+  "03_rabs_dateisystem.pdf": "Dateien & Dateisysteme",
+  "04_rabs-os-konzepte.pdf": "Systemaufrufe, Schutz & Shell",
+  "05_rabs-process.pdf": "Prozesse",
+  "06_rabs-threads.pdf": "Threads",
+  "07_rabs-scheduling.pdf": "Scheduling",
+  "08_rabs-synchro-1.pdf": "Synchronisation",
+  "09_rabs-synchro-2.pdf": "Semaphore & Deadlocks",
+  "10_rabs-ipc.pdf": "IPC & Kooperation",
+  "3_rabs-c-intro.pdf": "C & Systemprogrammierung"
+}

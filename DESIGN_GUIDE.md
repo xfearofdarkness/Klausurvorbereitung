@@ -147,8 +147,13 @@ Abschnitts in der Randspalte, auf einer Höhe mit der Überschrift.
 Darunter steht sie wieder unter dem Text. Tabellen, Formeln, Abläufe
 und Aufgaben nutzen die ganze Inhaltsspalte. Üben folgt demselben
 Fließtext: Überschrift, dünne Trennung, Aktionsknöpfe unter der
-Aufgabe, Folienangabe in der Randspalte. Die Zählung ist eine kleine
-Fläche ohne Rand. In Abläufen steht die Quelle unter dem Schritt, bei
+Aufgabe, Folienangabe in der Randspalte. Die Angabe ist kurz und in der
+UI-Schrift, etwa „Übung 12 · Folien 71, 80“. Hat ein Fach mehrere
+Foliensätze, steht das Kürzel aus `content/<fach-id>/decks.json` davor,
+etwa „Speicherverwaltung · Folie 12“. Ein einzelner Foliensatz bleibt ohne
+Kürzel, Übungsblätter bleiben „Übung 12“. Die volle Quellenzeile bleibt
+in den Daten. Die Zählung ist eine Zeile in sekundärer Textfarbe ohne
+Fläche. In Abläufen steht die Quelle unter dem Schritt, bei
 Karteikarten auf der Rückseite. Die Karteikarte sitzt in der
 Inhaltsspalte horizontal und, soweit der Platz reicht, vertikal mittig.
 Das stützt die Kernregel, dass die Folien Vorrang haben, und macht das

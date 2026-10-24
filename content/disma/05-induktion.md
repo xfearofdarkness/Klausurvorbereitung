@@ -46,19 +46,19 @@ quelle: DiskreteMathematikVLHO.pdf, Folien 90-91
 
 Auf beiden Seiten \(n + 1\) addieren: \(\frac{n(n+1)}{2} + \frac{2(n+1)}{2} = \frac{(n+2)(n+1)}{2} = \frac{(n+1)((n+1)+1)}{2}\), also \(A(n+1)\).
 
-## Aufgabe: Aufgabe 14 (Variante)
+## Aufgabe: Gerade und teilbar
 id: aufgabe-14-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 14
 
 Weisen Sie für natürliche Zahlen \(n\) größer als 0 nach: 1) \(n^2 - n\) ist gerade. 2) \(n^3 - n\) ist durch 3 teilbar.
 
-## Aufgabe: Aufgabe 15 (Variante)
+## Aufgabe: Summe der geraden Zahlen
 id: aufgabe-15-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 15
 
 Weisen Sie für natürliche Zahlen \(n\) größer als 0 mit vollständiger Induktion nach: \[2 + 4 + \cdots + 2n = n(n + 1)\]
 
-## Aufgabe: Aufgabe 16 (Variante)
+## Aufgabe: Exponential gegen Potenz
 id: aufgabe-16-variante
 quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 16
 

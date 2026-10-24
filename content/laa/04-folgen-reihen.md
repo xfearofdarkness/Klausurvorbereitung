@@ -170,50 +170,50 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 74
 
 Für \(x \ne 1\) gilt \(S_n(x) = \sum_{k=0}^{n} x^k = \frac{1 - x^{n+1}}{1 - x}\).
 
-## Aufgabe: Aufgabe 9 (Variante)
+## Aufgabe: Summe von Logarithmen
 id: aufgabe-9-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 9
 
 Bestimmen Sie für beliebige \(n \in \mathbb{N}\) mit \(n \ge 2\) den Wert der Summe \[\sum_{k=2}^{n} \ln\left(1 - \frac{1}{k}\right)\]
 
-## Aufgabe: Aufgabe 11 (Variante)
+## Aufgabe: Komplexe Folge
 id: aufgabe-11-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 11
 
 Beschreiben Sie den Verlauf der komplexen Folge \(\left(\frac{2}{k} e^{-\mathrm{i}k}\right)\). Gegen welchen Grenzwert konvergiert die Folge? Begründen Sie Ihre Wahl.
 
-## Aufgabe: Aufgabe 12 (Variante)
+## Aufgabe: Folgen frei vortragen
 id: aufgabe-12-variante
 notiz: Die Theoriefragen sind auch als Karteikarten dieses Themas mit Folienbeleg enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 12
 
 Erklären Sie ohne Unterlagen und üben Sie, frei vorzutragen:<br>a) Wann ist eine Folge beschränkt, wann konvergent? Geben Sie je ein eigenes Beispiel.<br>b) Wie hängen Nullfolgen und Konvergenz zusammen?<br>c) Was beschreibt eine \(\varepsilon\)-Umgebung, und wie wird sie in der Definition der Konvergenz verwendet?<br>d) Kann eine konvergente Folge zwei Häufungspunkte haben?<br>e) Wie berechnet man den Grenzwert von Summe, Produkt und Quotient konvergenter Folgen?
 
-## Aufgabe: Aufgabe 13 (Variante)
+## Aufgabe: Grenzwerte
 id: aufgabe-13-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 13
 
 Berechnen Sie die folgenden Grenzwerte:<br>a) \(\lim_{n\to\infty} \left(\sqrt{n^2 + bn} - n\right)\)<br>b) \(\lim_{n\to\infty} (-1)^n \cdot \frac{5}{n^2}\)<br>c) \(\lim_{n\to\infty} \left(1 + \frac{1}{n^2}\right)^n\)<br>d) \(\lim_{k\to\infty} \frac{(2k-1)(k+3)(3k+1)}{k^3}\)
 
-## Aufgabe: Aufgabe 14 (Variante)
+## Aufgabe: Unendliche Strecke
 id: aufgabe-14-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 14
 
 Ein Läufer soll 10 km laufen. Er läuft zuerst 1 km, danach 0,1 km, danach 0,01 km usf. Erreicht er das Ziel? Begründen Sie Ihre Antwort mathematisch.
 
-## Aufgabe: Aufgabe 15 (Variante)
+## Aufgabe: Partialsummen
 id: aufgabe-15-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 15
 
 Betrachten Sie die Reihe \(\sum_{n=1}^{\infty} \frac{1}{n^3}\). Bilden Sie den Betrag der Differenz zwischen der 5. und 4. Partialsumme und den Betrag der Differenz zwischen der 6. und 5. Partialsumme. Welcher der Beträge ist größer? Können Sie Ihre Antwort begründen?
 
-## Aufgabe: Aufgabe 16 (Variante)
+## Aufgabe: Kettenreaktion
 id: aufgabe-16-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 16
 
 Kettenreaktion: Ein Neutron spaltet einen Kern, wobei zwei weitere Neutronen entstehen (1. Stufe). Jedes dieser Neutronen spaltet wieder einen Kern, und es entstehen vier Neutronen (2. Stufe). Das setzt sich fort, bis alle Kerne gespalten sind. Nach wie vielen Stufen ist ein Stück mit \(N = 2^{40}\) Kernen vollständig gespalten, und wie lange dauert das, wenn eine Stufe die Dauer \(\tau\) hat?
 
-## Aufgabe: Aufgabe 17 (Variante)
+## Aufgabe: Wiederholung bis zur Ableitung
 id: aufgabe-17-variante
 notiz: Fragt den Stoff der Kapitel Funktionen bis Differenzierbarkeit ab.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 17
