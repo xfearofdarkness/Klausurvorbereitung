@@ -248,6 +248,8 @@ export interface ModeConfig {
   icon: IconName;
   /** Inhalte, von denen mindestens einer vorhanden sein muss, damit der Modus wählbar ist. */
   keys: Array<keyof Pick<Topic, "cards" | "flashcards" | "exercises" | "walkthroughs">>;
+  /** Nomen im Hinweis, wenn der Modus leer ist, z. B. „Aufgaben“. */
+  missing: string;
 }
 
 /** Markierungen des früheren Modus „Fragen“; nur noch für die Übernahme alter Stände. */

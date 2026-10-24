@@ -50,13 +50,10 @@ Node 24 kommt aus `.nvmrc`; `engines.node` ist `24.x`, damit Vercel diese
 Major-Version nimmt. Das Vercel-Projekt braucht keine Env-Variablen.
 `sources/` steht zusätzlich in `.vercelignore` und wird nicht hochgeladen.
 
-GitHub Pages (`.github/workflows/deploy.yml`) ist nur noch die
-Weiterleitung: bei Push auf `main` baut sie mit
-`VITE_BASE=/Klausurvorbereitung/` und `VITE_PAGES_REDIRECT=1` und leitet
-auf https://learn.jamiehuta.com um, inklusive lokalem Fortschritt im
-URL-Fragment. `validate:manifest`
-und `validate:sources` laufen nicht in CI, weil `sources/` nur lokal
-existiert. Sie müssen lokal laufen.
+GitHub Pages (`.github/workflows/deploy.yml`) leitet bei Push auf `main`
+auf https://learn.jamiehuta.com um (`VITE_BASE=/Klausurvorbereitung/`,
+`VITE_PAGES_REDIRECT=1`, Fortschritt im URL-Fragment).
+`validate:manifest` und `validate:sources` laufen nur lokal, nicht in CI.
 
 ## Wo was hingehört
 
@@ -107,6 +104,12 @@ existiert. Sie müssen lokal laufen.
 - `base` kommt aus `VITE_BASE`, Standard `/`. Links relativ halten wie in
   `src/pages/Home.svelte` (`trainer.html?subject=...`), nie mit führendem `/`.
 
+## Manuell testen
+
+`npm run dev` startet http://localhost:5173/. Üben ist für Themen ohne Aufgaben absichtlich deaktiviert, kein Fehler.
+Mit Aufgaben, jeweils das erste Thema: DisMa (`trainer.html?subject=disma`, Aussagen- und Prädikatenlogik) und LAA (`trainer.html?subject=laa`, Funktionen & Polynome).
+Karteikarten: RABS (`trainer.html?subject=rabs`, Einordnung & Historie).
+
 ## Definition of Done
 
 Eine Aufgabe ist erst fertig, wenn alle betroffenen Prüfungen grün sind:
@@ -117,9 +120,7 @@ Eine Aufgabe ist erst fertig, wenn alle betroffenen Prüfungen grün sind:
 4. Bei Inhaltsänderungen an einem Fach zusätzlich `validate:manifest` und
    `validate:sources` für dieses Fach (Befehle oben).
 5. `npm run build`
-6. Bei UI-Änderungen: im Dev-Server die Startseite und
-   `trainer.html?subject=<fach-id>` öffnen, betroffene Modi kurz durchklicken,
-   auch in schmaler Breite.
+6. Bei UI-Änderungen die Wege unter „Manuell testen“, auch in schmaler Breite.
 
 Jede Prüfung, die nicht möglich war, im Abschlussbericht ausdrücklich nennen.
 Inhalte gelten erst nach der fachlichen Endprüfung gegen die Folien als
@@ -135,8 +136,7 @@ Immer:
 
 Erst fragen:
 
-- Push auf `main` (löst das Pages-Deployment aus; Vercel ebenso, sobald
-  das Projekt verbunden ist).
+- Push auf `main` (Pages-Deployment; Vercel ebenso, sobald das Projekt verbunden ist).
 - Neue npm-Abhängigkeiten oder Architekturwechsel (z. B. Router, SvelteKit,
   Backend).
 - Änderungen an Produktregeln in `DESIGN_GUIDE.md` oder `CONTENT_GUIDE.md`.
