@@ -211,44 +211,44 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 115
 
 \(T^{n,0}_f(x) = \sum_{i=0}^{n} \frac{x^i}{i!}\), denn beim Ableiten ändert sich die Exponentialfunktion nicht und damit ist \(f^{(i)}(0) = e^0 = 1\) für alle \(i\).
 
-## Aufgabe: Aufgabe 18
-id: ws32t1
+## Aufgabe: Aufgabe 18 (Variante)
+id: aufgabe-18-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 18
 
-Zeigen Sie, dass die Ableitung einer geraden Funktion ungerade ist, und dass die Ableitung einer ungeraden Funktion gerade ist.
+Zeigen Sie: Ist \(f\) gerade und in 0 differenzierbar, so ist \(f'(0) = 0\).
 
-## Aufgabe: Aufgabe 19
-id: 1s5dfs8
+## Aufgabe: Aufgabe 19 (Variante)
+id: aufgabe-19-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 19
 
-a) Differenzieren Sie die Funktion \(h(x) := x \cdot \cos x \cdot e^x\).<br>b) Leiten Sie \(h'\) ein weiteres Mal ab.
+a) Differenzieren Sie die Funktion \(h(x) := x^2 \cdot \sin x \cdot e^{-x}\).<br>b) Leiten Sie \(h'\) ein weiteres Mal ab.
 
-## Aufgabe: Aufgabe 20
-id: a6x83x
+## Aufgabe: Aufgabe 20 (Variante)
+id: aufgabe-20-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 20
 
-Betrachten Sie \(f(x) := 3x^3 + x\). Bilden Sie die Ableitung dieser Funktion unter Verwendung des Differentialquotienten.
+Betrachten Sie \(f(x) := 2x^2 - 5x\). Bilden Sie die Ableitung dieser Funktion unter Verwendung des Differentialquotienten.
 
-## Aufgabe: Aufgabe 21
-id: mhhvwa
+## Aufgabe: Aufgabe 21 (Variante)
+id: aufgabe-21-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 21
 
-Differenzieren Sie die Funktionen \[f_1(x) := \sqrt{1 - \cos x}, \quad f_2(x) := \ln\sqrt{x}, \quad f_3(x) := e^{(e^x)}\] und geben Sie zuvor den jeweiligen Definitionsbereich an.
+Differenzieren Sie die Funktionen \[g_1(x) := \sqrt{2 + \sin x}, \quad g_2(x) := \ln(x^2 + 1), \quad g_3(x) := e^{\sin x}\] und geben Sie zuvor den jeweiligen Definitionsbereich an.
 
-## Aufgabe: Aufgabe 22
-id: 19acivq
+## Aufgabe: Aufgabe 22 (Variante)
+id: aufgabe-22-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 22
 
-Bestimmen Sie sämtliche lokalen Extrema von \[f: \,]0, \infty[ \to \mathbb{R}, \quad f(x) := \frac{1}{x} \ln x\]
+Bestimmen Sie sämtliche lokalen Extrema von \[f: \,]0, \infty[ \to \mathbb{R}, \quad f(x) := \frac{\ln x}{x^2}\]
 
-## Aufgabe: Aufgabe 23
-id: qcadx8
+## Aufgabe: Aufgabe 23 (Variante)
+id: aufgabe-23-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 23
 
-Betrachten Sie \(f(x) = 3x^3 + 2x^2 + 2x + 2\). Bilden Sie \(T^{3}_{f,0}(x)\). Sind Sie vom Ergebnis überrascht?
+Betrachten Sie \(f(x) = x^3 - 4x^2 + x - 5\). Bilden Sie \(T^{3}_{f,0}(x)\). Was fällt Ihnen am Ergebnis auf?
 
-## Aufgabe: Aufgabe 24
-id: 19vussm
+## Aufgabe: Aufgabe 24 (Variante)
+id: aufgabe-24-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 24
 
-Betrachten Sie \(f(x) = \sin x\). Berechnen Sie \(T^{1}_{f,0}(x)\), \(T^{2}_{f,0}(x)\) und \(T^{3}_{f,0}(x)\) und zusätzlich \(T^{1}_{f,1}(x)\), \(T^{2}_{f,1}(x)\) und \(T^{3}_{f,1}(x)\). Skizzieren Sie alle Taylorpolynome zusammen mit der Sinusfunktion auf \([-\pi, \pi]\). Stellen Sie etwas fest?
+Betrachten Sie \(f(x) = \cos x\). Berechnen Sie \(T^{1}_{f,0}(x)\), \(T^{2}_{f,0}(x)\), \(T^{3}_{f,0}(x)\) sowie \(T^{1}_{f,1}(x)\), \(T^{2}_{f,1}(x)\), \(T^{3}_{f,1}(x)\). Skizzieren Sie die Taylorpolynome zusammen mit der Kosinusfunktion auf \([-\pi, \pi]\). Was stellen Sie fest?

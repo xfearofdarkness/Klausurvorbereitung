@@ -170,52 +170,52 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 74
 
 Für \(x \ne 1\) gilt \(S_n(x) = \sum_{k=0}^{n} x^k = \frac{1 - x^{n+1}}{1 - x}\).
 
-## Aufgabe: Aufgabe 9
-id: 7zqf5q
+## Aufgabe: Aufgabe 9 (Variante)
+id: aufgabe-9-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 9
 
-Bestimmen Sie für beliebige \(n \in \mathbb{N}\) den Wert der Summe \[\sum_{k=1}^{n} \ln\left(1 + \frac{1}{k}\right)\]
+Bestimmen Sie für beliebige \(n \in \mathbb{N}\) mit \(n \ge 2\) den Wert der Summe \[\sum_{k=2}^{n} \ln\left(1 - \frac{1}{k}\right)\]
 
-## Aufgabe: Aufgabe 11
-id: 1ta53a9
+## Aufgabe: Aufgabe 11 (Variante)
+id: aufgabe-11-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 11
 
-Beschreiben Sie den Verlauf der komplexen Folge \(\left(\frac{1}{k} e^{\mathrm{i}k}\right)\). Gegen welchen Grenzwert konvergiert die Folge? Begründen Sie Ihre Wahl.
+Beschreiben Sie den Verlauf der komplexen Folge \(\left(\frac{2}{k} e^{-\mathrm{i}k}\right)\). Gegen welchen Grenzwert konvergiert die Folge? Begründen Sie Ihre Wahl.
 
-## Aufgabe: Aufgabe 12
-id: 1p7napg
-notiz: Die Theoriefragen sind auch im Modus „Fragen“ dieses Themas mit Folienbeleg enthalten.
+## Aufgabe: Aufgabe 12 (Variante)
+id: aufgabe-12-variante
+notiz: Die Theoriefragen sind auch als Karteikarten dieses Themas mit Folienbeleg enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 12
 
-Denken Sie über die folgenden Fragen nach, rekapitulieren Sie den zugehörigen Stoff und lernen Sie, die Lösungen in der Übung frei vorzutragen:<br>a) Was ist eine Folge? Nennen Sie Beispiele.<br>b) Wie ist die Konvergenz einer Folge definiert?<br>c) Was ist eine Nullfolge?<br>d) Was ist eine \(\varepsilon\)-Umgebung eines Punktes?<br>e) Welche Anzahl von Häufungspunkten hat eine konvergente Folge?<br>f) Nennen Sie drei wichtige Rechenregeln für konvergente Folgen.
+Erklären Sie ohne Unterlagen und üben Sie, frei vorzutragen:<br>a) Wann ist eine Folge beschränkt, wann konvergent? Geben Sie je ein eigenes Beispiel.<br>b) Wie hängen Nullfolgen und Konvergenz zusammen?<br>c) Was beschreibt eine \(\varepsilon\)-Umgebung, und wie wird sie in der Definition der Konvergenz verwendet?<br>d) Kann eine konvergente Folge zwei Häufungspunkte haben?<br>e) Wie berechnet man den Grenzwert von Summe, Produkt und Quotient konvergenter Folgen?
 
-## Aufgabe: Aufgabe 13
-id: 19xjpg8
+## Aufgabe: Aufgabe 13 (Variante)
+id: aufgabe-13-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 13
 
-Berechnen Sie die folgenden Grenzwerte:<br>a) \(\lim_{n\to\infty} \left(\sqrt{n^2 + an + 1} - \sqrt{n^2 + 1}\right)\)<br>b) \(\lim_{n\to\infty} (-1)^n \cdot \frac{23}{n}\)<br>c) \(\lim_{n\to\infty} \left(1 - \frac{1}{n^2}\right)^n\)<br>d) \(\lim_{k\to\infty} \frac{(k+1)(2k-3)(k+2)}{k^3}\)
+Berechnen Sie die folgenden Grenzwerte:<br>a) \(\lim_{n\to\infty} \left(\sqrt{n^2 + bn} - n\right)\)<br>b) \(\lim_{n\to\infty} (-1)^n \cdot \frac{5}{n^2}\)<br>c) \(\lim_{n\to\infty} \left(1 + \frac{1}{n^2}\right)^n\)<br>d) \(\lim_{k\to\infty} \frac{(2k-1)(k+3)(3k+1)}{k^3}\)
 
-## Aufgabe: Aufgabe 14
-id: 1xbid6p
+## Aufgabe: Aufgabe 14 (Variante)
+id: aufgabe-14-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 14
 
-Ein Marathonläufer muss 42,195 km laufen, um ins Ziel zu kommen. Dazu muss er zuerst 4,2195 km laufen, danach 0,42195 km usf. Können Sie mathematisch beweisen, dass der Marathonläufer das Ziel erreicht?
+Ein Läufer soll 10 km laufen. Er läuft zuerst 1 km, danach 0,1 km, danach 0,01 km usf. Erreicht er das Ziel? Begründen Sie Ihre Antwort mathematisch.
 
-## Aufgabe: Aufgabe 15
-id: woa607
+## Aufgabe: Aufgabe 15 (Variante)
+id: aufgabe-15-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 15
 
-Betrachten Sie die Reihe \(\sum_{n=1}^{\infty} \frac{1}{n^2}\). Bilden Sie den Betrag der Differenz zwischen der 7. und 6. Partialsumme und den Betrag der Differenz der 8. und 7. Partialsumme. Welcher der Beträge ist größer? Können Sie Ihre Antwort begründen?
+Betrachten Sie die Reihe \(\sum_{n=1}^{\infty} \frac{1}{n^3}\). Bilden Sie den Betrag der Differenz zwischen der 5. und 4. Partialsumme und den Betrag der Differenz zwischen der 6. und 5. Partialsumme. Welcher der Beträge ist größer? Können Sie Ihre Antwort begründen?
 
-## Aufgabe: Aufgabe 16
-id: 128at77
+## Aufgabe: Aufgabe 16 (Variante)
+id: aufgabe-16-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 16
 
-Die Explosion einer Atombombe: Ein Neutron spaltet einen Plutoniumkern, wobei drei weitere Neutronen entstehen (1. Zerfallsstufe). Jedes der drei erzeugten Neutronen spaltet einen weiteren Kern und es entstehen insgesamt neun Neutronen (2. Zerfallsstufe). Dieses Spiel setzt sich fort, bis alle Plutoniumkerne zerfallen sind (Kettenreaktion). Wie lange dauert der vollständige Zerfall eines Plutoniumstücks mit \(N = 7{,}85 \cdot 10^{26}\) Kernen, wenn die Dauer einer Zerfallsstufe \(\tau\) beträgt?
+Kettenreaktion: Ein Neutron spaltet einen Kern, wobei zwei weitere Neutronen entstehen (1. Stufe). Jedes dieser Neutronen spaltet wieder einen Kern, und es entstehen vier Neutronen (2. Stufe). Das setzt sich fort, bis alle Kerne gespalten sind. Nach wie vielen Stufen ist ein Stück mit \(N = 2^{40}\) Kernen vollständig gespalten, und wie lange dauert das, wenn eine Stufe die Dauer \(\tau\) hat?
 
-## Aufgabe: Aufgabe 17
-id: 1u3hbks
-notiz: Umfasst den Stoff der Kapitel Funktionen bis Differenzierbarkeit (Aufgabenteile a–v im Übungsblatt).
+## Aufgabe: Aufgabe 17 (Variante)
+id: aufgabe-17-variante
+notiz: Fragt den Stoff der Kapitel Funktionen bis Differenzierbarkeit ab.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 17
 
-Wiederholungsfragen zum frei Vortragen in der Übung — u. a.: Was ist die geometrische Summe (Wert für beliebiges \(x \in \mathbb{R}\), \(n \in \mathbb{N}\))? Imaginär- und Realteil einer komplexen Zahl? Grundrechenregeln für komplexe Zahlen? Polarkoordinatendarstellung? Was ist ein Polynom, wie funktioniert Polynomdivision? Zusammenhang Sinus/Kosinus/Tangens mit Nullstellen? Zusammenhang Logarithmus/Exponentialfunktion? Was ist eine Folge, \(\varepsilon\)-Umgebung, Zusammenhang Reihen/Folgen, Partialsumme, konvergente/divergente Reihen? Definition Stetigkeit und lokales Minimum? Was sind Sekante und Tangente (mit Skizzen)?
+Wiederholung zum freien Vortragen (Stoff von den Funktionen bis zur Differenzierbarkeit): Leiten Sie den Wert der geometrischen Summe her. Wie rechnet man mit komplexen Zahlen, und wie wechselt man in die Polarkoordinatendarstellung? Wie dividiert man Polynome? Wo liegen die Nullstellen von Sinus, Kosinus und Tangens? Wie hängen Logarithmus und Exponentialfunktion zusammen? Was unterscheidet Folgen und Reihen, was ist eine Partialsumme, wann konvergiert eine Reihe? Wie sind Stetigkeit und lokale Extrema definiert? Erklären Sie Sekante und Tangente an einer eigenen Skizze.

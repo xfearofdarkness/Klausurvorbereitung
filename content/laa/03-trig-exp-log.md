@@ -117,14 +117,14 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 48
 
 \(\log_a x^y = y \log_a x\) — der Exponent darf vor den Logarithmus gezogen werden. Für Quotienten gilt außerdem \(\log_a \frac{x}{y} = \log_a x - \log_a y\).
 
-## Aufgabe: Aufgabe 7
-id: hg7ivb
+## Aufgabe: Aufgabe 7 (Variante)
+id: aufgabe-7-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 7
 
-Betrachten Sie den Einheitskreis. Verwenden Sie diesen, um mithilfe der Schuldefinition des Sinus nachzuweisen, dass die Sinuskurve die Ihnen bekannte Form hat.
+Betrachten Sie den Einheitskreis. Verwenden Sie diesen, um mithilfe der Schuldefinition des Kosinus nachzuweisen, dass die Kosinuskurve die Ihnen bekannte Form hat.
 
-## Aufgabe: Aufgabe 10
-id: vga2h2
+## Aufgabe: Aufgabe 10 (Variante)
+id: aufgabe-10-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 10
 
-a) Lösen Sie die folgende Exponentialgleichung: \(a^{2x+n} = \frac{a^{3x+2n}}{a^{3n}}\)<br>b) Vereinfachen Sie den folgenden Term: \(\frac{(p^2 - 16q^2)^{n+1}}{(p + 4q)^{n+1}}\)<br>c) Lösen Sie die Klammern auf: \((m - n)^{-2}\)<br>d) \(\log_2 a - \log_2 b\)<br>e) \(2 \cdot \log x + \frac{1}{2}\log x^4 - \log x^2\)
+a) Lösen Sie die folgende Exponentialgleichung: \(a^{x+2n} = \frac{a^{3x+n}}{a^{2n}}\)<br>b) Vereinfachen Sie den folgenden Term: \(\frac{(9p^2 - q^2)^{n}}{(3p - q)^{n}}\)<br>c) Lösen Sie die Klammern auf: \((m + 2n)^{-2}\)<br>d) Fassen Sie zusammen: \(\log_3 a + \log_3 b\)<br>e) Vereinfachen Sie: \(3 \cdot \log x - \frac{1}{3}\log x^6 + \log x^2\)

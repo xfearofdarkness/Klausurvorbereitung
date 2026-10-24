@@ -122,8 +122,8 @@ generator: gauss-lgs-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — es kommen alle drei Fälle vor (eindeutig, unendlich viele, keine Lösung).
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 31
 
-## Aufgabe: Aufgabe 32
-id: 1u8rtp
+## Aufgabe: Aufgabe 32 (Variante)
+id: aufgabe-32-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 32
 
-Für welche Werte von \(\alpha \in \mathbb{R}\) hat das lineare Gleichungssystem \[\begin{aligned} x + y + z &= 2 \\ x + 2y - 2z &= 2 \\ 3x + y + \alpha^2 z &= 2\alpha \end{aligned}\] keine, eine bzw. unendlich viele Lösungen?
+Für welche Werte von \(\alpha \in \mathbb{R}\) hat das lineare Gleichungssystem \[\begin{aligned} x + y + z &= 1 \\ x + 2y + 3z &= 2 \\ x + 3y + (\alpha^2 + 1) z &= \alpha + 1 \end{aligned}\] keine, eine bzw. unendlich viele Lösungen?

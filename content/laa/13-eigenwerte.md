@@ -99,9 +99,9 @@ generator: eigenwerte-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — die Eigenwerte sind stets ganzzahlig.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 38
 
-## Aufgabe: Aufgabe 39
-id: idpc55
-notiz: Umfasst den Stoff der Kapitel Vektorräume bis Eigenwerte (Aufgabenteile a–q im Übungsblatt). Die Theoriefragen sind in den Modi „Fragen“ der jeweiligen Themen mit Folienbeleg enthalten.
+## Aufgabe: Aufgabe 39 (Variante)
+id: aufgabe-39-variante
+notiz: Fragt den Stoff der Kapitel Vektorräume bis Eigenwerte ab. Die Theoriefragen sind auch als Karteikarten der jeweiligen Themen enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 39
 
-Wiederholungsfragen zur linearen Algebra — u. a.: Definition des Vektorraums der reellen Zahlen und der linearen Unabhängigkeit; Rang einer Matrix; besondere Matrizentypen; inhomogene LGS; erlaubte Operationen beim Gauß-Algorithmus; Laplace'scher Entwicklungssatz; Anwendungen und geometrische Interpretation der Determinante; Regel von Sarrus; Folgerungen aus \(\det A \ne 0\); Rechenregeln für Determinanten; Definition des Kreuzprodukts; Standardskalarprodukt und Standardnorm; Winkelberechnung im \(\mathbb{R}^n\); Eigenwertgleichung und charakteristisches Polynom.
+Wiederholung zum freien Vortragen (Stoff von den Vektorräumen bis zu den Eigenwerten): Wann sind Vektoren linear unabhängig, und was ist eine Basis? Wie bestimmt man den Rang einer Matrix? Welche besonderen Matrizentypen kennen Sie? Wann ist ein inhomogenes LGS lösbar, und welche Umformungen erlaubt der Gauß-Algorithmus? Wie berechnet man Determinanten mit dem Entwicklungssatz und mit der Regel von Sarrus, und was bedeutet \(\det A \ne 0\)? Was beschreiben Kreuzprodukt, Skalarprodukt und Norm geometrisch, und wie berechnet man einen Winkel? Wie findet man Eigenwerte über das charakteristische Polynom?

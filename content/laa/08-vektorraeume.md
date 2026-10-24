@@ -94,8 +94,8 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 145
 
 Die Vektoren \(\vec{e}_1 = (1, 0, \ldots, 0)^T\) bis \(\vec{e}_n = (0, \ldots, 0, 1)^T\) — bei jedem ist genau eine Koordinate 1 und alle anderen sind 0.
 
-## Aufgabe: Aufgabe 28
-id: 1iyilnk
+## Aufgabe: Aufgabe 28 (Variante)
+id: aufgabe-28-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 28
 
-Finden Sie diejenigen Zahlen \(\alpha \in \mathbb{R}\), für die folgende Vektoren eine Basis des \(\mathbb{R}^3\) bilden: \[\begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}, \quad \begin{pmatrix} 2 \\ 0 \\ -2 \end{pmatrix}, \quad \begin{pmatrix} 0 \\ \alpha + 1 \\ 1 \end{pmatrix}\]
+Finden Sie diejenigen Zahlen \(\alpha \in \mathbb{R}\), für die folgende Vektoren eine Basis des \(\mathbb{R}^3\) bilden: \[\begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix}, \quad \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix}, \quad \begin{pmatrix} \alpha \\ 0 \\ 1 \end{pmatrix}\]

@@ -130,11 +130,11 @@ generator: matrixprodukt-2x2
 notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt und die Lösung wird berechnet — Aufgabentyp wie im Übungsblatt.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 29
 
-## Aufgabe: Aufgabe 30
-id: 3uk6lz
+## Aufgabe: Aufgabe 30 (Variante)
+id: aufgabe-30-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 30
 
-Für welche reellen Werte von \(\alpha\) ist die Matrix \[A = \begin{pmatrix} 2 & \alpha \\ 1 & 3 \end{pmatrix}\] symmetrisch?
+Für welche reellen Werte von \(\alpha\) ist die Matrix \[A = \begin{pmatrix} \alpha^2 & 4 \\ \alpha + 2 & 1 \end{pmatrix}\] symmetrisch?
 
 ## Ablauf: Matrixprodukt Schritt für Schritt
 nach: Matrixprodukt für (2×2)-Matrizen

@@ -118,29 +118,29 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 22
 
 Die Nullstellen des Nennerpolynoms \(q\) — an diesen Punkten ist die rationale Funktion nicht definiert. Die Nullstellen von \(f\) selbst sind dagegen die Nullstellen des Zählerpolynoms \(p\).
 
-## Aufgabe: Aufgabe 1
-id: 1ps2g8i
+## Aufgabe: Aufgabe 1 (Variante)
+id: aufgabe-1-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 1
 
-Beweisen oder widerlegen Sie: Die Summe von zwei beschränkten Funktionen ist stets wieder beschränkt.
+Beweisen oder widerlegen Sie: Das Produkt von zwei beschränkten Funktionen ist stets wieder beschränkt.
 
-## Aufgabe: Aufgabe 2
-id: nyayjb
+## Aufgabe: Aufgabe 2 (Variante)
+id: aufgabe-2-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 2
 
-Beweisen oder widerlegen Sie: Die Summe von zwei periodischen Funktionen ist stets wieder periodisch, wenn sie die gleiche Periode haben.
+Beweisen oder widerlegen Sie: Das Produkt von zwei periodischen Funktionen mit der gleichen Periode ist stets wieder periodisch.
 
-## Aufgabe: Aufgabe 3
-id: 1b90z1m
+## Aufgabe: Aufgabe 3 (Variante)
+id: aufgabe-3-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 3
 
-Beweisen oder widerlegen Sie: Das Produkt von einer geraden und einer ungeraden Funktion ist stets ungerade.
+Beweisen oder widerlegen Sie: Das Produkt von zwei geraden Funktionen ist stets gerade.
 
-## Aufgabe: Aufgabe 4
-id: 1uf0451
+## Aufgabe: Aufgabe 4 (Variante)
+id: aufgabe-4-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 4
 
-Beweisen oder widerlegen Sie: Das Produkt von zwei ungeraden Funktionen ist stets gerade.
+Beweisen oder widerlegen Sie: Die Summe einer geraden und einer ungeraden Funktion ist stets gerade oder ungerade.
 
 ## Aufgabe: Aufgabe 5 (Typ)
 id: y8p0ie

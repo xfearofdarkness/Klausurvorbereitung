@@ -129,21 +129,21 @@ quelle: VorlesungFolienLAA-2026.pdf, Folie 133
 
 Man wählt \(f(x) := x\) und \(g'(x) := e^x\): \(\int_a^b x e^x\,dx = x e^x\big|_a^b - \int_a^b 1 \cdot e^x\,dx = (x - 1)e^x\big|_a^b\).
 
-## Aufgabe: Aufgabe 25
-id: 19c95gj
-notiz: Die Theoriefragen sind auch im Modus „Fragen“ dieses Themas mit Folienbeleg enthalten.
+## Aufgabe: Aufgabe 25 (Variante)
+id: aufgabe-25-variante
+notiz: Die Theoriefragen sind auch als Karteikarten dieses Themas mit Folienbeleg enthalten.
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 25
 
-a) Was ist die Grundidee bei der Berechnung von bestimmten Integralen? Fertigen Sie Skizzen an.<br>b) Sind differenzierbare Funktionen integrierbar?<br>c) Was besagt der Hauptsatz der Differenzial- und Integralrechnung?
+a) Erklären Sie an einer eigenen Skizze, wie man den Flächeninhalt unter einem Funktionsgraphen durch Rechtecke annähert.<br>b) Welche Funktionen sind laut Vorlesung integrierbar? Gehören differenzierbare Funktionen dazu?<br>c) Wie berechnet man mit dem Hauptsatz ein bestimmtes Integral aus einer Stammfunktion?
 
-## Aufgabe: Aufgabe 26
-id: 1pagpk8
+## Aufgabe: Aufgabe 26 (Variante)
+id: aufgabe-26-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 26
 
-Begründen Sie durch eine allgemeine Rechnung (unter Verwendung von bestimmten und unbestimmten Integralen), warum die Integrationskonstante bei der Flächenberechnung vernachlässigt werden kann.
+Sei \(F\) eine Stammfunktion von \(f\). Zeigen Sie durch eine allgemeine Rechnung, dass \(\int_a^b f(x)\,dx\) mit \(F + C\) für jede Konstante \(C\) denselben Wert ergibt, und erklären Sie, was das für die Flächenberechnung bedeutet.
 
-## Aufgabe: Aufgabe 27
-id: 1rsqhc6
+## Aufgabe: Aufgabe 27 (Variante)
+id: aufgabe-27-variante
 quelle: ÜbungsaufgabenLAA.pdf, Aufgabe 27
 
-Berechnen Sie folgende Stammfunktionen: \[\int \frac{1}{x^3}\,dx, \quad \int \cos x \sin x\,dx, \quad \int x \sin x\,dx, \quad \int \cos^2 x\,dx\]
+Berechnen Sie folgende Stammfunktionen: \[\int \frac{1}{x^4}\,dx, \quad \int \sin x \cos^2 x\,dx, \quad \int x \cos x\,dx, \quad \int \sin^2 x\,dx\]
