@@ -664,8 +664,8 @@ function schedulingGenerator(kind: SchedulingKind): Generator {
 }
 
 /** Rechnet das Folienbeispiel nach; liefert eine Fehlermeldung, wenn ein Wert abweicht. */
-function checkSchedulingSlideExample(): string | null {
-  for (const expected of SCHEDULING_SLIDE_RESULTS) {
+function checkSchedulingSlideExample(kind: SchedulingKind): string | null {
+  for (const expected of SCHEDULING_SLIDE_RESULTS.filter((result) => result.kind === kind)) {
     const result = simulateScheduling(expected.kind, SCHEDULING_SLIDE_PROCESSES, expected.quantum);
     const same = (a: number[], b: number[]): boolean => a.length === b.length && a.every((value, index) => value === b[index]);
     if (!same(result.turnaround, expected.turnaround) || !same(result.waiting, expected.waiting)) {
@@ -696,11 +696,11 @@ const GENERATORS: Record<string, Generator> = {
 
 /** Prüfungen, ob ein Generator das Folienbeispiel seines Verfahrens exakt nachrechnet. */
 const SLIDE_EXAMPLE_CHECKS: Record<string, () => string | null> = {
-  "scheduling-fcfs": checkSchedulingSlideExample,
-  "scheduling-sjf": checkSchedulingSlideExample,
-  "scheduling-rr": checkSchedulingSlideExample,
-  "scheduling-prio-np": checkSchedulingSlideExample,
-  "scheduling-prio-p": checkSchedulingSlideExample
+  "scheduling-fcfs": () => checkSchedulingSlideExample("fcfs"),
+  "scheduling-sjf": () => checkSchedulingSlideExample("sjf"),
+  "scheduling-rr": () => checkSchedulingSlideExample("rr"),
+  "scheduling-prio-np": () => checkSchedulingSlideExample("prio-np"),
+  "scheduling-prio-p": () => checkSchedulingSlideExample("prio-p")
 };
 
 /** Fehlermeldung, wenn der Generator sein Folienbeispiel nicht reproduziert; null, wenn alles stimmt oder es keins gibt. */
