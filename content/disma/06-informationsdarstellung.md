@@ -135,6 +135,12 @@ quelle: ÜbungsaufgabenDisMa.pdf, Aufgabe 17
 
 Finden Sie eine Schaltung aus Schaltern und einer Lampe, die das logische „nicht und“ (nand) darstellt.
 
+## Aufgabe: Dual- und Hexadezimaldarstellung
+id: rm-dual-hexadezimal
+generator: dual-hexadezimal
+notiz: Rechenmodul: Die Zahlen werden zufällig erzeugt, die Lösung wird nach dem Verfahren der Folien berechnet.
+quelle: DiskreteMathematikVLHO.pdf, Folie 95
+
 ## Aufgabe: Disjunktive Normalform
 id: rm-disjunktive-normalform
 generator: disjunktive-normalform

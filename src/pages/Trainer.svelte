@@ -18,8 +18,11 @@
     getPracticeState,
     getSubjectProgress,
     loadProgress,
+    migrateLegacyProgress,
+    needsLegacyMigration,
     saveUiState,
     summarizeTopicProgress,
+    type LegacySubjectKeys,
     type TopicProgressSummary
   } from "../lib/progress";
   import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, Topic } from "../types/content";
@@ -67,6 +70,10 @@
     try {
       const module = await loader();
       const loadedSubject = normalizeSubject(module.default, subjectMeta);
+      if (needsLegacyMigration(progress, loadedSubject.id)) {
+        const { default: legacyKeys } = await import("../data/legacyProgressKeys.json");
+        migrateLegacyProgress(progress, loadedSubject, (legacyKeys as Record<string, LegacySubjectKeys>)[loadedSubject.id]);
+      }
       await prepareRichText(loadedSubject.features.math === true);
       subject = loadedSubject;
       document.title = `${subject.title} Klausurtrainer`;

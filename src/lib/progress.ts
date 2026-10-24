@@ -64,70 +64,103 @@ export function getSubjectProgress(progress: AppProgress, subject: Subject): Sub
     subjectProgress.ui = {};
   }
   if (subjectProgress.version !== PROGRESS_VERSION) {
-    if ((subjectProgress.version ?? 1) < CONTENT_KEY_VERSION) migrateIndexKeys(subjectProgress, subject);
-    migrateQuizToFlash(subjectProgress, subject);
-    subjectProgress.version = PROGRESS_VERSION;
+    if ((subjectProgress.version ?? 1) < CONTENT_KEY_VERSION) discardIndexMarks(subjectProgress);
+    finishMigration(subjectProgress);
   }
 
   progress.subjects[subject.id] = subjectProgress;
   return subjectProgress;
 }
 
-/**
- * Ältere Stände speicherten Markierungen und Thema über Listenpositionen. Sie werden einmalig
- * anhand der aktuellen Inhalte auf Inhaltsschlüssel bzw. Topic-IDs übertragen.
- */
-function migrateIndexKeys(subjectProgress: SubjectProgress, subject: Subject): void {
-  const topicById = new Map(subject.topics.map((topic) => [topic.id, topic]));
-  const migrate = <T>(records: Record<string, MarkState<T>> | undefined, items: (topic: Topic) => Array<{ key: string }>): void => {
-    if (!records) return;
-    for (const [topicId, marks] of Object.entries(records)) {
-      const topic = topicById.get(topicId);
-      if (!topic || !isRecord(marks)) {
-        delete records[topicId];
-        continue;
-      }
-      const migrated: MarkState<T> = {};
-      for (const [key, mark] of Object.entries(marks)) {
-        const item = LEGACY_INDEX_PATTERN.test(key) ? items(topic)[Number(key)] : undefined;
-        if (item) migrated[item.key] = mark as T;
-      }
-      records[topicId] = migrated;
-    }
-  };
+/** Alte Listenpositionen eines Fachs: Topic-Reihenfolge und je Thema die neue Id pro Position (null = verworfen). */
+export interface LegacySubjectKeys {
+  topicOrder: string[];
+  topics: Record<string, { flash: Array<string | null>; quiz: Array<string | null>; practice: Array<string | null> }>;
+}
 
-  migrate(subjectProgress.flash, (topic) => topic.flashcards);
-  migrate(subjectProgress.practice, (topic) => topic.exercises);
-
-  const ui = subjectProgress.ui;
-  if (ui && ui.lastTopicId === undefined && typeof ui.lastTopicIndex === "number") {
-    ui.lastTopicId = subject.topics[ui.lastTopicIndex]?.id;
-  }
-  if (ui) delete ui.lastTopicIndex;
+/** Stände der früheren Version speicherten Markierungen nach Listenposition statt nach Id. */
+export function needsLegacyMigration(progress: AppProgress, subjectId: Subject["id"]): boolean {
+  const current = progress.subjects[subjectId];
+  return isRecord(current) && ((current as SubjectProgress).version ?? 1) < CONTENT_KEY_VERSION;
 }
 
 /**
- * Der Modus „Fragen“ ist in den Karteikarten aufgegangen. Eine Frage, deren Text jetzt Vorderseite
- * einer Karteikarte ist, hat denselben Schlüssel; ihre Markierung wird übernommen, sofern die Karte
- * noch keine eigene hat. Markierungen von Fragen ohne solche Karte entfallen.
+ * Überträgt einen Stand der früheren Version einmalig auf Ids. Die Zuordnung stammt aus den Inhalten
+ * dieser Version (exakter Text); Positionen ohne eindeutige Entsprechung werden verworfen statt
+ * einer falschen Karte zugeordnet. Markierungen des früheren Modus „Fragen“ gehen in die Karteikarte
+ * mit demselben Text über, sofern diese noch keine eigene hat.
  */
-function migrateQuizToFlash(subjectProgress: SubjectProgress, subject: Subject): void {
-  const quiz = isRecord(subjectProgress.quiz) ? subjectProgress.quiz : {};
-  for (const topic of subject.topics) {
-    const marks = quiz[topic.id];
-    if (!isRecord(marks)) continue;
-    const flash = (subjectProgress.flash[topic.id] = subjectProgress.flash[topic.id] || {});
-    for (const card of topic.flashcards) {
-      const mark = marks[card.key];
-      if (flash[card.key] || (mark !== "correct" && mark !== "wrong")) continue;
-      flash[card.key] = mark === "correct" ? "know" : "repeat";
+export function migrateLegacyProgress(progress: AppProgress, subject: Subject, legacy: LegacySubjectKeys | undefined): void {
+  const subjectProgress = getSubjectProgressRecord(progress, subject);
+  if ((subjectProgress.version ?? 1) >= CONTENT_KEY_VERSION) return;
+  const topicById = new Map(subject.topics.map((topic) => [topic.id, topic]));
+  const remap = <T>(
+    records: Record<string, MarkState<unknown>> | undefined,
+    kind: "flash" | "quiz" | "practice",
+    validKeys: (topic: Topic) => Set<string>,
+    convert: (mark: unknown) => T | undefined,
+    target: Record<string, MarkState<T>>
+  ): void => {
+    if (!isRecord(records)) return;
+    for (const [topicId, marks] of Object.entries(records)) {
+      const topic = topicById.get(topicId);
+      const ids = legacy?.topics[topicId]?.[kind];
+      if (!topic || !ids || !isRecord(marks)) continue;
+      const valid = validKeys(topic);
+      const migrated = (target[topicId] = isRecord(target[topicId]) ? target[topicId] : {});
+      for (const [key, mark] of Object.entries(marks)) {
+        const id = LEGACY_INDEX_PATTERN.test(key) ? ids[Number(key)] : null;
+        const value = convert(mark);
+        if (id && valid.has(id) && value !== undefined && migrated[id] === undefined) migrated[id] = value;
+      }
     }
-  }
-  delete subjectProgress.quiz;
+  };
+  const flashKeys = (topic: Topic) => new Set(topic.flashcards.map((card) => card.key));
+  const flash: Record<string, MarkState<FlashMark>> = {};
+  const practice: Record<string, MarkState<PracticeMark>> = {};
+  remap(subjectProgress.flash, "flash", flashKeys, (mark) => (mark === "know" || mark === "repeat" ? mark : undefined), flash);
+  remap(subjectProgress.quiz, "quiz", flashKeys, (mark) => (mark === "correct" ? "know" : mark === "wrong" ? "repeat" : undefined), flash);
+  remap(subjectProgress.practice, "practice", (topic) => new Set(topic.exercises.map((exercise) => exercise.key)), (mark) => (mark === "done" ? mark : undefined), practice);
+  subjectProgress.flash = flash;
+  if (subjectProgress.practice !== undefined) subjectProgress.practice = practice;
 
   const ui = subjectProgress.ui;
-  const replacement = ui?.lastMode ? REMOVED_MODES[ui.lastMode] : undefined;
-  if (ui && replacement) ui.lastMode = replacement;
+  if (ui && typeof ui.lastTopicIndex === "number") ui.lastTopicId = legacy?.topicOrder[ui.lastTopicIndex];
+  finishMigration(subjectProgress);
+}
+
+function getSubjectProgressRecord(progress: AppProgress, subject: Subject): SubjectProgress {
+  const current = progress.subjects[subject.id];
+  const subjectProgress = isRecord(current) ? (current as SubjectProgress) : { version: PROGRESS_VERSION, flash: {} };
+  progress.subjects[subject.id] = subjectProgress;
+  return subjectProgress;
+}
+
+/** Ohne Zuordnungstabelle lassen sich Listenpositionen nicht sicher übertragen; sie werden verworfen. */
+function discardIndexMarks(subjectProgress: SubjectProgress): void {
+  const keep = (records: Record<string, MarkState<unknown>> | undefined): void => {
+    if (!isRecord(records)) return;
+    for (const [topicId, marks] of Object.entries(records)) {
+      if (!isRecord(marks)) {
+        delete records[topicId];
+        continue;
+      }
+      for (const key of Object.keys(marks)) if (LEGACY_INDEX_PATTERN.test(key)) delete marks[key];
+    }
+  };
+  keep(subjectProgress.flash);
+  keep(subjectProgress.practice);
+}
+
+function finishMigration(subjectProgress: SubjectProgress): void {
+  delete subjectProgress.quiz;
+  const ui = subjectProgress.ui;
+  if (ui) {
+    delete ui.lastTopicIndex;
+    const replacement = ui.lastMode ? REMOVED_MODES[ui.lastMode] : undefined;
+    if (replacement) ui.lastMode = replacement;
+  }
+  subjectProgress.version = PROGRESS_VERSION;
 }
 
 export function getFlashState(progress: AppProgress, subject: Subject, topicId: string): MarkState<FlashMark> {
