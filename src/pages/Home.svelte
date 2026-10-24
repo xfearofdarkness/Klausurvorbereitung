@@ -45,8 +45,8 @@
       </a>
     {/each}
   </div>
+  <div class="home-foot">
+    <ProgressBackup />
+    <p class="footer">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</p>
+  </div>
 </main>
-<div class="home-foot">
-  <ProgressBackup />
-  <footer class="footer" aria-label="Hinweis">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</footer>
-</div>

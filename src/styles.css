@@ -169,6 +169,9 @@ button:disabled {
 }
 
 .home-shell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   width: 100%;
   max-width: 48rem;
 }
@@ -283,7 +286,7 @@ a.card.is-last .card-badge {
 
 .home-foot .footer {
   margin-top: 0.35rem;
-  padding-top: 0;
+  padding: 0 var(--gutter) 0;
 }
 
 .agent-hint {
@@ -588,12 +591,6 @@ a.card.is-last .card-badge {
     background: transparent;
   }
 
-  .mode-btn,
-  .mode-btn:hover:not(.unavailable):not(.active),
-  .mode-btn.active {
-    background: transparent;
-  }
-
   .mode-btn .icon {
     display: grid;
     place-items: center;
@@ -660,10 +657,6 @@ a.card.is-last .card-badge {
   .mode-btn .icon svg {
     width: 1rem;
     height: 1rem;
-  }
-
-  .mode-btn {
-    background: transparent;
   }
 
   .mode-btn.active {
