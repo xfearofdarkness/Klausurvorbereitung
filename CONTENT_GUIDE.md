@@ -111,8 +111,12 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 Der optionale Themenabschnitt `exercises` enthält Aufgaben zum Selbstrechnen.
 Sie stammen aus zwei Quellen:
 
-- **Übungsblätter:** Aufgaben eines offiziellen Übungsblatts. Der Aufgabentext
-  bleibt so nah wie möglich am Blatt.
+- **Übungsblätter:** Aufgaben eines offiziellen Übungsblatts. Sie werden nicht
+  wortgleich übernommen, damit sich Lösungen zum Blatt nicht abschreiben
+  lassen: Aufgaben mit konkreten Daten werden zu Varianten mit anderen Daten
+  (`ref` z. B. "Aufgabe 7 (Variante)") oder zu Rechenmodulen; offene Aufgaben
+  werden so umformuliert, dass sie denselben Stoff üben. Jede Variante muss
+  lösbar sein und darf die Lösung einer anderen Blattaufgabe nicht verraten.
 - **Folien:** Aufgaben, die ein auf den Folien beschriebenes oder
   vorgerechnetes Verfahren anwenden, etwa ein Scheduling-Verfahren auf andere
   Prozessdaten. Sie verlangen nur Wissen und Vorgehen, die auf den Folien

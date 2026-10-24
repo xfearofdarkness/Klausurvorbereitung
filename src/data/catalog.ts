@@ -24,6 +24,12 @@ export const catalog = [
     "title": "AuD",
     "subtitle": "Algorithmen und Datenstrukturen",
     "icon": "🧮"
+  },
+  {
+    "id": "disma",
+    "title": "DisMa",
+    "subtitle": "Diskrete Mathematik",
+    "icon": "🧩"
   }
 ] satisfies SubjectMeta[];
 
@@ -31,5 +37,6 @@ export const subjectLoaders: Record<SubjectId, () => Promise<{ default: import("
   rabs: () => import("virtual:subject/rabs"),
   laa: () => import("virtual:subject/laa"),
   vs: () => import("virtual:subject/vs"),
-  aud: () => import("virtual:subject/aud")
+  aud: () => import("virtual:subject/aud"),
+  disma: () => import("virtual:subject/disma")
 };
