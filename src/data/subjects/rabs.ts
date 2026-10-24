@@ -653,6 +653,38 @@ const rabs = {
           source: "04_rabs-os-konzepte.pdf, Folie 10"
         },
         {
+          title: "Verzeichnis- und sonstige Systemaufrufe",
+          body: "Zum Verzeichnismanagement gehören <code>mkdir()</code> (Verzeichnis erzeugen) und <code>mount()</code> (Datenträger in das Dateisystem einhängen). Weitere typische Aufrufe: <code>chdir()</code> (Arbeitsverzeichnis wechseln), <code>chmod()</code> (Zugriffsrechte ändern), <code>chown()</code> (Eigentümer ändern), <code>kill()</code> (Signal an einen Prozess senden) und <code>time()</code> (Uhrzeit).",
+          source: "04_rabs-os-konzepte.pdf, Folie 11"
+        },
+        {
+          title: "Systemaufrufe: Windows und UNIX",
+          body: "Windows-Programme sind normalerweise ereignisgesteuert. Unter UNIX gibt es praktisch eine 1:1-Abbildung zwischen Systemaufrufen und Bibliotheksfunktionen. Unter Windows sind beide entkoppelt: Die Win32-API bietet eine extrem große Zahl von Funktionen, viele arbeiten im Benutzermodus, und die Schnittstelle ist nicht konsistent, weil sie sich mit der Windows-Version ändert und Kompatibilität zu teils sehr alten Systemen hält.",
+          source: "04_rabs-os-konzepte.pdf, Folie 15"
+        },
+        {
+          title: "Aufgabenbereiche der Sicherheit",
+          body: "Zugriffskontrolle: Zugriff von Benutzern auf Gesamtsystem, Subsysteme und Daten sowie von Prozessen auf Ressourcen und Objekte. Kontrolle des Informationsflusses: keine Weitergabe vertraulicher Daten an Unautorisierte. Zertifizierung: Nachweis, dass das System die gewünschten Sicherheitseigenschaften durchsetzt.",
+          source: "04_rabs-os-konzepte.pdf, Folie 17"
+        },
+        {
+          title: "Sicherheit und Schutz",
+          body: "Sicherheit (security) stellt sicher, dass Unautorisierte nicht auf Daten zugreifen können; sie schließt technische, administrative, rechtliche und politische Fragen ein. Schutz (protection) sind die spezifischen Betriebssystemmechanismen, mit denen Sicherheit gewährleistet wird. Die Begriffe sind nicht immer klar abgegrenzt.",
+          tag: "def",
+          source: "04_rabs-os-konzepte.pdf, Folie 18"
+        },
+        {
+          title: "Schutzziele (CIA)",
+          body: "1. Vertraulichkeit: Geheime Daten bleiben geheim; der Besitzer legt fest, wem sie zugänglich sind, das System garantiert die Zugriffskontrolle. 2. Integrität: Unautorisierte Benutzer oder Systemdienste können Daten nicht ohne Erlaubnis des Besitzers ändern, löschen oder verfälschen. 3. Verfügbarkeit: Niemand kann das System so stören, dass es nur eingeschränkt oder gar nicht benutzbar ist, z. B. durch Denial-of-Service; schwerer zu realisieren als 1 und 2. Englisch: confidentiality, integrity, availability.",
+          tag: "wichtig",
+          source: "04_rabs-os-konzepte.pdf, Folie 19"
+        },
+        {
+          title: "Datenschutz",
+          body: "Datenschutz (privacy) schützt Personen vor dem Missbrauch ihrer persönlichen Daten. Er ist das übergeordnete Ziel, dem sich die Schutz- und Sicherheitsmechanismen der Systeme unterordnen, und ein gesellschaftliches, rechtliches und moralisches Thema mit gesetzlichen Regelungen wie der DSGVO.",
+          source: "04_rabs-os-konzepte.pdf, Folie 20"
+        },
+        {
           title: "Principle of Least Authority",
           body: "Programme, Benutzer und Systeme sollen nur so viele Privilegien bekommen, wie unbedingt notwendig ist, um ihre Jobs zu erledigen.",
           tag: "wichtig",
@@ -662,6 +694,11 @@ const rabs = {
           title: "UNIX-Zugriffskontrolle",
           body: "UNIX führt Benutzer und Benutzergruppen ein; <code>root</code> ist Administrator. Prozesse und Dateien haben Eigentümer und Eigentümergruppe. Dateizugriff wird über 9 Rechtebits festgelegt: je 3 Bits für Eigentümer, Gruppe und alle anderen.",
           source: "04_rabs-os-konzepte.pdf, Folien 22-23"
+        },
+        {
+          title: "Schutzdomänen und Schutzmatrix",
+          body: "Objekte können in mehreren Schutzdomänen enthalten sein, mit gleichen oder unterschiedlichen Rechten. Die Schutzmatrix legt fest, wer welche Operationen auf welchen Objekten ausführen darf: Zeilen sind Domänen, Spalten Objekte, die Einträge die Rechte (z. B. Read, Write, Execute).",
+          source: "04_rabs-os-konzepte.pdf, Folien 24-25"
         },
         {
           title: "ACLs und Capabilities",
@@ -677,6 +714,11 @@ const rabs = {
           title: "Pipes und Umleitungen in der Shell",
           body: "Die Shell unterstützt Eingabe- und Ausgabeumleitung, Hintergrundausführung und Pipes. Mit Pipes dient die Ausgabe eines Prozesses als Eingabe des nächsten; die UNIX-Philosophie kombiniert viele kleine Kommandos über Pipes.",
           source: "04_rabs-os-konzepte.pdf, Folien 30-31"
+        },
+        {
+          title: "Shell-Skripte",
+          body: "Shell-Skripte ergänzen Kommandos um Elemente zur Ablaufsteuerung wie Bedingungen, Schleifen und Prozeduren. Beispiel der Folie: Für alle <code>.txt</code>-Dateien wird eine vorhandene Zieldatei zuerst nach <code>.bak</code> umbenannt und dann die Datei verschoben, sodass nichts überschrieben wird.",
+          source: "04_rabs-os-konzepte.pdf, Folie 33"
         },
         {
           title: "Graphische Benutzungsschnittstellen",
@@ -696,6 +738,26 @@ const rabs = {
           source: "04_rabs-os-konzepte.pdf, Folie 8"
         },
         {
+          front: "Was unterscheidet Systemaufrufe unter UNIX und Windows?",
+          back: "UNIX: praktisch 1:1-Abbildung zwischen Systemaufrufen und Bibliotheksfunktionen. Windows: beide entkoppelt; die Win32-API hat sehr viele Funktionen, viele im Benutzermodus, und keine konsistente Schnittstelle über die Versionen.",
+          source: "04_rabs-os-konzepte.pdf, Folie 15"
+        },
+        {
+          front: "Was unterscheidet Sicherheit von Schutz?",
+          back: "Sicherheit stellt sicher, dass Unautorisierte nicht auf Daten zugreifen können. Schutz sind die Betriebssystemmechanismen, mit denen Sicherheit gewährleistet wird.",
+          source: "04_rabs-os-konzepte.pdf, Folie 18"
+        },
+        {
+          front: "Welche drei Schutzziele nennt die Vorlesung?",
+          back: "Vertraulichkeit, Integrität und Verfügbarkeit (CIA: confidentiality, integrity, availability).",
+          source: "04_rabs-os-konzepte.pdf, Folie 19"
+        },
+        {
+          front: "Welches Schutzziel ist am schwersten zu realisieren und warum?",
+          back: "Verfügbarkeit: Niemand darf das System so stören können, dass es nur eingeschränkt oder gar nicht benutzbar ist, z. B. durch Denial-of-Service-Angriffe.",
+          source: "04_rabs-os-konzepte.pdf, Folie 19"
+        },
+        {
           front: "Was bedeutet POLA?",
           back: "POLA steht für Principle of Least Authority: Programme, Benutzer und Systeme erhalten nur so viele Privilegien, wie für ihre Aufgabe notwendig sind.",
           source: "04_rabs-os-konzepte.pdf, Folie 21"
@@ -704,6 +766,11 @@ const rabs = {
           front: "Wie funktionieren UNIX-Rechtebits grundsätzlich?",
           back: "Es gibt je drei Bits für Eigentümer, Eigentümergruppe und alle anderen; literale Rechte sind r, w und x, oktal 4, 2 und 1.",
           source: "04_rabs-os-konzepte.pdf, Folien 22-23"
+        },
+        {
+          front: "Was legt eine Schutzmatrix fest?",
+          back: "Wer (Domäne) welche Operationen auf welchen Objekten ausführen darf.",
+          source: "04_rabs-os-konzepte.pdf, Folie 25"
         },
         {
           front: "Wie ist die Shell zum Betriebssystem einzuordnen?",
@@ -743,10 +810,20 @@ const rabs = {
           source: "3_rabs-c-intro.pdf, Folie 7"
         },
         {
+          title: "Basistypen",
+          body: "Die Tabelle der Folie nennt <code>char</code> (1 Byte, −128 bis 127, Zeichen), <code>int</code> (2 Byte, −32768 bis 32767, ganze Zahlen), <code>float</code> (4 Byte, 3.4E−38 bis 3.4E+38, Gleitkommazahlen) und <code>double</code> (8 Byte, 1.7E−308 bis 1.7E+308, große Gleitkommazahlen).",
+          source: "3_rabs-c-intro.pdf, Folie 9"
+        },
+        {
           title: "Variablen",
           body: "Eine Variable besteht aus Typ, Name und Wert. Durch Deklaration wird ihr Typ festgelegt und damit, wie sie im Speicher repräsentiert wird. Der Wert wird durch Zuweisungen verändert.",
           tag: "def",
           source: "3_rabs-c-intro.pdf, Folie 10"
+        },
+        {
+          title: "Kontrollfluss",
+          body: "Bedingte Verzweigung mit <code>if (n > 5) { … } else { … }</code>: Ist die Bedingung wahr, läuft der if-Rumpf, sonst der else-Rumpf; danach geht es mit der Anweisung nach dem if weiter. Schleifen: <code>for (int i = 0; i < 3; i++) { … }</code> oder <code>while (i < 3) { …; i++; }</code>; beide Beispiele geben dreimal „Hello RABS“ aus.",
+          source: "3_rabs-c-intro.pdf, Folien 11-13"
         },
         {
           title: "Funktionen",
@@ -759,6 +836,12 @@ const rabs = {
           body: "Pointer sind Variablen, die direkt Speicheradressen enthalten. Die Folien nennen Pointer als Konstrukt, das C für Systemprogrammierung attraktiv macht.",
           tag: "wichtig",
           source: "3_rabs-c-intro.pdf, Folie 16"
+        },
+        {
+          title: "Adress- und Dereferenzierungsoperator",
+          body: "<code>&</code> liefert die Adresse eines Werts, <code>*</code> liefert den Wert, auf den ein Pointer zeigt. Beispiel: <code>char c = 65; char* p = &c; *p = 88; char x = *p;</code> Hier zeigt <code>p</code> auf <code>c</code>, <code>*p = 88</code> ändert also <code>c</code>, und <code>x</code> erhält 88.",
+          tag: "wichtig",
+          source: "3_rabs-c-intro.pdf, Folie 17"
         },
         {
           title: "Array-Grenzen und Stack",
@@ -774,6 +857,11 @@ const rabs = {
           title: "Fehlerbehandlung bei Systemaufrufen",
           body: "Die Fehlerbehandlung erfolgt über den Rückgabewert. Im Fehlerfall geben Systemaufrufe den Wert <code>-1</code> zurück. Weitere Informationen können aus der globalen Variable <code>errno</code> gelesen werden; dafür wird <code>&lt;errno.h&gt;</code> importiert.",
           source: "3_rabs-c-intro.pdf, Folie 24"
+        },
+        {
+          title: "Dateizugriff mit FILE*",
+          body: "Das Datei-Beispiel nutzt ein weiteres Header-File mit den Funktionen für den Systemaufruf. Der Datentyp <code>FILE*</code> enthält einen Pointer auf eine Datei.",
+          source: "3_rabs-c-intro.pdf, Folie 26"
         }
       ],
       flashcards: [
@@ -796,6 +884,16 @@ const rabs = {
           front: "Was ist ein Pointer?",
           back: "Ein Pointer ist eine Variable, die direkt eine Speicheradresse enthält.",
           source: "3_rabs-c-intro.pdf, Folie 16"
+        },
+        {
+          front: "Was liefern die Operatoren & und * bei Pointern?",
+          back: "<code>&</code> (Adressoperator) liefert die Adresse eines Werts, <code>*</code> (Dereferenzierungsoperator) den Wert, auf den der Pointer zeigt.",
+          source: "3_rabs-c-intro.pdf, Folie 17"
+        },
+        {
+          front: "Welchen Wert hat c nach <code>char c = 65; char* p = &c; *p = 88;</code>?",
+          back: "88, weil <code>p</code> auf <code>c</code> zeigt und <code>*p = 88</code> den Wert an dieser Adresse überschreibt.",
+          source: "3_rabs-c-intro.pdf, Folie 17"
         },
         {
           front: "Was zeigt das Array-Beispiel zum Stack?",
@@ -847,6 +945,17 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folie 13"
         },
         {
+          title: "Hit-Ratio und Gründe für Cache-Misses",
+          body: "Die Performanz eines Caches misst die Hit-Ratio = Hits / (Hits + Misses). Gründe für Misses: Cold-Start-Misses beim ersten Zugriff auf einen Speicherblock, Capacity-Misses wegen der begrenzten Cachegröße und Collision-Misses in nicht-assoziativen Caches, wenn der zugewiesene Cache-Platz schon belegt ist.",
+          tag: "formel",
+          source: "02_rabs_speicher.pdf, Folie 14"
+        },
+        {
+          title: "Direkte Speicherverwaltung",
+          body: "Bei direkter Speicherverwaltung läuft immer genau ein Programm neben dem Betriebssystem. Der Speicher wird nur zwischen beiden geteilt, beide liegen an festen Adressen, eine MMU ist nicht nötig. Das gibt es nur noch in einfachen eingebetteten Systemen. Alle anderen Systeme nutzen Auslagerung mit logischem Adressraum, Swapping und Paging.",
+          source: "02_rabs_speicher.pdf, Folien 17-18"
+        },
+        {
           title: "MMU und Adressumsetzung",
           body: "Bei Mehrprogrammbetrieb schützt die MMU Betriebssystem und Programme voneinander und erlaubt das Laden an unterschiedlichen Adressen. Virtuelle Adressen werden durch Hardware-MMU auf physische Adressen umgesetzt, wobei Zugriffsrechte geprüft werden.",
           source: "02_rabs_speicher.pdf, Folie 19"
@@ -858,6 +967,11 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folie 20"
         },
         {
+          title: "Speicherschutz",
+          body: "Das Betriebssystem muss sicherstellen, dass jeder Prozess einen eigenen Adressraum besitzt. Es selbst hat Zugriff auf alle Prozess-Adressräume; Benutzerprozesse haben keinen Zugriff auf den Adressraum des Betriebssystems oder anderer Prozesse.",
+          source: "02_rabs_speicher.pdf, Folie 21"
+        },
+        {
           title: "Basis- und Limit-Register",
           body: "Das Basis-Register hält die kleinste Adresse, auf die der Prozess Zugriff hat. Das Limit-Register enthält die Größe des Adressraums. Zugriffe außerhalb dieses Bereichs führen zu einem Ausnahmefehler beziehungsweise Trap.",
           source: "02_rabs_speicher.pdf, Folie 22"
@@ -866,6 +980,11 @@ const rabs = {
           title: "Swapping",
           body: "Beim Swapping wird ein Prozess komplett in den Speicher geladen, kann eine Zeit laufen und wird dann komplett ausgelagert. Ein Teil der Festplatte dient dazu, gerade nicht ausgeführte Prozesse aus dem Hauptspeicher auszulagern.",
           source: "02_rabs_speicher.pdf, Folien 24-26"
+        },
+        {
+          title: "Fragmentierung beim Swapping",
+          body: "Beim Swapping entstehen Lücken im Speicher. Sie lassen sich durch Speicherverdichtung zusammenfassen, das ist aber zeitaufwändig und wird normalerweise nicht eingesetzt. Für dynamisch wachsenden Speicher wird beim Einlagern mehr reserviert, nicht genutzter Speicher nicht mit ausgelagert, und jeder Prozess hat ein spezielles Speicherlayout mit Heap und Stack.",
+          source: "02_rabs_speicher.pdf, Folie 27"
         },
         {
           title: "Virtueller Speicher und Paging",
@@ -882,6 +1001,12 @@ const rabs = {
           title: "Seitengröße und TLB",
           body: "Große Seiten bedeuten mehr Treffer pro Seitenaufruf und weniger Einlagerungen, aber mehr interne Fragmentierung. Kleine Seiten führen zu langen Seitentabellen. Der Translation Lookaside Buffer ist spezielle Hardwareunterstützung, im Prinzip ein Teil der MMU.",
           source: "02_rabs_speicher.pdf, Folie 35"
+        },
+        {
+          title: "Virtueller Speicher: Vor- und Nachteile",
+          body: "Vorteile: Programme dürfen größer als der Arbeitsspeicher sein, Prozesse müssen nicht komplett im Speicher liegen, Adressierung ist aus Programmierersicht linear ohne Fragmentierung, Code und Daten können gemeinsam genutzt werden, und Speicherschutz ist einfach. Nachteile: aufwendige Adressierung, zusätzliche Verwaltungsstrukturen (Page-Tables), ein Teil der Festplatte dient als Auslagerungsdatei, komplexe Seitenersetzungsstrategien.",
+          tag: "wichtig",
+          source: "02_rabs_speicher.pdf, Folie 36"
         },
         {
           title: "Windows-Speicherbereiche",
@@ -911,6 +1036,21 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folie 13"
         },
         {
+          front: "Wie berechnet sich die Hit-Ratio eines Caches?",
+          back: "Hit-Ratio = Hits / (Hits + Misses).",
+          source: "02_rabs_speicher.pdf, Folie 14"
+        },
+        {
+          front: "Welche drei Arten von Cache-Misses nennen die Folien?",
+          back: "Cold-Start-Misses (erster Zugriff auf einen Block), Capacity-Misses (begrenzte Cachegröße) und Collision-Misses (zugewiesener Platz in nicht-assoziativen Caches schon belegt).",
+          source: "02_rabs_speicher.pdf, Folie 14"
+        },
+        {
+          front: "Wann genügt direkte Speicherverwaltung?",
+          back: "Wenn genau ein Programm neben dem Betriebssystem läuft, etwa in einfachen eingebetteten Systemen; dann ist keine MMU erforderlich.",
+          source: "02_rabs_speicher.pdf, Folie 18"
+        },
+        {
           front: "Was macht die MMU?",
           back: "Sie setzt virtuelle Adressen auf physische Adressen um und prüft Zugriffsrechte.",
           source: "02_rabs_speicher.pdf, Folie 19"
@@ -926,6 +1066,11 @@ const rabs = {
           source: "02_rabs_speicher.pdf, Folie 24"
         },
         {
+          front: "Wie wird Fragmentierung beim Swapping behandelt?",
+          back: "Lücken können durch Speicherverdichtung zusammengefasst werden; das ist aber zeitaufwändig und wird normalerweise nicht eingesetzt.",
+          source: "02_rabs_speicher.pdf, Folie 27"
+        },
+        {
           front: "Was passiert bei einem Page Fault?",
           back: "Das Betriebssystem lädt die ausgelagerte Seite in den Speicher, aktualisiert die Seitentabelle und führt den auslösenden Befehl erneut aus; dafür kann ein wenig benutzter Seitenrahmen ausgelagert werden.",
           source: "02_rabs_speicher.pdf, Folie 33"
@@ -939,6 +1084,11 @@ const rabs = {
           front: "Welche Nachteile haben große beziehungsweise kleine Seiten?",
           back: "Große Seiten verursachen mehr interne Fragmentierung; kleine Seiten führen zu langen Seitentabellen.",
           source: "02_rabs_speicher.pdf, Folie 35"
+        },
+        {
+          front: "Welche Vor- und Nachteile hat virtueller Speicher?",
+          back: "Vorteile: Programme größer als der Arbeitsspeicher, Prozesse nur teilweise im Speicher, lineare Adressierung, gemeinsamer Code, einfacher Speicherschutz. Nachteile: aufwendige Adressierung, Page-Tables, Auslagerungsdatei, komplexe Seitenersetzung.",
+          source: "02_rabs_speicher.pdf, Folie 36"
         }
       ]
     },
@@ -969,9 +1119,19 @@ const rabs = {
           source: "03_rabs_dateisystem.pdf, Folie 20"
         },
         {
+          title: "Bestandteile und Organisation",
+          body: "Ein Dateisystem besteht aus Dateien (speichern Daten oder Programme, repräsentieren auch E/A-Geräte), Verzeichnissen (fassen Dateien und Verzeichnisse zusammen, enthalten Verwaltungsinformationen) und Partitionen (trennen Dateimengen physisch, z. B. Festplatte, oder logisch, z. B. Teilbereich einer Platte). Die Struktur ist meist hierarchisch; das Device-Directory (Volume Table) einer Partition enthält Informationen über deren Dateien.",
+          source: "03_rabs_dateisystem.pdf, Folien 21-22"
+        },
+        {
           title: "Dateien als unstrukturierte Bytefolge",
           body: "Bei heutigen PC- und Server-Betriebssystemen sind Dateien meist unstrukturierte Folgen von Bytes; das Betriebssystem kennt die Struktur nicht. In Mainframe-Systemen können Dateien auch Datensätze fester Struktur mit Index enthalten.",
           source: "03_rabs_dateisystem.pdf, Folie 24"
+        },
+        {
+          title: "Dateitypen",
+          body: "Dateitypen sind Klassen von Dateien mit gemeinsamen Eigenschaften. Meist ist der Typ als Extension Teil des Namens (z. B. <code>.exe</code>, <code>.c</code>, <code>.sh</code>, <code>.txt</code>, <code>.zip</code>), sodass das Betriebssystem beim Öffnen die passende Anwendung starten kann. Alternativ steht der Typ in der Datei selbst, unter UNIX z. B. als Magic Number in ausführbaren Dateien. Jedes Betriebssystem muss mindestens die Struktur ausführbarer Dateien kennen, um Programme zu laden.",
+          source: "03_rabs_dateisystem.pdf, Folien 26-27"
         },
         {
           title: "Dateiattribute",
@@ -989,9 +1149,20 @@ const rabs = {
           source: "03_rabs_dateisystem.pdf, Folien 32-33"
         },
         {
+          title: "Sequentielles Dateimodell",
+          body: "Die Datei ist eine unstrukturierte Byte-Folge. Nach dem Öffnen hat der Prozess einen privaten Dateizeiger auf das nächste zu lesende Byte bzw. die Schreibposition. Lesen und Schreiben kopieren einen Datenblock zwischen Hauptspeicher und Datei und schieben den Zeiger weiter. Über das Dateiende (EOF) hinaus kann nicht gelesen werden; Schreiben dort hängt an. Mit <code>seek</code> lässt sich der Zeiger explizit setzen.",
+          tag: "wichtig",
+          source: "03_rabs_dateisystem.pdf, Folie 34"
+        },
+        {
           title: "Verzeichnisse und Pfadnamen",
           body: "Verzeichnisse organisieren Dateien hierarchisch, sind selbst spezielle Dateien und benennen Dateien über Pfadnamen. Absolute Pfadnamen beginnen beim Wurzelverzeichnis, relative beim aktuellen Arbeitsverzeichnis.",
           source: "03_rabs_dateisystem.pdf, Folie 36"
+        },
+        {
+          title: "Operationen auf Verzeichnissen",
+          body: "Create legt ein leeres Verzeichnis an (bis auf <code>.</code> und <code>..</code>), Delete löscht ein Verzeichnis (nur leere), Opendir und Closedir öffnen und schließen es, Readdir liefert den nächsten Eintrag, Link verlinkt eine Datei in ein Verzeichnis und Unlink entfernt einen Verzeichniseintrag.",
+          source: "03_rabs_dateisystem.pdf, Folie 37"
         },
         {
           title: "Links und Mounten",
@@ -1007,6 +1178,11 @@ const rabs = {
           title: "Speichern von Dateien auf Blöcken",
           body: "Für Dateien, die größer als ein Block sind, nennen die Folien kontinuierliche Speicherung, verkettete Speicherung und indizierte Speicherung. Kontinuierliche Speicherung ermöglicht schnellen Zugriff, führt aber zu Fragmentierung und Problemen bei wachsender Datei.",
           source: "03_rabs_dateisystem.pdf, Folien 44-47"
+        },
+        {
+          title: "Indizierte Speicherung",
+          body: "Ein spezieller Plattenblock, der Indexblock, enthält alle Blocknummern der Datenblöcke einer Datei, z. B. bei UNIX-I-Nodes. Problem: Ein Indexblock ist nur ein Plattenblock, seine Kapazität ist begrenzt; für größere Dateien gibt es mehrere Indexstufen. Nachteil: Pro Datei muss der Indexblock (eventuell mehrere) mitgeladen werden.",
+          source: "03_rabs_dateisystem.pdf, Folie 48"
         },
         {
           title: "FAT und UNIX-Dateisystem",
@@ -1037,14 +1213,34 @@ const rabs = {
           source: "03_rabs_dateisystem.pdf, Folie 19"
         },
         {
+          front: "Wozu dienen Partitionen im Dateisystem?",
+          back: "Zum physischen (z. B. eigene Festplatte) oder logischen (z. B. Teilbereich einer Platte) Trennen von Dateimengen.",
+          source: "03_rabs_dateisystem.pdf, Folie 21"
+        },
+        {
+          front: "Wie kann ein Betriebssystem den Typ einer Datei erkennen?",
+          back: "Über die Extension im Dateinamen oder über eine Typangabe in der Datei selbst, z. B. die Magic Number ausführbarer UNIX-Dateien.",
+          source: "03_rabs_dateisystem.pdf, Folie 27"
+        },
+        {
           front: "Welche typischen Dateioperationen nennt die Vorlesung?",
           back: "Create, Delete, Open, Close, Rename, Read, Write, Append, Seek sowie Get und Set Attributes.",
           source: "03_rabs_dateisystem.pdf, Folien 32-33"
         },
         {
+          front: "Was passiert im sequentiellen Dateimodell beim Lesen und Schreiben?",
+          back: "Ein Datenblock wird zwischen Hauptspeicher und Datei kopiert und der private Dateizeiger weitergeschoben. Lesen über EOF ist nicht möglich, Schreiben dort hängt an; <code>seek</code> setzt den Zeiger explizit.",
+          source: "03_rabs_dateisystem.pdf, Folie 34"
+        },
+        {
           front: "Woran erkennt man absolute Pfadnamen?",
           back: "Absolute Pfadnamen beginnen beim Wurzelverzeichnis.",
           source: "03_rabs_dateisystem.pdf, Folie 36"
+        },
+        {
+          front: "Welche Verzeichnisse darf Delete löschen?",
+          back: "Nur leere Verzeichnisse.",
+          source: "03_rabs_dateisystem.pdf, Folie 37"
         },
         {
           front: "Was ist Mounten im UNIX-Dateibaum?",
@@ -1060,6 +1256,11 @@ const rabs = {
           front: "Was ist FAT?",
           back: "FAT ist eine Variante verketteter Speicherung mit Verkettung in speziellen Plattenblöcken.",
           source: "03_rabs_dateisystem.pdf, Folie 47"
+        },
+        {
+          front: "Wie funktioniert indizierte Speicherung und was ist ihr Nachteil?",
+          back: "Ein Indexblock enthält alle Blocknummern der Datenblöcke einer Datei (z. B. UNIX-I-Nodes); für große Dateien gibt es mehrere Indexstufen. Nachteil: Pro Datei muss der Indexblock mitgeladen werden.",
+          source: "03_rabs_dateisystem.pdf, Folie 48"
         },
         {
           front: "Was sichert ein Komplett-Backup?",
@@ -1106,6 +1307,11 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 12"
         },
         {
+          title: "Prozesstabelle",
+          body: "Die Prozesstabelle enthält Verweise auf die Prozesskontrollblöcke der existierenden Prozesse. Sie ist meist eine Tabelle fester Länge, die maximale Prozessanzahl ist also durch einen Systemparameter festgelegt. PCB-Verweise werden anhand der Prozess-ID gesucht, z. B. über Hashing oder Suchbäume.",
+          source: "05_rabs-process.pdf, Folie 14"
+        },
+        {
           title: "Prozesserzeugung allgemein",
           body: "Prozesse entstehen bei Systeminitialisierung, durch Systemaufruf eines anderen Prozesses, durch Benutzeranfrage oder bei Initiierung einer Stapelverarbeitung.",
           source: "05_rabs-process.pdf, Folie 17"
@@ -1126,15 +1332,30 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 22"
         },
         {
+          title: "Prozesshierarchien und init",
+          body: "Prozesshierarchien entstehen durch Prozesserzeugung. Unter UNIX bildet ein Prozess mit allen Kind- und Kindeskindprozessen eine Prozessgruppe; ein Signal von der Tastatur geht an alle Mitglieder der zugehörigen Gruppe. UNIX initialisiert sich durch den Prozess <code>init</code> aus dem Bootimage: Er erzeugt per fork einen Kindprozess pro Terminal, der auf einen Login wartet, danach starten Shells oder GUI. Alle Prozesse bilden einen Baum mit init als Wurzel; Daemons laufen ohne Shell.",
+          source: "05_rabs-process.pdf, Folien 23-24"
+        },
+        {
           title: "Prozesszustände",
           body: "Die Folien nennen erzeugt, bereit, laufend, blockiert und beendet. Blockiert bedeutet, dass ein Prozess auf ein Ereignis wartet, etwa E/A-Fertigstellung, Betriebsmittelzuteilung oder Nachricht.",
           tag: "def",
           source: "05_rabs-process.pdf, Folie 26"
         },
         {
+          title: "Zustandsübergänge",
+          body: "laufend → blockiert: Das Betriebssystem entdeckt, dass der Prozess nicht fortfahren kann, oder er ruft selbst <code>pause</code> auf. blockiert → bereit: Das externe Ereignis, auf das er gewartet hat, tritt ein. Zwischen bereit und laufend wechselt der Scheduler, wenn ein Prozess lange genug gelaufen ist bzw. wieder die CPU bekommt. Die Übergänge zwischen bereit und laufend bemerkt der Prozess selbst nicht.",
+          source: "05_rabs-process.pdf, Folie 28"
+        },
+        {
           title: "Prozessumschaltung",
           body: "Context Switch bedeutet Wechsel von der Ausführung eines Prozesses zu einem anderen. Der Scheduler teilt Rechenzeit zu, der Dispatcher führt den Wechsel aus.",
           source: "05_rabs-process.pdf, Folie 29"
+        },
+        {
+          title: "Wer löst den Prozesswechsel aus?",
+          body: "Unter Kontrolle der Prozesse (Koroutinen) bestimmt der Prozess den Umschaltzeitpunkt: kein transparentes Umschalten, keine Fairness. Daher übernimmt das Betriebssystem: Es wechselt in oder nach Systemaufrufen (Warten auf Ereignisse, Terminieren) und nach Unterbrechungen (Ablauf einer Zeitscheibe, ein bevorzugter Prozess wird laufbereit). Den nächsten Prozess wählt der Scheduler.",
+          source: "05_rabs-process.pdf, Folien 30-31"
         },
         {
           title: "Ablauf des Context Switch",
@@ -1179,6 +1400,11 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 12"
         },
         {
+          front: "Was enthält die Prozesstabelle?",
+          back: "Verweise auf die Prozesskontrollblöcke existierender Prozesse; meist eine Tabelle fester Länge, gesucht wird anhand der Prozess-ID.",
+          source: "05_rabs-process.pdf, Folie 14"
+        },
+        {
           front: "Was macht fork() unter UNIX?",
           back: "Es erzeugt einen exakten Klon des aufrufenden Prozesses; Kind und Elternprozess laufen danach unabhängig weiter.",
           source: "05_rabs-process.pdf, Folie 18"
@@ -1189,9 +1415,29 @@ const rabs = {
           source: "05_rabs-process.pdf, Folie 21"
         },
         {
+          front: "Welche Rolle hat init unter UNIX?",
+          back: "init startet aus dem Bootimage, erzeugt einen Kindprozess pro Terminal, der auf einen Login wartet, und ist die Wurzel des Prozessbaums.",
+          source: "05_rabs-process.pdf, Folien 23-24"
+        },
+        {
+          front: "Wann geht ein Prozess von blockiert nach bereit über?",
+          back: "Wenn das externe Ereignis eintritt, auf das er gewartet hat.",
+          source: "05_rabs-process.pdf, Folie 28"
+        },
+        {
           front: "Welche Aufgabe hat der Dispatcher?",
           back: "Der Dispatcher führt den Prozesswechsel durch.",
           source: "05_rabs-process.pdf, Folie 29"
+        },
+        {
+          front: "Warum reicht Prozesswechsel unter Kontrolle der Prozesse nicht aus?",
+          back: "Der Prozess bestimmt den Umschaltzeitpunkt selbst: kein transparentes Umschalten und keine Fairness. Gewünscht ist eine faire Zuteilung der CPU durch das Betriebssystem.",
+          source: "05_rabs-process.pdf, Folie 30"
+        },
+        {
+          front: "Bei welchen Ereignissen kann das Betriebssystem einen Prozesswechsel vornehmen?",
+          back: "In oder nach Systemaufrufen (Warten auf Ereignisse, Terminieren eines Prozesses) und nach Unterbrechungen (Ablauf einer Zeitscheibe, bevorzugter Prozess wird laufbereit).",
+          source: "05_rabs-process.pdf, Folie 31"
         },
         {
           front: "Was passiert bei einem Context Switch?",
@@ -1263,6 +1509,21 @@ const rabs = {
           source: "06_rabs-threads.pdf, Folien 26-28"
         },
         {
+          title: "Hybride Threads",
+          body: "Die Kombination aus Kernel- und User-Threads ordnet mehrere User-Threads Kernel-Threads zu. Sie gab es z. B. in alten Solaris-Versionen; heute wird sie für Programme mit sehr vielen nebenläufigen Aktivitäten genutzt, etwa Webserver mit mehreren Netzwerkschnittstellen.",
+          source: "06_rabs-threads.pdf, Folien 29-30"
+        },
+        {
+          title: "Realisierung von Threads",
+          body: "Konzeptionell wird jeder Thread von einer eigenen virtuellen CPU ausgeführt, die Threads laufen quasi-parallel mit den Ressourcen des Prozesses. Real schaltet die CPU zwischen ihnen um, indem sie CPU-Register und Program Counter speichert und lädt.",
+          source: "06_rabs-threads.pdf, Folie 32"
+        },
+        {
+          title: "Threads in Windows",
+          body: "Seit Windows NT gibt es Kernel-Level-Threads (Win32-API). <code>CreateProcess()</code> legt einen neuen Adressraum an und startet darin den ersten Thread, <code>CreateThread()</code> startet weitere Threads im bestehenden Prozess. Zusätzlich gibt es User-Level-Threads, die Fibers: Mehrere Fibers können in einem Kernel-Level-Thread existieren.",
+          source: "06_rabs-threads.pdf, Folie 34"
+        },
+        {
           title: "Threads in Linux",
           body: "Ab Kernel 2.0 gab es die Bibliothek LinuxThreads. Ab 2002 entwickelte sich die Native POSIX Thread Library (NPTL), voll POSIX-kompatibel, ohne Limitierung der Thread-Anzahl und mit 1:1-Implementierung.",
           source: "06_rabs-threads.pdf, Folie 35"
@@ -1283,6 +1544,11 @@ const rabs = {
           front: "Was zeigt Thread_create?",
           back: "Thread_create zeigt, dass ein Start-Thread neue Threads erzeugen kann.",
           source: "06_rabs-threads.pdf, Folie 19"
+        },
+        {
+          front: "Welche drei Ansätze zur Implementierung von Threads gibt es?",
+          back: "Im User Space über Thread-Bibliotheken, integriert im Kernel und die Kombination aus beiden.",
+          source: "06_rabs-threads.pdf, Folie 21"
         },
         {
           front: "Was kennzeichnet User-Level-Threads?",
@@ -1308,6 +1574,16 @@ const rabs = {
           front: "Was ist der Vorteil von Kernel-Level-Threads bei Blockierung?",
           back: "Wenn ein Thread blockiert, kann das Betriebssystem einen anderen Thread desselben Prozesses auswählen.",
           source: "06_rabs-threads.pdf, Folie 28"
+        },
+        {
+          front: "Wie schaltet die CPU real zwischen Threads um?",
+          back: "Durch Speichern und Laden der CPU-Register und des Program Counters.",
+          source: "06_rabs-threads.pdf, Folie 32"
+        },
+        {
+          front: "Was sind Fibers unter Windows?",
+          back: "User-Level-Threads; mehrere Fibers können in einem Kernel-Level-Thread existieren.",
+          source: "06_rabs-threads.pdf, Folie 34"
         },
         {
           front: "Was ist NPTL?",
@@ -2917,6 +3193,18 @@ const rabs = {
           source: "08_rabs-synchro-1.pdf, Folie 19"
         },
         {
+          title: "Too much milk: Problem",
+          body: "Alice und Bob teilen einen Kühlschrank, es soll stets genug, aber nicht zu viel Milch da sein. Naive Lösung: Wer sieht, dass keine Milch da ist, geht welche kaufen. Das scheitert: Beide sehen, dass keine Milch da ist, und beide kaufen, also ist zu viel Milch im Kühlschrank. Ziel mit Notizen am Kühlschrank: Mindestens einer und höchstens einer kauft Milch, wenn keine da ist. Beide sehen sich nicht und kommunizieren nur über Notizen.",
+          tag: "beispiel",
+          source: "08_rabs-synchro-1.pdf, Folien 22-25"
+        },
+        {
+          title: "Too much milk: Lösungsversuche",
+          body: "1. Versuch: Wenn keine Notiz und keine Milch da ist, Notiz schreiben, kaufen, Notiz entfernen. Scheitert bei der Sequenz A1, A2, B1, B2: Beide prüfen, bevor einer die Notiz geschrieben hat. 2. Versuch mit zwei Notizen: Zuerst die eigene Notiz schreiben, dann nur kaufen, wenn keine Notiz des anderen da ist. Scheitert bei A1, B1, A2, B2, A5, B5: Beide sehen die Notiz des anderen, und niemand kauft. Die korrekte Lösung nutzt zusätzliche Notizen, um den Vorrang zu entscheiden, und wartet aktiv (<code>while … do skip</code>), bevor Milch geprüft und gekauft wird.",
+          tag: "beispiel",
+          source: "08_rabs-synchro-1.pdf, Folien 26-31"
+        },
+        {
           title: "Mutual-Exclusion-Problem",
           body: "Das Mutual-Exclusion-Problem fordert die Garantie, dass exklusiver Zugriff auf eine gemeinsam genutzte Ressource sichergestellt wird. Zugriffscode heißt kritischer Abschnitt; Ziel ist die Vermeidung von Race Conditions durch Synchronisation.",
           tag: "def",
@@ -2967,6 +3255,21 @@ const rabs = {
           source: "08_rabs-synchro-1.pdf, Folie 18"
         },
         {
+          front: "Welche beiden Bedingungen muss die Too-much-milk-Lösung erfüllen?",
+          back: "Wenn keine Milch da ist, geht mindestens eine und höchstens eine der beiden Personen Milch kaufen.",
+          source: "08_rabs-synchro-1.pdf, Folie 25"
+        },
+        {
+          front: "Warum scheitert der 1. Lösungsversuch bei Too much milk?",
+          back: "Bei der Sequenz A1, A2, B1, B2 prüfen beide auf Notiz und Milch, bevor einer seine Notiz geschrieben hat; beide kaufen.",
+          source: "08_rabs-synchro-1.pdf, Folie 26"
+        },
+        {
+          front: "Warum scheitert der 2. Lösungsversuch bei Too much milk?",
+          back: "Bei der Sequenz A1, B1, A2, B2, A5, B5 schreiben beide ihre Notiz, sehen dann die des anderen und entfernen ihre eigene; niemand kauft Milch.",
+          source: "08_rabs-synchro-1.pdf, Folie 29"
+        },
+        {
           front: "Was ist eine Race Condition?",
           back: "Mehrere Prozesse greifen konkurrierend auf gemeinsame Daten zu, mindestens einer manipuliert sie, und das Ergebnis hängt von der Zugriffsreihenfolge ab.",
           source: "08_rabs-synchro-1.pdf, Folie 32"
@@ -3010,6 +3313,11 @@ const rabs = {
           source: "09_rabs-synchro-2.pdf, Folie 6"
         },
         {
+          title: "Semaphor-Initialisierung",
+          body: "Der Semaphorzähler wird mit der Anzahl der Prozesse initialisiert, die gleichzeitig im kritischen Abschnitt sein dürfen; die Warteschlange wird bei der Initialisierung geleert.",
+          source: "09_rabs-synchro-2.pdf, Folie 7"
+        },
+        {
           title: "Wait und Signal",
           body: "<code>Wait()</code>, auch <code>P()</code> oder <code>down()</code>, dekrementiert den Zähler; bei negativem Wert blockiert der Prozess. <code>Signal()</code>, auch <code>V()</code> oder <code>up()</code>, inkrementiert den Zähler und entblockt gegebenenfalls einen wartenden Prozess.",
           tag: "wichtig",
@@ -3026,6 +3334,11 @@ const rabs = {
           source: "09_rabs-synchro-2.pdf, Folie 12"
         },
         {
+          title: "Betriebsmittel-Zugangskontrolle",
+          body: "Für jedes Betriebsmittel gibt es genau einen Semaphor, der wie beim kritischen Abschnitt den wechselseitigen Ausschluss realisiert.",
+          source: "09_rabs-synchro-2.pdf, Folie 13"
+        },
+        {
           title: "Reihenfolgensynchronisation",
           body: "Soll Prozess 1 eine Datei erst lesen, nachdem Prozess 0 sie erzeugt hat, wird der Semaphor mit 0 vorbelegt. Prozess 1 blockiert bei <code>Wait()</code>, bis Prozess 0 mit <code>Signal()</code> die Wartebedingung erfüllt.",
           source: "09_rabs-synchro-2.pdf, Folie 14"
@@ -3034,6 +3347,11 @@ const rabs = {
           title: "Realisierung von Semaphoren",
           body: "Bei Kernel-Threads werden Semaphore im Betriebssystemkern realisiert; Operationen sind Systemaufrufe. Atomare Ausführung wird durch Interrupt-Sperre und gegebenenfalls Spinlocks gesichert.",
           source: "09_rabs-synchro-2.pdf, Folie 15"
+        },
+        {
+          title: "Bewertung von Semaphoren",
+          body: "Semaphore sind ein allgemeines, leistungsfähiges Konzept zur Koordination nebenläufiger Prozesse. Sie kontrollieren, wie viele Prozesse eine Ressource nutzen; der wechselseitige Ausschluss ist der Spezialfall.",
+          source: "09_rabs-synchro-2.pdf, Folie 16"
         },
         {
           title: "Deadlock",
@@ -3075,6 +3393,11 @@ const rabs = {
           source: "09_rabs-synchro-2.pdf, Folien 5-6"
         },
         {
+          front: "Womit wird der Zähler eines Semaphors initialisiert?",
+          back: "Mit der Anzahl der Prozesse, die gleichzeitig im kritischen Abschnitt sein dürfen; die Warteschlange wird dabei geleert.",
+          source: "09_rabs-synchro-2.pdf, Folie 7"
+        },
+        {
           front: "Was passiert bei Wait() auf einem Semaphor?",
           back: "Der Zähler wird dekrementiert; ist er danach negativ, wird der Prozess blockiert und in die Warteschlange eingereiht.",
           source: "09_rabs-synchro-2.pdf, Folie 8"
@@ -3100,9 +3423,331 @@ const rabs = {
           source: "09_rabs-synchro-2.pdf, Folie 30"
         },
         {
+          front: "Wie läuft im Folienbeispiel A–B–C–A–B–C die Verklemmung ab?",
+          back: "A belegt R, B belegt S, C belegt T. Dann fordert A S an, B T und C R; alle drei warten. Der Graph enthält den Zyklus A → S → B → T → C → R → A: Deadlock.",
+          source: "09_rabs-synchro-2.pdf, Folien 33-40"
+        },
+        {
+          front: "Wie vermeidet das Betriebssystem im Folienbeispiel die Verklemmung?",
+          back: "Es erkennt, dass die Belegung von T durch C zum Deadlock führen könnte, und blockiert C. B belegt T und gibt S frei, A bekommt S; sobald B auch T freigibt, kann C T belegen.",
+          source: "09_rabs-synchro-2.pdf, Folien 41-49"
+        },
+        {
           front: "Welche vier Strategien zur Deadlock-Behandlung werden genannt?",
           back: "Ignorieren, Erkennen und Beheben, Vermeidung und Verhinderung.",
           source: "09_rabs-synchro-2.pdf, Folie 50"
+        }
+      ],
+      walkthroughs: [
+        {
+          id: "deadlock-ablauf",
+          title: "Ablauf einer Verklemmung",
+          afterCard: "Belegungsanforderungsgraph",
+          source: "09_rabs-synchro-2.pdf, Folien 33-40",
+          intro: "A braucht R und S, B braucht S und T, C braucht T und R; jeder fordert seine beiden Betriebsmittel nacheinander an und gibt sie danach frei. Reihenfolge der Schritte: A–B–C–A–B–C.",
+          legend: {
+            done: "Belegung",
+            active: "Anforderung"
+          },
+          visual: {
+            kind: "graph",
+            nodes: [
+              { id: "A", x: 18, y: 18 },
+              { id: "B", x: 50, y: 18 },
+              { id: "C", x: 82, y: 18 },
+              { id: "R", x: 18, y: 80, note: "frei" },
+              { id: "S", x: 50, y: 80, note: "frei" },
+              { id: "T", x: 82, y: 80, note: "frei" }
+            ],
+            edges: [
+              { from: "A", to: "R" },
+              { from: "A", to: "S" },
+              { from: "B", to: "S" },
+              { from: "B", to: "T" },
+              { from: "C", to: "T" },
+              { from: "C", to: "R" }
+            ]
+          },
+          steps: [
+            {
+              title: "A belegt R",
+              text: "A fordert R an und bekommt es.",
+              source: "09_rabs-synchro-2.pdf, Folie 34",
+              explanation: {
+                action: "A fordert R an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "R ist frei → A belegt R."
+              },
+              values: [
+                { kind: "graph-edge", from: "A", to: "R", mark: "done" },
+                { kind: "graph-node", node: "R", note: "belegt: A" }
+              ]
+            },
+            {
+              title: "B belegt S",
+              text: "B fordert S an und bekommt es.",
+              source: "09_rabs-synchro-2.pdf, Folie 35",
+              explanation: {
+                action: "B fordert S an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "S ist frei → B belegt S."
+              },
+              values: [
+                { kind: "graph-edge", from: "B", to: "S", mark: "done" },
+                { kind: "graph-node", node: "S", note: "belegt: B" }
+              ]
+            },
+            {
+              title: "C belegt T",
+              text: "C fordert T an und bekommt es.",
+              source: "09_rabs-synchro-2.pdf, Folie 36",
+              explanation: {
+                action: "C fordert T an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "T ist frei → C belegt T."
+              },
+              values: [
+                { kind: "graph-edge", from: "C", to: "T", mark: "done" },
+                { kind: "graph-node", node: "T", note: "belegt: C" }
+              ]
+            },
+            {
+              title: "A fordert S an",
+              text: "S ist von B belegt, A muss warten.",
+              source: "09_rabs-synchro-2.pdf, Folie 37",
+              explanation: {
+                action: "A fordert S an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "S ist belegt → A wartet."
+              },
+              values: [
+                { kind: "graph-node", node: "A", note: "wartet auf S" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "A", to: "S", role: "active" }
+              ]
+            },
+            {
+              title: "B fordert T an",
+              text: "T ist von C belegt, B muss warten.",
+              source: "09_rabs-synchro-2.pdf, Folie 38",
+              explanation: {
+                action: "B fordert T an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "T ist belegt → B wartet."
+              },
+              values: [
+                { kind: "graph-node", node: "B", note: "wartet auf T" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "A", to: "S", role: "active" },
+                { kind: "graph-edge", from: "B", to: "T", role: "active" }
+              ]
+            },
+            {
+              title: "C fordert R an",
+              text: "R ist von A belegt, C muss warten.",
+              source: "09_rabs-synchro-2.pdf, Folie 39",
+              explanation: {
+                action: "C fordert R an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "R ist belegt → C wartet."
+              },
+              values: [
+                { kind: "graph-node", node: "C", note: "wartet auf R" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "A", to: "S", role: "active" },
+                { kind: "graph-edge", from: "B", to: "T", role: "active" },
+                { kind: "graph-edge", from: "C", to: "R", role: "active" }
+              ]
+            },
+            {
+              title: "Deadlock",
+              text: "Der Graph enthält den Zyklus A → S → B → T → C → R → A. Jeder Prozess wartet auf ein Betriebsmittel, das ein anderer wartender Prozess belegt; keiner kann fortfahren.",
+              source: "09_rabs-synchro-2.pdf, Folie 40",
+              explanation: {
+                action: "Graph auf einen Zyklus prüfen.",
+                rule: "Im Belegungsanforderungsgraphen liegt ein Deadlock genau dann vor, wenn der Graph einen Zyklus enthält.",
+                decision: "Zyklus A → S → B → T → C → R → A → Deadlock."
+              },
+              values: [
+                { kind: "graph-node", node: "A", note: "Deadlock" },
+                { kind: "graph-node", node: "B", note: "Deadlock" },
+                { kind: "graph-node", node: "C", note: "Deadlock" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "A", to: "S", role: "active" },
+                { kind: "graph-edge", from: "B", to: "T", role: "active" },
+                { kind: "graph-edge", from: "C", to: "R", role: "active" }
+              ]
+            }
+          ]
+        },
+        {
+          id: "deadlock-vermeidung",
+          title: "Verklemmung vermeiden",
+          afterCard: "Strategien gegen Deadlocks",
+          source: "09_rabs-synchro-2.pdf, Folien 41-49",
+          intro: "Dieselben Prozesse und Anforderungen wie beim Ablauf der Verklemmung. Jetzt prüft das Betriebssystem vor jeder Zuteilung, ob sie zu einem Deadlock führen könnte.",
+          legend: {
+            done: "Belegung",
+            active: "Anforderung"
+          },
+          visual: {
+            kind: "graph",
+            nodes: [
+              { id: "A", x: 18, y: 18 },
+              { id: "B", x: 50, y: 18 },
+              { id: "C", x: 82, y: 18 },
+              { id: "R", x: 18, y: 80, note: "frei" },
+              { id: "S", x: 50, y: 80, note: "frei" },
+              { id: "T", x: 82, y: 80, note: "frei" }
+            ],
+            edges: [
+              { from: "A", to: "R" },
+              { from: "A", to: "S" },
+              { from: "B", to: "S" },
+              { from: "B", to: "T" },
+              { from: "C", to: "T" },
+              { from: "C", to: "R" }
+            ]
+          },
+          steps: [
+            {
+              title: "A belegt R",
+              text: "A fordert R an und bekommt es.",
+              source: "09_rabs-synchro-2.pdf, Folie 42",
+              explanation: {
+                action: "A fordert R an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "R ist frei → A belegt R."
+              },
+              values: [
+                { kind: "graph-edge", from: "A", to: "R", mark: "done" },
+                { kind: "graph-node", node: "R", note: "belegt: A" }
+              ]
+            },
+            {
+              title: "B belegt S",
+              text: "B fordert S an und bekommt es.",
+              source: "09_rabs-synchro-2.pdf, Folie 43",
+              explanation: {
+                action: "B fordert S an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "S ist frei → B belegt S."
+              },
+              values: [
+                { kind: "graph-edge", from: "B", to: "S", mark: "done" },
+                { kind: "graph-node", node: "S", note: "belegt: B" }
+              ]
+            },
+            {
+              title: "C fordert T an",
+              text: "Das Betriebssystem erkennt, dass die Belegung von T durch C zu einem Deadlock führen könnte, und blockiert C, obwohl T frei ist.",
+              source: "09_rabs-synchro-2.pdf, Folie 44",
+              explanation: {
+                action: "C fordert T an.",
+                rule: "Vermeidung: Eine Anforderung wird nicht erfüllt, wenn dadurch ein Deadlock entstehen könnte.",
+                decision: "T an C könnte zum Deadlock führen → C wird blockiert."
+              },
+              values: [
+                { kind: "graph-node", node: "C", note: "blockiert" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" }
+              ]
+            },
+            {
+              title: "A fordert S an",
+              text: "S ist von B belegt, A muss warten.",
+              source: "09_rabs-synchro-2.pdf, Folie 45",
+              explanation: {
+                action: "A fordert S an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "S ist belegt → A wartet."
+              },
+              values: [
+                { kind: "graph-node", node: "A", note: "wartet auf S" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" },
+                { kind: "graph-edge", from: "A", to: "S", role: "active" }
+              ]
+            },
+            {
+              title: "B belegt T",
+              text: "B fordert T an und bekommt es; B hat damit beide Betriebsmittel.",
+              source: "09_rabs-synchro-2.pdf, Folie 46",
+              explanation: {
+                action: "B fordert T an.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "T ist frei → B belegt T."
+              },
+              values: [
+                { kind: "graph-edge", from: "B", to: "T", mark: "done" },
+                { kind: "graph-node", node: "T", note: "belegt: B" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" },
+                { kind: "graph-edge", from: "A", to: "S", role: "active" }
+              ]
+            },
+            {
+              title: "B gibt S frei",
+              text: "B ist mit S fertig und gibt es frei.",
+              source: "09_rabs-synchro-2.pdf, Folie 47",
+              explanation: {
+                action: "B gibt S frei.",
+                rule: "Ein freigegebenes Betriebsmittel kann einem wartenden Prozess zugeteilt werden.",
+                decision: "S ist wieder frei; A wartet darauf."
+              },
+              values: [
+                { kind: "graph-edge", from: "B", to: "S", mark: null },
+                { kind: "graph-node", node: "S", note: "frei" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" },
+                { kind: "graph-edge", from: "A", to: "S", role: "active" }
+              ]
+            },
+            {
+              title: "A belegt S",
+              text: "A bekommt das freigegebene S und kann weiterlaufen.",
+              source: "09_rabs-synchro-2.pdf, Folie 48",
+              explanation: {
+                action: "S an A zuteilen.",
+                rule: "Ein freies Betriebsmittel wird dem anfordernden Prozess zugeteilt; ein belegtes nicht, dann muss der Prozess warten.",
+                decision: "S ist frei → A belegt S."
+              },
+              values: [
+                { kind: "graph-edge", from: "A", to: "S", mark: "done" },
+                { kind: "graph-node", node: "S", note: "belegt: A" },
+                { kind: "graph-node", node: "A", note: null }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" }
+              ]
+            },
+            {
+              title: "B gibt T frei",
+              text: "B gibt auch T frei. Jetzt kann C weiterlaufen und T belegen; eine Verklemmung ist nicht entstanden.",
+              source: "09_rabs-synchro-2.pdf, Folie 49",
+              explanation: {
+                action: "B gibt T frei.",
+                rule: "Vermeidung: Eine Anforderung wird nicht erfüllt, wenn dadurch ein Deadlock entstehen könnte.",
+                decision: "T ist frei und führt nicht mehr zum Deadlock → C kann T belegen."
+              },
+              values: [
+                { kind: "graph-edge", from: "B", to: "T", mark: null },
+                { kind: "graph-node", node: "T", note: "frei" },
+                { kind: "graph-node", node: "C", note: "kann T belegen" }
+              ],
+              highlights: [
+                { kind: "graph-edge", from: "C", to: "T", role: "active" }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3139,6 +3784,11 @@ const rabs = {
           source: "10_rabs-ipc.pdf, Folie 11"
         },
         {
+          title: "Merkmale von Kommunikationsbeziehungen",
+          body: "Kommunikationsbeziehungen unterscheiden sich nach Anzahl der Teilnehmer, zeitlicher Kopplung (synchron oder asynchron), Gleichzeitigkeit von Hin- und Rückkanal (unidirektional oder bidirektional), räumlichen Aspekten (lokal oder entfernt) und direkter oder indirekter Kommunikation.",
+          source: "10_rabs-ipc.pdf, Folie 12"
+        },
+        {
           title: "Direkte und indirekte Kommunikation",
           body: "Bei direkter Kommunikation wird die Nachricht unmittelbar aus dem Speicherbereich des Senders in einen Speicherbereich des Empfängers geschrieben. Bei indirekter Kommunikation über Mailboxen realisiert das Betriebssystem eine Warteschlange.",
           source: "10_rabs-ipc.pdf, Folien 14-15"
@@ -3149,15 +3799,31 @@ const rabs = {
           source: "10_rabs-ipc.pdf, Folien 15-16"
         },
         {
+          title: "Client-Server",
+          body: "Der Server stellt einen Port zur Verfügung, über den Clients ihre Aufträge senden, z. B. Printserver für Druckaufträge oder Fileserver für Zugriffe auf zentrale Dateien.",
+          source: "10_rabs-ipc.pdf, Folie 17"
+        },
+        {
           title: "Zeitliche Kopplung",
           body: "Synchrones Senden blockiert den Sender, bis der Empfänger die Information entgegengenommen hat. Asynchrones Senden setzt sofort fort. Synchrones Empfangen blockiert bis zum Eintreffen der Information; asynchrones Empfangen prüft, ob etwas empfangen wurde, und arbeitet weiter.",
           source: "10_rabs-ipc.pdf, Folie 18"
+        },
+        {
+          title: "Asynchrone und synchrone Nachrichten, Aufträge",
+          body: "Asynchrone Message: Der Sender wird nicht mit dem Empfänger synchronisiert; das Betriebssystem muss die Nachricht puffern, falls der Empfänger noch nicht wartet. Synchrone Message: Der Sender blockiert, bis die Nachricht empfangen ist (Rendezvous), es ist keine Pufferung nötig. Synchroner Auftrag: Der Empfänger sendet ein Resultat zurück, der Sender blockiert bis dahin. Erteilt der Sender mehrere Aufträge gleichzeitig, ist Parallelverarbeitung möglich.",
+          tag: "wichtig",
+          source: "10_rabs-ipc.pdf, Folien 22-25"
         },
         {
           title: "Pipes",
           body: "Pipes übertragen Sequenzen von Bytes in FIFO-Reihenfolge zwischen Prozessen. Sie haben keine Nachrichtengrenzen oder Längenbeschränkungen. Eine Pipe ist ein unidirektionaler Datenstrom.",
           tag: "def",
           source: "10_rabs-ipc.pdf, Folien 26-28"
+        },
+        {
+          title: "Unbenannte und benannte Pipes",
+          body: "Eine unbenannte Pipe kennt zunächst nur der erzeugende Prozess; ihre Dateideskriptoren werden an Kindprozesse vererbt. Eine benannte Pipe ist als spezielle Datei im Dateisystem sichtbar und wird wie eine normale Datei mit <code>open</code>, <code>close</code>, <code>read</code> und <code>write</code> benutzt. Erzeugt wird sie mit dem Systemaufruf <code>mkfifo(char *name, mode_t mode)</code>, unter Linux auch mit dem Shell-Kommando <code>mkfifo</code>; gelöscht wird sie mit normalen Dateisystem-Operationen.",
+          source: "10_rabs-ipc.pdf, Folien 29-30"
         },
         {
           title: "Pipes in der Shell",
@@ -3208,9 +3874,24 @@ const rabs = {
           source: "10_rabs-ipc.pdf, Folie 16"
         },
         {
+          front: "Warum muss bei asynchronen Nachrichten gepuffert werden, bei synchronen nicht?",
+          back: "Asynchron wird der Sender nicht mit dem Empfänger synchronisiert, das Betriebssystem muss die Nachricht halten, bis der Empfänger sie abholt. Synchron blockiert der Sender, bis die Nachricht empfangen ist (Rendezvous).",
+          source: "10_rabs-ipc.pdf, Folien 22-23"
+        },
+        {
+          front: "Was ist ein synchroner Auftrag?",
+          back: "Der Empfänger sendet ein Resultat zurück, und der Sender ist blockiert, bis das Resultat vorliegt.",
+          source: "10_rabs-ipc.pdf, Folie 24"
+        },
+        {
           front: "Was ist eine Pipe?",
           back: "Ein unidirektionaler Datenstrom, der Bytes in FIFO-Reihenfolge zwischen Prozessen überträgt.",
           source: "10_rabs-ipc.pdf, Folien 26-28"
+        },
+        {
+          front: "Was unterscheidet unbenannte von benannten Pipes?",
+          back: "Unbenannte Pipes kennt zunächst nur der erzeugende Prozess, die Deskriptoren werden an Kinder vererbt. Benannte Pipes sind als spezielle Datei im Dateisystem sichtbar und werden mit <code>mkfifo</code> erzeugt.",
+          source: "10_rabs-ipc.pdf, Folien 29-30"
         },
         {
           front: "Was ist Shared Memory?",
