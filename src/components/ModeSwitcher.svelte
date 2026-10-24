@@ -21,6 +21,7 @@
       class:unavailable={!available}
       class="mode-btn"
       type="button"
+      aria-label={mode.label}
       aria-current={mode.id === currentMode ? "true" : undefined}
       aria-disabled={available ? undefined : "true"}
       title={available ? undefined : "Für dieses Thema nicht vorhanden"}

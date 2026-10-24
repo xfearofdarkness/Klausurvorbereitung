@@ -3,7 +3,7 @@
   import { walkthroughsAfterCards } from "../lib/walkthrough";
   import Source from "./Source.svelte";
   import WalkthroughCard from "./WalkthroughCard.svelte";
-  import type { ContentTag, Topic } from "../types/content";
+  import type { Topic } from "../types/content";
 
   interface Props {
     topic: Topic;
@@ -15,26 +15,17 @@
   function blockId(index: number): string {
     return `abschnitt-${index + 1}`;
   }
-
-  function tagLabel(tag: ContentTag): string {
-    if (tag === "wichtig") return "Wichtig";
-    if (tag === "formel") return "Formel";
-    if (tag === "def") return "Definition";
-    if (tag === "satz") return "Satz";
-    if (tag === "beispiel") return "Beispiel";
-    return "";
-  }
 </script>
 
 <article class="study-doc">
   {#each topic.cards as card, index (blockId(index))}
     <section class="study-block fade-in" class:study-wichtig={card.tag === "wichtig"} id={blockId(index)}>
-      <h3>
+      <h2>
         {card.title}
-        {#if card.tag && card.tag !== "def"}
-          <span class={`tag tag-${card.tag}`}>{tagLabel(card.tag)}</span>
+        {#if card.tag === "wichtig"}
+          <span class="tag tag-wichtig">Wichtig</span>
         {/if}
-      </h3>
+      </h2>
       <div class="study-body">
         <p>{@html richText(card.body)}</p>
       </div>

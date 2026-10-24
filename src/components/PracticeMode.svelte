@@ -47,7 +47,7 @@
         <GeneratedExercise {exercise} {isDone} {showNote} onMark={() => onMark(exercise.key)} />
       {:else}
         <section class="study-block ex-block fade-in">
-          <h3>{exercise.ref || "Aufgabe"}</h3>
+          <h2>{exercise.ref || "Aufgabe"}</h2>
           <div class="study-body">
             <div class="ex-task">{@html richText(exercise.task)}</div>
             {#if showNote && exercise.note}

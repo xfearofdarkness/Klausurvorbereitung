@@ -134,8 +134,8 @@ Lernkarten können mit den Tags `wichtig`, `formel`, `def`, `satz`
 und `beispiel` ausgezeichnet werden. Im Modus Lernen stehen sie im
 Fließtext, nicht in umrandeten Karten. Alle Abschnitte sitzen bündig.
 Nur `wichtig` behält eine Markierung: eine linke Linie und das Wort
-„Wichtig“. Die übrigen Tags bleiben kleine Farbmarken, `def` ohne
-Badge. Die Farben sind zentral definiert und in allen Fächern gleich.
+„Wichtig“. Andere Tags wie `formel`, `def`, `satz` und `beispiel`
+bleiben ohne Badge. Die Farben sind zentral definiert.
 
 Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an.
 Im Modus Lernen steht der Fließtext auf etwa 68 Zeichen bei 18px und

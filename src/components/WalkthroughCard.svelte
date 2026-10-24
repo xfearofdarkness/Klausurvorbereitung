@@ -61,7 +61,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <article class="walk-card fade-in" aria-label={walkthrough.title} onkeydown={handleKeydown}>
   <header class="walk-header">
-    <h3>{walkthrough.title}</h3>
+    <h2>{walkthrough.title}</h2>
     {#if stepCount > 0}
       <span class="walk-step-count">Ablauf · Schritt {stepIndex + 1} von {stepCount}</span>
     {/if}
@@ -95,7 +95,7 @@
 
   <div class="walk-controls">
     <button class="walk-nav-btn" type="button" disabled={stepIndex === 0} onclick={() => setStep(stepIndex - 1)}>Zurück</button>
-    <nav class="walk-step-nav" aria-label="Ablaufschritte">
+    <nav class="walk-step-nav" aria-label={`Ablaufschritte: ${walkthrough.title}`}>
       <ol>
         {#each walkthrough.steps as step, index}
           <li>
@@ -121,7 +121,7 @@
 
   {#if currentStep}
     <div class="walk-step" aria-live="polite">
-      <h4>{currentStep.title}</h4>
+      <h3>{currentStep.title}</h3>
       <p>{@html richText(currentStep.text)}</p>
       {#if currentStep.formula || currentStep.product || currentStep.sum}
         <div class="walk-calculation" aria-label="Rechnung">

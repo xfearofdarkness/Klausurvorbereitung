@@ -453,12 +453,17 @@ a.card.is-last .card-badge {
 }
 
 .topic-item-progress {
-  color: var(--text3);
+  color: var(--text2);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
 }
 
-.topic-item-progress.complete {
+.topic-item.active .topic-item-progress {
+  color: var(--text);
+}
+
+.topic-item-progress.complete,
+.topic-item.active .topic-item-progress.complete {
   color: var(--success);
 }
 
@@ -785,12 +790,12 @@ a.card.is-last .card-badge {
   border-left: 3px solid var(--warning);
 }
 
-.study-wichtig h3,
+.study-wichtig h2,
 .study-wichtig .study-body {
   padding-left: 0.85rem;
 }
 
-.study-block h3 {
+.study-block h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -871,24 +876,9 @@ a.card.is-last .card-badge {
   font-size: 0.8125rem;
 }
 
-.tag-formel {
-  background: var(--yellow-dim);
-  color: var(--yellow);
-}
-
-.tag-satz {
-  background: var(--purple-dim);
-  color: var(--purple);
-}
-
-.tag-beispiel {
-  background: var(--pink-dim);
-  color: var(--pink);
-}
-
 .card-source {
   margin-top: 0.5rem;
-  color: var(--text3);
+  color: var(--text2);
   font-family: var(--font-mono);
   font-size: 0.75rem;
 }
@@ -933,7 +923,7 @@ a.card.is-last .card-badge {
     align-items: start;
   }
 
-  .study-block h3 {
+  .study-block h2 {
     grid-column: 1;
     grid-row: 1;
     max-width: none;
@@ -1219,7 +1209,7 @@ a.card.is-last .card-badge {
 
 .fc-label {
   margin-bottom: 0.875rem;
-  color: var(--text3);
+  color: var(--text2);
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -1246,7 +1236,7 @@ a.card.is-last .card-badge {
 
 .fc-hint {
   margin-top: auto;
-  color: var(--text3);
+  color: var(--text2);
   font-size: 0.75rem;
 }
 
@@ -1335,7 +1325,7 @@ a.card.is-last .card-badge {
   gap: 0.25rem 0.75rem;
 }
 
-.walk-header h3 {
+.walk-header h2 {
   font-size: 0.9375rem;
   font-weight: 600;
   line-height: 1.3;
@@ -1366,7 +1356,7 @@ a.card.is-last .card-badge {
   justify-content: center;
   gap: 0.25rem 0.875rem;
   margin-top: 0.25rem;
-  color: var(--text3);
+  color: var(--text2);
   font-size: 0.75rem;
   list-style: none;
 }
@@ -1379,7 +1369,7 @@ a.card.is-last .card-badge {
 }
 
 .walk-legend li.walk-legend-idle {
-  opacity: 0.4;
+  color: var(--text3);
 }
 
 .walk-swatch {
@@ -1480,7 +1470,7 @@ a.card.is-last .card-badge {
   margin-top: 0.625rem;
 }
 
-.walk-step h4 {
+.walk-step h3 {
   margin-bottom: 0.25rem;
   font-size: 1rem;
   font-weight: 600;

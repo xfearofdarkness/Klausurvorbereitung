@@ -15,6 +15,7 @@
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
   import { prepareRichText } from "../lib/richText";
+  import { keyboardScroll } from "../lib/keyboardScroll";
   import type { SearchHit } from "../lib/search";
   import {
     getFlashState,
@@ -276,7 +277,7 @@
   }
 </script>
 
-<div class={`trainer ${layoutClass}`}>
+<div class="trainer {layoutClass}" use:keyboardScroll>
   {#if subject}
     <aside class="sidebar" aria-label="Themen">
       <div class="sidebar-head">

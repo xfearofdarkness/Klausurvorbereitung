@@ -24,7 +24,7 @@
 </script>
 
 <section class="study-block ex-block fade-in">
-  <h3>{exercise.ref || "Aufgabe"}</h3>
+  <h2>{exercise.ref || "Aufgabe"}</h2>
   <div class="study-body">
     {#if generated}
       <div class="ex-task">{@html richText(generated.task)}</div>

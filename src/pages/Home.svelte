@@ -28,4 +28,4 @@
   </div>
   <ProgressBackup />
 </main>
-<div class="footer">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</div>
+<footer class="footer">Hinweis: Lernseiten sind KI-generiert. Im Zweifel immer mit Folien und Originalunterlagen abgleichen.</footer>
