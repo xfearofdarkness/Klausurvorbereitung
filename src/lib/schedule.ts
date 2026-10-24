@@ -1,4 +1,4 @@
-import type { AppProgress, CardSchedule, Subject } from "../types/content";
+import type { CardSchedule } from "../types/content";
 
 export type ReviewGrade = "again" | "hard" | "good";
 
@@ -45,22 +45,6 @@ export function reviewCard(previous: CardSchedule | undefined, grade: ReviewGrad
     interval = Math.max((previous?.interval ?? 1) + 1, Math.round((previous?.interval ?? 1) * ease));
   }
   return { due: addDays(today, interval), interval, ease, reps };
-}
-
-export function isDue(schedule: CardSchedule | undefined, today: string): boolean {
-  return !schedule || schedule.due <= today;
-}
-
-export function countDueCards(subject: Subject, progress: AppProgress, today: string): number {
-  const schedules = progress.subjects[subject.id]?.schedule;
-  let count = 0;
-  for (const topic of subject.topics) {
-    const topicSchedule = schedules?.[topic.id];
-    for (const card of topic.flashcards) {
-      if (isDue(topicSchedule?.[card.key], today)) count += 1;
-    }
-  }
-  return count;
 }
 
 /** Fällige Karten zuerst, danach Karten ohne Termin, danach spätere Termine. */

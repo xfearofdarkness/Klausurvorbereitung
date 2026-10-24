@@ -29,7 +29,7 @@
     type LegacySubjectKeys,
     type TopicProgressSummary
   } from "../lib/progress";
-  import { countDueCards, orderByDue, reviewCard, todayIso, type ReviewGrade } from "../lib/schedule";
+  import { orderByDue, reviewCard, todayIso, type ReviewGrade } from "../lib/schedule";
   import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, Topic } from "../types/content";
 
   const AGAIN_GAP = 2;
@@ -57,7 +57,6 @@
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
-  let dueCount = $derived(subject ? countDueCards(subject, progress, todayIso()) : 0);
 
   onMount(() => {
     progress = loadProgress();
@@ -307,7 +306,6 @@
       <div class="sidebar-subject">
         <span class="sidebar-subject-title">{subject.title}</span>
         {#if subject.subtitle}<span class="sidebar-subject-subtitle">{subject.subtitle}</span>{/if}
-        <span class="sidebar-due">Heute fällig: {dueCount}</span>
       </div>
       <TopicList topics={subject.topics} progress={topicProgress} {currentTopicIndex} onSelect={selectTopic} />
       <div class="sidebar-footer">
@@ -352,9 +350,6 @@
     </header>
 
     <main class="main content-frame" id="content">
-      {#if subject}
-        <p class="due-line">Heute fällig: {dueCount}</p>
-      {/if}
       {#if errorMessage}
         <div class="error-card fade-in">
           <h2>Fach nicht verfügbar</h2>

@@ -1,28 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { addDays, countDueCards, orderByDue, reviewCard, todayIso } from "./schedule";
-import type { AppProgress, Subject } from "../types/content";
-
-const subject = {
-  id: "laa",
-  title: "LAA",
-  subtitle: "",
-  icon: "",
-  features: {},
-  topics: [
-    {
-      id: "funktionen",
-      title: "Funktionen",
-      icon: "",
-      cards: [],
-      flashcards: [
-        { key: "karte-a", front: "A", back: "a", source: "" },
-        { key: "karte-b", front: "B", back: "b", source: "" }
-      ],
-      exercises: [],
-      walkthroughs: []
-    }
-  ]
-} satisfies Subject;
+import { addDays, orderByDue, reviewCard, todayIso } from "./schedule";
 
 describe("Karteikarten-Termine", () => {
   const today = "2026-10-24";
@@ -47,18 +24,9 @@ describe("Karteikarten-Termine", () => {
     expect(reviewCard(hard, "hard", today).ease).toBe(1.3);
   });
 
-  it("zählt neue und fällige Karten und sortiert sie nach vorn", () => {
-    const progress: AppProgress = {
-      subjects: {
-        laa: {
-          version: 4,
-          flash: {},
-          schedule: { funktionen: { "karte-a": { due: "2026-11-01", interval: 4, ease: 2.5, reps: 2 } } }
-        }
-      }
-    };
-    expect(countDueCards(subject, progress, today)).toBe(1);
-    expect(orderByDue([0, 1], (index) => (index === 0 ? progress.subjects.laa?.schedule?.funktionen["karte-a"] : undefined), today)).toEqual([1, 0]);
+  it("sortiert Karten ohne Termin vor späteren Terminen", () => {
+    const later = { due: "2026-11-01", interval: 4, ease: 2.5, reps: 2 };
+    expect(orderByDue([0, 1], (index) => (index === 0 ? later : undefined), today)).toEqual([1, 0]);
   });
 
   it("rechnet Tage über Monatsgrenzen", () => {
