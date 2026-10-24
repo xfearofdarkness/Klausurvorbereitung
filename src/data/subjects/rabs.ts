@@ -1827,6 +1827,38 @@ const rabs = {
           source: "07_rabs-scheduling.pdf, Folie 47"
         }
       ],
+      exercises: [
+        {
+          ref: "FCFS",
+          generator: "scheduling-fcfs",
+          note: "Rechenmodul: Die Prozessdaten werden zufällig erzeugt, die Lösung wird nach den Regeln der Folien berechnet.",
+          source: "07_rabs-scheduling.pdf, Folien 14-18"
+        },
+        {
+          ref: "SJF",
+          generator: "scheduling-sjf",
+          note: "Rechenmodul: Die Prozessdaten werden zufällig erzeugt, die Lösung wird nach den Regeln der Folien berechnet.",
+          source: "07_rabs-scheduling.pdf, Folien 14, 19-21"
+        },
+        {
+          ref: "Round Robin",
+          generator: "scheduling-rr",
+          note: "Rechenmodul: Die Prozessdaten werden zufällig erzeugt, die Lösung wird nach den Regeln der Folien berechnet.",
+          source: "07_rabs-scheduling.pdf, Folien 14, 22-28"
+        },
+        {
+          ref: "PRIO-NP",
+          generator: "scheduling-prio-np",
+          note: "Rechenmodul: Die Prozessdaten werden zufällig erzeugt, die Lösung wird nach den Regeln der Folien berechnet.",
+          source: "07_rabs-scheduling.pdf, Folien 14, 29-31"
+        },
+        {
+          ref: "PRIO-P",
+          generator: "scheduling-prio-p",
+          note: "Rechenmodul: Die Prozessdaten werden zufällig erzeugt, die Lösung wird nach den Regeln der Folien berechnet.",
+          source: "07_rabs-scheduling.pdf, Folien 14, 32-34"
+        }
+      ],
       walkthroughs: [
         {
           id: "scheduling-fcfs",

@@ -2,7 +2,7 @@
 
 import katex from "katex";
 import { catalog, subjectLoaders } from "../src/data/catalog";
-import { generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
+import { checkSlideExample, generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
 import { MATH_PATTERN } from "../src/lib/math";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
@@ -113,6 +113,10 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
       if (!hasGenerator(exercise.generator)) {
         fail(`${topicLabel} exercise[${exerciseIndex}] references unknown generator "${exercise.generator}".`);
       } else {
+        const slideExampleError = checkSlideExample(exercise.generator);
+        if (slideExampleError) {
+          fail(`${topicLabel} exercise[${exerciseIndex}] generator "${exercise.generator}" does not reproduce the slide example: ${slideExampleError}`);
+        }
         for (const seed of [1, 2, 3, 42, 1337, 99991]) {
           const generated = generateTask(exercise.generator, seed);
           if (!generated || !generated.task || !generated.solution) {

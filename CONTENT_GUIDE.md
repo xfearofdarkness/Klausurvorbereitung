@@ -14,7 +14,7 @@ Er gilt für:
 
 - Vorlesungsfolien haben immer das letzte Wort.
 - Die Folien sind die einzige fachliche Referenz für Lernkarten, Karteikarten (`flashcards`) und Abläufe (`walkthroughs`).
-- Offizielle Übungsblätter des Kurses dürfen zusätzlich als Quelle für Übungsaufgaben (`exercises`) dienen — nur für den Aufgabentext, nie für Lösungen.
+- Übungsaufgaben (`exercises`) dürfen zusätzlich aus offiziellen Übungsblättern des Kurses stammen oder Verfahren der Folien anwenden. Lösungen stammen nie aus KI-Wissen (siehe „Übungsaufgaben“).
 - Wenn etwas nicht explizit auf den Folien steht, darf es nicht in den Trainer.
 - Bei Abweichungen zwischen Trainer und Folien gelten immer die Folien.
 - Unklare, abgeschnittene oder OCR-fehlerhafte Stellen werden nicht geraten.
@@ -108,25 +108,39 @@ Eine optionale `manifest.json` oder `README.md` sollte enthalten:
 
 ## Übungsaufgaben (`exercises`)
 
-Der optionale Themenabschnitt `exercises` bildet offizielle Übungsblätter ab.
+Der optionale Themenabschnitt `exercises` enthält Aufgaben zum Selbstrechnen.
+Sie stammen aus zwei Quellen:
+
+- **Übungsblätter:** Aufgaben eines offiziellen Übungsblatts. Der Aufgabentext
+  bleibt so nah wie möglich am Blatt.
+- **Folien:** Aufgaben, die ein auf den Folien beschriebenes oder
+  vorgerechnetes Verfahren anwenden, etwa ein Scheduling-Verfahren auf andere
+  Prozessdaten. Sie verlangen nur Wissen und Vorgehen, die auf den Folien
+  stehen, und verwenden deren Begriffe.
 
 Regeln:
 
-- Der Aufgabentext bleibt so nah wie möglich am Übungsblatt.
-- Enthält die Quelle keine Lösung, wird keine Lösung erfunden oder ergänzt.
+- Lösungen werden nie erfunden oder aus KI-Wissen ergänzt. Feste Aufgaben
+  haben keine hinterlegte Lösung; Rechenmodule berechnen sie algorithmisch.
 - Theoriefragen eines Übungsblatts, deren Antwort explizit auf den Folien steht, dürfen zusätzlich als `flashcards` mit Folien-`source` geführt werden.
-- `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5"), `source` die Pflicht-Quellenangabe.
+- `ref` ist die sichtbare Kurzreferenz (z. B. "Aufgabe 5" oder "FCFS"),
+  `source` die Pflicht-Quellenangabe: die Aufgabe des Übungsblatts oder die
+  Folien, die das Verfahren erklären und vorrechnen.
 - `note` ist optional für Hinweise, die sich direkt aus den Quellen ergeben (z. B. auf welche Foliencluster sich die Aufgabe bezieht).
 
 ### Generierte Rechenmodule
 
-Reine Rechenaufgaben aus offiziellen Übungsblättern dürfen als generierte
-Rechenmodule geführt werden (`generator`-Feld statt `task`):
+Rechenaufgaben, deren Lösung sich eindeutig berechnen lässt, dürfen als
+generierte Rechenmodule geführt werden (`generator`-Feld statt `task`):
 
-- Ein Modul entspricht genau einem Aufgabentyp des Übungsblatts; `ref` und
-  `source` verweisen auf diese Aufgabe (Kennzeichnung z. B. "Aufgabe 5 (Typ)").
+- Ein Modul entspricht genau einem Aufgabentyp: einer Aufgabe eines
+  Übungsblatts (Kennzeichnung z. B. "Aufgabe 5 (Typ)") oder einem Verfahren
+  der Folien. `ref` und `source` verweisen darauf.
 - Die Zahlen werden zufällig erzeugt; die Lösung samt Rechenweg wird vom
-  Generator algorithmisch berechnet — nie aus KI-Wissen ergänzt.
+  Generator algorithmisch berechnet — nie aus KI-Wissen ergänzt. Der
+  Rechenweg folgt dem Vorgehen und den Regeln der Folien.
+- Rechnen die Folien das Verfahren vor, muss der Generator dieses Beispiel
+  exakt nachrechnen. Das prüft der Validator.
 - Generatoren sind generisch und leben in `src/lib/exerciseGenerators.ts`;
   die Fachdaten referenzieren sie nur deklarativ über die Generator-Id.
 - Der Validator prüft jede Generator-Referenz und erzeugt Stichproben.
