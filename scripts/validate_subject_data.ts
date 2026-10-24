@@ -1,12 +1,13 @@
 #!/usr/bin/env tsx
 
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import katex from "katex";
 import { catalog } from "../src/data/catalog";
 import { emDashPaths } from "./no_em_dash";
 import { ContentError } from "./content_compiler";
-import { loadRawSubject } from "./load_content";
+import { loadRawSubject, subjectContentDir } from "./load_content";
 import { checkSlideExample, generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
 import { MATH_PATTERN } from "../src/lib/math";
 import { normalizeSubject } from "../src/lib/normalize";
@@ -77,6 +78,8 @@ function validateSubject(subjectId: SubjectId, subject: Subject | null): void {
     fail(`Subject "${subjectId}" must contain at least one topic.`);
     return;
   }
+
+  validateDeckLabels(subjectId, subject);
 
   const topicIds = new Set<string>();
 
@@ -174,6 +177,69 @@ function validateTopic(subjectId: SubjectId, topic: Topic, topicIndex: number, t
 
   if (topic.flashcards.length === 0) {
     fail(`${topicLabel} has no flashcards.`);
+  }
+}
+
+const DECKS_FILE = "decks.json";
+const SLIDE_FILE = /^(.+\.pdf),\s*((?:Folien|Folie)\b.*)$/;
+
+function slideFiles(source: string): string[] {
+  return source
+    .split(";")
+    .map((part) => SLIDE_FILE.exec(part.trim()))
+    .flatMap((match) => (match ? [match[1].trim()] : []));
+}
+
+function citedSlideFiles(subject: Subject): Set<string> {
+  const files = new Set<string>();
+  for (const topic of subject.topics) {
+    for (const source of [
+      ...topic.cards.map((card) => card.source),
+      ...topic.flashcards.map((card) => card.source),
+      ...topic.exercises.map((exercise) => exercise.source),
+      ...topic.walkthroughs.flatMap((walkthrough) => [walkthrough.source, ...walkthrough.steps.map((step) => step.source ?? "")])
+    ]) {
+      for (const file of slideFiles(source)) files.add(file);
+    }
+  }
+  return files;
+}
+
+/** Jeder Foliensatz steht in `decks.json`; das Kürzel zeigt die Oberfläche nur bei mehreren Sätzen. */
+function validateDeckLabels(subjectId: SubjectId, subject: Subject): void {
+  const relative = `content/${subjectId}/${DECKS_FILE}`;
+  const path = join(subjectContentDir(subjectId), DECKS_FILE);
+  if (!existsSync(path)) {
+    fail(`${relative} is missing.`);
+    return;
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(readFileSync(path, "utf8")) as unknown;
+  } catch {
+    fail(`${relative} is not valid JSON.`);
+    return;
+  }
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    fail(`${relative} must be an object of filename to label.`);
+    return;
+  }
+
+  const labels = parsed as Record<string, unknown>;
+  const cited = citedSlideFiles(subject);
+  for (const [file, label] of Object.entries(labels)) {
+    if (!file.endsWith(".pdf") || typeof label !== "string" || label.trim().length === 0) {
+      fail(`${relative} entry "${file}" needs a non-empty label.`);
+    } else if (!cited.has(file)) {
+      fail(`${relative} lists "${file}", which no slide reference cites.`);
+    }
+  }
+  for (const file of cited) {
+    const label = labels[file];
+    if (typeof label !== "string" || label.trim().length === 0) {
+      fail(`${relative} is missing a label for "${file}".`);
+    }
   }
 }
 

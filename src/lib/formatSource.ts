@@ -1,3 +1,5 @@
+import { deckLabel } from "./deckLabels";
+
 const SEPARATOR = " · ";
 
 function shortenPart(part: string): string {
@@ -8,7 +10,8 @@ function shortenPart(part: string): string {
   const numbers = rest.replace(/ und /g, ", ");
   const exercise = /^(?:Aufgaben|Aufgabe)\s+(.+)$/.exec(numbers);
   if (exercise) return `Übung ${exercise[1]}`;
-  return numbers;
+  const label = /^(?:Folien|Folie)\b/.test(numbers) ? deckLabel(file) : "";
+  return label ? `${label}${SEPARATOR}${numbers}` : numbers;
 }
 
 /** Kurze Randangabe. Die volle Quellenzeile bleibt in den Fachdaten. */

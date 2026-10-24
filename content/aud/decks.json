@@ -1,0 +1,11 @@
+{
+  "01_introduction.pdf": "Einführung",
+  "02_abstract_data_types.pdf": "Abstrakte Datentypen",
+  "03_fundamental-algorithms.pdf": "Suchen & Sortieren",
+  "04_tree_structures.pdf": "Bäume",
+  "05_balanced_trees.pdf": "Balancierte Bäume",
+  "06_heaps_hash-tables.pdf": "Heaps & Hashing",
+  "07_graphs.pdf": "Graphen",
+  "08_graph-algorithms.pdf": "Graphalgorithmen",
+  "09_algorithm-patterns.pdf": "Entwurfsverfahren"
+}

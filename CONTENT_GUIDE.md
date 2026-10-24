@@ -253,6 +253,13 @@ Optional:
 - Aufgaben und Abläufe pro Thema
 - `tag` bei Lernkarten: `wichtig`, `formel`, `def`, `satz`, `beispiel`
 
+`content/<fach-id>/decks.json` ordnet jeden Dateinamen eines Foliensatzes
+einem kurzen Kürzel zu (`"02_rabs_speicher.pdf": "Speicherverwaltung"`).
+Die Quellenzeile in den Themendateien bleibt vollständig. Die Oberfläche
+setzt das Kürzel nur vor die Folienangabe, und nur wenn das Fach mehr als
+einen Foliensatz hat. Übungsblätter stehen nicht in der Datei und bleiben
+„Übung 12“.
+
 ## Qualitätssicherung
 
 Vor Veröffentlichung prüfen:
