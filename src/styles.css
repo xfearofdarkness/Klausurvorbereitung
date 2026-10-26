@@ -1289,6 +1289,14 @@ a.card.is-last .card-badge {
   margin: 0.4rem 0;
 }
 
+.slide-note {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--yellow);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
 .fc-source {
   max-width: 90%;
   margin-top: 0.75rem;

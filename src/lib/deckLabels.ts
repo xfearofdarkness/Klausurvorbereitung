@@ -1,5 +1,6 @@
 import audDecks from "../../content/aud/decks.json" with { type: "json" };
 import dismaDecks from "../../content/disma/decks.json" with { type: "json" };
+import dsvDecks from "../../content/dsv/decks.json" with { type: "json" };
 import laaDecks from "../../content/laa/decks.json" with { type: "json" };
 import rabsDecks from "../../content/rabs/decks.json" with { type: "json" };
 import vsDecks from "../../content/vs/decks.json" with { type: "json" };
@@ -19,7 +20,7 @@ function indexDecks(maps: readonly object[]): Map<string, DeckLabel> {
   return index;
 }
 
-const DECKS = indexDecks([audDecks, dismaDecks, laaDecks, rabsDecks, vsDecks]);
+const DECKS = indexDecks([audDecks, dismaDecks, dsvDecks, laaDecks, rabsDecks, vsDecks]);
 
 /** Kürzel nur, wenn das Fach mehr als einen Foliensatz hat. */
 export function deckLabel(file: string): string {

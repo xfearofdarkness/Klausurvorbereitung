@@ -6,5 +6,6 @@ export const subjectLoaders: Record<SubjectId, () => Promise<{ default: RawSubje
   laa: () => import("virtual:subject/laa"),
   vs: () => import("virtual:subject/vs"),
   aud: () => import("virtual:subject/aud"),
-  disma: () => import("virtual:subject/disma")
+  disma: () => import("virtual:subject/disma"),
+  dsv: () => import("virtual:subject/dsv")
 };

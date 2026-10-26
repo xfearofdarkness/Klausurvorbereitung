@@ -30,5 +30,11 @@ export const catalog = [
     "title": "DisMa",
     "subtitle": "Diskrete Mathematik",
     "icon": "🧩"
+  },
+  {
+    "id": "dsv",
+    "title": "DSV",
+    "subtitle": "Digitale Signalverarbeitung",
+    "icon": "🎚️"
   }
 ] satisfies SubjectMeta[];
