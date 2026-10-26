@@ -146,6 +146,10 @@ Nur `wichtig` behält eine Markierung: eine linke Linie und das Wort
 „Wichtig“. Andere Tags wie `formel`, `def`, `satz` und `beispiel`
 bleiben ohne Badge. Die Farben sind zentral definiert.
 
+Weicht ein Eintrag bewusst von einer fehlerhaften Folie ab, steht der
+Hinweis darauf als `<span class="slide-note">` am Ende des Texts: eine
+eigene Zeile darunter, kleiner und gelb.
+
 Jeder Inhaltseintrag zeigt seine Quellenangabe (`source`) dezent an.
 Im Modus Lernen steht der Fließtext auf etwa 68 Zeichen bei 18px und
 Zeilenhöhe mindestens 1,5. Ab 80rem liegt die Folienangabe jedes

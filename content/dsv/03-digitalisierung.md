@@ -97,9 +97,7 @@ tag: wichtig
 quelle: DSV-final.pdf, Folie 130
 
 <table><thead><tr><th>Bits</th><th>Typ</th><th>Min</th><th>Max</th></tr></thead><tbody><tr><td>8 bit</td><td>char</td><td>-128</td><td>127</td></tr><tr><td>16 bit</td><td>short</td><td>-32.768</td><td>32.767</td></tr><tr><td>32 bit</td><td>integer</td><td>-2.147.483.648</td><td>2.147.483.647</td></tr><tr><td>64 bit</td><td>long</td><td>-9.223.372.036.854.775.808</td><td>9.223.372.036.854.775.807</td></tr></tbody></table>
-Floating Point (Zahl zwischen -1 und 1): 32 bit float, 64 bit double; Min = -1, Max = 1.
-
-<em>Hinweis: korrigiert, weicht von der Folie ab. Folie 130 schreibt „Zahl zwischen 0 und 1“, nennt aber selbst Min = -1 und Max = 1. Beim 32-bit-Minimum fehlt auf der Folie das Minuszeichen (2.147.483.648).</em>
+Floating Point (Zahl zwischen -1 und 1): 32 bit float, 64 bit double; Min = -1, Max = 1. <span class="slide-note">Korrigiert, weicht von der Folie ab: Folie 130 schreibt „Zahl zwischen 0 und 1“, nennt aber selbst Min = -1 und Max = 1. Beim 32-bit-Minimum fehlt auf der Folie das Minuszeichen (2.147.483.648).</span>
 
 ## Frage: Warum lässt sich ein verrauschtes digitales Signal trotzdem fehlerfrei dekodieren?
 id: digital-rauschen
