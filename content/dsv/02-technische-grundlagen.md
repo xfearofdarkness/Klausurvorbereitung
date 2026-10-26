@@ -39,7 +39,9 @@ Beim Spannungsteiler liegen zwei Widerstände R1 und R2 in Reihe an der Gesamtsp
 tag: wichtig
 quelle: DSV-final.pdf, Folien 77-79
 
-Die Netzspannung hat 230 V und eine Frequenz von 50 Hz, also eine Periode von \(T = 20\) ms. Die Abbildung nennt als maximale Amplitude \(U = 325\) V (230 V RMS).
+Die Netzspannung hat einen Effektivwert von 230 V (RMS), eine Amplitude (Spitzenwert) von 325 V und eine Frequenz von 50 Hz, also eine Periode von \(T = 20\) ms.
+
+<em>Hinweis: korrigiert, weicht von der Folie ab. Der Text auf Folie 79 nennt eine Amplitude von 230 V; die Abbildung derselben Folie zeigt 325 V (230 V RMS).</em>
 
 ## Karte: Powerline Communication
 tag: def
@@ -105,7 +107,7 @@ U1 = U2 = 115 V; \(I_1 = I_2 = 115\text{ V} / 1.000\ \Omega = 0{,}115\text{ A} =
 id: netzspannung
 quelle: DSV-final.pdf, Folien 78-79
 
-50 Hz, also eine Periode \(T = 20\) ms (bei 230 V).
+50 Hz, also eine Periode \(T = 20\) ms. 230 V ist der Effektivwert (RMS), die Amplitude beträgt 325 V.
 
 ## Frage: Was ist Powerline Communication (PLC) und welche Modulation nutzt sie?
 id: powerline

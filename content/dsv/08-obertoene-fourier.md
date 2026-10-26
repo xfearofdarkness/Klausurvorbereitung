@@ -8,7 +8,9 @@ icon: 🌈
 tag: def
 quelle: DSV-final.pdf, Folien 214-216
 
-Eine Harmonische ist in der Physik und Technik eine Schwingung, deren Frequenz ein ganzzahliges Vielfaches einer bestimmten Grundfrequenz ist. Beispiel mit Grundton C = 66 Hz: Teilton 2 hat die doppelte Frequenz (132 Hz, Verhältnis 2:1, Oktave), Teilton 3 die dreifache (198 Hz, 3:2 zum Ton darunter, reine Quinte), Teilton 4 die vierfache (264 Hz, 4:3, reine Quarte), Teilton 5 die fünffache (330 Hz, 5:4, große Terz), Teilton 6 die sechsfache (396 Hz, 6:5, kleine Terz).
+Eine Harmonische ist in der Physik und Technik eine Schwingung, deren Frequenz ein ganzzahliges Vielfaches einer bestimmten Grundfrequenz ist. Eine Harmonische oberhalb der Grundfrequenz wird auch Oberton genannt. Beispiel mit Grundton C = 66 Hz: Teilton 2 hat die doppelte Frequenz (132 Hz, Verhältnis 2:1, Oktave), Teilton 3 die dreifache (198 Hz, 3:2 zum Ton darunter, reine Quinte), Teilton 4 die vierfache (264 Hz, 4:3, reine Quarte), Teilton 5 die fünffache (330 Hz, 5:4, große Terz), Teilton 6 die sechsfache (396 Hz, 6:5, kleine Terz).
+
+<em>Hinweis: korrigiert, weicht von der Folie ab. Folie 214 schreibt „Untertöne (Harmonics)“ und „Unterton“; das Inhaltsverzeichnis (Folie 7) und die Tabelle auf Folie 216 sprechen von Obertönen.</em>
 
 ## Karte: Spektrum eines Klangs
 quelle: DSV-final.pdf, Folie 217
@@ -69,7 +71,7 @@ quelle: DSV-final.pdf, Folie 226
 id: harmonische
 quelle: DSV-final.pdf, Folie 214
 
-Eine Schwingung, deren Frequenz ein ganzzahliges Vielfaches einer bestimmten Grundfrequenz ist.
+Eine Schwingung, deren Frequenz ein ganzzahliges Vielfaches einer bestimmten Grundfrequenz ist. Oberhalb der Grundfrequenz heißt sie auch Oberton. <em>Hinweis: korrigiert, weicht von der Folie ab. Folie 214 schreibt „Unterton“.</em>
 
 ## Frage: Welche Frequenzen haben die ersten Teiltöne über einem Grundton von 66 Hz, und welche Intervalle bilden sie zum Ton darunter?
 id: teiltoene

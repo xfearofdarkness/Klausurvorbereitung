@@ -20,9 +20,11 @@ In der Digitaltechnik bezeichnet man das Bit mit der niedrigsten Wertigkeit als 
 tag: wichtig
 quelle: DSV-final.pdf, Folien 304-306
 
-Zur Darstellung von Zahlen mit Vorzeichen wird das MSB genutzt. Werte der Tabelle (Bits von \(2^0\) bis \(2^7\)):
+Zur Darstellung von Zahlen mit Vorzeichen wird das MSB genutzt. Ist es gesetzt, handelt es sich um eine negative Zahl, wenn nicht, um eine positive. Werte der Tabelle (Bits von \(2^0\) bis \(2^7\)):
 <table><thead><tr><th>Bits \(2^0 \ldots 2^7\)</th><th>Wert</th></tr></thead><tbody><tr><td>0000 0000</td><td>0</td></tr><tr><td>1111 1111 (unsigned)</td><td>255</td></tr><tr><td>0000 0001 (signed)</td><td>-128</td></tr><tr><td>1101 0101 (signed)</td><td>-85</td></tr><tr><td>0101 0100 (signed)</td><td>+42</td></tr><tr><td>1111 1110 (signed)</td><td>+127</td></tr></tbody></table>
 Die fünf Werte -128, -85, 0, +42 und 127 sind die relevanten Werte für den Beispiel-Anwendungsfall.
+
+<em>Hinweis: korrigiert, weicht von der Folie ab. Der Text auf Folie 304 sagt, ein gesetztes MSB bedeute eine positive Zahl; die Tabelle derselben Folie zeigt MSB = 1 als -128 und MSB = 0 als +127.</em>
 
 ## Karte: Bitrate für unkomprimierte Signale
 tag: wichtig
@@ -45,12 +47,14 @@ quelle: DSV-final.pdf, Folien 300, 307, 310-312
 tag: wichtig
 quelle: DSV-final.pdf, Folie 313
 
-- Luft: Propagation-Speed ca. 300.000 km/s, Delay 3,3 µs/km
+- Luft: Propagation-Speed ca. 300.000 km/s, Delay 3,3 µs/km bzw. 3,3 ns/m
 - Glasfaser: Propagation-Speed 210.000 km/s, Delay 4,7 µs/km bzw. 4,7 ns/m
 - Kupferkabel: Propagation-Speed 240.000 km/s, Delay 4,2 µs/km bzw. 4,2 ns/m
 
 Finale Verzögerung in digitalen Netzwerken:
 \[d_{transfer} = \sum^{M} d_{propagation} + \sum^{N} d_{transmission}\]
+
+<em>Hinweis: korrigiert, weicht von der Folie ab. Folie 313 schreibt für Luft „3,3 µs/m“; bei Glasfaser und Kupfer rechnet sie µs/km in ns/m um.</em>
 
 ## Frage: Was bezeichnen LSB und MSB?
 id: lsb-msb
@@ -62,7 +66,7 @@ LSB (least significant bit): das Bit mit der niedrigsten Wertigkeit. MSB (most s
 id: vorzeichenbit
 quelle: DSV-final.pdf, Folie 304
 
-Das MSB.
+Das MSB. Ist es gesetzt, ist die Zahl negativ. <em>Hinweis: korrigiert, weicht von der Folie ab. Der Text auf Folie 304 sagt „positiv“, die Tabelle zeigt negativ.</em>
 
 ## Frage: Welche Bitrate braucht ein unkomprimiertes Stereo-Audiosignal mit 48 kHz und 16 Bit?
 id: bitrate-audio

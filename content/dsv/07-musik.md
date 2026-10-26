@@ -14,7 +14,9 @@ In der Musik wird eine Oktave üblicherweise in 12 Halbtöne unterteilt. Jeder d
 tag: def
 quelle: DSV-final.pdf, Folie 206
 
-Den einzelnen Frequenzen werden Notennamen von a bis g gegeben, die in aufsteigender Sequenz jeweils Ganztonschritten (also 200 Cent) entsprechen. Halbtonschritte (also 100 Cent) werden mit einem Doppelkreuz und dem Zusatz „is“ versehen. Ausnahme bilden die Übergänge von e nach f und b nach c, die jeweils Halbtonschritten entsprechen. Chromatische Folge: c', cis', d', dis', e', f', fis', g', gis', a', ais', h', c''.
+Den einzelnen Frequenzen werden Notennamen von a bis g gegeben, die in aufsteigender Sequenz jeweils Ganztonschritten (also 200 Cent) entsprechen. Halbtonschritte (also 100 Cent) werden mit einem Kreuz (♯) und dem Zusatz „is“ versehen. Ausnahme bilden die Übergänge von e nach f und h nach c, die jeweils Halbtonschritten entsprechen. Chromatische Folge: c', cis', d', dis', e', f', fis', g', gis', a', ais', h', c''.
+
+<em>Hinweis: korrigiert, weicht von der Folie ab. Folie 206 schreibt „Doppelkreuz“ und „b nach c“; die Notenzeile derselben Folie zeigt ein einfaches Kreuz, und die Tonleitern auf Folie 209/210 haben den Halbtonschritt h nach c.</em>
 
 ## Karte: Intervalle
 tag: wichtig
@@ -49,7 +51,7 @@ In 12 Halbtöne zu je 100 Cent, zusammen 1.200 Cent.
 id: notennamen
 quelle: DSV-final.pdf, Folie 206
 
-Ganztonschritt 200 Cent, Halbtonschritt 100 Cent. Halbtonschritte liegen bei den Übergängen e nach f und b nach c; andere Halbtöne erhalten den Zusatz „is“ (Doppelkreuz).
+Ganztonschritt 200 Cent, Halbtonschritt 100 Cent. Halbtonschritte liegen bei den Übergängen e nach f und h nach c; andere Halbtöne erhalten den Zusatz „is“ (Kreuz ♯). <em>Hinweis: korrigiert, weicht von der Folie ab. Folie 206 schreibt „b nach c“ und „Doppelkreuz“.</em>
 
 ## Frage: Wie viele Intervalle gibt es und warum?
 id: anzahl-intervalle
