@@ -1,6 +1,6 @@
 import type { IconName } from "../lib/icons";
 
-export type SubjectId = "rabs" | "laa" | "vs" | "aud" | "disma";
+export type SubjectId = "rabs" | "laa" | "vs" | "aud" | "disma" | "dsv";
 
 export type ModeId = "study" | "flash" | "practice";
 
