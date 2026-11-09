@@ -17,7 +17,7 @@ const KATEX_STYLESHEET = /^katex.*\.css$/;
 interface BuiltAsset {
   data: string;
   math: boolean;
-  /** Dateinamen der benutzten woff2-Schnitte, noch ohne Build-Hash. */
+  /** woff2-Schnitte der ersten Ansicht (erstes Thema), noch ohne Build-Hash. */
   fontFiles: string[];
 }
 
@@ -26,6 +26,16 @@ function buildBundle(subjectId: SubjectId): { bundle: SubjectBundle; files: stri
   const { subject, files } = loadRawSubject(subjectId);
   const formulas = subject.features?.math === true ? prerenderFormulas(subject) : {};
   return { bundle: { subject, formulas }, files };
+}
+
+/**
+ * Schriften, die die Formeln des ersten Themas brauchen. Nicht die des ganzen Fachs: Vorgeladene
+ * Schriften teilen sich die Leitung mit der Fachdatei, und selten gebrauchte Schnitte (Size4, Caligraphic)
+ * verzögerten bei langsamen Verbindungen die Schriften, die die erste Ansicht wirklich braucht.
+ */
+function firstViewFonts(bundle: SubjectBundle): string[] {
+  const firstTopic = bundle.subject.topics[0];
+  return firstTopic ? fontFilesForHtml(Object.values(prerenderFormulas(firstTopic)).join("")) : [];
 }
 
 function contentHash(text: string): string {
@@ -61,7 +71,7 @@ function assetFile(ctx: IndexHtmlTransformContext, match: (name: string) => bool
  * Fachdaten aus `content/<fach-id>/`. Der Build schreibt jedes Fach als `assets/<fach>-<hash>.json`
  * (Daten plus fertig gerendertes KaTeX-HTML). Die Zuordnung Fach → Datei steht inline in `trainer.html`,
  * nicht im JS-Bundle: Ändert sich ein Fach, bleiben `trainer-*.js` und die anderen Fächer im Cache.
- * Das Inline-Skript fordert die Fachdatei, das KaTeX-CSS und die von diesem Fach benutzten woff2-Schnitte an.
+ * Das Inline-Skript fordert die Fachdatei, das KaTeX-CSS und die woff2-Schnitte der ersten Ansicht an.
  * Dieselbe Zuordnung steht in `index.html`, damit die Startseite die Fachdatei vorab holen kann.
  */
 export function contentPlugin(): Plugin {
@@ -85,7 +95,7 @@ export function contentPlugin(): Plugin {
         buildAssets[entry.id] = {
           data: `${config.base}${fileName}`,
           math,
-          fontFiles: math ? fontFilesForHtml(Object.values(bundle.formulas).join("")) : []
+          fontFiles: math ? firstViewFonts(bundle) : []
         };
       }
     },
