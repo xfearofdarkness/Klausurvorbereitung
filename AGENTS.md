@@ -95,6 +95,11 @@ auf https://learn.jamiehuta.com um (`VITE_BASE=/Klausurvorbereitung/`,
 
 ## Fallstricke
 
+- `public/sw.js` (Service Worker) liefert Seiten sofort aus dem Cache und
+  aktualisiert sie im Hintergrund: Ein Deploy erscheint beim übernächsten
+  Aufruf. Bei geänderter Cache-Logik `VERSION` darin erhöhen. Notausschalter
+  und Ablauf stehen im Kopf der Datei. Die eingebaute Browser-Ansicht der
+  Desktop-App erlaubt keine Service Worker; zum Testen ein normales Chrome.
 - LaTeX steht in Autorendateien mit einfachem Backslash. Ausnahme: im
   JSON-Block eines Ablaufs und in normalen TS-Strings wird ein einfacher
   Backslash still zum Escape (`"\times"` wird zu Tab plus `imes`), dort
