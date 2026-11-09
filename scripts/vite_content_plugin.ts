@@ -49,7 +49,7 @@ function isTrainerPage(ctx: IndexHtmlTransformContext): boolean {
 /** Inline-Skript: legt die Zuordnung ab. Auf der Trainerseite startet es zusätzlich den Abruf des Fachs. */
 function bootScript(assets: Partial<Record<SubjectId, SubjectAsset>>, stylesheet: string | undefined, prefetch: boolean): string {
   const preloadMath = stylesheet
-    ? `if(s.math){var c=document.createElement("link");c.rel="preload";c.as="style";c.href=${JSON.stringify(stylesheet)};document.head.appendChild(c);(s.fonts||[]).forEach(function(h){var f=document.createElement("link");f.rel="preload";f.as="font";f.type="font/woff2";f.href=h;f.crossOrigin="";document.head.appendChild(f)})}`
+    ? `if(s.math){var c=document.createElement("link");c.rel="preload";c.as="style";c.crossOrigin="";c.href=${JSON.stringify(stylesheet)};document.head.appendChild(c);(s.fonts||[]).forEach(function(h){var f=document.createElement("link");f.rel="preload";f.as="font";f.type="font/woff2";f.href=h;f.crossOrigin="";document.head.appendChild(f)})}`
     : `if(s.math)(s.fonts||[]).forEach(function(h){var f=document.createElement("link");f.rel="preload";f.as="font";f.type="font/woff2";f.href=h;f.crossOrigin="";document.head.appendChild(f)})`;
   return `(function(){var a=${JSON.stringify(assets)},b=window[${JSON.stringify(SUBJECT_BOOT_GLOBAL)}]={assets:a};${
     prefetch
