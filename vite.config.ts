@@ -54,6 +54,26 @@ function publishPlugin(): Plugin {
   };
 }
 
+/**
+ * Vercel Speed Insights: misst Ladezeiten bei echten Besuchen. Das Skript liefert Vercel selbst unter
+ * `/_vercel/speed-insights/` aus, deshalb nur im Vercel-Build (`VERCEL=1`), nicht lokal und nicht im
+ * Pages-Build. `defer` am Ende des Body, damit es den Start nicht bremst.
+ */
+function speedInsightsPlugin(): Plugin {
+  return {
+    name: "klausurtrainer-speed-insights",
+    apply: () => process.env.VERCEL === "1",
+    transformIndexHtml: () => [
+      {
+        tag: "script",
+        children: "window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};",
+        injectTo: "body"
+      },
+      { tag: "script", attrs: { defer: true, src: "/_vercel/speed-insights/script.js" }, injectTo: "body" }
+    ]
+  };
+}
+
 const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 /** Pfad-Präfix. Standard `/` (Vercel, lokal). GitHub Pages setzt `VITE_BASE=/Klausurvorbereitung/`. */
@@ -68,7 +88,7 @@ export default defineConfig(({ mode }) => {
   const fromFile = loadEnv(mode, projectRoot, "VITE_").VITE_BASE;
   return {
     base: siteBase(process.env.VITE_BASE ?? fromFile),
-    plugins: [contentPlugin(), publishPlugin(), svelte()],
+    plugins: [contentPlugin(), publishPlugin(), speedInsightsPlugin(), svelte()],
     build: {
       rollupOptions: {
         input: {
