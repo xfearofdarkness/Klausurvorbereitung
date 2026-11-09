@@ -859,6 +859,8 @@ a.card.is-last .card-badge {
   padding: 1.15rem 0 1.2rem;
   border-top: 1px solid var(--border);
   scroll-margin-top: 1rem;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .study-block:first-of-type {
@@ -1402,6 +1404,8 @@ a.card.is-last .card-badge {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 .walk-header {

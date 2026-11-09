@@ -8,9 +8,10 @@
     availableModes: ModeConfig[];
     currentMode: ModeId;
     onSelect: (mode: ModeId) => void;
+    onPracticeIntent?: () => void;
   }
 
-  let { modes, availableModes, currentMode, onSelect }: Props = $props();
+  let { modes, availableModes, currentMode, onSelect, onPracticeIntent }: Props = $props();
   let availableIds = $derived(new Set(availableModes.map((mode) => mode.id)));
 </script>
 
@@ -28,6 +29,12 @@
       title={modeAccessTitle(mode, available)}
       onclick={() => {
         if (available) onSelect(mode.id);
+      }}
+      onpointerenter={() => {
+        if (mode.id === "practice" && available) onPracticeIntent?.();
+      }}
+      onfocus={() => {
+        if (mode.id === "practice" && available) onPracticeIntent?.();
       }}
     >
       <Icon name={mode.icon} />
