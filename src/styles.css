@@ -36,6 +36,8 @@
   --yellow-dim: rgba(220, 191, 98, 0.12);
   --cyan: #5cc8d8;
   --cyan-dim: rgba(92, 200, 216, 0.12);
+  --neutral-strong: #d2d4da;
+  --neutral-strong-dim: rgba(210, 212, 218, 0.16);
 
   --font-ui: "Outfit Variable", "Outfit", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -1470,13 +1472,13 @@ a.card.is-last .card-badge {
 }
 
 .walk-swatch-factor {
-  border-color: var(--yellow);
-  background: var(--yellow-dim);
+  border-color: var(--danger);
+  background: var(--danger-dim);
 }
 
 .walk-swatch-target {
-  border-color: var(--cyan);
-  background: var(--cyan-dim);
+  border-color: var(--yellow);
+  background: var(--yellow-dim);
 }
 
 .walk-swatch-done {
@@ -1485,8 +1487,8 @@ a.card.is-last .card-badge {
 }
 
 .walk-swatch-changed {
-  border-color: var(--warning);
-  background: var(--warning-dim);
+  border-color: var(--neutral-strong);
+  background: var(--neutral-strong-dim);
 }
 
 .walk-swatch-result {
@@ -1814,13 +1816,13 @@ a.card.is-last .card-badge {
 }
 
 .walk-data-cell.walk-factor {
-  background: var(--yellow-dim);
-  box-shadow: inset 0 0 0 1px var(--yellow);
+  background: var(--danger-dim);
+  box-shadow: inset 0 0 0 1px var(--danger);
 }
 
 .walk-data-cell.walk-target {
-  background: var(--cyan-dim);
-  box-shadow: inset 0 0 0 1px var(--cyan);
+  background: var(--yellow-dim);
+  box-shadow: inset 0 0 0 1px var(--yellow);
 }
 
 .walk-data-cell.walk-compare {
@@ -1829,8 +1831,8 @@ a.card.is-last .card-badge {
 }
 
 .walk-data-cell.walk-changed {
-  background: var(--warning-dim);
-  box-shadow: inset 0 0 0 1px var(--warning);
+  background: var(--neutral-strong-dim);
+  box-shadow: inset 0 0 0 1px var(--neutral-strong);
 }
 
 .walk-data-cell.walk-result {
@@ -1853,22 +1855,6 @@ a.card.is-last .card-badge {
 }
 
 .walk-done {
-  box-shadow: inset 0 0 0 1px var(--success-border);
-}
-
-.walk-data-cell.walk-factor {
-  box-shadow: inset 0 0 0 1px var(--yellow);
-}
-
-.walk-data-cell.walk-target {
-  box-shadow: inset 0 0 0 1px var(--cyan);
-}
-
-.walk-data-cell.walk-compare {
-  box-shadow: inset 0 0 0 1px var(--pink);
-}
-
-.walk-done {
   border-color: var(--success-border);
   background: var(--success-dim);
 }
@@ -1884,13 +1870,13 @@ a.card.is-last .card-badge {
 }
 
 .walk-factor {
-  border-color: var(--yellow);
-  background: var(--yellow-dim);
+  border-color: var(--danger);
+  background: var(--danger-dim);
 }
 
 .walk-target {
-  border-color: var(--cyan);
-  background: var(--cyan-dim);
+  border-color: var(--yellow);
+  background: var(--yellow-dim);
 }
 
 .walk-result {
@@ -1909,25 +1895,25 @@ a.card.is-last .card-badge {
 }
 
 .walk-changed {
-  border-color: var(--warning);
-  background: var(--warning-dim);
+  border-color: var(--neutral-strong);
+  background: var(--neutral-strong-dim);
 }
 
 .walk-svg .walk-node.walk-changed circle {
-  fill: var(--warning-dim);
-  stroke: var(--warning);
+  fill: var(--neutral-strong-dim);
+  stroke: var(--neutral-strong);
 }
 
 .walk-svg .walk-node text.walk-note-changed,
 .walk-svg .walk-node.walk-changed text.walk-node-note,
 .walk-bar-value.walk-value-changed {
-  fill: var(--warning);
-  color: var(--warning);
+  fill: var(--neutral-strong);
+  color: var(--neutral-strong);
 }
 
 .walk-bar.walk-changed {
-  border-color: var(--warning);
-  background: var(--warning);
+  border-color: var(--neutral-strong);
+  background: var(--neutral-strong);
 }
 
 .walk-bar.walk-result {
@@ -1971,8 +1957,8 @@ a.card.is-last .card-badge {
 }
 
 .walk-svg .walk-node.walk-target circle {
-  fill: var(--cyan-dim);
-  stroke: var(--cyan);
+  fill: var(--yellow-dim);
+  stroke: var(--yellow);
 }
 
 .walk-svg .walk-edge {
@@ -2195,8 +2181,8 @@ a.card.is-last .card-badge {
 }
 
 .walk-bar.walk-target {
-  border-color: var(--cyan);
-  background: var(--cyan);
+  border-color: var(--yellow);
+  background: var(--yellow);
 }
 
 .walk-timeline {
