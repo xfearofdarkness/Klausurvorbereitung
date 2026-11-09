@@ -1013,6 +1013,11 @@ a.card.is-last .card-badge {
   font-size: 1.05em;
 }
 
+/* Formel einer Generator-Aufgabe, solange KaTeX noch nachlädt: Platz halten, nichts Rohes zeigen. */
+.math-pending {
+  visibility: hidden;
+}
+
 .katex-display {
   margin: 0.55rem 0;
   padding: 0.2rem 0;

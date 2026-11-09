@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { richText } from "../lib/richText";
+  import { richText } from "../lib/richText.svelte";
   import { walkthroughsAfterCards } from "../lib/walkthrough";
   import Source from "./Source.svelte";
   import WalkthroughCard from "./WalkthroughCard.svelte";

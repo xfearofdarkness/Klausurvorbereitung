@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { richText } from "../lib/richText";
+  import { richText } from "../lib/richText.svelte";
   import Source from "./Source.svelte";
   import type { ReviewGrade } from "../lib/schedule";
   import type { FlashMark, MarkState, Topic } from "../types/content";

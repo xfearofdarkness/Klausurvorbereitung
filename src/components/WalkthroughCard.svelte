@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { richText } from "../lib/richText";
+  import { richText } from "../lib/richText.svelte";
   import { legendFor, legendKeysInStep } from "../lib/walkthrough";
   import Source from "./Source.svelte";
   import MatrixWalkthrough from "./MatrixWalkthrough.svelte";

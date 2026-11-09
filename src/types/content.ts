@@ -17,6 +17,13 @@ export interface SubjectFeatures {
   math?: boolean;
 }
 
+/** Was der Build pro Fach als gehashte JSON-Datei ausliefert. */
+export interface SubjectBundle {
+  subject: RawSubject;
+  /** Vorab gerendertes KaTeX-HTML je Formel, Schlüssel aus `src/lib/mathSyntax.ts`. */
+  formulas: Record<string, string>;
+}
+
 export interface RawSubject {
   id: SubjectId;
   title: string;

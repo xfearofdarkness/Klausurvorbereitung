@@ -58,10 +58,13 @@ auf https://learn.jamiehuta.com um (`VITE_BASE=/Klausurvorbereitung/`,
 ## Wo was hingehört
 
 - Neues Fach: `content/<fach-id>/` mit `fach.md` und Themendateien anlegen,
-  dann an drei Stellen registrieren: `SubjectId` in `src/types/content.ts`,
-  `catalog` in `src/data/catalog.ts` und `subjectLoaders` in
-  `src/data/subjectLoaders.ts` (nicht im Katalog: der Config-Bundler löst
-  `virtual:subject` nicht auf). Keine neue HTML-Datei.
+  dann an zwei Stellen registrieren: `SubjectId` in `src/types/content.ts`
+  und `catalog` in `src/data/catalog.ts`. Keine neue HTML-Datei.
+- Laden der Fachdaten: `scripts/vite_content_plugin.ts` schreibt jedes Fach
+  als `assets/<fach>-<hash>.json` mit vorab gerenderten Formeln und die
+  Zuordnung Fach → Datei als Inline-Skript in `trainer.html`, nicht ins
+  JS-Bundle. So invalidiert eine Inhaltsänderung nur die Datei dieses Fachs.
+  KaTeX läuft im Browser nur für Generator-Aufgaben.
 - Datenformat und Vorlage: Abschnitt „Datenformat“ in `CONTENT_GUIDE.md`.
   Compiler: `scripts/content_compiler.ts`, eingebunden über
   `scripts/vite_content_plugin.ts`. Datenmodell: `src/types/content.ts`.
