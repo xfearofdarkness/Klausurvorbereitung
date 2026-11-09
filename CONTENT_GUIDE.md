@@ -159,7 +159,9 @@ einzubauen.
 Regeln:
 
 - Jeder Ablauf hat `id`, `title`, `source`, `visual` und `steps`.
-- `visual` verwendet nur generische Visualtypen: `matrix`, `array`, `tree` oder `graph`.
+- `visual` verwendet nur generische Visualtypen: `matrix`, `array`, `tree`, `graph` oder `timeline` (eine Spur pro Auftrag mit Ankunft und Dauer, z. B. Gantt-Diagramm beim Scheduling).
+- Jedes Element trägt pro Schritt höchstens eine Rolle. Zeiger (`pointers`) und Bereiche (`ranges`) eines Arrays tragen die Namen der Folien, z. B. die Laufvariablen `i` und `j` oder „Suchbereich“; dafür wird keine Farbe vergeben.
+- Der letzte Schritt zeigt das Ergebnis, bei Bedarf mit der Rolle `result`. Er endet nicht mit einer bloßen Rechnung.
 - Schritte enthalten explizit belegbare Aussagen aus den Quellen.
 - Agenten erzeugen deklarative Schritt- und Highlight-Daten, keinen neuen UI-Code.
 - Schrittquellen sind optional, wenn der Ablauf bereits einen genauen Folienbereich als `source` hat.

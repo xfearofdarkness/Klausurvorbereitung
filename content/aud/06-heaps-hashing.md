@@ -216,205 +216,174 @@ quelle: 06_heaps_hash-tables.pdf, Folien 52-67
 {
   "id": "heapsort",
   "intro": "Min-at-top Heap: remove() liefert wiederholt das kleinste Element, das ans Ende des unsortierten Bereichs gesetzt wird.",
-  "visual": {"kind":"array","bars":true,"values":[13,6,45,10,3,22,5]},
+  "visual": {"kind": "array", "bars": true, "values": [13, 6, 45, 10, 3, 22, 5]},
+  "legend": {"target": "smallestRemaining, nach arr[endUnsorted]", "changed": "Vom Heap umgeordnet", "result": "Ergebnis"},
   "steps": [
-             {
-               "title": "Heap aufbauen",
-               "text": "new Heap(arr) wandelt das Array per makeHeap in einen min-at-top Heap um: 3 6 5 10 13 22 45.",
-               "explanation": {
-                                "action": "<code>Heap heap = new Heap(arr);</code>",
-                                "rule": "Heapsort ermittelt wiederholt das kleinste verbleibende Element und setzt es an seinen Platz.",
-                                "decision": "Der Heap ist 3 6 5 10 13 22 45; endUnsorted = 6."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":3},
-                           {"kind":"array-index","index":1,"value":6},
-                           {"kind":"array-index","index":2,"value":5},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":13},
-                           {"kind":"array-index","index":5,"value":22},
-                           {"kind":"array-index","index":6,"value":45}
-                         ],
-               "highlights": [{"kind":"array-index","index":0,"role":"active"}]
-             },
-             {
-               "title": "remove() → 3",
-               "text": "Das kleinste Element 3 wird entfernt und an Position 6 gesetzt; der Heap ordnet sich neu: 5 6 22 10 13 45 | 3.",
-               "explanation": {
-                                "action": "heap.remove() liefert 3.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "3 steht an Position 6; endUnsorted = 5."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":5},
-                           {"kind":"array-index","index":1,"value":6},
-                           {"kind":"array-index","index":2,"value":22},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":13},
-                           {"kind":"array-index","index":5,"value":45},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "remove() → 5",
-               "text": "Das kleinste Element 5 wird entfernt und an Position 5 gesetzt: 6 10 22 45 13 | 5 3.",
-               "explanation": {
-                                "action": "heap.remove() liefert 5.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "5 steht an Position 5; endUnsorted = 4."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":6},
-                           {"kind":"array-index","index":1,"value":10},
-                           {"kind":"array-index","index":2,"value":22},
-                           {"kind":"array-index","index":3,"value":45},
-                           {"kind":"array-index","index":4,"value":13},
-                           {"kind":"array-index","index":5,"value":5}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "remove() → 6",
-               "text": "Das kleinste Element 6 wird entfernt und an Position 4 gesetzt: 10 13 22 45 | 6 5 3.",
-               "source": "06_heaps_hash-tables.pdf, Folie 59",
-               "explanation": {
-                                "action": "heap.remove() liefert 6.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "6 steht an Position 4; endUnsorted = 3."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":10},
-                           {"kind":"array-index","index":1,"value":13},
-                           {"kind":"array-index","index":2,"value":22},
-                           {"kind":"array-index","index":3,"value":45},
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":5},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "remove() → 10",
-               "text": "Das kleinste Element 10 wird entfernt und an Position 3 gesetzt: 13 45 22 | 10 6 5 3.",
-               "source": "06_heaps_hash-tables.pdf, Folie 61",
-               "explanation": {
-                                "action": "heap.remove() liefert 10.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "10 steht an Position 3; endUnsorted = 2."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":13},
-                           {"kind":"array-index","index":1,"value":45},
-                           {"kind":"array-index","index":2,"value":22},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":5},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "remove() → 13",
-               "text": "Das kleinste Element 13 wird entfernt und an Position 2 gesetzt: 22 45 | 13 10 6 5 3.",
-               "source": "06_heaps_hash-tables.pdf, Folie 63",
-               "explanation": {
-                                "action": "heap.remove() liefert 13.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "13 steht an Position 2; endUnsorted = 1."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":22},
-                           {"kind":"array-index","index":1,"value":45},
-                           {"kind":"array-index","index":2,"value":13},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":5},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "remove() → 22",
-               "text": "Das kleinste Element 22 wird entfernt und an Position 1 gesetzt: 45 | 22 13 10 6 5 3.",
-               "source": "06_heaps_hash-tables.pdf, Folie 65",
-               "explanation": {
-                                "action": "heap.remove() liefert 22.",
-                                "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>",
-                                "decision": "22 steht an Position 1; endUnsorted = 0."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":45},
-                           {"kind":"array-index","index":1,"value":22},
-                           {"kind":"array-index","index":2,"value":13},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":5},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "Schleife endet",
-               "text": "Mit endUnsorted = 0 endet die Schleife. Ergebnis: 45 22 13 10 6 5 3. Mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
-               "source": "06_heaps_hash-tables.pdf, Folie 67",
-               "explanation": {
-                                "action": "Schleifenbedingung prüfen.",
-                                "rule": "<code>while (endUnsorted &gt; 0)</code>",
-                                "decision": "0 > 0 ist falsch → heapSort ist fertig."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":45},
-                           {"kind":"array-index","index":1,"value":22},
-                           {"kind":"array-index","index":2,"value":13},
-                           {"kind":"array-index","index":3,"value":10},
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":5},
-                           {"kind":"array-index","index":6,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             }
-           ]
+  {
+    "title": "Heap aufbauen",
+    "text": "new Heap(arr) wandelt das Array per makeHeap in einen min-at-top Heap um: 3 6 5 10 13 22 45.",
+    "explanation": {"action": "<code>Heap heap = new Heap(arr);</code>", "rule": "Heapsort ermittelt wiederholt das kleinste verbleibende Element und setzt es an seinen Platz.", "decision": "Der Heap ist 3 6 5 10 13 22 45; endUnsorted = 6."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 3},
+      {"kind": "array-index", "index": 1, "value": 6},
+      {"kind": "array-index", "index": 2, "value": 5},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 13},
+      {"kind": "array-index", "index": 5, "value": 22},
+      {"kind": "array-index", "index": 6, "value": 45}
+    ],
+    "ranges": [{"from": 0, "to": 6, "label": "Heap"}],
+    "pointers": [{"index": 6, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 3",
+    "text": "Das kleinste Element 3 wird entfernt und an Position 6 gesetzt; der Heap ordnet sich neu: 5 6 22 10 13 45 | 3.",
+    "explanation": {"action": "heap.remove() liefert 3.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "3 steht an Position 6; endUnsorted = 5."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 5},
+      {"kind": "array-index", "index": 1, "value": 6},
+      {"kind": "array-index", "index": 2, "value": 22},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 13},
+      {"kind": "array-index", "index": 5, "value": 45},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 6, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 5, "label": "Heap"},
+      {"from": 6, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 5, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 5",
+    "text": "Das kleinste Element 5 wird entfernt und an Position 5 gesetzt: 6 10 22 45 13 | 5 3.",
+    "explanation": {"action": "heap.remove() liefert 5.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "5 steht an Position 5; endUnsorted = 4."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 6},
+      {"kind": "array-index", "index": 1, "value": 10},
+      {"kind": "array-index", "index": 2, "value": 22},
+      {"kind": "array-index", "index": 3, "value": 45},
+      {"kind": "array-index", "index": 4, "value": 13},
+      {"kind": "array-index", "index": 5, "value": 5}
+    ],
+    "highlights": [{"kind": "array-index", "index": 5, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 4, "label": "Heap"},
+      {"from": 5, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 4, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 6",
+    "text": "Das kleinste Element 6 wird entfernt und an Position 4 gesetzt: 10 13 22 45 | 6 5 3.",
+    "source": "06_heaps_hash-tables.pdf, Folie 59",
+    "explanation": {"action": "heap.remove() liefert 6.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "6 steht an Position 4; endUnsorted = 3."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 10},
+      {"kind": "array-index", "index": 1, "value": 13},
+      {"kind": "array-index", "index": 2, "value": 22},
+      {"kind": "array-index", "index": 3, "value": 45},
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 5},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 4, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 3, "label": "Heap"},
+      {"from": 4, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 3, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 10",
+    "text": "Das kleinste Element 10 wird entfernt und an Position 3 gesetzt: 13 45 22 | 10 6 5 3.",
+    "source": "06_heaps_hash-tables.pdf, Folie 61",
+    "explanation": {"action": "heap.remove() liefert 10.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "10 steht an Position 3; endUnsorted = 2."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 13},
+      {"kind": "array-index", "index": 1, "value": 45},
+      {"kind": "array-index", "index": 2, "value": 22},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 5},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 3, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 2, "label": "Heap"},
+      {"from": 3, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 2, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 13",
+    "text": "Das kleinste Element 13 wird entfernt und an Position 2 gesetzt: 22 45 | 13 10 6 5 3.",
+    "source": "06_heaps_hash-tables.pdf, Folie 63",
+    "explanation": {"action": "heap.remove() liefert 13.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "13 steht an Position 2; endUnsorted = 1."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 22},
+      {"kind": "array-index", "index": 1, "value": 45},
+      {"kind": "array-index", "index": 2, "value": 13},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 5},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 2, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 1, "label": "Heap"},
+      {"from": 2, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 1, "label": "endUnsorted"}]
+  },
+  {
+    "title": "remove() → 22",
+    "text": "Das kleinste Element 22 wird entfernt und an Position 1 gesetzt: 45 | 22 13 10 6 5 3.",
+    "source": "06_heaps_hash-tables.pdf, Folie 65",
+    "explanation": {"action": "heap.remove() liefert 22.", "rule": "<code>arr[endUnsorted] = smallestRemaining; endUnsorted--;</code>", "decision": "22 steht an Position 1; endUnsorted = 0."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 45},
+      {"kind": "array-index", "index": 1, "value": 22},
+      {"kind": "array-index", "index": 2, "value": 13},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 5},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 1, "role": "target"}],
+    "ranges": [
+      {"from": 0, "to": 0, "label": "Heap"},
+      {"from": 1, "to": 6, "label": "sortiert"}
+    ],
+    "pointers": [{"index": 0, "label": "endUnsorted"}]
+  },
+  {
+    "title": "Schleife endet",
+    "text": "Mit endUnsorted = 0 endet die Schleife. Ergebnis: 45 22 13 10 6 5 3. Mit dem min-at-top Heap entsteht die absteigende Reihenfolge.",
+    "source": "06_heaps_hash-tables.pdf, Folie 67",
+    "explanation": {"action": "Schleifenbedingung prüfen.", "rule": "<code>while (endUnsorted &gt; 0)</code>", "decision": "0 > 0 ist falsch → heapSort ist fertig."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 45},
+      {"kind": "array-index", "index": 1, "value": 22},
+      {"kind": "array-index", "index": 2, "value": 13},
+      {"kind": "array-index", "index": 3, "value": 10},
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 5},
+      {"kind": "array-index", "index": 6, "value": 3}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "result"},
+      {"kind": "array-index", "index": 1, "role": "result"},
+      {"kind": "array-index", "index": 2, "role": "result"},
+      {"kind": "array-index", "index": 3, "role": "result"},
+      {"kind": "array-index", "index": 4, "role": "result"},
+      {"kind": "array-index", "index": 5, "role": "result"},
+      {"kind": "array-index", "index": 6, "role": "result"}
+    ],
+    "ranges": [{"from": 0, "to": 6, "label": "absteigend sortiert"}],
+    "pointers": [{"index": 0, "label": "endUnsorted"}]
+  }
+  ]
 }
 ```

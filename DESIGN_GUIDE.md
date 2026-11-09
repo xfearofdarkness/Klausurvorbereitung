@@ -67,8 +67,17 @@ Sonderlogik:
   ein-/ausblendbar, Button „Neue Zahlen“.
 - Abläufe (`walkthroughs`) sind deklarative Schrittfolgen mit
   generischen Visualtypen: `matrix`, `array`, `tree` (Knoten
-  mit links/rechts-Kindern) und `graph` (Knoten mit Koordinaten,
-  Kanten optional gerichtet und beschriftet).
+  mit links/rechts-Kindern), `graph` (Knoten mit Koordinaten,
+  Kanten optional gerichtet und beschriftet) und `timeline`
+  (Spuren auf einer Zeitachse mit Abschnitten, Wartelinie,
+  Zeitmarke und optionaler Liste).
+- In Abläufen trägt jede Zelle, jeder Knoten und jede Kante genau
+  eine Codierung. Vorrang: Rolle des Schritts vor „geändert“ vor
+  „erledigt“. Farben, die in einem Ablauf zusammen vorkommen,
+  sind deutlich verschieden; die Legende zeigt nur, was sichtbar
+  ist. Laufvariablen und Bereiche stehen als beschriftete Zeiger
+  unter und Bögen über den Array-Zellen, nicht als Farbe. In
+  Tabellen markiert eine aktive Zeile nur ihren Kopf.
 - `features.math: true` im Fachobjekt aktiviert Formel-Rendering
   mit KaTeX. Formeln werden vor dem Einfügen in die Seite gerendert,
   nicht nachträglich im DOM.

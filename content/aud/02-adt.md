@@ -259,115 +259,78 @@ quelle: 02_abstract_data_types.pdf, Folien 108-109
 {
   "id": "stack-operationen",
   "intro": "Die Operationsfolge von Folie 109, dargestellt als Array mit Index 0 als unterstem Element.",
-  "visual": {"kind":"array","label":"Stack (unten = Index 0)","values":["",""]},
+  "visual": {"kind": "array", "label": "Stack (unten = Index 0)", "values": ["", ""]},
+  "legend": {"active": "Mit push abgelegt", "result": "Von top() gelesen"},
   "steps": [
-             {
-               "title": "push(5)",
-               "text": "Rückgabewert true. Inhalt des Stacks: (5).",
-               "explanation": {
-                                "action": "push(5)",
-                                "rule": "push(e) fügt das Element e oben auf den Stapel ein.",
-                                "decision": "5 liegt oben; Rückgabe true."
-                              },
-               "values": [{"kind":"array-index","index":0,"value":5}],
-               "highlights": [{"kind":"array-index","index":0,"role":"active"}]
-             },
-             {
-               "title": "push(3)",
-               "text": "Rückgabewert true. Inhalt des Stacks: (3, 5).",
-               "explanation": {
-                                "action": "push(3)",
-                                "rule": "push(e) fügt das Element e oben auf den Stapel ein.",
-                                "decision": "3 liegt über 5; Rückgabe true."
-                              },
-               "values": [{"kind":"array-index","index":1,"value":3}],
-               "highlights": [{"kind":"array-index","index":1,"role":"active"}]
-             },
-             {
-               "title": "isFull()",
-               "text": "Rückgabewert false. Inhalt des Stacks unverändert: (3, 5).",
-               "explanation": {
-                                "action": "isFull()",
-                                "rule": "isFull() gibt einen Boolean zurück, der angibt, ob der Stapel voll ist.",
-                                "decision": "Der Stapel ist nicht voll → false."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"}
-                             ]
-             },
-             {
-               "title": "pop()",
-               "text": "Rückgabewert 3. Das oberste Element wird entfernt, Inhalt: (5).",
-               "explanation": {
-                                "action": "pop()",
-                                "rule": "pop() entfernt das oberste Element des Stapels und gibt es zurück.",
-                                "decision": "3 wird entfernt und zurückgegeben."
-                              },
-               "values": [{"kind":"array-index","index":1,"value":""}],
-               "highlights": [{"kind":"array-index","index":0,"role":"active"}]
-             },
-             {
-               "title": "isEmpty()",
-               "text": "Rückgabewert false. Inhalt: (5).",
-               "explanation": {
-                                "action": "isEmpty()",
-                                "rule": "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.",
-                                "decision": "5 liegt noch auf dem Stapel → false."
-                              },
-               "highlights": [{"kind":"array-index","index":0,"role":"done"}]
-             },
-             {
-               "title": "pop()",
-               "text": "Rückgabewert 5. Der Stack ist jetzt leer: ().",
-               "explanation": {
-                                "action": "pop()",
-                                "rule": "pop() entfernt das oberste Element des Stapels und gibt es zurück.",
-                                "decision": "5 wird entfernt und zurückgegeben; der Stapel ist leer."
-                              },
-               "values": [{"kind":"array-index","index":0,"value":""}]
-             },
-             {
-               "title": "isEmpty()",
-               "text": "Rückgabewert true. Inhalt: ().",
-               "explanation": {
-                                "action": "isEmpty()",
-                                "rule": "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.",
-                                "decision": "Der Stapel ist leer → true."
-                              }
-             },
-             {
-               "title": "push(7)",
-               "text": "Rückgabewert true. Inhalt: (7).",
-               "explanation": {
-                                "action": "push(7)",
-                                "rule": "push(e) fügt das Element e oben auf den Stapel ein.",
-                                "decision": "7 liegt oben; Rückgabe true."
-                              },
-               "values": [{"kind":"array-index","index":0,"value":7}],
-               "highlights": [{"kind":"array-index","index":0,"role":"active"}]
-             },
-             {
-               "title": "push(9)",
-               "text": "Rückgabewert true. Inhalt: (9, 7).",
-               "explanation": {
-                                "action": "push(9)",
-                                "rule": "push(e) fügt das Element e oben auf den Stapel ein.",
-                                "decision": "9 liegt über 7; Rückgabe true."
-                              },
-               "values": [{"kind":"array-index","index":1,"value":9}],
-               "highlights": [{"kind":"array-index","index":1,"role":"active"}]
-             },
-             {
-               "title": "top()",
-               "text": "Rückgabewert 9. Das oberste Element wird nur gelesen, nicht entfernt: (9, 7).",
-               "explanation": {
-                                "action": "top()",
-                                "rule": "top() gibt das oberste Element des Stapels zurück, ohne es zu entfernen.",
-                                "decision": "Rückgabe 9; der Inhalt bleibt (9, 7)."
-                              },
-               "highlights": [{"kind":"array-index","index":1,"role":"compare"}]
-             }
-           ]
+  {
+    "title": "push(5)",
+    "text": "Rückgabewert true. Inhalt des Stacks: (5).",
+    "explanation": {"action": "push(5)", "rule": "push(e) fügt das Element e oben auf den Stapel ein.", "decision": "5 liegt oben; Rückgabe true."},
+    "values": [{"kind": "array-index", "index": 0, "value": 5}],
+    "highlights": [{"kind": "array-index", "index": 0, "role": "active"}],
+    "pointers": [{"index": 0, "label": "oben"}]
+  },
+  {
+    "title": "push(3)",
+    "text": "Rückgabewert true. Inhalt des Stacks: (3, 5).",
+    "explanation": {"action": "push(3)", "rule": "push(e) fügt das Element e oben auf den Stapel ein.", "decision": "3 liegt über 5; Rückgabe true."},
+    "values": [{"kind": "array-index", "index": 1, "value": 3}],
+    "highlights": [{"kind": "array-index", "index": 1, "role": "active"}],
+    "pointers": [{"index": 1, "label": "oben"}]
+  },
+  {
+    "title": "isFull()",
+    "text": "Rückgabewert false. Inhalt des Stacks unverändert: (3, 5).",
+    "explanation": {"action": "isFull()", "rule": "isFull() gibt einen Boolean zurück, der angibt, ob der Stapel voll ist.", "decision": "Der Stapel ist nicht voll → false."},
+    "pointers": [{"index": 1, "label": "oben"}]
+  },
+  {
+    "title": "pop()",
+    "text": "Rückgabewert 3. Das oberste Element wird entfernt, Inhalt: (5).",
+    "explanation": {"action": "pop()", "rule": "pop() entfernt das oberste Element des Stapels und gibt es zurück.", "decision": "3 wird entfernt und zurückgegeben."},
+    "values": [{"kind": "array-index", "index": 1, "value": ""}],
+    "pointers": [{"index": 0, "label": "oben"}]
+  },
+  {
+    "title": "isEmpty()",
+    "text": "Rückgabewert false. Inhalt: (5).",
+    "explanation": {"action": "isEmpty()", "rule": "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.", "decision": "5 liegt noch auf dem Stapel → false."},
+    "pointers": [{"index": 0, "label": "oben"}]
+  },
+  {
+    "title": "pop()",
+    "text": "Rückgabewert 5. Der Stack ist jetzt leer: ().",
+    "explanation": {"action": "pop()", "rule": "pop() entfernt das oberste Element des Stapels und gibt es zurück.", "decision": "5 wird entfernt und zurückgegeben; der Stapel ist leer."},
+    "values": [{"kind": "array-index", "index": 0, "value": ""}]
+  },
+  {
+    "title": "isEmpty()",
+    "text": "Rückgabewert true. Inhalt: ().",
+    "explanation": {"action": "isEmpty()", "rule": "isEmpty() gibt einen Boolean zurück, der angibt, ob der Stapel leer ist.", "decision": "Der Stapel ist leer → true."}
+  },
+  {
+    "title": "push(7)",
+    "text": "Rückgabewert true. Inhalt: (7).",
+    "explanation": {"action": "push(7)", "rule": "push(e) fügt das Element e oben auf den Stapel ein.", "decision": "7 liegt oben; Rückgabe true."},
+    "values": [{"kind": "array-index", "index": 0, "value": 7}],
+    "highlights": [{"kind": "array-index", "index": 0, "role": "active"}],
+    "pointers": [{"index": 0, "label": "oben"}]
+  },
+  {
+    "title": "push(9)",
+    "text": "Rückgabewert true. Inhalt: (9, 7).",
+    "explanation": {"action": "push(9)", "rule": "push(e) fügt das Element e oben auf den Stapel ein.", "decision": "9 liegt über 7; Rückgabe true."},
+    "values": [{"kind": "array-index", "index": 1, "value": 9}],
+    "highlights": [{"kind": "array-index", "index": 1, "role": "active"}],
+    "pointers": [{"index": 1, "label": "oben"}]
+  },
+  {
+    "title": "top()",
+    "text": "Rückgabewert 9. Das oberste Element wird nur gelesen, nicht entfernt: (9, 7).",
+    "explanation": {"action": "top()", "rule": "top() gibt das oberste Element des Stapels zurück, ohne es zu entfernen.", "decision": "Rückgabe 9; der Inhalt bleibt (9, 7)."},
+    "highlights": [{"kind": "array-index", "index": 1, "role": "result"}],
+    "pointers": [{"index": 1, "label": "oben"}]
+  }
+  ]
 }
 ```

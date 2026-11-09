@@ -2088,7 +2088,11 @@ a.card.is-last .card-badge {
 }
 
 .walk-pointer {
-  min-height: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.125rem;
+  height: 1.5rem;
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -2099,8 +2103,6 @@ a.card.is-last .card-badge {
 
 .walk-pointer:not(:empty)::before {
   content: "↑";
-  display: block;
-  text-align: center;
 }
 
 .walk-array-item.walk-dim {

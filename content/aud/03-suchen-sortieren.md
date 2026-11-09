@@ -304,77 +304,63 @@ quelle: 03_fundamental-algorithms.pdf, Folien 5-11
 {
   "id": "lineare-suche",
   "intro": "find(arr, 23): Jedes Element wird der Reihe nach untersucht, bis das Ziel gefunden ist.",
-  "visual": {"kind":"array","values":[4,8,15,16,23,42,45,52,55,70,72,80]},
+  "visual": {"kind": "array", "values": [4, 8, 15, 16, 23, 42, 45, 52, 55, 70, 72, 80]},
+  "legend": {"active": "arr[i] wird verglichen", "done": "Geprüft, kein Treffer", "result": "Gefunden"},
   "steps": [
-             {
-               "title": "i = 0",
-               "text": "arr[0] = 4 wird mit dem Zielwert 23 verglichen, kein Treffer.",
-               "explanation": {
-                                "action": "arr[0] mit dem Zielwert vergleichen.",
-                                "rule": "<code>if (arr[i]==target) return i;</code>",
-                                "decision": "4 ≠ 23 → die Schleife läuft mit i = 1 weiter."
-                              },
-               "highlights": [{"kind":"array-index","index":0,"role":"active"}]
-             },
-             {
-               "title": "i = 1",
-               "text": "arr[1] = 8, kein Treffer.",
-               "explanation": {
-                                "action": "arr[1] mit dem Zielwert vergleichen.",
-                                "rule": "<code>if (arr[i]==target) return i;</code>",
-                                "decision": "8 ≠ 23 → weiter mit i = 2."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"active"}
-                             ]
-             },
-             {
-               "title": "i = 2",
-               "text": "arr[2] = 15, kein Treffer.",
-               "explanation": {
-                                "action": "arr[2] mit dem Zielwert vergleichen.",
-                                "rule": "<code>if (arr[i]==target) return i;</code>",
-                                "decision": "15 ≠ 23 → weiter mit i = 3."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"active"}
-                             ]
-             },
-             {
-               "title": "i = 3",
-               "text": "arr[3] = 16, kein Treffer.",
-               "explanation": {
-                                "action": "arr[3] mit dem Zielwert vergleichen.",
-                                "rule": "<code>if (arr[i]==target) return i;</code>",
-                                "decision": "16 ≠ 23 → weiter mit i = 4."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"active"}
-                             ]
-             },
-             {
-               "title": "i = 4: gefunden",
-               "text": "arr[4] = 23 stimmt mit dem Zielwert überein: return 4.",
-               "explanation": {
-                                "action": "arr[4] mit dem Zielwert vergleichen.",
-                                "rule": "<code>if (arr[i]==target) return i;</code>",
-                                "decision": "23 = 23 → return 4."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"target"}
-                             ]
-             }
-           ]
+  {
+    "title": "i = 0",
+    "text": "arr[0] = 4 wird mit dem Zielwert 23 verglichen, kein Treffer.",
+    "explanation": {"action": "arr[0] mit dem Zielwert vergleichen.", "rule": "<code>if (arr[i]==target) return i;</code>", "decision": "4 ≠ 23 → die Schleife läuft mit i = 1 weiter."},
+    "highlights": [{"kind": "array-index", "index": 0, "role": "active"}],
+    "pointers": [{"index": 0, "label": "i"}]
+  },
+  {
+    "title": "i = 1",
+    "text": "arr[1] = 8, kein Treffer.",
+    "explanation": {"action": "arr[1] mit dem Zielwert vergleichen.", "rule": "<code>if (arr[i]==target) return i;</code>", "decision": "8 ≠ 23 → weiter mit i = 2."},
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "done"},
+      {"kind": "array-index", "index": 1, "role": "active"}
+    ],
+    "pointers": [{"index": 1, "label": "i"}]
+  },
+  {
+    "title": "i = 2",
+    "text": "arr[2] = 15, kein Treffer.",
+    "explanation": {"action": "arr[2] mit dem Zielwert vergleichen.", "rule": "<code>if (arr[i]==target) return i;</code>", "decision": "15 ≠ 23 → weiter mit i = 3."},
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "done"},
+      {"kind": "array-index", "index": 1, "role": "done"},
+      {"kind": "array-index", "index": 2, "role": "active"}
+    ],
+    "pointers": [{"index": 2, "label": "i"}]
+  },
+  {
+    "title": "i = 3",
+    "text": "arr[3] = 16, kein Treffer.",
+    "explanation": {"action": "arr[3] mit dem Zielwert vergleichen.", "rule": "<code>if (arr[i]==target) return i;</code>", "decision": "16 ≠ 23 → weiter mit i = 4."},
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "done"},
+      {"kind": "array-index", "index": 1, "role": "done"},
+      {"kind": "array-index", "index": 2, "role": "done"},
+      {"kind": "array-index", "index": 3, "role": "active"}
+    ],
+    "pointers": [{"index": 3, "label": "i"}]
+  },
+  {
+    "title": "i = 4: gefunden",
+    "text": "arr[4] = 23 stimmt mit dem Zielwert überein: return 4.",
+    "explanation": {"action": "arr[4] mit dem Zielwert vergleichen.", "rule": "<code>if (arr[i]==target) return i;</code>", "decision": "23 = 23 → return 4."},
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "done"},
+      {"kind": "array-index", "index": 1, "role": "done"},
+      {"kind": "array-index", "index": 2, "role": "done"},
+      {"kind": "array-index", "index": 3, "role": "done"},
+      {"kind": "array-index", "index": 4, "role": "result"}
+    ],
+    "pointers": [{"index": 4, "label": "i"}]
+  }
+  ]
 }
 ```
 
@@ -386,58 +372,54 @@ quelle: 03_fundamental-algorithms.pdf, Folien 16-23
 {
   "id": "binaere-suche",
   "intro": "Das sortierte Array wird wiederholt am mittleren Element (median) geteilt.",
-  "visual": {"kind":"array","values":[4,8,15,16,23,42,45,52,55,70,72,80]},
+  "visual": {"kind": "array", "values": [4, 8, 15, 16, 23, 42, 45, 52, 55, 70, 72, 80]},
+  "legend": {"active": "median = arr[mid]", "result": "Gefunden"},
   "steps": [
-             {
-               "title": "median = arr[5] = 42",
-               "text": "Suchbereich 0-11, mid = (0+11)/2 = 5. 70 > 42 → weiter in der oberen Hälfte.",
-               "explanation": {
-                                "action": "mid = (low + high) / 2 = (0 + 11) / 2 = 5; target mit arr[mid] = 42 vergleichen.",
-                                "rule": "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.",
-                                "decision": "70 > 42 → <code>binarySearch(arr, mid+1, high, target)</code> mit low = 6."
-                              },
-               "highlights": [{"kind":"array-index","index":5,"role":"active"}]
-             },
-             {
-               "title": "median = arr[8] = 55",
-               "text": "Suchbereich 6-11, mid = (6+11)/2 = 8. 70 > 55 → weiter in der oberen Hälfte.",
-               "explanation": {
-                                "action": "mid = (6 + 11) / 2 = 8; target mit arr[mid] = 55 vergleichen.",
-                                "rule": "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.",
-                                "decision": "70 > 55 → weiter mit low = 9."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":8,"role":"active"}
-                             ]
-             },
-             {
-               "title": "median = arr[10] = 72",
-               "text": "Suchbereich 9-11, mid = (9+11)/2 = 10. 70 < 72 → weiter in der unteren Hälfte.",
-               "explanation": {
-                                "action": "mid = (9 + 11) / 2 = 10; target mit arr[mid] = 72 vergleichen.",
-                                "rule": "Wenn target < median, suche in der unteren Hälfte des Arrays weiter.",
-                                "decision": "70 < 72 → <code>binarySearch(arr, low, mid-1, target)</code> mit high = 9."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":8,"role":"done"},
-                               {"kind":"array-index","index":10,"role":"active"}
-                             ]
-             },
-             {
-               "title": "median = arr[9] = 70: gefunden",
-               "text": "Suchbereich 9-9, mid = 9. 70 = 70 → return 9. Nach jeder Iteration blieb nur die Hälfte der Elemente übrig.",
-               "explanation": {
-                                "action": "mid = (9 + 9) / 2 = 9; target mit arr[mid] = 70 vergleichen.",
-                                "rule": "Wenn target = median, gib den Index des mittleren Elements zurück.",
-                                "decision": "70 = 70 → return 9."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":10,"role":"done"},
-                               {"kind":"array-index","index":9,"role":"target"}
-                             ]
-             }
-           ]
+  {
+    "title": "median = arr[5] = 42",
+    "text": "Suchbereich 0-11, mid = (0+11)/2 = 5. 70 > 42 → weiter in der oberen Hälfte.",
+    "explanation": {"action": "mid = (low + high) / 2 = (0 + 11) / 2 = 5; target mit arr[mid] = 42 vergleichen.", "rule": "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.", "decision": "70 > 42 → <code>binarySearch(arr, mid+1, high, target)</code> mit low = 6."},
+    "highlights": [{"kind": "array-index", "index": 5, "role": "active"}],
+    "pointers": [
+      {"index": 0, "label": "low"},
+      {"index": 5, "label": "mid"},
+      {"index": 11, "label": "high"}
+    ],
+    "ranges": [{"from": 0, "to": 11, "label": "Suchbereich", "focus": true}]
+  },
+  {
+    "title": "median = arr[8] = 55",
+    "text": "Suchbereich 6-11, mid = (6+11)/2 = 8. 70 > 55 → weiter in der oberen Hälfte.",
+    "explanation": {"action": "mid = (6 + 11) / 2 = 8; target mit arr[mid] = 55 vergleichen.", "rule": "Wenn target > median, suche in der oberen Hälfte des Arrays weiter.", "decision": "70 > 55 → weiter mit low = 9."},
+    "highlights": [{"kind": "array-index", "index": 8, "role": "active"}],
+    "pointers": [
+      {"index": 6, "label": "low"},
+      {"index": 8, "label": "mid"},
+      {"index": 11, "label": "high"}
+    ],
+    "ranges": [{"from": 6, "to": 11, "label": "Suchbereich", "focus": true}]
+  },
+  {
+    "title": "median = arr[10] = 72",
+    "text": "Suchbereich 9-11, mid = (9+11)/2 = 10. 70 < 72 → weiter in der unteren Hälfte.",
+    "explanation": {"action": "mid = (9 + 11) / 2 = 10; target mit arr[mid] = 72 vergleichen.", "rule": "Wenn target < median, suche in der unteren Hälfte des Arrays weiter.", "decision": "70 < 72 → <code>binarySearch(arr, low, mid-1, target)</code> mit high = 9."},
+    "highlights": [{"kind": "array-index", "index": 10, "role": "active"}],
+    "pointers": [
+      {"index": 9, "label": "low"},
+      {"index": 10, "label": "mid"},
+      {"index": 11, "label": "high"}
+    ],
+    "ranges": [{"from": 9, "to": 11, "label": "Suchbereich", "focus": true}]
+  },
+  {
+    "title": "median = arr[9] = 70: gefunden",
+    "text": "Suchbereich 9-9, mid = 9. 70 = 70 → return 9. Nach jeder Iteration blieb nur die Hälfte der Elemente übrig.",
+    "explanation": {"action": "mid = (9 + 9) / 2 = 9; target mit arr[mid] = 70 vergleichen.", "rule": "Wenn target = median, gib den Index des mittleren Elements zurück.", "decision": "70 = 70 → return 9."},
+    "highlights": [{"kind": "array-index", "index": 9, "role": "result"}],
+    "pointers": [{"index": 9, "label": "low, mid, high"}],
+    "ranges": [{"from": 9, "to": 9, "label": "Suchbereich", "focus": true}]
+  }
+  ]
 }
 ```
 
@@ -596,128 +578,130 @@ quelle: 03_fundamental-algorithms.pdf, Folien 141-158
 {
   "id": "bubble-sort-durchlauf",
   "intro": "Im ersten Durchlauf wandert das größte Element (10) durch Nachbartausche ans Ende.",
-  "visual": {"kind":"array","bars":true,"values":[4,3,1,9,2,10,6,8,7,5]},
+  "visual": {"kind": "array", "bars": true, "values": [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]},
+  "legend": {"active": "Verglichen: arr[j-1] und arr[j]", "result": "Am Ende fixiert"},
   "steps": [
-             {
-               "title": "4 und 3 tauschen",
-               "text": "4 > 3 → Tausch: 3 4 1 9 2 10 6 8 7 5.",
-               "explanation": {
-                                "action": "Vergleiche die benachbarten Werte 4 und 3.",
-                                "rule": "Bubble Sort tauscht Nachbarn, wenn der linke Wert größer ist.",
-                                "decision": "4 > 3, daher werden beide Werte vertauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":3},
-                           {"kind":"array-index","index":1,"value":4}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":1,"role":"active"}
-                             ]
-             },
-             {
-               "title": "4 und 1 tauschen",
-               "text": "4 > 1 → Tausch: 3 1 4 9 2 10 6 8 7 5.",
-               "explanation": {
-                                "action": "Vergleiche das nächste Nachbarpaar 4 und 1.",
-                                "rule": "Bei falscher Reihenfolge wird das größere Element nach rechts geschoben.",
-                                "decision": "4 > 1, daher wandert 4 eine Position weiter nach rechts."
-                              },
-               "values": [
-                           {"kind":"array-index","index":1,"value":1},
-                           {"kind":"array-index","index":2,"value":4}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":1,"role":"active"},
-                               {"kind":"array-index","index":2,"role":"active"}
-                             ]
-             },
-             {
-               "title": "9 und 2 tauschen",
-               "text": "4 < 9: kein Tausch. Dann 9 > 2 → Tausch: 3 1 4 2 9 10 6 8 7 5.",
-               "explanation": {
-                                "action": "Prüfe weiter von links nach rechts.",
-                                "rule": "Paare in richtiger Reihenfolge bleiben unverändert; falsche Paare werden getauscht.",
-                                "decision": "4 < 9 bleibt, aber 9 > 2 wird vertauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":3,"value":2},
-                           {"kind":"array-index","index":4,"value":9}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":3,"role":"active"},
-                               {"kind":"array-index","index":4,"role":"active"}
-                             ]
-             },
-             {
-               "title": "10 und 6 tauschen",
-               "text": "9 < 10: kein Tausch. Dann 10 > 6 → Tausch: 3 1 4 2 9 6 10 8 7 5.",
-               "explanation": {
-                                "action": "Vergleiche weiter bis zum nächsten falschen Nachbarpaar.",
-                                "rule": "Das größere Element wandert im Durchlauf schrittweise nach rechts.",
-                                "decision": "10 > 6, daher wird 10 nach rechts geschoben."
-                              },
-               "values": [
-                           {"kind":"array-index","index":5,"value":6},
-                           {"kind":"array-index","index":6,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":5,"role":"active"},
-                               {"kind":"array-index","index":6,"role":"active"}
-                             ]
-             },
-             {
-               "title": "10 und 8 tauschen",
-               "text": "10 > 8 → Tausch: 3 1 4 2 9 6 8 10 7 5.",
-               "explanation": {
-                                "action": "Vergleiche 10 und 8.",
-                                "rule": "Ist links größer als rechts, wird getauscht.",
-                                "decision": "10 > 8, also wandert 10 weiter nach rechts."
-                              },
-               "values": [
-                           {"kind":"array-index","index":6,"value":8},
-                           {"kind":"array-index","index":7,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":6,"role":"active"},
-                               {"kind":"array-index","index":7,"role":"active"}
-                             ]
-             },
-             {
-               "title": "10 und 7 tauschen",
-               "text": "10 > 7 → Tausch: 3 1 4 2 9 6 8 7 10 5.",
-               "explanation": {
-                                "action": "Vergleiche 10 und 7.",
-                                "rule": "Der gleiche Nachbarvergleich wird bis zum Ende des Bereichs wiederholt.",
-                                "decision": "10 > 7, deshalb folgt der nächste Tausch."
-                              },
-               "values": [
-                           {"kind":"array-index","index":7,"value":7},
-                           {"kind":"array-index","index":8,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":7,"role":"active"},
-                               {"kind":"array-index","index":8,"role":"active"}
-                             ]
-             },
-             {
-               "title": "10 und 5 tauschen: Durchlauf fertig",
-               "text": "10 > 5 → Tausch: 3 1 4 2 9 6 8 7 5 10. Das größte Element steht am Ende; weitere Durchläufe sortieren den Rest.",
-               "explanation": {
-                                "action": "Vergleiche das letzte Nachbarpaar des Durchlaufs.",
-                                "rule": "Nach einem vollständigen Durchlauf steht das größte Element am rechten Rand.",
-                                "decision": "10 > 5, nach dem Tausch ist 10 am Ende fixiert."
-                              },
-               "values": [
-                           {"kind":"array-index","index":8,"value":5},
-                           {"kind":"array-index","index":9,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":8,"role":"active"},
-                               {"kind":"array-index","index":9,"role":"done"}
-                             ]
-             }
-           ]
+  {
+    "title": "4 und 3 tauschen",
+    "text": "4 > 3 → Tausch: 3 4 1 9 2 10 6 8 7 5.",
+    "explanation": {"action": "Vergleiche die benachbarten Werte 4 und 3.", "rule": "Bubble Sort tauscht Nachbarn, wenn der linke Wert größer ist.", "decision": "4 > 3, daher werden beide Werte vertauscht."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 3},
+      {"kind": "array-index", "index": 1, "value": 4}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "active"},
+      {"kind": "array-index", "index": 1, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 0, "label": "j-1"},
+      {"index": 1, "label": "j"}
+    ]
+  },
+  {
+    "title": "4 und 1 tauschen",
+    "text": "4 > 1 → Tausch: 3 1 4 9 2 10 6 8 7 5.",
+    "explanation": {"action": "Vergleiche das nächste Nachbarpaar 4 und 1.", "rule": "Bei falscher Reihenfolge wird das größere Element nach rechts geschoben.", "decision": "4 > 1, daher wandert 4 eine Position weiter nach rechts."},
+    "values": [
+      {"kind": "array-index", "index": 1, "value": 1},
+      {"kind": "array-index", "index": 2, "value": 4}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 1, "role": "active"},
+      {"kind": "array-index", "index": 2, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 1, "label": "j-1"},
+      {"index": 2, "label": "j"}
+    ]
+  },
+  {
+    "title": "9 und 2 tauschen",
+    "text": "4 < 9: kein Tausch. Dann 9 > 2 → Tausch: 3 1 4 2 9 10 6 8 7 5.",
+    "explanation": {"action": "Prüfe weiter von links nach rechts.", "rule": "Paare in richtiger Reihenfolge bleiben unverändert; falsche Paare werden getauscht.", "decision": "4 < 9 bleibt, aber 9 > 2 wird vertauscht."},
+    "values": [
+      {"kind": "array-index", "index": 3, "value": 2},
+      {"kind": "array-index", "index": 4, "value": 9}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 3, "role": "active"},
+      {"kind": "array-index", "index": 4, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 3, "label": "j-1"},
+      {"index": 4, "label": "j"}
+    ]
+  },
+  {
+    "title": "10 und 6 tauschen",
+    "text": "9 < 10: kein Tausch. Dann 10 > 6 → Tausch: 3 1 4 2 9 6 10 8 7 5.",
+    "explanation": {"action": "Vergleiche weiter bis zum nächsten falschen Nachbarpaar.", "rule": "Das größere Element wandert im Durchlauf schrittweise nach rechts.", "decision": "10 > 6, daher wird 10 nach rechts geschoben."},
+    "values": [
+      {"kind": "array-index", "index": 5, "value": 6},
+      {"kind": "array-index", "index": 6, "value": 10}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 5, "role": "active"},
+      {"kind": "array-index", "index": 6, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 5, "label": "j-1"},
+      {"index": 6, "label": "j"}
+    ]
+  },
+  {
+    "title": "10 und 8 tauschen",
+    "text": "10 > 8 → Tausch: 3 1 4 2 9 6 8 10 7 5.",
+    "explanation": {"action": "Vergleiche 10 und 8.", "rule": "Ist links größer als rechts, wird getauscht.", "decision": "10 > 8, also wandert 10 weiter nach rechts."},
+    "values": [
+      {"kind": "array-index", "index": 6, "value": 8},
+      {"kind": "array-index", "index": 7, "value": 10}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 6, "role": "active"},
+      {"kind": "array-index", "index": 7, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 6, "label": "j-1"},
+      {"index": 7, "label": "j"}
+    ]
+  },
+  {
+    "title": "10 und 7 tauschen",
+    "text": "10 > 7 → Tausch: 3 1 4 2 9 6 8 7 10 5.",
+    "explanation": {"action": "Vergleiche 10 und 7.", "rule": "Der gleiche Nachbarvergleich wird bis zum Ende des Bereichs wiederholt.", "decision": "10 > 7, deshalb folgt der nächste Tausch."},
+    "values": [
+      {"kind": "array-index", "index": 7, "value": 7},
+      {"kind": "array-index", "index": 8, "value": 10}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 7, "role": "active"},
+      {"kind": "array-index", "index": 8, "role": "active"}
+    ],
+    "pointers": [
+      {"index": 7, "label": "j-1"},
+      {"index": 8, "label": "j"}
+    ]
+  },
+  {
+    "title": "10 und 5 tauschen: Durchlauf fertig",
+    "text": "10 > 5 → Tausch: 3 1 4 2 9 6 8 7 5 10. Das größte Element steht am Ende; weitere Durchläufe sortieren den Rest.",
+    "explanation": {"action": "Vergleiche das letzte Nachbarpaar des Durchlaufs.", "rule": "Nach einem vollständigen Durchlauf steht das größte Element am rechten Rand.", "decision": "10 > 5, nach dem Tausch ist 10 am Ende fixiert."},
+    "values": [
+      {"kind": "array-index", "index": 8, "value": 5},
+      {"kind": "array-index", "index": 9, "value": 10}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 8, "role": "active"},
+      {"kind": "array-index", "index": 9, "role": "result"}
+    ],
+    "pointers": [
+      {"index": 8, "label": "j-1"},
+      {"index": 9, "label": "j"}
+    ],
+    "ranges": [{"from": 9, "to": 9, "label": "sortiert"}]
+  }
+  ]
 }
 ```
 
@@ -729,185 +713,149 @@ quelle: 03_fundamental-algorithms.pdf, Folien 53-100
 {
   "id": "selection-sort",
   "intro": "In jedem Durchlauf wird das kleinste Element im unsortierten Bereich gesucht und an die erste unsortierte Stelle getauscht; der sortierte Bereich wächst von links.",
-  "legend": {"target":"Kleinstes Element","done":"Sortierter Bereich"},
-  "visual": {"kind":"array","bars":true,"values":[4,3,1,9,2,10,6,8,7,5]},
+  "legend": {"target": "Kleinstes Element (nach dem Tausch an Position i)", "changed": "Getauscht (an indexMin)", "result": "Sortiert"},
+  "visual": {"kind": "array", "bars": true, "values": [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]},
   "steps": [
-             {
-               "title": "Durchlauf 1: Minimum 1",
-               "text": "Das kleinste Element im Bereich 0-9 ist 1 (Position 2). Tausch mit Position 0.",
-               "explanation": {
-                                "action": "Suche das Minimum im gesamten noch unsortierten Bereich 0-9.",
-                                "rule": "Selection Sort setzt das kleinste gefundene Element an die erste unsortierte Position.",
-                                "decision": "1 ist das Minimum und wird mit Position 0 getauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":1},
-                           {"kind":"array-index","index":2,"value":4}
-                         ],
-               "highlights": [{"kind":"array-index","index":0,"role":"target"}]
-             },
-             {
-               "title": "Durchlauf 2: Minimum 2",
-               "text": "Das kleinste Element im Bereich 1-9 ist 2 (Position 4). Tausch mit Position 1.",
-               "explanation": {
-                                "action": "Suche das Minimum im restlichen Bereich 1-9.",
-                                "rule": "Der linke sortierte Bereich bleibt fixiert und wird nicht erneut verändert.",
-                                "decision": "2 ist das Minimum des Restbereichs und kommt an Position 1."
-                              },
-               "values": [
-                           {"kind":"array-index","index":1,"value":2},
-                           {"kind":"array-index","index":4,"value":3}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 3: Minimum 3",
-               "text": "Das kleinste Element im Bereich 2-9 ist 3 (Position 4). Tausch mit Position 2.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 2-9.",
-                                "rule": "Nach jedem Durchlauf wächst der sortierte Bereich links um eine Position.",
-                                "decision": "3 ist das nächste Minimum und wird an Position 2 gesetzt."
-                              },
-               "values": [
-                           {"kind":"array-index","index":2,"value":3},
-                           {"kind":"array-index","index":4,"value":4}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 4: Minimum 4",
-               "text": "Das kleinste Element im Bereich 3-9 ist 4 (Position 4). Tausch mit Position 3.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 3-9.",
-                                "rule": "Das gefundene Minimum wird an den Anfang des unsortierten Bereichs getauscht.",
-                                "decision": "4 wird an Position 3 gesetzt; die ersten vier Werte sind sortiert."
-                              },
-               "values": [
-                           {"kind":"array-index","index":3,"value":4},
-                           {"kind":"array-index","index":4,"value":9}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 5: Minimum 5",
-               "text": "Das kleinste Element im Bereich 4-9 ist 5 (Position 9). Tausch mit Position 4.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 4-9.",
-                                "rule": "Nur der unsortierte Bereich wird durchsucht.",
-                                "decision": "5 liegt am Ende des Restbereichs und wird nach Position 4 getauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":4,"value":5},
-                           {"kind":"array-index","index":9,"value":9}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 6: Minimum 6",
-               "text": "Das kleinste Element im Bereich 5-9 ist 6 (Position 6). Tausch mit Position 5.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 5-9.",
-                                "rule": "Der kleinste Wert des Restbereichs besetzt die nächste freie sortierte Position.",
-                                "decision": "6 ist das Minimum und wird an Position 5 gesetzt."
-                              },
-               "values": [
-                           {"kind":"array-index","index":5,"value":6},
-                           {"kind":"array-index","index":6,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 7: Minimum 7",
-               "text": "Das kleinste Element im Bereich 6-9 ist 7 (Position 8). Tausch mit Position 6.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 6-9.",
-                                "rule": "Die Auswahlregel bleibt in jedem Durchlauf gleich.",
-                                "decision": "7 wird mit Position 6 getauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":6,"value":7},
-                           {"kind":"array-index","index":8,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 8: Minimum 8",
-               "text": "Das kleinste Element im Bereich 7-9 ist 8. Es steht bereits an Position 7.",
-               "explanation": {
-                                "action": "Suche das Minimum im Bereich 7-9.",
-                                "rule": "Wenn das Minimum bereits vorne steht, ist kein Tausch nötig.",
-                                "decision": "8 bleibt an Position 7."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"},
-                               {"kind":"array-index","index":7,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Durchlauf 9: Minimum 9, fertig",
-               "text": "Das kleinste Element im Bereich 8-9 ist 9 (Position 9). Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
-               "explanation": {
-                                "action": "Bearbeite den letzten unsortierten Bereich.",
-                                "rule": "Nach n−1 Durchläufen ist jedes Element an seiner sortierten Position.",
-                                "decision": "9 und 10 werden in die endgültige Reihenfolge gebracht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":8,"value":9},
-                           {"kind":"array-index","index":9,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"},
-                               {"kind":"array-index","index":7,"role":"done"},
-                               {"kind":"array-index","index":8,"role":"done"},
-                               {"kind":"array-index","index":9,"role":"done"}
-                             ]
-             }
-           ]
+  {
+    "title": "Durchlauf 1: Minimum 1",
+    "text": "Das kleinste Element im Bereich 0-9 ist 1 (Position 2). Tausch mit Position 0.",
+    "explanation": {"action": "Suche das Minimum im gesamten noch unsortierten Bereich 0-9.", "rule": "Selection Sort setzt das kleinste gefundene Element an die erste unsortierte Position.", "decision": "1 ist das Minimum und wird mit Position 0 getauscht."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 1},
+      {"kind": "array-index", "index": 2, "value": 4}
+    ],
+    "highlights": [{"kind": "array-index", "index": 0, "role": "target"}],
+    "ranges": [{"from": 0, "to": 0, "label": "sortiert"}],
+    "pointers": [
+      {"index": 0, "label": "i"},
+      {"index": 2, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 2: Minimum 2",
+    "text": "Das kleinste Element im Bereich 1-9 ist 2 (Position 4). Tausch mit Position 1.",
+    "explanation": {"action": "Suche das Minimum im restlichen Bereich 1-9.", "rule": "Der linke sortierte Bereich bleibt fixiert und wird nicht erneut verändert.", "decision": "2 ist das Minimum des Restbereichs und kommt an Position 1."},
+    "values": [
+      {"kind": "array-index", "index": 1, "value": 2},
+      {"kind": "array-index", "index": 4, "value": 3}
+    ],
+    "highlights": [{"kind": "array-index", "index": 1, "role": "target"}],
+    "ranges": [{"from": 0, "to": 1, "label": "sortiert"}],
+    "pointers": [
+      {"index": 1, "label": "i"},
+      {"index": 4, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 3: Minimum 3",
+    "text": "Das kleinste Element im Bereich 2-9 ist 3 (Position 4). Tausch mit Position 2.",
+    "explanation": {"action": "Suche das Minimum im Bereich 2-9.", "rule": "Nach jedem Durchlauf wächst der sortierte Bereich links um eine Position.", "decision": "3 ist das nächste Minimum und wird an Position 2 gesetzt."},
+    "values": [
+      {"kind": "array-index", "index": 2, "value": 3},
+      {"kind": "array-index", "index": 4, "value": 4}
+    ],
+    "highlights": [{"kind": "array-index", "index": 2, "role": "target"}],
+    "ranges": [{"from": 0, "to": 2, "label": "sortiert"}],
+    "pointers": [
+      {"index": 2, "label": "i"},
+      {"index": 4, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 4: Minimum 4",
+    "text": "Das kleinste Element im Bereich 3-9 ist 4 (Position 4). Tausch mit Position 3.",
+    "explanation": {"action": "Suche das Minimum im Bereich 3-9.", "rule": "Das gefundene Minimum wird an den Anfang des unsortierten Bereichs getauscht.", "decision": "4 wird an Position 3 gesetzt; die ersten vier Werte sind sortiert."},
+    "values": [
+      {"kind": "array-index", "index": 3, "value": 4},
+      {"kind": "array-index", "index": 4, "value": 9}
+    ],
+    "highlights": [{"kind": "array-index", "index": 3, "role": "target"}],
+    "ranges": [{"from": 0, "to": 3, "label": "sortiert"}],
+    "pointers": [
+      {"index": 3, "label": "i"},
+      {"index": 4, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 5: Minimum 5",
+    "text": "Das kleinste Element im Bereich 4-9 ist 5 (Position 9). Tausch mit Position 4.",
+    "explanation": {"action": "Suche das Minimum im Bereich 4-9.", "rule": "Nur der unsortierte Bereich wird durchsucht.", "decision": "5 liegt am Ende des Restbereichs und wird nach Position 4 getauscht."},
+    "values": [
+      {"kind": "array-index", "index": 4, "value": 5},
+      {"kind": "array-index", "index": 9, "value": 9}
+    ],
+    "highlights": [{"kind": "array-index", "index": 4, "role": "target"}],
+    "ranges": [{"from": 0, "to": 4, "label": "sortiert"}],
+    "pointers": [
+      {"index": 4, "label": "i"},
+      {"index": 9, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 6: Minimum 6",
+    "text": "Das kleinste Element im Bereich 5-9 ist 6 (Position 6). Tausch mit Position 5.",
+    "explanation": {"action": "Suche das Minimum im Bereich 5-9.", "rule": "Der kleinste Wert des Restbereichs besetzt die nächste freie sortierte Position.", "decision": "6 ist das Minimum und wird an Position 5 gesetzt."},
+    "values": [
+      {"kind": "array-index", "index": 5, "value": 6},
+      {"kind": "array-index", "index": 6, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 5, "role": "target"}],
+    "ranges": [{"from": 0, "to": 5, "label": "sortiert"}],
+    "pointers": [
+      {"index": 5, "label": "i"},
+      {"index": 6, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 7: Minimum 7",
+    "text": "Das kleinste Element im Bereich 6-9 ist 7 (Position 8). Tausch mit Position 6.",
+    "explanation": {"action": "Suche das Minimum im Bereich 6-9.", "rule": "Die Auswahlregel bleibt in jedem Durchlauf gleich.", "decision": "7 wird mit Position 6 getauscht."},
+    "values": [
+      {"kind": "array-index", "index": 6, "value": 7},
+      {"kind": "array-index", "index": 8, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 6, "role": "target"}],
+    "ranges": [{"from": 0, "to": 6, "label": "sortiert"}],
+    "pointers": [
+      {"index": 6, "label": "i"},
+      {"index": 8, "label": "indexMin"}
+    ]
+  },
+  {
+    "title": "Durchlauf 8: Minimum 8",
+    "text": "Das kleinste Element im Bereich 7-9 ist 8. Es steht bereits an Position 7.",
+    "explanation": {"action": "Suche das Minimum im Bereich 7-9.", "rule": "Wenn das Minimum bereits vorne steht, ist kein Tausch nötig.", "decision": "8 bleibt an Position 7."},
+    "highlights": [{"kind": "array-index", "index": 7, "role": "target"}],
+    "ranges": [{"from": 0, "to": 7, "label": "sortiert"}],
+    "pointers": [{"index": 7, "label": "i, indexMin"}]
+  },
+  {
+    "title": "Durchlauf 9: Minimum 9, fertig",
+    "text": "Das kleinste Element im Bereich 8-9 ist 9 (Position 9). Tausch mit Position 8. Nach n−1 Durchläufen ist das Array sortiert: 1 2 3 4 5 6 7 8 9 10.",
+    "explanation": {"action": "Bearbeite den letzten unsortierten Bereich.", "rule": "Nach n−1 Durchläufen ist jedes Element an seiner sortierten Position.", "decision": "9 und 10 werden in die endgültige Reihenfolge gebracht."},
+    "values": [
+      {"kind": "array-index", "index": 8, "value": 9},
+      {"kind": "array-index", "index": 9, "value": 10}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 0, "role": "result"},
+      {"kind": "array-index", "index": 1, "role": "result"},
+      {"kind": "array-index", "index": 2, "role": "result"},
+      {"kind": "array-index", "index": 3, "role": "result"},
+      {"kind": "array-index", "index": 4, "role": "result"},
+      {"kind": "array-index", "index": 5, "role": "result"},
+      {"kind": "array-index", "index": 6, "role": "result"},
+      {"kind": "array-index", "index": 7, "role": "result"},
+      {"kind": "array-index", "index": 8, "role": "result"},
+      {"kind": "array-index", "index": 9, "role": "result"}
+    ],
+    "ranges": [{"from": 0, "to": 9, "label": "sortiert"}],
+    "pointers": [
+      {"index": 8, "label": "i"},
+      {"index": 9, "label": "indexMin"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -919,97 +867,84 @@ quelle: 03_fundamental-algorithms.pdf, Folien 216-257
 {
   "id": "quicksort-partitionierung",
   "intro": "Pivot ist das letzte Element. Index i läuft von links, Index j von rechts; „fehl am Platz“ stehende Elemente werden getauscht.",
-  "legend": {
-              "target": "Pivot",
-              "active": "Index i",
-              "compare": "Index j",
-              "done": "Linkes Teilarray (≤ Pivot)"
-            },
-  "visual": {"kind":"array","bars":true,"values":[4,3,1,9,2,10,6,8,7,5]},
+  "legend": {"target": "Pivot p", "active": "arr[i] ≥ p (fehl am Platz)", "compare": "arr[j] ≤ p (fehl am Platz)", "result": "Partitioniert"},
+  "visual": {"kind": "array", "bars": true, "values": [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]},
   "steps": [
-             {
-               "title": "Pivot wählen",
-               "text": "Als Pivot dient das letzte Element: p = 5.",
-               "explanation": {
-                                "action": "Pivot-Element festlegen.",
-                                "rule": "Wähle das Pivot-Element; die Folie nimmt das letzte Element.",
-                                "decision": "p = 5."
-                              },
-               "highlights": [{"kind":"array-index","index":9,"role":"target"}]
-             },
-             {
-               "title": "i läuft von links",
-               "text": "4, 3 und 1 sind kleiner als der Pivot; i stoppt bei Position 3, denn 9 >= 5.",
-               "explanation": {
-                                "action": "i von links nach rechts bewegen.",
-                                "rule": "Gehe von links nach rechts (i = 0, 1, …) bis arr[i] ≥ p.",
-                                "decision": "4, 3 und 1 sind kleiner als 5; bei i = 3 gilt 9 ≥ 5 → i stoppt."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":3,"role":"active"},
-                               {"kind":"array-index","index":9,"role":"target"}
-                             ]
-             },
-             {
-               "title": "j läuft von rechts",
-               "text": "j stoppt sofort bei Position 9, denn 5 <= 5. Die Elemente an i und j stehen „fehl am Platz“.",
-               "explanation": {
-                                "action": "j von rechts nach links bewegen.",
-                                "rule": "Gehe von rechts nach links (j = n−1, …) bis arr[j] ≤ p.",
-                                "decision": "Bei j = 9 gilt 5 ≤ 5 → j stoppt sofort."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":3,"role":"active"},
-                               {"kind":"array-index","index":9,"role":"compare"}
-                             ]
-             },
-             {
-               "title": "Tausch 9 ↔ 5",
-               "text": "arr[i] und arr[j] werden getauscht: 4 3 1 5 2 10 6 8 7 9.",
-               "explanation": {
-                                "action": "Die beiden „fehl am Platz“ stehenden Elemente tauschen.",
-                                "rule": "Tausche arr[i] ↔ arr[j] und wiederhole ab Schritt 2 bis i > j.",
-                                "decision": "i = 3 < j = 9 → 9 und 5 werden getauscht."
-                              },
-               "values": [
-                           {"kind":"array-index","index":3,"value":5},
-                           {"kind":"array-index","index":9,"value":9}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":3,"role":"active"},
-                               {"kind":"array-index","index":9,"role":"compare"}
-                             ]
-             },
-             {
-               "title": "Weiter ab Schritt 2",
-               "text": "i läuft weiter und stoppt bei Position 5 (10 >= 5); j läuft nach links und stoppt bei Position 4 (2 <= 5).",
-               "explanation": {
-                                "action": "Schritt 2 wiederholen.",
-                                "rule": "i läuft bis arr[i] ≥ p, j läuft bis arr[j] ≤ p.",
-                                "decision": "i stoppt bei 5 (10 ≥ 5), j stoppt bei 4 (2 ≤ 5)."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":5,"role":"active"},
-                               {"kind":"array-index","index":4,"role":"compare"}
-                             ]
-             },
-             {
-               "title": "i > j: Partitionierung fertig",
-               "text": "Mit i = 5 und j = 4 ist i > j: der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
-               "explanation": {
-                                "action": "Abbruchbedingung prüfen.",
-                                "rule": "Wiederhole ab Schritt 2 bis i > j.",
-                                "decision": "i = 5 > j = 4 → die Partitionierung endet."
-                              },
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"done"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"}
-                             ]
-             }
-           ]
+  {
+    "title": "Pivot wählen",
+    "text": "Als Pivot dient das letzte Element: p = 5.",
+    "explanation": {"action": "Pivot-Element festlegen.", "rule": "Wähle das Pivot-Element; die Folie nimmt das letzte Element.", "decision": "p = 5."},
+    "highlights": [{"kind": "array-index", "index": 9, "role": "target"}],
+    "pointers": [{"index": 9, "label": "p"}]
+  },
+  {
+    "title": "i läuft von links",
+    "text": "4, 3 und 1 sind kleiner als der Pivot; i stoppt bei Position 3, denn 9 >= 5.",
+    "explanation": {"action": "i von links nach rechts bewegen.", "rule": "Gehe von links nach rechts (i = 0, 1, …) bis arr[i] ≥ p.", "decision": "4, 3 und 1 sind kleiner als 5; bei i = 3 gilt 9 ≥ 5 → i stoppt."},
+    "highlights": [
+      {"kind": "array-index", "index": 3, "role": "active"},
+      {"kind": "array-index", "index": 9, "role": "target"}
+    ],
+    "pointers": [{"index": 3, "label": "i"}]
+  },
+  {
+    "title": "j läuft von rechts",
+    "text": "j stoppt sofort bei Position 9, denn 5 <= 5. Die Elemente an i und j stehen „fehl am Platz“.",
+    "explanation": {"action": "j von rechts nach links bewegen.", "rule": "Gehe von rechts nach links (j = n−1, …) bis arr[j] ≤ p.", "decision": "Bei j = 9 gilt 5 ≤ 5 → j stoppt sofort."},
+    "highlights": [
+      {"kind": "array-index", "index": 3, "role": "active"},
+      {"kind": "array-index", "index": 9, "role": "compare"}
+    ],
+    "pointers": [
+      {"index": 3, "label": "i"},
+      {"index": 9, "label": "j"}
+    ]
+  },
+  {
+    "title": "Tausch 9 ↔ 5",
+    "text": "arr[i] und arr[j] werden getauscht: 4 3 1 5 2 10 6 8 7 9.",
+    "explanation": {"action": "Die beiden „fehl am Platz“ stehenden Elemente tauschen.", "rule": "Tausche arr[i] ↔ arr[j] und wiederhole ab Schritt 2 bis i > j.", "decision": "i = 3 < j = 9 → 9 und 5 werden getauscht."},
+    "values": [
+      {"kind": "array-index", "index": 3, "value": 5},
+      {"kind": "array-index", "index": 9, "value": 9}
+    ],
+    "highlights": [
+      {"kind": "array-index", "index": 3, "role": "active"},
+      {"kind": "array-index", "index": 9, "role": "compare"}
+    ],
+    "pointers": [
+      {"index": 3, "label": "i"},
+      {"index": 9, "label": "j"}
+    ]
+  },
+  {
+    "title": "Weiter ab Schritt 2",
+    "text": "i läuft weiter und stoppt bei Position 5 (10 >= 5); j läuft nach links und stoppt bei Position 4 (2 <= 5).",
+    "explanation": {"action": "Schritt 2 wiederholen.", "rule": "i läuft bis arr[i] ≥ p, j läuft bis arr[j] ≤ p.", "decision": "i stoppt bei 5 (10 ≥ 5), j stoppt bei 4 (2 ≤ 5)."},
+    "highlights": [
+      {"kind": "array-index", "index": 5, "role": "active"},
+      {"kind": "array-index", "index": 4, "role": "compare"}
+    ],
+    "pointers": [
+      {"index": 5, "label": "i"},
+      {"index": 4, "label": "j"}
+    ]
+  },
+  {
+    "title": "i > j: Partitionierung fertig",
+    "text": "Mit i = 5 und j = 4 ist i > j: der Vorgang endet. Links stehen alle Werte <= 5, rechts alle Werte >= 5; Quicksort wird nun rekursiv auf beide Teilarrays angewendet.",
+    "explanation": {"action": "Abbruchbedingung prüfen.", "rule": "Wiederhole ab Schritt 2 bis i > j.", "decision": "i = 5 > j = 4 → die Partitionierung endet."},
+    "highlights": [],
+    "pointers": [
+      {"index": 5, "label": "i"},
+      {"index": 4, "label": "j"}
+    ],
+    "ranges": [
+      {"from": 0, "to": 4, "label": "Werte ≤ 5"},
+      {"from": 5, "to": 9, "label": "Werte ≥ 5"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -1021,156 +956,131 @@ quelle: 03_fundamental-algorithms.pdf, Folien 333-343
 {
   "id": "merge-sortierter-arrays",
   "intro": "Die sortierten Arrays A = [2, 8, 14, 24] und B = [5, 7, 9, 11] werden zu C zusammengeführt: A[i] und B[j] vergleichen, den kleineren Wert kopieren.",
-  "visual": {
-              "kind": "array",
-              "label": "Merging",
-              "values": ["","","","","","","",""],
-              "arrays": [
-                          {"id":"a","label":"A","values":[2,8,14,24]},
-                          {"id":"b","label":"B","values":[5,7,9,11]},
-                          {"id":"c","label":"C","values":["","","","","","","",""]}
-                        ]
-            },
+  "visual": {"kind": "array", "label": "Merging", "values": ["", "", "", "", "", "", "", ""], "arrays": [{"id": "a", "label": "A", "values": [2, 8, 14, 24]}, {"id": "b", "label": "B", "values": [5, 7, 9, 11]}, {"id": "c", "label": "C", "values": ["", "", "", "", "", "", "", ""]}]},
+  "legend": {"active": "Kleinerer Wert, wird kopiert", "compare": "Verglichen, bleibt", "target": "Nach C[k] kopiert", "result": "Ergebnis C"},
   "steps": [
-             {
-               "title": "2 < 5",
-               "text": "A[0] = 2 ist kleiner als B[0] = 5 → C[0] = 2; i wird erhöht.",
-               "explanation": {
-                                "action": "Vergleiche die aktuellen Köpfe A[i] und B[j].",
-                                "rule": "Beim Merge wird der kleinere der beiden Werte in C[k] kopiert.",
-                                "decision": "2 < 5, also wird A[0] nach C[0] übernommen."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":0,"value":2}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":0,"role":"active"},
-                               {"kind":"array-index","array":"b","index":0,"role":"compare"},
-                               {"kind":"array-index","array":"c","index":0,"role":"target"}
-                             ]
-             },
-             {
-               "title": "8 > 5",
-               "text": "A[1] = 8 ist größer als B[0] = 5 → C[1] = 5; j wird erhöht.",
-               "explanation": {
-                                "action": "Vergleiche A[1] mit B[0].",
-                                "rule": "Nach dem Kopieren wird nur der Zeiger des gewählten Arrays erhöht.",
-                                "decision": "5 ist kleiner als 8, also wird B[0] nach C[1] kopiert."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":1,"value":5}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":0,"role":"done"},
-                               {"kind":"array-index","array":"a","index":1,"role":"compare"},
-                               {"kind":"array-index","array":"b","index":0,"role":"active"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"target"}
-                             ]
-             },
-             {
-               "title": "8 > 7",
-               "text": "B[1] = 7 ist kleiner → C[2] = 7.",
-               "explanation": {
-                                "action": "Vergleiche A[1] mit B[1].",
-                                "rule": "Der kleinere Kopf wandert in die nächste freie C-Position.",
-                                "decision": "7 ist kleiner als 8, daher wird B[1] nach C[2] kopiert."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":2,"value":7}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":1,"role":"compare"},
-                               {"kind":"array-index","array":"b","index":0,"role":"done"},
-                               {"kind":"array-index","array":"b","index":1,"role":"active"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"done"},
-                               {"kind":"array-index","array":"c","index":2,"role":"target"}
-                             ]
-             },
-             {
-               "title": "8 < 9",
-               "text": "Jetzt ist A[1] = 8 kleiner als B[2] = 9 → C[3] = 8.",
-               "explanation": {
-                                "action": "Vergleiche A[1] mit B[2].",
-                                "rule": "Die sortierten Teilarrays bleiben sichtbar; nur C wächst schrittweise.",
-                                "decision": "8 ist kleiner als 9, also wird A[1] nach C[3] kopiert."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":3,"value":8}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":0,"role":"done"},
-                               {"kind":"array-index","array":"a","index":1,"role":"active"},
-                               {"kind":"array-index","array":"b","index":0,"role":"done"},
-                               {"kind":"array-index","array":"b","index":1,"role":"done"},
-                               {"kind":"array-index","array":"b","index":2,"role":"compare"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"done"},
-                               {"kind":"array-index","array":"c","index":2,"role":"done"},
-                               {"kind":"array-index","array":"c","index":3,"role":"target"}
-                             ]
-             },
-             {
-               "title": "14 > 9",
-               "text": "B[2] = 9 ist kleiner → C[4] = 9.",
-               "explanation": {
-                                "action": "Vergleiche A[2] mit B[2].",
-                                "rule": "Der Merge-Schritt entscheidet immer nur zwischen den aktuellen Kopfwerten.",
-                                "decision": "9 ist kleiner als 14 und wird nach C[4] kopiert."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":4,"value":9}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":2,"role":"compare"},
-                               {"kind":"array-index","array":"b","index":2,"role":"active"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"done"},
-                               {"kind":"array-index","array":"c","index":2,"role":"done"},
-                               {"kind":"array-index","array":"c","index":3,"role":"done"},
-                               {"kind":"array-index","array":"c","index":4,"role":"target"}
-                             ]
-             },
-             {
-               "title": "14 > 11",
-               "text": "B[3] = 11 ist kleiner → C[5] = 11. Damit ist B erschöpft.",
-               "explanation": {
-                                "action": "Vergleiche A[2] mit B[3].",
-                                "rule": "Wenn ein Teilarray erschöpft ist, wird der Rest des anderen Arrays kopiert.",
-                                "decision": "11 ist kleiner als 14; danach gibt es in B keinen weiteren Wert."
-                              },
-               "values": [{"kind":"array-index","array":"c","index":5,"value":11}],
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":2,"role":"compare"},
-                               {"kind":"array-index","array":"b","index":3,"role":"active"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"done"},
-                               {"kind":"array-index","array":"c","index":2,"role":"done"},
-                               {"kind":"array-index","array":"c","index":3,"role":"done"},
-                               {"kind":"array-index","array":"c","index":4,"role":"done"},
-                               {"kind":"array-index","array":"c","index":5,"role":"target"}
-                             ]
-             },
-             {
-               "title": "Rest von A kopieren: fertig",
-               "text": "Da B erschöpft ist (j >= Länge von B), werden die restlichen Werte von A übernommen: C = [2, 5, 7, 8, 9, 11, 14, 24].",
-               "values": [
-                           {"kind":"array-index","array":"c","index":6,"value":14},
-                           {"kind":"array-index","array":"c","index":7,"value":24}
-                         ],
-               "explanation": {
-                                "action": "Kopiere die übrigen Werte aus A.",
-                                "rule": "Sobald ein Teilarray leer ist, muss nicht mehr verglichen werden.",
-                                "decision": "14 und 24 werden direkt nach C[6] und C[7] übernommen."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"a","index":2,"role":"active"},
-                               {"kind":"array-index","array":"a","index":3,"role":"active"},
-                               {"kind":"array-index","array":"b","index":0,"role":"done"},
-                               {"kind":"array-index","array":"b","index":1,"role":"done"},
-                               {"kind":"array-index","array":"b","index":2,"role":"done"},
-                               {"kind":"array-index","array":"b","index":3,"role":"done"},
-                               {"kind":"array-index","array":"c","index":0,"role":"done"},
-                               {"kind":"array-index","array":"c","index":1,"role":"done"},
-                               {"kind":"array-index","array":"c","index":2,"role":"done"},
-                               {"kind":"array-index","array":"c","index":3,"role":"done"},
-                               {"kind":"array-index","array":"c","index":4,"role":"done"},
-                               {"kind":"array-index","array":"c","index":5,"role":"done"},
-                               {"kind":"array-index","array":"c","index":6,"role":"target"},
-                               {"kind":"array-index","array":"c","index":7,"role":"target"}
-                             ]
-             }
-           ]
+  {
+    "title": "2 < 5",
+    "text": "A[0] = 2 ist kleiner als B[0] = 5 → C[0] = 2; i wird erhöht.",
+    "explanation": {"action": "Vergleiche die aktuellen Köpfe A[i] und B[j].", "rule": "Beim Merge wird der kleinere der beiden Werte in C[k] kopiert.", "decision": "2 < 5, also wird A[0] nach C[0] übernommen."},
+    "values": [{"kind": "array-index", "array": "c", "index": 0, "value": 2}],
+    "highlights": [
+      {"kind": "array-index", "array": "a", "index": 0, "role": "active"},
+      {"kind": "array-index", "array": "b", "index": 0, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 0, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 0, "label": "i"},
+      {"array": "b", "index": 0, "label": "j"},
+      {"array": "c", "index": 0, "label": "k"}
+    ]
+  },
+  {
+    "title": "8 > 5",
+    "text": "A[1] = 8 ist größer als B[0] = 5 → C[1] = 5; j wird erhöht.",
+    "explanation": {"action": "Vergleiche A[1] mit B[0].", "rule": "Nach dem Kopieren wird nur der Zeiger des gewählten Arrays erhöht.", "decision": "5 ist kleiner als 8, also wird B[0] nach C[1] kopiert."},
+    "values": [{"kind": "array-index", "array": "c", "index": 1, "value": 5}],
+    "highlights": [
+      {"kind": "array-index", "array": "b", "index": 0, "role": "active"},
+      {"kind": "array-index", "array": "a", "index": 1, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 1, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 1, "label": "i"},
+      {"array": "b", "index": 0, "label": "j"},
+      {"array": "c", "index": 1, "label": "k"}
+    ]
+  },
+  {
+    "title": "8 > 7",
+    "text": "B[1] = 7 ist kleiner → C[2] = 7.",
+    "explanation": {"action": "Vergleiche A[1] mit B[1].", "rule": "Der kleinere Kopf wandert in die nächste freie C-Position.", "decision": "7 ist kleiner als 8, daher wird B[1] nach C[2] kopiert."},
+    "values": [{"kind": "array-index", "array": "c", "index": 2, "value": 7}],
+    "highlights": [
+      {"kind": "array-index", "array": "b", "index": 1, "role": "active"},
+      {"kind": "array-index", "array": "a", "index": 1, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 2, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 1, "label": "i"},
+      {"array": "b", "index": 1, "label": "j"},
+      {"array": "c", "index": 2, "label": "k"}
+    ]
+  },
+  {
+    "title": "8 < 9",
+    "text": "Jetzt ist A[1] = 8 kleiner als B[2] = 9 → C[3] = 8.",
+    "explanation": {"action": "Vergleiche A[1] mit B[2].", "rule": "Die sortierten Teilarrays bleiben sichtbar; nur C wächst schrittweise.", "decision": "8 ist kleiner als 9, also wird A[1] nach C[3] kopiert."},
+    "values": [{"kind": "array-index", "array": "c", "index": 3, "value": 8}],
+    "highlights": [
+      {"kind": "array-index", "array": "a", "index": 1, "role": "active"},
+      {"kind": "array-index", "array": "b", "index": 2, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 3, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 1, "label": "i"},
+      {"array": "b", "index": 2, "label": "j"},
+      {"array": "c", "index": 3, "label": "k"}
+    ]
+  },
+  {
+    "title": "14 > 9",
+    "text": "B[2] = 9 ist kleiner → C[4] = 9.",
+    "explanation": {"action": "Vergleiche A[2] mit B[2].", "rule": "Der Merge-Schritt entscheidet immer nur zwischen den aktuellen Kopfwerten.", "decision": "9 ist kleiner als 14 und wird nach C[4] kopiert."},
+    "values": [{"kind": "array-index", "array": "c", "index": 4, "value": 9}],
+    "highlights": [
+      {"kind": "array-index", "array": "b", "index": 2, "role": "active"},
+      {"kind": "array-index", "array": "a", "index": 2, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 4, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 2, "label": "i"},
+      {"array": "b", "index": 2, "label": "j"},
+      {"array": "c", "index": 4, "label": "k"}
+    ]
+  },
+  {
+    "title": "14 > 11",
+    "text": "B[3] = 11 ist kleiner → C[5] = 11. Damit ist B erschöpft.",
+    "explanation": {"action": "Vergleiche A[2] mit B[3].", "rule": "Wenn ein Teilarray erschöpft ist, wird der Rest des anderen Arrays kopiert.", "decision": "11 ist kleiner als 14; danach gibt es in B keinen weiteren Wert."},
+    "values": [{"kind": "array-index", "array": "c", "index": 5, "value": 11}],
+    "highlights": [
+      {"kind": "array-index", "array": "b", "index": 3, "role": "active"},
+      {"kind": "array-index", "array": "a", "index": 2, "role": "compare"},
+      {"kind": "array-index", "array": "c", "index": 5, "role": "target"}
+    ],
+    "pointers": [
+      {"array": "a", "index": 2, "label": "i"},
+      {"array": "b", "index": 3, "label": "j"},
+      {"array": "c", "index": 5, "label": "k"}
+    ]
+  },
+  {
+    "title": "Rest von A kopieren: fertig",
+    "text": "Da B erschöpft ist (j >= Länge von B), werden die restlichen Werte von A übernommen: C = [2, 5, 7, 8, 9, 11, 14, 24].",
+    "values": [
+      {"kind": "array-index", "array": "c", "index": 6, "value": 14},
+      {"kind": "array-index", "array": "c", "index": 7, "value": 24}
+    ],
+    "explanation": {"action": "Kopiere die übrigen Werte aus A.", "rule": "Sobald ein Teilarray leer ist, muss nicht mehr verglichen werden.", "decision": "14 und 24 werden direkt nach C[6] und C[7] übernommen."},
+    "highlights": [
+      {"kind": "array-index", "array": "a", "index": 2, "role": "active"},
+      {"kind": "array-index", "array": "a", "index": 3, "role": "active"},
+      {"kind": "array-index", "array": "c", "index": 0, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 1, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 2, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 3, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 4, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 5, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 6, "role": "result"},
+      {"kind": "array-index", "array": "c", "index": 7, "role": "result"}
+    ],
+    "ranges": [{"array": "c", "from": 0, "to": 7, "label": "sortiert"}],
+    "pointers": [
+      {"array": "a", "index": 2, "label": "i"},
+      {"array": "c", "index": 6, "label": "k"}
+    ]
+  }
+  ]
 }
 ```
