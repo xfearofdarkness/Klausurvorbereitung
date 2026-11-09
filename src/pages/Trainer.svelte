@@ -15,6 +15,7 @@
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
   import { prepareRichText, warmMathRenderer } from "../lib/richText.svelte";
+  import { loadGenerators } from "../lib/generatorLoader";
   import { scrollToSection, scrollToStart, sectionIdFromHash } from "../lib/scrollLayout";
   import { keyboardScroll } from "../lib/keyboardScroll";
   import type { SearchHit } from "../lib/search";
@@ -59,7 +60,8 @@
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
-  let runtimeMath = $state(false);
+  /** Das Fach hat Generator-Aufgaben: Üben braucht dann die Rechenmodule und bei Formeln KaTeX im Browser. */
+  let hasGenerators = $state(false);
 
   onMount(() => {
     progress = loadProgress();
@@ -73,7 +75,7 @@
   });
 
   $effect(() => {
-    if (runtimeMath && currentMode === "practice") warmMathRenderer();
+    if (currentMode === "practice") warmPractice();
   });
 
   async function loadSubject(): Promise<void> {
@@ -100,7 +102,7 @@
         const { default: legacyKeys } = await import("../data/legacyProgressKeys.json");
         migrateLegacyProgress(progress, loadedSubject, (legacyKeys as Record<string, LegacySubjectKeys>)[loadedSubject.id]);
       }
-      runtimeMath = loadedSubject.topics.some((topic) => topic.exercises.some((exercise) => exercise.generator));
+      hasGenerators = loadedSubject.topics.some((topic) => topic.exercises.some((exercise) => exercise.generator));
       await prepareRichText(loadedSubject.features.math === true, bundle.formulas);
       subject = loadedSubject;
       document.title = `${subject.title} Klausurtrainer`;
@@ -234,8 +236,10 @@
     if (id) scrollToSection(id);
   }
 
-  function warmPracticeMath(): void {
-    if (runtimeMath) warmMathRenderer();
+  function warmPractice(): void {
+    if (!hasGenerators) return;
+    void loadGenerators();
+    if (subject?.features.math === true) warmMathRenderer();
   }
 
   function markExercise(key: string): void {
@@ -371,7 +375,7 @@
             {currentTopicIndex}
             onSelect={selectTopic}
           />
-          <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} onPracticeIntent={warmPracticeMath} />
+          <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} onPracticeIntent={warmPractice} />
           <SearchDialog {subject} onSelect={openHit} />
           <div class="topbar-layout-switch">
             <LayoutMenu value={navPlacement} onChange={changeNavPlacement} />

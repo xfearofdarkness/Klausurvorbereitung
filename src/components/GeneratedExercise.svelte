@@ -1,7 +1,7 @@
 <script lang="ts">
   import { richText } from "../lib/richText.svelte";
   import Source from "./Source.svelte";
-  import { generateTask, randomSeed } from "../lib/exerciseGenerators";
+  import { loadGenerators, type GeneratorModule } from "../lib/generatorLoader";
   import type { Exercise } from "../types/content";
 
   interface Props {
@@ -11,13 +11,20 @@
   }
 
   let { exercise, isDone, onMark }: Props = $props();
-  let seed = $state(randomSeed());
+  let generators = $state<GeneratorModule | null>(null);
+  let seed = $state(0);
   let showSolution = $state(false);
 
-  let generated = $derived(exercise.generator ? generateTask(exercise.generator, seed) : null);
+  void loadGenerators().then((module) => {
+    seed = module.randomSeed();
+    generators = module;
+  });
+
+  let generated = $derived(exercise.generator && generators ? generators.generateTask(exercise.generator, seed) : null);
 
   function rollNewNumbers(): void {
-    seed = randomSeed();
+    if (!generators) return;
+    seed = generators.randomSeed();
     showSolution = false;
   }
 </script>
@@ -39,8 +46,10 @@
           Erledigt
         </button>
       </div>
-    {:else}
+    {:else if generators}
       <p class="empty-state">Dieses Rechenmodul ist nicht verfügbar.</p>
+    {:else}
+      <p class="empty-state" aria-busy="true">Aufgabe wird geladen …</p>
     {/if}
   </div>
   <Source source={exercise.source} className="card-source study-source" />
