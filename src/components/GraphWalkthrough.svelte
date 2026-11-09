@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { pickState } from "../lib/walkthroughState";
   import type { GraphEdgeDefinition, GraphNodeDefinition, GraphVisual, Walkthrough, WalkthroughStep } from "../types/content";
 
   interface Props {
@@ -90,23 +91,16 @@
   }
 
   function nodeClasses(nodeId: string): string {
-    const classes = ["walk-node"];
-    if (renderState.nodes.get(nodeId)?.marked) classes.push("walk-done");
-    for (const role of renderState.nodeRoles.get(nodeId) || []) {
-      classes.push(`walk-${role}`);
-    }
-    return classes.join(" ");
+    const visible = pickState(renderState.nodeRoles.get(nodeId) || [], false, renderState.nodes.get(nodeId)?.marked === true);
+    return visible ? `walk-node walk-${visible}` : "walk-node";
   }
 
   function edgeClasses(edge: GraphEdgeDefinition): string {
     const key = edgeKey(edge.from, edge.to);
-    const classes = ["walk-edge"];
-    if (renderState.edgeMarks.get(key)) classes.push("walk-done");
-    for (const role of renderState.edgeRoles.get(key) || []) {
-      classes.push(`walk-${role}`);
-    }
-    return classes.join(" ");
+    const visible = pickState(renderState.edgeRoles.get(key) || [], false, renderState.edgeMarks.get(key) === true);
+    return visible ? `walk-edge walk-${visible}` : "walk-edge";
   }
+
 
   function endpoints(edge: GraphEdgeDefinition): { x1: number; y1: number; x2: number; y2: number } | null {
     const from = nodeById.get(edge.from);

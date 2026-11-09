@@ -6,6 +6,7 @@
   import ArrayWalkthrough from "./ArrayWalkthrough.svelte";
   import TreeWalkthrough from "./TreeWalkthrough.svelte";
   import GraphWalkthrough from "./GraphWalkthrough.svelte";
+  import TimelineWalkthrough from "./TimelineWalkthrough.svelte";
   import type { Walkthrough, WalkthroughStep } from "../types/content";
 
   interface Props {
@@ -80,6 +81,8 @@
       <TreeWalkthrough {walkthrough} {stepIndex} />
     {:else if walkthrough.visual.kind === "graph"}
       <GraphWalkthrough {walkthrough} {stepIndex} />
+    {:else if walkthrough.visual.kind === "timeline"}
+      <TimelineWalkthrough {walkthrough} {stepIndex} />
     {/if}
   </div>
 

@@ -18,10 +18,12 @@ import type {
   Subject,
   SubjectId,
   Topic,
+  TimelineVisual,
   TreeVisual,
   Walkthrough,
   WalkthroughHighlight,
   WalkthroughRole,
+  WalkthroughStep,
   WalkthroughValueUpdate
 } from "../src/types/content";
 
@@ -31,7 +33,8 @@ const DANGEROUS_HTML_PATTERNS = [
   { label: "javascript URL", pattern: /javascript\s*:/i },
   { label: "inline event handler", pattern: /\son[a-z]+\s*=/i }
 ];
-const WALKTHROUGH_ROLES: WalkthroughRole[] = ["active", "compare", "done", "target", "factor"];
+const WALKTHROUGH_ROLES: WalkthroughRole[] = ["active", "compare", "done", "target", "factor", "result"];
+const LEGEND_KEYS: string[] = [...WALKTHROUGH_ROLES, "changed", "waiting"];
 const MATH_DELIMITER_PATTERNS = [
   { label: "inline math", open: /(?<!\\)\\\(/g, close: /(?<!\\)\\\)/g },
   { label: "display math", open: /(?<!\\)\\\[/g, close: /(?<!\\)\\\]/g }
@@ -279,7 +282,7 @@ function validateWalkthrough(
   requireSource(topicLabel, "walkthrough", walkthroughIndex, walkthrough.source);
   validateHtmlField(`${label}.intro`, walkthrough.intro || "", validateMath);
 
-  if (!walkthrough.visual || !["matrix", "array", "tree", "graph"].includes(walkthrough.visual.kind)) {
+  if (!walkthrough.visual || !["matrix", "array", "tree", "graph", "timeline"].includes(walkthrough.visual.kind)) {
     fail(`${label} has unsupported visual kind.`);
     return;
   }
@@ -292,7 +295,7 @@ function validateWalkthrough(
   validateWalkthroughVisual(label, walkthrough);
 
   for (const [role, legendLabel] of Object.entries(walkthrough.legend || {})) {
-    if (!WALKTHROUGH_ROLES.includes(role as WalkthroughRole)) {
+    if (!LEGEND_KEYS.includes(role)) {
       fail(`${label}.legend uses unknown role "${role}".`);
     }
     if (typeof legendLabel !== "string" || !legendLabel.trim()) {
@@ -310,7 +313,51 @@ function validateWalkthrough(
     validateHtmlField(`${label} step[${stepIndex}].explanation.decision`, step.explanation?.decision, validateMath);
     step.highlights?.forEach((highlight, highlightIndex) => validateWalkthroughHighlight(label, walkthrough, stepIndex, highlight, highlightIndex));
     step.values?.forEach((update, updateIndex) => validateWalkthroughValue(label, walkthrough, stepIndex, update, updateIndex));
+    validateArrayAnnotations(`${label} step[${stepIndex}]`, walkthrough, step);
   });
+}
+
+function validateArrayAnnotations(label: string, walkthrough: Walkthrough, step: WalkthroughStep): void {
+  if ((step.pointers?.length || step.ranges?.length) && walkthrough.visual.kind !== "array") {
+    fail(`${label} uses pointers/ranges outside an array visual.`);
+    return;
+  }
+  if (walkthrough.visual.kind !== "array") return;
+  const visual = walkthrough.visual;
+  step.pointers?.forEach((pointer, index) => {
+    if (!pointer.label?.trim()) fail(`${label}.pointers[${index}] is missing a label.`);
+    validateArrayReference(`${label}.pointers[${index}]`, visual, pointer.array, pointer.index);
+  });
+  step.ranges?.forEach((range, index) => {
+    const rangeLabel = `${label}.ranges[${index}]`;
+    if (!range.label?.trim()) fail(`${rangeLabel} is missing a label.`);
+    validateArrayReference(rangeLabel, visual, range.array, range.from);
+    validateArrayReference(rangeLabel, visual, range.array, range.to);
+    if (range.from > range.to) fail(`${rangeLabel} has from > to.`);
+  });
+}
+
+function validateTimelineVisual(label: string, visual: TimelineVisual): void {
+  if (!Number.isInteger(visual.length) || visual.length <= 0) {
+    fail(`${label} timeline visual needs a positive integer length.`);
+  }
+  if (!Array.isArray(visual.lanes) || visual.lanes.length === 0) {
+    fail(`${label} timeline visual must contain at least one lane.`);
+    return;
+  }
+  const ids = new Set<string>();
+  visual.lanes.forEach((lane, index) => {
+    const laneLabel = `${label} visual.lanes[${index}]`;
+    if (!lane.id || !lane.label) fail(`${laneLabel} is missing id/label.`);
+    if (ids.has(lane.id)) fail(`${laneLabel} has duplicate id "${lane.id}".`);
+    ids.add(lane.id);
+    if (lane.start !== undefined && (lane.start < 0 || lane.start > visual.length)) fail(`${laneLabel}.start is outside the time axis.`);
+    if (lane.duration !== undefined && lane.duration <= 0) fail(`${laneLabel}.duration must be positive.`);
+  });
+}
+
+function validateTimelineTime(label: string, visual: TimelineVisual, time: number): void {
+  if (typeof time !== "number" || time < 0 || time > visual.length) fail(`${label} uses time ${time} outside 0-${visual.length}.`);
 }
 
 function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): void {
@@ -321,6 +368,11 @@ function validateWalkthroughVisual(label: string, walkthrough: Walkthrough): voi
 
   if (walkthrough.visual.kind === "graph") {
     validateGraphVisual(label, walkthrough.visual);
+    return;
+  }
+
+  if (walkthrough.visual.kind === "timeline") {
+    validateTimelineVisual(label, walkthrough.visual);
     return;
   }
 
@@ -582,6 +634,17 @@ function validateWalkthroughHighlight(
     return;
   }
 
+  if (walkthrough.visual.kind === "timeline") {
+    if (highlight.kind !== "timeline-lane") {
+      fail(`${highlightLabel} uses ${highlight.kind} highlight in timeline visual.`);
+      return;
+    }
+    if (!walkthrough.visual.lanes.some((lane) => lane.id === highlight.lane)) {
+      fail(`${highlightLabel} references unknown lane "${highlight.lane}".`);
+    }
+    return;
+  }
+
   if (walkthrough.visual.kind === "matrix") {
     if (highlight.kind === "array-index") {
       fail(`${highlightLabel} uses array highlight in matrix visual.`);
@@ -659,6 +722,35 @@ function validateWalkthroughValue(
       return;
     }
     fail(`${updateLabel} uses ${update.kind} value in graph visual.`);
+    return;
+  }
+
+  if (walkthrough.visual.kind === "timeline") {
+    const visual = walkthrough.visual;
+    const hasLane = (lane: string) => visual.lanes.some((entry) => entry.id === lane);
+    if (update.kind === "timeline-segment") {
+      if (!hasLane(update.lane)) fail(`${updateLabel} references unknown lane "${update.lane}".`);
+      validateTimelineTime(updateLabel, visual, update.from);
+      validateTimelineTime(updateLabel, visual, update.to);
+      if (update.from >= update.to) fail(`${updateLabel} needs from < to.`);
+      return;
+    }
+    if (update.kind === "timeline-cursor") {
+      validateTimelineTime(updateLabel, visual, update.at);
+      return;
+    }
+    if (update.kind === "timeline-queue") {
+      if (!Array.isArray(update.items) || update.items.some((item) => typeof item !== "string" || !item)) {
+        fail(`${updateLabel} needs non-empty string items.`);
+      }
+      if (update.at !== undefined) validateTimelineTime(updateLabel, visual, update.at);
+      return;
+    }
+    if (update.kind === "timeline-note") {
+      if (!hasLane(update.lane)) fail(`${updateLabel} references unknown lane "${update.lane}".`);
+      return;
+    }
+    fail(`${updateLabel} uses ${update.kind} value in timeline visual.`);
     return;
   }
 

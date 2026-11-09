@@ -292,165 +292,78 @@ quelle: 07_rabs-scheduling.pdf, Folien 14-18
 ```json
 {
   "id": "scheduling-fcfs",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 3",
-               "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 3 ausführen.",
-                                "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.",
-                                "decision": "P1 ist bei t = 3 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 3: P2 rechnet bis t = 9",
-               "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
-               "explanation": {
-                                "action": "P2 von t = 3 bis t = 9 ausführen.",
-                                "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.",
-                                "decision": "P2 ist bei t = 9 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":3,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":5,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":6,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":7,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":8,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 9: P3 rechnet bis t = 13",
-               "text": "Bereitliste: P3, P4, P5. P3 steht vorne in der Bereitliste (angekommen bei t = 4).",
-               "explanation": {
-                                "action": "P3 von t = 9 bis t = 13 ausführen.",
-                                "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.",
-                                "decision": "P3 ist bei t = 13 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":9,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":10,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":11,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":12,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 13: P4 rechnet bis t = 18",
-               "text": "Bereitliste: P4, P5. P4 steht vorne in der Bereitliste (angekommen bei t = 6).",
-               "explanation": {
-                                "action": "P4 von t = 13 bis t = 18 ausführen.",
-                                "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.",
-                                "decision": "P4 ist bei t = 18 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":13,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":14,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":15,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":16,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":17,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 18: P5 rechnet bis t = 20",
-               "text": "Nur P5 ist bereit.",
-               "explanation": {
-                                "action": "P5 von t = 18 bis t = 20 ausführen.",
-                                "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.",
-                                "decision": "P5 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":18,"value":"5"},
-                           {"kind":"array-index","array":"cpu","index":19,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 9, P4 12, P5 12. Wartezeit: P1 0, P2 1, P3 5, P4 7, P5 10. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 18",
-               "formula": "Ø Laufzeit = (3 + 7 + 9 + 12 + 12) / 5 = 8,6 ms",
-               "product": "Ø Wartezeit = (0 + 1 + 5 + 7 + 10) / 5 = 4,6 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 3",
+    "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
+    "explanation": {"action": "P1 von t = 0 bis t = 3 ausführen.", "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.", "decision": "P1 ist bei t = 3 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 3},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 3: P2 rechnet bis t = 9",
+    "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
+    "explanation": {"action": "P2 von t = 3 bis t = 9 ausführen.", "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.", "decision": "P2 ist bei t = 9 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 3, "to": 9},
+      {"kind": "timeline-queue", "items": ["P2"], "at": 3}
+    ]
+  },
+  {
+    "title": "t = 9: P3 rechnet bis t = 13",
+    "text": "Bereitliste: P3, P4, P5. P3 steht vorne in der Bereitliste (angekommen bei t = 4).",
+    "explanation": {"action": "P3 von t = 9 bis t = 13 ausführen.", "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.", "decision": "P3 ist bei t = 13 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 9, "to": 13},
+      {"kind": "timeline-queue", "items": ["P3", "P4", "P5"], "at": 9}
+    ]
+  },
+  {
+    "title": "t = 13: P4 rechnet bis t = 18",
+    "text": "Bereitliste: P4, P5. P4 steht vorne in der Bereitliste (angekommen bei t = 6).",
+    "explanation": {"action": "P4 von t = 13 bis t = 18 ausführen.", "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.", "decision": "P4 ist bei t = 18 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 13, "to": 18},
+      {"kind": "timeline-queue", "items": ["P4", "P5"], "at": 13}
+    ]
+  },
+  {
+    "title": "t = 18: P5 rechnet bis t = 20",
+    "text": "Nur P5 ist bereit.",
+    "explanation": {"action": "P5 von t = 18 bis t = 20 ausführen.", "rule": "FCFS: Bearbeitung in der Reihenfolge der Ankunft in der Bereitliste, Prozessorbesitz bis zum Ende.", "decision": "P5 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 18, "to": 20},
+      {"kind": "timeline-queue", "items": ["P5"], "at": 18}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 9, P4 12, P5 12. Wartezeit: P1 0, P2 1, P3 5, P4 7, P5 10. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 18",
+    "formula": "Ø Laufzeit = (3 + 7 + 9 + 12 + 12) / 5 = 8,6 ms",
+    "product": "Ø Wartezeit = (0 + 1 + 5 + 7 + 10) / 5 = 4,6 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 3 · W 0"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 7 · W 1"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 9 · W 5"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 12 · W 7"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 12 · W 10"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -461,165 +374,78 @@ quelle: 07_rabs-scheduling.pdf, Folien 14, 19-21
 ```json
 {
   "id": "scheduling-sjf",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 3",
-               "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 3 ausführen.",
-                                "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.",
-                                "decision": "P1 ist bei t = 3 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 3: P2 rechnet bis t = 9",
-               "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
-               "explanation": {
-                                "action": "P2 von t = 3 bis t = 9 ausführen.",
-                                "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.",
-                                "decision": "P2 ist bei t = 9 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":3,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":5,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":6,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":7,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":8,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 9: P5 rechnet bis t = 11",
-               "text": "Bereitliste: P3, P4, P5. P5 hat mit t = 2 die kürzeste Bedienzeit (P3: 4, P4: 5).",
-               "explanation": {
-                                "action": "P5 von t = 9 bis t = 11 ausführen.",
-                                "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.",
-                                "decision": "P5 ist bei t = 11 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":2,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":9,"value":"5"},
-                           {"kind":"array-index","array":"cpu","index":10,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 11: P3 rechnet bis t = 15",
-               "text": "Bereitliste: P3, P4. P3 hat mit t = 4 die kürzeste Bedienzeit (P4: 5).",
-               "explanation": {
-                                "action": "P3 von t = 11 bis t = 15 ausführen.",
-                                "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.",
-                                "decision": "P3 ist bei t = 15 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":11,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":12,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":13,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":14,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 15: P4 rechnet bis t = 20",
-               "text": "Nur P4 ist bereit.",
-               "explanation": {
-                                "action": "P4 von t = 15 bis t = 20 ausführen.",
-                                "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.",
-                                "decision": "P4 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":15,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":16,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":17,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":18,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":19,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 11, P4 14, P5 3. Wartezeit: P1 0, P2 1, P3 7, P4 9, P5 1. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 21",
-               "formula": "Ø Laufzeit = (3 + 7 + 11 + 14 + 3) / 5 = 7,6 ms",
-               "product": "Ø Wartezeit = (0 + 1 + 7 + 9 + 1) / 5 = 3,6 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 3",
+    "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
+    "explanation": {"action": "P1 von t = 0 bis t = 3 ausführen.", "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.", "decision": "P1 ist bei t = 3 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 3},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 3: P2 rechnet bis t = 9",
+    "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
+    "explanation": {"action": "P2 von t = 3 bis t = 9 ausführen.", "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.", "decision": "P2 ist bei t = 9 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 3, "to": 9},
+      {"kind": "timeline-queue", "items": ["P2"], "at": 3}
+    ]
+  },
+  {
+    "title": "t = 9: P5 rechnet bis t = 11",
+    "text": "Bereitliste: P3, P4, P5. P5 hat mit t = 2 die kürzeste Bedienzeit (P3: 4, P4: 5).",
+    "explanation": {"action": "P5 von t = 9 bis t = 11 ausführen.", "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.", "decision": "P5 ist bei t = 11 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 9, "to": 11},
+      {"kind": "timeline-queue", "items": ["P3", "P4", "P5"], "at": 9}
+    ]
+  },
+  {
+    "title": "t = 11: P3 rechnet bis t = 15",
+    "text": "Bereitliste: P3, P4. P3 hat mit t = 4 die kürzeste Bedienzeit (P4: 5).",
+    "explanation": {"action": "P3 von t = 11 bis t = 15 ausführen.", "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.", "decision": "P3 ist bei t = 15 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 11, "to": 15},
+      {"kind": "timeline-queue", "items": ["P3", "P4"], "at": 11}
+    ]
+  },
+  {
+    "title": "t = 15: P4 rechnet bis t = 20",
+    "text": "Nur P4 ist bereit.",
+    "explanation": {"action": "P4 von t = 15 bis t = 20 ausführen.", "rule": "SJF: Der Prozess mit der kürzesten Bedienzeit wird als nächster bis zum Ende bearbeitet.", "decision": "P4 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 15, "to": 20},
+      {"kind": "timeline-queue", "items": ["P4"], "at": 15}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 11, P4 14, P5 3. Wartezeit: P1 0, P2 1, P3 7, P4 9, P5 1. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 21",
+    "formula": "Ø Laufzeit = (3 + 7 + 11 + 14 + 3) / 5 = 7,6 ms",
+    "product": "Ø Wartezeit = (0 + 1 + 7 + 9 + 1) / 5 = 3,6 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 3 · W 0"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 7 · W 1"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 11 · W 7"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 14 · W 9"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 3 · W 1"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -630,399 +456,195 @@ quelle: 07_rabs-scheduling.pdf, Folien 14, 22-26
 ```json
 {
   "id": "scheduling-rr-1",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 2",
-               "text": "Nur P1 ist bereit. Nach jedem Quantum ist die Bereitliste leer, deshalb rechnet P1 gleich weiter.",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 2 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 2 läuft das Quantum ab; P1 hat noch 1 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P2."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 2: P2 rechnet bis t = 3",
-               "text": "Bereitliste: P2, P1. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 2 bis t = 3 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 3 läuft das Quantum ab; P2 hat noch 5 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":2,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 3: P1 rechnet bis t = 4",
-               "text": "Bereitliste: P1, P2. P1 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P1 von t = 3 bis t = 4 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P1 ist bei t = 4 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":3,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 4: P2 rechnet bis t = 5",
-               "text": "Bereitliste: P2, P3. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 4 bis t = 5 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 5 läuft das Quantum ab; P2 hat noch 4 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 5: P3 rechnet bis t = 6",
-               "text": "Bereitliste: P3, P2. P3 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P3 von t = 5 bis t = 6 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 6 läuft das Quantum ab; P3 hat noch 3 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P4."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":5,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 6: P2 rechnet bis t = 7",
-               "text": "Bereitliste: P2, P4, P3. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 6 bis t = 7 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 7 läuft das Quantum ab; P2 hat noch 3 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":6,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 7: P4 rechnet bis t = 8",
-               "text": "Bereitliste: P4, P3, P2. P4 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P4 von t = 7 bis t = 8 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 8 läuft das Quantum ab; P4 hat noch 4 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P5."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":7,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 8: P3 rechnet bis t = 9",
-               "text": "Bereitliste: P3, P2, P5, P4. P3 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P3 von t = 8 bis t = 9 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 9 läuft das Quantum ab; P3 hat noch 2 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":8,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"4"}
-                         ]
-             },
-             {
-               "title": "t = 9: P2 rechnet bis t = 10",
-               "text": "Bereitliste: P2, P5, P4, P3. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 9 bis t = 10 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 10 läuft das Quantum ab; P2 hat noch 2 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":9,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"3"}
-                         ]
-             },
-             {
-               "title": "t = 10: P5 rechnet bis t = 11",
-               "text": "Bereitliste: P5, P4, P3, P2. P5 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P5 von t = 10 bis t = 11 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 11 läuft das Quantum ab; P5 hat noch 1 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":10,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"2"}
-                         ]
-             },
-             {
-               "title": "t = 11: P4 rechnet bis t = 12",
-               "text": "Bereitliste: P4, P3, P2, P5. P4 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P4 von t = 11 bis t = 12 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 12 läuft das Quantum ab; P4 hat noch 3 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":11,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"5"}
-                         ]
-             },
-             {
-               "title": "t = 12: P3 rechnet bis t = 13",
-               "text": "Bereitliste: P3, P2, P5, P4. P3 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P3 von t = 12 bis t = 13 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 13 läuft das Quantum ab; P3 hat noch 1 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":12,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"4"}
-                         ]
-             },
-             {
-               "title": "t = 13: P2 rechnet bis t = 14",
-               "text": "Bereitliste: P2, P5, P4, P3. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 13 bis t = 14 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 14 läuft das Quantum ab; P2 hat noch 1 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":13,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"3"}
-                         ]
-             },
-             {
-               "title": "t = 14: P5 rechnet bis t = 15",
-               "text": "Bereitliste: P5, P4, P3, P2. P5 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P5 von t = 14 bis t = 15 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P5 ist bei t = 15 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":14,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"2"}
-                         ]
-             },
-             {
-               "title": "t = 15: P4 rechnet bis t = 16",
-               "text": "Bereitliste: P4, P3, P2. P4 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P4 von t = 15 bis t = 16 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 16 läuft das Quantum ab; P4 hat noch 2 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":15,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 16: P3 rechnet bis t = 17",
-               "text": "Bereitliste: P3, P2, P4. P3 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P3 von t = 16 bis t = 17 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P3 ist bei t = 17 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":16,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 17: P2 rechnet bis t = 18",
-               "text": "Bereitliste: P2, P4. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 17 bis t = 18 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P2 ist bei t = 18 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":17,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 18: P4 rechnet bis t = 20",
-               "text": "Nur P4 ist bereit. Nach jedem Quantum ist die Bereitliste leer, deshalb rechnet P4 gleich weiter.",
-               "explanation": {
-                                "action": "P4 von t = 18 bis t = 20 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P4 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":18,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":19,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 4, P2 16, P3 13, P4 14, P5 7. Wartezeit: P1 1, P2 10, P3 9, P4 9, P5 5. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 26",
-               "formula": "Ø Laufzeit = (4 + 16 + 13 + 14 + 7) / 5 = 10,8 ms",
-               "product": "Ø Wartezeit = (1 + 10 + 9 + 9 + 5) / 5 = 6,8 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 2",
+    "text": "Nur P1 ist bereit. Nach jedem Quantum ist die Bereitliste leer, deshalb rechnet P1 gleich weiter.",
+    "explanation": {"action": "P1 von t = 0 bis t = 2 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 2 läuft das Quantum ab; P1 hat noch 1 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P2."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 2},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 2: P2 rechnet bis t = 3",
+    "text": "Bereitliste: P2, P1. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 2 bis t = 3 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 3 läuft das Quantum ab; P2 hat noch 5 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 2, "to": 3},
+      {"kind": "timeline-queue", "items": ["P2", "P1"], "at": 2}
+    ]
+  },
+  {
+    "title": "t = 3: P1 rechnet bis t = 4",
+    "text": "Bereitliste: P1, P2. P1 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P1 von t = 3 bis t = 4 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P1 ist bei t = 4 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 3, "to": 4},
+      {"kind": "timeline-queue", "items": ["P1", "P2"], "at": 3}
+    ]
+  },
+  {
+    "title": "t = 4: P2 rechnet bis t = 5",
+    "text": "Bereitliste: P2, P3. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 4 bis t = 5 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 5 läuft das Quantum ab; P2 hat noch 4 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 4, "to": 5},
+      {"kind": "timeline-queue", "items": ["P2", "P3"], "at": 4}
+    ]
+  },
+  {
+    "title": "t = 5: P3 rechnet bis t = 6",
+    "text": "Bereitliste: P3, P2. P3 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P3 von t = 5 bis t = 6 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 6 läuft das Quantum ab; P3 hat noch 3 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P4."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 5, "to": 6},
+      {"kind": "timeline-queue", "items": ["P3", "P2"], "at": 5}
+    ]
+  },
+  {
+    "title": "t = 6: P2 rechnet bis t = 7",
+    "text": "Bereitliste: P2, P4, P3. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 6 bis t = 7 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 7 läuft das Quantum ab; P2 hat noch 3 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 6, "to": 7},
+      {"kind": "timeline-queue", "items": ["P2", "P4", "P3"], "at": 6}
+    ]
+  },
+  {
+    "title": "t = 7: P4 rechnet bis t = 8",
+    "text": "Bereitliste: P4, P3, P2. P4 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P4 von t = 7 bis t = 8 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 8 läuft das Quantum ab; P4 hat noch 4 ms und geht ans Ende der Bereitliste, hinter den gerade angekommenen P5."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 7, "to": 8},
+      {"kind": "timeline-queue", "items": ["P4", "P3", "P2"], "at": 7}
+    ]
+  },
+  {
+    "title": "t = 8: P3 rechnet bis t = 9",
+    "text": "Bereitliste: P3, P2, P5, P4. P3 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P3 von t = 8 bis t = 9 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 9 läuft das Quantum ab; P3 hat noch 2 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 8, "to": 9},
+      {"kind": "timeline-queue", "items": ["P3", "P2", "P5", "P4"], "at": 8}
+    ]
+  },
+  {
+    "title": "t = 9: P2 rechnet bis t = 10",
+    "text": "Bereitliste: P2, P5, P4, P3. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 9 bis t = 10 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 10 läuft das Quantum ab; P2 hat noch 2 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 9, "to": 10},
+      {"kind": "timeline-queue", "items": ["P2", "P5", "P4", "P3"], "at": 9}
+    ]
+  },
+  {
+    "title": "t = 10: P5 rechnet bis t = 11",
+    "text": "Bereitliste: P5, P4, P3, P2. P5 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P5 von t = 10 bis t = 11 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 11 läuft das Quantum ab; P5 hat noch 1 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 10, "to": 11},
+      {"kind": "timeline-queue", "items": ["P5", "P4", "P3", "P2"], "at": 10}
+    ]
+  },
+  {
+    "title": "t = 11: P4 rechnet bis t = 12",
+    "text": "Bereitliste: P4, P3, P2, P5. P4 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P4 von t = 11 bis t = 12 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 12 läuft das Quantum ab; P4 hat noch 3 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 11, "to": 12},
+      {"kind": "timeline-queue", "items": ["P4", "P3", "P2", "P5"], "at": 11}
+    ]
+  },
+  {
+    "title": "t = 12: P3 rechnet bis t = 13",
+    "text": "Bereitliste: P3, P2, P5, P4. P3 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P3 von t = 12 bis t = 13 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 13 läuft das Quantum ab; P3 hat noch 1 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 12, "to": 13},
+      {"kind": "timeline-queue", "items": ["P3", "P2", "P5", "P4"], "at": 12}
+    ]
+  },
+  {
+    "title": "t = 13: P2 rechnet bis t = 14",
+    "text": "Bereitliste: P2, P5, P4, P3. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 13 bis t = 14 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 14 läuft das Quantum ab; P2 hat noch 1 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 13, "to": 14},
+      {"kind": "timeline-queue", "items": ["P2", "P5", "P4", "P3"], "at": 13}
+    ]
+  },
+  {
+    "title": "t = 14: P5 rechnet bis t = 15",
+    "text": "Bereitliste: P5, P4, P3, P2. P5 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P5 von t = 14 bis t = 15 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P5 ist bei t = 15 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 14, "to": 15},
+      {"kind": "timeline-queue", "items": ["P5", "P4", "P3", "P2"], "at": 14}
+    ]
+  },
+  {
+    "title": "t = 15: P4 rechnet bis t = 16",
+    "text": "Bereitliste: P4, P3, P2. P4 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P4 von t = 15 bis t = 16 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 16 läuft das Quantum ab; P4 hat noch 2 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 15, "to": 16},
+      {"kind": "timeline-queue", "items": ["P4", "P3", "P2"], "at": 15}
+    ]
+  },
+  {
+    "title": "t = 16: P3 rechnet bis t = 17",
+    "text": "Bereitliste: P3, P2, P4. P3 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P3 von t = 16 bis t = 17 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P3 ist bei t = 17 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 16, "to": 17},
+      {"kind": "timeline-queue", "items": ["P3", "P2", "P4"], "at": 16}
+    ]
+  },
+  {
+    "title": "t = 17: P2 rechnet bis t = 18",
+    "text": "Bereitliste: P2, P4. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 17 bis t = 18 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P2 ist bei t = 18 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 17, "to": 18},
+      {"kind": "timeline-queue", "items": ["P2", "P4"], "at": 17}
+    ]
+  },
+  {
+    "title": "t = 18: P4 rechnet bis t = 20",
+    "text": "Nur P4 ist bereit. Nach jedem Quantum ist die Bereitliste leer, deshalb rechnet P4 gleich weiter.",
+    "explanation": {"action": "P4 von t = 18 bis t = 20 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P4 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 18, "to": 20},
+      {"kind": "timeline-queue", "items": ["P4"], "at": 18}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 4, P2 16, P3 13, P4 14, P5 7. Wartezeit: P1 1, P2 10, P3 9, P4 9, P5 5. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 26",
+    "formula": "Ø Laufzeit = (4 + 16 + 13 + 14 + 7) / 5 = 10,8 ms",
+    "product": "Ø Wartezeit = (1 + 10 + 9 + 9 + 5) / 5 = 6,8 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 4 · W 1"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 16 · W 10"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 13 · W 9"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 14 · W 9"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 7 · W 5"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -1033,201 +655,96 @@ quelle: 07_rabs-scheduling.pdf, Folien 14, 22-23, 27-28
 ```json
 {
   "id": "scheduling-rr-4",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms): P1: a = 0, t = 3; P2: a = 2, t = 6; P3: a = 4, t = 4; P4: a = 6, t = 5; P5: a = 8, t = 2. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 3",
-               "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 3 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P1 ist bei t = 3 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 3: P2 rechnet bis t = 7",
-               "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6).",
-               "explanation": {
-                                "action": "P2 von t = 3 bis t = 7 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 7 läuft das Quantum ab; P2 hat noch 2 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":3,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":5,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":6,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 7: P3 rechnet bis t = 11",
-               "text": "Bereitliste: P3, P4, P2. P3 steht vorne in der Bereitliste. Währenddessen kommen an: P5 (t = 8).",
-               "explanation": {
-                                "action": "P3 von t = 7 bis t = 11 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P3 ist bei t = 11 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":7,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":8,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":9,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":10,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 11: P4 rechnet bis t = 15",
-               "text": "Bereitliste: P4, P2, P5. P4 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P4 von t = 11 bis t = 15 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "Bei t = 15 läuft das Quantum ab; P4 hat noch 1 ms und geht ans Ende der Bereitliste."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":11,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":12,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":13,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":14,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 15: P2 rechnet bis t = 17",
-               "text": "Bereitliste: P2, P5, P4. P2 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P2 von t = 15 bis t = 17 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P2 ist bei t = 17 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":15,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":16,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 17: P5 rechnet bis t = 19",
-               "text": "Bereitliste: P5, P4. P5 steht vorne in der Bereitliste.",
-               "explanation": {
-                                "action": "P5 von t = 17 bis t = 19 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P5 ist bei t = 19 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":17,"value":"5"},
-                           {"kind":"array-index","array":"cpu","index":18,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 19: P4 rechnet bis t = 20",
-               "text": "Nur P4 ist bereit.",
-               "explanation": {
-                                "action": "P4 von t = 19 bis t = 20 ausführen.",
-                                "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.",
-                                "decision": "P4 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":19,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 15, P3 7, P4 14, P5 11. Wartezeit: P1 0, P2 9, P3 3, P4 9, P5 9. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 28",
-               "formula": "Ø Laufzeit = (3 + 15 + 7 + 14 + 11) / 5 = 10 ms",
-               "product": "Ø Wartezeit = (0 + 9 + 3 + 9 + 9) / 5 = 6 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 3",
+    "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
+    "explanation": {"action": "P1 von t = 0 bis t = 3 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P1 ist bei t = 3 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 3},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 3: P2 rechnet bis t = 7",
+    "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6).",
+    "explanation": {"action": "P2 von t = 3 bis t = 7 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 7 läuft das Quantum ab; P2 hat noch 2 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 3, "to": 7},
+      {"kind": "timeline-queue", "items": ["P2"], "at": 3}
+    ]
+  },
+  {
+    "title": "t = 7: P3 rechnet bis t = 11",
+    "text": "Bereitliste: P3, P4, P2. P3 steht vorne in der Bereitliste. Währenddessen kommen an: P5 (t = 8).",
+    "explanation": {"action": "P3 von t = 7 bis t = 11 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P3 ist bei t = 11 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 7, "to": 11},
+      {"kind": "timeline-queue", "items": ["P3", "P4", "P2"], "at": 7}
+    ]
+  },
+  {
+    "title": "t = 11: P4 rechnet bis t = 15",
+    "text": "Bereitliste: P4, P2, P5. P4 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P4 von t = 11 bis t = 15 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "Bei t = 15 läuft das Quantum ab; P4 hat noch 1 ms und geht ans Ende der Bereitliste."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 11, "to": 15},
+      {"kind": "timeline-queue", "items": ["P4", "P2", "P5"], "at": 11}
+    ]
+  },
+  {
+    "title": "t = 15: P2 rechnet bis t = 17",
+    "text": "Bereitliste: P2, P5, P4. P2 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P2 von t = 15 bis t = 17 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P2 ist bei t = 17 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 15, "to": 17},
+      {"kind": "timeline-queue", "items": ["P2", "P5", "P4"], "at": 15}
+    ]
+  },
+  {
+    "title": "t = 17: P5 rechnet bis t = 19",
+    "text": "Bereitliste: P5, P4. P5 steht vorne in der Bereitliste.",
+    "explanation": {"action": "P5 von t = 17 bis t = 19 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P5 ist bei t = 19 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 17, "to": 19},
+      {"kind": "timeline-queue", "items": ["P5", "P4"], "at": 17}
+    ]
+  },
+  {
+    "title": "t = 19: P4 rechnet bis t = 20",
+    "text": "Nur P4 ist bereit.",
+    "explanation": {"action": "P4 von t = 19 bis t = 20 ausführen.", "rule": "RR: Ankunftsreihenfolge; nach dem Quantum wird verdrängt. Neue und verdrängte Prozesse gehen ans Ende, neue haben Vorrang.", "decision": "P4 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 19, "to": 20},
+      {"kind": "timeline-queue", "items": ["P4"], "at": 19}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 15, P3 7, P4 14, P5 11. Wartezeit: P1 0, P2 9, P3 3, P4 9, P5 9. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 28",
+    "formula": "Ø Laufzeit = (3 + 15 + 7 + 14 + 11) / 5 = 10 ms",
+    "product": "Ø Wartezeit = (0 + 9 + 3 + 9 + 9) / 5 = 6 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 3 · W 0"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 15 · W 9"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 7 · W 3"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 14 · W 9"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 11 · W 9"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -1238,165 +755,78 @@ quelle: 07_rabs-scheduling.pdf, Folien 14, 29-31
 ```json
 {
   "id": "scheduling-prio-np",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms, Priorität P): P1: a = 0, t = 3, P = 2; P2: a = 2, t = 6, P = 4; P3: a = 4, t = 4, P = 1; P4: a = 6, t = 5, P = 5; P5: a = 8, t = 2, P = 3. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links. Im Folienbeispiel läuft bei Konkurrenz der Prozess mit der größeren Zahl P zuerst.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms, Priorität P): P1: a = 0, t = 3, P = 2; P2: a = 2, t = 6, P = 4; P3: a = 4, t = 4, P = 1; P4: a = 6, t = 5, P = 5; P5: a = 8, t = 2, P = 3. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 3",
-               "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 3 ausführen.",
-                                "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.",
-                                "decision": "P1 ist bei t = 3 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 3: P2 rechnet bis t = 9",
-               "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
-               "explanation": {
-                                "action": "P2 von t = 3 bis t = 9 ausführen.",
-                                "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.",
-                                "decision": "P2 ist bei t = 9 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":3,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":5,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":6,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":7,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":8,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 9: P4 rechnet bis t = 14",
-               "text": "Bereitliste: P4, P5, P3. P4 hat mit P = 5 die höchste Priorität (P5: 3, P3: 1).",
-               "explanation": {
-                                "action": "P4 von t = 9 bis t = 14 ausführen.",
-                                "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.",
-                                "decision": "P4 ist bei t = 14 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":9,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":10,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":11,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":12,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":13,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 14: P5 rechnet bis t = 16",
-               "text": "Bereitliste: P5, P3. P5 hat mit P = 3 die höchste Priorität (P3: 1).",
-               "explanation": {
-                                "action": "P5 von t = 14 bis t = 16 ausführen.",
-                                "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.",
-                                "decision": "P5 ist bei t = 16 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":14,"value":"5"},
-                           {"kind":"array-index","array":"cpu","index":15,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 16: P3 rechnet bis t = 20",
-               "text": "Nur P3 ist bereit.",
-               "explanation": {
-                                "action": "P3 von t = 16 bis t = 20 ausführen.",
-                                "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.",
-                                "decision": "P3 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":16,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":17,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":18,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":19,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 16, P4 8, P5 8. Wartezeit: P1 0, P2 1, P3 12, P4 3, P5 6. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 31",
-               "formula": "Ø Laufzeit = (3 + 7 + 16 + 8 + 8) / 5 = 8,4 ms",
-               "product": "Ø Wartezeit = (0 + 1 + 12 + 3 + 6) / 5 = 4,4 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 3",
+    "text": "Nur P1 ist bereit. Währenddessen kommen an: P2 (t = 2).",
+    "explanation": {"action": "P1 von t = 0 bis t = 3 ausführen.", "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.", "decision": "P1 ist bei t = 3 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 3},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 3: P2 rechnet bis t = 9",
+    "text": "Nur P2 ist bereit. Währenddessen kommen an: P3 (t = 4), P4 (t = 6), P5 (t = 8).",
+    "explanation": {"action": "P2 von t = 3 bis t = 9 ausführen.", "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.", "decision": "P2 ist bei t = 9 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 3, "to": 9},
+      {"kind": "timeline-queue", "items": ["P2"], "at": 3}
+    ]
+  },
+  {
+    "title": "t = 9: P4 rechnet bis t = 14",
+    "text": "Bereitliste: P4, P5, P3. P4 hat mit P = 5 die höchste Priorität (P5: 3, P3: 1).",
+    "explanation": {"action": "P4 von t = 9 bis t = 14 ausführen.", "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.", "decision": "P4 ist bei t = 14 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 9, "to": 14},
+      {"kind": "timeline-queue", "items": ["P4", "P5", "P3"], "at": 9}
+    ]
+  },
+  {
+    "title": "t = 14: P5 rechnet bis t = 16",
+    "text": "Bereitliste: P5, P3. P5 hat mit P = 3 die höchste Priorität (P3: 1).",
+    "explanation": {"action": "P5 von t = 14 bis t = 16 ausführen.", "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.", "decision": "P5 ist bei t = 16 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 14, "to": 16},
+      {"kind": "timeline-queue", "items": ["P5", "P3"], "at": 14}
+    ]
+  },
+  {
+    "title": "t = 16: P3 rechnet bis t = 20",
+    "text": "Nur P3 ist bereit.",
+    "explanation": {"action": "P3 von t = 16 bis t = 20 ausführen.", "rule": "PRIO-NP: Neuankömmlinge werden nach ihrer Priorität in die Bereitliste eingeordnet; der Prozess an der Spitze läuft bis zum Ende.", "decision": "P3 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 16, "to": 20},
+      {"kind": "timeline-queue", "items": ["P3"], "at": 16}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 3, P2 7, P3 16, P4 8, P5 8. Wartezeit: P1 0, P2 1, P3 12, P4 3, P5 6. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 31",
+    "formula": "Ø Laufzeit = (3 + 7 + 16 + 8 + 8) / 5 = 8,4 ms",
+    "product": "Ø Wartezeit = (0 + 1 + 12 + 3 + 6) / 5 = 4,4 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 3 · W 0"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 7 · W 1"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 16 · W 12"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 8 · W 3"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 8 · W 6"}
+    ]
+  }
+  ]
 }
 ```
 
@@ -1407,200 +837,95 @@ quelle: 07_rabs-scheduling.pdf, Folien 14, 32-34
 ```json
 {
   "id": "scheduling-prio-p",
-  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms, Priorität P): P1: a = 0, t = 3, P = 2; P2: a = 2, t = 6, P = 4; P3: a = 4, t = 4, P = 1; P4: a = 6, t = 5, P = 5; P5: a = 8, t = 2, P = 3. Zeile CPU: welcher Prozess in welcher Millisekunde rechnet. Zeile Bereit: die Bereitliste im Moment der Entscheidung, vorne links. Im Folienbeispiel läuft bei Konkurrenz der Prozess mit der größeren Zahl P zuerst.",
-  "legend": {"active":"Bekommt die CPU"},
-  "visual": {
-              "kind": "array",
-              "values": [],
-              "arrays": [
-                          {
-                            "id": "cpu",
-                            "label": "CPU",
-                            "values": ["","","","","","","","","","","","","","","","","","","",""]
-                          },
-                          {"id":"queue","label":"Bereit","values":["","","",""]}
-                        ]
-            },
+  "intro": "Beispiel-Prozessliste der Folien (Ankunftszeit a, Bedienzeit t in ms, Priorität P): P1: a = 0, t = 3, P = 2; P2: a = 2, t = 6, P = 4; P3: a = 4, t = 4, P = 1; P4: a = 6, t = 5, P = 5; P5: a = 8, t = 2, P = 3. Jede Zeile ist ein Prozess: ▾ markiert die Ankunft, ein Balken die Zeit auf der CPU, die gestrichelte Linie die Wartezeit in der Bereitliste. Die Bereitliste darunter gilt im Moment der Entscheidung, vorne zuerst.",
+  "legend": {"active": "Bekommt die CPU", "waiting": "Wartet", "result": "Ergebnis: Laufzeit L, Wartezeit W"},
+  "visual": {"kind": "timeline", "label": "CPU-Belegung", "length": 20, "unit": "ms", "lanes": [{"id": "P1", "label": "P1", "start": 0, "duration": 3}, {"id": "P2", "label": "P2", "start": 2, "duration": 6}, {"id": "P3", "label": "P3", "start": 4, "duration": 4}, {"id": "P4", "label": "P4", "start": 6, "duration": 5}, {"id": "P5", "label": "P5", "start": 8, "duration": 2}], "queueLabel": "Bereitliste"},
   "steps": [
-             {
-               "title": "t = 0: P1 rechnet bis t = 2",
-               "text": "Nur P1 ist bereit.",
-               "explanation": {
-                                "action": "P1 von t = 0 bis t = 2 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "Bei t = 2 kommt P2 mit höherer Priorität an (4 > 2) und verdrängt P1; P1 hat noch 1 ms."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":0,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":1,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":0,"value":"1"},
-                           {"kind":"array-index","array":"cpu","index":1,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 2: P2 rechnet bis t = 6",
-               "text": "Bereitliste: P2, P1. P2 hat mit P = 4 die höchste Priorität (P1: 2). Währenddessen kommen an: P3 (t = 4).",
-               "explanation": {
-                                "action": "P2 von t = 2 bis t = 6 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "Bei t = 6 kommt P4 mit höherer Priorität an (5 > 4) und verdrängt P2; P2 hat noch 2 ms."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":2,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":3,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":4,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":5,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":2,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":3,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":4,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":5,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 6: P4 rechnet bis t = 11",
-               "text": "Bereitliste: P4, P2, P1, P3. P4 hat mit P = 5 die höchste Priorität (P2: 4, P1: 2, P3: 1). Währenddessen kommen an: P5 (t = 8).",
-               "explanation": {
-                                "action": "P4 von t = 6 bis t = 11 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "P4 ist bei t = 11 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":6,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":7,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":8,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":9,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":10,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":6,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":7,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":8,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":9,"value":"4"},
-                           {"kind":"array-index","array":"cpu","index":10,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"4"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"3"}
-                         ]
-             },
-             {
-               "title": "t = 11: P2 rechnet bis t = 13",
-               "text": "Bereitliste: P2, P5, P1, P3. P2 hat mit P = 4 die höchste Priorität (P5: 3, P1: 2, P3: 1).",
-               "explanation": {
-                                "action": "P2 von t = 11 bis t = 13 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "P2 ist bei t = 13 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":11,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":12,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":11,"value":"2"},
-                           {"kind":"array-index","array":"cpu","index":12,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"2"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":3,"value":"3"}
-                         ]
-             },
-             {
-               "title": "t = 13: P5 rechnet bis t = 15",
-               "text": "Bereitliste: P5, P1, P3. P5 hat mit P = 3 die höchste Priorität (P1: 2, P3: 1).",
-               "explanation": {
-                                "action": "P5 von t = 13 bis t = 15 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "P5 ist bei t = 15 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":13,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":14,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":13,"value":"5"},
-                           {"kind":"array-index","array":"cpu","index":14,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"5"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":2,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 15: P1 rechnet bis t = 16",
-               "text": "Bereitliste: P1, P3. P1 hat mit P = 2 die höchste Priorität (P3: 1).",
-               "explanation": {
-                                "action": "P1 von t = 15 bis t = 16 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "P1 ist bei t = 16 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":15,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":15,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"1"},
-                           {"kind":"array-index","array":"queue","index":1,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "t = 16: P3 rechnet bis t = 20",
-               "text": "Nur P3 ist bereit.",
-               "explanation": {
-                                "action": "P3 von t = 16 bis t = 20 ausführen.",
-                                "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.",
-                                "decision": "P3 ist bei t = 20 fertig."
-                              },
-               "highlights": [
-                               {"kind":"array-index","array":"cpu","index":16,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":17,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":18,"role":"active"},
-                               {"kind":"array-index","array":"cpu","index":19,"role":"active"},
-                               {"kind":"array-index","array":"queue","index":0,"role":"active"}
-                             ],
-               "values": [
-                           {"kind":"array-index","array":"cpu","index":16,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":17,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":18,"value":"3"},
-                           {"kind":"array-index","array":"cpu","index":19,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":0,"value":"3"},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             },
-             {
-               "title": "Ergebnis: Lauf- und Wartezeiten",
-               "text": "Laufzeit von der Ankunft bis zum Ende: P1 16, P2 11, P3 16, P4 5, P5 7. Wartezeit: P1 13, P2 5, P3 12, P4 0, P5 5. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
-               "source": "07_rabs-scheduling.pdf, Folie 34",
-               "formula": "Ø Laufzeit = (16 + 11 + 16 + 5 + 7) / 5 = 11 ms",
-               "product": "Ø Wartezeit = (13 + 5 + 12 + 0 + 5) / 5 = 7 ms",
-               "values": [
-                           {"kind":"array-index","array":"queue","index":0,"value":""},
-                           {"kind":"array-index","array":"queue","index":1,"value":""},
-                           {"kind":"array-index","array":"queue","index":2,"value":""},
-                           {"kind":"array-index","array":"queue","index":3,"value":""}
-                         ]
-             }
-           ]
+  {
+    "title": "t = 0: P1 rechnet bis t = 2",
+    "text": "Nur P1 ist bereit.",
+    "explanation": {"action": "P1 von t = 0 bis t = 2 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "Bei t = 2 kommt P2 mit höherer Priorität an (4 > 2) und verdrängt P1; P1 hat noch 1 ms."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 0, "to": 2},
+      {"kind": "timeline-queue", "items": ["P1"], "at": 0}
+    ]
+  },
+  {
+    "title": "t = 2: P2 rechnet bis t = 6",
+    "text": "Bereitliste: P2, P1. P2 hat mit P = 4 die höchste Priorität (P1: 2). Währenddessen kommen an: P3 (t = 4).",
+    "explanation": {"action": "P2 von t = 2 bis t = 6 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "Bei t = 6 kommt P4 mit höherer Priorität an (5 > 4) und verdrängt P2; P2 hat noch 2 ms."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 2, "to": 6},
+      {"kind": "timeline-queue", "items": ["P2", "P1"], "at": 2}
+    ]
+  },
+  {
+    "title": "t = 6: P4 rechnet bis t = 11",
+    "text": "Bereitliste: P4, P2, P1, P3. P4 hat mit P = 5 die höchste Priorität (P2: 4, P1: 2, P3: 1). Währenddessen kommen an: P5 (t = 8).",
+    "explanation": {"action": "P4 von t = 6 bis t = 11 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "P4 ist bei t = 11 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P4", "from": 6, "to": 11},
+      {"kind": "timeline-queue", "items": ["P4", "P2", "P1", "P3"], "at": 6}
+    ]
+  },
+  {
+    "title": "t = 11: P2 rechnet bis t = 13",
+    "text": "Bereitliste: P2, P5, P1, P3. P2 hat mit P = 4 die höchste Priorität (P5: 3, P1: 2, P3: 1).",
+    "explanation": {"action": "P2 von t = 11 bis t = 13 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "P2 ist bei t = 13 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P2", "from": 11, "to": 13},
+      {"kind": "timeline-queue", "items": ["P2", "P5", "P1", "P3"], "at": 11}
+    ]
+  },
+  {
+    "title": "t = 13: P5 rechnet bis t = 15",
+    "text": "Bereitliste: P5, P1, P3. P5 hat mit P = 3 die höchste Priorität (P1: 2, P3: 1).",
+    "explanation": {"action": "P5 von t = 13 bis t = 15 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "P5 ist bei t = 15 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P5", "from": 13, "to": 15},
+      {"kind": "timeline-queue", "items": ["P5", "P1", "P3"], "at": 13}
+    ]
+  },
+  {
+    "title": "t = 15: P1 rechnet bis t = 16",
+    "text": "Bereitliste: P1, P3. P1 hat mit P = 2 die höchste Priorität (P3: 1).",
+    "explanation": {"action": "P1 von t = 15 bis t = 16 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "P1 ist bei t = 16 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P1", "from": 15, "to": 16},
+      {"kind": "timeline-queue", "items": ["P1", "P3"], "at": 15}
+    ]
+  },
+  {
+    "title": "t = 16: P3 rechnet bis t = 20",
+    "text": "Nur P3 ist bereit.",
+    "explanation": {"action": "P3 von t = 16 bis t = 20 ausführen.", "rule": "PRIO-P: wie PRIO-NP, aber der rechnende Prozess wird verdrängt, wenn er geringere Priorität hat als der Neuankömmling.", "decision": "P3 ist bei t = 20 fertig."},
+    "values": [
+      {"kind": "timeline-segment", "lane": "P3", "from": 16, "to": 20},
+      {"kind": "timeline-queue", "items": ["P3"], "at": 16}
+    ]
+  },
+  {
+    "title": "Ergebnis: Lauf- und Wartezeiten",
+    "text": "Laufzeit von der Ankunft bis zum Ende: P1 16, P2 11, P3 16, P4 5, P5 7. Wartezeit: P1 13, P2 5, P3 12, P4 0, P5 5. Die Wartezeit ist die Laufzeit ohne die eigene Bedienzeit.",
+    "source": "07_rabs-scheduling.pdf, Folie 34",
+    "formula": "Ø Laufzeit = (16 + 11 + 16 + 5 + 7) / 5 = 11 ms",
+    "product": "Ø Wartezeit = (13 + 5 + 12 + 0 + 5) / 5 = 7 ms",
+    "highlights": [
+      {"kind": "timeline-lane", "lane": "P1", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P2", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P3", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P4", "role": "result"},
+      {"kind": "timeline-lane", "lane": "P5", "role": "result"}
+    ],
+    "values": [
+      {"kind": "timeline-queue", "items": [], "at": 20},
+      {"kind": "timeline-note", "lane": "P1", "text": "L 16 · W 13"},
+      {"kind": "timeline-note", "lane": "P2", "text": "L 11 · W 5"},
+      {"kind": "timeline-note", "lane": "P3", "text": "L 16 · W 12"},
+      {"kind": "timeline-note", "lane": "P4", "text": "L 5 · W 0"},
+      {"kind": "timeline-note", "lane": "P5", "text": "L 7 · W 5"}
+    ]
+  }
+  ]
 }
 ```
