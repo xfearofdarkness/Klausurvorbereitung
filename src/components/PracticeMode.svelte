@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { richText } from "../lib/richText";
+  import { richText } from "../lib/richText.svelte";
   import Source from "./Source.svelte";
   import GeneratedExercise from "./GeneratedExercise.svelte";
   import type { MarkState, PracticeMark, Topic } from "../types/content";

@@ -10,11 +10,11 @@
   import TopicList from "../components/TopicList.svelte";
   import TopicPicker from "../components/TopicPicker.svelte";
   import { catalog } from "../data/catalog";
-  import { subjectLoaders } from "../data/subjectLoaders";
+  import { loadSubjectBundle } from "../data/subjectData";
   import { MODES } from "../lib/modes";
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
-  import { prepareRichText } from "../lib/richText";
+  import { prepareRichText } from "../lib/richText.svelte";
   import { keyboardScroll } from "../lib/keyboardScroll";
   import type { SearchHit } from "../lib/search";
   import {
@@ -31,7 +31,7 @@
     type TopicProgressSummary
   } from "../lib/progress";
   import { orderByDue, reviewCard, todayIso, type ReviewGrade } from "../lib/schedule";
-  import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, Topic } from "../types/content";
+  import type { AppProgress, FlashMark, MarkState, ModeConfig, ModeId, PracticeMark, Subject, SubjectBundle, Topic } from "../types/content";
 
   const AGAIN_GAP = 2;
 
@@ -75,20 +75,23 @@
       return;
     }
 
-    const loader = subjectLoaders[subjectMeta.id];
-    if (!loader) {
+    let bundle: SubjectBundle;
+    try {
+      bundle = await loadSubjectBundle(subjectMeta.id);
+    } catch (error) {
+      console.error(error);
       errorMessage = "Die Fachdaten konnten nicht geladen werden.";
       return;
     }
 
     try {
-      const module = await loader();
-      const loadedSubject = normalizeSubject(module.default, subjectMeta);
+      const loadedSubject = normalizeSubject(bundle.subject, subjectMeta);
       if (needsLegacyMigration(progress, loadedSubject.id)) {
         const { default: legacyKeys } = await import("../data/legacyProgressKeys.json");
         migrateLegacyProgress(progress, loadedSubject, (legacyKeys as Record<string, LegacySubjectKeys>)[loadedSubject.id]);
       }
-      await prepareRichText(loadedSubject.features.math === true);
+      const runtimeMath = loadedSubject.topics.some((topic) => topic.exercises.some((exercise) => exercise.generator));
+      await prepareRichText(loadedSubject.features.math === true, bundle.formulas, runtimeMath);
       subject = loadedSubject;
       document.title = `${subject.title} Klausurtrainer`;
       restoreUiState();

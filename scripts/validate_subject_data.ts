@@ -9,7 +9,7 @@ import { emDashPaths } from "./no_em_dash";
 import { ContentError } from "./content_compiler";
 import { loadRawSubject, subjectContentDir } from "./load_content";
 import { checkSlideExample, generateTask, hasGenerator } from "../src/lib/exerciseGenerators";
-import { MATH_PATTERN } from "../src/lib/math";
+import { MATH_PATTERN } from "../src/lib/mathSyntax";
 import { normalizeSubject } from "../src/lib/normalize";
 import type {
   ArrayVisual,

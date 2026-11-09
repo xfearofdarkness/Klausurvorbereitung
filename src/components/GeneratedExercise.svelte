@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { richText } from "../lib/richText";
+  import { richText } from "../lib/richText.svelte";
   import Source from "./Source.svelte";
   import { generateTask, randomSeed } from "../lib/exerciseGenerators";
   import type { Exercise } from "../types/content";
