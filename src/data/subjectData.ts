@@ -11,6 +11,8 @@ export interface SubjectAsset {
   /** URL der Fachdatei (Build: `assets/<fach>-<hash>.json`). */
   data: string;
   math: boolean;
+  /** Gehashte woff2-URLs der KaTeX-Schnitte, die dieses Fach benutzt. */
+  fonts?: string[];
 }
 
 export interface SubjectBoot {
@@ -21,6 +23,11 @@ export interface SubjectBoot {
 
 function boot(): SubjectBoot | undefined {
   return (window as unknown as Record<string, SubjectBoot | undefined>)[SUBJECT_BOOT_GLOBAL];
+}
+
+/** URL der Fachdatei aus dem Inline-Skript, wie `trainer.html` sie ablegt. */
+export function subjectDataUrl(subjectId: SubjectId): string | undefined {
+  return boot()?.assets[subjectId]?.data;
 }
 
 export async function loadSubjectBundle(subjectId: SubjectId): Promise<SubjectBundle> {

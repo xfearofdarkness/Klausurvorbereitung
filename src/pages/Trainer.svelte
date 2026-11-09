@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import FlashMode from "../components/FlashMode.svelte";
   import ModeSwitcher from "../components/ModeSwitcher.svelte";
   import PracticeMode from "../components/PracticeMode.svelte";
@@ -14,7 +14,8 @@
   import { MODES } from "../lib/modes";
   import { loadNavPlacement, loadSidebarCollapsed, saveNavPlacement, saveSidebarCollapsed, type NavPlacement } from "../lib/navPlacement";
   import { normalizeSubject } from "../lib/normalize";
-  import { prepareRichText } from "../lib/richText.svelte";
+  import { prepareRichText, warmMathRenderer } from "../lib/richText.svelte";
+  import { scrollToSection, scrollToStart, sectionIdFromHash } from "../lib/scrollLayout";
   import { keyboardScroll } from "../lib/keyboardScroll";
   import type { SearchHit } from "../lib/search";
   import {
@@ -58,12 +59,21 @@
   let flashState = $derived(currentTopic ? readFlashState(currentTopic) : {});
   let practiceState = $derived(currentTopic ? readPracticeState(currentTopic) : {});
   let topicProgress = $derived(subject ? summarizeSubject(subject) : []);
+  let runtimeMath = $state(false);
 
   onMount(() => {
     progress = loadProgress();
     loadSubject();
     window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
+    window.addEventListener("hashchange", onHashChange);
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  });
+
+  $effect(() => {
+    if (runtimeMath && currentMode === "practice") warmMathRenderer();
   });
 
   async function loadSubject(): Promise<void> {
@@ -90,13 +100,15 @@
         const { default: legacyKeys } = await import("../data/legacyProgressKeys.json");
         migrateLegacyProgress(progress, loadedSubject, (legacyKeys as Record<string, LegacySubjectKeys>)[loadedSubject.id]);
       }
-      const runtimeMath = loadedSubject.topics.some((topic) => topic.exercises.some((exercise) => exercise.generator));
-      await prepareRichText(loadedSubject.features.math === true, bundle.formulas, runtimeMath);
+      runtimeMath = loadedSubject.topics.some((topic) => topic.exercises.some((exercise) => exercise.generator));
+      await prepareRichText(loadedSubject.features.math === true, bundle.formulas);
       subject = loadedSubject;
       document.title = `${subject.title} Klausurtrainer`;
       restoreUiState();
       syncFlashDeck();
       persistUi();
+      await tick();
+      scrollToHashedSection();
     } catch (error) {
       console.error(error);
       errorMessage = "Die Fachdaten sind leer oder ungültig.";
@@ -171,7 +183,8 @@
     persistUi();
     if (mode === shown) return;
     syncFlashDeck();
-    window.scrollTo(0, 0);
+    scrollToStart();
+    void tick().then(() => scrollToStart());
   }
 
   function changeNavPlacement(placement: NavPlacement): void {
@@ -197,7 +210,8 @@
       flashFlipped = false;
     }
     persistUi();
-    window.scrollTo(0, 0);
+    scrollToStart();
+    void tick().then(() => scrollToStart());
   }
 
   function selectTopic(index: number): void {
@@ -206,7 +220,22 @@
     currentTopicIndex = index;
     syncFlashDeck();
     persistUi();
-    window.scrollTo(0, 0);
+    scrollToStart();
+    void tick().then(() => scrollToStart());
+  }
+
+  function onHashChange(): void {
+    void tick().then(() => scrollToHashedSection());
+  }
+
+  function scrollToHashedSection(): void {
+    if (currentMode !== "study") return;
+    const id = sectionIdFromHash(window.location.hash);
+    if (id) scrollToSection(id);
+  }
+
+  function warmPracticeMath(): void {
+    if (runtimeMath) warmMathRenderer();
   }
 
   function markExercise(key: string): void {
@@ -342,7 +371,7 @@
             {currentTopicIndex}
             onSelect={selectTopic}
           />
-          <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} />
+          <ModeSwitcher modes={MODES} {availableModes} {currentMode} onSelect={selectMode} onPracticeIntent={warmPracticeMath} />
           <SearchDialog {subject} onSelect={openHit} />
           <div class="topbar-layout-switch">
             <LayoutMenu value={navPlacement} onChange={changeNavPlacement} />
