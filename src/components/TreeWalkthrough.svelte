@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { pickState } from "../lib/walkthroughState";
   import { cubicOut } from "svelte/easing";
   import { Tween } from "svelte/motion";
   import type { TreeVisual, Walkthrough, WalkthroughStep } from "../types/content";
@@ -206,21 +207,13 @@
 
   function nodeClasses(nodeId: string): string {
     const state = renderState.nodes.get(nodeId);
-    const classes = ["walk-node"];
-    if (state?.marked) classes.push("walk-done");
-    if (state?.changed) classes.push("walk-changed");
-    for (const role of renderState.nodeRoles.get(nodeId) || []) {
-      classes.push(`walk-${role}`);
-    }
-    return classes.join(" ");
+    const visible = pickState(renderState.nodeRoles.get(nodeId) || [], state?.changed === true, state?.marked === true);
+    return visible ? `walk-node walk-${visible}` : "walk-node";
   }
 
   function edgeClasses(key: string): string {
-    const classes = ["walk-edge"];
-    for (const role of renderState.edgeRoles.get(key) || []) {
-      classes.push(`walk-${role}`);
-    }
-    return classes.join(" ");
+    const visible = pickState(renderState.edgeRoles.get(key) || [], false, false);
+    return visible ? `walk-edge walk-${visible}` : "walk-edge";
   }
 
   function svgStyle(): string {

@@ -141,170 +141,132 @@ quelle: DiskreteMathematikVLHO.pdf, Folien 341-349
 ```json
 {
   "id": "delta-regel-und",
-  "legend": {"active": "Aktueller Trainingsschritt", "target": "Durch die Delta-Regel geändert", "done": "Bereits berechnet"},
+  "legend": {"active": "Aktueller Trainingsschritt", "compare": "a_ist ≠ a_soll", "target": "Durch die Delta-Regel geändert", "result": "Ergebnis"},
   "intro": "Ein Perzeptron mit zwei Eingängen wird mit der Delta-Regel auf das „und“ trainiert (Soll: nur bei e₁ = e₂ = 1 Ausgabe 1). Jede Zeile ist ein Trainingsschritt.",
-  "visual": {
-    "kind": "matrix",
-    "matrices": [
-      {
-        "id": "training",
-        "label": "Training",
-        "layout": "table",
-        "values": [
-          ["", "", "", "", "", "1", "1"],
-          ["", "", "", "", "", "", ""],
-          ["", "", "", "", "", "", ""],
-          ["", "", "", "", "", "", ""],
-          ["", "", "", "", "", "", ""],
-          ["", "", "", "", "", "", ""],
-          ["", "", "", "", "", "", ""]
-        ],
-        "rowLabels": ["Start", "1", "2", "2 neu", "3", "3 neu", "4"],
-        "colLabels": ["e₁", "e₂", "a_soll", "S", "a_ist", "g₁", "g₂"],
-        "cornerLabel": "Schritt"
-      }
+  "visual": {"kind": "matrix", "matrices": [{"id": "training", "label": "Training", "layout": "table", "values": [["", "", "", "", "", "1", "1"], ["", "", "", "", "", "", ""], ["", "", "", "", "", "", ""], ["", "", "", "", "", "", ""], ["", "", "", "", "", "", ""], ["", "", "", "", "", "", ""], ["", "", "", "", "", "", ""]], "rowLabels": ["Start", "1", "2", "2 neu", "3", "3 neu", "4"], "colLabels": ["e₁", "e₂", "a_soll", "S", "a_ist", "g₁", "g₂"], "cornerLabel": "Schritt"}]},
+  "steps": [
+  {
+    "title": "Start",
+    "text": "Das Perzeptron soll das „und“ lernen. Es startet mit den Gewichten g₁ = g₂ = 1 und der Treppenfunktion f₁ (Schwellenwert 1).",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 342",
+    "explanation": {"action": "Gewichte und Aktivierungsfunktion festlegen.", "rule": "Zum Start wird das NN mit (zufälligen) Gewichten initialisiert und dann mit Eingabebeispielen gespeist.", "decision": "g₁ = 1, g₂ = 1, f = f₁."},
+    "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 0, "role": "active"}]
+  },
+  {
+    "title": "Trainingsbeispiel 1",
+    "text": "e₁ = 0, e₂ = 0: S = 1 · 0 + 1 · 0 = 0, a_ist = f(0) = 0 = a_soll.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 343",
+    "explanation": {"action": "S und a_ist berechnen.", "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.", "decision": "Ist = Soll → keine Änderung der Gewichte."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 0, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 1, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 2, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 3, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 4, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 5, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 6, "value": "1"}
+    ],
+    "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 1, "role": "active"}]
+  },
+  {
+    "title": "Trainingsbeispiel 2",
+    "text": "e₁ = 0, e₂ = 1: S = 1 · 0 + 1 · 1 = 1, a_ist = f(1) = 1 ≠ 0 = a_soll. Die Gewichte müssen so geändert werden, dass a_ist kleiner wird: g₁ = 1 + 0,5 · (0 − 1) · 0 = 1, g₂ = 1 + 0,5 · (0 − 1) · 1 = 0,5.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 344",
+    "explanation": {"action": "Gewichte mit der Delta-Regel korrigieren.", "rule": "Delta-Regel: \\(g_i^{neu} = g_i^{alt} + \\lambda(a_{soll} - a_{ist})e_i\\) mit Lernrate λ = 0,5.", "decision": "a_ist ≠ a_soll → g₁ bleibt 1, g₂ wird 0,5."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 0, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 1, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 2, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 3, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 4, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 5, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 6, "value": "0,5"}
+    ],
+    "highlights": [
+      {"kind": "matrix-row", "matrix": "training", "row": 2, "role": "active"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 2, "role": "compare"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 4, "role": "compare"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 6, "role": "target"}
     ]
   },
-  "steps": [
-    {
-      "title": "Start",
-      "text": "Das Perzeptron soll das „und“ lernen. Es startet mit den Gewichten g₁ = g₂ = 1 und der Treppenfunktion f₁ (Schwellenwert 1).",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 342",
-      "explanation": {
-        "action": "Gewichte und Aktivierungsfunktion festlegen.",
-        "rule": "Zum Start wird das NN mit (zufälligen) Gewichten initialisiert und dann mit Eingabebeispielen gespeist.",
-        "decision": "g₁ = 1, g₂ = 1, f = f₁."
-      },
-      "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 0, "role": "active"}]
-    },
-    {
-      "title": "Trainingsbeispiel 1",
-      "text": "e₁ = 0, e₂ = 0: S = 1 · 0 + 1 · 0 = 0, a_ist = f(0) = 0 = a_soll.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 343",
-      "explanation": {
-        "action": "S und a_ist berechnen.",
-        "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.",
-        "decision": "Ist = Soll → keine Änderung der Gewichte."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 0, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 1, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 2, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 3, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 4, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 5, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 1, "col": 6, "value": "1"}
-      ],
-      "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 1, "role": "active"}]
-    },
-    {
-      "title": "Trainingsbeispiel 2",
-      "text": "e₁ = 0, e₂ = 1: S = 1 · 0 + 1 · 1 = 1, a_ist = f(1) = 1 ≠ 0 = a_soll. Die Gewichte müssen so geändert werden, dass a_ist kleiner wird: g₁ = 1 + 0,5 · (0 − 1) · 0 = 1, g₂ = 1 + 0,5 · (0 − 1) · 1 = 0,5.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 344",
-      "explanation": {
-        "action": "Gewichte mit der Delta-Regel korrigieren.",
-        "rule": "Delta-Regel: g_i^neu = g_i^alt + λ(a_soll − a_ist)e_i mit Lernrate λ = 0,5.",
-        "decision": "a_ist ≠ a_soll → g₁ bleibt 1, g₂ wird 0,5."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 0, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 1, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 2, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 3, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 4, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 5, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 6, "value": "0,5"}
-      ],
-      "highlights": [
-        {"kind": "matrix-row", "matrix": "training", "row": 2, "role": "active"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 4, "role": "target"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 2, "col": 6, "role": "target"}
-      ]
-    },
-    {
-      "title": "Neuberechnung für Beispiel 2",
-      "text": "Mit den neuen Gewichten: S = 1 · 0 + 0,5 · 1 = 0,5, a_ist = f(0,5) = 0 = a_soll.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 345",
-      "explanation": {
-        "action": "Beispiel 2 erneut berechnen.",
-        "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.",
-        "decision": "Ist = Soll → passt jetzt."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 0, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 1, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 2, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 3, "value": "0,5"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 4, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 5, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 6, "value": "0,5"}
-      ],
-      "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 3, "role": "active"}]
-    },
-    {
-      "title": "Trainingsbeispiel 3",
-      "text": "e₁ = 1, e₂ = 0: S = 1 · 1 + 0,5 · 0 = 1, a_ist = f(1) = 1 ≠ 0 = a_soll. Wie bei Beispiel 2: g₁ = 1 + 0,5 · (0 − 1) · 1 = 0,5, g₂ = 0,5 + 0,5 · (0 − 1) · 0 = 0,5.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 346",
-      "explanation": {
-        "action": "Gewichte mit der Delta-Regel korrigieren.",
-        "rule": "Delta-Regel: g_i^neu = g_i^alt + λ(a_soll − a_ist)e_i mit Lernrate λ = 0,5.",
-        "decision": "a_ist ≠ a_soll → g₁ wird 0,5, g₂ bleibt 0,5."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 0, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 1, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 2, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 3, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 4, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 5, "value": "0,5"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 6, "value": "0,5"}
-      ],
-      "highlights": [
-        {"kind": "matrix-row", "matrix": "training", "row": 4, "role": "active"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 4, "role": "target"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 5, "role": "target"}
-      ]
-    },
-    {
-      "title": "Neuberechnung für Beispiel 3",
-      "text": "S = 0,5 · 1 + 0,5 · 0 = 0,5, a_ist = f(0,5) = 0 = a_soll.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 348",
-      "explanation": {
-        "action": "Beispiel 3 erneut berechnen.",
-        "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.",
-        "decision": "Ist = Soll → passt jetzt."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 0, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 1, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 2, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 3, "value": "0,5"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 4, "value": "0"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 5, "value": "0,5"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 6, "value": "0,5"}
-      ],
-      "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 5, "role": "active"}]
-    },
-    {
-      "title": "Trainingsbeispiel 4",
-      "text": "e₁ = 1, e₂ = 1: S = 0,5 · 1 + 0,5 · 1 = 1, a_ist = f(1) = 1 = a_soll. Es verbleibt der Nachtest für e₁ = 0, e₂ = 0 und für e₁ = 0, e₂ = 1 usw.",
-      "source": "DiskreteMathematikVLHO.pdf, Folie 349",
-      "explanation": {
-        "action": "S und a_ist berechnen.",
-        "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.",
-        "decision": "Ist = Soll → das Perzeptron liefert das „und“ mit g₁ = g₂ = 0,5."
-      },
-      "values": [
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 0, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 1, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 2, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 3, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 4, "value": "1"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 5, "value": "0,5"},
-        {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 6, "value": "0,5"}
-      ],
-      "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 6, "role": "active"}]
-    }
+  {
+    "title": "Neuberechnung für Beispiel 2",
+    "text": "Mit den neuen Gewichten: S = 1 · 0 + 0,5 · 1 = 0,5, a_ist = f(0,5) = 0 = a_soll.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 345",
+    "explanation": {"action": "Beispiel 2 erneut berechnen.", "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.", "decision": "Ist = Soll → passt jetzt."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 0, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 1, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 2, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 3, "value": "0,5"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 4, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 5, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 3, "col": 6, "value": "0,5"}
+    ],
+    "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 3, "role": "active"}]
+  },
+  {
+    "title": "Trainingsbeispiel 3",
+    "text": "e₁ = 1, e₂ = 0: S = 1 · 1 + 0,5 · 0 = 1, a_ist = f(1) = 1 ≠ 0 = a_soll. Wie bei Beispiel 2: g₁ = 1 + 0,5 · (0 − 1) · 1 = 0,5, g₂ = 0,5 + 0,5 · (0 − 1) · 0 = 0,5.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 346",
+    "explanation": {"action": "Gewichte mit der Delta-Regel korrigieren.", "rule": "Delta-Regel: \\(g_i^{neu} = g_i^{alt} + \\lambda(a_{soll} - a_{ist})e_i\\) mit Lernrate λ = 0,5.", "decision": "a_ist ≠ a_soll → g₁ wird 0,5, g₂ bleibt 0,5."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 0, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 1, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 2, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 3, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 4, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 5, "value": "0,5"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 6, "value": "0,5"}
+    ],
+    "highlights": [
+      {"kind": "matrix-row", "matrix": "training", "row": 4, "role": "active"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 2, "role": "compare"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 4, "role": "compare"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 4, "col": 5, "role": "target"}
+    ]
+  },
+  {
+    "title": "Neuberechnung für Beispiel 3",
+    "text": "S = 0,5 · 1 + 0,5 · 0 = 0,5, a_ist = f(0,5) = 0 = a_soll.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 348",
+    "explanation": {"action": "Beispiel 3 erneut berechnen.", "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.", "decision": "Ist = Soll → passt jetzt."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 0, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 1, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 2, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 3, "value": "0,5"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 4, "value": "0"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 5, "value": "0,5"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 5, "col": 6, "value": "0,5"}
+    ],
+    "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 5, "role": "active"}]
+  },
+  {
+    "title": "Trainingsbeispiel 4",
+    "text": "e₁ = 1, e₂ = 1: S = 0,5 · 1 + 0,5 · 1 = 1, a_ist = f(1) = 1 = a_soll.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 349",
+    "explanation": {"action": "S und a_ist berechnen.", "rule": "f₁(S) = 1, falls S ≥ 1, sonst 0. Stimmen Ist- und Soll-Wert überein, bleiben die Gewichte.", "decision": "Ist = Soll → keine Änderung der Gewichte."},
+    "values": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 0, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 1, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 2, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 3, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 4, "value": "1"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 5, "value": "0,5"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 6, "value": "0,5"}
+    ],
+    "highlights": [{"kind": "matrix-row", "matrix": "training", "row": 6, "role": "active"}]
+  },
+  {
+    "title": "Ergebnis",
+    "text": "Nach den vier Trainingsbeispielen hat das Perzeptron die Gewichte g₁ = g₂ = 0,5 (Schwellenwert 1). Mit ihnen liefert Beispiel 4 (e₁ = e₂ = 1) die Ausgabe 1 = a_soll. Laut Folie verbleibt der Nachtest für e₁ = 0, e₂ = 0 und für e₁ = 0, e₂ = 1 usw.",
+    "source": "DiskreteMathematikVLHO.pdf, Folie 349",
+    "highlights": [
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 5, "role": "result"},
+      {"kind": "matrix-cell", "matrix": "training", "row": 6, "col": 6, "role": "result"}
+    ]
+  }
   ]
 }
 ```

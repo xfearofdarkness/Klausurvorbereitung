@@ -1,110 +1,36 @@
 <script lang="ts">
-  import type { MatrixDefinition, MatrixValue, Walkthrough, WalkthroughHighlight, WalkthroughStep } from "../types/content";
+  import type { MatrixDefinition, MatrixValue, Walkthrough } from "../types/content";
+  import { matrixHeaderKey, matrixKey, matrixStepState } from "../lib/walkthroughState";
 
   interface Props {
     walkthrough: Walkthrough;
     stepIndex: number;
   }
 
-  interface MatrixRenderState {
-    values: Map<string, MatrixValue>;
-    done: Set<string>;
-    changed: Set<string>;
-    roles: Map<string, string[]>;
-  }
-
   let { walkthrough, stepIndex }: Props = $props();
 
-  let matrices = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.matrices : []);
-  let operators = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual.operators || [] : []);
+  let visual = $derived(walkthrough.visual.kind === "matrix" ? walkthrough.visual : null);
+  let matrices = $derived(visual?.matrices || []);
+  let operators = $derived(visual?.operators || []);
   let hasTableMatrix = $derived(matrices.some((matrix) => matrix.layout === "table"));
   let currentStep = $derived(walkthrough.steps[stepIndex]);
-  let renderState = $derived(buildRenderState(matrices, walkthrough.steps, currentStep, stepIndex));
-
-  function buildRenderState(
-    matrixList: MatrixDefinition[],
-    steps: WalkthroughStep[],
-    step: WalkthroughStep | undefined,
-    activeStepIndex: number
-  ): MatrixRenderState {
-    const values = new Map<string, MatrixValue>();
-    const done = new Set<string>();
-    const changed = new Set<string>();
-    const roles = new Map<string, string[]>();
-    const matrixById = new Map(matrixList.map((matrix) => [matrix.id, matrix]));
-
-    for (const matrix of matrixList) {
-      matrix.values.forEach((row, rowIndex) => {
-        row.forEach((value, colIndex) => {
-          values.set(cellKey(matrix.id, rowIndex, colIndex), value);
-        });
-      });
-    }
-
-    for (let index = 0; index <= activeStepIndex; index += 1) {
-      const isPreviousStep = index < activeStepIndex;
-      for (const update of steps[index]?.values || []) {
-        if (update.kind !== "matrix-cell") continue;
-        const key = cellKey(update.matrix, update.row, update.col);
-        if (!isPreviousStep && values.get(key) !== update.value) {
-          changed.add(key);
-        }
-        values.set(key, update.value);
-        if (isPreviousStep) {
-          done.add(key);
-        }
-      }
-    }
-
-    for (const highlight of step?.highlights || []) {
-      for (const key of highlightedCellKeys(highlight, matrixById)) {
-        const nextRoles = roles.get(key) || [];
-        nextRoles.push(highlight.role);
-        roles.set(key, nextRoles);
-      }
-    }
-
-    return { values, done, changed, roles };
-  }
-
-  function highlightedCellKeys(highlight: WalkthroughHighlight, matrixById: Map<string, MatrixDefinition>): string[] {
-    if (highlight.kind === "matrix-cell") {
-      return [cellKey(highlight.matrix, highlight.row, highlight.col)];
-    }
-
-    if (highlight.kind === "matrix-row") {
-      const matrix = matrixById.get(highlight.matrix);
-      if (!matrix) return [];
-      return matrix.values[highlight.row]?.map((_, col) => cellKey(highlight.matrix, highlight.row, col)) || [];
-    }
-
-    if (highlight.kind === "matrix-col") {
-      const matrix = matrixById.get(highlight.matrix);
-      if (!matrix) return [];
-      return matrix.values.map((_, row) => cellKey(highlight.matrix, row, highlight.col));
-    }
-
-    return [];
-  }
-
-  function cellKey(matrixId: string, row: number, col: number): string {
-    return `${matrixId}:${row}:${col}`;
-  }
+  let renderState = $derived(visual ? matrixStepState(visual, walkthrough.steps, stepIndex) : null);
 
   function cellValue(matrix: MatrixDefinition, row: number, col: number): MatrixValue {
-    return renderState.values.get(cellKey(matrix.id, row, col)) ?? null;
+    return renderState?.values.get(matrixKey(matrix.id, row, col)) ?? null;
   }
 
   function highlightClasses(matrix: MatrixDefinition, row: number, col: number, baseClass = "walk-matrix-cell"): string {
-    const key = cellKey(matrix.id, row, col);
     const classes = [baseClass];
     if (cellValue(matrix, row, col) === null) classes.push("walk-empty");
-    if (renderState.done.has(key)) classes.push("walk-done");
-    if (renderState.changed.has(key)) classes.push("walk-changed");
-    for (const role of renderState.roles.get(key) || []) {
-      classes.push(`walk-${role}`);
-    }
+    const state = renderState?.states.get(matrixKey(matrix.id, row, col));
+    if (state) classes.push(`walk-${state}`);
     return classes.join(" ");
+  }
+
+  function headerClasses(matrix: MatrixDefinition, axis: "row" | "col", index: number, baseClass: string): string {
+    const state = renderState?.headers.get(matrixHeaderKey(matrix.id, axis, index));
+    return state ? `${baseClass} walk-head-${state}` : baseClass;
   }
 
   function display(value: MatrixValue, emptyValue = "?"): string {
@@ -122,7 +48,7 @@
   function cellAria(matrix: MatrixDefinition, row: number, col: number): string {
     const value = cellValue(matrix, row, col);
     const renderedValue = value === null ? "noch offen" : String(value);
-    const changedNote = renderState.changed.has(cellKey(matrix.id, row, col)) ? ", in diesem Schritt geändert" : "";
+    const changedNote = renderState?.states.get(matrixKey(matrix.id, row, col)) === "changed" ? ", in diesem Schritt geändert" : "";
     return `${matrix.label}, Zeile ${rowLabel(matrix, row)}, Spalte ${colLabel(matrix, col)}: ${renderedValue}${changedNote}`;
   }
 </script>
@@ -139,14 +65,14 @@
                 <tr>
                   <th class="walk-table-corner" scope="col">{matrix.cornerLabel || ""}</th>
                   {#each matrix.values[0] || [] as _, colIndex}
-                    <th class="walk-table-col-head" scope="col">{colLabel(matrix, colIndex)}</th>
+                    <th class={headerClasses(matrix, "col", colIndex, "walk-table-col-head")} scope="col">{colLabel(matrix, colIndex)}</th>
                   {/each}
                 </tr>
               </thead>
               <tbody>
                 {#each matrix.values as row, rowIndex}
                   <tr>
-                    <th class="walk-table-row-head" scope="row">{rowLabel(matrix, rowIndex)}</th>
+                    <th class={headerClasses(matrix, "row", rowIndex, "walk-table-row-head")} scope="row">{rowLabel(matrix, rowIndex)}</th>
                     {#each row as _, colIndex}
                       {@const value = cellValue(matrix, rowIndex, colIndex)}
                       <td

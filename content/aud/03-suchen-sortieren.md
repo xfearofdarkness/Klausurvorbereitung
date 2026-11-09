@@ -448,164 +448,143 @@ quelle: 03_fundamental-algorithms.pdf, Folien 109-133
 ```json
 {
   "id": "insertion-sort",
-  "intro": "Jedes Element wird an die richtige Stelle im bereits sortierten linken Bereich eingefügt.",
-  "visual": {"kind":"array","bars":true,"values":[4,3,1,9,2,10,6,8,7,5]},
+  "intro": "Jedes Element wird an die richtige Stelle im bereits sortierten linken Bereich eingefügt. Der Bogen oben zeigt den sortierten Bereich, die Zeiger unten die Laufvariablen i und j der Folien.",
+  "legend": {"active": "Eingefügt (toInsert)", "changed": "Geglitten"},
+  "visual": {"kind": "array", "bars": true, "values": [4, 3, 1, 9, 2, 10, 6, 8, 7, 5]},
   "steps": [
-             {
-               "title": "3 einfügen",
-               "text": "3 < 4: die 4 gleitet nach rechts, 3 wird an Position 0 eingefügt → 3 4 1 9 2 10 6 8 7 5.",
-               "explanation": {
-                                "action": "i = 1: toInsert = 3.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "3 < 4 → 4 gleitet; bei j = 0 endet die Schleife, arr[0] = 3."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":3},
-                           {"kind":"array-index","index":1,"value":4}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":1,"role":"done"}
-                             ]
-             },
-             {
-               "title": "1 einfügen",
-               "text": "1 ist kleiner als 3 und 4: beide gleiten nach rechts → 1 3 4 9 2 10 6 8 7 5.",
-               "explanation": {
-                                "action": "i = 2: toInsert = 1.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "1 < 4 und 1 < 3 → beide gleiten; arr[0] = 1."
-                              },
-               "values": [
-                           {"kind":"array-index","index":0,"value":1},
-                           {"kind":"array-index","index":1,"value":3},
-                           {"kind":"array-index","index":2,"value":4}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":0,"role":"active"},
-                               {"kind":"array-index","index":1,"role":"done"},
-                               {"kind":"array-index","index":2,"role":"done"}
-                             ]
-             },
-             {
-               "title": "9 bleibt",
-               "text": "9 ist größer als 4: keine Verschiebung nötig → 1 3 4 9 2 10 6 8 7 5.",
-               "explanation": {
-                                "action": "i = 3: toInsert = 9.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "9 < 4 ist falsch → die innere Schleife läuft nicht, 9 bleibt an Position 3."
-                              },
-               "highlights": [{"kind":"array-index","index":3,"role":"active"}]
-             },
-             {
-               "title": "2 einfügen",
-               "text": "2 wird zwischen 1 und 3 eingefügt → 1 2 3 4 9 10 6 8 7 5.",
-               "explanation": {
-                                "action": "i = 4: toInsert = 2.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "9, 4 und 3 gleiten; 2 < 1 ist falsch → arr[1] = 2."
-                              },
-               "values": [
-                           {"kind":"array-index","index":1,"value":2},
-                           {"kind":"array-index","index":2,"value":3},
-                           {"kind":"array-index","index":3,"value":4},
-                           {"kind":"array-index","index":4,"value":9}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":1,"role":"active"},
-                               {"kind":"array-index","index":2,"role":"done"},
-                               {"kind":"array-index","index":3,"role":"done"},
-                               {"kind":"array-index","index":4,"role":"done"}
-                             ]
-             },
-             {
-               "title": "10 bleibt",
-               "text": "10 ist größer als 9: keine Verschiebung → 1 2 3 4 9 10 6 8 7 5.",
-               "explanation": {
-                                "action": "i = 5: toInsert = 10.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "10 < 9 ist falsch → 10 bleibt an Position 5."
-                              },
-               "highlights": [{"kind":"array-index","index":5,"role":"active"}]
-             },
-             {
-               "title": "6 einfügen",
-               "text": "6 wird zwischen 4 und 9 eingefügt → 1 2 3 4 6 9 10 8 7 5.",
-               "explanation": {
-                                "action": "i = 6: toInsert = 6.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "10 und 9 gleiten; 6 < 4 ist falsch → arr[4] = 6."
-                              },
-               "values": [
-                           {"kind":"array-index","index":4,"value":6},
-                           {"kind":"array-index","index":5,"value":9},
-                           {"kind":"array-index","index":6,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":4,"role":"active"},
-                               {"kind":"array-index","index":5,"role":"done"},
-                               {"kind":"array-index","index":6,"role":"done"}
-                             ]
-             },
-             {
-               "title": "8 einfügen",
-               "text": "8 wird zwischen 6 und 9 eingefügt → 1 2 3 4 6 8 9 10 7 5.",
-               "explanation": {
-                                "action": "i = 7: toInsert = 8.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "10 und 9 gleiten; 8 < 6 ist falsch → arr[5] = 8."
-                              },
-               "values": [
-                           {"kind":"array-index","index":5,"value":8},
-                           {"kind":"array-index","index":6,"value":9},
-                           {"kind":"array-index","index":7,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":5,"role":"active"},
-                               {"kind":"array-index","index":6,"role":"done"},
-                               {"kind":"array-index","index":7,"role":"done"}
-                             ]
-             },
-             {
-               "title": "7 einfügen",
-               "text": "7 wird zwischen 6 und 8 eingefügt → 1 2 3 4 6 7 8 9 10 5.",
-               "explanation": {
-                                "action": "i = 8: toInsert = 7.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "10, 9 und 8 gleiten; 7 < 6 ist falsch → arr[5] = 7."
-                              },
-               "values": [
-                           {"kind":"array-index","index":5,"value":7},
-                           {"kind":"array-index","index":6,"value":8},
-                           {"kind":"array-index","index":7,"value":9},
-                           {"kind":"array-index","index":8,"value":10}
-                         ],
-               "highlights": [
-                               {"kind":"array-index","index":5,"role":"active"},
-                               {"kind":"array-index","index":6,"role":"done"},
-                               {"kind":"array-index","index":7,"role":"done"},
-                               {"kind":"array-index","index":8,"role":"done"}
-                             ]
-             },
-             {
-               "title": "5 einfügen: fertig",
-               "text": "5 wird zwischen 4 und 6 eingefügt → 1 2 3 4 5 6 7 8 9 10. Das Array ist sortiert.",
-               "explanation": {
-                                "action": "i = 9: toInsert = 5.",
-                                "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.",
-                                "decision": "10, 9, 8, 7 und 6 gleiten; 5 < 4 ist falsch → arr[4] = 5."
-                              },
-               "values": [
-                           {"kind":"array-index","index":4,"value":5},
-                           {"kind":"array-index","index":5,"value":6},
-                           {"kind":"array-index","index":6,"value":7},
-                           {"kind":"array-index","index":7,"value":8},
-                           {"kind":"array-index","index":8,"value":9},
-                           {"kind":"array-index","index":9,"value":10}
-                         ],
-               "highlights": [{"kind":"array-index","index":4,"role":"active"}]
-             }
-           ]
+  {
+    "title": "3 einfügen",
+    "text": "3 < 4: die 4 gleitet nach rechts, 3 wird an Position 0 eingefügt → 3 4 1 9 2 10 6 8 7 5.",
+    "explanation": {"action": "i = 1: toInsert = 3.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "3 < 4 → 4 gleitet; bei j = 0 endet die Schleife, arr[0] = 3."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 3},
+      {"kind": "array-index", "index": 1, "value": 4}
+    ],
+    "highlights": [{"kind": "array-index", "index": 0, "role": "active"}],
+    "pointers": [
+      {"index": 1, "label": "i"},
+      {"index": 0, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 1, "label": "sortiert"}]
+  },
+  {
+    "title": "1 einfügen",
+    "text": "1 ist kleiner als 3 und 4: beide gleiten nach rechts → 1 3 4 9 2 10 6 8 7 5.",
+    "explanation": {"action": "i = 2: toInsert = 1.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "1 < 4 und 1 < 3 → beide gleiten; arr[0] = 1."},
+    "values": [
+      {"kind": "array-index", "index": 0, "value": 1},
+      {"kind": "array-index", "index": 1, "value": 3},
+      {"kind": "array-index", "index": 2, "value": 4}
+    ],
+    "highlights": [{"kind": "array-index", "index": 0, "role": "active"}],
+    "pointers": [
+      {"index": 2, "label": "i"},
+      {"index": 0, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 2, "label": "sortiert"}]
+  },
+  {
+    "title": "9 bleibt",
+    "text": "9 ist größer als 4: keine Verschiebung nötig → 1 3 4 9 2 10 6 8 7 5.",
+    "explanation": {"action": "i = 3: toInsert = 9.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "9 < 4 ist falsch → die innere Schleife läuft nicht, 9 bleibt an Position 3."},
+    "highlights": [{"kind": "array-index", "index": 3, "role": "active"}],
+    "pointers": [{"index": 3, "label": "i = j"}],
+    "ranges": [{"from": 0, "to": 3, "label": "sortiert"}]
+  },
+  {
+    "title": "2 einfügen",
+    "text": "2 wird zwischen 1 und 3 eingefügt → 1 2 3 4 9 10 6 8 7 5.",
+    "explanation": {"action": "i = 4: toInsert = 2.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "9, 4 und 3 gleiten; 2 < 1 ist falsch → arr[1] = 2."},
+    "values": [
+      {"kind": "array-index", "index": 1, "value": 2},
+      {"kind": "array-index", "index": 2, "value": 3},
+      {"kind": "array-index", "index": 3, "value": 4},
+      {"kind": "array-index", "index": 4, "value": 9}
+    ],
+    "highlights": [{"kind": "array-index", "index": 1, "role": "active"}],
+    "pointers": [
+      {"index": 4, "label": "i"},
+      {"index": 1, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 4, "label": "sortiert"}]
+  },
+  {
+    "title": "10 bleibt",
+    "text": "10 ist größer als 9: keine Verschiebung → 1 2 3 4 9 10 6 8 7 5.",
+    "explanation": {"action": "i = 5: toInsert = 10.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "10 < 9 ist falsch → 10 bleibt an Position 5."},
+    "highlights": [{"kind": "array-index", "index": 5, "role": "active"}],
+    "pointers": [{"index": 5, "label": "i = j"}],
+    "ranges": [{"from": 0, "to": 5, "label": "sortiert"}]
+  },
+  {
+    "title": "6 einfügen",
+    "text": "6 wird zwischen 4 und 9 eingefügt → 1 2 3 4 6 9 10 8 7 5.",
+    "explanation": {"action": "i = 6: toInsert = 6.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "10 und 9 gleiten; 6 < 4 ist falsch → arr[4] = 6."},
+    "values": [
+      {"kind": "array-index", "index": 4, "value": 6},
+      {"kind": "array-index", "index": 5, "value": 9},
+      {"kind": "array-index", "index": 6, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 4, "role": "active"}],
+    "pointers": [
+      {"index": 6, "label": "i"},
+      {"index": 4, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 6, "label": "sortiert"}]
+  },
+  {
+    "title": "8 einfügen",
+    "text": "8 wird zwischen 6 und 9 eingefügt → 1 2 3 4 6 8 9 10 7 5.",
+    "explanation": {"action": "i = 7: toInsert = 8.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "10 und 9 gleiten; 8 < 6 ist falsch → arr[5] = 8."},
+    "values": [
+      {"kind": "array-index", "index": 5, "value": 8},
+      {"kind": "array-index", "index": 6, "value": 9},
+      {"kind": "array-index", "index": 7, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 5, "role": "active"}],
+    "pointers": [
+      {"index": 7, "label": "i"},
+      {"index": 5, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 7, "label": "sortiert"}]
+  },
+  {
+    "title": "7 einfügen",
+    "text": "7 wird zwischen 6 und 8 eingefügt → 1 2 3 4 6 7 8 9 10 5.",
+    "explanation": {"action": "i = 8: toInsert = 7.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "10, 9 und 8 gleiten; 7 < 6 ist falsch → arr[5] = 7."},
+    "values": [
+      {"kind": "array-index", "index": 5, "value": 7},
+      {"kind": "array-index", "index": 6, "value": 8},
+      {"kind": "array-index", "index": 7, "value": 9},
+      {"kind": "array-index", "index": 8, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 5, "role": "active"}],
+    "pointers": [
+      {"index": 8, "label": "i"},
+      {"index": 5, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 8, "label": "sortiert"}]
+  },
+  {
+    "title": "5 einfügen: fertig",
+    "text": "5 wird zwischen 4 und 6 eingefügt → 1 2 3 4 5 6 7 8 9 10. Das Array ist sortiert.",
+    "explanation": {"action": "i = 9: toInsert = 5.", "rule": "Solange <code>toInsert &lt; arr[j-1]</code>, gleitet arr[j-1] eine Stelle nach rechts.", "decision": "10, 9, 8, 7 und 6 gleiten; 5 < 4 ist falsch → arr[4] = 5."},
+    "values": [
+      {"kind": "array-index", "index": 4, "value": 5},
+      {"kind": "array-index", "index": 5, "value": 6},
+      {"kind": "array-index", "index": 6, "value": 7},
+      {"kind": "array-index", "index": 7, "value": 8},
+      {"kind": "array-index", "index": 8, "value": 9},
+      {"kind": "array-index", "index": 9, "value": 10}
+    ],
+    "highlights": [{"kind": "array-index", "index": 4, "role": "active"}],
+    "pointers": [
+      {"index": 9, "label": "i"},
+      {"index": 4, "label": "j"}
+    ],
+    "ranges": [{"from": 0, "to": 9, "label": "sortiert"}]
+  }
+  ]
 }
 ```
 
