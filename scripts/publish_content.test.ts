@@ -57,4 +57,16 @@ describe("öffentliche Inhaltsdateien", () => {
     const disma = JSON.parse(byName.get("content/disma.json") ?? "{}") as { topics: Array<{ title: string; modes: string }> };
     expect(disma.topics.find((topic) => topic.title === "Aussagen- und Prädikatenlogik")?.modes).toMatch(/Aufgaben: [1-9]/);
   });
+
+  it("nennt die Credits eines Fachs in JSON, Markdown und llms.txt", () => {
+    const llms = byName.get("llms.txt") ?? "";
+    for (const subject of catalog) {
+      const data = JSON.parse(byName.get(`content/${subject.id}.json`) ?? "{}") as { credits?: string };
+      if (!data.credits) continue;
+      expect(byName.get(`content/${subject.id}.md`) ?? "").toContain(`Vorlesung: ${data.credits}\n`);
+      expect(llms).toContain(`Vorlesung: ${data.credits}.`);
+    }
+    const aud = JSON.parse(byName.get("content/aud.json") ?? "{}") as { credits?: string };
+    expect(aud.credits).toBe("Prof. Dr. Sandro Schulze");
+  });
 });

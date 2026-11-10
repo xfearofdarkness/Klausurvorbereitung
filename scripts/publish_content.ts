@@ -70,6 +70,7 @@ interface PublishedSubject {
   title: string;
   subtitle: string;
   icon?: string;
+  credits?: string;
   features?: RawSubject["features"];
   topics: PublishedTopic[];
 }
@@ -126,6 +127,7 @@ function publishSubject(subject: RawSubject): PublishedSubject {
     title: subject.title,
     subtitle: subject.subtitle ?? "",
     ...(subject.icon ? { icon: subject.icon } : {}),
+    ...(subject.credits ? { credits: subject.credits } : {}),
     ...(subject.features ? { features: subject.features } : {}),
     topics: subject.topics.map(publishTopic)
   };
@@ -137,6 +139,7 @@ function block(title: string, body: string, source: string): string[] {
 
 function markdownFor(subject: PublishedSubject): string {
   const lines = [`# ${subject.title}`, "", subject.subtitle, ""];
+  if (subject.credits) lines.push(`Vorlesung: ${subject.credits}`, "");
   for (const topic of subject.topics) {
     lines.push(`## ${topic.title}`, "", topic.modes, "");
     if (topic.cards.length > 0) {
@@ -187,7 +190,7 @@ function llmsTxt(subjects: PublishedSubject[]): string {
   for (const subject of subjects) {
     const meta = catalog.find((entry) => entry.id === subject.id);
     lines.push(
-      `- [${subject.title}](${SITE_ORIGIN}/content/${subject.id}.md): ${meta?.subtitle ?? subject.subtitle}. Maschinenlesbar: [JSON](${SITE_ORIGIN}/content/${subject.id}.json)`
+      `- [${subject.title}](${SITE_ORIGIN}/content/${subject.id}.md): ${meta?.subtitle ?? subject.subtitle}.${subject.credits ? ` Vorlesung: ${subject.credits}.` : ""} Maschinenlesbar: [JSON](${SITE_ORIGIN}/content/${subject.id}.json)`
     );
   }
   lines.push("", "## Index", "", `- [Fächerliste](${SITE_ORIGIN}/content/index.json)`, "");
@@ -223,6 +226,7 @@ export function buildPublicFiles(): PublicFile[] {
       id: subject.id,
       title: subject.title,
       subtitle: subject.subtitle,
+      ...(subject.credits ? { credits: subject.credits } : {}),
       markdown: `/content/${subject.id}.md`,
       json: `/content/${subject.id}.json`
     }))

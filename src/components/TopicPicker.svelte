@@ -6,13 +6,14 @@
 
   interface Props {
     subjectTitle: string;
+    credits: string;
     topics: Topic[];
     progress: TopicProgressSummary[];
     currentTopicIndex: number;
     onSelect: (index: number) => void;
   }
 
-  let { subjectTitle, topics, progress, currentTopicIndex, onSelect }: Props = $props();
+  let { subjectTitle, credits, topics, progress, currentTopicIndex, onSelect }: Props = $props();
   let dialog: HTMLDialogElement;
   let currentTopic = $derived(topics[currentTopicIndex]);
 
@@ -41,7 +42,10 @@
 
 <dialog class="topic-sheet" bind:this={dialog} aria-label="Themen" onclick={closeOnBackdrop}>
   <div class="topic-sheet-header">
-    <span class="topic-sheet-title">{subjectTitle} · Themen</span>
+    <span class="topic-sheet-heading">
+      <span class="topic-sheet-title">{subjectTitle} · Themen</span>
+      {#if credits}<span class="topic-sheet-credits">Vorlesung: {credits}</span>{/if}
+    </span>
     <button class="icon-btn" type="button" aria-label="Schließen" onclick={() => dialog.close()}>
       <Icon name="close" />
     </button>

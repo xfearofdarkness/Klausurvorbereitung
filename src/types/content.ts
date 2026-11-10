@@ -29,6 +29,8 @@ export interface RawSubject {
   title: string;
   subtitle?: string;
   icon?: string;
+  /** Wer die Vorlesung hält, wie auf den Folien angegeben. */
+  credits?: string;
   features?: SubjectFeatures;
   topics: RawTopic[];
 }
@@ -38,6 +40,7 @@ export interface Subject {
   title: string;
   subtitle: string;
   icon: string;
+  credits: string;
   features: SubjectFeatures;
   topics: Topic[];
 }
