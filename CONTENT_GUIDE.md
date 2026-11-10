@@ -191,8 +191,10 @@ Validierung in JSON. Er bricht bei jedem Formatfehler mit Datei und Zeile ab.
 
 - `fach.md`: nur der Kopfbereich mit `id`, `title`, `subtitle`, `icon` und
   optional `credits` und `math: true`. `credits` nennt, wer die Vorlesung
-  hält, so wie es auf Titelfolie oder Übungsblatt steht (Name, ggf.
-  Hochschule). Fehlt die Angabe in den Quellen, entfällt das Feld.
+  hält (Titel, Name, Hochschule), so wie es auf Titelfolie oder
+  Übungsblatt steht. Fehlende Titel oder Hochschule dürfen aus dem
+  offiziellen Personenverzeichnis der Hochschule ergänzt werden. Ist die
+  Person nirgends belegt, entfällt das Feld.
 - Ein Thema pro Datei `NN-<thema-id>.md`. `NN` legt die Reihenfolge fest, die
   `id` im Kopf muss zum Dateinamen passen.
 

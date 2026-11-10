@@ -67,6 +67,6 @@ describe("öffentliche Inhaltsdateien", () => {
       expect(llms).toContain(`Vorlesung: ${data.credits}.`);
     }
     const aud = JSON.parse(byName.get("content/aud.json") ?? "{}") as { credits?: string };
-    expect(aud.credits).toBe("Prof. Dr. Sandro Schulze");
+    expect(aud.credits).toBe("Prof. Dr. Sandro Schulze, Hochschule Anhalt");
   });
 });
