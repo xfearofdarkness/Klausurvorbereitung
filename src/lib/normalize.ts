@@ -18,6 +18,7 @@ export function normalizeSubject(rawSubject: RawSubject, subjectMeta: SubjectMet
     title: rawSubject.title || subjectMeta.title,
     subtitle: rawSubject.subtitle || subjectMeta.subtitle || "",
     icon: rawSubject.icon || subjectMeta.icon || "📘",
+    credits: rawSubject.credits || "",
     features: rawSubject.features && typeof rawSubject.features === "object" ? rawSubject.features : {},
     topics: Array.isArray(rawSubject.topics)
       ? rawSubject.topics.map((topic, index) => normalizeTopic(topic, index))

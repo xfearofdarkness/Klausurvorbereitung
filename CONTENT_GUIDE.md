@@ -190,7 +190,11 @@ Fachdaten sind Autorendateien in `content/<fach-id>/`. Ein Compiler
 Validierung in JSON. Er bricht bei jedem Formatfehler mit Datei und Zeile ab.
 
 - `fach.md`: nur der Kopfbereich mit `id`, `title`, `subtitle`, `icon` und
-  optional `math: true`.
+  optional `credits` und `math: true`. `credits` nennt, wer die Vorlesung
+  hält (Titel, Name, Hochschule), so wie es auf Titelfolie oder
+  Übungsblatt steht. Fehlende Titel oder Hochschule dürfen aus dem
+  offiziellen Personenverzeichnis der Hochschule ergänzt werden. Ist die
+  Person nirgends belegt, entfällt das Feld.
 - Ein Thema pro Datei `NN-<thema-id>.md`. `NN` legt die Reihenfolge fest, die
   `id` im Kopf muss zum Dateinamen passen.
 
@@ -251,7 +255,7 @@ Pflicht:
 
 Optional:
 
-- `math` im Kopf von `fach.md`
+- `credits` und `math` im Kopf von `fach.md`
 - Aufgaben und Abläufe pro Thema
 - `tag` bei Lernkarten: `wichtig`, `formel`, `def`, `satz`, `beispiel`
 
@@ -288,7 +292,9 @@ Der Build schreibt aus den kompilierten Fachdaten, nie aus `sources/`:
 
 - `/llms.txt` beschreibt die Seite und verlinkt die Dateien.
 - `/content/index.json` listet die Fächer (`format`, `site`, `id`,
-  `title`, `subtitle`, Pfade zu Markdown und JSON).
+  `title`, `subtitle`, `credits` falls vorhanden, Pfade zu Markdown und
+  JSON). `/llms.txt` und `/content/<fach-id>.md` nennen die Credits als
+  „Vorlesung: …“.
 - `/content/<fach-id>.json` enthält Lernkarten, Karteikarten (mit
   Rückseite), Aufgaben und Abläufe, wie die App sie lädt. Aufgaben mit
   `generator` haben zusätzlich `example` (Seed 1, Aufgabe und Lösung).

@@ -6,6 +6,7 @@ const subject = {
   id: "laa",
   title: "LAA",
   subtitle: "",
+  credits: "",
   icon: "",
   features: {},
   topics: [

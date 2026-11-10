@@ -346,6 +346,7 @@
       <div class="sidebar-subject">
         <span class="sidebar-subject-title">{subject.title}</span>
         {#if subject.subtitle}<span class="sidebar-subject-subtitle">{subject.subtitle}</span>{/if}
+        {#if subject.credits}<span class="sidebar-subject-credits">Vorlesung: {subject.credits}</span>{/if}
       </div>
       <TopicList topics={subject.topics} progress={topicProgress} {currentTopicIndex} onSelect={selectTopic} />
     </aside>
@@ -370,6 +371,7 @@
           <h1 class="topbar-title">{currentTopic.title}</h1>
           <TopicPicker
             subjectTitle={subject.title}
+            credits={subject.credits}
             topics={subject.topics}
             progress={topicProgress}
             {currentTopicIndex}

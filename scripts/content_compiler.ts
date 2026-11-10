@@ -26,7 +26,7 @@ const REQUIRED_FIELDS: Record<EntryKind, readonly string[]> = {
   Aufgabe: ["id", "quelle"],
   Ablauf: ["quelle"]
 };
-const SUBJECT_FIELDS = ["id", "title", "subtitle", "icon", "math"];
+const SUBJECT_FIELDS = ["id", "title", "subtitle", "icon", "credits", "math"];
 const TOPIC_FIELDS = ["id", "title", "icon"];
 const HEADER_DELIMITER = "---";
 const ENTRY_HEADING = /^## (Karte|Frage|Aufgabe|Ablauf): (.+)$/;
@@ -61,6 +61,7 @@ export function compileSubject(subjectId: SubjectId, files: ContentFile[]): RawS
     title: required(header.fields, "title", subjectLabel),
     ...(header.fields.subtitle ? { subtitle: header.fields.subtitle } : {}),
     ...(header.fields.icon ? { icon: header.fields.icon } : {}),
+    ...(header.fields.credits ? { credits: header.fields.credits } : {}),
     ...(header.fields.math ? { features: { math: parseBoolean(header.fields.math, subjectLabel) } } : {}),
     topics: topicFiles.map((file) => compileTopic(file, `content/${subjectId}/${file.name}`))
   };
